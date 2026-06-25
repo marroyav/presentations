@@ -1,0 +1,54 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,fit,backgrounds,calc}
+
+\definecolor{noirbg}{HTML}{131B24}
+\definecolor{noirpanel}{HTML}{1C2834}
+\definecolor{noirpanelalt}{HTML}{2A3948}
+\definecolor{noirtext}{HTML}{ECF1F4}
+\definecolor{noirmuted}{HTML}{C4CDD5}
+\definecolor{duneorange}{HTML}{F2682B}
+\definecolor{noircyan}{HTML}{92DDF2}
+\definecolor{noirmint}{HTML}{96D6AE}
+
+\tikzset{
+  stage/.style={
+    draw=noirmuted,
+    rounded corners=4pt,
+    semithick,
+    minimum height=1.05cm,
+    align=center,
+    font=\sffamily\small,
+    fill=noirpanel,
+    text=noirtext,
+    inner sep=5pt
+  },
+  hot/.style={stage, draw=duneorange, very thick, fill=noirpanelalt},
+  future/.style={stage, draw=noirmint, very thick, fill=noirpanelalt},
+  shared/.style={stage, draw=noircyan, semithick},
+  reject/.style={
+    rounded corners=10pt,
+    semithick,
+    minimum height=0.72cm,
+    align=center,
+    font=\sffamily\scriptsize,
+    fill=noirpanel,
+    text=noirtext,
+    inner sep=4pt
+  },
+  callout/.style={
+    rounded corners=4pt,
+    semithick,
+    fill=noirbg,
+    align=center,
+    font=\sffamily\scriptsize,
+    text=noirmuted,
+    inner sep=4pt
+  },
+  flow/.style={-{Latex[length=2.4mm]}, thick, draw=noirmuted},
+  accent/.style={-{Latex[length=2.2mm]}, semithick, draw=duneorange},
+  subtle/.style={-{Latex[length=2.0mm]}, semithick, dashed, draw=noircyan}
+}

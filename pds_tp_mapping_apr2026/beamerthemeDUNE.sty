@@ -1,0 +1,157 @@
+\mode<presentation>
+\RequirePackage{iftex}
+\usecolortheme{default}
+\useinnertheme{default}
+\useoutertheme{default}
+
+% --------------------------------------
+% FONT SIZE SETTINGS
+% --------------------------------------
+\setbeamerfont{normal text}{size=\footnotesize}
+\setbeamerfont{frametitle}{size=\LARGE}
+\setbeamerfont{title}{size=\LARGE}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{block body}{size=\footnotesize}
+\setbeamerfont{footline}{size=\footnotesize}
+
+% --------------------------------------
+% �� COLORS
+% --------------------------------------
+\definecolor{duneblue}{HTML}{7caed5}
+\definecolor{duneorange}{HTML}{f2682b}
+\definecolor{dunegrey}{gray}{0.9}           % Light grey
+\definecolor{dunecolor}{RGB}{50,50,50}      % Dark grey for text
+\definecolor{dunecharcoal}{HTML}{2F3136}
+
+\setbeamercolor{normal text}{fg=dunecolor, bg=white}
+\setbeamercolor{frametitle}{fg=duneorange, bg=white}
+\setbeamercolor{section in toc}{fg=dunecolor, bg=white}
+\setbeamercolor{title}{fg=duneorange}
+\setbeamercolor{inverted normal text}{fg=white, bg=duneorange}
+\setbeamercolor{itemize item}{fg=dunecolor}
+\setbeamercolor{itemize subitem}{fg=dunecolor}
+\setbeamercolor{itemize subsubitem}{fg=dunecolor}
+\setbeamercolor{enumerate item}{fg=dunecolor}
+\setbeamercolor{enumerate subitem}{fg=dunecolor}
+\setbeamercolor{caption name}{fg=dunecolor}
+
+% Blocks
+\setbeamercolor*{block title example}{fg=duneblue}
+\setbeamercolor{block title}{fg=dunecolor, bg=duneorange!30}
+\setbeamercolor{block body}{fg=dunecolor, bg=gray!10}
+\setbeamercolor{block title alerted}{fg=duneorange, bg=white}
+\setbeamercolor{block body alerted}{bg=gray!10}
+\setbeamercolor{alertblock title}{fg=white, bg=duneorange}
+\setbeamercolor{alertblock body}{fg=dunecolor, bg=duneorange!15}
+\setbeamercolor{exampleblock title}{fg=white, bg=duneblue}
+\setbeamercolor{exampleblock body}{fg=dunecolor, bg=duneblue!15}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setlength{\leftmargini}{1.15em}
+\setbeamersize{text margin left=0.55cm, text margin right=0.55cm}
+
+% --------------------------------------
+% �� FONT & STRUCTURE
+% --------------------------------------
+\usefonttheme{structurebold}
+\ifPDFTeX
+  \usepackage[scaled]{helvet}
+  \renewcommand*\familydefault{\sfdefault}
+  \usepackage[T1]{fontenc}
+\else
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \IfFontExistsTF{IBM Plex Sans}{
+    \setsansfont{IBM Plex Sans}
+    \setmainfont{IBM Plex Sans}
+  }{
+    \IfFontExistsTF{Helvetica Neue}{
+      \setsansfont{Helvetica Neue}
+      \setmainfont{Helvetica Neue}
+    }{
+      \setsansfont{Arial}
+      \setmainfont{Arial}
+    }
+  }
+  \IfFontExistsTF{JetBrainsMono Nerd Font Propo}{
+    \setmonofont{JetBrainsMono Nerd Font Propo}[Scale=0.92]
+  }{
+    \IfFontExistsTF{JetBrainsMono Nerd Font}{
+      \setmonofont{JetBrainsMono Nerd Font}[Scale=0.92]
+    }{
+      \setmonofont{Courier New}[Scale=0.92]
+    }
+  }
+  \renewcommand*\familydefault{\sfdefault}
+\fi
+
+% --------------------------------------
+% HEADLINE (TOP BANNER)
+% --------------------------------------
+\setbeamertemplate{headline}{%
+\leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=10pt,dp=3pt]{palette quaternary}%
+    \begin{columns}
+    \column{.64\paperwidth}
+    \column{.36\paperwidth}
+    \includegraphics[width=0.31\paperwidth]{logos/lettersalone.png}
+    \end{columns}
+    \end{beamercolorbox}%
+  }
+}
+
+% --------------------------------------
+% FOOTLINE (BOTTOM BANNER)
+% --------------------------------------
+\setbeamertemplate{footline}{
+\begin{beamercolorbox}[ht=12pt, center]{normal text}
+    \begin{columns}
+    \column{.04\paperwidth} \small{\insertpagenumber}
+    \column{.70\paperwidth} \small{\talkdate}
+    \column{.08\paperwidth} \includegraphics[width=.08\paperwidth]{logos/logosolo.png}
+    \end{columns}
+\end{beamercolorbox}
+}
+
+% --------------------------------------
+% �� DATE HANDLING COMMAND
+% --------------------------------------
+\newcommand{\talkdate}{
+  \@ifundefined{mydate}
+  {\today}
+  {\mydate}
+}
+
+% --------------------------------------
+% �� SPLASH SCREENS (INTRO & OUTRO)
+% --------------------------------------
+\newcommand{\duneSplash}{
+    % DUNE blue splash page slide with white logo
+    \bgroup
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamercolor{background canvas}{bg=white}
+    \frame[plain]{
+    \centering
+    \includegraphics[scale=0.2]{logos/DUNElogo_color.png}\\
+    \includegraphics[scale=0.17]{logos/logo-uan.png}\\
+    \includegraphics[scale=0.14]{logos/logo-eia.png}
+    }
+    \egroup
+}
+
+\newcommand{\DUNESplashWhite}{
+    % DUNE ending slide with blue logo and web page
+    \bgroup
+    \setbeamertemplate{navigation symbols}{}
+    \setbeamercolor{background canvas}{bg=gray!50}
+    \frame[plain]{
+        \centering
+        \vspace{10pt}
+        \begin{figure}
+            \includegraphics[scale=.3]{logos/DUNElogo_white.png} \\
+        \end{figure}
+    }
+    \egroup
+}
+
+\mode<all>

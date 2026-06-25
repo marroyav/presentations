@@ -1,0 +1,358 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{iftex}
+\input{../dune_dark_template_lab/font-presets}
+\DuneNoirUseHelvetica
+\makeatletter
+\input{../dune_dark_template_lab/beamerthemeDUNENoir.sty}
+\makeatother
+
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx,booktabs,array,hyperref}
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage[dvipsnames]{xcolor}
+
+\sisetup{detect-all,per-mode=symbol}
+\DeclareSIUnit{\sample}{sample}
+\DeclareSIUnit{\tick}{tick}
+\DeclareSIUnit{\pe}{PE}
+
+\graphicspath{{../../../daphne_mezz_xc_sim/data/output/plots/}}
+
+\title[XCorr Trigger Timing]{XCorr Trigger Timing}
+\subtitle{Relative to raw pulse rising edges}
+\author{Manuel Arroyave}
+\date{May 12, 2026}
+\newcommand{\mydate}{May 12, 2026}
+
+\newcommand{\repo}{\texttt{daphne\_mezz\_xc\_sim}}
+\newcommand{\sampleperiod}{\SI{16}{\nano\second}}
+\newcommand{\clockfreq}{\SI{62.5}{\mega\hertz}}
+\newcommand{\fixedlatency}{\SI{1008}{\nano\second}}
+\newcommand{\fixedticks}{\SI{63}{\sample}}
+\newcommand{\xcperpe}{\num{581.9}}
+\newcommand{\rawbaseline}{\num{2692}}
+\newcommand{\rawmax}{\num{16383}}
+\newcommand{\rawspan}{\num{13691}}
+\newcommand{\rawrangepe}{\num{1369}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Main Result}
+\small
+\begin{block}{Timing decomposition}
+\[
+\Delta n(P)=n_{\mathrm{trig}}(P)-n_{\mathrm{edge}}
+          = n_{\mathrm{latency}} + n_{\mathrm{walk}}(P).
+\]
+\end{block}
+
+\begin{itemize}
+  \item \(n_{\mathrm{edge}}\): raw rising-edge timestamp.
+  \item \(n_{\mathrm{trig}}(P)\): xcorr trigger timestamp at PE threshold \(P\).
+  \item Fixed xcorr latency: \(63\) samples = \fixedlatency.
+  \item Residual walk: \(n_{\mathrm{walk}}(P)\), the threshold-dependent part.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Sources}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\column{0.50\textwidth}
+\begin{block}{Raw data}
+\begin{itemize}
+  \item Real waveform: \path{data/input/run039344_ch35.bin}
+  \item Samples: unsigned 14-bit ADC words in 16-bit little-endian storage
+  \item Sampling clock: \clockfreq
+  \item Sample period: \sampleperiod
+\end{itemize}
+\end{block}
+
+\column{0.44\textwidth}
+\begin{block}{Raw dynamic range}
+\[
+A_{\max} = \rawmax-\rawbaseline=\rawspan~\mathrm{ADC}
+\]
+\[
+1~\mathrm{PE}=10~\mathrm{ADC}
+\quad\Rightarrow\quad
+A_{\max}\approx\rawrangepe~\mathrm{PE}
+\]
+\end{block}
+\end{columns}
+
+\vspace{0.2em}
+\textbf{Study location:} \path{~/repo/daphne_mezz_xc_sim}
+\end{frame}
+
+\begin{frame}{Study Artifacts And PE Calibration}
+\footnotesize
+\begin{columns}[T,onlytextwidth]
+\column{0.56\textwidth}
+\begin{block}{Code and outputs}
+\begin{itemize}
+  \item Timing script: \path{scripts/plot_xcorr_delay_vs_pe.py}
+  \item XCorr trace: \path{data/output/analysis/run039344_ch35_rtl_thr2k_len1024_xcorr.txt}
+  \item Summary CSV: \path{data/output/analysis/xcorr_threshold_timing/run039344_ch35_delay_vs_pe_summary.csv}
+\end{itemize}
+\end{block}
+
+\column{0.40\textwidth}
+\begin{block}{PE threshold conversion}
+The saturated-pulse plateau gives
+\[
+1~\mathrm{PE}_{\mathrm{thr}} = \xcperpe~\mathrm{xcorr~counts}.
+\]
+\end{block}
+
+\begin{block}{Plots}
+\begin{itemize}
+  \item Residual vs PE threshold
+  \item Example pulses with edge marks
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{What Is Compared}
+\scriptsize
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Raw reference timestamp}
+For each pulse:
+\[
+n_{\mathrm{edge}} = 
+\operatorname*{arg\,max}_{n<n_{\mathrm{peak}}}
+  \frac{d}{dn}\left(x[n]-\mathrm{median}(x)\right).
+\]
+This is the peak finder on the rising edge of the raw waveform.
+\end{block}
+
+\column{0.48\textwidth}
+\begin{block}{XCorr trigger timestamp}
+For PE threshold setting \(P\):
+\[
+T(P)=P\cdot \xcperpe .
+\]
+\[
+n_{\mathrm{trig}}(P)=\min n
+\]
+with \(y[n]>T\), \(y[n-1]>T\), and \(y[n-2]\le T\). This mirrors the two-cycle threshold-crossing rule used by the emulator.
+\end{block}
+\end{columns}
+
+\vspace{0.15em}
+\textbf{Important alignment point.}
+The xcorr timestamp is produced by a causal matched-filter pipeline. It is not in the same phase reference as the raw ADC sample.
+\end{frame}
+
+\begin{frame}{Causal Matched Filter}
+\scriptsize
+\textbf{Filter form}
+\[
+y[n] = \sum_i h_i\,x[n-d_i],
+\qquad
+d_i \simeq 3i+4.
+\]
+
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Where the delay comes from}
+\begin{itemize}
+  \item RTL-style transposed FIR tap \(i\) appears at approximately \(3i+4\) samples.
+  \item The xcorr phase follows the template centroid, not the raw leading edge.
+\end{itemize}
+\end{block}
+
+\column{0.48\textwidth}
+\begin{block}{Template centroid}
+Using the negative template lobe:
+\[
+\tau_h =
+\frac{\sum_{h_i<0}(-h_i)(3i+4)}{\sum_{h_i<0}(-h_i)}
+=63.9~\mathrm{samples}.
+\]
+\[
+63~\mathrm{samples}\cdot\sampleperiod=\fixedlatency.
+\]
+\end{block}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Subtract The Fixed Latency}
+\small
+\begin{block}{Latency-corrected residual}
+\[
+r(P)=\left[n_{\mathrm{trig}}(P)-n_{\mathrm{edge}}\right]-63~\mathrm{samples}.
+\]
+\[
+r_{\mathrm{ns}}(P)=16~r(P).
+\]
+\end{block}
+
+\vspace{0.3em}
+\begin{itemize}
+  \item The fixed latency is estimated from the \SI{1}{PE} threshold median: \fixedlatency = \fixedticks.
+  \item The residual is the threshold-dependent walk that matters for timing.
+  \item The shaded green band in the next plot is \(\pm 2\) ticks = \(\pm\SI{32}{\nano\second}\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Residual Timing Walk Versus PE Threshold}
+\centering
+\includegraphics[width=\linewidth,height=0.62\textheight,keepaspectratio]{xcorr_residual_vs_pe_run039344_ch35.pdf}
+
+\vspace{0.1em}
+\scriptsize\textcolor{noirmuted}{Black line: median residual. Blue band: 10--90\% interval. Green band: \(\pm 2\) ticks.}
+\end{frame}
+
+\begin{frame}{Statistical Summary}
+\scriptsize
+\centering
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{rrrrr}
+\toprule
+\textbf{Threshold} &
+\textbf{Matched} &
+\textbf{Residual} &
+\textbf{Residual p10} &
+\textbf{Residual p90} \\
+\textbf{(PE)} & \textbf{pulses} & \textbf{(ticks)} & \textbf{(ticks)} & \textbf{(ticks)} \\
+\midrule
+1    & 386 &  0 & -2 & 15 \\
+10   & 384 &  0 & -2 & 15 \\
+20   & 382 &  0 & -2 & 16 \\
+100  & 364 &  2 &  0 & 17 \\
+200  & 331 &  4 &  2 & 17 \\
+500  & 263 & 10 &  8 & 14 \\
+800  & 230 & 15 & 14 & 19 \\
+1000 & 199 & 19 & 18 & 23 \\
+1200 & 162 & 25 & 24 & 26 \\
+1300 & 138 & 29 & 28 & 29 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.2em}
+\scriptsize
+\textbf{Interpretation:} low-threshold median residual is \(\leq 2\) ticks; large PE thresholds walk later because the trigger waits for a higher point on the xcorr lobe.
+\end{frame}
+
+\begin{frame}{Example Pulses: First Pair}
+\centering
+\includegraphics[
+  width=\linewidth,
+  height=0.68\textheight,
+  keepaspectratio,
+  trim=0 389pt 0 0,
+  clip
+]{xcorr_example_pulses_run039344_ch35.pdf}
+\end{frame}
+
+\begin{frame}{Example Pulses: Second Pair}
+\centering
+\includegraphics[
+  width=\linewidth,
+  height=0.68\textheight,
+  keepaspectratio,
+  trim=0 0 0 389pt,
+  clip
+]{xcorr_example_pulses_run039344_ch35.pdf}
+\end{frame}
+
+\begin{frame}{Why Threshold Walk Appears}
+\scriptsize
+\textbf{Crossing equation.}
+Near a pulse, after latency alignment:
+\[
+y_{\mathrm{aligned}}[k] \approx A\,g[k],
+\]
+where \(A\) is pulse amplitude and \(g[k]\) is the normalized xcorr lobe.
+\[
+k_T = \min\{k: A\,g[k] > T\}.
+\]
+
+\vspace{0.05em}
+\begin{itemize}
+  \item If \(T\) is small, \(k_T\) is close to the leading part of the xcorr lobe.
+  \item If \(T\) is large, \(k_T\) moves up the lobe toward the peak.
+  \item For saturated pulses, raising \(T\) from low PE to \(\sim 1000\) PE moves the median crossing by about \(19\) ticks after latency correction.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Practical Consequence}
+\small
+\begin{alertblock}{Comparator behavior}
+The timing comparator must either subtract the fixed latency, use a constant-fraction-like timing reference, or constrain threshold settings to the region where residual walk is acceptable.
+\end{alertblock}
+
+\vspace{0.5em}
+\begin{itemize}
+  \item The 63-sample term is a phase/latency offset.
+  \item The residual walk is the physics/algorithm behavior that changes with threshold.
+  \item The PE scan identifies the threshold boundaries where that residual leaves the acceptable timing band.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Reproducibility Checklist}
+\scriptsize
+\textbf{Commands used for the PE scan}
+\begin{enumerate}
+  \item Run or reuse the xcorr trace from \repo.
+  \item Execute:
+  \[
+  \texttt{python3 scripts/plot\_xcorr\_delay\_vs\_pe.py}
+  \]
+  \item Use the generated summary CSV, residual plot, and pulse examples.
+\end{enumerate}
+
+\vspace{0.25em}
+\textbf{Validation anchors}
+\begin{itemize}
+  \item \(\clockfreq \Rightarrow \sampleperiod\) per sample.
+  \item Raw dynamic range: \(\rawspan~\mathrm{ADC}\approx\rawrangepe~\mathrm{PE}\).
+  \item Filter/template centroid: \(63.9\) samples.
+  \item Measured fixed latency from data: \(63\) samples.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Generated Files}
+\tiny
+\textbf{Analysis}
+\begin{itemize}
+  \item \path{data/output/analysis/xcorr_threshold_timing/run039344_ch35_delay_vs_pe_summary.csv}
+  \item \path{data/output/analysis/xcorr_threshold_timing/run039344_ch35_pe_calibration.csv}
+\end{itemize}
+
+\vspace{0.35em}
+\textbf{Figures}
+\begin{itemize}
+  \item \path{data/output/plots/xcorr_residual_vs_pe_run039344_ch35.pdf}
+  \item \path{data/output/plots/xcorr_example_pulses_run039344_ch35.pdf}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Bottom Line}
+\small
+\begin{enumerate}
+  \item The measured xcorr time is fixed matched-filter latency plus residual threshold walk.
+  \item The fixed latency is \(\approx 63\) samples, confirmed mathematically and from the \SI{1}{PE} data point.
+  \item The timing quantity of interest is the residual:
+  \[
+    n_{\mathrm{trig}} - n_{\mathrm{edge}} - 63.
+  \]
+  \item Low thresholds have near-zero median residual.
+  \item High thresholds introduce deterministic threshold walk because the crossing point moves later on the xcorr lobe.
+\end{enumerate}
+\end{frame}
+
+\end{document}

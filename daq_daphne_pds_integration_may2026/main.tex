@@ -1,0 +1,735 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usepackage{iftex}
+\input{../dune_dark_template_lab/font-presets}
+\DuneNoirUseHelvetica
+\makeatletter
+\input{../dune_dark_template_lab/beamerthemeDUNENoir.sty}
+\makeatother
+
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,fit,shapes.geometric}
+
+\title[DAPHNE DAQ Integration]{DAPHNE DAQ Integration}
+\subtitle{Ethernet data taking, standalone calibration, and \texttt{pds-run} scans}
+\author{Manuel Arroyave}
+\date{May 8, 2026}
+\newcommand{\mydate}{May 8, 2026}
+
+\lstdefinestyle{terminal}{
+  basicstyle=\ttfamily\scriptsize,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{noirline},
+  backgroundcolor=\color{noirpanel},
+  xleftmargin=0.2em,
+  xrightmargin=0.2em
+}
+
+\newcommand{\sectioncard}[2]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[noirpanelalt] (current page.south west) rectangle (current page.north east);
+      \fill[duneorange] ($(current page.north west)+(0.9,-0.9)$) rectangle ++(1.8,0.08);
+      \fill[noircyan] ($(current page.south east)+(-2.8,0.9)$) rectangle ++(1.8,0.08);
+      \draw[noirline, line width=0.8pt] ($(current page.south west)+(0.9,1.1)$) -- ($(current page.south east)+(-0.9,1.1)$);
+    \end{tikzpicture}
+    \vspace*{0.21\paperheight}
+    {\color{noirmuted}\small\bfseries SECTION\par}
+    \vspace{3mm}
+    {\color{white}\bfseries\fontsize{29}{32}\selectfont #1\par}
+    \vspace{4mm}
+    {\color{noirmuted}\fontsize{13}{16}\selectfont #2\par}
+  \end{frame}
+}
+
+\newcommand{\eyebrow}[1]{{\color{noircyan}\small\bfseries #1\par}}
+
+\newcommand{\panelbox}[3][panel]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{#1}
+    {\color{noircyan}\bfseries #2\par}
+    \vspace{0.5mm}
+    {\small #3\par}
+  \end{beamercolorbox}
+}
+
+\newcommand{\statcard}[2]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+    {\color{noircyan}\bfseries\fontsize{14}{16}\selectfont #1\par}
+    \vspace{0.6mm}
+    {\color{noirmuted}\scriptsize #2\par}
+  \end{beamercolorbox}
+}
+
+\newcommand{\blocksep}{%
+  \vspace{0.7mm}%
+  {\color{noirline}\hrule height 0.35pt}%
+  \vspace{0.7mm}%
+}
+
+\tikzset{
+  flowbox/.style={
+    draw=noirline,
+    fill=noirpanelalt,
+    text=noirtext,
+    rounded corners=4pt,
+    align=center,
+    text width=2.7cm,
+    minimum height=0.92cm,
+    inner sep=4pt,
+    font=\scriptsize
+  },
+  flowboxwide/.style={
+    draw=noirline,
+    fill=noirpanelalt,
+    text=noirtext,
+    rounded corners=4pt,
+    align=center,
+    text width=3.35cm,
+    minimum height=0.92cm,
+    inner sep=4pt,
+    font=\scriptsize
+  },
+  repo/.style={
+    draw=noircyan!70,
+    fill=noirpanel,
+    text=noirtext,
+    rounded corners=5pt,
+    align=left,
+    text width=3.55cm,
+    minimum height=2.1cm,
+    inner sep=7pt,
+    font=\scriptsize
+  },
+  arrow/.style={-Latex, line width=0.8pt, draw=noircyan},
+  warnarrow/.style={-Latex, line width=0.8pt, draw=duneorange},
+  smallnote/.style={align=center, font=\tiny, text=noirtext}
+}
+
+\newcommand{\daqPipelineDiagram}{%
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0.55cm and 0.45cm]
+  \node[flowboxwide] (hw) {DAPHNE\\Ethernet output};
+  \node[flowboxwide, right=of hw] (daq) {DUNE DAQ\\readout path};
+  \node[flowboxwide, right=of daq] (frag) {Fragments\\with DAPHNE ETH frames};
+  \node[flowboxwide, right=of frag] (decode) {Python/C++\\decode interface};
+  \node[flowboxwide, right=of decode] (analysis) {HDF5/NumPy\\Waffles analysis};
+  \draw[arrow] (hw) -- (daq);
+  \draw[arrow] (daq) -- (frag);
+  \draw[arrow] (frag) -- (decode);
+  \draw[arrow] (decode) -- (analysis);
+  \node[smallnote, below=0.25cm of daq] {data taking baseline};
+  \node[smallnote, below=0.25cm of decode] {reviewer-visible contract};
+\end{tikzpicture}
+}%
+}
+
+\newcommand{\standaloneDiagram}{%
+\resizebox{0.9\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0.55cm and 0.55cm]
+  \node[flowbox] (scripts) {\texttt{daphne-server}\\scan scripts};
+  \node[flowbox, right=of scripts] (tunnel) {SSH tunnel\\or direct host};
+  \node[flowbox, right=of tunnel] (server) {DAPHNE control\\server};
+  \node[flowbox, right=of server] (spy) {Spy buffer\\or osc capture};
+  \node[flowbox, below=0.85cm of server] (ssp) {SSP LED\\control};
+  \node[flowbox, right=of spy] (products) {run folders\\plots, JSON};
+  \draw[arrow] (scripts) -- (tunnel);
+  \draw[arrow] (tunnel) -- (server);
+  \draw[arrow] (server) -- (spy);
+  \draw[arrow] (spy) -- (products);
+  \draw[warnarrow] (scripts) |- (ssp);
+  \draw[warnarrow] (ssp) -| (spy);
+  \node[smallnote, above=0.22cm of server] {no DAQ run control};
+  \node[smallnote, below=0.22cm of products] {calibration evidence};
+\end{tikzpicture}
+}%
+}
+
+\newcommand{\pdsRunDiagram}{%
+\resizebox{0.94\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0.48cm and 0.42cm]
+  \node[flowbox] (paths) {\texttt{00\_paths}\\facility};
+  \node[flowbox, right=of paths] (defaults) {\texttt{02}/\texttt{03}\\defaults};
+  \node[flowbox, right=of defaults] (scan) {scan JSON\\one variable};
+  \node[flowbox, right=of scan] (patch) {minimal DAPHNE\\JSON patch};
+  \node[flowbox, right=of patch] (xml) {\texttt{add\_daphne\_conf}\\OKS XML};
+  \node[flowbox, right=of xml] (ssp) {\texttt{set\_ssp\_conf}\\LED};
+  \node[flowbox, right=of ssp] (drunc) {\texttt{drunc}\\short run};
+  \draw[arrow] (paths) -- (defaults);
+  \draw[arrow] (defaults) -- (scan);
+  \draw[arrow] (scan) -- (patch);
+  \draw[arrow] (patch) -- (xml);
+  \draw[arrow] (xml) -- (ssp);
+  \draw[arrow] (ssp) -- (drunc);
+  \node[smallnote, below=0.2cm of xml] {overlay, not hand edit};
+  \node[smallnote, below=0.2cm of drunc] {data + monitoring};
+\end{tikzpicture}
+}%
+}
+
+\begin{document}
+
+{
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\begin{frame}[plain,noframenumbering]
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[noirbg] (current page.south west) rectangle (current page.north east);
+    \fill[noirpanelalt] (current page.north west) rectangle ($(current page.north east)+(0,-2.1)$);
+    \fill[duneorange] ($(current page.north west)+(0.8,-0.62)$) rectangle ++(1.5,0.08);
+    \fill[noircyan] ($(current page.south east)+(-2.8,0.8)$) rectangle ++(1.9,0.08);
+    \IfFileExists{logos/DUNElogo_white.png}{%
+      \node[anchor=south east,opacity=0.13] at ($(current page.south east)+(-0.55,1.48)$) {%
+        \includegraphics[width=0.33\paperwidth]{logos/DUNElogo_white.png}%
+      };
+    }{}%
+    \IfFileExists{logos/FNAL-Logo-NAL-Light.png}{%
+      \node[anchor=south east] at ($(current page.south east)+(-0.92,0.82)$) {%
+        \includegraphics[height=0.45cm]{logos/FNAL-Logo-NAL-Light.png}%
+      };
+    }{}%
+  \end{tikzpicture}
+  \vspace*{0.26\paperheight}
+  {\color{white}\bfseries\fontsize{29}{31}\selectfont DAPHNE DAQ Integration\par}
+  \vspace{2mm}
+  {\color{noirmuted}\fontsize{15}{18}\selectfont Ethernet data taking, standalone calibration, and \texttt{pds-run} scans\par}
+  \vspace{7mm}
+  {\color{noircyan}\bfseries Manuel Arroyave\par}
+  \vspace{1mm}
+  {\color{noirmuted}May 8, 2026\par}
+\end{frame}
+}
+
+\begin{frame}[t]{Executive Claim}
+\begin{columns}[T,onlytextwidth]
+\column{0.57\textwidth}
+\eyebrow{WHAT IS NOW TRUE}
+{\color{white}\bfseries\fontsize{16}{19}\selectfont
+DAPHNE Ethernet data taking is established in DAQ; calibration scans are being moved from standalone tools into \texttt{pds-run}. \par}
+
+\vspace{1.5mm}
+{\color{noirmuted}\small
+Decoding belongs in DAQ libraries, with Waffles downstream. Calibration policy belongs in \texttt{pds-run}. Firmware/schema work adds peak descriptors and the x-correlation self trigger; firmware dead-time remains active. \par}
+
+\column{0.39\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\scriptsize
+{\color{noircyan}\bfseries Nov 2025}\par
+DAQ baseline proven in the VD Coldbox.\par
+\blocksep
+{\color{noircyan}\bfseries Feb 2026}\par
+Standalone calibration proven in the same VD Coldbox facility.\par
+\blocksep
+{\color{noircyan}\bfseries Mar--Apr 2026}\par
+Peak descriptors and x-correlation self trigger implemented; dead-time work ongoing.\par
+\blocksep
+{\color{noircyan}\bfseries May 2026}\par
+DAQ-wrapped calibration exercised with \texttt{pds-run}.\par
+\end{beamercolorbox}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Scope And Success Criteria}
+\begin{columns}[T,onlytextwidth]
+\column{0.31\textwidth}
+\panelbox{DAQ baseline}{%
+Proven in the VD Coldbox, November 2025; decodes DAPHNE Ethernet fragments and preserves monitoring in fddaq-v5.5.0.}
+
+\column{0.31\textwidth}
+\panelbox{Standalone calibration}{%
+Proven in the same VD Coldbox facility, February 2026, with direct DAPHNE control and spy-buffer capture.}
+
+\column{0.31\textwidth}
+\panelbox{DAQ-wrapped calibration}{%
+May 2026 work: selected scan variables move into \texttt{pds-run}; every point creates a DAQ run.}
+\end{columns}
+
+\vspace{2mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\footnotesize
+\textcolor{noircyan}{\textbf{Constraint:}} the DAQ environment, OKS database, proxy state, and tmux session are part of the apparatus. The change must survive a short run on \texttt{np04-srv-024} through \texttt{np02-vdcb}.
+\end{beamercolorbox}
+\end{frame}
+
+\sectioncard{DAQ Baseline}{The three DAQ packages define the format, the decode API, and the live controller path}
+
+\begin{frame}[t]{Baseline Data Path}
+\centering
+\vspace{2mm}
+\daqPipelineDiagram
+
+\vspace{3mm}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\panelbox{Format}{C++ classes describe the wire layout and enforce bit-field boundaries.}
+\column{0.32\textwidth}
+\panelbox{Decode}{Python bindings expose arrays for analysis without rewriting the unpacker.}
+\column{0.32\textwidth}
+\panelbox{Waffles}{Waffles consumes the decoded arrays for calibration and validation workflows.}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Changed DAQ Repositories}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\begin{tikzpicture}
+\node[repo] {
+{\color{noircyan}\bfseries fddetdataformats}\\[1mm]
+\texttt{marroyav/daphneeth}\\
+Frame definitions and tests\\[1mm]
+\textcolor{duneorange}{New: peak descriptor support}\\
+\textcolor{noirmuted}{Adds DAPHNE ETH stream frame bindings.}
+};
+\end{tikzpicture}
+
+\column{0.32\textwidth}
+\begin{tikzpicture}
+\node[repo] {
+{\color{noircyan}\bfseries rawdatautils}\\[1mm]
+\texttt{marroyav/daphneeth}\\
+NumPy-facing unpackers\\[1mm]
+\textcolor{noirmuted}{Exposes ADC, timestamp, channel, stream, and peak descriptor arrays for Waffles and analysis.}
+};
+\end{tikzpicture}
+
+\column{0.32\textwidth}
+\begin{tikzpicture}
+\node[repo] {
+{\color{noircyan}\bfseries daphnemodules}\\[1mm]
+\texttt{patch/fddaq-v5.5.x}\\
+DAPHNE V3 controller\\[1mm]
+\textcolor{noirmuted}{Adds V3 GeneralInfo monitoring used during operations.}
+};
+\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Data-Format Contract}
+\begin{columns}[T,onlytextwidth]
+\column{0.5\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{panel}
+\scriptsize
+{\color{noircyan}\bfseries\texttt{DAPHNEEthFrame}\par}
+Single-channel frame: Ethernet header, DAPHNE metadata, five peak descriptors, and 1024 packed 14-bit ADC samples.
+\end{beamercolorbox}
+
+\vspace{1mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{panel alt}
+\scriptsize
+{\color{noircyan}\bfseries Peak descriptors\par}
+New firmware information is now persisted in the frame and exposed through DAQ formats and Python decode utilities.
+\end{beamercolorbox}
+
+\vspace{1mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{panel}
+\scriptsize
+{\color{noircyan}\bfseries\texttt{DAPHNEEthStreamFrame}\par}
+Four-channel stream frame with 280 samples per channel packed as 14-bit ADCs.
+\end{beamercolorbox}
+
+\column{0.46\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{panel alt}
+\scriptsize
+\textcolor{noircyan}{\textbf{Reviewer handles}}
+\vspace{0.5mm}
+\begin{itemize}
+  \item Constants: ADC width, sample count, channel count.
+  \item Accessors validate channel, sample, and peak indices.
+  \item Unit tests round-trip ADC and peak fields.
+  \item Bindings register triggered and stream types.
+\end{itemize}
+\end{beamercolorbox}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Decode Contract}
+\begin{columns}[T,onlytextwidth]
+\column{0.46\textwidth}
+\eyebrow{RAW DATA UTILS}
+\footnotesize
+\texttt{rawdatautils} is not a second format definition. It reuses \texttt{fddetdataformats} and exposes arrays consumed by Waffles and validation scripts:
+
+\begin{itemize}
+  \item ADC, timestamp, and channel arrays
+  \item stream-frame equivalents
+  \item peak descriptor arrays for triggered frames
+\end{itemize}
+
+\column{0.5\textwidth}
+\begin{tikzpicture}[node distance=0.3cm]
+  \node[flowboxwide] (frag) {DAQ fragment};
+  \node[flowboxwide, below=of frag] (reinterpret) {reinterpret as\\DAPHNE frame};
+  \node[flowboxwide, below=of reinterpret] (arrays) {NumPy arrays\\ADC, time, channel};
+  \node[flowboxwide, below=of arrays] (analysis) {Waffles\\analysis and validation};
+  \draw[arrow] (frag) -- (reinterpret);
+  \draw[arrow] (reinterpret) -- (arrays);
+  \draw[arrow] (arrays) -- (analysis);
+\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Controller And Monitoring Contract}
+\begin{columns}[T,onlytextwidth]
+\column{0.5\textwidth}
+\panelbox{\texttt{daphnemodules} V3 controller}{%
+Configures the DAPHNE V3 analog chain, reads counters, and publishes opmon in DAQ.}
+
+\vspace{1mm}
+\panelbox[panel alt]{Important release finding}{%
+\texttt{fddaq-v5.5.0-a9-1} ships 3.0.1. V3 \texttt{GeneralInfo} opmon appears in 3.0.2 on \texttt{patch/fddaq-v5.5.x}.}
+
+\column{0.46\textwidth}
+\begin{tikzpicture}[node distance=0.3cm]
+  \node[flowboxwide] (counter) {ReadTriggerCounters};
+  \node[flowboxwide, below=of counter] (perchan) {per-channel\\threshold, record, busy, full};
+  \node[flowboxwide, below=of perchan] (general) {ReadGeneralInfo\\bias, power, temp};
+  \node[flowboxwide, below=of general] (opmon) {Kafka opmon\\shifter view};
+  \draw[arrow] (counter) -- (perchan);
+  \draw[arrow] (perchan) -- (general);
+  \draw[arrow] (general) -- (opmon);
+\end{tikzpicture}
+\end{columns}
+\end{frame}
+
+\sectioncard{Standalone Calibration}{\texttt{daphne-server} established fast board-level scans outside DAQ run control}
+
+\begin{frame}[t]{Why Standalone Was Useful}
+\centering
+\vspace{0mm}
+\standaloneDiagram
+
+\vspace{1mm}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\panelbox{Scientific role}{%
+Find settings before DAQ run-control time.}
+\column{0.32\textwidth}
+\panelbox{Engineering role}{%
+Exercise routes, spy buffers, LED clients, and analysis.}
+\column{0.32\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel}
+\footnotesize
+\textcolor{noircyan}{\textbf{Boundary}}\par
+\vspace{0.5mm}
+Diagnostic data is not a substitute for DAQ-integrated data taking.
+\end{beamercolorbox}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Standalone Products}
+\begin{columns}[T,onlytextwidth]
+\column{0.33\textwidth}
+\statcard{Dark scans}{Scan \texttt{vgain}/offset and find pedestal regions from spy-buffer captures.}
+
+\column{0.33\textwidth}
+\statcard{LED scans}{Scan LED intensity, mask, and channel sets with direct SSP control.}
+
+\column{0.33\textwidth}
+\statcard{Bundles}{Generate per-\texttt{vgain} JSON settings for later replay.}
+\end{columns}
+
+\vspace{3mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel}
+\footnotesize
+Example dynamic-range result: \texttt{vgain} 1500--2500 is useful for the tested LED response; 2750 and 3000 did not reach the 2000 ADC pedestal target in the scanned offset range.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[fragile,t]{Standalone Command Shape}
+\small
+\begin{lstlisting}[style=terminal]
+./utils/run_client_via_tunnel.sh daphne-13 \
+  client/configure_fe_from_output.py \
+  client/dynamic_range_led/per_channel_target2k_vgain2000.json
+
+./utils/run_client_via_tunnel.sh daphne-13 \
+  client/protobuf_acquire_list_channels.py --osc_mode \
+  -foldername client/dynamic_range_led/runs/vgain2000_led_sat \
+  -channel_list 4,5,6,7,12,13,14,15,18,19,21 -N 64 -L 2048
+\end{lstlisting}
+
+\vspace{2mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\footnotesize
+Operational caution: the VD Coldbox target must be checked in configuration. Inventory maps \texttt{daphne-14} to \texttt{10.73.137.160}; some historical examples use \texttt{daphne-13}/\texttt{10.73.137.161}.
+\end{beamercolorbox}
+\end{frame}
+
+\sectioncard{DAQ-Wrapped Calibration}{\texttt{pds-run} moves selected scan variables into the DAQ configuration and run-control chain}
+
+\begin{frame}[t]{What \texttt{pds-run} Adds}
+\centering
+\vspace{0mm}
+\hspace*{0.03\linewidth}\pdsRunDiagram
+
+\vspace{1mm}
+\begin{columns}[T,onlytextwidth]
+\column{0.31\textwidth}
+\panelbox{Model}{Paths, commands, defaults, and scan dimensions live in numbered JSON files.}
+\column{0.31\textwidth}
+\panelbox{Overlay}{DAPHNE changes become minimal JSON patches, then OKS XML.}
+\column{0.31\textwidth}
+\panelbox{Execution}{Each scan point can set SSP LED state and take a DAQ run.}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Configuration Chain}
+\begin{columns}[T,onlytextwidth]
+\column{0.47\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel}
+\footnotesize
+\textcolor{noircyan}{\textbf{Facility}}
+\begin{itemize}
+  \item \texttt{00\_paths.json}: workarea, DB, OKS, target.
+  \item \texttt{01\_commands.json}: proxy and helper commands.
+  \item \texttt{02\_run\_defaults.json}: rate, wait, SSP LED.
+  \item \texttt{03\_default\_config.json}: base DAPHNE detail.
+\end{itemize}
+\end{beamercolorbox}
+
+\column{0.49\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\footnotesize
+\textcolor{noircyan}{\textbf{Scan}}
+\begin{itemize}
+  \item \texttt{thr-scan}, \texttt{selfthr-scan}, \texttt{att-scan}.
+  \item \texttt{offset-scan}, \texttt{trim-scan}.
+  \item \texttt{led-intensity-scan}: masks and intensities.
+  \item \texttt{plan\_only}: inspect XML and commands.
+\end{itemize}
+\end{beamercolorbox}
+\end{columns}
+
+\vspace{2mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel}
+\footnotesize
+Review rule: one scan file explains the changed variable; it does not re-declare the whole DAQ environment.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[fragile,t]{DAQ Run Command Generated By \texttt{pds-run}}
+\begin{lstlisting}[style=terminal]
+drunc-unified-shell ssh-CERN-kafka.json \
+  /nfs/sw/dunedaq/dunedaq-fddaq-v5.5.0-dev-pds/.../pds-vdcb-session.data.xml \
+  np02-session pds-vdcb-pds \
+  start-run --run-type TEST \
+  change-rate --trigger-rate 20.0 \
+  wait 120 shutdown terminate
+\end{lstlisting}
+
+\vspace{2mm}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\panelbox{Before run}{Source DAQ env, source DB path, disable proxy for runtime.}
+\column{0.32\textwidth}
+\panelbox{During run}{Run under tmux on the run-control host.}
+\column{0.32\textwidth}
+\panelbox{After run}{Confirm data files and opmon.}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile,t]{Operations Commands For \texttt{pds-run} Scans}
+\begin{lstlisting}[style=terminal]
+# Plan first: set "plan_only": true in the scan JSON.
+pds-run led-intensity-scan configs/vd_coldbox/06_led_calib.json
+pds-run led-intensity-scan configs/vd_coldbox/02_run_defaults.json \
+  --mask-values 1,2,4,8 \
+  --led-intensity-values 3000,3500,4095
+pds-run thr-scan configs/vd_coldbox/04_stthre.json
+pds-run selfthr-scan configs/vd_coldbox/04_stthre.json
+pds-run offset-scan configs/vd_coldbox/<offset_scan>.json
+pds-run trim-scan configs/vd_coldbox/<trim_scan>.json
+\end{lstlisting}
+
+\vspace{0.5mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{panel alt}
+\footnotesize
+Each command updates only the scan variable, applies the minimal DAPHNE XML overlay, runs SSP setup when requested, then delegates to \texttt{drunc}.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[t]{Operational Environment}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\panelbox{Login path}{%
+\texttt{marroyav@np04-srv-017} then \texttt{np04daq@np04-srv-024}; use tmux session \texttt{np02-vdcb}.}
+\vspace{1mm}
+\panelbox{Workarea}{%
+\texttt{/nfs/sw/dunedaq/}\\
+\texttt{dunedaq-fddaq-v5.5.0-dev-pds}.\\
+Source \texttt{setup\_for\_run.sh}.}
+
+\column{0.48\textwidth}
+\panelbox{Proxy state}{%
+Use \texttt{source \textasciitilde/bin/web\_proxy.sh} only for package downloads. Disable for running with \texttt{-u}.}
+\vspace{1mm}
+\panelbox{Hardware target}{%
+Board identity and IP must be checked in the active JSON/XML; target DAPHNE selection is a configuration requirement, not an assumption.}
+\end{columns}
+\end{frame}
+
+\sectioncard{Validation And Review}{The success condition is both software cleanliness and live DAQ behavior}
+
+\begin{frame}[t]{Live Validation Result}
+\begin{columns}[T,onlytextwidth]
+\column{0.24\textwidth}
+\statcard{Run 44355}{Default release with no local \texttt{daphnemodules}: data taking worked, but V3 monitoring was not visible.}
+\column{0.24\textwidth}
+\statcard{Run 44356}{Clean \texttt{daphnemodules} 3.0.2 override: two-minute TEST run succeeded at 20 Hz.}
+\column{0.24\textwidth}
+\statcard{Firmware}{Peak descriptors were added in firmware and then carried into the DAQ data-format contract.}
+\column{0.24\textwidth}
+\statcard{Conclusion}{Monitoring loss was traced to the release package version, not to run control.}
+\end{columns}
+
+\vspace{3mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\footnotesize
+Final tested state: \texttt{sourcecode/daphnemodules} commit \texttt{13289b5} on \texttt{patch/fddaq-v5.5.x}; \texttt{DAPHNE\_V3\_ROUTE} unset; monitoring visible.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[t]{Live \texttt{pds-run} Scan Exercise}
+\begin{beamercolorbox}[wd=\linewidth,sep=3pt,rounded=true]{panel}
+\tiny
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{0.98}
+\begin{tabular}{@{}p{0.18\linewidth}p{0.19\linewidth}p{0.54\linewidth}@{}}
+\toprule
+\textbf{Mode} & \textbf{Runs} & \textbf{Variable exercised} \\
+\midrule
+self-trigger & 44357--44358 & DAPHNE threshold: 11, 10 \\
+AFE attenuation & 44359--44360 & all AFE attenuators: 2200, 2300 \\
+offset & 44361--44362 & selected channel offsets: 2260, 2275 \\
+trim & 44363--44364 & selected channel trims: 1, 0 \\
+AFE bias & 44365--44366 & AFE0 bias: 10, 0; others fixed at 0 \\
+LED / SSP & 44367--44368 & LED intensity: 3000, 4095; mask 4 \\
+\bottomrule
+\end{tabular}
+\end{beamercolorbox}
+
+\vspace{1mm}
+{\color{noirmuted}\scriptsize
+Branch/host: \texttt{marroyav/vdcb-daq-scans} at \texttt{06efc5c} on \texttt{np04-srv-024}, tmux \texttt{np02-vdcb}; logs \texttt{/tmp/pds\_vdcb\_live\_20260508\_152420}.\\[-0.2mm]
+Result: every successful scan command exited with status 0; \texttt{xmllint --noout} passed after each XML update; no successful-run traceback or drunc command failure was found.\par}
+\end{frame}
+
+\begin{frame}[t]{Live Exercise Findings}
+\begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{panel}
+\scriptsize
+\renewcommand{\arraystretch}{1.16}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.65\linewidth}@{}}
+\toprule
+\textbf{Finding} & \textbf{Reviewer-facing consequence} \\
+\midrule
+SSP object name & Active XML uses \texttt{np02-ssp}; scan configs must not silently rely on the old \texttt{np02-ssp-on} default. \\
+Execution seed & \texttt{99\_apply\_fe\_min\_v2\_subset.json} is plan-safe but not execution-safe; \texttt{add\_daphne\_conf} requires \texttt{detector\_id}. \\
+Zero/default XML & \texttt{trim=0}, \texttt{v\_bias=0}, and \texttt{bias\_ctrl=0} can be omitted by \texttt{add\_daphne\_conf}; absence of these attributes is not by itself a run failure. \\
+Post-scan state & The exercise left SSP at \texttt{channel\_mask=4}, \texttt{pulse1\_width=3}; scan plans should state whether to restore the baseline. \\
+\bottomrule
+\end{tabular}
+\end{beamercolorbox}
+
+\vspace{1.5mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{panel alt}
+\scriptsize
+Conclusion: the DAQ-wrapped scan loop is operational for the tested modes; remaining cleanup is configuration hygiene, explicit target naming, and post-scan restoration policy.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[noirpanelalt] (current page.south west) rectangle (current page.north east);
+  \fill[duneorange] ($(current page.north west)+(0.9,-0.9)$) rectangle ++(1.8,0.08);
+  \fill[noircyan] ($(current page.south east)+(-2.8,0.9)$) rectangle ++(1.8,0.08);
+\end{tikzpicture}
+\vspace*{0.22\paperheight}
+{\color{white}\bfseries\fontsize{30}{34}\selectfont Summary\par}
+\vspace{5mm}
+{\color{noirmuted}\Large
+DAQ baseline: proven in the VD Coldbox, November 2025.\\[2mm]
+Standalone calibration: proven in the same facility, February 2026.\\[2mm]
+\texttt{pds-run}: DAQ-wrapped calibration, May 2026.\\[2mm]
+Peak descriptors: firmware, DAQ format, decode, Waffles.
+\par}
+\end{frame}
+
+\newcommand{\backupresourcebar}[4]{%
+  \begin{tikzpicture}[x=0.1cm,y=0.34cm,baseline=(label.base)]
+    \pgfmathsetmacro{\barend}{#2/10}
+    \node[anchor=east,font=\scriptsize,text=noirmuted] (label) at (0,0) {#1};
+    \draw[draw=noirline,fill=noirpanelalt,rounded corners=1pt] (0.25,-0.17) rectangle (10.25,0.17);
+    \draw[draw=#4,fill=#4!30,rounded corners=1pt] (0.25,-0.17) rectangle ({0.25+\barend},0.17);
+    \node[anchor=west,font=\scriptsize,text=noirtext] at (10.45,0) {#3};
+  \end{tikzpicture}\par
+}
+
+\begin{frame}[noframenumbering,t]{Backup: Interface Reference}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\eyebrow{FORMAL INTERFACE HANDLE}
+{\color{white}\bfseries DUNE Interface Control Document: DAQ \& Photon Detector System (PDS)\par}
+\vspace{1mm}
+{\color{noirmuted}\small
+EDMS 2088726 v7\\
+\href{https://edms.cern.ch/document/2088726/7}{https://edms.cern.ch/document/2088726/7}\par}
+
+\column{0.48\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\footnotesize
+\textcolor{noircyan}{\textbf{Use in discussion}}\par
+\vspace{0.5mm}
+The ICD is the external reference for the DAQ/PDS boundary. Resource and dead-time work remains an implementation risk, but the mitigation path is constrained by this interface contract.
+\end{beamercolorbox}
+\end{columns}
+
+\vspace{2mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{panel}
+\scriptsize
+Backup source for resource evidence: \texttt{repo/Latex/daphne\_hardware\_architecture\_may2026}, sections ``Baseline PL Resource Report'' and ``Current Grouped Candidate Build Result''.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[noframenumbering,t]{Backup: K26 Resource Mitigation Evidence}
+\begin{columns}[T,onlytextwidth]
+\column{0.49\textwidth}
+\eyebrow{BASELINE, OUTPUT-2C337B5}
+\vspace{1mm}
+\backupresourcebar{CLB sites}{99.55}{99.55\%}{duneorange}
+\backupresourcebar{DSP48E2}{99.36}{99.36\%}{duneorange}
+\backupresourcebar{CLB LUTs}{74.48}{74.48\%}{noircyan}
+\backupresourcebar{Block RAM}{68.75}{68.75\%}{noircyan}
+\backupresourcebar{URAM}{62.50}{62.50\%}{noircyan}
+\backupresourcebar{Registers}{44.78}{44.78\%}{noircyan}
+
+\column{0.49\textwidth}
+\eyebrow{GROUPED CANDIDATE, E5E2D70}
+\vspace{1mm}
+\backupresourcebar{CLB LUTs}{76.05}{76.05\%}{noircyan}
+\backupresourcebar{Block RAM}{67.36}{67.36\%}{noircyan}
+\backupresourcebar{RAMB36/FIFO}{63.89}{63.89\%}{noircyan}
+\backupresourcebar{URAM}{62.50}{62.50\%}{noircyan}
+\backupresourcebar{Registers}{61.19}{61.19\%}{noircyan}
+\backupresourcebar{DSP48E2}{0.00}{0.00\%}{noircyan}
+\end{columns}
+
+\vspace{2mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{panel alt}
+\scriptsize
+Interpretation: the grouped candidate keeps LUT/BRAM/URAM below device limits and removes the baseline DSP pressure. Remaining qualification is Hermes readout, backpressure, and real-trigger behavior, not FPGA fit or route legality.
+\end{beamercolorbox}
+\end{frame}
+
+\end{document}
