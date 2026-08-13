@@ -18,3 +18,8 @@ make
 Primary sources are DUNE-doc-35392, 1805, 25365, 27482, and 285. Source links
 and the distinction between verified, legacy, and proposed values are included
 in the document.
+
+This directory preserves the original July 2026 presentation draft. The
+maintained publication-safe copy, updated for the canonical OPC UA and
+historian contracts, is in
+[`marroyav/gizmo-icd`](https://github.com/marroyav/gizmo-icd/tree/main/guides/ground-reference-monitoring).
