@@ -1,0 +1,214 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+
+\usepackage{amsmath}
+\usepackage{multirow}
+
+\title[SC/DPS Repository Plan]{SC/DPS Repository Plan}
+\subtitle{A governed collection for slow-controls software, contracts, bridges, emulators, and deployment}
+\author{Manuel Arroyave}
+\date{DUNE slow-controls software discussion -- 20 August 2026}
+\newcommand{\mydate}{20 August 2026}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Decision for Thursday}
+\begin{columns}[T,onlytextwidth]
+  \begin{column}{0.56\textwidth}
+    \DuneEyebrow{ASK FOR AGREEMENT}
+    \begin{itemize}
+      \DuneTightList
+      \item Use an official DUNE-controlled namespace or an equivalent governed collection.
+      \item Keep existing DUNE DAQ and firmware repositories as first-class members.
+      \item Assign one canonical source for each schema, descriptor, and interface contract.
+      \item Start with two vertical pilots: board-to-OPC-UA and rack-power/DPS permit.
+      \item Exclude secrets, site endpoints, certificates, Gateway backups, and private configuration.
+    \end{itemize}
+  \end{column}
+  \begin{column}{0.40\textwidth}
+    \DuneFixedCard[dune decision]{1.35cm}{Recommendation}
+      {A small repository collection, not a monorepo and not untracked personal forks.}
+      {}
+    \vspace{1.5mm}
+    \DuneFixedCard[dune evidence]{1.35cm}{Naming}
+      {\texttt{scdps-*} for system-level repositories; \texttt{<device>-<role>} for device implementations.}
+      {}
+    \vspace{1.5mm}
+    \DuneFixedCard[dune panel alt]{1.35cm}{Near-term outcome}
+      {A repository catalog, owner list, branch policy, and migration checklist before wider onboarding.}
+      {}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Repository Relationship Topology}
+\centering
+\begin{tikzpicture}[node distance=8mm and 10mm]
+  \node[dune decision node,text width=2.55cm] (coord) {matrix\\ADRs\\RACI};
+  \node[dune artifact,text width=2.6cm,right=of coord] (contracts) {contracts\\schemas\\descriptors};
+  \node[dune repo muted,text width=2.55cm,below left=8mm and 1mm of contracts] (firmware) {firmware\\and board\\services};
+  \node[dune repo,text width=2.55cm,below=of contracts] (bridges) {OPC-UA\\bridges};
+  \node[dune repo,text width=2.55cm,below right=8mm and 1mm of contracts] (daq) {DUNE DAQ\\integration};
+  \node[dune repo muted,text width=2.55cm,below=of bridges] (ignition) {Ignition\\exports};
+  \node[dune artifact,text width=2.55cm,left=of ignition] (emulator) {emulator\\and contract\\oracle};
+  \node[dune decision node,text width=2.65cm,right=of ignition] (tests) {system tests\\release BOM\\evidence};
+
+  \draw[dune flow] (coord) -- node[dune label,above] {requirements} (contracts);
+  \draw[dune flow] (contracts) -- (firmware);
+  \draw[dune flow] (contracts) -- (bridges);
+  \draw[dune flow] (contracts) -- (daq);
+  \draw[dune flow] (bridges) -- (ignition);
+  \draw[dune evidence flow] (contracts) -- (emulator);
+  \draw[dune evidence flow] (firmware) -- (emulator);
+  \draw[dune evidence flow] (emulator) -- (tests);
+  \draw[dune evidence flow] (daq) -- (tests);
+  \draw[dune evidence flow] (ignition) -- (tests);
+
+  \node[dune label,align=left,text width=10.2cm,below=10mm of emulator,xshift=2.15cm] {
+    Lines mean implements, consumes, or verifies. The release bill of materials pins compatible versions across repositories.
+  };
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Proposed Repository Collection}
+\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{>{\bfseries\ttfamily}p{0.24\textwidth} X p{0.30\textwidth}}
+\toprule
+Repo & Owns & Seed from current work \\
+\midrule
+scdps-coordination &
+Interaction matrix, ADRs, RACI, risks, source register, release compatibility table. &
+\texttt{daphne\_slow\_controls\_plan} \\
+\addlinespace
+scdps-contracts &
+Shared status, quality, provenance, authority, schema policy, descriptor hashes. &
+Extract from DAPHNE/WIB/GIZMo after interface review. \\
+\addlinespace
+scdps-interfaces &
+ICD sources, intake workbooks, public review packages, controlled-source register. &
+\texttt{sc\_interface}, \texttt{gizmo-icd} \\
+\addlinespace
+scdps-emulator &
+Fleet emulator, protocol adapters, scenarios, fault injection, contract oracle. &
+\texttt{detector-control-emulator} / \texttt{sc\_emu} \\
+\addlinespace
+scdps-bridge-core &
+Reusable OPC-UA service shell, cache/quality/staleness, metrics, audit, config. &
+Reusable pieces from DAPHNE bridge work. \\
+\addlinespace
+daphne-opcua-bridge, wib-opcua-bridge &
+Device-specific mappings, methods, tests, and source protocol pinning. &
+\texttt{daphne-sc/opcua-bridge}, \texttt{wib\_opcua} \\
+\addlinespace
+scdps-deployment, scdps-system-tests &
+Host roles, service/container definitions, release BOM, rollback, VST evidence. &
+Reviewed deployment files plus emulator harness. \\
+\bottomrule
+\end{tabularx}
+\end{frame}
+
+\begin{frame}{Naming and Ownership Rules}
+\begin{columns}[T,onlytextwidth]
+  \begin{column}{0.48\textwidth}
+    \DuneFixedCard[dune accent]{1.95cm}{System-level repositories}
+      {\texttt{scdps-coordination}\\\texttt{scdps-contracts}\\\texttt{scdps-emulator}\\\texttt{scdps-deployment}}
+      {Owned by the SC/DPS collaboration team with CODEOWNERS for specific areas.}
+    \vspace{1.5mm}
+    \DuneFixedCard[dune evidence]{1.95cm}{Device-level repositories}
+      {\texttt{daphne-opcua-bridge}\\\texttt{wib-opcua-bridge}\\\texttt{gizmo-runtime}}
+      {Owned by the responsible device or subsystem team.}
+  \end{column}
+  \begin{column}{0.48\textwidth}
+    \DuneEyebrow{RULES THAT PREVENT CONFUSION}
+    \begin{itemize}
+      \DuneTightList
+      \item Repo name states the ownership boundary, not the implementation language.
+      \item Contracts are versioned artifacts, not scattered copies in every client.
+      \item Public by default; controlled deployment values live outside Git.
+      \item Personal forks remain development spaces, not collaboration sources of record.
+      \item System releases pin exact compatible versions across repositories.
+    \end{itemize}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Onboard Existing Work Without a Restart}
+\centering
+\begin{tikzpicture}[node distance=6mm and 5mm]
+  \node[dune repo muted,text width=2.45cm] (personal) {personal or prototype\\repositories};
+  \node[dune decision node,text width=2.45cm,right=of personal] (catalog) {catalog\\owner\\status};
+  \node[dune artifact,text width=2.45cm,right=of catalog] (review) {sanitize\\review\\license};
+  \node[dune repo,text width=2.45cm,right=of review] (official) {official\\canonical\\repo};
+  \node[dune decision node,text width=2.45cm,below=of catalog] (policy) {branch policy\\CODEOWNERS\\release tags};
+  \node[dune artifact,text width=2.45cm,below=of review] (ci) {CI\\contract tests\\dry-run deploy};
+
+  \draw[dune flow] (personal) -- (catalog);
+  \draw[dune flow] (catalog) -- (review);
+  \draw[dune flow] (review) -- (official);
+  \draw[dune flow] (policy) -- (catalog);
+  \draw[dune flow] (ci) -- (review);
+  \draw[dune evidence flow] (official) |- (ci);
+
+  \node[dune label,text width=10.2cm,align=center,below=11mm of ci] {
+    Initial examples: \texttt{daphne-sc}, \texttt{daphneZMQ}, \texttt{wib\_opcua}, \texttt{sc\_interface};\\
+    \texttt{detector-control-emulator}, \texttt{GIZMo} public package, and \texttt{gizmo-ignition}.
+  };
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{First Vertical Pilots}
+\begin{columns}[T,onlytextwidth]
+  \begin{column}{0.48\textwidth}
+    \DuneFixedCard[dune evidence]{2.65cm}{Pilot 1: board to OPC-UA}
+      {DAPHNE/WIB status and readiness projected through canonical device contracts into OPC-UA, then checked against DAQ views.}
+      {\DunePill{DuneMint}{read-only first}\hspace{1mm}\DunePill{DuneCyan}{schema hash}}
+  \end{column}
+  \begin{column}{0.48\textwidth}
+    \DuneFixedCard[dune risk]{2.65cm}{Pilot 2: rack-power and permit}
+      {PDU, supply, sensor, and DPS-permit path exercised through emulator scenarios and one representative hardware path.}
+      {\DunePill{DuneRed}{failure survives bridge loss}\hspace{1mm}\DunePill{DuneYellow}{reset owner}}
+  \end{column}
+\end{columns}
+\vspace{4mm}
+\DuneCard[dune panel alt]{Crossing fault}
+  {Inject one scenario that touches both pilots: permit loss during DAQ configure or SC command. The result should be visible in DAQ, OPC-UA/Ignition, and the evidence report, without crediting monitoring software for independent protection.}
+  {}
+\end{frame}
+
+\begin{frame}{Governance Minimum for the First Repos}
+\begin{columns}[T,onlytextwidth]
+  \begin{column}{0.50\textwidth}
+    \begin{itemize}
+      \DuneTightList
+      \item Protected default and release branches.
+      \item No direct pushes to protected branches.
+      \item Required status checks for build, tests, and contract compatibility.
+      \item Traceable release tags and retained artifacts.
+      \item CODEOWNERS for schemas, firmware ABI, protection logic, deployment, and matrix rows.
+    \end{itemize}
+  \end{column}
+  \begin{column}{0.46\textwidth}
+    \DuneFixedCard[dune decision]{1.35cm}{Meeting output}
+      {Choose namespace, first repo names, maintainers, and migration order.}
+      {}
+    \vspace{1.5mm}
+    \DuneFixedCard[dune panel alt]{1.35cm}{Do not decide yet}
+      {Do not force every prototype to move before the catalog and review gates exist.}
+      {}
+    \vspace{1.5mm}
+    \DuneFixedCard[dune evidence]{1.35cm}{Concrete next step}
+      {Create \texttt{scdps-coordination} and merge the repository catalog plus decision record.}
+      {}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\end{document}
