@@ -21,6 +21,7 @@ make
 The repository currently builds:
 
 - `decks/scdps_repo_plan_aug2026/main.pdf`
+- `decks/scdps_git_management_aug2026/main.pdf`
 
 ## Audit
 
@@ -37,4 +38,3 @@ usually be handled through the template macros.
 Create a new directory under `decks/`, copy the structure of
 `decks/scdps_repo_plan_aug2026/main.tex`, and keep local styling in the shared
 template unless a deck has a documented special reason to diverge.
-
