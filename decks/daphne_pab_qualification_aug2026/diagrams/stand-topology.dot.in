@@ -1,0 +1,82 @@
+digraph stand_topology {
+  graph [
+    rankdir=LR,
+    bgcolor="{{background}}",
+    pad="0.12",
+    margin="0",
+    nodesep="0.30",
+    ranksep="0.62",
+    splines=polyline,
+    outputorder=edgesfirst
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fillcolor="{{surface-raised}}",
+    color="{{border}}",
+    fontcolor="{{text}}",
+    fontname="Helvetica",
+    fontsize=13,
+    penwidth=1.5,
+    margin="0.20,0.14"
+  ];
+
+  edge [
+    color="{{info}}",
+    fontcolor="{{text-muted}}",
+    fontname="Helvetica",
+    fontsize=10,
+    penwidth=1.7,
+    arrowsize=0.75
+  ];
+
+  queue [
+    label="Board queue\n10 serial numbers\none selected",
+    fillcolor="{{paper}}",
+    color="{{paper}}",
+    fontcolor="{{on-accent}}"
+  ];
+
+  power [label="Metered 48 V\nV / I / P + safe off"];
+  timing [
+    label="Iceberg timing\nmaster / endpoint path",
+    fillcolor="{{sky}}",
+    color="{{sky}}",
+    fontcolor="{{on-accent}}"
+  ];
+  control [label="Board control\nconfiguration + readback"];
+
+  dut [
+    label="ACTIVE DAPHNE\none board under test\nfour data links",
+    fillcolor="{{coral}}",
+    color="{{coral}}",
+    fontcolor="{{on-accent}}",
+    penwidth=2.2
+  ];
+
+  daq [
+    label="DUNE DAQ 5.x\nfour-link readout\nrun control + monitoring",
+    fillcolor="{{sky}}",
+    color="{{sky}}",
+    fontcolor="{{on-accent}}"
+  ];
+
+  evidence [
+    label="Evidence store\nraw data / metrics\nlogs / plots / result",
+    fillcolor="{{paper}}",
+    color="{{paper}}",
+    fontcolor="{{on-accent}}",
+    shape=component
+  ];
+
+  {rank=same; power; timing; control;}
+
+  queue -> dut [label="install + identify"];
+  power -> dut [label="one protected channel", color="{{coral}}"];
+  timing -> dut [label="clock + commands"];
+  control -> dut [label="write + read"];
+  dut -> daq [label="4 links together", color="{{coral}}", penwidth=2.2];
+  daq -> evidence [label="fragments + logs"];
+  dut -> evidence [label="status + measurements", style=dashed];
+}
