@@ -4,15 +4,57 @@
 \input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
 \makeatother
 
-\title[SC/DPS Git Management]{SC/DPS Git Management}
-\subtitle{A clear repository plan around official references, DAQ ZMQ/protobuf interfaces, OPC-UA bridges, safety checks, and release evidence}
+\usepackage{colortbl}
+\arrayrulecolor{DuneLine}
+
+\title[SC/DPS Software Ownership]{SC/DPS Software Ownership}
+\subtitle{A clear ownership plan for slow controls, DAQ interfaces, Computing support, and protection boundaries}
 \author{Manuel Arroyave}
 \date{DUNE slow-controls software discussion -- 20 August 2026}
 \newcommand{\mydate}{20 August 2026}
 \hypersetup{colorlinks=true,urlcolor=DuneCyan,linkcolor=DuneCyan}
-\newcommand{\edmsdoc}[1]{\href{https://edms.cern.ch/document/#1}{\texttt{EDMS #1}}}
-\newcommand{\edmsproj}[1]{\href{https://edms.cern.ch/project/#1}{\texttt{EDMS project #1}}}
-\newcommand{\ghrepo}[2]{\href{https://github.com/#1/#2}{\nolinkurl{#1/#2}}}
+
+% Coherent but not flat: all cards stay dark, while each role has a
+% restrained tint from the shared DUNE palette.
+\setbeamercolor{dune accent}{fg=DuneText,bg=DuneCyan!24!DunePanel}
+\setbeamercolor{dune decision}{fg=DuneText,bg=DuneYellow!22!DunePanel}
+\setbeamercolor{dune risk}{fg=DuneText,bg=DuneRed!22!DunePanel}
+\setbeamercolor{dune evidence}{fg=DuneText,bg=DuneMint!22!DunePanel}
+
+\newcommand{\edmsdoc}[2]{\href{https://edms.cern.ch/document/#1}{#2}}
+\newcommand{\edmsproject}[2]{\href{https://edms.cern.ch/project/#1}{#2}}
+\newcommand{\ghorg}[1]{\href{https://github.com/#1}{\nolinkurl{github.com/#1}}}
+\newcommand{\webref}[2]{\href{#1}{#2}}
+\newcommand{\OwnerCell}[2]{\RaggedRight\textbf{#1}\par{\scriptsize\color{DuneMuted}#2}}
+\newcommand{\ShortRule}[2]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{#1}
+    \begin{minipage}[t][1.15cm][c]{\dimexpr\linewidth-10pt\relax}
+      \centering\bfseries #2
+    \end{minipage}
+  \end{beamercolorbox}
+}
+
+\tikzset{
+  sc box/.style={
+    draw=DuneLine,
+    fill=DunePanelAlt,
+    text=DuneText,
+    rounded corners=3pt,
+    align=center,
+    text width=3.0cm,
+    minimum height=1.02cm,
+    inner sep=5pt,
+    font=\footnotesize\bfseries
+  },
+  sc box hot/.style={sc box,draw=DuneCyan,fill=DuneCyan!20!DunePanel},
+  sc box evidence/.style={sc box,draw=DuneMint,fill=DuneMint!18!DunePanel},
+  sc box decision/.style={sc box,draw=DuneYellow,fill=DuneYellow!18!DunePanel},
+  sc box safe/.style={sc box,draw=DuneRed,fill=DuneRed!18!DunePanel},
+  sc arrow/.style={-Latex,draw=DuneCyan,line width=0.95pt},
+  sc arrow soft/.style={-Latex,draw=DuneViolet,dashed,line width=0.88pt},
+  sc arrow safe/.style={-Latex,draw=DuneOrange,line width=0.95pt},
+  sc caption/.style={text=DuneMuted,font=\tiny,align=center}
+}
 
 \begin{document}
 
@@ -20,288 +62,328 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Start From Official Sources}
+\begin{frame}{The Whole Proposal}
 \begin{columns}[T,onlytextwidth]
-  \begin{column}{0.54\textwidth}
-    \DuneEyebrow{SOURCE OF RECORD}
+  \begin{column}{0.50\textwidth}
+    \DuneEyebrow{ONE QUESTION}
+    {\color{white}\bfseries\fontsize{16}{19}\selectfont
+    Who owns the software logic that represents detector hardware to operators, DAQ, Computing, and protection systems?\par}
+    \medskip
     \begin{itemize}
       \DuneTightList
-      \item Requirements and interfaces come from approved EDMS and official DUNE documents.
-      \item Git repositories implement, test, package, and document software behavior against those sources.
-      \item Unlinked notes, prototype repos, and slides are evidence or proposals, not authority.
-      \item Each production repo should point to the exact official source it implements.
+      \item Start with ownership, then choose repository names.
+      \item Keep device-control logic close to Slow Controls when SC owns the bridge.
+      \item Keep DAQ and Computing interfaces explicit and testable.
     \end{itemize}
   \end{column}
-  \begin{column}{0.42\textwidth}
-    \DuneFixedCard[dune decision]{1.35cm}{Practical rule}
-      {A production change needs an official reference, a contract version, and evidence that the dependent clients still work.}
+  \begin{column}{0.46\textwidth}
+    \DuneFixedCard[dune accent]{1.20cm}{Slow Controls}
+      {Owns bridge logic, OPC-UA representation, operator alarms, history, and SC-facing command semantics.}
       {}
-    \vspace{1.5mm}
-    \DuneFixedCard[dune evidence]{1.35cm}{Initial references}
-      {Use online EDMS/DUNE links only. The next slide is the starter reference register.}
+    \smallskip
+    \DuneFixedCard[dune evidence]{1.20cm}{DAQ and Computing}
+      {DAQ owns DAQ clients and run-control behavior. Computing owns platform support, CI, artifacts, and deployment infrastructure.}
+      {}
+    \smallskip
+    \DuneFixedCard[dune risk]{1.20cm}{DPS / facilities}
+      {Owns credited protection and hard interlock logic. SC may display it, but does not become the safety owner.}
       {}
   \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Reference Register We Should Maintain}
-\scriptsize
-\renewcommand{\arraystretch}{1.12}
-\DuneEyebrow{ALL EXAMPLES ARE CLICKABLE ONLINE LINKS}
-\vspace{0.7mm}
-\begin{tabularx}{\textwidth}{p{0.27\textwidth} p{0.30\textwidth} X}
-\toprule
-Reference class & Examples & What the Git repos record \\
-\midrule
-SC/DPS and subsystem ICDs &
-\edmsdoc{3309688} (PDS SC), \edmsdoc{3362709} (BDE), \edmsdoc{3315615} (HVS), \edmsdoc{3297045} (TDE), \edmsdoc{3449868} (DAQ), \edmsdoc{2401090} (DPS). &
-Which variables, commands, permits, interlocks, and failure behavior are in scope. \\
-\addlinespace
-HWDB and installation identity &
-\edmsproj{CERN-0000279681} (HWDB exports), \edmsdoc{3357086} (PDS to HWDB), rack/network/interface records linked from EDMS. &
-How software maps tags and endpoints to real installed identities without duplicating live inventory. \\
-\addlinespace
-Official software sources &
-\ghrepo{DUNE-DAQ}{daphnemodules}, \ghrepo{DUNE-DAQ}{daphne-firmware}, \ghrepo{DUNE-DAQ}{dune-wib-firmware}, canonical board-service repos once chosen. &
-Which code owns each producer, consumer, schema, build artifact, and release tag. \\
-\addlinespace
-Release and evidence records &
-System release BOM, VST reports, compatibility matrix, signed or traceable tags. &
-Which versions were tested together and what rollback path is approved. \\
-\bottomrule
-\end{tabularx}
-\end{frame}
-
-\begin{frame}{Systems We Are Considering}
+\begin{frame}{Online Sources Only}
 \begin{columns}[T,onlytextwidth]
   \begin{column}{0.32\textwidth}
-    \DuneFixedCard[dune accent]{2.35cm}{Device producers}
-      {DAPHNE and WIB firmware, board services, ZMQ/protobuf actors, GIZMo OPC-UA producer, support-equipment adapters.}
-      {\DunePill{DuneCyan}{producer owns truth}}
+    \DuneFixedCard[dune evidence]{3.20cm}{Slow-controls documents}
+      {\edmsproject{CERN-0000266175}{Common SC project}\par
+       \edmsdoc{3309688}{PDS SC}\par
+       \edmsdoc{3362709}{BDE SC}\par
+       \edmsdoc{3315615}{HVS SC}\par
+       \edmsdoc{3297045}{TDE SC}\par
+       \edmsdoc{3449868}{DAQ SC}}
+      {}
   \end{column}
   \begin{column}{0.32\textwidth}
-    \DuneFixedCard[dune evidence]{2.35cm}{Consumers and projections}
-      {DUNE DAQ controllers/opmon, OPC-UA bridges, Ignition Gateway projects, dashboards, archival paths.}
-      {\DunePill{DuneMint}{same contract}}
+    \DuneFixedCard[dune decision]{3.20cm}{Installation and protection}
+      {\edmsdoc{2401090}{DPS}\par
+       \edmsdoc{2741879/1}{VD rack assignments}\par
+       \edmsdoc{2429058/3}{HD rack assignments}\par
+       \edmsdoc{2794420/1}{DAQ rack build}\par
+       \edmsproject{CERN-0000279681}{HWDB exports}}
+      {}
   \end{column}
   \begin{column}{0.32\textwidth}
-    \DuneFixedCard[dune decision]{2.35cm}{Verification and deployment}
-      {Fleet emulator, vertical-slice tests, release BOM, host services, network/port policy, rollback procedure.}
-      {\DunePill{DuneYellow}{tested set}}
+    \DuneFixedCard[dune accent]{3.20cm}{Software spaces}
+      {\ghorg{DUNE-DAQ}\par
+       \ghorg{DUNE}\par
+       \webref{https://dune.github.io/computing-basics/}{DUNE Computing basics}\par
+       \webref{https://arxiv.org/abs/2210.15665}{Offline Computing CDR}}
+      {}
   \end{column}
 \end{columns}
-\vspace{3mm}
-\DuneCard[dune panel alt]{Boundary statement}
-  {The repository plan follows these interfaces. It is not a proposal to merge all code into one repository or to replace existing DUNE-DAQ ownership.}
+\medskip
+\DuneCard[dune panel alt]{Rule}
+  {A production repository should point to the online source it implements. Local notes and prototypes can motivate work, but they are not the authority.}
   {}
 \end{frame}
 
-\begin{frame}{Why This Organization}
+\begin{frame}{Systems We Need To Cover}
 \begin{columns}[T,onlytextwidth]
-  \begin{column}{0.48\textwidth}
-    \DuneEyebrow{THE PROBLEM}
-    \begin{itemize}
-      \DuneTightList
-      \item DAQ and SC both talk to board services, often through the same ZMQ/protobuf contracts.
-      \item Bridges can accidentally carry private schema copies and drift from DAQ behavior.
-      \item Firmware, board services, bridges, Ignition exports, and deployment do not release on the same cadence.
-      \item Safety-related assumptions can be hidden in code unless they are tracked as explicit gates.
-    \end{itemize}
+  \begin{column}{0.24\textwidth}
+    \DuneFixedCard[dune accent]{2.65cm}{Detector electronics}
+      {PDS / DAPHNE\par TPC / BDE / WIB\par TDE / timing}
+      {Board services, readiness, status, commands.}
   \end{column}
-  \begin{column}{0.48\textwidth}
-    \DuneEyebrow{THE ORGANIZATION}
-    \begin{itemize}
-      \DuneTightList
-      \item Put contracts and compatibility policy where everyone can review them.
-      \item Keep device implementation beside the teams that own the device behavior.
-      \item Put cross-system tests and release BOMs in a place whose job is integration evidence.
-      \item Keep secrets and site-specific runtime values outside public Git.
-    \end{itemize}
+  \begin{column}{0.24\textwidth}
+    \DuneFixedCard[dune decision]{2.65cm}{Power and racks}
+      {PDU outlets\par Rack sensors\par IPMI / BMC}
+      {Installed identity, outlet maps, host health.}
+  \end{column}
+  \begin{column}{0.24\textwidth}
+    \DuneFixedCard[dune evidence]{2.65cm}{Detector services}
+      {HVS\par Calibration\par LCM / GIZMo}
+      {Permitted operation, readback, safe ranges.}
+  \end{column}
+  \begin{column}{0.24\textwidth}
+    \DuneFixedCard[dune risk]{2.65cm}{Protection and platform}
+      {DPS / facilities\par DAQ\par Computing}
+      {Safety authority, DAQ consumers, deployment support.}
   \end{column}
 \end{columns}
+\medskip
+\DuneCard[dune panel alt]{Interpretation}
+  {These are not all the same kind of software. Some are device-control paths, some are consumers, and some are safety or platform responsibilities.}
+  {}
 \end{frame}
 
-\begin{frame}{System and Interface Map}
+\begin{frame}{Where Software Goes}
 \centering
-\begin{adjustbox}{max width=\textwidth,max totalheight=0.72\textheight,center}
+\resizebox{0.96\textwidth}{!}{%
 \begin{tikzpicture}[node distance=7mm and 8mm]
-  \node[dune decision node,text width=2.55cm] (refs) {official\\EDMS/DUNE\\references};
-  \node[dune artifact,text width=2.80cm,right=of refs] (contracts) {contracts\\schemas\\descriptor hashes};
-  \node[dune decision node,text width=2.55cm,right=of contracts] (bom) {release BOM\\compatibility\\matrix};
+  \node[sc box evidence] (docs) {1. Official source\\EDMS, HWDB, DUNE docs};
+  \node[sc box,right=of docs] (device) {2. Installed device\\board, rack, supply};
+  \node[sc box hot,right=of device] (service) {3. Device service\\ZMQ, SNMP, IPMI, SCPI};
+  \node[sc box hot,right=of service] (bridge) {4. SC bridge\\OPC-UA model};
+  \node[sc box,right=of bridge] (operator) {5. Operator tools\\Ignition, alarms, history};
 
-  \node[dune repo muted,text width=2.60cm,below=11mm of refs] (daphnefw) {DAPHNE\\firmware +\\board service};
-  \node[dune repo muted,text width=2.60cm,below=11mm of contracts] (wibfw) {WIB\\firmware +\\board service};
-  \node[dune artifact,text width=2.60cm,below=11mm of bom] (support) {PDU / supply\\SNMP / SCPI\\IPMI};
-
-  \node[dune repo,text width=2.70cm,below=10mm of daphnefw] (daphnezmq) {DAPHNE actor\\ZMQ/protobuf\\\texttt{:40001}};
-  \node[dune repo,text width=2.70cm,below=10mm of wibfw] (wibzmq) {WIB actor\\ZMQ/protobuf};
-  \node[dune repo,text width=2.70cm,below=10mm of support] (supportadapter) {support\\adapters};
-
-  \node[dune repo,text width=2.82cm,below left=13mm and -1mm of wibzmq] (daq) {DUNE DAQ\\controllers\\opmon};
-  \node[dune repo,text width=2.82cm,below=13mm of wibzmq] (opcua) {OPC-UA\\bridges};
-  \node[dune repo,text width=2.82cm,below right=13mm and -1mm of wibzmq] (ignition) {Ignition\\Gateway\\tags/HMI};
-
-  \node[dune artifact,text width=2.95cm,below=12mm of daq] (emu) {emulator\\same protocols\\fault scenarios};
-  \node[dune decision node,text width=2.95cm,below=12mm of opcua] (tests) {system tests\\VST evidence\\dry-run deploy};
-  \node[dune repo muted,text width=2.95cm,below=12mm of ignition] (deploy) {deployment\\services\\host roles};
-
-  \draw[dune flow] (refs) -- node[dune label,above] {requirements} (contracts);
-  \draw[dune flow] (contracts) -- node[dune label,above] {version policy} (bom);
-  \draw[dune flow] (contracts) -- (daphnefw);
-  \draw[dune flow] (contracts) -- (wibfw);
-  \draw[dune flow] (contracts) -- (support);
-  \draw[dune flow] (daphnefw) -- (daphnezmq);
-  \draw[dune flow] (wibfw) -- (wibzmq);
-  \draw[dune flow] (support) -- (supportadapter);
-
-  \draw[dune flow] (daphnezmq) -- node[dune label,left] {ZMQ/protobuf\\commands + status} (daq);
-  \draw[dune flow] (wibzmq) -- node[dune label,right] {ZMQ/protobuf\\commands + status} (daq);
-  \draw[dune flow] (daphnezmq) -- node[dune label,left] {ZMQ/protobuf\\readiness} (opcua);
-  \draw[dune flow] (wibzmq) -- node[dune label,right] {ZMQ/protobuf\\readiness} (opcua);
-  \draw[dune flow] (supportadapter) -- node[dune label,right] {SNMP/SCPI/IPMI} (opcua);
-  \draw[dune flow] (opcua) -- node[dune label,above] {OPC-UA tags\\methods} (ignition);
-
-  \draw[dune evidence flow] (daphnezmq) -- (emu);
-  \draw[dune evidence flow] (wibzmq) -- (emu);
-  \draw[dune evidence flow] (emu) -- (tests);
-  \draw[dune evidence flow] (daq) -- (tests);
-  \draw[dune evidence flow] (opcua) -- (tests);
-  \draw[dune evidence flow] (ignition) -- (tests);
-  \draw[dune evidence flow] (deploy) -- (tests);
-  \draw[dune evidence flow] (bom) |- (deploy);
+  \draw[sc arrow] (docs) -- (device);
+  \draw[sc arrow] (device) -- (service);
+  \draw[sc arrow] (service) -- (bridge);
+  \draw[sc arrow] (bridge) -- (operator);
 \end{tikzpicture}
-\end{adjustbox}
+}
+
+\medskip
+\begin{columns}[T,onlytextwidth]
+  \begin{column}{0.31\textwidth}
+    \ShortRule{dune panel alt}{Subsystem owners define hardware behavior.}
+  \end{column}
+  \begin{column}{0.31\textwidth}
+    \ShortRule{dune accent}{Slow Controls owns the bridge and operator representation.}
+  \end{column}
+  \begin{column}{0.31\textwidth}
+    \ShortRule{dune decision}{DAQ and Computing consume or support stable contracts.}
+  \end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{What We Need to Track}
+\begin{frame}{DAPHNE And WIB Boundary}
+\centering
+\resizebox{0.92\textwidth}{!}{%
+\begin{tikzpicture}[node distance=10mm and 14mm]
+  \node[sc box evidence,text width=3.40cm] (owners) {PDS / TPC owners\\hardware behavior};
+  \node[sc box hot,text width=3.40cm,right=of owners] (service) {DAPHNE / WIB service\\ZMQ + protobuf};
+  \node[sc box,text width=3.40cm,below left=of service] (daq) {DUNE DAQ\\client + run control};
+  \node[sc box hot,text width=3.40cm,below right=of service] (scbridge) {Slow Controls\\bridge to OPC-UA};
+  \node[sc box,text width=3.40cm,right=of scbridge] (ignition) {Operator layer\\Ignition + history};
+
+  \draw[sc arrow] (owners) -- (service);
+  \draw[sc arrow soft] (service) -- (daq);
+  \draw[sc arrow] (service) -- (scbridge);
+  \draw[sc arrow] (scbridge) -- (ignition);
+\end{tikzpicture}
+}
+
+\medskip
+\DuneCard[dune panel alt]{Plain-language boundary}
+  {DAQ owns the DAQ client. Slow Controls owns the SC bridge and operator semantics. The shared service contract must be reviewed by both sides.}
+  {}
+\end{frame}
+
+\begin{frame}{PDU And Rack Boundary}
+\centering
+\resizebox{0.94\textwidth}{!}{%
+\begin{tikzpicture}[node distance=9mm and 12mm]
+  \node[sc box evidence,text width=3.20cm] (rack) {Rack / electrical owner\\outlet map};
+  \node[sc box,text width=3.20cm,right=of rack] (pdu) {PDU + rack sensors\\SNMP, IPMI};
+  \node[sc box hot,text width=3.20cm,right=of pdu] (bridge) {Slow Controls\\rack bridge};
+  \node[sc box,text width=3.20cm,right=of bridge] (operator) {Operator view\\alarms + history};
+  \node[sc box decision,text width=3.20cm,below=of bridge] (compute) {Computing\\hosts, network, CI};
+
+  \draw[sc arrow] (rack) -- (pdu);
+  \draw[sc arrow] (pdu) -- (bridge);
+  \draw[sc arrow] (bridge) -- (operator);
+  \draw[sc arrow soft] (compute) -- (bridge);
+\end{tikzpicture}
+}
+
+\medskip
+\DuneCard[dune panel alt]{Plain-language boundary}
+  {Slow Controls can monitor and command rack services through approved bridges. Electrical, rack, facilities, and Computing owners keep their separate authority for installation facts and platform operation.}
+  {}
+\end{frame}
+
+\begin{frame}{Protection Is A Separate Lane}
+\begin{columns}[T,onlytextwidth]
+  \begin{column}{0.31\textwidth}
+    \DuneFixedCard[dune accent]{2.45cm}{Observe}
+      {SC displays protection state, alarms on it, and archives it for operators.}
+      {This is monitoring.}
+  \end{column}
+  \begin{column}{0.31\textwidth}
+    \DuneFixedCard[dune decision]{2.45cm}{Request}
+      {SC may request permitted actions through approved command paths.}
+      {This is controlled operation.}
+  \end{column}
+  \begin{column}{0.31\textwidth}
+    \DuneFixedCard[dune risk]{2.45cm}{Protect}
+      {DPS, facilities, and approved interlocks own credited protection.}
+      {This must survive ordinary software failures.}
+  \end{column}
+\end{columns}
+\medskip
+\DuneCard[dune risk]{Hard rule}
+  {Do not credit a bridge, HMI, GitHub workflow, or normal service process as protection unless the designated protection owner explicitly approves that claim.}
+  {}
+\end{frame}
+
+\begin{frame}{Ownership Matrix}
 \scriptsize
-\renewcommand{\arraystretch}{1.13}
-\begin{tabularx}{\textwidth}{p{0.23\textwidth} p{0.32\textwidth} X}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}p{0.20\textwidth} p{0.36\textwidth} X@{}}
 \toprule
-Thing to track & Minimum record & Why it matters \\
+System & Slow Controls owns & Other required owners \\
 \midrule
-Official reference &
-EDMS/DUNE document ID, revision, owner, interpreted scope. &
-Prevents local assumptions from becoming silent requirements. \\
+PDS / DAPHNE &
+\OwnerCell{SC bridge and operator state}{OPC-UA mapping, quality, alarms, history, emulator tests.} &
+\OwnerCell{PDS + DAQ}{Board behavior and DAQ client compatibility.} \\
 \addlinespace
-Contract identity &
-Schema version, descriptor hash, producer repo/tag, compatible consumers. &
-Makes DAQ, bridge, emulator, and deployment compatibility reviewable. \\
+TPC / BDE / WIB &
+\OwnerCell{BDE/WIB SC bridge}{Readiness state, bridge behavior, operator-facing commands.} &
+\OwnerCell{TPC/BDE + DAQ}{WIB behavior and run-control integration.} \\
 \addlinespace
-Command authority &
-Who may write in each lifecycle state, stale limits, rejection behavior, audit fields. &
-Prevents DAQ/SC races and makes unsupported writes fail closed. \\
+PDU / rack services &
+\OwnerCell{Rack monitoring bridge}{SNMP/IPMI mapping, stale-data rules, alarm exposure.} &
+\OwnerCell{Electrical + Computing}{Outlet map, rack installation, hosts, network.} \\
 \addlinespace
-Safety assumptions &
-Permit source, interlock owner, failure survival claim, reset/rollback path. &
-Prevents monitoring software from being credited with independent protection. \\
+HVS / calibration &
+\OwnerCell{Operator representation}{OPC-UA methods, readback quality, alarm/history model.} &
+\OwnerCell{Subsystem + safety owner}{Safe ranges, permits, approved modes.} \\
 \addlinespace
-Evidence &
-CI logs, emulator scenarios, one-board vertical-slice results, release BOM. &
-Shows the selected versions worked together before deployment. \\
+DPS / facilities &
+\OwnerCell{Visibility only unless approved}{Display, alarm, archive, and documented requests.} &
+\OwnerCell{DPS / facilities}{Credited protection and hard interlocks.} \\
 \bottomrule
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Safety and Dependency Checks in Git}
+\begin{frame}{Repo Families Follow The Layers}
+\centering
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[node distance=8mm and 8mm]
+  \node[sc box evidence,text width=2.70cm] (refs) {\texttt{sc-reference-data}\\sources + topology};
+  \node[sc box decision,text width=2.70cm,right=of refs] (services) {\texttt{sc-device-services}\\service contracts};
+  \node[sc box hot,text width=2.70cm,right=of services] (bridges) {\texttt{sc-bridges}\\protocol to OPC-UA};
+  \node[sc box,text width=2.70cm,right=of bridges] (ign) {\texttt{sc-opcua-ignition}\\operator layer};
+  \node[sc box evidence,text width=2.70cm,right=of ign] (tests) {\texttt{sc-tests-deploy}\\evidence + release};
+
+  \draw[sc arrow] (refs) -- (services);
+  \draw[sc arrow] (services) -- (bridges);
+  \draw[sc arrow] (bridges) -- (ign);
+  \draw[sc arrow] (ign) -- (tests);
+\end{tikzpicture}
+}
+
+\medskip
+\DuneCard[dune panel alt]{Naming principle}
+  {The names are examples. The important point is that each repo family has a clear responsibility, owner set, review path, and test obligation.}
+  {}
+\end{frame}
+
+\begin{frame}{What Git Must Prove}
 \begin{columns}[T,onlytextwidth]
-  \begin{column}{0.48\textwidth}
-    \DuneFixedCard[dune risk]{2.45cm}{Safety checks}
-      {No secrets or site credentials. Writes gated by lifecycle and fresh permits. Unsafe command paths fail closed. DPS/protection claims require the designated owner and evidence that the action survives the initiating failure.}
+  \begin{column}{0.24\textwidth}
+    \DuneFixedCard[dune evidence]{2.55cm}{Source}
+      {Which online EDMS, HWDB, DUNE, or GitHub source is implemented?}
       {}
   \end{column}
-  \begin{column}{0.48\textwidth}
-    \DuneFixedCard[dune evidence]{2.45cm}{Dependency checks}
-      {Schema hash compatibility. Producer/consumer matrix. Emulator scenario with real DAQ ZMQ client and real OPC-UA bridge. Release BOM validated before deployment.}
+  \begin{column}{0.24\textwidth}
+    \DuneFixedCard[dune decision]{2.55cm}{Owner}
+      {Who reviews hardware behavior, SC behavior, DAQ impact, safety impact, and deployment impact?}
+      {}
+  \end{column}
+  \begin{column}{0.24\textwidth}
+    \DuneFixedCard[dune accent]{2.55cm}{Contract}
+      {Which protocol/schema version is used, and which consumers are compatible?}
+      {}
+  \end{column}
+  \begin{column}{0.24\textwidth}
+    \DuneFixedCard[dune risk]{2.55cm}{Safety}
+      {What fails closed, what is only monitoring, and who signs protection assumptions?}
       {}
   \end{column}
 \end{columns}
-\vspace{3mm}
-\DuneCard[dune panel alt]{Review gate}
-  {A contract-changing pull request should link the official reference, affected producers, DAQ consumers, bridges, emulator scenarios, deployment impact, test evidence, and rollback plan.}
+\medskip
+\DuneCard[dune panel alt]{Minimum release evidence}
+  {A tagged release should include a tested producer, bridge, emulator scenario, DAQ compatibility result when relevant, deployment manifest, and rollback note.}
   {}
 \end{frame}
 
-\begin{frame}{Repository Roles}
-\scriptsize
-\renewcommand{\arraystretch}{1.12}
-\begin{adjustbox}{max width=\textwidth,max totalheight=0.70\textheight,center}
-\begin{tabularx}{\textwidth}{>{\bfseries\ttfamily}p{0.25\textwidth} p{0.30\textwidth} X}
-\toprule
-Repo role & Owns & Does not own \\
-\midrule
-scdps-coordination &
-Reference register, matrix, ADRs, RACI, release compatibility table. &
-Device implementation or live inventory. \\
-\addlinespace
-scdps-contracts &
-Common status semantics, schema policy, descriptor publication, compatibility tooling. &
-Every device register or every command. \\
-\addlinespace
-daphne-sc-service / wib service &
-Board actor behavior, ZMQ/protobuf producer, firmware/service readiness. &
-Ignition project resources or cross-system release evidence. \\
-\addlinespace
-daphne-opcua-bridge / wib-opcua-bridge &
-Device-specific OPC-UA mappings, quality/staleness, methods, bridge tests. &
-Private schema forks or independent protection decisions. \\
-\addlinespace
-scdps-emulator &
-Production-like protocol behavior, fault scenarios, protocol-source pinning. &
-Production HMI or production DPS logic. \\
-\addlinespace
-scdps-system-tests / deployment &
-VST orchestration, evidence reports, release BOM, host services, rollback. &
-Secrets, live operational databases, or HWDB duplication. \\
-\bottomrule
-\end{tabularx}
-\end{adjustbox}
-\end{frame}
-
-\begin{frame}{Adoption Path}
+\begin{frame}{First Vertical Slice}
 \centering
-\begin{tikzpicture}[node distance=6mm and 5mm]
-  \node[dune decision node,text width=2.45cm] (catalog) {catalog\\official refs\\owners};
-  \node[dune artifact,text width=2.45cm,right=of catalog] (contract) {contract\\identity\\hash};
-  \node[dune repo,text width=2.45cm,right=of contract] (producer) {producer\\repo/tag};
-  \node[dune repo,text width=2.45cm,right=of producer] (consumers) {DAQ + bridge\\consumers};
-  \node[dune artifact,text width=2.45cm,below=of contract] (emu) {emulator\\scenario};
-  \node[dune decision node,text width=2.45cm,below=of producer] (evidence) {VST evidence\\release BOM};
+\resizebox{0.84\textwidth}{!}{%
+\begin{tikzpicture}[node distance=9mm and 12mm]
+  \node[sc box decision,text width=3.20cm] (contract) {One shared contract\\DAPHNE or WIB};
+  \node[sc box,text width=3.20cm,below left=of contract] (daq) {DAQ client\\uses the contract};
+  \node[sc box hot,text width=3.20cm,below=of contract] (bridge) {SC bridge\\uses the contract};
+  \node[sc box evidence,text width=3.20cm,below right=of contract] (emu) {Emulator\\same behavior};
+  \node[sc box evidence,text width=3.20cm,below=of bridge] (bom) {Release evidence\\test result + BOM};
 
-  \draw[dune flow] (catalog) -- (contract);
-  \draw[dune flow] (contract) -- (producer);
-  \draw[dune flow] (producer) -- (consumers);
-  \draw[dune evidence flow] (contract) -- (emu);
-  \draw[dune evidence flow] (producer) -- (emu);
-  \draw[dune evidence flow] (consumers) |- (evidence);
-  \draw[dune evidence flow] (emu) -- (evidence);
+  \draw[sc arrow soft] (contract) -- (daq);
+  \draw[sc arrow] (contract) -- (bridge);
+  \draw[sc arrow soft] (contract) -- (emu);
+  \draw[sc arrow soft] (daq) -- (bom);
+  \draw[sc arrow] (bridge) -- (bom);
+  \draw[sc arrow soft] (emu) -- (bom);
 \end{tikzpicture}
+}
 
-\vspace{3mm}
-\DuneCard[dune panel alt]{Online candidates to classify}
-  {\ghrepo{marroyav}{daphne_slow_controls_plan}, \ghrepo{marroyav}{daphne-sc}, \ghrepo{ecristal}{daphneZMQ}, \ghrepo{BenLand100}{wib_opcua}, \ghrepo{marroyav}{sc_emu}, \ghrepo{marroyav}{sc_interface}, \ghrepo{marroyav}{GIZMo}, \ghrepo{marroyav}{gizmo-ignition}.}
+\medskip
+\DuneCard[dune evidence]{Why this proves the model}
+  {One contract tested by a DAQ client, an SC bridge, and an emulator demonstrates the ownership boundary without requiring all repositories to be finalized first.}
   {}
 \end{frame}
 
-\begin{frame}{Decisions for Thursday}
+\begin{frame}{Decisions For Thursday}
 \begin{columns}[T,onlytextwidth]
-  \begin{column}{0.54\textwidth}
+  \begin{column}{0.56\textwidth}
     \begin{itemize}
       \DuneTightList
-      \item Where is the governed namespace: DUNE, DUNE-DAQ, or a coordinated cross-organization collection?
-      \item Which repository owns the canonical DAPHNE and WIB ZMQ/protobuf contracts?
-      \item Who are the first CODEOWNERS for references, contracts, DAQ interfaces, bridges, deployment, and evidence?
-      \item Which vertical slice proves the first DAQ ZMQ client plus OPC-UA bridge path?
-      \item What branch protection, tag, and release-BOM policy is the minimum before wider onboarding?
+      \item Approve the ownership rule before debating final repository names.
+      \item Confirm that SC-owned bridges govern DAPHNE/WIB slow-control behavior.
+      \item Choose the governed Git namespace or coordinated namespace policy.
+      \item Name first reviewers for SC, DAQ, Computing, subsystem, and DPS/facilities.
+      \item Select the first vertical slice: DAPHNE or WIB.
     \end{itemize}
   \end{column}
-  \begin{column}{0.42\textwidth}
-    \DuneFixedCard[dune decision]{1.55cm}{Meeting output}
-      {Approve the catalog structure and name the owners for the first two contracts.}
+  \begin{column}{0.40\textwidth}
+    \DuneFixedCard[dune decision]{1.55cm}{Meeting target}
+      {Agree on boundaries and first owners. Do not require perfect repo names to start.}
       {}
-    \vspace{1.5mm}
-    \DuneFixedCard[dune evidence]{1.55cm}{First technical proof}
-      {Run one DAQ ZMQ client and one OPC-UA bridge against the same emulator scenario in CI.}
+    \smallskip
+    \DuneFixedCard[dune evidence]{1.55cm}{Technical target}
+      {Run one DAQ client and one SC bridge against the same emulator scenario.}
       {}
   \end{column}
 \end{columns}

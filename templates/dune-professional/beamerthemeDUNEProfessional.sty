@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemeDUNEProfessional}[2026/08/19 DUNE professional Beamer theme]
+\ProvidesFile{beamerthemeDUNEProfessional.sty}[2026/08/19 DUNE professional Beamer theme v2]
 
 \mode<presentation>
 
@@ -24,43 +24,80 @@
 \newcommand{\DuneLogoPath}{../../templates/dune-professional/logos}
 \newcommand{\DuneSetLogoPath}[1]{\renewcommand{\DuneLogoPath}{#1}}
 
-% Color roles. Keep semantic names in decks; avoid ad hoc local colors.
-\definecolor{DuneBg}{HTML}{101820}
-\definecolor{DunePanel}{HTML}{1B2733}
-\definecolor{DunePanelAlt}{HTML}{263645}
-\definecolor{DuneTitleBand}{HTML}{20303E}
-\definecolor{DuneLine}{HTML}{536878}
+% Canonical design tokens. These values are checked against design-tokens.json.
+% Brand anchors follow Fermilab's published palette; paper, sky, and coral are
+% high-contrast layout surfaces derived from the earlier clear/dark decks.
+\definecolor{DuneBackground}{HTML}{101820}
+\definecolor{DuneSurface}{HTML}{1B2733}
+\definecolor{DuneSurfaceRaised}{HTML}{263645}
+\definecolor{DuneTitleSurface}{HTML}{20303E}
+\definecolor{DuneBorder}{HTML}{536878}
 \definecolor{DuneText}{HTML}{F1F5F7}
-\definecolor{DuneMuted}{HTML}{BAC6CF}
-\definecolor{DuneOrange}{HTML}{F2682B}
-\definecolor{DuneCyan}{HTML}{8EDDF2}
-\definecolor{DuneMint}{HTML}{9BD7AE}
-\definecolor{DuneYellow}{HTML}{E8C85A}
-\definecolor{DuneRed}{HTML}{F38B7F}
-\definecolor{DuneViolet}{HTML}{B8A7E8}
+\definecolor{DuneTextMuted}{HTML}{BAC6CF}
+\definecolor{DunePrimary}{HTML}{F68D2E}
+\definecolor{DuneInfo}{HTML}{41B6E6}
+\definecolor{DuneSuccess}{HTML}{78BE20}
+\definecolor{DuneWarning}{HTML}{FED141}
+\definecolor{DuneDanger}{HTML}{AF272F}
+\definecolor{DunePaper}{HTML}{F3EADB}
+\definecolor{DuneSky}{HTML}{A8DDEB}
+\definecolor{DuneCoral}{HTML}{F3A07A}
+\definecolor{DuneOnAccent}{HTML}{101820}
+\definecolor{DuneOnDanger}{HTML}{FFFFFF}
 
-\setbeamercolor{normal text}{fg=DuneText,bg=DuneBg}
-\setbeamercolor{title}{fg=white,bg=DuneBg}
-\setbeamercolor{subtitle}{fg=DuneMuted,bg=DuneBg}
-\setbeamercolor{author}{fg=DuneCyan,bg=DuneBg}
-\setbeamercolor{date}{fg=DuneMuted,bg=DuneBg}
-\setbeamercolor{frametitle}{fg=white,bg=DuneBg}
-\setbeamercolor{headline}{fg=DuneMuted,bg=DuneBg}
-\setbeamercolor{footline}{fg=DuneMuted,bg=DuneBg}
-\setbeamercolor{itemize item}{fg=DuneOrange}
-\setbeamercolor{itemize subitem}{fg=DuneCyan}
-\setbeamercolor{enumerate item}{fg=DuneOrange}
-\setbeamercolor{caption name}{fg=DuneMuted}
+% Compatibility aliases for existing decks. New material should use the
+% semantic names above or the role-based components below.
+\colorlet{DuneBg}{DuneBackground}
+\colorlet{DunePanel}{DuneSurface}
+\colorlet{DunePanelAlt}{DuneSurfaceRaised}
+\colorlet{DuneTitleBand}{DuneTitleSurface}
+\colorlet{DuneLine}{DuneBorder}
+\colorlet{DuneMuted}{DuneTextMuted}
+\colorlet{DuneOrange}{DunePrimary}
+\colorlet{DuneCyan}{DuneInfo}
+\colorlet{DuneMint}{DuneSuccess}
+\colorlet{DuneYellow}{DuneWarning}
+\colorlet{DuneRed}{DuneDanger}
+\colorlet{DuneViolet}{DuneInfo}
 
-\setbeamercolor{dune panel}{fg=DuneText,bg=DunePanel}
-\setbeamercolor{dune panel alt}{fg=DuneText,bg=DunePanelAlt}
-\setbeamercolor{dune accent}{fg=DuneBg,bg=DuneCyan}
-\setbeamercolor{dune decision}{fg=DuneBg,bg=DuneYellow}
-\setbeamercolor{dune risk}{fg=DuneBg,bg=DuneRed}
-\setbeamercolor{dune evidence}{fg=DuneBg,bg=DuneMint}
-\setbeamercolor{dune violet}{fg=DuneBg,bg=DuneViolet}
+\setbeamercolor{normal text}{fg=DuneText,bg=DuneBackground}
+\setbeamercolor{title}{fg=DuneText,bg=DuneBackground}
+\setbeamercolor{subtitle}{fg=DuneTextMuted,bg=DuneBackground}
+\setbeamercolor{author}{fg=DuneSky,bg=DuneBackground}
+\setbeamercolor{date}{fg=DuneTextMuted,bg=DuneBackground}
+\setbeamercolor{frametitle}{fg=DuneText,bg=DuneBackground}
+\setbeamercolor{headline}{fg=DuneTextMuted,bg=DuneBackground}
+\setbeamercolor{footline}{fg=DuneTextMuted,bg=DuneBackground}
+\setbeamercolor{itemize item}{fg=DuneCoral}
+\setbeamercolor{itemize subitem}{fg=DuneSky}
+\setbeamercolor{enumerate item}{fg=DuneCoral}
+\setbeamercolor{caption name}{fg=DuneTextMuted}
 
-\setbeamerfont{normal text}{size=\small}
+\setbeamercolor{dune panel}{fg=DuneText,bg=DuneSurface}
+\setbeamercolor{dune panel alt}{fg=DuneText,bg=DuneSurfaceRaised}
+
+% Legacy card roles intentionally share neutral surfaces. Meaning belongs in a
+% small role label, icon, line style, or explicit words—not a wall of color.
+\setbeamercolor{dune accent}{fg=DuneText,bg=DuneSurfaceRaised}
+\setbeamercolor{dune decision}{fg=DuneText,bg=DuneSurfaceRaised}
+\setbeamercolor{dune risk}{fg=DuneText,bg=DuneSurfaceRaised}
+\setbeamercolor{dune evidence}{fg=DuneText,bg=DuneSurfaceRaised}
+\setbeamercolor{dune violet}{fg=DuneText,bg=DuneSurfaceRaised}
+
+\setbeamercolor{dune role primary}{fg=DuneOnAccent,bg=DunePrimary}
+\setbeamercolor{dune role info}{fg=DuneOnAccent,bg=DuneInfo}
+\setbeamercolor{dune role success}{fg=DuneOnAccent,bg=DuneSuccess}
+\setbeamercolor{dune role warning}{fg=DuneOnAccent,bg=DuneWarning}
+\setbeamercolor{dune role danger}{fg=DuneOnDanger,bg=DuneDanger}
+\setbeamercolor{dune block ink}{fg=DuneText,bg=DuneSurfaceRaised}
+\setbeamercolor{dune block paper}{fg=DuneOnAccent,bg=DunePaper}
+\setbeamercolor{dune block sky}{fg=DuneOnAccent,bg=DuneSky}
+\setbeamercolor{dune block coral}{fg=DuneOnAccent,bg=DuneCoral}
+\setbeamercolor{dune block danger}{fg=DuneOnDanger,bg=DuneDanger}
+
+% Keep projected body copy at the class's normal size. Individual components
+% may step down once, but the framework never uses \tiny for meaningful text.
+\setbeamerfont{normal text}{size=\normalsize}
 \setbeamerfont{title}{series=\bfseries}
 \setbeamerfont{subtitle}{size=\large}
 \setbeamerfont{author}{size=\normalsize,series=\bfseries}
@@ -75,24 +112,29 @@
 \else
   \RequirePackage{fontspec}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-  \IfFontExistsTF{IBM Plex Sans}{
-    \setsansfont{IBM Plex Sans}
-    \setmainfont{IBM Plex Sans}
+  \IfFontExistsTF{Helvetica Neue}{
+    \setsansfont{Helvetica Neue}
+    \setmainfont{Helvetica Neue}
   }{
-    \IfFontExistsTF{Helvetica Neue}{
-      \setsansfont{Helvetica Neue}
-      \setmainfont{Helvetica Neue}
+    \IfFontExistsTF{Helvetica}{
+      \setsansfont{Helvetica}
+      \setmainfont{Helvetica}
     }{
       \IfFontExistsTF{TeX Gyre Heros}{
         \setsansfont{TeX Gyre Heros}
         \setmainfont{TeX Gyre Heros}
       }{
-        \IfFontExistsTF{Liberation Sans}{
-          \setsansfont{Liberation Sans}
-          \setmainfont{Liberation Sans}
+        \IfFontExistsTF{Arial}{
+          \setsansfont{Arial}
+          \setmainfont{Arial}
         }{
-          \setsansfont{DejaVu Sans}
-          \setmainfont{DejaVu Sans}
+          \IfFontExistsTF{Liberation Sans}{
+            \setsansfont{Liberation Sans}
+            \setmainfont{Liberation Sans}
+          }{
+            \setsansfont{DejaVu Sans}
+            \setmainfont{DejaVu Sans}
+          }
         }
       }
     }
@@ -115,10 +157,10 @@
 \setlength{\parskip}{0.18em}
 
 \setbeamertemplate{itemize item}{%
-  \color{DuneOrange}\raisebox{0.15ex}{\scriptsize$\blacktriangleright$}%
+  \color{DuneCoral}\raisebox{0.15ex}{\scriptsize$\blacktriangleright$}%
 }
 \setbeamertemplate{itemize subitem}{%
-  \color{DuneCyan}\raisebox{0.15ex}{\tiny$\blacktriangleright$}%
+  \color{DuneSky}\raisebox{0.15ex}{\tiny$\blacktriangleright$}%
 }
 
 % Measured boxes: content may shrink down, but never expands outside the safe box.
@@ -134,7 +176,7 @@
 }
 
 \newcommand{\DuneEyebrow}[1]{%
-  {\color{DuneCyan}\scriptsize\bfseries #1\par}%
+  {\color{DuneSky}\footnotesize\bfseries #1\par}%
 }
 
 \newcommand{\DunePill}[2]{%
@@ -145,17 +187,169 @@
     inner xsep=4pt,
     inner ysep=1.35pt,
     text=#1,
-    font=\tiny\bfseries
+    font=\scriptsize\bfseries
   ]{#2};%
+}
+
+% Role API. Always pair color with an explicit text label. The filled labels
+% use checked foreground/background pairs from design-tokens.json.
+\expandafter\def\csname DuneRoleColor@primary\endcsname{DunePrimary}
+\expandafter\def\csname DuneRoleColor@decision\endcsname{DunePrimary}
+\expandafter\def\csname DuneRoleColor@info\endcsname{DuneInfo}
+% Calm role palette: blue explains, orange asks or cautions, and red is
+% reserved for a hard danger. The explicit label carries the precise meaning.
+\expandafter\def\csname DuneRoleColor@evidence\endcsname{DuneInfo}
+\expandafter\def\csname DuneRoleColor@success\endcsname{DuneInfo}
+\expandafter\def\csname DuneRoleColor@warning\endcsname{DunePrimary}
+\expandafter\def\csname DuneRoleColor@risk\endcsname{DunePrimary}
+\expandafter\def\csname DuneRoleColor@danger\endcsname{DuneDanger}
+\expandafter\def\csname DuneRoleText@primary\endcsname{DuneOnAccent}
+\expandafter\def\csname DuneRoleText@decision\endcsname{DuneOnAccent}
+\expandafter\def\csname DuneRoleText@info\endcsname{DuneOnAccent}
+\expandafter\def\csname DuneRoleText@evidence\endcsname{DuneOnAccent}
+\expandafter\def\csname DuneRoleText@success\endcsname{DuneOnAccent}
+\expandafter\def\csname DuneRoleText@warning\endcsname{DuneOnAccent}
+\expandafter\def\csname DuneRoleText@risk\endcsname{DuneOnAccent}
+\expandafter\def\csname DuneRoleText@danger\endcsname{DuneOnDanger}
+\newcommand{\DuneRoleColor}[1]{\csname DuneRoleColor@#1\endcsname}
+\newcommand{\DuneRoleText}[1]{\csname DuneRoleText@#1\endcsname}
+
+\newcommand{\DuneRoleTag}[2]{%
+  \begingroup
+  \edef\DuneTagFill{\DuneRoleColor{#1}}%
+  \edef\DuneTagText{\DuneRoleText{#1}}%
+  \tikz[baseline=-0.55ex]\node[
+    rounded corners=2.5pt,
+    fill=\DuneTagFill,
+    inner xsep=4.2pt,
+    inner ysep=1.45pt,
+    text=\DuneTagText,
+    font=\scriptsize\bfseries
+  ]{#2};%
+  \endgroup
+}
+
+\newcommand{\DuneCallout}[4]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{dune panel alt}
+    \DuneRoleTag{#1}{#2}\hspace{0.55em}{\bfseries #3\par}
+    \vspace{0.65mm}
+    {\small #4\par}
+  \end{beamercolorbox}
+}
+
+\newcommand{\DuneTakeaway}[1]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{dune panel alt}
+    \DuneRoleTag{primary}{TAKEAWAY}\hspace{0.55em}{\bfseries #1\par}
+  \end{beamercolorbox}
+}
+
+% Layout-first components. These visual variants describe composition, not
+% status. A slide normally uses one dominant light fill, with a second fill
+% reserved for an actual comparison or system boundary.
+\newcommand{\DuneColorBlock}[4]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=8pt,rounded=true]{dune block #1}
+    {\usebeamercolor[fg]{dune block #1}\footnotesize\bfseries #2\par}
+    \vspace{0.8mm}
+    {\usebeamercolor[fg]{dune block #1}\large\bfseries #3\par}
+    \vspace{1mm}
+    {\usebeamercolor[fg]{dune block #1}\small #4\par}
+  \end{beamercolorbox}%
+}
+
+\newcommand{\DuneFixedColorBlock}[5]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=8pt,rounded=true]{dune block #1}
+    \begin{minipage}[t][#2][t]{\dimexpr\linewidth-16pt\relax}
+      \raggedright
+      {\usebeamercolor[fg]{dune block #1}\footnotesize\bfseries #3\par}
+      \vspace{0.8mm}
+      {\usebeamercolor[fg]{dune block #1}\large\bfseries #4\par}
+      \vspace{1mm}
+      {\usebeamercolor[fg]{dune block #1}\small #5\par}
+    \end{minipage}
+  \end{beamercolorbox}%
+}
+
+\newcommand{\DuneNumberBlock}[4]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=8pt,rounded=true]{dune block #1}
+    {\usebeamercolor[fg]{dune block #1}\bfseries\fontsize{19}{21}\selectfont #2\par}
+    \vspace{0.8mm}
+    {\usebeamercolor[fg]{dune block #1}\large\bfseries #3\par}
+    \vspace{1mm}
+    {\usebeamercolor[fg]{dune block #1}\small #4\par}
+  \end{beamercolorbox}%
+}
+
+\newcommand{\DuneCompactColorBlock}[4]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=5.5pt,rounded=true]{dune block #1}
+    {\usebeamercolor[fg]{dune block #1}\scriptsize\bfseries #2\par}
+    \vspace{0.35mm}
+    {\usebeamercolor[fg]{dune block #1}\normalsize\bfseries #3\par}
+    \vspace{0.45mm}
+    {\usebeamercolor[fg]{dune block #1}\footnotesize #4\par}
+  \end{beamercolorbox}%
+}
+
+\newcommand{\DuneCompactNumberBlock}[4]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{dune block #1}
+    {\usebeamercolor[fg]{dune block #1}%
+      \bfseries\fontsize{16}{18}\selectfont #2\hspace{0.55em}%
+      \normalsize #3\par}
+    \vspace{0.5mm}
+    {\usebeamercolor[fg]{dune block #1}\footnotesize #4\par}
+  \end{beamercolorbox}%
+}
+
+\newcommand{\DuneBigStatement}[3]{%
+  {\color{DuneSky}\footnotesize\bfseries #1\par}
+  \vspace{2mm}
+  {\color{DuneText}\bfseries\fontsize{21}{25}\selectfont #2\par}
+  \vspace{3mm}
+  {\color{DuneTextMuted}\large #3\par}
+}
+
+\newcommand{\DuneSectionPage}[3]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[DuneTitleSurface] (current page.south west) rectangle (current page.north east);
+      \fill[DuneCoral]
+        ($(current page.north west)+(0.88,-0.82)$) rectangle ++(1.75,0.085);
+      \fill[DuneSky]
+        ($(current page.south east)+(-2.9,0.86)$) rectangle ++(1.95,0.075);
+      \fill[DuneSky!9!DuneTitleSurface]
+        ($(current page.north east)+(-4.15,0)$) rectangle (current page.south east);
+      \draw[DuneBorder,line width=0.75pt]
+        ($(current page.south west)+(0.88,1.05)$)
+        -- ($(current page.south east)+(-0.88,1.05)$);
+    \end{tikzpicture}
+    \vspace*{0.19\paperheight}
+    {\color{DuneSky}\footnotesize\bfseries #1\par}
+    \vspace{3mm}
+    {\color{DuneText}\bfseries\fontsize{28}{32}\selectfont #2\par}
+    \vspace{4mm}
+    {\color{DuneTextMuted}\fontsize{13}{17}\selectfont #3\par}
+  \end{frame}%
+}
+
+\newcommand{\DuneDiagramCaption}[1]{%
+  {\color{DuneTextMuted}\footnotesize\textbf{Diagram.} #1\par}%
+}
+
+\newcommand{\DuneSourceLine}[2]{%
+  {\color{DuneTextMuted}\scriptsize Source: \href{#2}{#1}\par}%
+}
+
+\newcommand{\DuneBlockSourceLine}[2]{%
+  {\color{DuneOnAccent}\scriptsize Source:
+    \href{#2}{\textcolor{DuneOnAccent}{\underline{#1}}}\par}%
 }
 
 \newcommand{\DuneCard}[4][dune panel]{%
   \begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{#1}
     {\usebeamercolor[fg]{#1}\bfseries #2\par}
     \vspace{0.4mm}
-    {\usebeamercolor[fg]{#1}\footnotesize #3\par}
+    {\usebeamercolor[fg]{#1}\small #3\par}
     \if\relax\detokenize{#4}\relax\else
-      \vspace{0.5mm}{\usebeamercolor[fg]{#1}\scriptsize #4\par}
+      \vspace{0.5mm}{\usebeamercolor[fg]{#1}\footnotesize #4\par}
     \fi
   \end{beamercolorbox}
 }
@@ -166,9 +360,9 @@
       \raggedright
       {\usebeamercolor[fg]{#1}\bfseries #3\par}
       \vspace{0.45mm}
-      {\usebeamercolor[fg]{#1}\footnotesize #4\par}
+      {\usebeamercolor[fg]{#1}\small #4\par}
       \if\relax\detokenize{#5}\relax\else
-        \vspace{0.55mm}{\usebeamercolor[fg]{#1}\scriptsize #5\par}
+        \vspace{0.55mm}{\usebeamercolor[fg]{#1}\footnotesize #5\par}
       \fi
     \end{minipage}
   \end{beamercolorbox}
@@ -189,11 +383,11 @@
 % Background and fixed frame-title band.
 \addtobeamertemplate{background canvas}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[DuneBg] (current page.south west) rectangle (current page.north east);
-    \draw[DuneLine,line width=0.55pt]
+    \fill[DuneBackground] (current page.south west) rectangle (current page.north east);
+    \draw[DuneBorder,line width=0.55pt]
       ($(current page.south west)+(0.78,0.74)$)
       -- ($(current page.south east)+(-0.78,0.74)$);
-    \fill[DuneCyan!16]
+    \fill[DuneSky!16]
       ($(current page.south east)+(-3.2,0.83)$) rectangle ++(1.45,0.055);
   \end{tikzpicture}%
 }{}
@@ -203,21 +397,21 @@
 \setbeamertemplate{frametitle}{%
   \nointerlineskip%
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[DuneTitleBand]
+    \fill[DuneTitleSurface]
       (current page.north west) rectangle ($(current page.north east)+(0,-1.18)$);
-    \fill[DuneOrange]
+    \fill[DuneCoral]
       ($(current page.north west)+(0.78,-0.23)$) rectangle ++(1.38,0.055);
     \node[anchor=west,inner sep=0pt]
       at ($(current page.north west)+(0.78,-0.72)$) {%
         \DuneFitBox{\dimexpr\paperwidth-1.56cm\relax}{6.7mm}{%
-          {\color{white}\bfseries\fontsize{17}{20}\selectfont\insertframetitle}%
+          {\color{DuneText}\bfseries\fontsize{17}{20}\selectfont\insertframetitle}%
         }%
       };
     \ifx\insertframesubtitle\@empty\else
       \node[anchor=west,inner sep=0pt]
         at ($(current page.north west)+(0.78,-1.02)$) {%
           \DuneFitBox{\dimexpr\paperwidth-1.56cm\relax}{3.2mm}{%
-            {\color{DuneMuted}\scriptsize\insertframesubtitle}%
+            {\color{DuneTextMuted}\scriptsize\insertframesubtitle}%
           }%
         };
     \fi
@@ -228,20 +422,20 @@
 \setbeamertemplate{footline}{%
   \leavevmode%
   \begin{beamercolorbox}[wd=\paperwidth,ht=6.4mm,dp=1.8mm,leftskip=0.78cm,rightskip=0.78cm]{footline}
-    \DuneFooterLogo\hspace{0.45em}{\textcolor{DuneMuted}{\DuneTalkDate}}%
+    \DuneFooterLogo\hspace{0.45em}{\textcolor{DuneTextMuted}{\DuneTalkDate}}%
     \hfill%
-    {\textcolor{DuneOrange}{\bfseries\insertframenumber}\textcolor{DuneMuted}{/\inserttotalframenumber}}%
+    {\textcolor{DuneCoral}{\bfseries\insertframenumber}\textcolor{DuneTextMuted}{/\inserttotalframenumber}}%
   \end{beamercolorbox}%
 }
 
 \setbeamertemplate{title page}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[DuneBg] (current page.south west) rectangle (current page.north east);
-    \fill[DuneTitleBand]
+    \fill[DuneBackground] (current page.south west) rectangle (current page.north east);
+    \fill[DuneTitleSurface]
       (current page.north west) rectangle ($(current page.north east)+(0,-3.03)$);
-    \fill[DuneOrange]
+    \fill[DuneCoral]
       ($(current page.north west)+(0.82,-0.58)$) rectangle ++(1.55,0.075);
-    \fill[DuneCyan]
+    \fill[DuneSky]
       ($(current page.south east)+(-2.8,0.79)$) rectangle ++(1.88,0.065);
     \IfFileExists{\DuneLogoPath/DUNElogo_white.png}{%
       \node[anchor=south east,opacity=0.13,inner sep=0pt]
@@ -258,18 +452,18 @@
     \node[anchor=north west,inner sep=0pt]
       at ($(current page.north west)+(0.82,-0.88)$) {%
         \DuneFitBox{0.78\paperwidth}{1.48cm}{%
-          {\color{white}\bfseries\fontsize{25}{28}\selectfont\inserttitle}%
+          {\color{DuneText}\bfseries\fontsize{25}{28}\selectfont\inserttitle}%
         }%
       };
     \node[anchor=north west,inner sep=0pt]
       at ($(current page.north west)+(0.82,-3.55)$) {%
         \DuneFitBox{0.56\paperwidth}{1.35cm}{%
-          {\color{DuneMuted}\fontsize{13}{17}\selectfont\insertsubtitle}%
+          {\color{DuneTextMuted}\fontsize{13}{17}\selectfont\insertsubtitle}%
         }%
       };
-    \node[anchor=north west,text=DuneCyan,font=\bfseries,inner sep=0pt]
+    \node[anchor=north west,text=DuneSky,font=\bfseries,inner sep=0pt]
       at ($(current page.north west)+(0.82,-6.3)$) {\insertauthor};
-    \node[anchor=north west,text=DuneMuted,font=\small,inner sep=0pt]
+    \node[anchor=north west,text=DuneTextMuted,font=\small,inner sep=0pt]
       at ($(current page.north west)+(0.82,-6.82)$) {\insertdate};
   \end{tikzpicture}%
   \vfill%
@@ -277,8 +471,8 @@
 
 \tikzset{
   dune repo/.style={
-    draw=DuneCyan,
-    fill=DuneCyan!12!DunePanel,
+    draw=DuneInfo,
+    fill=DuneInfo!12!DuneSurface,
     text=DuneText,
     rounded corners=3pt,
     align=center,
@@ -288,8 +482,8 @@
     font=\scriptsize\bfseries
   },
   dune repo muted/.style={
-    draw=DuneLine,
-    fill=DunePanelAlt,
+    draw=DuneBorder,
+    fill=DuneSurfaceRaised,
     text=DuneText,
     rounded corners=3pt,
     align=center,
@@ -299,8 +493,8 @@
     font=\scriptsize\bfseries
   },
   dune artifact/.style={
-    draw=DuneMint,
-    fill=DuneMint!13!DunePanel,
+    draw=DuneSuccess,
+    fill=DuneSuccess!13!DuneSurface,
     text=DuneText,
     rounded corners=3pt,
     align=center,
@@ -310,8 +504,8 @@
     font=\scriptsize\bfseries
   },
   dune decision node/.style={
-    draw=DuneYellow,
-    fill=DuneYellow!14!DunePanel,
+    draw=DunePrimary,
+    fill=DunePrimary!14!DuneSurface,
     text=DuneText,
     rounded corners=3pt,
     align=center,
@@ -320,12 +514,12 @@
     inner sep=4pt,
     font=\scriptsize\bfseries
   },
-  dune flow/.style={-Latex,draw=DuneCyan,line width=0.85pt},
-  dune relation/.style={draw=DuneMuted,line width=0.65pt},
-  dune evidence flow/.style={-Latex,draw=DuneViolet,dashed,line width=0.85pt},
+  dune flow/.style={-Latex,draw=DuneInfo,line width=0.85pt},
+  dune relation/.style={draw=DuneTextMuted,line width=0.65pt},
+  dune evidence flow/.style={-Latex,draw=DuneSuccess,dashed,line width=0.85pt},
   dune label/.style={
-    fill=DuneBg,
-    text=DuneMuted,
+    fill=DuneBackground,
+    text=DuneTextMuted,
     inner sep=1.5pt,
     font=\tiny,
     align=center

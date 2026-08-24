@@ -1,0 +1,128 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+
+\title{Presentation title}
+\subtitle{State the audience outcome in one clear sentence}
+\author{Presentation author}
+\date{Meeting or event -- \today}
+\newcommand{\mydate}{\today}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Tell people the answer first}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.59\textwidth}
+      \DuneBigStatement{IF THEY REMEMBER ONE THING}
+        {Make it one clear sentence.}
+        {Say what changed and why it matters. Everything else earns its place by helping people understand or act.}
+    \end{column}
+    \begin{column}{0.37\textwidth}
+      \DuneCompactNumberBlock{coral}{01}{What happened?}
+        {Use a plain verb: changed, passed, failed, or needs a decision.}
+      \smallskip
+      \DuneCompactNumberBlock{sky}{02}{Why should we care?}
+        {Give only the context people need to understand the consequence.}
+      \smallskip
+      \DuneCompactNumberBlock{paper}{03}{What do you need?}
+        {Name who acts and what done looks like.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\DuneSectionPage{MAKE IT EASY TO FOLLOW}{Give the story a rhythm}
+  {Move between a clear claim, the evidence, a useful picture, and the decision.}
+
+\begin{frame}{Give the strongest evidence the most space}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      \DuneFixedColorBlock{sky}{4.9cm}{THE THING THAT CONVINCED YOU}
+        {Show the clearest proof}
+        {Use one measured result, comparison, or observed behavior.\par\medskip
+         Make it large enough to read from the back, then say what it changes.}
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \DuneColorBlock{paper}{ENOUGH CONTEXT}{What am I looking at?}
+        {Show the one dependency or limit people need to read the result correctly.}
+      \smallskip
+      \DuneColorBlock{coral}{WHAT WE DO NOT KNOW YET}{Be honest about the gap}
+        {Say what will answer the question and who will do that work.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Use a diagram when it makes the story simpler}
+  \centering
+  \includegraphics[width=0.91\textwidth,height=0.61\textheight,keepaspectratio]{diagrams/system-context.pdf}
+
+  \vspace{1mm}
+  \DuneDiagramCaption{The audience should see the relationship first; the caption tells them why it matters.}
+\end{frame}
+
+\begin{frame}{Put the choice—and the line between choices—on screen}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{sky}{3.4cm}{WHAT THE EVIDENCE SUPPORTS}
+        {Here is what we know}
+        {Show the evidence and say where the conclusion still holds.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{coral}{3.4cm}{WHAT COULD CHANGE OUR MINDS}
+        {Here is what remains open}
+        {Name the failure, trigger, or new evidence that would change the recommendation.}
+    \end{column}
+  \end{columns}
+
+  \smallskip
+  \DuneCompactColorBlock{paper}{CLOSE THE GAP}{Say who goes next}
+    {Name the person who will answer the open question and what answer will be enough.}
+\end{frame}
+
+\begin{frame}{Give the story a beginning, a middle, and an end}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.235\textwidth}
+      \DuneNumberBlock{paper}{01}{The point}
+        {Say the conclusion before the supporting detail.}
+    \end{column}
+    \begin{column}{0.235\textwidth}
+      \DuneNumberBlock{sky}{02}{What supports it}
+        {Show the measurement, system, or source that convinced you.}
+    \end{column}
+    \begin{column}{0.235\textwidth}
+      \DuneNumberBlock{sky}{03}{Where it stops}
+        {Be clear about the uncertainty, risk, or responsibility line.}
+    \end{column}
+    \begin{column}{0.235\textwidth}
+      \DuneNumberBlock{coral}{04}{What happens next}
+        {End with a person, an action, and what done looks like.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{End by asking for one thing}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.36\textwidth}
+      \DuneFixedColorBlock{coral}{3.6cm}{MAKE IT EASY TO REPEAT}
+        {Ask for one concrete action}
+        {Choose, review, fund, schedule, or test the specific thing on screen.}
+    \end{column}
+    \begin{column}{0.60\textwidth}
+      \DuneBigStatement{WHO GOES NEXT?}
+        {Name the person and what done looks like.}
+        {A date helps. A result everyone can recognize is even better.}
+    \end{column}
+  \end{columns}
+
+  \smallskip
+  \DuneCompactColorBlock{paper}{THE LAST WORD}{Leave the room with the decision}
+    {Move implementation detail to backup slides or a companion document.}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "updated": "2026-08-19",
+  "description": "Canonical layout-first dark-presentation tokens. Paper, sky, and coral create structural layers; red is reserved for hard danger.",
+  "brand_source": "https://www.fnal.gov/faw/designstandards/color-palette.html",
+  "colors": {
+    "background": {
+      "hex": "#101820",
+      "tex": "DuneBackground",
+      "purpose": "Canvas background"
+    },
+    "surface": {
+      "hex": "#1B2733",
+      "tex": "DuneSurface",
+      "purpose": "Default neutral card"
+    },
+    "surface-raised": {
+      "hex": "#263645",
+      "tex": "DuneSurfaceRaised",
+      "purpose": "Raised card and grouped content"
+    },
+    "title-surface": {
+      "hex": "#20303E",
+      "tex": "DuneTitleSurface",
+      "purpose": "Title band"
+    },
+    "border": {
+      "hex": "#536878",
+      "tex": "DuneBorder",
+      "purpose": "Rules and neutral diagram edges"
+    },
+    "text": {
+      "hex": "#F1F5F7",
+      "tex": "DuneText",
+      "purpose": "Primary text"
+    },
+    "text-muted": {
+      "hex": "#BAC6CF",
+      "tex": "DuneTextMuted",
+      "purpose": "Secondary text and captions"
+    },
+    "primary": {
+      "hex": "#F68D2E",
+      "tex": "DunePrimary",
+      "purpose": "Primary accent and decisions",
+      "brand_role": "Fermilab Orange Light"
+    },
+    "info": {
+      "hex": "#41B6E6",
+      "tex": "DuneInfo",
+      "purpose": "Information and primary flow",
+      "brand_role": "Fermilab NAL Blue Light"
+    },
+    "success": {
+      "hex": "#78BE20",
+      "tex": "DuneSuccess",
+      "purpose": "Optional chart/data passing state, not standard slide furniture",
+      "brand_role": "Fermilab NAL Green Light"
+    },
+    "warning": {
+      "hex": "#FED141",
+      "tex": "DuneWarning",
+      "purpose": "Optional chart/data warning state, not standard slide furniture",
+      "brand_role": "Fermilab Prairie Gold"
+    },
+    "danger": {
+      "hex": "#AF272F",
+      "tex": "DuneDanger",
+      "purpose": "Hard danger fill with white text; never a thin line on the dark canvas",
+      "brand_role": "Fermilab Massey Ferguson Red Light"
+    },
+    "paper": {
+      "hex": "#F3EADB",
+      "tex": "DunePaper",
+      "purpose": "Warm editorial block for definitions, sources, and neutral emphasis"
+    },
+    "sky": {
+      "hex": "#A8DDEB",
+      "tex": "DuneSky",
+      "purpose": "Cool structural block for interfaces, flows, and system context"
+    },
+    "coral": {
+      "hex": "#F3A07A",
+      "tex": "DuneCoral",
+      "purpose": "Warm structural block for ownership, decisions, and the active path"
+    },
+    "on-accent": {
+      "hex": "#101820",
+      "tex": "DuneOnAccent",
+      "purpose": "Dark text on primary, information, and light structural fills"
+    },
+    "on-danger": {
+      "hex": "#FFFFFF",
+      "tex": "DuneOnDanger",
+      "purpose": "Text on danger fill"
+    }
+  },
+  "contrast_checks": [
+    {"foreground": "text", "background": "background", "minimum": 4.5},
+    {"foreground": "text-muted", "background": "background", "minimum": 4.5},
+    {"foreground": "text", "background": "surface", "minimum": 4.5},
+    {"foreground": "text-muted", "background": "surface", "minimum": 4.5},
+    {"foreground": "text", "background": "surface-raised", "minimum": 4.5},
+    {"foreground": "border", "background": "background", "minimum": 3.0},
+    {"foreground": "on-accent", "background": "primary", "minimum": 4.5},
+    {"foreground": "on-accent", "background": "info", "minimum": 4.5},
+    {"foreground": "on-accent", "background": "success", "minimum": 4.5},
+    {"foreground": "on-accent", "background": "warning", "minimum": 4.5},
+    {"foreground": "on-danger", "background": "danger", "minimum": 4.5},
+    {"foreground": "on-accent", "background": "paper", "minimum": 4.5},
+    {"foreground": "on-accent", "background": "sky", "minimum": 4.5},
+    {"foreground": "on-accent", "background": "coral", "minimum": 4.5}
+  ]
+}

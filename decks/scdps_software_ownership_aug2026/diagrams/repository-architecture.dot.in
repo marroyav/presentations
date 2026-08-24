@@ -1,0 +1,76 @@
+digraph repository_architecture {
+  graph [
+    rankdir=TB,
+    bgcolor="{{background}}",
+    pad="0.16",
+    margin="0",
+    nodesep="0.72",
+    ranksep="0.58",
+    splines=polyline,
+    outputorder=edgesfirst
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Helvetica",
+    fontsize=14,
+    penwidth=1.6,
+    margin="0.20,0.12"
+  ];
+
+  edge [
+    color="{{sky}}",
+    fontcolor="{{text-muted}}",
+    fontname="Helvetica",
+    fontsize=10,
+    penwidth=1.7,
+    arrowsize=0.76
+  ];
+
+  reference [
+    label="sc-reference-data\nwhat is installed: racks / outlets / hosts",
+    color="{{paper}}",
+    fillcolor="{{paper}}",
+    fontcolor="{{on-accent}}"
+  ];
+
+  services [
+    label="sc-device-services\nshared states / commands / errors",
+    color="{{sky}}",
+    fillcolor="{{sky}}",
+    fontcolor="{{on-accent}}"
+  ];
+
+  bridges [
+    label="sc-bridges\ndevice data becomes operator state",
+    color="{{coral}}",
+    fillcolor="{{coral}}",
+    fontcolor="{{on-accent}}",
+    penwidth=2.2
+  ];
+
+  operator [
+    label="sc-opcua-ignition\nscreens / alarms / history",
+    color="{{sky}}",
+    fillcolor="{{sky}}",
+    fontcolor="{{on-accent}}"
+  ];
+
+  release [
+    label="sc-tests-deploy\nemulators / tests / manifest / rollback",
+    color="{{paper}}",
+    fillcolor="{{paper}}",
+    fontcolor="{{on-accent}}",
+    peripheries=2
+  ];
+
+  reference -> bridges [label="uses the facts"];
+  services -> bridges [label="uses one version"];
+  bridges -> operator [label="feeds the view"];
+  bridges -> release [label="is tested by", color="{{coral}}"];
+  release -> operator [label="deploys", style=dashed];
+
+  {rank=same; reference; services;}
+  {rank=same; operator; release;}
+}

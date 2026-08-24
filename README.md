@@ -1,16 +1,19 @@
 # DUNE presentations
 
-Shared presentation workspace for DUNE SC/DPS, DAPHNE, and related technical
-decks.
+Shared presentation framework for DUNE SC/DPS, DAPHNE, and related technical
+decks. Beamer remains the PDF shell, while the repository now centralizes:
 
-The first reusable template is `templates/dune-professional`. It keeps Beamer
-as the PDF shell but centralizes the layout rules:
+- audience/outcome briefs and a maintained starter deck;
+- layout-first paper, sky, and coral surfaces with red reserved for hard danger;
+- an 11-point Beamer baseline and projector-size density checks;
+- section, statement, mosaic, comparison, pipeline, table, and decision layouts;
+- tokenized Graphviz diagrams and shared TikZ styles;
+- source audits for theme drift, density, long lists, and unexplained visuals.
 
-- fixed title and frame-title safe areas;
-- auto-shrinking title/subtitle boxes;
-- named DUNE color roles;
-- reusable cards, pills, and diagram node styles;
-- a lightweight source audit for title length and manual layout drift.
+Read [the framework guide](docs/framework-guide.md) for the research,
+tool choices, authoring rules, and migration sequence. The
+[theme reference](templates/dune-professional/README.md) documents the component
+API, layout grammar, and color system.
 
 ## Build
 
@@ -22,6 +25,7 @@ The repository currently builds:
 
 - `decks/scdps_repo_plan_aug2026/main.pdf`
 - `decks/scdps_git_management_aug2026/main.pdf`
+- `decks/scdps_software_ownership_aug2026/main.pdf`
 
 ## Audit
 
@@ -29,12 +33,27 @@ The repository currently builds:
 make audit
 ```
 
-The audit is intentionally conservative. It flags decks that do not load the
-shared template and calls out long titles or heavy manual spacing that should
-usually be handled through the template macros.
+The audit fails on theme or color drift and reports editorial advisories that
+need human judgment. Run the complete framework and deck validation with:
 
-## Add a Deck
+```sh
+make check
+```
 
-Create a new directory under `decks/`, copy the structure of
-`decks/scdps_repo_plan_aug2026/main.tex`, and keep local styling in the shared
-template unless a deck has a documented special reason to diverge.
+## Create a deck
+
+```sh
+make new-deck \
+  SLUG=my_topic_sep2026 \
+  TITLE="My topic" \
+  AUTHOR="Your name"
+```
+
+Complete the generated audience/outcome brief before drafting slides. Run
+`make diagrams` after changing any `diagrams/*.dot.in` source.
+
+## Framework starter
+
+`make starter` builds `examples/framework_starter/main.pdf`, which demonstrates
+the recommended narrative structure, varied slide languages, and Graphviz
+pipeline.

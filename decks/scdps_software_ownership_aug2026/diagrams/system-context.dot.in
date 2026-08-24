@@ -1,0 +1,107 @@
+digraph system_context {
+  graph [
+    rankdir=TB,
+    bgcolor="{{background}}",
+    pad="0.16",
+    margin="0",
+    nodesep="0.54",
+    ranksep="0.66",
+    splines=polyline,
+    outputorder=edgesfirst
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fillcolor="{{surface-raised}}",
+    color="{{border}}",
+    fontcolor="{{text}}",
+    fontname="Helvetica",
+    fontsize=14,
+    penwidth=1.4,
+    margin="0.16,0.10"
+  ];
+
+  edge [
+    color="{{info}}",
+    fontcolor="{{text-muted}}",
+    fontname="Helvetica",
+    fontsize=10,
+    penwidth=1.55,
+    arrowsize=0.72
+  ];
+
+  sources [
+    label="Approved sources\nEDMS / HWDB / DUNE docs",
+    color="{{paper}}",
+    fillcolor="{{paper}}",
+    fontcolor="{{on-accent}}",
+    peripheries=2
+  ];
+
+  owners [
+    label="Subsystem teams\nsay what the hardware can do",
+    color="{{paper}}",
+    fillcolor="{{paper}}",
+    fontcolor="{{on-accent}}"
+  ];
+
+  services [
+    label="Device services\nread and command the hardware",
+    color="{{sky}}",
+    fillcolor="{{sky}}",
+    fontcolor="{{on-accent}}",
+    penwidth=2.0
+  ];
+
+  bridge [
+    label="Slow Controls bridge\nturns device data into operator state",
+    color="{{coral}}",
+    fillcolor="{{coral}}",
+    fontcolor="{{on-accent}}",
+    penwidth=2.2
+  ];
+
+  operator [
+    label="Operator view\nscreens / alarms / history",
+    color="{{coral}}",
+    fillcolor="{{coral}}",
+    fontcolor="{{on-accent}}",
+    penwidth=2.0
+  ];
+
+  daq [
+    label="DAQ\nuses the shared interface",
+    color="{{sky}}",
+    fillcolor="{{sky}}",
+    fontcolor="{{on-accent}}"
+  ];
+
+  computing [
+    label="Computing\nhelps us build and deploy",
+    color="{{sky}}",
+    fillcolor="{{sky}}",
+    fontcolor="{{on-accent}}"
+  ];
+
+  protection [
+    label="DPS / facilities\nowns the hard protection",
+    color="{{danger}}",
+    fillcolor="{{danger}}",
+    fontcolor="{{on-danger}}",
+    penwidth=2.2
+  ];
+
+  sources -> services [label="sets the rules"];
+  owners -> services [label="defines behavior"];
+  services -> bridge [label="device data"];
+  bridge -> operator [label="operator state"];
+
+  services -> daq [label="same interface", style=dashed, color="{{sky}}"];
+  bridge -> computing [label="build + deploy", style=dashed, color="{{sky}}"];
+  bridge -> protection [label="approved requests", dir=back, style=dashed, color="{{coral}}"];
+
+  {rank=same; sources; owners;}
+  {rank=same; services; bridge; operator;}
+  {rank=same; daq; computing; protection;}
+}
