@@ -26,6 +26,8 @@ The repository currently builds:
 - `decks/scdps_repo_plan_aug2026/main.pdf`
 - `decks/scdps_git_management_aug2026/main.pdf`
 - `decks/scdps_software_ownership_aug2026/main.pdf`
+- `decks/daphne_pab_qualification_aug2026/main.pdf`
+- `decks/lidine2024_pds_schematics/main.pdf`
 
 ## Audit
 
@@ -38,6 +40,14 @@ need human judgment. Run the complete framework and deck validation with:
 
 ```sh
 make check
+```
+
+Image-derived or EDA-exported electrical schematics carry a `schematics.json`
+provenance manifest. Validate the recorded source classification and asset
+hashes independently with:
+
+```sh
+make schematics
 ```
 
 ## Create a deck

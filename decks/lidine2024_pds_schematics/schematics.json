@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "deck": "lidine2024_pds_schematics",
+  "source": {
+    "title": "The DUNE Photon Detection System (Phase I)",
+    "presenter": "Gabriel Botogoske, on behalf of the DUNE Collaboration",
+    "event": "LIDINE 2024",
+    "date": "2024-08-27",
+    "landing_page": "https://indico.cern.ch/event/1390649/contributions/6061526/",
+    "artifact_url": "https://indico.cern.ch/event/1390649/contributions/6061526/attachments/2916523/5118380/LIDINE2024-dune%20pds.pdf",
+    "artifact_sha256": "8a22dcd6820c7559f53fbb8b07ac96785e5a13ce5276d4510ad245ce2175c2d9"
+  },
+  "verification": {
+    "status": "image-derived-reference",
+    "electrical_connectivity": "not-verified",
+    "erc": "not-applicable",
+    "human_review": "classified as circuit schematics and checked for faithful extraction",
+    "statement": "These raster extracts contain no machine-readable nets, pins, symbols, footprints, or ERC evidence and must not be used as manufacturing authority."
+  },
+  "artifacts": [
+    {
+      "path": "figures/sipm-equivalent-circuit.jpeg",
+      "kind": "embedded-raster",
+      "source_page": 9,
+      "source_object": 163,
+      "width_px": 291,
+      "height_px": 271,
+      "extraction": "lossless extraction of the embedded JPEG object",
+      "sha256": "2375f4a8ae7bb80ebefd460f0d9ea7ba93b1d8ef95b6d1ecbefc76ef87e93cdc",
+      "upstream_citation": "https://www.sciencedirect.com/science/article/abs/pii/S0168900220310457"
+    },
+    {
+      "path": "figures/supercell-daphne-wiring.jpeg",
+      "kind": "embedded-raster",
+      "source_page": 14,
+      "source_object": 252,
+      "width_px": 796,
+      "height_px": 307,
+      "extraction": "lossless extraction of the embedded JPEG object",
+      "sha256": "601ff5e236d3be52d89a7796917cf7f60400978e2d728b862ad4119d9f1954ae",
+      "source_slide_credit": "Claudio Giotti"
+    },
+    {
+      "path": "figures/membrane-flexboard-circuit.jpeg",
+      "kind": "embedded-raster",
+      "source_page": 18,
+      "source_object": 328,
+      "width_px": 880,
+      "height_px": 555,
+      "extraction": "lossless extraction of the embedded JPEG object",
+      "sha256": "49bc5e342e00e230f29dfdb3544e28021e1b7cf0c1ca4cf92a6480e6fdfc9cc4"
+    }
+  ]
+}
