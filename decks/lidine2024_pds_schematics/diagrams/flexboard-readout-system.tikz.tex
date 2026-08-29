@@ -1,0 +1,121 @@
+% Complete flex-board passive-ganging and differential readout topology.
+% Reconstructed from LIDINE 2024 slide 18 / DUNE FD2-VD TDR Fig. 6.13.
+\begin{circuitikz}[
+  x=1cm,
+  y=1cm,
+  every node/.style={font=\scriptsize\sffamily,text=black},
+  fp wire/.style={draw=black,line width=0.52pt,line cap=round,line join=round},
+  fp rail/.style={draw=black,line width=0.64pt,line cap=round,line join=round},
+  fp boundary/.style={draw=black!55,line width=0.55pt},
+  fp terminal/.style={circle,draw=black,fill=black,
+    minimum size=4.8pt,inner sep=0pt,line width=0.52pt}
+]
+  \path[fill=white,draw=none] (0,0) rectangle (14.40,5.34);
+
+  % Two coordinated subsystems with explicit U/L crossings between them.
+  \draw[fp boundary] (0.22,0.40) rectangle (8.28,5.10);
+  \node[anchor=west,fill=white,inner xsep=4pt,
+    font=\scriptsize\bfseries\sffamily]
+    at (0.50,5.10) {20-SiPM FLEX BOARD / PASSIVE GANGING};
+
+  \draw[fp boundary] (8.62,0.40) rectangle (14.18,5.10);
+  \node[anchor=west,fill=white,inner xsep=4pt,
+    font=\scriptsize\bfseries\sffamily]
+    at (8.90,5.10) {BIAS / DIFFERENTIAL READOUT};
+
+  % Five groups Gi, each with four SiPMs explicitly in parallel.
+  \foreach \i/\yt/\yb in {
+    1/4.50/4.11,
+    2/3.72/3.33,
+    3/2.94/2.55,
+    4/2.16/1.77,
+    5/1.38/0.99}{
+    \draw[fp rail] (2.42,\yt) -- (5.88,\yt);
+    \draw[fp rail] (2.42,\yb) -- (5.88,\yb);
+    \foreach \x in {2.76,3.66,4.56,5.46}{
+      \draw[fp wire] (\x,\yt) to[photodiode,invert] (\x,\yb);
+      \fill[black] (\x,\yt) circle (0.72pt);
+      \fill[black] (\x,\yb) circle (0.72pt);
+    }
+    \node[anchor=east,font=\scriptsize\bfseries\sffamily]
+      at (2.20,{(\yt+\yb)/2}) {$G_{\i}$};
+  }
+
+  % Four source-defined AC links: Bi -- C -- T(i+1).
+  \draw[fp wire] (5.88,4.11) -- (6.14,4.11)
+    to[C,l={$C$}] (6.14,3.72) -- (5.88,3.72);
+  \draw[fp wire] (5.88,3.33) -- (6.14,3.33)
+    to[C,l={$C$}] (6.14,2.94) -- (5.88,2.94);
+  \draw[fp wire] (5.88,2.55) -- (6.14,2.55)
+    to[C,l={$C$}] (6.14,2.16) -- (5.88,2.16);
+  \draw[fp wire] (5.88,1.77) -- (6.14,1.77)
+    to[C,l={$C$}] (6.14,1.38) -- (5.88,1.38);
+
+  % L weighting bus: B1 uses 2R, B2--B4 use R, B5 is direct.
+  \draw[fp rail] (0.72,4.11) -- (0.72,0.99);
+  \draw[fp wire] (0.72,4.11) to[R,l_={$2R$}] (2.42,4.11);
+  \draw[fp wire] (0.72,3.33) to[R,l_={$R$}] (2.42,3.33);
+  \draw[fp wire] (0.72,2.55) to[R,l_={$R$}] (2.42,2.55);
+  \draw[fp wire] (0.72,1.77) to[R,l_={$R$}] (2.42,1.77);
+  \draw[fp rail] (0.72,0.99) -- (2.42,0.99);
+
+  % U weighting bus: T2--T4 use R, T5 uses 2R, T1 is direct.
+  \draw[fp rail] (7.42,4.50) -- (7.42,1.38);
+  \draw[fp wire] (5.88,3.72) to[R,l_={$R$}] (7.42,3.72);
+  \draw[fp wire] (5.88,2.94) to[R,l_={$R$}] (7.42,2.94);
+  \draw[fp wire] (5.88,2.16) to[R,l_={$R$}] (7.42,2.16);
+  \draw[fp wire] (5.88,1.38) to[R,l_={$2R$}] (7.42,1.38);
+
+  % Direct top and bottom nets leave the flex board as U and L.  Short
+  % orthogonal jogs keep the two sheet crossings visually independent.
+  \coordinate (U) at (9.16,3.78);
+  \coordinate (L) at (9.16,1.66);
+  \draw[fp rail] (5.88,4.50) -- (8.40,4.50)
+    -- (8.40,3.78) -- (U);
+  \draw[fp rail] (5.88,0.99) -- (8.50,0.99)
+    -- (8.50,1.66) -- (L);
+  \node[anchor=south west,font=\scriptsize\bfseries\sffamily]
+    at (8.70,3.80) {U};
+  \node[anchor=north west,font=\scriptsize\bfseries\sffamily]
+    at (8.70,1.64) {L};
+
+  % Junctions make the two weighting buses and interface nets unambiguous.
+  \foreach \y in {4.11,3.33,2.55,1.77,0.99}{
+    \fill[black] (0.72,\y) circle (0.90pt);
+  }
+  \foreach \y in {4.50,3.72,2.94,2.16,1.38}{
+    \fill[black] (7.42,\y) circle (0.90pt);
+  }
+  \fill[black] (U) circle (1.00pt);
+  \fill[black] (L) circle (1.00pt);
+
+  % Bias paths: +V -- R -- U and L -- R -- reference ground.
+  \coordinate (PositiveSupply) at (9.16,4.64);
+  \draw[fp wire] (PositiveSupply) node[fp terminal] {}
+    to[R,l_={$R$}] (U);
+  \draw[fp wire] (L) to[R,l_={$R$}] (9.16,0.80) node[ground] {};
+  \node[anchor=south west,font=\scriptsize\bfseries\sffamily]
+    at (9.30,4.56) {$+V$};
+
+  % Source-defined AC coupling and output order.
+  \coordinate (OutputTwo) at (12.74,3.78);
+  \coordinate (OutputOne) at (12.74,1.66);
+  \draw[fp wire]
+    (U) to[C,l={$C^{\prime}$}] (10.50,3.78)
+        to[R,l={$R^{\prime}$}] (11.80,3.78)
+        -- (OutputTwo) node[fp terminal] {};
+  \draw[fp wire]
+    (L) to[C,l_={$C^{\prime}$}] (10.50,1.66)
+        to[R,l_={$R^{\prime}$}] (11.80,1.66)
+        -- (OutputOne) node[fp terminal] {};
+  \node[anchor=west,font=\scriptsize\bfseries\sffamily]
+    at (12.90,3.78) {OUTPUT 2};
+  \node[anchor=west,font=\scriptsize\bfseries\sffamily]
+    at (12.90,1.66) {OUTPUT 1};
+
+  % Compact title-block information; no unverified value is introduced.
+  \node[anchor=south west,text=black!65,align=left,inner sep=0pt,
+    font=\fontsize{4.6}{5.4}\selectfont\sffamily]
+    at (0.22,0.02) {SOURCE VALUES: $R=10\,\mathrm{k}\Omega$; $2R=20\,\mathrm{k}\Omega$; $C=10\,\mathrm{nF}$; $R^{\prime}=100\,\Omega$; $C^{\prime}=22\,\mathrm{nF}$\\
+    SOURCE LIMITS: SiPM part number, bias magnitude, load, ratings, tolerances, and grounding domain are not specified.};
+\end{circuitikz}

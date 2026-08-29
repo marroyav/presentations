@@ -1,0 +1,298 @@
+% Integrated SuperCell-to-DAPHNE system diagram.
+% Monochrome presentation reconstruction from the source-supported topology on
+% LIDINE 2024 slide 14. Unknown values and endpoints remain explicit.
+\begingroup
+\ctikzset{
+  bipoles/length=0.58cm,
+  resistors/scale=0.66,
+  capacitors/scale=0.66,
+  inductors/scale=0.62,
+  diodes/scale=0.56,
+  nodes width=0.045,
+  label/align=straight
+}
+\begin{circuitikz}[
+  x=1cm,
+  y=1cm,
+  font=\sffamily\fontsize{6.1}{6.7}\selectfont,
+  every node/.style={text=black},
+  line cap=round,
+  line join=round,
+  system enclosure/.style={
+    draw=black,
+    fill=white,
+    rounded corners=10pt,
+    line width=0.68pt
+  },
+  flange/.style={
+    draw=black!70,
+    fill=black!2,
+    rounded corners=2pt,
+    line width=0.72pt
+  },
+  board/.style={
+    draw=black!78,
+    fill=white,
+    rounded corners=2pt,
+    line width=0.55pt
+  },
+  channel/.style={
+    draw=black!62,
+    fill=white,
+    line width=0.46pt
+  },
+  functional/.style={
+    draw=black!82,
+    fill=white,
+    rounded corners=2pt,
+    line width=0.55pt,
+    align=center,
+    inner sep=2.5pt
+  },
+  uncertain/.style={
+    draw=black!58,
+    fill=white,
+    dash pattern=on 2.4pt off 1.5pt,
+    rounded corners=2pt,
+    line width=0.52pt
+  },
+  stack line/.style={draw=black!48,line width=0.45pt},
+  wire/.style={draw=black,line width=0.56pt},
+  secondary wire/.style={draw=black!66,line width=0.48pt},
+  control wire/.style={draw=black!55,line width=0.48pt},
+  reference wire/.style={draw=black!58,line width=0.50pt},
+  shield wire/.style={draw=black,line width=0.82pt},
+  open port/.style={
+    circle,
+    draw=black,
+    fill=white,
+    minimum size=3.4pt,
+    inner sep=0pt,
+    line width=0.52pt
+  },
+  junction/.style={
+    circle,
+    draw=none,
+    fill=black,
+    minimum size=2.5pt,
+    inner sep=0pt
+  },
+  tiny label/.style={font=\sffamily\fontsize{5.6}{6.1}\selectfont},
+  micro label/.style={font=\sffamily\fontsize{5.3}{5.8}\selectfont},
+  math label/.style={font=\fontsize{6.2}{6.7}\selectfont},
+  major label/.style={font=\sffamily\bfseries\fontsize{8.0}{8.5}\selectfont},
+  region label/.style={font=\sffamily\bfseries\fontsize{6.8}{7.3}\selectfont}
+]
+  \path[use as bounding box] (0,0) rectangle (15.0,5.65);
+  \fill[white] (0,0) rectangle (15.0,5.65);
+
+  % Physical ownership is the primary visual hierarchy.
+  \path[system enclosure]  (0.06,0.48) rectangle (8.20,5.43);
+  \path[flange]  (8.34,0.48) rectangle (9.43,5.43);
+  \path[system enclosure]  (9.57,0.48) rectangle (14.94,5.43);
+  \node[major label,anchor=west] at (0.30,5.19) {CRYOSTAT};
+  \node[tiny label,font=\sffamily\bfseries\fontsize{5.8}{6.2}\selectfont,
+    anchor=north] at (8.885,5.31) {FLANGE};
+  \node[major label,anchor=west] at (9.82,5.19) {DAPHNE RACK / CHASSIS};
+
+  % Repeated passive mounting boards: one representative electrical group is
+  % expanded; the other seven are indicated geometrically and by multiplicity.
+  \draw[stack line,rounded corners=2pt] (0.34,2.25) rectangle (1.89,3.70);
+  \draw[stack line,rounded corners=2pt] (0.27,2.32) rectangle (1.82,3.77);
+  \path[board] (0.20,2.39) rectangle (1.75,3.84);
+  \node[region label,align=center,text width=1.40cm] at (0.98,4.34)
+    {MOUNTING BOARDS\\[-0.1em]$\times 8$};
+  \draw[wire] (0.38,3.34) -- (1.57,3.34);
+  \draw[wire] (0.38,2.82) -- (1.57,2.82);
+  \foreach \x in {0.62,0.98,1.34}{
+    \draw[wire] (\x,2.82) to[D] (\x,3.34);
+    \node[junction] at (\x,2.82) {};
+    \node[junction] at (\x,3.34) {};
+  }
+  \node[tiny label,anchor=south,align=center,text width=1.30cm]
+    at (0.98,3.43) {$6$ SiPMs\\passively ganged};
+
+  % One of four active-ganging channels is shown in circuit detail.
+  \path[board] (2.05,1.82) rectangle (8.08,4.10);
+  \node[region label,anchor=west] at (2.23,3.92)
+    {ACTIVE GANGING};
+  \node[tiny label,anchor=east] at (7.90,3.92)
+    {4 CHANNELS / PCB};
+  \draw[channel] (2.25,2.05) rectangle (7.88,3.72);
+
+  \draw[wire] (1.75,3.34) -- (2.42,3.34)
+    to[R] (3.10,3.34) coordinate (sumP);
+  \draw[wire] (1.75,2.82) -- (2.42,2.82)
+    to[R] (3.10,2.82) coordinate (sumN);
+  \node[math label,anchor=south] at (2.76,3.41) {$R_i\times 8$};
+  \node[math label,anchor=north] at (2.76,2.75) {$R_i\times 8$};
+  \node[junction] at (sumP) {};
+  \node[junction] at (sumN) {};
+  \draw[wire] (sumP) to[C] (4.14,3.34);
+  \draw[wire] (sumN) to[C] (4.14,2.82);
+  \node[micro label,anchor=south] at (3.52,3.41) {$100\,\mathrm{nF}$};
+
+  \node[functional,minimum width=1.28cm,minimum height=0.92cm]
+    (coldamp) at (4.92,3.08)
+    {FULLY DIFFERENTIAL\\COLD AMPLIFIER\\[-0.15em]
+     \textit{device model ?}};
+  \draw[wire] (4.14,3.34) -- (coldamp.west |- 0,3.34);
+  \draw[wire] (4.14,2.82) -- (coldamp.west |- 0,2.82);
+  \node[micro label,anchor=east] at (4.38,3.46) {$+$};
+  \node[micro label,anchor=east] at (4.38,2.69) {$-$};
+
+  \coordinate (ampOutP) at (coldamp.east |- 0,3.34);
+  \coordinate (ampOutN) at (coldamp.east |- 0,2.82);
+  \draw[wire] (ampOutP) to[C] (6.30,3.34)
+    to[R] (7.20,3.34) -- (8.34,3.34);
+  \draw[wire] (ampOutN) to[C] (6.30,2.82)
+    to[R] (7.20,2.82) -- (8.34,2.82);
+  \node[micro label,anchor=south] at (6.00,3.41) {$100\,\mathrm{nF}$};
+  \node[tiny label,anchor=south] at (6.75,3.41) {$50\,\Omega$};
+  \node[tiny label,anchor=north] at (6.75,2.75) {$50\,\Omega$};
+
+  % The source confirms two Rf paths but does not supply their values.
+  \draw[secondary wire] (sumP) -- (3.10,3.60)
+    to[R] (5.73,3.60) -- (5.73,3.34);
+  \node[micro label,anchor=north] at (4.55,3.56) {$R_f\;?$};
+  \draw[secondary wire] (sumN) -- (3.10,2.30)
+    to[R,l_={$R_f\;?$}] (5.73,2.30) -- (5.73,2.82);
+
+  % The signal connector allocation is explicit; only one pair is expanded.
+  \node[micro label,anchor=north east,align=right]
+    at (8.15,2.62) {CH1 1--2\\CH2 3--4\\CH3 5--6\\CH4 7--8};
+  \node[tiny label,anchor=south] at (8.885,3.62) {SIG CM};
+  \draw[wire] (8.34,3.34) to[L] (9.43,3.34);
+  \draw[wire] (8.34,2.82) to[L] (9.43,2.82);
+  \draw[secondary wire]
+    (8.81,2.96) -- (8.81,3.20)
+    (8.96,2.96) -- (8.96,3.20);
+
+  % DAPHNE input: named controls are routed outside the signal core and end at
+  % explicit open ports.  Their upstream implementation is not asserted.
+  \path[board] (9.73,1.75) rectangle (14.75,4.10);
+  \node[region label] at (11.55,3.94) {DAPHNE INPUT};
+  \draw[wire] (9.43,3.34) -- (10.18,3.34)
+    to[C] (10.76,3.34);
+  \draw[wire] (9.43,2.82) -- (10.18,2.82)
+    to[C] (10.76,2.82);
+  \node[micro label,anchor=south] at (10.47,3.43) {$C\;?$};
+
+  \node[functional,minimum width=0.88cm,minimum height=0.88cm]
+    (winding) at (11.25,3.08) {COUPLED\\WINDING\\[-0.2em]\textit{type ?}};
+  \draw[wire] (10.76,3.34) -- (winding.west |- 0,3.34);
+  \draw[wire] (10.76,2.82) -- (winding.west |- 0,2.82);
+
+  \node[functional,minimum width=1.02cm,minimum height=0.70cm]
+    (afe) at (12.68,3.20) {AFE5808};
+  \draw[wire,-{Stealth[length=1.6mm,width=1.15mm]}]
+    (winding.east |- 0,3.34) -- (afe.west |- 0,3.34);
+  \draw[wire] (winding.east |- 0,2.82) -- (11.82,2.82) -- (11.82,2.47);
+  \draw[wire] (11.60,2.47) -- (12.04,2.47);
+  \draw[wire] (11.67,2.37) -- (11.97,2.37);
+  \draw[wire] (11.74,2.27) -- (11.90,2.27);
+  \node[micro label,anchor=west] at (12.08,2.34) {DAPHNE GND};
+
+  \node[open port] (biasPort) at (14.50,3.67) {};
+  \node[tiny label,anchor=east] at (14.38,3.61) {BIAS};
+  \node[junction] at (9.90,3.34) {};
+  \draw[control wire] (9.90,3.34) -- (9.90,3.67)
+    to[R,l^={$R\;?$}] (10.55,3.67) -- (biasPort);
+
+  \node[open port] (trimPort) at (14.50,1.96) {};
+  \node[tiny label,anchor=east] at (14.38,1.90) {TRIM};
+  \node[junction] at (9.90,2.82) {};
+  \draw[control wire] (9.90,2.82) -- (9.90,1.96)
+    to[R,l_={$R\;?$}] (10.55,1.96) -- (trimPort);
+
+  \node[open port] (offsetPort) at (13.32,3.78) {};
+  \node[micro label,anchor=south] at (13.32,3.84) {OFFSET};
+  \draw[control wire,-{Stealth[length=1.35mm,width=1.0mm]}]
+    (offsetPort) -- (12.92,3.78) -- (12.92,3.55);
+
+  % Confirmed low-voltage rails and two common-mode filtering stages.
+  \draw[wire] (4.72,4.72) -- (8.34,4.72)
+    to[L] (9.43,4.72) -- (9.57,4.72)
+    to[L] (10.33,4.72) -- (12.54,4.72);
+  \draw[secondary wire] (4.72,4.30) -- (8.34,4.30)
+    to[L] (9.43,4.30) -- (9.57,4.30)
+    to[L] (10.33,4.30) -- (12.54,4.30);
+  \node[tiny label,anchor=south west] at (5.34,4.76)
+    {9 · $V_{CC}$ · 3--5 V};
+  \node[tiny label,anchor=south west] at (5.34,4.34)
+    {11 · $V_{EE}$ · 0 V return};
+  \draw[secondary wire]
+    (8.81,4.42) -- (8.81,4.60)
+    (8.96,4.42) -- (8.96,4.60)
+    (9.88,4.42) -- (9.88,4.60)
+    (10.02,4.42) -- (10.02,4.60);
+  \node[micro label,anchor=east,rotate=90] at (8.46,4.48) {PWR CM};
+
+  % The source shows unvalued rail-to-flange/chassis capacitors.
+  \node[junction] at (8.51,4.72) {};
+  \node[junction] at (8.68,4.30) {};
+  \draw[reference wire] (8.51,4.72) to[C] (8.51,5.09);
+  \draw[reference wire] (8.68,4.30) to[C] (8.68,3.97);
+  \node[micro label,anchor=west] at (8.75,4.02)
+    {$C\;?$};
+
+  \node[functional,minimum width=0.96cm,minimum height=0.42cm]
+    (lvreg) at (13.04,4.51) {LV REGULATOR};
+  \draw[wire] (12.54,4.72) -- (lvreg.west |- 0,4.67);
+  \draw[secondary wire] (12.54,4.30) -- (lvreg.west |- 0,4.35);
+
+  % DAPHNE circuit ground is tied to the LV-return rail in the source.
+  \node[junction] at (11.34,4.30) {};
+  \draw[secondary wire] (11.34,4.30) -- (11.34,4.03);
+  \draw[secondary wire] (11.12,4.03) -- (11.56,4.03);
+  \draw[secondary wire] (11.19,3.93) -- (11.49,3.93);
+  \draw[secondary wire] (11.26,3.83) -- (11.42,3.83);
+
+  % Cold-amplifier power association.  White preactions make the two supply
+  % drops visibly cross, rather than join, the Rf path.
+  \draw[wire,preaction={draw=white,line width=2.0pt}]
+    (5.00,4.72) -- (5.00,3.55);
+  \draw[secondary wire,preaction={draw=white,line width=2.0pt}]
+    (5.23,4.30) -- (5.23,3.55);
+
+  % Ground/reference conductors remain separate nets across the interconnect.
+  \draw[reference wire] (6.16,1.48) -- (10.02,1.48)
+    to[R] (10.70,1.48) node[open port] {};
+  \draw[reference wire] (6.16,1.16) -- (10.02,1.16)
+    to[R] (10.70,1.16) node[open port] {};
+  \draw[reference wire] (6.16,0.84) -- (10.02,0.84)
+    to[R] (10.70,0.84) node[open port] {};
+  \node[micro label,anchor=south] at (10.36,1.54) {$R^{*}\times 3$};
+  \node[tiny label,anchor=east] at (8.18,1.56) {10 · GND};
+  \node[tiny label,anchor=east] at (8.18,1.24)
+    {12 · shared};
+  \node[tiny label,anchor=east] at (8.18,0.92)
+    {13 · drain / shield};
+
+  \path[uncertain] (10.57,0.66) rectangle (13.22,1.65);
+  \node[tiny label,align=left,anchor=west] at (10.91,1.22)
+    {\textbf{SOFT BONDS}\\
+     $R^{*}$ = short or higher $R$\\
+     endpoints unresolved};
+  \node[tiny label] at (10.81,1.48) {?};
+  \node[tiny label] at (10.81,1.16) {?};
+  \node[tiny label] at (10.81,0.84) {?};
+
+  % Only the direct mechanical bond is asserted; no reference nets are merged.
+  \draw[shield wire] (8.20,0.48) -- (9.57,0.48);
+  \node[micro label,anchor=north,align=center]
+    at (8.885,0.43) {DIRECT CHASSIS BOND};
+
+  % The floating supply is present in the source but its internal destinations
+  % are not resolved, so its leads terminate independently at the rack edge.
+  \node[functional,text width=1.72cm,minimum height=0.25cm,
+    font=\sffamily\fontsize{5.3}{5.8}\selectfont]
+    (supply) at (13.62,0.17) {FLOATING SUPPLY · ?};
+  \draw[secondary wire,-{Stealth[length=1.25mm,width=0.95mm]}]
+    (13.25,0.38) -- (13.25,0.48);
+  \draw[wire,-{Stealth[length=1.25mm,width=0.95mm]}]
+    (13.99,0.38) -- (13.99,0.48);
+  \node[micro label,anchor=south] at (13.25,0.47) {$-$};
+  \node[micro label,anchor=south] at (13.99,0.47) {$+$};
+\end{circuitikz}
+\endgroup

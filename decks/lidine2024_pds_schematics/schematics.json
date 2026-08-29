@@ -10,45 +10,48 @@
     "artifact_url": "https://indico.cern.ch/event/1390649/contributions/6061526/attachments/2916523/5118380/LIDINE2024-dune%20pds.pdf",
     "artifact_sha256": "8a22dcd6820c7559f53fbb8b07ac96785e5a13ce5276d4510ad245ce2175c2d9"
   },
+  "visual_reference": {
+    "title": "HD & VD Mezzanine QA/QC",
+    "artifact_url": "https://indico.fnal.gov/event/74170/contributions/342404/attachments/198858/276941/HD_VD_MEZZANINE_QA_QC.pdf",
+    "artifact_sha256": "7aff7edfc3a03dda7bf15de1cdce7d199d46dff8d0df6e189caa097c7dfdfdaf",
+    "artifact_bytes": 1298210,
+    "cache_entry_sha256": "f296b17a7860eb00da144ceb900ef59df64e8779e282bc75a4e2dae57e2fc635",
+    "cache_entry_bytes": 1310333,
+    "digest_scope": "artifact_sha256 covers the PDF payload through its final %%EOF; cache_entry_sha256 additionally covers trailing Zen/Firefox cache metadata",
+    "pages": [12, 13, 14],
+    "role": "drafting-language benchmark only; no reference pixels are copied into the redraws"
+  },
   "verification": {
-    "status": "image-derived-reference",
-    "electrical_connectivity": "not-verified",
+    "status": "vector-redraw-reference",
+    "electrical_connectivity": "transcribed-not-verified",
     "erc": "not-applicable",
-    "human_review": "classified as circuit schematics and checked for faithful extraction",
-    "statement": "These raster extracts contain no machine-readable nets, pins, symbols, footprints, or ERC evidence and must not be used as manufacturing authority."
+    "human_review": "topology transcribed from the published figures and visually reviewed; the slide 18 network was also cross-checked against FD2-VD TDR Figure 6.13",
+    "statement": "These original vector reconstructions contain no source pixels, native netlist, footprint mapping, or ERC evidence. They are presentation references and must not be used as design or manufacturing authority."
   },
   "artifacts": [
     {
-      "path": "figures/sipm-equivalent-circuit.jpeg",
-      "kind": "embedded-raster",
+      "path": "diagrams/sipm-equivalent.tikz.tex",
+      "kind": "repo-native-vector-redraw",
       "source_page": 9,
-      "source_object": 163,
-      "width_px": 291,
-      "height_px": 271,
-      "extraction": "lossless extraction of the embedded JPEG object",
-      "sha256": "2375f4a8ae7bb80ebefd460f0d9ea7ba93b1d8ef95b6d1ecbefc76ef87e93cdc",
-      "upstream_citation": "https://www.sciencedirect.com/science/article/abs/pii/S0168900220310457"
+      "extraction": "original monochrome CircuitikZ/TikZ system reconstruction from published reference topology",
+      "sha256": "5a252e9fdf8a2e6e10d07618f4bba287c6b9e398082cbedece1710d6b903014a",
+      "upstream_citation": "https://doi.org/10.1016/j.nima.2020.164648"
     },
     {
-      "path": "figures/supercell-daphne-wiring.jpeg",
-      "kind": "embedded-raster",
+      "path": "diagrams/supercell-daphne-system.tikz.tex",
+      "kind": "repo-native-vector-redraw",
       "source_page": 14,
-      "source_object": 252,
-      "width_px": 796,
-      "height_px": 307,
-      "extraction": "lossless extraction of the embedded JPEG object",
-      "sha256": "601ff5e236d3be52d89a7796917cf7f60400978e2d728b862ad4119d9f1954ae",
-      "source_slide_credit": "Claudio Giotti"
+      "extraction": "original monochrome CircuitikZ/TikZ system reconstruction from published reference topology",
+      "sha256": "22f7c9e6c54c4bd5799ee848b5f051b25f45ee6302baf70ac2217d8e24c99823",
+      "source_slide_credit": "Claudio Gotti"
     },
     {
-      "path": "figures/membrane-flexboard-circuit.jpeg",
-      "kind": "embedded-raster",
+      "path": "diagrams/flexboard-readout-system.tikz.tex",
+      "kind": "repo-native-vector-redraw",
       "source_page": 18,
-      "source_object": 328,
-      "width_px": 880,
-      "height_px": 555,
-      "extraction": "lossless extraction of the embedded JPEG object",
-      "sha256": "49bc5e342e00e230f29dfdb3544e28021e1b7cf0c1ca4cf92a6480e6fdfc9cc4"
+      "extraction": "original monochrome CircuitikZ/TikZ system reconstruction from published reference topology",
+      "sha256": "d50f3aafd95ae2e065f71234c8316a14a0d09a03c345e6553d772471a809fcbd",
+      "cross_check": "DUNE FD2-VD Technical Design Report, arXiv:2312.03130, Section 6.5.2 and Figure 6.13"
     }
   ]
 }

@@ -19,7 +19,7 @@ diagrams: $(DIAGRAM_PDFS)
 %.pdf: %.dot.in templates/dune-professional/design-tokens.json scripts/render_diagram.py
 	$(PYTHON) scripts/render_diagram.py $< $@
 
-decks/%/main.pdf: decks/%/main.tex templates/dune-professional/beamerthemeDUNEProfessional.sty $$(wildcard decks/$$*/diagrams/*.pdf) $$(wildcard decks/$$*/figures/*) $$(wildcard decks/$$*/schematics.json) | diagrams
+decks/%/main.pdf: decks/%/main.tex templates/dune-professional/beamerthemeDUNEProfessional.sty $$(wildcard decks/$$*/diagrams/*) $$(wildcard decks/$$*/figures/*) $$(wildcard decks/$$*/schematics.json) | diagrams
 	cd decks/$* && $(TECTONIC) $(TECTONIC_FLAGS) main.tex
 
 schematics:

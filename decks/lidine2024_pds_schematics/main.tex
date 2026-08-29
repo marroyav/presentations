@@ -4,113 +4,109 @@
 \input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
 \makeatother
 
-\title{LIDINE 2024 DUNE PDS schematics}
-\subtitle{Image-derived reference schematics from the published source deck}
+\usepackage[american]{circuitikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,matrix}
+
+\title{LIDINE 2024 DUNE PDS schematic redraws}
+\subtitle{Original vector reconstructions from published reference figures}
 \author{Source presentation: Gabriel Botogoske, on behalf of the DUNE Collaboration}
-\date{Framework import pilot -- 28 August 2026}
+\date{Framework vector-redraw pilot -- 28 August 2026}
 \newcommand{\mydate}{28 August 2026}
 \hypersetup{
   colorlinks=true,
   urlcolor=DuneInfo,
   linkcolor=DuneInfo,
-  pdftitle={LIDINE 2024 DUNE PDS schematics},
+  pdftitle={LIDINE 2024 DUNE PDS schematic redraws},
   pdfauthor={Gabriel Botogoske, on behalf of the DUNE Collaboration}
+}
+
+\ctikzset{
+  bipoles/length=0.78cm,
+  resistors/scale=0.74,
+  capacitors/scale=0.74,
+  diodes/scale=0.72
+}
+
+% Reference language: slides 12--14 of HD_VD_MEZZANINE_QA_QC.pdf.
+% The drawing itself stays neutral engineering line art.  Color is confined to
+% the presentation furniture and composed from the shared DUNE design tokens.
+
+\tikzset{
+  eng wire/.style={draw=black,line width=0.62pt,
+    line cap=round,line join=round},
+  eng boundary/.style={draw=black,fill=white,
+    rounded corners=9pt,line width=0.62pt},
+  eng block/.style={eng boundary,rounded corners=3pt,align=center,
+    inner sep=3pt,text=black,font=\footnotesize},
+  eng label/.style={text=black,font=\footnotesize},
+  eng muted/.style={text=black!65,font=\scriptsize},
+  eng junction/.style={circle,fill=black,draw=none,inner sep=1pt}
 }
 
 \newcommand{\SchematicBackground}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[DunePaper] (current page.south west) rectangle (current page.north east);
-    \fill[DuneSurface]
-      (current page.south west) rectangle ($(current page.south east)+(0,1.42)$);
-    \fill[DuneCoral]
-      ($(current page.north west)+(0.72,-0.22)$) rectangle ++(1.52,0.065);
+    \fill[white] (current page.south west) rectangle (current page.north east);
+  \end{tikzpicture}%
+}
+
+\newcommand{\SchematicPlate}[5]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north,draw=DuneInfo!50!DuneTitleSurface,
+      fill=DuneSky!35!white,
+      minimum width=8.00cm,minimum height=0.62cm,inner xsep=8pt,
+      text=DuneInfo!50!DuneTitleSurface,font=\fontsize{16}{18}\selectfont]
+      at ($(current page.north)+(0,-0.20)$) {#1};
+    \node[anchor=north,draw=DuneInfo!50!DuneTitleSurface,
+      fill=DuneCoral!60!white,
+      minimum width=10.40cm,minimum height=0.42cm,inner xsep=7pt,
+      text=DuneInfo!50!DuneTitleSurface,font=\fontsize{8.2}{9.4}\selectfont]
+      at ($(current page.north)+(0,-1.03)$) {#3};
+    \node[anchor=center,inner sep=0pt]
+      at ($(current page.center)+(0,-0.10)$) {\input{#2}};
+    \draw[DunePrimary,line width=1.15pt]
+      ($(current page.south west)+(0.72,0.54)$) --
+      ($(current page.south east)+(-0.72,0.54)$);
+    \node[anchor=south west,inner sep=0pt,text=black!65,
+      font=\fontsize{5.8}{6.8}\selectfont]
+      at ($(current page.south west)+(0.72,0.16)$)
+      {\href{#5}{Source: #4}\enspace\textbullet\enspace
+       vector reconstruction; connectivity transcribed, not ERC verified};
+    \node[anchor=south east,inner sep=0pt,text=black!65,
+      font=\fontsize{6.2}{7}\selectfont]
+      at ($(current page.south east)+(-0.72,0.16)$) {\insertframenumber};
   \end{tikzpicture}%
 }
 
 \begin{document}
 
-{
 \setbeamertemplate{background canvas}{\SchematicBackground}
 \setbeamertemplate{footline}{}
-\begin{frame}[plain]
-  \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=north west,inner sep=0pt,text=DuneOnAccent,
-      font=\bfseries\fontsize{18}{21}\selectfont]
-      at ($(current page.north west)+(0.72,-0.48)$)
-      {SiPM equivalent circuit};
-    \node[anchor=center,inner sep=0pt]
-      at ($(current page.center)+(0,0.15)$) {%
-        \includegraphics[width=0.94\paperwidth,height=0.67\paperheight,
-          keepaspectratio]{figures/sipm-equivalent-circuit.jpeg}%
-      };
-    \node[anchor=south west,inner sep=0pt]
-      at ($(current page.south west)+(0.72,0.22)$) {%
-        \begin{minipage}{0.90\paperwidth}
-          \DuneDiagramCaption{Source slide 9. Embedded image reproduced without
-            cropping or resampling. Image-derived reference only; connectivity
-            and component values are not verified.}
-          \DuneSourceLine{G. Botogoske, DUNE Photon Detection System,
-            LIDINE 2024}{https://indico.cern.ch/event/1390649/contributions/6061526/}
-        \end{minipage}%
-      };
-  \end{tikzpicture}
-\end{frame}
-}
 
-{
-\setbeamertemplate{background canvas}{\SchematicBackground}
-\setbeamertemplate{footline}{}
 \begin{frame}[plain]
-  \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=north west,inner sep=0pt,text=DuneOnAccent,
-      font=\bfseries\fontsize{18}{21}\selectfont]
-      at ($(current page.north west)+(0.72,-0.48)$)
-      {SuperCell active-ganging and DAPHNE wiring};
-    \node[anchor=center,inner sep=0pt]
-      at ($(current page.center)+(0,0.15)$) {%
-        \includegraphics[width=0.94\paperwidth,height=0.67\paperheight,
-          keepaspectratio]{figures/supercell-daphne-wiring.jpeg}%
-      };
-    \node[anchor=south west,inner sep=0pt]
-      at ($(current page.south west)+(0.72,0.22)$) {%
-        \begin{minipage}{0.90\paperwidth}
-          \DuneDiagramCaption{Source slide 14; the source slide credits Claudio
-            Giotti. Embedded image reproduced without resampling. Image-derived
-            reference only; no netlist or ERC evidence is available.}
-          \DuneSourceLine{G. Botogoske, DUNE Photon Detection System,
-            LIDINE 2024}{https://indico.cern.ch/event/1390649/contributions/6061526/}
-        \end{minipage}%
-      };
-  \end{tikzpicture}
+  \SchematicPlate
+    {SiPM equivalent circuit}
+    {diagrams/sipm-equivalent.tikz.tex}
+    {Four representative microcells in parallel; unspecified values are omitted}
+    {G. Botogoske, DUNE Photon Detection System, LIDINE 2024, slide 9}
+    {https://indico.cern.ch/event/1390649/contributions/6061526/}
 \end{frame}
-}
 
-{
-\setbeamertemplate{background canvas}{\SchematicBackground}
-\setbeamertemplate{footline}{}
 \begin{frame}[plain]
-  \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=north west,inner sep=0pt,text=DuneOnAccent,
-      font=\bfseries\fontsize{18}{21}\selectfont]
-      at ($(current page.north west)+(0.72,-0.48)$)
-      {Membrane-module flex-board circuit};
-    \node[anchor=center,inner sep=0pt]
-      at ($(current page.center)+(0,0.15)$) {%
-        \includegraphics[width=0.94\paperwidth,height=0.67\paperheight,
-          keepaspectratio]{figures/membrane-flexboard-circuit.jpeg}%
-      };
-    \node[anchor=south west,inner sep=0pt]
-      at ($(current page.south west)+(0.72,0.22)$) {%
-        \begin{minipage}{0.90\paperwidth}
-          \DuneDiagramCaption{Source slide 18. Embedded image reproduced without
-            cropping or resampling. Image-derived reference only; values and
-            connections have not been checked against an EDA source.}
-          \DuneSourceLine{G. Botogoske, DUNE Photon Detection System,
-            LIDINE 2024}{https://indico.cern.ch/event/1390649/contributions/6061526/}
-        \end{minipage}%
-      };
-  \end{tikzpicture}
+  \SchematicPlate
+    {SuperCell to DAPHNE system}
+    {diagrams/supercell-daphne-system.tikz.tex}
+    {48-SiPM SuperCell, cold active ganging, flange interface, and DAPHNE input}
+    {G. Botogoske, DUNE Photon Detection System, LIDINE 2024, slide 14; source credit: Claudio Gotti}
+    {https://indico.cern.ch/event/1390649/contributions/6061526/}
 \end{frame}
-}
+
+\begin{frame}[plain]
+  \SchematicPlate
+    {Twenty-SiPM passive readout}
+    {diagrams/flexboard-readout-system.tikz.tex}
+    {Five four-SiPM groups, symmetric passive network, bias, and differential outputs}
+    {G. Botogoske, LIDINE 2024, slide 18; cross-check: FD2-VD TDR Fig.~6.13}
+    {https://indico.cern.ch/event/1390649/contributions/6061526/}
+\end{frame}
 
 \end{document}

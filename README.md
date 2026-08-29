@@ -13,7 +13,9 @@ decks. Beamer remains the PDF shell, while the repository now centralizes:
 Read [the framework guide](docs/framework-guide.md) for the research,
 tool choices, authoring rules, and migration sequence. The
 [theme reference](templates/dune-professional/README.md) documents the component
-API, layout grammar, and color system.
+API, layout grammar, and color system. The
+[electrical schematic framework](docs/schematic-framework.md) separates
+presentation-system drawings from ERC-backed hardware-authority exports.
 
 ## Build
 
@@ -42,9 +44,9 @@ need human judgment. Run the complete framework and deck validation with:
 make check
 ```
 
-Image-derived or EDA-exported electrical schematics carry a `schematics.json`
-provenance manifest. Validate the recorded source classification and asset
-hashes independently with:
+Original vector redraws, image-derived references, and EDA-exported electrical
+schematics carry a `schematics.json` provenance manifest. Validate the recorded
+source classification and asset hashes independently with:
 
 ```sh
 make schematics

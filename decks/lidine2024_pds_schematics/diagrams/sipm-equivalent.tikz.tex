@@ -1,0 +1,53 @@
+% Conceptual SiPM equivalent circuit reconstructed from source slide 9.
+% Four representative microcells are shown; no component values were supplied.
+\begin{circuitikz}[
+  x=1cm,
+  y=1cm,
+  every node/.style={font=\scriptsize\sffamily,text=black},
+  fp wire/.style={draw=black,line width=0.58pt,line cap=round,line join=round},
+  fp rail/.style={draw=black,line width=0.72pt,line cap=round},
+  fp boundary/.style={draw=black!55,line width=0.55pt},
+  fp terminal/.style={circle,draw=black,fill=white,
+    minimum size=5.2pt,inner sep=0pt,line width=0.58pt}
+]
+  % A clean white drawing field, independent of the presentation background.
+  \path[fill=white,draw=none] (0,0) rectangle (14.40,5.28);
+
+  % The enclosure is a logical SiPM boundary, not a package or PCB outline.
+  \draw[fp boundary] (1.12,0.64) rectangle (13.28,4.66);
+  \node[anchor=west,fill=white,inner xsep=4pt,font=\scriptsize\bfseries\sffamily]
+    at (1.38,4.66) {SiPM / representative microcell network};
+
+  % Named external terminals and common rails.
+  \coordinate (CathodeRailW) at (2.02,4.06);
+  \coordinate (CathodeRailE) at (12.38,4.06);
+  \coordinate (AnodeRailW)   at (2.02,1.19);
+  \coordinate (AnodeRailE)   at (12.38,1.19);
+  \coordinate (CathodePort)  at (7.20,5.02);
+  \coordinate (AnodePort)    at (7.20,0.22);
+
+  \draw[fp rail] (CathodeRailW) -- (CathodeRailE);
+  \draw[fp rail] (AnodeRailW) -- (AnodeRailE);
+  \draw[fp wire] (7.20,4.06) -- (CathodePort) node[fp terminal] {};
+  \draw[fp wire] (7.20,1.19) -- (AnodePort) node[fp terminal] {};
+  \node[anchor=south,font=\scriptsize\bfseries\sffamily]
+    at (7.20,5.08) {CATHODE (K)};
+  \node[anchor=north,font=\scriptsize\bfseries\sffamily]
+    at (7.20,0.15) {ANODE (A)};
+
+  % Four identical branches in parallel.  The standard photodiode symbol is
+  % used for the source's GM-APD element; no device model is implied.
+  \foreach \x in {3.18,5.84,8.56,11.22}{
+    \draw[fp wire]
+      (\x,4.06) to[R,l_={$R_q$}] (\x,2.88)
+      to[photodiode,invert,l_={GM--APD}] (\x,1.19);
+    \fill[black] (\x,4.06) circle (0.95pt);
+    \fill[black] (\x,1.19) circle (0.95pt);
+  }
+
+  % Compact drawing notes avoid crossing the centered anode connection.
+  \node[anchor=west,text=black!65,font=\tiny\sffamily]
+    at (1.36,0.83) {REPRESENTATION: four microcells in parallel};
+  \node[anchor=west,text=black!65,font=\tiny\sffamily]
+    at (7.66,0.83) {UNSPECIFIED: values, device model, parasitics, total cell count};
+\end{circuitikz}
