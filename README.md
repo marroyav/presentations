@@ -15,7 +15,31 @@ tool choices, authoring rules, and migration sequence. The
 [theme reference](templates/dune-professional/README.md) documents the component
 API, layout grammar, and color system. The
 [electrical schematic framework](docs/schematic-framework.md) separates
-presentation-system drawings from ERC-backed hardware-authority exports.
+standalone explanatory drawings from ERC-backed hardware-authority exports.
+
+## Standalone schematics
+
+Schematics are now developed as independent SVG artifacts before any slide is
+considered. The first two one-concept pilots live in [`schematics/`](schematics/):
+
+- a SiPM parallel-microcell equivalent circuit;
+- a SuperCell composition diagram.
+
+They share one outlined font, one `1.25` stroke width, a fixed orthogonal grid,
+actual-geometry spacing reservations, and a vector-only audit. Render them in
+an isolated environment with:
+
+```sh
+python3 -m venv .venv-schematics
+.venv-schematics/bin/pip install -r schematics/requirements.txt
+make schematic-concepts PYTHON=.venv-schematics/bin/python
+```
+
+Run the dependency-free audit of the committed outputs with:
+
+```sh
+make audit-schematic-concepts
+```
 
 ## Build
 

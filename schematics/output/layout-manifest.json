@@ -1,0 +1,614 @@
+{
+  "artifacts": [
+    {
+      "classification": "illustrative-circuit",
+      "concept": "sipm-microcells-in-parallel",
+      "description": "Representative microcell branches place a quench resistor and Geiger-mode APD between common cathode and anode rails; an ellipsis denotes additional parallel branches.",
+      "id": "S09-01",
+      "layout": {
+        "canvas": {
+          "height": 8.0,
+          "width": 14.0
+        },
+        "grid": 0.25,
+        "objects": [
+          {
+            "allow_overlap": [],
+            "bounds": [
+              0.75,
+              7.034939236111111,
+              9.607421875,
+              7.465060763888888
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 16.0,
+            "kind": "text",
+            "name": "sheet-title",
+            "text": "SiPM equivalent \u2014 microcells in parallel"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              0.75,
+              6.384033203125,
+              6.871826171875,
+              6.615966796875
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 10.0,
+            "kind": "text",
+            "name": "sheet-scope",
+            "text": "ILLUSTRATIVE CIRCUIT  /  NOT ERC-VERIFIED"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              1.4999999999999998,
+              2.5,
+              2.641058283165162,
+              5.25
+            ],
+            "clearance": 0.18,
+            "kind": "symbol-group",
+            "name": "branch-1"
+          },
+          {
+            "allow_overlap": [
+              "branch-1"
+            ],
+            "bounds": [
+              1.695,
+              5.195,
+              1.805,
+              5.305
+            ],
+            "clearance": 0.18,
+            "kind": "junction",
+            "name": "branch-1-top-junction"
+          },
+          {
+            "allow_overlap": [
+              "branch-1"
+            ],
+            "bounds": [
+              1.695,
+              1.695,
+              1.805,
+              1.805
+            ],
+            "clearance": 0.18,
+            "kind": "junction",
+            "name": "branch-1-bottom-junction"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              5.75,
+              2.5,
+              6.891058283165163,
+              5.25
+            ],
+            "clearance": 0.18,
+            "kind": "symbol-group",
+            "name": "branch-2"
+          },
+          {
+            "allow_overlap": [
+              "branch-2"
+            ],
+            "bounds": [
+              5.945,
+              5.195,
+              6.055,
+              5.305
+            ],
+            "clearance": 0.18,
+            "kind": "junction",
+            "name": "branch-2-top-junction"
+          },
+          {
+            "allow_overlap": [
+              "branch-2"
+            ],
+            "bounds": [
+              5.945,
+              1.695,
+              6.055,
+              1.805
+            ],
+            "clearance": 0.18,
+            "kind": "junction",
+            "name": "branch-2-bottom-junction"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              11.75,
+              2.5,
+              12.891058283165162,
+              5.25
+            ],
+            "clearance": 0.18,
+            "kind": "symbol-group",
+            "name": "branch-n"
+          },
+          {
+            "allow_overlap": [
+              "branch-n"
+            ],
+            "bounds": [
+              11.945,
+              5.195,
+              12.055,
+              5.305
+            ],
+            "clearance": 0.18,
+            "kind": "junction",
+            "name": "branch-n-top-junction"
+          },
+          {
+            "allow_overlap": [
+              "branch-n"
+            ],
+            "bounds": [
+              11.945,
+              1.695,
+              12.055,
+              1.805
+            ],
+            "clearance": 0.18,
+            "kind": "junction",
+            "name": "branch-n-bottom-junction"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              7.4,
+              5.65,
+              7.6,
+              5.85
+            ],
+            "clearance": 0.18,
+            "kind": "terminal",
+            "name": "cathode-terminal"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              7.4,
+              0.9,
+              7.6,
+              1.1
+            ],
+            "clearance": 0.18,
+            "kind": "terminal",
+            "name": "anode-terminal"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              3.0,
+              4.454817708333333,
+              4.787272135416666,
+              4.745182291666666
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 12.0,
+            "kind": "text",
+            "name": "resistor-label",
+            "text": "QUENCH R"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              3.0,
+              3.0239420572916664,
+              4.398274739583333,
+              3.276057942708333
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 12.0,
+            "kind": "text",
+            "name": "apd-label",
+            "text": "GM\u2013APD"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              8.777777777777779,
+              3.4224392361111113,
+              9.222222222222223,
+              3.477560763888889
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 16,
+            "kind": "text",
+            "name": "ellipsis-label",
+            "text": "\u2026"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              8.0,
+              5.623942057291667,
+              10.03759765625,
+              5.876057942708334
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 12.0,
+            "kind": "text",
+            "name": "cathode-label",
+            "text": "CATHODE  K"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              8.0,
+              0.8739420572916667,
+              9.64697265625,
+              1.1260579427083335
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 12.0,
+            "kind": "text",
+            "name": "anode-label",
+            "text": "ANODE  A"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              0.75,
+              0.21558702256944443,
+              9.416314019097221,
+              0.48441297743055556
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 10.0,
+            "kind": "text",
+            "name": "source-limit",
+            "text": "Values, parasitics, and total microcell count N are unspecified."
+          }
+        ],
+        "routes": [
+          {
+            "joins": [],
+            "name": "cathode-rail",
+            "points": [
+              [
+                1.75,
+                5.25
+              ],
+              [
+                12.0,
+                5.25
+              ]
+            ],
+            "touches": [
+              "branch-1",
+              "branch-1-top-junction",
+              "branch-2",
+              "branch-2-top-junction",
+              "branch-n",
+              "branch-n-top-junction"
+            ]
+          },
+          {
+            "joins": [],
+            "name": "anode-rail",
+            "points": [
+              [
+                1.75,
+                1.75
+              ],
+              [
+                12.0,
+                1.75
+              ]
+            ],
+            "touches": [
+              "branch-1-bottom-junction",
+              "branch-2-bottom-junction",
+              "branch-n-bottom-junction"
+            ]
+          },
+          {
+            "joins": [
+              "anode-rail"
+            ],
+            "name": "branch-1-tail",
+            "points": [
+              [
+                1.75,
+                2.5
+              ],
+              [
+                1.75,
+                1.75
+              ]
+            ],
+            "touches": [
+              "branch-1",
+              "branch-1-bottom-junction"
+            ]
+          },
+          {
+            "joins": [
+              "anode-rail"
+            ],
+            "name": "branch-2-tail",
+            "points": [
+              [
+                6.0,
+                2.5
+              ],
+              [
+                6.0,
+                1.75
+              ]
+            ],
+            "touches": [
+              "branch-2",
+              "branch-2-bottom-junction"
+            ]
+          },
+          {
+            "joins": [
+              "anode-rail"
+            ],
+            "name": "branch-3-tail",
+            "points": [
+              [
+                12.0,
+                2.5
+              ],
+              [
+                12.0,
+                1.75
+              ]
+            ],
+            "touches": [
+              "branch-n",
+              "branch-n-bottom-junction"
+            ]
+          },
+          {
+            "joins": [
+              "cathode-rail"
+            ],
+            "name": "cathode-terminal-lead",
+            "points": [
+              [
+                7.5,
+                5.25
+              ],
+              [
+                7.5,
+                5.75
+              ]
+            ],
+            "touches": [
+              "cathode-terminal"
+            ]
+          },
+          {
+            "joins": [
+              "anode-rail"
+            ],
+            "name": "anode-terminal-lead",
+            "points": [
+              [
+                7.5,
+                1.75
+              ],
+              [
+                7.5,
+                1.0
+              ]
+            ],
+            "touches": [
+              "anode-terminal"
+            ]
+          }
+        ]
+      },
+      "path": "S09-01-sipm-parallel.svg",
+      "renderer": {
+        "name": "SchemDraw",
+        "text_stack": {
+          "ziafont": "0.11",
+          "ziamath": "0.13"
+        },
+        "version": "0.23"
+      },
+      "scope": "ILLUSTRATIVE CIRCUIT  /  NOT ERC-VERIFIED",
+      "sha256": "07fd4f81d2394915f7ddf83a565dc77a844cf915d6dcf09679dac92d0bfdbdc8",
+      "source": {
+        "page": 9,
+        "title": "The DUNE Photon Detection System (Phase I)",
+        "url": "https://indico.cern.ch/event/1390649/contributions/6061526/attachments/2916523/5118380/LIDINE2024-dune%20pds.pdf"
+      },
+      "title": "SiPM equivalent \u2014 microcells in parallel"
+    },
+    {
+      "classification": "system-structure",
+      "concept": "supercell-composition",
+      "description": "One SuperCell contains eight mounting boards; each board passively gangs six SiPMs, yielding 48 SiPMs and one channel.",
+      "id": "S14-01",
+      "layout": {
+        "canvas": {
+          "height": 8.0,
+          "width": 14.0
+        },
+        "grid": 0.25,
+        "objects": [
+          {
+            "allow_overlap": [],
+            "bounds": [
+              0.75,
+              7.034939236111111,
+              5.733723958333333,
+              7.465060763888888
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 16.0,
+            "kind": "text",
+            "name": "sheet-title",
+            "text": "SuperCell composition"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              0.75,
+              6.384033203125,
+              6.861924913194444,
+              6.615966796875
+            ],
+            "clearance": 0.1,
+            "font_family": "DejaVu Sans",
+            "font_size": 10.0,
+            "kind": "text",
+            "name": "sheet-scope",
+            "text": "STRUCTURE ONLY  /  NOT ELECTRICAL NETS"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              3.75,
+              4.5,
+              10.25,
+              6.0
+            ],
+            "clearance": 0.18,
+            "font_family": "DejaVu Sans",
+            "font_size": 12.0,
+            "kind": "block",
+            "name": "supercell",
+            "text": "SUPERCELL\n48 SiPMs / 1 CHANNEL"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              3.75,
+              2.5,
+              10.25,
+              4.0
+            ],
+            "clearance": 0.18,
+            "font_family": "DejaVu Sans",
+            "font_size": 12.0,
+            "kind": "block",
+            "name": "mounting-boards",
+            "text": "MOUNTING BOARDS\n8 PER SUPERCELL"
+          },
+          {
+            "allow_overlap": [],
+            "bounds": [
+              3.75,
+              0.5,
+              10.25,
+              2.0
+            ],
+            "clearance": 0.18,
+            "font_family": "DejaVu Sans",
+            "font_size": 12.0,
+            "kind": "block",
+            "name": "sipms-per-board",
+            "text": "SiPMs PER BOARD\n6 / PASSIVELY GANGED"
+          }
+        ],
+        "routes": [
+          {
+            "joins": [],
+            "name": "supercell-to-mounting-boards",
+            "points": [
+              [
+                7.0,
+                4.5
+              ],
+              [
+                7.0,
+                4.0
+              ]
+            ],
+            "touches": [
+              "supercell",
+              "mounting-boards"
+            ]
+          },
+          {
+            "joins": [],
+            "name": "mounting-board-to-sipms",
+            "points": [
+              [
+                7.0,
+                2.5
+              ],
+              [
+                7.0,
+                2.0
+              ]
+            ],
+            "touches": [
+              "mounting-boards",
+              "sipms-per-board"
+            ]
+          }
+        ]
+      },
+      "path": "S14-01-supercell-composition.svg",
+      "renderer": {
+        "name": "SchemDraw",
+        "text_stack": {
+          "ziafont": "0.11",
+          "ziamath": "0.13"
+        },
+        "version": "0.23"
+      },
+      "scope": "STRUCTURE ONLY  /  NOT ELECTRICAL NETS",
+      "sha256": "4c0d2520bd9cd4b936a75f08911ad8216e42afabca18e261d5dccdb3218a93d9",
+      "source": {
+        "page": 14,
+        "title": "The DUNE Photon Detection System (Phase I)",
+        "url": "https://indico.cern.ch/event/1390649/contributions/6061526/attachments/2916523/5118380/LIDINE2024-dune%20pds.pdf"
+      },
+      "title": "SuperCell composition"
+    }
+  ],
+  "schema_version": 1,
+  "style": {
+    "block_padding": 0.25,
+    "corner_radius": 0.16,
+    "element_unit": 2.6,
+    "font_family": "DejaVu Sans",
+    "font_sizes": {
+      "label": 12.0,
+      "note": 10.0,
+      "title": 16.0
+    },
+    "grid": 0.25,
+    "inches_per_unit": 0.34,
+    "ink": "#181a1d",
+    "junction_radius": 0.055,
+    "margin": 0.35,
+    "minimum_font_size": 10.0,
+    "muted": "#666d73",
+    "object_clearance": 0.18,
+    "paper": "#ffffff",
+    "schema_version": 1,
+    "stroke_width": 1.25,
+    "surface": "#f7f8f8",
+    "svg2": true,
+    "terminal_radius": 0.1,
+    "text_clearance": 0.1,
+    "text_mode": "path"
+  }
+}

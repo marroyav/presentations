@@ -9,8 +9,12 @@ PDFS := $(addsuffix /main.pdf,$(DECK_DIRS))
 DIAGRAM_SOURCES := $(shell find decks examples -type f -name '*.dot.in' 2>/dev/null | sort)
 DIAGRAM_PDFS := $(DIAGRAM_SOURCES:.dot.in=.pdf)
 STARTER_PDF := examples/framework_starter/main.pdf
+SCHEMATIC_TESTS := \
+	schematics.test_contract \
+	schematics.test_geometry \
+	schematics.test_svg_postprocess
 
-.PHONY: all diagrams schematics audit check starter new-deck clean
+.PHONY: all diagrams schematics schematic-concepts audit-schematic-concepts audit check starter new-deck clean
 
 all: diagrams $(PDFS)
 
@@ -25,6 +29,15 @@ decks/%/main.pdf: decks/%/main.tex templates/dune-professional/beamerthemeDUNEPr
 schematics:
 	$(PYTHON) scripts/audit_schematics.py decks
 
+schematic-concepts:
+	$(PYTHON) -m schematics.render_all
+	$(PYTHON) -m unittest $(SCHEMATIC_TESTS)
+	$(PYTHON) -m schematics.audit
+
+audit-schematic-concepts:
+	$(PYTHON) -m unittest $(SCHEMATIC_TESTS)
+	$(PYTHON) -m schematics.audit
+
 audit:
 	$(PYTHON) scripts/audit_design.py
 	$(PYTHON) scripts/audit_decks.py decks
@@ -34,7 +47,7 @@ starter: diagrams $(STARTER_PDF)
 $(STARTER_PDF): examples/framework_starter/main.tex templates/dune-professional/beamerthemeDUNEProfessional.sty examples/framework_starter/diagrams/system-context.pdf
 	cd examples/framework_starter && $(TECTONIC) $(TECTONIC_FLAGS) main.tex
 
-check: audit schematics starter all
+check: audit schematics audit-schematic-concepts starter all
 
 new-deck:
 	@test -n "$(SLUG)" || (echo "Usage: make new-deck SLUG=my_deck TITLE='My title'" && exit 2)
