@@ -1,0 +1,48 @@
+digraph system_context {
+  graph [
+    rankdir=TB,
+    bgcolor="{{background}}",
+    pad="0.18",
+    margin="0",
+    nodesep="0.38",
+    ranksep="0.55",
+    splines=polyline,
+    outputorder=edgesfirst
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fillcolor="{{surface-raised}}",
+    color="{{border}}",
+    fontcolor="{{text}}",
+    fontname="Helvetica",
+    fontsize=13,
+    penwidth=1.5,
+    margin="0.18,0.12"
+  ];
+
+  edge [
+    color="{{info}}",
+    fontcolor="{{text-muted}}",
+    fontname="Helvetica",
+    fontsize=10,
+    penwidth=1.6,
+    arrowsize=0.75
+  ];
+
+  source [label="Approved source\nwhat should happen", color="{{paper}}", fillcolor="{{paper}}", fontcolor="{{on-accent}}", peripheries=2];
+  contract [label="Shared interface\none language", color="{{sky}}", fillcolor="{{sky}}", fontcolor="{{on-accent}}", penwidth=2.1];
+  implementation [label="Working code\nmakes it real", color="{{coral}}", fillcolor="{{coral}}", fontcolor="{{on-accent}}"];
+  evidence [label="Independent test\ntries good and bad cases", color="{{paper}}", fillcolor="{{paper}}", fontcolor="{{on-accent}}", shape=component];
+  decision [label="Release decision\nready or not?", color="{{coral}}", fillcolor="{{coral}}", fontcolor="{{on-accent}}", penwidth=2.1];
+
+  {rank=same; source; contract; implementation;}
+  {rank=same; evidence; decision;}
+
+  source -> contract [label="sets the rules"];
+  contract -> implementation [label="guides"];
+  implementation -> decision [label="is proposed"];
+  evidence -> decision [label="checks", color="{{coral}}", style=dashed];
+  contract -> evidence [style=invis];
+}

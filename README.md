@@ -53,6 +53,8 @@ The repository currently builds:
 - `decks/scdps_git_management_aug2026/main.pdf`
 - `decks/scdps_software_ownership_aug2026/main.pdf`
 - `decks/daphne_pab_qualification_aug2026/main.pdf`
+- `decks/pds_selftrigger_deadtime_aug2026/main.pdf`
+- `decks/detector_wide_interaction_matrix_sep2026/main.pdf`
 - `decks/lidine2024_pds_schematics/main.pdf`
 
 ## Audit
