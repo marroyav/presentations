@@ -1,0 +1,329 @@
+{
+  "source_file": "planning/detector_wide_interaction_register_v0_1.csv",
+  "source_repository": "daphne_slow_controls_plan (local working draft)",
+  "sha256": "52b3606b8ff1040291ac159a86c03330c7403e4fd33e279e56b88b07c378679f",
+  "review_date": "2026-09-08",
+  "note": "Selected original fields, preserved for comparison. This snapshot is not approval or proof of an upstream release.",
+  "rows": [
+    {
+      "id": "S-001",
+      "title": "Personnel access or active work versus hazardous energy",
+      "consequence_class": "PS",
+      "enforcement_class": "FSS;HOLD",
+      "required_response": "Facility safe state and work-control hold point",
+      "evidence_status": "TBD site-specific requirement"
+    },
+    {
+      "id": "S-002",
+      "title": "Laser personnel safety",
+      "consequence_class": "PS",
+      "enforcement_class": "FSS",
+      "required_response": "Inhibit hazardous emission or reach approved personnel safe state",
+      "evidence_status": "Open requirement"
+    },
+    {
+      "id": "P-001",
+      "title": "Cryogenic fill and coverage permit before drift-HV enable",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Deny energization; if the approved permit is lost while energized apply P-002/P-003 cause/effect",
+      "evidence_status": "Source-derived concept; initial-fill contract incomplete"
+    },
+    {
+      "id": "P-002",
+      "title": "Low LAr level while drift HV is on",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Trip affected drift HV; latch; notify SC/DAQ/PDS",
+      "evidence_status": "Source says within 5 cm of top rim; production details require approval"
+    },
+    {
+      "id": "P-003",
+      "title": "Cryostat relief or boiling-risk condition while drift HV is on",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Trip affected drift HV; latch and alarm",
+      "evidence_status": "Source-derived; condition list incomplete"
+    },
+    {
+      "id": "P-004",
+      "title": "Drift-HV overcurrent or streamer",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Automatic HV safe action; latch; inhibit new ramp; publish cause and waveform reference",
+      "evidence_status": "Source gives an example of >2x normal for >1 s, not adopted here as approved FD threshold"
+    },
+    {
+      "id": "P-005",
+      "title": "Drift-HV shutdown coordinates associated FC termination bias",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Execute mapped safe action and verify both drift-HV and termination output states",
+      "evidence_status": "Source-derived; sequence timing incomplete"
+    },
+    {
+      "id": "P-006",
+      "title": "Fire alarm effect on HVS and detector power",
+      "consequence_class": "ED",
+      "enforcement_class": "FSS;AUTO",
+      "required_response": "Facility/DPS action to approved zoned safe state; alarm and event record",
+      "evidence_status": "Partial source-derived; detector-wide scope not approved"
+    },
+    {
+      "id": "P-007",
+      "title": "Rack smoke or fire",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Local/PDU or DPS shutdown; alarm; latch/no automatic restore",
+      "evidence_status": "Prototype/source-derived; production architecture and threshold approval pending"
+    },
+    {
+      "id": "P-008",
+      "title": "Rack water leak",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Local/PDU or DPS shutdown; alarm; no automatic restore",
+      "evidence_status": "Source-derived prototype behavior; production scope TBD"
+    },
+    {
+      "id": "P-009",
+      "title": "Rack overtemperature or cooling failure",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Approved autonomous safe action plus alarm; preserve only reviewed essential loads",
+      "evidence_status": "Prototype uses 60 C fallback; not adopted as universal production value"
+    },
+    {
+      "id": "P-010",
+      "title": "Rack protection controller or sensor-path fault",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Fail safe for credited protection; expose fault and bypass state",
+      "evidence_status": "Principle source-supported; target response per fault TBD"
+    },
+    {
+      "id": "P-011",
+      "title": "PDS supply current or voltage outside approved safe envelope",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Independent supply/local/DPS trip with verified output readback",
+      "evidence_status": "Source-derived requirement; no approved values or granular mapping"
+    },
+    {
+      "id": "P-012",
+      "title": "PDS power/readout/calibration equipment overtemperature",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Autonomous local/supply/DPS action; alarm and timestamped cause",
+      "evidence_status": "Source-derived; device-specific mechanisms/limits incomplete"
+    },
+    {
+      "id": "P-013",
+      "title": "WIEC fan/heater/temperature/dew-point fault",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO;ALARM",
+      "required_response": "Action per hazard analysis; do not infer one response for fan, heater, and dew point",
+      "evidence_status": "Inputs are source-derived; cause/effect remains open"
+    },
+    {
+      "id": "P-014",
+      "title": "Facility power-loss ordering between anode bias and supporting electronics",
+      "consequence_class": "ED",
+      "enforcement_class": "TBD",
+      "required_response": "Target inequality: hold-up exceeds detection + logic + bias-safe time + margin, or an equivalent hard guarantee",
+      "evidence_status": "Explicit unresolved conditional risk"
+    },
+    {
+      "id": "P-015",
+      "title": "Cold electronics energization versus cryogenic temperature/immersion state",
+      "consequence_class": "UNK",
+      "enforcement_class": "TBD",
+      "required_response": "No automatic trip or permission claim until damage mechanism and envelope are documented",
+      "evidence_status": "Open classification"
+    },
+    {
+      "id": "P-016",
+      "title": "Detector-to-building ground impedance fault",
+      "consequence_class": "UNK",
+      "enforcement_class": "ALARM;TBD",
+      "required_response": "Escalate by classified severity; do not map every impedance warning to detector-wide trip",
+      "evidence_status": "Historical alarm/human response; detector-damage class unresolved"
+    },
+    {
+      "id": "P-017",
+      "title": "Credited protection input missing stale or broken",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Positive-safety behavior or diagnostically equivalent design; SC displays reason and bypass",
+      "evidence_status": "Architecture principle; loop-specific responses open"
+    },
+    {
+      "id": "O-001",
+      "title": "Camera illumination versus excluded PDS active state",
+      "consequence_class": "DQ",
+      "enforcement_class": "SW",
+      "required_response": "Deny the second request; if unexpected light appears then inhibit/turn off the light where possible and invalidate the overlap; do not infer an emergency PDS-bias trip",
+      "evidence_status": "Mutual exclusion strongly supported by NP02/NP04 operations; PDS damage mechanism not established"
+    },
+    {
+      "id": "O-002",
+      "title": "Ionisation or alignment laser versus excluded PDS active state",
+      "consequence_class": "DQ",
+      "enforcement_class": "SW;FSS",
+      "required_response": "Deny the second request; require verified shutter/emission-off before PDS return; unexpected overlap invalidates data and alarms; no PDS-bias trip without an approved damage case",
+      "evidence_status": "Mutual exclusion and deliberate handoff strongly supported by NP04 operations; damage mechanism not established"
+    },
+    {
+      "id": "Q-001",
+      "title": "Purity-monitor flashes versus PDS measurements",
+      "consequence_class": "DQ",
+      "enforcement_class": "TAG",
+      "required_response": "No PDS bias action; time-stamp PrM requested/active/start/stop and propagate quality metadata",
+      "evidence_status": "Physical effect source-supported as data quality; Slack documents a historical DAQ-trigger interlock and unreliable-state failure; target no-bias-off policy requires controlled approval"
+    },
+    {
+      "id": "Q-002",
+      "title": "PDS LCM or calibration LEDs during acquisition",
+      "consequence_class": "DQ",
+      "enforcement_class": "TAG",
+      "required_response": "Execute approved calibration sequence; publish activity, pulse configuration identity, and affected scope",
+      "evidence_status": "Source-supported functional distinction; detailed run contract open"
+    },
+    {
+      "id": "C-001",
+      "title": "Power-over-Fiber laser is a VD PDS dependency",
+      "consequence_class": "OK",
+      "enforcement_class": "NONE",
+      "required_response": "Do not inhibit PoF merely because PDS is active; apply P-011/P-012-style protection to PoF equipment",
+      "evidence_status": "Source-supported dependency; detailed protection incomplete"
+    },
+    {
+      "id": "O-003",
+      "title": "Unclassified internal light or laser source",
+      "consequence_class": "UNK",
+      "enforcement_class": "SW;HOLD",
+      "required_response": "Deny new conflicting activity or clean-physics state; never infer an equipment trip from unknown alone",
+      "evidence_status": "Proposed conservative operational rule"
+    },
+    {
+      "id": "Q-003",
+      "title": "Drift-HV ramp trip or non-nominal state versus physics data",
+      "consequence_class": "DQ",
+      "enforcement_class": "SW;TAG",
+      "required_response": "Run-control admission/state response plus time-aligned HV metadata; protection remains P-001…P-005",
+      "evidence_status": "Historical operations and proposed FD data contract"
+    },
+    {
+      "id": "Q-004",
+      "title": "Cryogenic transient versus physics data",
+      "consequence_class": "DQ",
+      "enforcement_class": "TAG",
+      "required_response": "Publish owner-defined stable/degraded state and underlying metadata; do not reuse protection thresholds as DQ limits without approval",
+      "evidence_status": "General source support; quantitative FD envelope open"
+    },
+    {
+      "id": "O-004",
+      "title": "Timing not locked or synchronized",
+      "consequence_class": "OP",
+      "enforcement_class": "SW",
+      "required_response": "Reject timing-dependent transition and publish reason; tag any acquired interval unknown/degraded",
+      "evidence_status": "Operational principle; target thresholds/state response open"
+    },
+    {
+      "id": "O-005",
+      "title": "SC DAQ or control-network loss",
+      "consequence_class": "OP",
+      "enforcement_class": "SW",
+      "required_response": "Fail closed for commands; never auto-replay or auto-restore power; reconcile actual state on reconnect",
+      "evidence_status": "Existing draft principle; production policy open"
+    },
+    {
+      "id": "O-006",
+      "title": "DAQ and SC share access to one hardware endpoint",
+      "consequence_class": "OP",
+      "enforcement_class": "SW",
+      "required_response": "Reject unauthorized/conflicting request; serialize accepted writes; verify final state and audit actor/config revision",
+      "evidence_status": "Developed draft principle; architecture approval needed"
+    },
+    {
+      "id": "O-007",
+      "title": "Movable calibration or instrumentation device versus HV and detector state",
+      "consequence_class": "OP",
+      "enforcement_class": "SW;HOLD",
+      "required_response": "Deny request outside approved envelope; actual protective action depends on device hazard analysis",
+      "evidence_status": "Open detector-wide interaction"
+    },
+    {
+      "id": "H-001",
+      "title": "Expert or subsystem use of detector partition versus shifter run start",
+      "consequence_class": "OP",
+      "enforcement_class": "HOLD;SW",
+      "required_response": "Deny new run/configuration until owner releases scope or run coordinator authorizes a controlled transition",
+      "evidence_status": "Historical human-interlock evidence; target automation proposed"
+    },
+    {
+      "id": "H-002",
+      "title": "Human response to HV current stream during historical operations",
+      "consequence_class": "OP",
+      "enforcement_class": "HOLD;ALARM",
+      "required_response": "Historical sequence: inhibit triggers; remove SSP bias; HV expert ramps; log; deliberate restore. Target decomposes each step into ED or DQ/OP row",
+      "evidence_status": "Historical operations evidence only"
+    },
+    {
+      "id": "O-008",
+      "title": "Protection bypass or temporary override active",
+      "consequence_class": "OP",
+      "enforcement_class": "SW;HOLD",
+      "required_response": "Display and audit bypass; block normal readiness; never allow software bypass of non-bypassable personnel safety",
+      "evidence_status": "Proposed governance requirement"
+    },
+    {
+      "id": "O-009",
+      "title": "Unknown or inconsistent detector-region mapping",
+      "consequence_class": "OP",
+      "enforcement_class": "SW",
+      "required_response": "Fail closed for new activation; select pre-approved conservative scope for active ED hazards; DQ becomes unknown",
+      "evidence_status": "Proposed systemic requirement"
+    },
+    {
+      "id": "O-010",
+      "title": "Protective-trip recovery and return to run",
+      "consequence_class": "OP",
+      "enforcement_class": "SW",
+      "required_response": "Preserve latch/cause and actual state; require explicit authority handback and successful requalification",
+      "evidence_status": "Established draft principle; per-system procedure needed"
+    },
+    {
+      "id": "P-018",
+      "title": "Individual APA CRP or FC bias-channel electrical or thermal fault",
+      "consequence_class": "ED",
+      "enforcement_class": "AUTO",
+      "required_response": "Remove affected output; latch cause; verify actual voltage and discharge; notify SC/DAQ",
+      "evidence_status": "Equipment-protection function is supported; limits and coupled grouping are not yet approved"
+    },
+    {
+      "id": "P-019",
+      "title": "Cathode-HV shutdown versus APA CRP bias and TPC electronics",
+      "consequence_class": "UNK",
+      "enforcement_class": "TBD",
+      "required_response": "Preserve actual states and alarm; apply only owner-approved scoped action; FC terminations remain governed by P-005",
+      "evidence_status": "Historical operations show human shutdown and sequencing; no controlled universal APA/CRP/BDE coupling found"
+    },
+    {
+      "id": "O-011",
+      "title": "Cathode-HV and APA or CRP bias voltage recipe",
+      "consequence_class": "OP",
+      "enforcement_class": "SW;HOLD",
+      "required_response": "Deny an unapproved new transition; if state changes unexpectedly make physics-ready false; hold for expert reconciliation",
+      "evidence_status": "Historical sequence and run-boundary evidence; production recipe and priority remain open"
+    },
+    {
+      "id": "Q-005",
+      "title": "Cathode HV or APA CRP FC bias outside physics recipe",
+      "consequence_class": "DQ",
+      "enforcement_class": "SW;TAG",
+      "required_response": "Do not trip hardware for data quality; publish state transition and affected interval; pause or continue according to the run plan",
+      "evidence_status": "Historical data-taking practice supports explicit configuration and run boundaries; FD criteria are open"
+    }
+  ]
+}

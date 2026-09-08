@@ -14,7 +14,7 @@ SCHEMATIC_TESTS := \
 	schematics.test_geometry \
 	schematics.test_svg_postprocess
 
-.PHONY: all diagrams schematics schematic-concepts audit-schematic-concepts audit check starter new-deck clean
+.PHONY: all diagrams schematics schematic-concepts audit-schematic-concepts audit check starter new-deck clean interlock-guide check-interlock-guide
 
 all: diagrams $(PDFS)
 
@@ -47,7 +47,13 @@ starter: diagrams $(STARTER_PDF)
 $(STARTER_PDF): examples/framework_starter/main.tex templates/dune-professional/beamerthemeDUNEProfessional.sty examples/framework_starter/diagrams/system-context.pdf
 	cd examples/framework_starter && $(TECTONIC) $(TECTONIC_FLAGS) main.tex
 
-check: audit schematics audit-schematic-concepts starter all
+interlock-guide:
+	$(PYTHON) scripts/build_interlock_guide.py
+
+check-interlock-guide:
+	$(PYTHON) scripts/build_interlock_guide.py --check
+
+check: audit schematics audit-schematic-concepts check-interlock-guide starter all
 
 new-deck:
 	@test -n "$(SLUG)" || (echo "Usage: make new-deck SLUG=my_deck TITLE='My title'" && exit 2)

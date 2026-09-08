@@ -1,65 +1,25 @@
 \documentclass[aspectratio=169,11pt]{beamer}
-
 \makeatletter
 \input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
 \makeatother
 
 \title[DUNE detector-wide interlocks]{DUNE detector-wide interlocks}
-\subtitle{A draft framework for protection, operating exclusions, and data quality}
+\subtitle{What can run together?\quad What must wait?\quad What needs protection?}
 \author{Manuel Arroyave}
-\date{DUNE detector-coordination discussion draft -- 4 September 2026}
-\newcommand{\mydate}{4 September 2026}
+\date{Collaboration review v0.2 -- 8 September 2026}
+\newcommand{\mydate}{Draft v0.2 · 8 September 2026}
 \hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
-
-\newcommand{\RuleID}[1]{\texttt{#1}}
-\newcommand{\MatrixCell}[2]{%
-  \RaggedRight\textbf{#1}\par{\footnotesize\color{DuneTextMuted}#2}%
-}
 \newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
 \newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
-
+\newcommand{\RuleNote}[1]{\par\medskip{\footnotesize\color{DuneTextMuted}#1\par}}
 \tikzset{
-  interlock node/.style={
-    rounded corners=5pt,
-    align=center,
-    minimum height=1.05cm,
-    inner sep=7pt,
-    font=\small\bfseries
-  },
-  interlock paper/.style={
-    interlock node,
-    draw=DunePaper,
-    fill=DunePaper,
-    text=DuneOnAccent
-  },
-  interlock sky/.style={
-    interlock node,
-    draw=DuneSky,
-    fill=DuneSky,
-    text=DuneOnAccent
-  },
-  interlock coral/.style={
-    interlock node,
-    draw=DuneCoral,
-    fill=DuneCoral,
-    text=DuneOnAccent
-  },
-  interlock ink/.style={
-    interlock node,
-    draw=DuneBorder,
-    fill=DuneSurfaceRaised,
-    text=DuneText
-  },
-  interlock danger/.style={
-    interlock node,
-    draw=DuneDanger,
-    fill=DuneDanger,
-    text=DuneOnDanger
-  },
-  interlock flow/.style={-Latex,draw=DuneSky,line width=1.15pt},
-  interlock active flow/.style={-Latex,draw=DuneCoral,line width=1.2pt},
-  interlock relation/.style={draw=DuneTextMuted,line width=0.85pt},
-  interlock dashed/.style={draw=DuneTextMuted,dashed,line width=0.85pt}
+  guide node/.style={rounded corners=5pt,align=center,text width=3.45cm,
+    minimum height=1.4cm,inner sep=8pt,font=\normalsize\bfseries},
+  guide paper/.style={guide node,draw=DunePaper,fill=DunePaper,text=DuneOnAccent},
+  guide sky/.style={guide node,draw=DuneSky,fill=DuneSky,text=DuneOnAccent},
+  guide coral/.style={guide node,draw=DuneCoral,fill=DuneCoral,text=DuneOnAccent},
+  guide flow/.style={-Latex,draw=DuneSky,line width=1.2pt},
+  guide mark/.style={draw=DuneTextMuted,dashed,line width=0.9pt}
 }
 
 \begin{document}
@@ -68,428 +28,306 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{DUNE needs one rulebook for cross-detector constraints}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.58\textwidth}
-      \DuneBigStatement{THE PROPOSAL}
-        {Keep one controlled interaction register.}
-        {Each row names the condition, consequence, response, owner, recovery, and test. Every public matrix is a view of that same row.}
-    \end{column}
-    \begin{column}{0.38\textwidth}
-      \DuneCompactColorBlock{coral}{PROTECTION}{Stop credible damage}
-        {Trip or inhibit the hazardous energy path.}
-      \DuneCompactColorBlock{paper}{OPERATIONS}{Keep incompatible modes apart}
-        {Deny the second request or require a named hold.}
-      \DuneCompactColorBlock{sky}{DATA QUALITY}{Keep useful data honest}
-        {Allow the activity and publish the affected interval.}
-    \end{column}
-  \end{columns}
+\begin{frame}{Three situations need three different responses}
+  \DuneColorBlock{coral}{PROTECT EQUIPMENT}{Cryogenics has not confirmed HV readiness}
+    {Keep cathode HV off until the agreed cryogenic checks pass.}
+  \DuneColorBlock{paper}{TAKE TURNS}{Camera lights or an external laser with PDS}
+    {Block the second request. Confirm the light is off before PDS returns.}
+  \DuneColorBlock{sky}{KEEP RUNNING; LABEL DATA}{Purity monitor with PDS}
+    {Keep the photon detection system (PDS) running. Mark the affected data.}
 \end{frame}
 
-\begin{frame}{Not every ``not allowed'' condition is a hardware interlock}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \DuneBigStatement{THE CENTRAL DISTINCTION}
-        {The response must follow the consequence.}
-        {``Incompatible'' has historically covered three very different situations.}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \DuneCompactColorBlock{coral}{CREDIBLE DAMAGE}{Unsafe cryogenic condition with drift HV}
-        {Use an independent trip or inhibit.}
-      \DuneCompactColorBlock{paper}{OPERATING EXCLUSION}{Camera or external laser with PDS}
-        {Deny the second request; do not invent a PDS trip.}
-      \DuneCompactColorBlock{sky}{DATA QUALITY}{Purity monitor during PDS acquisition}
-        {Allow the overlap and tag the data.}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Every rule answers two questions}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \DuneFixedColorBlock{paper}{4.40cm}{1 · WHAT IS AT STAKE?}
-        {Consequence class}
-        {\textbf{PS / ED}\quad Personnel, facility, or equipment protection\par\medskip
-         \textbf{OP}\quad Operating conflict or loss of availability\par\medskip
-         \textbf{DQ}\quad Physics or data-quality contamination\par\medskip
-         \textbf{OK / UNK}\quad Compatible, or not yet classified}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \DuneFixedColorBlock{sky}{4.40cm}{2 · HOW IS IT HANDLED?}
-        {Enforcement class}
-        {\textbf{FSS / AUTO}\quad Independent safe state, trip, or inhibit\par\medskip
-         \textbf{SW / HOLD}\quad Software denial or named authorization\par\medskip
-         \textbf{TAG / NONE}\quad Allow, record, or take no special action\par\medskip
-         \textbf{TBD}\quad Not creditable until owners resolve it}
-    \end{column}
-  \end{columns}
-
-  \smallskip
-  \DuneTakeaway{A cell such as \RuleID{ED/AUTO [P-002]} states both the reason and the response.}
-\end{frame}
-
-\begin{frame}{Only a credible damage case can demand an automatic trip}
-  \DuneBigStatement{THE TEST}
-    {Describe the damage before prescribing the trip.}
-    {A red cell is evidence of concern; it is not yet a protection requirement.}
-
-  \smallskip
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \DuneCompactNumberBlock{paper}{01}{Protected asset}
-        {Name exactly what can be damaged.}
-      \DuneCompactNumberBlock{sky}{02}{Damage mechanism}
-        {State the physical initiating condition.}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \DuneCompactNumberBlock{coral}{03}{Safe action}
-        {Name scope, timing, latch, and reset.}
-      \DuneCompactNumberBlock{paper}{04}{Independent proof}
-        {Map the final element and fault-test it.}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{The protection matrix names the trigger and safe action}
-  \footnotesize
-  \renewcommand{\arraystretch}{1.05}
-  \begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}@{\hspace{3mm}}L{0.27\textwidth}@{\hspace{3mm}}L{0.28\textwidth}@{\hspace{3mm}}Y@{}}
+\begin{frame}{Each matrix row should read like a sentence}
+  \DuneBigStatement{HOW TO READ IT}
+    {When this happens,\newline this is what we do.}
+    {Then say why, who is involved, and what lets us return.}
+  \bigskip
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}@{\hspace{5mm}}L{0.27\textwidth}@{\hspace{5mm}}Y@{}}
     \toprule
-    Initiating condition & Required safe action & Return condition & Rule \\
+    Situation & What happens & Before returning \\
     \midrule
-    Cryogenic HV permit is false, low, stale, or abnormal while drift HV is on &
-      Block enable or trip the affected drift HV; latch &
-      Cause clear, inspection, fresh permit, deliberate ramp & \RuleID{P-001--003} \\
-    \addlinespace
-    Cathode overcurrent, streamer, or drift-HV shutdown &
-      Trip cathode HV and invoke the mapped field-cage action &
-      Inspect, reconcile states, restore in approved order & \RuleID{P-004/005} \\
-    \addlinespace
-    One bias channel exceeds its approved electrical or thermal envelope &
-      Remove the smallest approved channel or group &
-      Cause clear, authorized reset, fresh readback & \RuleID{P-018} \\
-    \addlinespace
-    Fire or damaging rack condition &
-      Apply the approved facility or rack cause-and-effect action &
-      Facility release and protection proof test & \RuleID{P-006--009} \\
+    Camera lights are already on; PDS is requested &
+    The new PDS request waits &
+    Confirm light-off and the agreed PDS return checks \\
     \bottomrule
   \end{tabularx}
-
-  \smallskip
-  \DuneSourceLine{SC--HVS interface, EDMS 3315615/1}{https://edms.cern.ch/document/3315615/1}
+  \RuleNote{Example: O-001. Proposed detector behavior; the exact PDS state still needs agreement.}
 \end{frame}
 
-\begin{frame}{Camera and external-laser requests share one PDS mutex}
+\begin{frame}{Cryogenics gives HV the go-ahead}
   \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.53\textwidth}
-      \begin{minipage}{\textwidth}
-      \centering
-      \begin{tikzpicture}
-        \node[interlock sky,minimum width=4.3cm] (pds) at (0,1.3) {Excluded PDS-active state};
-        \node[interlock paper,minimum width=4.3cm] (light) at (0,-1.3) {Camera light or external laser};
-        \node[circle,fill=DuneDanger,text=DuneOnDanger,minimum size=1.0cm,font=\Large\bfseries] (stop) at (0,0) {$\times$};
-        \draw[interlock relation] (pds) -- (stop);
-        \draw[interlock relation] (stop) -- (light);
-        \node[right=0.35cm of stop,text=DuneText,font=\small\bfseries,align=left]
-          {NO OVERLAP\\\normalfont\footnotesize deny the second request};
-      \end{tikzpicture}
-
-      \smallskip
-      \DuneDiagramCaption{The mutex works in both command orders. Laser personnel safety remains an independent facility-safety function.}
-      \end{minipage}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{paper}{3.3cm}{BEFORE HV STARTS}
+        {Confirm the required fill and coverage}
+        {Cryogenics and HV agree which measurements establish that the cryostat is ready.}
     \end{column}
-    \begin{column}{0.43\textwidth}
-      \DuneCompactNumberBlock{coral}{01}{Reject the new request}
-        {The activity already in control keeps the optical region.}
-      \DuneCompactNumberBlock{paper}{02}{Verify the return state}
-        {Confirm light, emission, and shutter off before PDS return.}
-      \DuneCompactNumberBlock{sky}{03}{Record accidental overlap}
-        {Invalidate or degrade the affected interval and alert operations.}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{coral}{3.3cm}{WHILE HV IS ON}
+        {Stop HV if an agreed protection condition occurs}
+        {Low liquid level, relief-valve opening and specified boiling-risk conditions have an HV response.}
     \end{column}
   \end{columns}
-
-  \smallskip
-  {\footnotesize\color{DuneTextMuted}\RuleID{O-001}, \RuleID{O-002}: operating mutex. \RuleID{S-002}: laser personnel safety.}
+  \medskip
+  \DuneTakeaway{Cryogenics + HV + Detector Protection must agree the limits, response time and restart checks.}
+  \RuleNote{P-001--P-003 · HVS interface supports the principle; production details remain open.}
 \end{frame}
 
-\begin{frame}{Purity-monitor activity stays in the data-quality lane}
+\begin{frame}{A fault stops the equipment named in its rule}
+  \renewcommand{\arraystretch}{1.28}
+  \begin{tabularx}{\textwidth}{@{}L{0.32\textwidth}@{\hspace{5mm}}L{0.32\textwidth}@{\hspace{5mm}}Y@{}}
+    \toprule
+    Equipment problem & Proposed response & Teams to agree it \\
+    \midrule
+    Abnormal cathode current & Shut down affected HV & HV + Detector Protection \\
+    \addlinespace
+    PDS supply fault or overheating & Switch off affected supply or equipment & PDS + power + protection \\
+    \addlinespace
+    APA/CRP supply fault & Switch off the agreed output or group & TPC + HV + protection \\
+    \bottomrule
+  \end{tabularx}
+  \smallskip
+  \DuneTakeaway{Each team names the equipment at risk and the action needed to protect it.}
+  \RuleNote{P-004, P-011, P-012, P-018 · Limits, shared outputs and timing still need agreement.}
+\end{frame}
+
+\begin{frame}{Camera lights and PDS take turns}
   \begin{minipage}{\textwidth}
   \centering
-  \begin{tikzpicture}[x=1cm,y=1cm]
-    \draw[DuneSky,line width=11pt,rounded corners=4pt] (-5.4,1.15) -- (5.4,1.15);
-    \node[text=DuneOnAccent,font=\small\bfseries] at (0,1.15) {PDS acquisition continues};
+  \begin{tikzpicture}
+    \node[guide sky] (pds) at (-4.4,1.15) {PDS is active};
+    \node[guide paper] (request) at (0,1.15) {Camera light\\is requested};
+    \node[guide coral] (wait) at (4.4,1.15) {Light request\\waits};
+    \node[guide paper] (light) at (-4.4,-1.15) {Camera light\\is on};
+    \node[guide sky] (pdsrequest) at (0,-1.15) {PDS is requested};
+    \node[guide coral] (pdswait) at (4.4,-1.15) {PDS request\\waits};
+    \draw[guide flow] (pds) -- (request); \draw[guide flow] (request) -- (wait);
+    \draw[guide flow] (light) -- (pdsrequest); \draw[guide flow] (pdsrequest) -- (pdswait);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{The rule applies whichever activity starts first. Confirm illumination is actually off before PDS resumes.}
+  \end{minipage}
+  \RuleNote{O-001 · PDS must define the exact excluded hardware state and affected region. Old interface wording needs review.}
+\end{frame}
 
-    \draw[DunePaper,line width=11pt,rounded corners=4pt] (-4.8,-0.2) -- (-3.7,-0.2);
-    \draw[DunePaper,line width=11pt,rounded corners=4pt] (-1.0,-0.2) -- (0.1,-0.2);
-    \draw[DunePaper,line width=11pt,rounded corners=4pt] (2.6,-0.2) -- (3.7,-0.2);
-    \node[text=DuneText,font=\small\bfseries] at (0,-0.82) {purity-monitor activity};
+\begin{frame}{External lasers need an explicit handback to PDS}
+  \begin{minipage}{\textwidth}
+  \centering
+  \begin{tikzpicture}
+    \node[guide sky] (before) at (-4.4,0) {Confirm the agreed\\PDS state for\\laser activity};
+    \node[guide coral] (laser) at (0,0) {Use the laser\\with its safety\\checks active};
+    \node[guide paper] (after) at (4.4,0) {Confirm emission off\\and shutter closed\\before PDS returns};
+    \draw[guide flow] (before) -- (laser); \draw[guide flow] (laser) -- (after);
+  \end{tikzpicture}\par
+  \bigskip
+  \DuneDiagramCaption{PDS and external-laser activity must take turns. The laser team and PDS team agree the return checks.}
+  \end{minipage}
+  \bigskip
+  \DuneColorBlock{paper}{TEAMS INVOLVED}{Laser + PDS + run coordination}
+    {Laser personnel protection remains active regardless of the PDS or run state.}
+  \RuleNote{O-002, S-002 · NP04 handoffs support this rule; state definitions and timing remain open.}
+\end{frame}
 
-    \foreach \x in {-4.25,-0.45,3.15} {
-      \draw[interlock dashed] (\x,0.15) -- (\x,0.87);
-      \node[draw=DuneInfo,fill=DuneInfo!12!DuneBackground,text=DuneText,rounded corners=3pt,
-            font=\footnotesize\bfseries,inner sep=4pt] at (\x,-1.48) {TAG TIME + REGION};
+\begin{frame}{Purity measurements can run while PDS takes data}
+  \begin{minipage}{\textwidth}
+  \centering
+  \begin{tikzpicture}
+    \draw[DuneSky,line width=15pt] (-5.7,1.35) -- (5.7,1.35);
+    \node[text=DuneOnAccent,font=\normalsize\bfseries] at (0,1.35) {PDS keeps running};
+    \foreach \x in {-3.8,0,3.8} {
+      \draw[DunePaper,line width=13pt] (\x-0.6,-0.05) -- (\x+0.6,-0.05);
+      \draw[guide mark] (\x,0.25) -- (\x,1.0);
+      \node[text=DuneText,font=\small,align=center] at (\x,-0.8) {Purity measurement};
+      \node[text=DuneSky,font=\small\bfseries,align=center] at (\x,-1.5) {Mark this interval};
     }
-  \end{tikzpicture}
-
-  \smallskip
-  \DuneDiagramCaption{The overlap affects measurement quality; it does not require PDS bias to be removed.}
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{The purity-monitor team supplies the times and affected region. Data acquisition records them for analysis.}
   \end{minipage}
-
-  \smallskip
-  \DuneCompactColorBlock{sky}{DATA-QUALITY RULE \RuleID{Q-001}}{Allow the overlap and publish the quality flag}
-    {Keep the data. Schedule a quiet window only for measurements that need clean PDS data.}
+  \medskip
+  \DuneTakeaway{PDS bias stays on for this interaction. Quiet periods can be arranged when a measurement needs them.}
+  \RuleNote{Q-001 · This proposal conflicts with the old PDS interface's bias-off text; that text needs correction.}
 \end{frame}
 
-\begin{frame}{The PDS matrix uses three different responses}
-  \small
-  \renewcommand{\arraystretch}{1.15}
-  \begin{tabularx}{\textwidth}{@{}L{0.28\textwidth}@{\hspace{3mm}}L{0.13\textwidth}@{\hspace{3mm}}L{0.29\textwidth}@{\hspace{3mm}}Y@{}}
+\begin{frame}{Different light sources have different rules}
+  \renewcommand{\arraystretch}{1.38}
+  \begin{tabularx}{\textwidth}{@{}L{0.36\textwidth}@{\hspace{6mm}}Y@{}}
     \toprule
-    Interaction with PDS & Coexist? & Admission or control & Data and return \\
+    Activity with PDS & Proposed rule \\
     \midrule
-    Camera illumination / external LEDs &
-      \textbf{NO} & Deny the second request & Tag overlap; verify light off \\
+    Camera illumination & Take turns \\
     \addlinespace
-    Ionisation or alignment laser &
-      \textbf{NO} & Deny second request; separate laser FSS & Tag overlap; verify emission and shutter off \\
+    External ionisation / alignment laser & Take turns; keep laser safety active \\
     \addlinespace
-    Purity monitor &
-      \textbf{YES} & Allow; quiet windows optional & Tag affected time and region; no bias action \\
+    Purity monitor & Run together; mark affected data \\
     \addlinespace
-    PDS-owned calibration light &
-      Calibration mode & Versioned PDS/DAQ sequence & Tag pulse, configuration, and region \\
+    PDS-owned calibration light & Use the declared calibration procedure \\
     \addlinespace
-    Power-over-Fiber for applicable VD PDS &
-      \textbf{REQUIRED} & Exempt from external-laser mutex & Keep its own electrical and thermal protection \\
+    Power-over-fiber for applicable PDS & Required together; keep its own protection active \\
     \bottomrule
   \end{tabularx}
-
-  \smallskip
-  {\footnotesize\color{DuneTextMuted}\RuleID{O-001}, \RuleID{O-002}, \RuleID{Q-001}, \RuleID{Q-002}, \RuleID{C-001}. Exact ``PDS active'' state remains an owner decision.}
+  \RuleNote{O-001, O-002, Q-001, Q-002, C-001 · Name the actual source and affected optical region.}
 \end{frame}
 
-\begin{frame}{HV and bias states need explicit, scoped actions}
-  \footnotesize
-  \renewcommand{\arraystretch}{1.05}
-  \begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}@{\hspace{3mm}}L{0.24\textwidth}@{\hspace{3mm}}L{0.30\textwidth}@{\hspace{3mm}}Y@{}}
-    \toprule
-    Event & Cathode / field cage & APA or CRP bias & PDS / DAQ \\
-    \midrule
-    Cryogenic HV-ready is false before enable &
-      Block cathode-HV ramp & Preserve actual states; use approved recipe & Not ready; publish cause \\
-    \addlinespace
-    Low LAr, relief, or approved boiling risk &
-      Trip and latch cathode HV; mapped FC action & Owner-approved action only & Stop or tag; notify \\
-    \addlinespace
-    Cathode overcurrent or streamer &
-      Trip cathode HV; mapped FC action & Coupled action remains open & Inhibit or tag; save waveform \\
-    \addlinespace
-    One bias channel exceeds its safe envelope &
-      No blanket cathode action & Remove smallest approved channel or group & Not ready; publish cause \\
-    \addlinespace
-    Fire condition &
-      Apply approved HVS cause and effect & Apply approved HVS cause and effect & Stop; facility record \\
-    \bottomrule
-  \end{tabularx}
-
-  \smallskip
-  \DuneTakeaway{One event does not justify an unreviewed detector-wide trip.}
-\end{frame}
-
-\begin{frame}{A cathode trip does not yet imply a detector-wide trip}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \DuneFixedColorBlock{sky}{3.20cm}{WHAT IS CONTROLLED}
-        {Cathode shutdown invokes the mapped field-cage action}
-        {The current HVS interface states this coupling. It also requires notification to detector operations.}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \DuneFixedColorBlock{coral}{3.20cm}{WHAT REMAINS OPEN}
-        {The coupled action for the rest of the detector}
-        {No available controlled requirement establishes one universal response for APA/CRP bias, readout electronics, or PDS/PoF.}
-    \end{column}
-  \end{columns}
-
-  \DuneCompactColorBlock{paper}{OPEN RULE \RuleID{P-019}}{Resolve HD and VD separately}
-    {Test both orders; measure transients; approve scope, timing, and recovery.}
-  \DuneSourceLine{SC--HVS interface, EDMS 3315615/1}{https://edms.cern.ch/document/3315615/1}
-\end{frame}
-
-\begin{frame}{ProtoDUNE already used human interlocks}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \DuneCompactColorBlock{sky}{PDS + CAMERA LIGHT}{People waited for lights to be off}
-        {NP02 PDS work was coordinated around camera and LED state.}
-      \DuneCompactColorBlock{paper}{PDS + LASER}{People handed the detector back}
-        {NP04 returned PDS only after laser emission or shutter state was clear.}
-    \end{column}
-    \begin{column}{0.48\textwidth}
-      \DuneCompactColorBlock{coral}{PURITY MONITOR + DAQ}{A state once inhibited triggers}
-        {A missing purity-monitor status also left the historical inhibit unreleased.}
-      \DuneCompactColorBlock{sky}{HV + DETECTOR STATES}{People followed explicit sequences}
-        {Shifters coordinated cathode, bias, PDS, electronics, and DAQ transitions.}
-    \end{column}
-  \end{columns}
-
-  \smallskip
-  \DuneCompactColorBlock{paper}{WHAT THIS EVIDENCE MEANS}{The workflow is real; the protection claim is not yet proven}
-    {History identifies candidate rules. Analysis and testing certify protection.}
-\end{frame}
-
-\begin{frame}{Human practice becomes a requirement, not a copy of the chat}
-  \begin{minipage}{\textwidth}
-  \centering
-  \begin{tikzpicture}[node distance=0.45cm]
-    \node[interlock paper,minimum width=2.30cm] (history) {Slack / elog\\past practice};
-    \node[interlock sky,minimum width=2.30cm,right=of history] (candidate) {Candidate rule\\and scope};
-    \node[interlock coral,minimum width=2.30cm,right=of candidate] (analysis) {Owner analysis\\and decision};
-    \node[interlock ink,minimum width=2.30cm,right=of analysis] (requirement) {Controlled\\requirement};
-    \node[interlock paper,minimum width=2.30cm,right=of requirement] (test) {Installed\\proof test};
-    \draw[interlock flow] (history) -- (candidate);
-    \draw[interlock active flow] (candidate) -- (analysis);
-    \draw[interlock active flow] (analysis) -- (requirement);
-    \draw[interlock flow] (requirement) -- (test);
-  \end{tikzpicture}
-
-  \medskip
-  \DuneDiagramCaption{Historical behavior starts the conversation. A rule becomes creditable only after ownership, controlled requirements, and installed verification.}
-  \end{minipage}
-
-  \medskip
-  \DuneTakeaway{No unowned Slack instruction becomes detector logic.}
-\end{frame}
-
-\begin{frame}{Routine coordination needs machine-readable state}
-  \begin{minipage}{\textwidth}
-  \centering
-  \begin{tikzpicture}
-    \node[interlock paper,minimum width=3.1cm] (states) at (-4.4,1.1) {Authoritative\\subsystem states};
-    \node[interlock coral,minimum width=3.25cm] (admission) at (0,1.1) {Admission decision\\allow / deny / hold};
-    \node[interlock sky,minimum width=3.1cm] (command) at (4.4,1.1) {Requested command\\or run transition};
-    \node[interlock ink,minimum width=3.25cm] (record) at (0,-1.25) {Alarm, audit record,\\and data-quality metadata};
-    \draw[interlock active flow] (states) -- (admission);
-    \draw[interlock active flow] (command) -- (admission);
-    \draw[interlock flow] (admission) -- (record);
-    \node[interlock danger,minimum width=3.75cm] (protect) at (-4.15,-1.25) {Independent protection path};
-    \draw[interlock dashed] (states) -- (protect);
-    \node[text=DuneTextMuted,font=\footnotesize,align=center] at (4.15,-1.25)
-      {Slow Controls and DAQ consume\\protection state; they do not replace it.};
-  \end{tikzpicture}
-
-  \medskip
-  \DuneDiagramCaption{Operational admission can be software. Credited equipment or personnel protection remains independent of ordinary detector software.}
-  \end{minipage}
-\end{frame}
-
-\begin{frame}{Test both command orders and every stale-state case}
-  \small
+\begin{frame}{TPC teams must agree the allowed detector states}
   \renewcommand{\arraystretch}{1.18}
-  \begin{tabularx}{\textwidth}{@{}L{0.30\textwidth}@{\hspace{4mm}}L{0.31\textwidth}@{\hspace{4mm}}Y@{}}
+  \begin{tabularx}{\textwidth}{@{}L{0.40\textwidth}@{\hspace{6mm}}Y@{}}
     \toprule
-    Test & Expected decision & Evidence to keep \\
+    Situation & Question for the detector teams \\
     \midrule
-    State A active; request B & Deny, hold, or allow exactly as the rule says & Request, authoritative state, decision, timestamp \\
+    Cathode HV trips & What must APA/CRP, electronics and affected PDS do? \\
     \addlinespace
-    State B active; request A & Same rule works in the reverse order & Reverse-order decision and return state \\
+    Mains power disappears & Is a shutdown order needed? Can it still happen? \\
     \addlinespace
-    Simultaneous requests & Deterministic priority; no race to an unsafe state & Ordered event log and final states \\
-    \addlinespace
-    Missing, stale, or contradictory state & Fail to the approved conservative decision & Quality, timeout, alarm, and owner response \\
-    \addlinespace
-    Restart during an active condition & Reconcile actual state before accepting commands & Startup snapshot and explicit recovery \\
+    Filling, draining or a warm test & Which electronics states are allowed in that procedure? \\
     \bottomrule
   \end{tabularx}
+  \smallskip
+  \DuneTakeaway{These answers remain open. Review horizontal-drift and vertical-drift cases separately.}
+  \RuleNote{P-014, P-015, P-019 · Use the approved detector procedure while these questions are resolved.}
 \end{frame}
 
-\begin{frame}{The lifecycle changes enforcement---not the rule}
+\begin{frame}{Every rack rule needs a list of affected equipment}
   \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.31\textwidth}
-      \DuneFixedColorBlock{paper}{4.3cm}{INSTALLATION}
-        {Isolation comes first}
-        {Default off. Use work control, lockout/tagout, and independent verification. Record the installed mapping before any protection claim.}
+    \begin{column}{0.48\textwidth}
+      \DuneBigStatement{RACK POWER + COOLING}
+        {Smoke, water or overheating can stop several systems.}
+        {The rack connection list tells us who is affected.}
     \end{column}
-    \begin{column}{0.31\textwidth}
-      \DuneFixedColorBlock{coral}{4.3cm}{COMMISSIONING + INTEGRATION}
-        {Bound every exception}
-        {Name the test owner, scope, recipe, expiry, and recovery. Human interlocks remain visible while interfaces mature.}
-    \end{column}
-    \begin{column}{0.31\textwidth}
-      \DuneFixedColorBlock{sky}{4.3cm}{RUN}
-        {Automate routine decisions}
-        {Use autonomous protection for damage, software admission for exclusions, and metadata for data-quality effects.}
+    \begin{column}{0.48\textwidth}
+      \DuneColorBlock{paper}{AGREE TOGETHER}{Which loads switch off?}
+        {Name the rack, supplies and detector equipment.}
+      \medskip
+      \DuneColorBlock{coral}{BEFORE RESTART}{What needs inspection?}
+        {Confirm cooling, power and the affected equipment before returning.}
     \end{column}
   \end{columns}
-
-  \smallskip
-  \DuneTakeaway{The rule ID and physical consequence remain stable across all three stages.}
+  \RuleNote{P-007--P-010 · Rack owners + equipment teams + Detector Protection agree the response and any essential loads kept on.}
 \end{frame}
 
-\begin{frame}{One register produces several audience views}
+\begin{frame}{DAQ needs to know what a detector condition means}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabularx}{\textwidth}{@{}L{0.35\textwidth}@{\hspace{6mm}}Y@{}}
+    \toprule
+    Detector condition & What DAQ needs to do \\
+    \midrule
+    Timing is not ready & Hold steps that require synchronized timing \\
+    \addlinespace
+    Equipment state is unknown & Hold unverified changes; show what is missing \\
+    \addlinespace
+    An allowed activity affects data quality & Record when, where and which activity \\
+    \bottomrule
+  \end{tabularx}
+  \smallskip
+  \DuneTakeaway{Agree in advance whether an ongoing run stops, pauses or continues with a data-quality record.}
+  \RuleNote{O-004, O-005, Q-001--Q-005 · The selected run type matters.}
+\end{frame}
+
+\begin{frame}{An expert test needs a clear handback}
   \begin{minipage}{\textwidth}
   \centering
   \begin{tikzpicture}
-    \node[interlock paper,minimum width=4.0cm,minimum height=2.2cm] (register) at (-3.6,0)
-      {CONTROLLED REGISTER\\[1mm]\normalfont\footnotesize condition / consequence / scope\\action / recovery / owner / test};
-    \node[interlock coral,minimum width=3.45cm] (protect) at (2.8,2.0) {Protection\\cause and effect};
-    \node[interlock sky,minimum width=3.45cm] (ops) at (2.8,0.65) {Operations +\\data quality};
-    \node[interlock ink,minimum width=3.45cm] (life) at (2.8,-0.70) {Lifecycle +\\readiness};
-    \node[interlock paper,minimum width=3.45cm] (test) at (2.8,-2.05) {Verification +\\approval};
-    \draw[interlock active flow] (register) -- (protect);
-    \draw[interlock flow] (register) -- (ops);
-    \draw[interlock flow] (register) -- (life);
-    \draw[interlock flow] (register) -- (test);
-  \end{tikzpicture}
-
-  \smallskip
-  \DuneDiagramCaption{Public matrices stay readable because detailed requirements live once in the controlled register. Every visible cell carries a stable rule ID.}
+    \node[guide paper] (owner) at (-4.4,0) {Name the test owner\\and detector region};
+    \node[guide coral] (test) at (0,0) {Hold conflicting\\runs or changes};
+    \node[guide sky] (return) at (4.4,0) {Confirm the test\\is finished and\\hand back control};
+    \draw[guide flow] (owner) -- (test); \draw[guide flow] (test) -- (return);
+  \end{tikzpicture}\par
+  \bigskip
+  \DuneDiagramCaption{ProtoDUNE shifters already coordinated work this way. The detector needs a visible record of who is using each region.}
   \end{minipage}
+  \bigskip
+  \DuneTakeaway{The next operator should be able to see who to contact and what still needs checking.}
+  \RuleNote{H-001, O-006 · Based on the existing NP02/NP04 evidence review; the recording method remains to be agreed.}
 \end{frame}
 
-\begin{frame}{Evidence has a clear authority ladder}
-  \small
-  \renewcommand{\arraystretch}{1.07}
-  \begin{tabularx}{\textwidth}{@{}L{0.25\textwidth}@{\hspace{4mm}}L{0.34\textwidth}@{\hspace{4mm}}Y@{}}
-    \toprule
-    Evidence source & What it establishes & What it cannot establish alone \\
-    \midrule
-    Slack, elog, and shift instructions &
-      \MatrixCell{Past behavior}{Who waited, what stayed off, and how handoff worked.} &
-      \MatrixCell{Automatic protection}{A human habit is not a credited trip.} \\
-    \addlinespace
-    Approved ICD or requirement &
-      \MatrixCell{Required interface behavior}{Named states, notifications, and candidate actions.} &
-      \MatrixCell{The complete hazard case}{Boundaries and response budgets may remain open.} \\
-    \addlinespace
-    Hazard and electrical analysis &
-      \MatrixCell{Why protection is needed}{Damage mechanism, safe state, scope, and timing.} &
-      \MatrixCell{Installed performance}{The real path still needs testing.} \\
-    \addlinespace
-    Installed proof or fault test &
-      \MatrixCell{What the detector really does}{Ordering, latency, readback, and recovery.} &
-      \MatrixCell{Policy ownership}{Owners must still accept the result.} \\
-    \bottomrule
-  \end{tabularx}
-\end{frame}
-
-\begin{frame}{Approve four things before implementation}
+\begin{frame}{Each detector stage needs a clear procedure}
   \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \DuneCompactNumberBlock{paper}{01}{Approve the two-axis grammar}
-        {Every row states consequence and enforcement separately.}
-      \DuneCompactNumberBlock{sky}{02}{Approve the first operating rules}
-        {PDS/light mutex; purity-monitor data tag; PoF exception.}
+    \begin{column}{0.31\textwidth}
+      \DuneFixedColorBlock{paper}{4.0cm}{INSTALLATION}
+        {Who is working?}
+        {Record the work area, isolation and the limited tests that are authorized.}
     \end{column}
-    \begin{column}{0.48\textwidth}
-      \DuneCompactNumberBlock{coral}{03}{Close the open coupling}
-        {Resolve \RuleID{P-019} separately for HD and VD.}
-      \DuneCompactNumberBlock{paper}{04}{Name owners and proof tests}
-        {Set thresholds, scope, timing, reset, and the pass result.}
+    \begin{column}{0.31\textwidth}
+      \DuneFixedColorBlock{coral}{4.0cm}{COMMISSIONING + INTEGRATION}
+        {Who owns the test?}
+        {Agree the detector states, affected systems, test duration and return procedure.}
+    \end{column}
+    \begin{column}{0.31\textwidth}
+      \DuneFixedColorBlock{sky}{4.0cm}{RUN}
+        {Is this run allowed?}
+        {Check equipment readiness and protection. Record conditions that affect the data.}
     \end{column}
   \end{columns}
+  \medskip
+  \DuneTakeaway{Commissioning does not create a general exception to protection or light exclusions.}
+\end{frame}
 
-  \smallskip
-  \DuneCompactColorBlock{paper}{WHAT ``DONE'' LOOKS LIKE}{Every rule has a reason, an owner, and a tested recovery}
-    {Until then, this remains a discussion draft---not detector logic.}
+\begin{frame}{Missing information needs a specific response}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{coral}{4.2cm}{A PROTECTION INPUT IS MISSING}
+        {Can we still protect the equipment?}
+        {The equipment and protection teams must define whether to block startup or stop the affected equipment.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{sky}{4.2cm}{A PURITY-ACTIVITY RECORD IS MISSING}
+        {Can we still identify affected data?}
+        {Mark the uncertain data quality. The missing record alone does not require a PDS-bias trip in this proposal.}
+    \end{column}
+  \end{columns}
+  \RuleNote{P-010, P-017, Q-001 · A lost display or connection must be distinguished from a failed protection function.}
+\end{frame}
+
+\begin{frame}{Clearing an alarm is only the first restart check}
+  \begin{minipage}{\textwidth}
+  \centering
+  \begin{tikzpicture}[guide node/.append style={text width=2.6cm,minimum height=1.8cm}]
+    \node[guide paper] (cause) at (-5.1,0) {Understand and\\clear the cause};
+    \node[guide coral] (inspect) at (-1.7,0) {Owner checks\\and authorizes\\recovery};
+    \node[guide sky] (state) at (1.7,0) {Restart deliberately;\\confirm actual\\equipment states};
+    \node[guide paper] (run) at (5.1,0) {DAQ checks the\\configuration;\\resume the run};
+    \draw[guide flow] (cause) -- (inspect); \draw[guide flow] (inspect) -- (state); \draw[guide flow] (state) -- (run);
+  \end{tikzpicture}\par
+  \bigskip
+  \DuneDiagramCaption{Every subsystem supplies its own recovery checks. A returning power supply or network connection does not automatically restart the detector.}
+  \end{minipage}
+  \RuleNote{O-010 · Agree the people, order and checks for the affected equipment.}
+\end{frame}
+
+\begin{frame}{Some rules still need a detector decision}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}L{0.47\textwidth}@{\hspace{6mm}}Y@{}}
+    \toprule
+    Decision needed & Teams to resolve it \\
+    \midrule
+    Exact PDS state excluded by external light; conflicting old interface text & PDS + light-source teams + DAQ \\
+    \addlinespace
+    Response of other systems to cathode or mains-power loss & HV + TPC + PDS + electrical + protection \\
+    \addlinespace
+    Electronics during filling; fan, heater and condensation faults & TPC + cryogenics + cooling + protection \\
+    \addlinespace
+    Allowed motion and grounding-fault response & Device owners + electrical + detector teams \\
+    \bottomrule
+  \end{tabularx}
+  \RuleNote{The companion guide records these questions and the source disagreements. An open row grants no new permission.}
+\end{frame}
+
+\begin{frame}{Review the rows for your subsystem}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.57\textwidth}
+      \DuneBigStatement{WHAT WE NEED FROM EACH TEAM}
+        {Tell us what must happen\newline and who needs to agree it.}
+        {Start with the detector situation. The integration team can translate the agreed answer into controls and tests.}
+    \end{column}
+    \begin{column}{0.39\textwidth}
+      \DuneColorBlock{paper}{COMPANION GUIDE}{40 rules. 11 team views.}
+        {Find your subsystem and review its actions and open questions.}
+      \medskip
+      \DuneColorBlock{sky}{ONE SHORT REVIEW FORM}{What happens next?}
+        {Name the consequence, response, affected equipment and return checks.}
+    \end{column}
+  \end{columns}
+  \RuleNote{\href{https://github.com/marroyav/presentations/tree/dev/lidine2024-schematic-import-pilot/decks/detector_wide_interaction_matrix_sep2026/human}{Companion guide and review form} · Discussion draft throughout.}
 \end{frame}
 
 \end{document}

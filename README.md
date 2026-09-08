@@ -57,6 +57,11 @@ The repository currently builds:
 - `decks/detector_wide_interaction_matrix_sep2026/main.pdf`
 - `decks/lidine2024_pds_schematics/main.pdf`
 
+The detector-interlock deck also includes a
+[plain-language collaboration guide](decks/detector_wide_interaction_matrix_sep2026/human/README.md)
+and a [searchable matrix by subsystem](decks/detector_wide_interaction_matrix_sep2026/human/index.html).
+These cover all 40 rows of the reviewed DPS draft, including open decisions.
+
 ## Audit
 
 ```sh
