@@ -1,7 +1,7 @@
 {
   "source_file": "planning/detector_wide_interaction_register_v0_1.csv",
   "source_repository": "daphne_slow_controls_plan (local working draft)",
-  "sha256": "52b3606b8ff1040291ac159a86c03330c7403e4fd33e279e56b88b07c378679f",
+  "sha256": "fa46ed478ef598747ffc191adac6d62a2b5883e1cc7e383171c365893dff1701",
   "review_date": "2026-09-08",
   "note": "Selected original fields, preserved for comparison. This snapshot is not approval or proof of an upstream release.",
   "rows": [
@@ -23,11 +23,11 @@
     },
     {
       "id": "P-001",
-      "title": "Cryogenic fill and coverage permit before drift-HV enable",
+      "title": "Required LAr level before cathode-HV availability",
       "consequence_class": "ED",
       "enforcement_class": "AUTO",
-      "required_response": "Deny energization; if the approved permit is lost while energized apply P-002/P-003 cause/effect",
-      "evidence_status": "Source-derived concept; initial-fill contract incomplete"
+      "required_response": "Keep cathode-HV voltage-setting, enable and ramp commands unavailable until reliable LAr level is above the specified minimum covering all required instrumentation including the cathode; preserve status readout and protective shutdown; if level subsequently violates the running protection condition apply P-002, with abnormal cryogenic conditions covered by P-003",
+      "evidence_status": "Cryogenic/HV protection source-supported; mandatory pre-availability coverage clarified 2026-09-08; numerical minimum and measurement contract incomplete"
     },
     {
       "id": "P-002",

@@ -12,21 +12,22 @@
 <p class="notice">Discussion draft for collaboration review, not an operating procedure.</p>
 <p>Read this page and the summary for your subsystem. The full guide contains every one of the 40 source rules, with actions, detector stages, source disagreements and return conditions.</p>
 <table><thead><tr><th>Situation</th><th>What we propose</th></tr></thead><tbody>
-<tr><td>Cryogenics has not confirmed HV readiness</td><td>Keep cathode HV off until the agreed checks pass. Protect the equipment.</td></tr>
+<tr><td>LAr level is not established above the required minimum</td><td>HV is unavailable. Block voltage-setting, enabling and ramping until LAr covers all required instrumentation, including the cathode.</td></tr>
 <tr><td>Camera lights or an external laser with PDS</td><td>Take turns. Block the second request and verify light-off before PDS returns.</td></tr>
 <tr><td>Purity monitor with PDS</td><td>Keep PDS running and mark the affected data. PDS bias stays on for this interaction.</td></tr>
 </tbody></table>
 <p><strong>Define the actual PDS state.</strong> The photon detection system (PDS) team must say which powered, biased or acquiring state excludes external light. PDS-owned calibration light and power-over-fiber have their own rules.</p>
+<p><strong>Level first, HV availability second.</strong> A reliable measured LAr level above the specified minimum is required before voltage can be set or HV enabled. Other HV checks must also pass; reaching the level does not switch HV on.</p>
 <p><strong>Use the procedure for the detector stage.</strong> Installation needs work and isolation checks. Commissioning and integration need an agreed test plan and owner. A run needs the right equipment states and data-quality records.</p>
 <p><strong>Some answers remain open.</strong> The old PDS interface conflicts with the proposed purity-monitor rule. Cathode-loss response, power-loss ordering and several electronics conditions still need detector decisions.</p>
 <p><a href="index.html">Search the complete guide by subsystem</a> · <a href="review-form.md">Send a rule review</a> · <a href="review-notes.md">Read the findings and sources</a></p>
 </section><section class="page"><article><h2>Cryogenics</h2>
-<p class="headline">Tell HV when the cryostat is ready, and when that changes.</p>
-<p><strong>Tell the other teams:</strong> The agreed fill and coverage check, relevant cryogenic faults, and changes that affect data quality.</p>
-<p><strong>Agree together:</strong> Which measurements authorize HV; which conditions stop it; how quickly; and what must be checked before restart.</p>
+<p class="headline">HV stays unavailable until LAr covers all required instrumentation, including the cathode.</p>
+<p><strong>Tell the other teams:</strong> The measured LAr level and whether it is reliably above the required minimum; relevant cryogenic faults and changes that affect data quality.</p>
+<p><strong>Agree together:</strong> The minimum level and reference point that guarantee the required coverage; measurement reliability; the response to a falling level; and restart checks.</p>
 <p class="refs"><strong>Related rules:</strong> <a href="index.html#P-001">P-001</a>, <a href="index.html#P-002">P-002</a>, <a href="index.html#P-003">P-003</a>, <a href="index.html#P-004">P-004</a>, <a href="index.html#P-013">P-013</a>, <a href="index.html#P-015">P-015</a>, <a href="index.html#P-017">P-017</a>, <a href="index.html#Q-001">Q-001</a>, <a href="index.html#Q-004">Q-004</a>.</p>
 <p><a href="index.html?team=cryo">Open the full rules for this team</a></p></article><article><h2>High voltage and field cage</h2>
-<p class="headline">Start only with the required cryogenic and detector checks.</p>
+<p class="headline">Keep voltage-setting, enabling and ramping unavailable until the required LAr level is established.</p>
 <p><strong>Tell the other teams:</strong> Requested and measured states, ramping, faults, affected detector region, and the reason for a shutdown.</p>
 <p><strong>Agree together:</strong> The approved startup and shutdown sequence, linked field-cage outputs, and the still-open response of other systems to a cathode trip.</p>
 <p class="refs"><strong>Related rules:</strong> <a href="index.html#S-001">S-001</a>, <a href="index.html#P-001">P-001</a>, <a href="index.html#P-002">P-002</a>, <a href="index.html#P-003">P-003</a>, <a href="index.html#P-004">P-004</a>, <a href="index.html#P-005">P-005</a>, <a href="index.html#P-006">P-006</a>, <a href="index.html#P-014">P-014</a>, <a href="index.html#P-016">P-016</a>, <a href="index.html#P-017">P-017</a>, <a href="index.html#O-001">O-001</a>, <a href="index.html#Q-003">Q-003</a>, <a href="index.html#O-007">O-007</a>, <a href="index.html#H-001">H-001</a>, <a href="index.html#H-002">H-002</a>, <a href="index.html#O-009">O-009</a>, <a href="index.html#O-010">O-010</a>, <a href="index.html#P-018">P-018</a>, <a href="index.html#P-019">P-019</a>, <a href="index.html#O-011">O-011</a>, <a href="index.html#Q-005">Q-005</a>.</p>

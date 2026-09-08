@@ -14,7 +14,7 @@ Each row answers: what happened, what we propose, and how settled the source is.
 |---|---|---|
 | [S-001: People are working in an affected area](#s-001) | Apply the site's approved access and isolation procedure before work or energization. | Decision needed |
 | [S-002: A hazardous laser is requested or its access checks fail](#s-002) | The laser-safety system allows or stops emission according to its approved design, regardless of PDS or run state. | Decision needed |
-| [P-001: HV is requested before cryogenics confirms readiness](#p-001) | Do not start cathode HV until cryogenics and HV confirm the agreed conditions. A general 'filled' label is not enough. | Source + open details |
+| [P-001: HV is unavailable until LAr is above the required minimum](#p-001) | Keep voltage-setting, enabling and ramping blocked until a reliable measured LAr level is above the specified minimum. This is a standing prerequisite, independent of whether anyone requests HV. Monitoring and protective shutdown remain available. | Source + open details |
 | [P-002: Liquid-argon level reaches the HV protection limit](#p-002) | Shut down the affected cathode HV through the agreed protection system and notify the affected teams. | Source + open details |
 | [P-003: A relief valve opens or an agreed boiling-risk condition occurs](#p-003) | Shut down the affected cathode HV for the conditions listed in the approved cryogenics/HV rule. | Source + open details |
 | [P-004: Cathode HV has an abnormal current excursion](#p-004) | Apply the approved HV shutdown rule, prevent an immediate restart and tell PDS and DAQ what happened. | Source + open details |
@@ -132,25 +132,25 @@ Each row answers: what happened, what we propose, and how settled the source is.
 **Evidence:** Site access, work-control and laser-safety requirements: exact references still needed.
 
 <a id="p-001"></a>
-### P-001 · HV is requested before cryogenics confirms readiness
+### P-001 · HV is unavailable until LAr is above the required minimum
 
-**Why it matters:** The required liquid-argon coverage and cryogenic conditions must be established before HV starts.
+**Why it matters:** The liquid argon must cover all required detector instrumentation, including the cathode, before cathode HV is available for operation.
 
-**What we propose:** Do not start cathode HV until cryogenics and HV confirm the agreed conditions. A general 'filled' label is not enough.
+**What we propose:** Keep voltage-setting, enabling and ramping blocked until a reliable measured LAr level is above the specified minimum. This is a standing prerequisite, independent of whether anyone requests HV. Monitoring and protective shutdown remain available.
 
-**Before returning:** Confirm the actual cryogenic state and the approved HV startup checks.
+**Before returning:** A confirmed level above the minimum satisfies this prerequisite; the other HV checks must also pass. HV starts only through a deliberate command. A falling level while HV is on follows the separate protection rule P-002.
 
 | Stage | What this means |
 |---|---|
-| Installation | Keep HV isolated except for an explicitly approved test. |
-| Commissioning and integration | Check cryogenic readiness before each authorized HV test. |
-| Run | Require the agreed cryogenic confirmation before starting HV. |
+| Installation | Keep cathode HV connected to the cryostat isolated and unavailable while the required LAr coverage is absent. |
+| Commissioning and integration | Keep voltage-setting, enabling and ramping blocked until the measured level is reliably above the minimum; a test request does not waive this prerequisite. |
+| Run | Allow HV commands only after this level requirement and the other HV checks pass. Reaching the level does not automatically switch HV on. |
 
 **Teams to agree the rule:** Cryogenics; High voltage and field cage; Detector Protection System (DPS) and Slow Controls; Installation, integration and run coordination.
 
-**Source + open details. Still to agree:** Agree the fill/coverage measurements, acceptable age of the readings, thresholds and affected region.
+**Source + open details. Still to agree:** Specify the minimum level, its reference point and coverage margin, the affected instrumentation, and which reliable measurements establish it. The requirement for coverage before HV availability is fixed; these details remain to be supplied.
 
-**Evidence:** [HVS interface, EDMS 3315615/1, section 5](https://edms.cern.ch/document/3315615/1); DPS interaction register v0.1 (working source).
+**Evidence:** [HVS interface, EDMS 3315615/1, section 5](https://edms.cern.ch/document/3315615/1); DPS interaction register v0.1 (working source); Collaboration clarification, 8 September 2026: required LAr coverage is a prerequisite for HV availability and voltage setting.
 
 <a id="p-002"></a>
 ### P-002 · Liquid-argon level reaches the HV protection limit

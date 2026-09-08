@@ -8,15 +8,15 @@ Start with your team. These are the teams to consult, not an already approved as
 
 ## Cryogenics
 
-Tell HV when the cryostat is ready, and when that changes.
+HV stays unavailable until LAr covers all required instrumentation, including the cathode.
 
-**Tell the other teams:** The agreed fill and coverage check, relevant cryogenic faults, and changes that affect data quality.
+**Tell the other teams:** The measured LAr level and whether it is reliably above the required minimum; relevant cryogenic faults and changes that affect data quality.
 
-**Agree with the other teams:** Which measurements authorize HV; which conditions stop it; how quickly; and what must be checked before restart.
+**Agree with the other teams:** The minimum level and reference point that guarantee the required coverage; measurement reliability; the response to a falling level; and restart checks.
 
 | Rule to review | What it means for coordination |
 |---|---|
-| [P-001: HV is requested before cryogenics confirms readiness](matrix.md#p-001) | Do not start cathode HV until cryogenics and HV confirm the agreed conditions. A general 'filled' label is not enough. |
+| [P-001: HV is unavailable until LAr is above the required minimum](matrix.md#p-001) | Keep voltage-setting, enabling and ramping blocked until a reliable measured LAr level is above the specified minimum. This is a standing prerequisite, independent of whether anyone requests HV. Monitoring and protective shutdown remain available. |
 | [P-002: Liquid-argon level reaches the HV protection limit](matrix.md#p-002) | Shut down the affected cathode HV through the agreed protection system and notify the affected teams. |
 | [P-003: A relief valve opens or an agreed boiling-risk condition occurs](matrix.md#p-003) | Shut down the affected cathode HV for the conditions listed in the approved cryogenics/HV rule. |
 | [P-004: Cathode HV has an abnormal current excursion](matrix.md#p-004) | Apply the approved HV shutdown rule, prevent an immediate restart and tell PDS and DAQ what happened. |
@@ -28,7 +28,7 @@ Tell HV when the cryostat is ready, and when that changes.
 
 ## High voltage and field cage
 
-Start only with the required cryogenic and detector checks.
+Keep voltage-setting, enabling and ramping unavailable until the required LAr level is established.
 
 **Tell the other teams:** Requested and measured states, ramping, faults, affected detector region, and the reason for a shutdown.
 
@@ -37,7 +37,7 @@ Start only with the required cryogenic and detector checks.
 | Rule to review | What it means for coordination |
 |---|---|
 | [S-001: People are working in an affected area](matrix.md#s-001) | Apply the site's approved access and isolation procedure before work or energization. |
-| [P-001: HV is requested before cryogenics confirms readiness](matrix.md#p-001) | Do not start cathode HV until cryogenics and HV confirm the agreed conditions. A general 'filled' label is not enough. |
+| [P-001: HV is unavailable until LAr is above the required minimum](matrix.md#p-001) | Keep voltage-setting, enabling and ramping blocked until a reliable measured LAr level is above the specified minimum. This is a standing prerequisite, independent of whether anyone requests HV. Monitoring and protective shutdown remain available. |
 | [P-002: Liquid-argon level reaches the HV protection limit](matrix.md#p-002) | Shut down the affected cathode HV through the agreed protection system and notify the affected teams. |
 | [P-003: A relief valve opens or an agreed boiling-risk condition occurs](matrix.md#p-003) | Shut down the affected cathode HV for the conditions listed in the approved cryogenics/HV rule. |
 | [P-004: Cathode HV has an abnormal current excursion](matrix.md#p-004) | Apply the approved HV shutdown rule, prevent an immediate restart and tell PDS and DAQ what happened. |
@@ -261,7 +261,7 @@ Make it clear who is using each part of the detector.
 |---|---|
 | [S-001: People are working in an affected area](matrix.md#s-001) | Apply the site's approved access and isolation procedure before work or energization. |
 | [S-002: A hazardous laser is requested or its access checks fail](matrix.md#s-002) | The laser-safety system allows or stops emission according to its approved design, regardless of PDS or run state. |
-| [P-001: HV is requested before cryogenics confirms readiness](matrix.md#p-001) | Do not start cathode HV until cryogenics and HV confirm the agreed conditions. A general 'filled' label is not enough. |
+| [P-001: HV is unavailable until LAr is above the required minimum](matrix.md#p-001) | Keep voltage-setting, enabling and ramping blocked until a reliable measured LAr level is above the specified minimum. This is a standing prerequisite, independent of whether anyone requests HV. Monitoring and protective shutdown remain available. |
 | [P-003: A relief valve opens or an agreed boiling-risk condition occurs](matrix.md#p-003) | Shut down the affected cathode HV for the conditions listed in the approved cryogenics/HV rule. |
 | [P-006: A fire alarm affects HV or detector power](matrix.md#p-006) | Apply the approved fire response. The HVS interface calls for all HVS supplies off, including cathode and CRP/field-cage/APA bias. |
 | [P-007: Smoke is detected in a rack](matrix.md#p-007) | The rack protection shuts down the agreed loads and identifies the affected rack. |
@@ -295,7 +295,7 @@ Make the agreed action happen and show a useful reason.
 |---|---|
 | [S-001: People are working in an affected area](matrix.md#s-001) | Apply the site's approved access and isolation procedure before work or energization. |
 | [S-002: A hazardous laser is requested or its access checks fail](matrix.md#s-002) | The laser-safety system allows or stops emission according to its approved design, regardless of PDS or run state. |
-| [P-001: HV is requested before cryogenics confirms readiness](matrix.md#p-001) | Do not start cathode HV until cryogenics and HV confirm the agreed conditions. A general 'filled' label is not enough. |
+| [P-001: HV is unavailable until LAr is above the required minimum](matrix.md#p-001) | Keep voltage-setting, enabling and ramping blocked until a reliable measured LAr level is above the specified minimum. This is a standing prerequisite, independent of whether anyone requests HV. Monitoring and protective shutdown remain available. |
 | [P-002: Liquid-argon level reaches the HV protection limit](matrix.md#p-002) | Shut down the affected cathode HV through the agreed protection system and notify the affected teams. |
 | [P-003: A relief valve opens or an agreed boiling-risk condition occurs](matrix.md#p-003) | Shut down the affected cathode HV for the conditions listed in the approved cryogenics/HV rule. |
 | [P-004: Cathode HV has an abnormal current excursion](matrix.md#p-004) | Apply the approved HV shutdown rule, prevent an immediate restart and tell PDS and DAQ what happened. |

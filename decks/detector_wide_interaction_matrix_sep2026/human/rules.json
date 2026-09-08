@@ -3,6 +3,9 @@
   "date": "2026-09-08",
   "basis": "All 40 rows of the DPS planning register v0.1, reviewed alongside the SC/DPS integration plan and the cited interfaces. This is a proposed collaboration view; no row is approved here for detector operation.",
   "sources": {
+    "level_clarification": {
+      "title": "Collaboration clarification, 8 September 2026: required LAr coverage is a prerequisite for HV availability and voltage setting"
+    },
     "register": {
       "title": "DPS interaction register v0.1 (working source)",
       "file": "planning/detector_wide_interaction_register_v0_1.csv"
@@ -47,14 +50,14 @@
     {
       "id": "cryo",
       "name": "Cryogenics",
-      "headline": "Tell HV when the cryostat is ready, and when that changes.",
-      "share": "The agreed fill and coverage check, relevant cryogenic faults, and changes that affect data quality.",
-      "agree": "Which measurements authorize HV; which conditions stop it; how quickly; and what must be checked before restart."
+      "headline": "HV stays unavailable until LAr covers all required instrumentation, including the cathode.",
+      "share": "The measured LAr level and whether it is reliably above the required minimum; relevant cryogenic faults and changes that affect data quality.",
+      "agree": "The minimum level and reference point that guarantee the required coverage; measurement reliability; the response to a falling level; and restart checks."
     },
     {
       "id": "hv",
       "name": "High voltage and field cage",
-      "headline": "Start only with the required cryogenic and detector checks.",
+      "headline": "Keep voltage-setting, enabling and ramping unavailable until the required LAr level is established.",
       "share": "Requested and measured states, ramping, faults, affected detector region, and the reason for a shutdown.",
       "agree": "The approved startup and shutdown sequence, linked field-cage outputs, and the still-open response of other systems to a cathode trip."
     },
@@ -170,12 +173,12 @@
     {
       "id": "P-001",
       "group": "protection",
-      "title": "HV is requested before cryogenics confirms readiness",
-      "why": "The required liquid-argon coverage and cryogenic conditions must be established before HV starts.",
-      "action": "Do not start cathode HV until cryogenics and HV confirm the agreed conditions. A general 'filled' label is not enough.",
-      "restart": "Confirm the actual cryogenic state and the approved HV startup checks.",
+      "title": "HV is unavailable until LAr is above the required minimum",
+      "why": "The liquid argon must cover all required detector instrumentation, including the cathode, before cathode HV is available for operation.",
+      "action": "Keep voltage-setting, enabling and ramping blocked until a reliable measured LAr level is above the specified minimum. This is a standing prerequisite, independent of whether anyone requests HV. Monitoring and protective shutdown remain available.",
+      "restart": "A confirmed level above the minimum satisfies this prerequisite; the other HV checks must also pass. HV starts only through a deliberate command. A falling level while HV is on follows the separate protection rule P-002.",
       "status": "Source + open details",
-      "open": "Agree the fill/coverage measurements, acceptable age of the readings, thresholds and affected region.",
+      "open": "Specify the minimum level, its reference point and coverage margin, the affected instrumentation, and which reliable measurements establish it. The requirement for coverage before HV availability is fixed; these details remain to be supplied.",
       "teams": [
         "cryo",
         "hv",
@@ -184,11 +187,12 @@
       ],
       "sources": [
         "hvs",
-        "register"
+        "register",
+        "level_clarification"
       ],
-      "installation": "Keep HV isolated except for an explicitly approved test.",
-      "commissioning": "Check cryogenic readiness before each authorized HV test.",
-      "run": "Require the agreed cryogenic confirmation before starting HV."
+      "installation": "Keep cathode HV connected to the cryostat isolated and unavailable while the required LAr coverage is absent.",
+      "commissioning": "Keep voltage-setting, enabling and ramping blocked until the measured level is reliably above the minimum; a test request does not waive this prerequisite.",
+      "run": "Allow HV commands only after this level requirement and the other HV checks pass. Reaching the level does not automatically switch HV on."
     },
     {
       "id": "P-002",

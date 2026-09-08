@@ -23,6 +23,7 @@ comments can be traced back to the engineering draft.
 
 | Point | Reviewed evidence | Treatment in this revision |
 |---|---|---|
+| LAr level before HV availability | Collaboration clarification, 8 September 2026: sufficient coverage is required before voltage setting or HV operation is available | P-001 is a standing prerequisite: measured LAr must be reliably above the specified minimum and cover all required instrumentation, including the cathode. It is independent of an HV request; the already-on low-level response remains P-002 |
 | Purity monitor / PDS | The old PDS interface asks for bias off; the existing framework and user direction call for continued PDS operation with data-quality records | Q-001 explicitly keeps bias on for this interaction and marks the source conflict |
 | Camera illumination / PDS | ProtoDUNE practice supports exclusion; the old PDS interface includes bias-off language and a copied purity-monitor sentence in the camera paragraph | O-001 proposes taking turns, requires an exact PDS state and verified light-off, and marks the unresolved source wording |
 | External laser / PDS | The recorded NP04 handoffs took PDS out for laser operation and checked shutter closure before return | O-002 retains the firm exclusion; hardware state and timing still need agreement |
@@ -37,6 +38,13 @@ These are editorial and requirements-review findings. The source CSV has not
 been silently reclassified or rewritten. In particular, P-005 still carries its
 original classification in the preserved source snapshot, while the readable
 view explains why review is needed.
+
+P-001 was explicitly clarified in the local working register on 8 September
+2026 following collaboration feedback. Its earlier request-triggered wording
+did not make HV unavailability clear enough. The requirement now precedes
+voltage-setting, enabling and ramping. The numerical minimum, reference point,
+coverage margin and measurement checks remain for the responsible teams to
+specify. The snapshot and all generated views include this correction.
 
 ## What the DPS work contributes
 

@@ -16,9 +16,17 @@ ideas in a short talk.
 
 | Situation | What we propose | Why |
 |---|---|---|
-| Cathode HV is requested before the required cryogenic conditions are confirmed | Keep HV off until cryogenics and HV confirm readiness | Protect detector equipment |
+| LAr level has not been established above the required minimum | HV remains unavailable: voltage-setting, enabling and ramping are blocked | The LAr must cover all required instrumentation, including the cathode |
 | Camera lights or an external laser are requested while PDS is active | Make the activities take turns; block the second request | Keep incompatible detector activities apart |
 | A purity monitor operates while PDS records data | Keep PDS running and mark the affected time and region | The measurement quality is reduced; this overlap does not require PDS bias off |
+
+For cathode HV, **sufficient LAr level is a prerequisite for availability**.
+The measured level must be reliably above the specified minimum, covering all
+required instrumentation, including the cathode. This restriction exists before
+anyone requests HV or sets its voltage. Meeting the level requirement allows
+operation only once the other HV checks also pass; it does not switch HV on.
+The shutdown response to a falling level while HV is already on is a separate
+rule, P-002.
 
 PDS means the photon detection system. Here, **“PDS active” is a placeholder**:
 PDS must specify exactly which powered, biased or acquiring state the light

@@ -11,7 +11,7 @@ rules or evidence. The whole deck is a proposal for review.
 | 1. DUNE detector-wide interlocks | “We need a common picture of which detector activities can run together and what happens when a condition changes.” |
 | 2. Three different responses | “Protecting equipment, taking turns and marking affected data need different responses. Purity-monitor activity does not require PDS bias off in this proposal.” |
 | 3. Read a row like a sentence | “Read the event, the action and the return condition. The rule number lets us connect comments to the detailed engineering draft.” |
-| 4. Cryogenics and HV | “Cryogenics must establish the required fill and coverage before HV starts. The teams still need to agree exactly which measurements and conditions provide that confirmation.” |
+| 4. LAr level before HV availability | “HV is unavailable until the measured LAr level is reliably above the specified minimum and covers all required instrumentation, including the cathode. Voltage-setting, enabling and ramping stay blocked. This prerequisite exists before an HV request. Satisfying it does not automatically switch HV on, and the other HV checks must also pass.” |
 | 5. Equipment faults | “The equipment team identifies what could be damaged. The protection action names the affected supply or group, its limits and its response time.” |
 | 6. Camera lights | “The second request waits, whichever activity started first. PDS must define the exact hardware state that excludes light. Being left out of DAQ is not automatically the same as that hardware state.” |
 | 7. External lasers | “Agree the handback as well as the start. Verify emission-off and shutter closure. Laser personnel protection applies throughout.” |

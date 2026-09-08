@@ -29,8 +29,8 @@
 \end{frame}
 
 \begin{frame}{Three situations need three different responses}
-  \DuneColorBlock{coral}{PROTECT EQUIPMENT}{Cryogenics has not confirmed HV readiness}
-    {Keep cathode HV off until the agreed cryogenic checks pass.}
+  \DuneColorBlock{coral}{PROTECT EQUIPMENT}{LAr level is not confirmed above the minimum}
+    {HV is unavailable: voltage-setting, enabling and ramping are blocked.}
   \DuneColorBlock{paper}{TAKE TURNS}{Camera lights or an external laser with PDS}
     {Block the second request. Confirm the light is off before PDS returns.}
   \DuneColorBlock{sky}{KEEP RUNNING; LABEL DATA}{Purity monitor with PDS}
@@ -55,22 +55,22 @@
   \RuleNote{Example: O-001. Proposed detector behavior; the exact PDS state still needs agreement.}
 \end{frame}
 
-\begin{frame}{Cryogenics gives HV the go-ahead}
+\begin{frame}{HV stays unavailable until LAr is above the minimum}
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.48\textwidth}
-      \DuneFixedColorBlock{paper}{3.3cm}{BEFORE HV STARTS}
-        {Confirm the required fill and coverage}
-        {Cryogenics and HV agree which measurements establish that the cryostat is ready.}
+      \DuneFixedColorBlock{coral}{3.3cm}{HV UNAVAILABLE}
+        {LAr level is too low or is not reliably known}
+        {Voltage-setting, enabling and ramping commands remain blocked.}
     \end{column}
     \begin{column}{0.48\textwidth}
-      \DuneFixedColorBlock{coral}{3.3cm}{WHILE HV IS ON}
-        {Stop HV if an agreed protection condition occurs}
-        {Low liquid level, relief-valve opening and specified boiling-risk conditions have an HV response.}
+      \DuneFixedColorBlock{paper}{3.3cm}{LEVEL REQUIREMENT MET}
+        {Measured LAr level is above the required minimum}
+        {All required instrumentation is covered, including the cathode. Other HV checks must also pass.}
     \end{column}
   \end{columns}
   \medskip
-  \DuneTakeaway{Cryogenics + HV + Detector Protection must agree the limits, response time and restart checks.}
-  \RuleNote{P-001--P-003 · HVS interface supports the principle; production details remain open.}
+  \DuneTakeaway{This is a prerequisite for HV availability. Reaching the level does not switch HV on.}
+  \RuleNote{P-001 · Cryogenics + HV + Detector Protection specify the minimum level, reference point and measurement checks.}
 \end{frame}
 
 \begin{frame}{A fault stops the equipment named in its rule}
