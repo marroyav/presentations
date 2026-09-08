@@ -1,0 +1,64 @@
+% Adapted from the earlier three-zone reference architecture (diagram 01).
+% Positions are centimetres from the common slide-content origin.
+% The zones end above the three notes; all connectors use explicit node anchors.
+\draw[zone] (0,-1.65) rectangle (3.05,-5.90);
+\draw[zone] (3.32,-1.65) rectangle (6.15,-5.90);
+\draw[zone] (6.42,-1.65) rectangle (14.10,-5.90);
+\fill[DuneEditorialSky] (0.01,-1.66) rectangle (3.04,-2.15);
+\fill[DuneEditorialWarm] (3.33,-1.66) rectangle (6.14,-2.15);
+\fill[DuneEditorialSky] (6.43,-1.66) rectangle (14.09,-2.15);
+\node[label,font=\fontsize{8.3}{10}\selectfont\bfseries]
+  at (0.17,-1.80) {SURF / sources};
+\node[label,font=\fontsize{8.3}{10}\selectfont\bfseries]
+  at (3.49,-1.80) {Access control};
+\node[label,font=\fontsize{8.3}{10}\selectfont\bfseries]
+  at (6.59,-1.80) {DUNE experiment};
+
+\node[label] at (0.17,-2.39) {MONITORING};
+\node[point,minimum width=2.62cm,text width=2.32cm,minimum height=1.05cm]
+  (bms) at (1.525,-3.15) {BMS /\newline Metasys};
+\node[point,minimum width=2.38cm,text width=2.08cm,minimum height=1.05cm]
+  (boundary) at (4.735,-3.15) {Read-only\\exchange};
+\node[point,minimum width=2.04cm,text width=1.74cm,minimum height=1.05cm]
+  (reader) at (7.685,-3.15) {Facility\\reader};
+\node[point,minimum width=2.04cm,text width=1.74cm,minimum height=1.05cm]
+  (slow) at (10.195,-3.15) {Slow\\Controls};
+\node[point,minimum width=2.27cm,text width=1.97cm,minimum height=1.05cm]
+  (operators) at (12.705,-3.15) {Operators};
+\draw[flow] (bms.east) -- (boundary.west);
+\draw[flow] (boundary.east) -- (reader.west);
+\draw[flow] (reader.east) -- (slow.west);
+\draw[flow] (slow.east) -- (operators.west);
+
+\node[label,text=DuneEditorialText] at (0.17,-4.20) {PROTECTION};
+\node[point,minimum width=2.62cm,text width=2.34cm,minimum height=1.15cm]
+  (source) at (1.525,-5.10) {Approved\\source state};
+\node[point,dashed,minimum width=2.38cm,text width=2.08cm,minimum height=1.15cm]
+  (dpsinput) at (4.735,-5.10) {Supervised\\DPS input};
+\node[point,draw=DuneEditorialText,fill=DuneEditorialText,text=DuneEditorialCanvas,
+  minimum width=2.04cm,text width=1.74cm,minimum height=1.15cm]
+  (dps) at (7.685,-5.10) {DPS\NodeDetail{Action}};
+\draw[DuneEditorialAccent,line width=1.4pt] (dps.south west) -- (dps.south east);
+\node[point,minimum width=4.63cm,text width=4.33cm,minimum height=1.15cm]
+  (functions) at (11.45,-5.10)
+  {Detector functions\NodeDetail{Local protection separate}};
+\draw[protectionflow] (source.east) -- (dpsinput.west);
+\draw[protectionflow] (dpsinput.east) -- (dps.west);
+\draw[protectionflow] (dps.east) -- (functions.west);
+\draw[statusflow] (dps.north) -- (7.685,-4.00) --
+  node[edgelabel] {DPS status} (10.195,-4.00) -- (slow.south);
+
+\foreach \x/\accent in {0/DuneEditorialMuted,4.95/DuneEditorialAccent,9.90/DuneEditorialText}
+  \draw[\accent,line width=1.2pt] (\x,-6.25) -- (\x,-6.92);
+\node[label,font=\fontsize{8.6}{10.5}\selectfont\bfseries]
+  at (0.16,-6.25) {Functional view};
+\node[small,font=\fontsize{8}{10}\selectfont,text width=4.05cm]
+  at (0.16,-6.62) {Trip link to be defined.};
+\node[label,font=\fontsize{8.6}{10.5}\selectfont\bfseries]
+  at (5.11,-6.25) {Lost monitoring};
+\node[small,font=\fontsize{8}{10}\selectfont,text width=4.05cm]
+  at (5.11,-6.62) {Data gaps are flagged.};
+\node[label,font=\fontsize{8.6}{10.5}\selectfont\bfseries]
+  at (10.06,-6.25) {Recovery};
+\node[small,font=\fontsize{8}{10}\selectfont,text width=4.04cm]
+  at (10.06,-6.62) {Owner confirms restart.};

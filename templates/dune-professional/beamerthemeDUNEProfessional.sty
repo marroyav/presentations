@@ -45,6 +45,17 @@
 \definecolor{DuneOnAccent}{HTML}{101820}
 \definecolor{DuneOnDanger}{HTML}{FFFFFF}
 
+% Light editorial palette retained for the SURF interface deck migration.
+% These opt-in tokens do not alter the existing dark theme or its defaults.
+\definecolor{DuneEditorialCanvas}{HTML}{FFFFFF}
+\definecolor{DuneEditorialText}{HTML}{1C2834}
+\definecolor{DuneEditorialMuted}{HTML}{304E62}
+\definecolor{DuneEditorialInfo}{HTML}{7CAED5}
+\definecolor{DuneEditorialAccent}{HTML}{F2682B}
+\definecolor{DuneEditorialRule}{HTML}{CED9E1}
+\definecolor{DuneEditorialSky}{HTML}{EFF5FA}
+\definecolor{DuneEditorialWarm}{HTML}{FDF0E9}
+
 % Compatibility aliases for existing decks. New material should use the
 % semantic names above or the role-based components below.
 \colorlet{DuneBg}{DuneBackground}
@@ -105,6 +116,11 @@
 \setbeamerfont{frametitle}{series=\bfseries}
 \setbeamerfont{footline}{size=\scriptsize}
 
+% A deck with bundled fonts can supply this optional setup before loading the
+% theme. Other decks retain the existing platform-font fallback unchanged.
+\ifdefined\DuneFontSetup
+  \DuneFontSetup
+\else
 \ifPDFTeX
   \RequirePackage[scaled]{helvet}
   \renewcommand*\familydefault{\sfdefault}
@@ -149,6 +165,7 @@
     }
   }
   \renewcommand*\familydefault{\sfdefault}
+\fi
 \fi
 
 \setbeamersize{text margin left=0.78cm,text margin right=0.78cm}

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updated": "2026-08-19",
-  "description": "Canonical layout-first dark-presentation tokens. Paper, sky, and coral create structural layers; red is reserved for hard danger.",
+  "updated": "2026-09-08",
+  "description": "Canonical presentation tokens. The dark theme remains the default; opt-in light editorial tokens preserve the reviewed SURF interface layout.",
   "brand_source": "https://www.fnal.gov/faw/designstandards/color-palette.html",
   "colors": {
     "background": {
@@ -93,6 +93,46 @@
       "hex": "#FFFFFF",
       "tex": "DuneOnDanger",
       "purpose": "Text on danger fill"
+    },
+    "editorial-canvas": {
+      "hex": "#FFFFFF",
+      "tex": "DuneEditorialCanvas",
+      "purpose": "Opt-in light editorial canvas and text on editorial ink"
+    },
+    "editorial-text": {
+      "hex": "#1C2834",
+      "tex": "DuneEditorialText",
+      "purpose": "Primary ink on the light editorial canvas"
+    },
+    "editorial-muted": {
+      "hex": "#304E62",
+      "tex": "DuneEditorialMuted",
+      "purpose": "Secondary ink and meaningful edges on light surfaces"
+    },
+    "editorial-info": {
+      "hex": "#7CAED5",
+      "tex": "DuneEditorialInfo",
+      "purpose": "Decorative DUNE blue accent; not standalone text or an encoded state"
+    },
+    "editorial-accent": {
+      "hex": "#F2682B",
+      "tex": "DuneEditorialAccent",
+      "purpose": "Decorative DUNE orange accent, paired with labels or geometry"
+    },
+    "editorial-rule": {
+      "hex": "#CED9E1",
+      "tex": "DuneEditorialRule",
+      "purpose": "Decorative separators and zone outlines, not signal connectors"
+    },
+    "editorial-sky": {
+      "hex": "#EFF5FA",
+      "tex": "DuneEditorialSky",
+      "purpose": "Light context surface under dark editorial text"
+    },
+    "editorial-warm": {
+      "hex": "#FDF0E9",
+      "tex": "DuneEditorialWarm",
+      "purpose": "Light interface surface under dark editorial text"
     }
   },
   "contrast_checks": [
@@ -109,6 +149,13 @@
     {"foreground": "on-danger", "background": "danger", "minimum": 4.5},
     {"foreground": "on-accent", "background": "paper", "minimum": 4.5},
     {"foreground": "on-accent", "background": "sky", "minimum": 4.5},
-    {"foreground": "on-accent", "background": "coral", "minimum": 4.5}
+    {"foreground": "on-accent", "background": "coral", "minimum": 4.5},
+    {"foreground": "editorial-text", "background": "editorial-canvas", "minimum": 4.5},
+    {"foreground": "editorial-muted", "background": "editorial-canvas", "minimum": 4.5},
+    {"foreground": "editorial-text", "background": "editorial-sky", "minimum": 4.5},
+    {"foreground": "editorial-muted", "background": "editorial-sky", "minimum": 4.5},
+    {"foreground": "editorial-text", "background": "editorial-warm", "minimum": 4.5},
+    {"foreground": "editorial-muted", "background": "editorial-warm", "minimum": 4.5},
+    {"foreground": "editorial-canvas", "background": "editorial-text", "minimum": 4.5}
   ]
 }

@@ -56,6 +56,13 @@ The repository currently builds:
 - `decks/pds_selftrigger_deadtime_aug2026/main.pdf`
 - `decks/detector_wide_interaction_matrix_sep2026/main.pdf`
 - `decks/lidine2024_pds_schematics/main.pdf`
+- [SURF–DUNE facility interface](decks/surf_bms_fd_integration_sep2026/main.pdf)
+
+The [SURF–DUNE deck](decks/surf_bms_fd_integration_sep2026/README.md) includes a
+dated title page followed by five content slides on facility monitoring, alarm
+ownership, detector protection, protocols, and integration. It uses JetBrains
+Mono throughout, with the light layout and editable architecture and alarm-flow
+diagrams retained.
 
 The detector-interlock deck also includes a
 [plain-language collaboration guide](decks/detector_wide_interaction_matrix_sep2026/human/README.md)

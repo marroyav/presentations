@@ -36,6 +36,12 @@ For example:
 
 ## Components
 
+The migrated SURF interface deck retains its reviewed light layout through the
+opt-in `DuneEditorial*` tokens in the same registry. They preserve its DUNE
+blue/orange accents and dark text. Its layout overrides do not change the
+default theme or other decks; meaningful diagram edges use dark ink, while the
+pale rules and blue accent are decorative.
+
 - `\DuneSectionPage{eyebrow}{title}{subtitle}`: full-canvas rhythm break.
 - `\DuneBigStatement{eyebrow}{claim}{support}`: editorial opening or close.
 - `\DuneColorBlock{style}{kicker}{title}{body}`: full visual block.
@@ -54,8 +60,12 @@ not the framework default.
 ## Typography
 
 The theme follows Fermilab's in-house guidance by preferring Helvetica Neue,
-Helvetica, and compatible substitutes. JetBrains Mono is used only for code.
+Helvetica, and compatible substitutes. By default, JetBrains Mono is used for code.
 The fallback chain keeps builds portable when licensed fonts are unavailable.
+
+A deck that bundles its own fonts can define `\DuneFontSetup` before loading
+the theme. This optional hook replaces only font initialization; the normal
+fallback chain is unchanged for every deck without the hook.
 
 New decks use an `11pt` Beamer base. Normal prose stays at that size; card copy
 may step down once to `\small`, and supporting table/caption text may use

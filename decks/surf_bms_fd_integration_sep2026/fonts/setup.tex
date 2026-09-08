@@ -1,0 +1,24 @@
+% The shared theme executes this opt-in setup instead of searching host fonts.
+\newcommand{\DuneFontSetup}{%
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX,Scale=1}
+  \setsansfont{JetBrainsMono-Regular.ttf}[
+    Path=fonts/,
+    BoldFont=JetBrainsMono-Bold.ttf,
+    ItalicFont=JetBrainsMono-Italic.ttf,
+    BoldItalicFont=JetBrainsMono-BoldItalic.ttf
+  ]
+  \setmainfont{JetBrainsMono-Regular.ttf}[
+    Path=fonts/,
+    BoldFont=JetBrainsMono-Bold.ttf,
+    ItalicFont=JetBrainsMono-Italic.ttf,
+    BoldItalicFont=JetBrainsMono-BoldItalic.ttf
+  ]
+  \setmonofont{JetBrainsMono-Regular.ttf}[
+    Path=fonts/,
+    BoldFont=JetBrainsMono-Bold.ttf,
+    ItalicFont=JetBrainsMono-Italic.ttf,
+    BoldItalicFont=JetBrainsMono-BoldItalic.ttf
+  ]
+  \renewcommand*\familydefault{\sfdefault}
+}
