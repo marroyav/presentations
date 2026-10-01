@@ -1,0 +1,36 @@
+id,label,repo,kind,layer,ownership,group,description
+repo_firmware,daphne-firmware,daphne-firmware,repo,repository,repo_owned,repository,Repository root and architectural scope
+control_plane,Control plane,daphne-firmware,module,control,repo_owned,control,PS-visible AXI-lite register map and stable software ABI
+analog_control,Analog control,daphne-firmware,module,analog,repo_owned,analog,AFE and DAC configuration path with config_ready semantics
+afe_block,AFE block (5 x 8 ch),daphne-firmware,block,frontend,imported,frontend,Board-facing ADC front-end and sample ingress
+frontend_boundary,Frontend boundary,daphne-firmware,module,frontend,repo_owned,frontend,LVDS capture alignment IDELAY bitslip and valid promotion
+timing_subsystem,Timing subsystem,daphne-firmware,module,timing,repo_owned,timing,Timing ingress clock selection readiness and timestamp propagation
+endpoint_core,Endpoint / PDTS core,daphne-firmware,ip,timing,imported,timing,Recovered timing clock endpoint state and timestamp path
+clock_select_mmcm,Clock select + MMCM,daphne-firmware,ip,timing,imported,timing,Clock source selection and trusted 62.5 MHz generation
+trigger_pipeline,Trigger pipeline,daphne-firmware,module,trigger,repo_owned,trigger,Self-trigger thresholds filters descriptors and record creation
+xc_filter,XC filter / self-trigger,daphne-firmware,ip,trigger,imported,trigger,32-tap matched-filter trigger core
+peak_descriptors,Peak descriptors,daphne-firmware,module,trigger,repo_owned,trigger,Metadata extraction for pulse shape and peak summary
+stc3_builder,STC3 record builder,daphne-firmware,module,trigger,repo_owned,trigger,Per-channel framed trigger record builder
+transport_subsystem,Readout / transport,daphne-firmware,module,transport,repo_owned,transport,Shared readout and export path
+two_lane_mux,Two-lane multiplexer,daphne-firmware,module,transport,repo_owned,transport,Shared arbitration and lane drain for trigger records
+hermes_transport,Hermes transport,daphne-firmware,ip,transport,imported,transport,IPBus UDP and 10G export subsystem
+spy_buffer,Spybuffer,daphne-firmware,module,debug,repo_owned,debug,Debug capture and software-visible spy memory path
+verification_layer,Formal + smoke tests,daphne-firmware,module,verification,repo_owned,verification,Contracts smoke tests and proof harnesses
+build_system,Build system,daphne-firmware,module,build,repo_owned,build,Architecture description and implementation entry points
+fusesoc_graph,FuseSoC graph,daphne-firmware,module,build,repo_owned,build,Intent layer for sources targets and platform manifests
+linux_chain,Native Linux build,daphne-firmware,build,build,repo_owned,build,Native Linux clone to artifacts workflow
+wsl_chain,WSL + Windows build,daphne-firmware,build,build,repo_owned,build,WSL shell with Windows Vivado and Vitis workflow
+implementation_backend,Vivado + XSCT impl,daphne-firmware,build,build,platform,build,Vendor implementation and device-tree backend
+artifact_bundle,Artifacts (.bit/.bin/.xsa/.dtbo),daphne-firmware,build,build,repo_owned,build,Final generated build products
+config_ready,config_ready,daphne-firmware,block,contract,repo_owned,contracts,AFE DAC configuration complete
+timing_ready,timing_ready,daphne-firmware,block,contract,repo_owned,contracts,Trusted timing source and endpoint state complete
+alignment_ready,alignment_ready,daphne-firmware,block,contract,repo_owned,contracts,Aligned frontend words promoted to valid
+trigger_enable,trigger_enable,daphne-firmware,block,contract,repo_owned,contracts,Trigger activity allowed
+spy_enable,spy_enable,daphne-firmware,block,contract,repo_owned,contracts,Spy capture meaningful and enabled
+local_clk100,Local CLK100,daphne-firmware,clock_source,clock,platform,clock,Board-local 100 MHz source
+rx0_tmg,Timing link rx0_tmg,daphne-firmware,clock_source,clock,platform,clock,Recovered timing-link ingress clock source
+descriptor_sample_start,sample_start,daphne-firmware,block,contract,repo_owned,contracts,Descriptor-local start sample offset exported by the peak-descriptor path
+descriptor_frame_timestamp,frame_timestamp,daphne-firmware,block,contract,repo_owned,contracts,Frame header timestamp associated with the record builder path
+descriptor_channel_identity,geoID + channel_id,daphne-firmware,block,control,repo_owned,control,Channel-scoped DAQ identity context carried outside the descriptor payload itself
+descriptor_identity_key,Descriptor key,daphne-firmware,block,repository,repo_owned,repository,Channel-scoped downstream identity formed from frame timestamp plus sample start
+descriptor_handoff_fix,Fixed Time_Start handoff,daphne-firmware,block,timing,repo_owned,timing,Current descriptor start is committed before a same-cycle next trigger captures a new start

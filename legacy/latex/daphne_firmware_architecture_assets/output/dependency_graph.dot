@@ -1,0 +1,62 @@
+digraph "dependency_graph" {
+  graph [bgcolor="white", pad="0.15", nodesep="0.45", ranksep="0.75", splines="spline", overlap="false", rankdir="LR", fontname="Helvetica", fontsize="18", labelloc="t", labeljust="l", label="daphne-firmware dependency and readiness graph"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  subgraph cluster_control {
+    graph [label="Control", bgcolor="#EDF5FD", color="#D0D0D0", style="rounded"];
+    control_plane [shape="box", style="rounded,filled", fillcolor="#DCEBFA", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Control plane"];
+  }
+  subgraph cluster_analog {
+    graph [label="Analog", bgcolor="#EFF8EF", color="#D0D0D0", style="rounded"];
+    analog_control [shape="box", style="rounded,filled", fillcolor="#DFF0DF", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Analog control"];
+  }
+  subgraph cluster_frontend {
+    graph [label="Frontend", bgcolor="#F2FAEE", color="#D0D0D0", style="rounded"];
+    afe_block [shape="box", style="rounded,filled,dashed", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="AFE block (5 x 8 ch)"];
+    frontend_boundary [shape="box", style="rounded,filled", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Frontend boundary"];
+  }
+  subgraph cluster_timing {
+    graph [label="Timing", bgcolor="#FFF1E4", color="#D0D0D0", style="rounded"];
+    timing_subsystem [shape="box", style="rounded,filled", fillcolor="#FCE7D3", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Timing subsystem"];
+  }
+  subgraph cluster_trigger {
+    graph [label="Trigger", bgcolor="#FCEBEC", color="#D0D0D0", style="rounded"];
+    trigger_pipeline [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Trigger pipeline"];
+  }
+  subgraph cluster_transport {
+    graph [label="Transport", bgcolor="#F3ECE8", color="#D0D0D0", style="rounded"];
+    transport_subsystem [shape="box", style="rounded,filled", fillcolor="#E9E0D8", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Readout / transport"];
+  }
+  subgraph cluster_debug {
+    graph [label="Debug", bgcolor="#EEF9F9", color="#D0D0D0", style="rounded"];
+    spy_buffer [shape="box", style="rounded,filled", fillcolor="#D9F0F0", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Spybuffer"];
+  }
+  subgraph cluster_build {
+    graph [label="Build", bgcolor="#F2F2F2", color="#D0D0D0", style="rounded"];
+    build_system [shape="box", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Build system"];
+    fusesoc_graph [shape="box", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="FuseSoC graph"];
+    linux_chain [shape="component", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Native Linux build"];
+    wsl_chain [shape="component", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="WSL + Windows build"];
+  }
+  control_plane -> analog_control [color="#4E79A7", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="AFE/DAC setup"];
+  control_plane -> timing_subsystem [color="#4E79A7", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="clock source / status"];
+  control_plane -> trigger_pipeline [color="#4E79A7", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="thresholds / modes"];
+  control_plane -> spy_buffer [color="#4E79A7", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="capture control"];
+  analog_control -> frontend_boundary [color="#F28E2B", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="config_ready"];
+  timing_subsystem -> frontend_boundary [color="#F28E2B", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="timing_ready"];
+  analog_control -> trigger_pipeline [color="#F28E2B", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="AFE configured", xlabel="config_ready", fontcolor="#F28E2B"];
+  timing_subsystem -> trigger_pipeline [color="#F28E2B", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="trusted clocks", xlabel="timing_ready", fontcolor="#F28E2B"];
+  frontend_boundary -> trigger_pipeline [color="#F28E2B", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="alignment_valid", xlabel="alignment_ready", fontcolor="#F28E2B"];
+  analog_control -> spy_buffer [color="#F28E2B", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="config_ready"];
+  timing_subsystem -> spy_buffer [color="#F28E2B", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="timing_ready"];
+  frontend_boundary -> spy_buffer [color="#F28E2B", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="alignment_valid", xlabel="alignment_ready", fontcolor="#F28E2B"];
+  afe_block -> frontend_boundary [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="digitized samples"];
+  frontend_boundary -> trigger_pipeline [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="aligned words"];
+  trigger_pipeline -> transport_subsystem [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="records"];
+  frontend_boundary -> spy_buffer [color="#76B7B2", style="dotted", penwidth="1.7", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="debug tap"];
+  trigger_pipeline -> spy_buffer [color="#76B7B2", style="dotted", penwidth="1.7", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="trigger metadata"];
+  build_system -> linux_chain [color="#9C755F", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="implementation flow"];
+  build_system -> wsl_chain [color="#9C755F", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="implementation flow"];
+  fusesoc_graph -> linux_chain [color="#9C755F", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="source graph"];
+  fusesoc_graph -> wsl_chain [color="#9C755F", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10", arrowsize="0.8", label="source graph"];
+}

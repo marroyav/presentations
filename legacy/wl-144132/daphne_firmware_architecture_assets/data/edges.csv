@@ -1,0 +1,78 @@
+src,dst,relation,domain,label,condition,note
+repo_firmware,control_plane,contains,structure,,,Top-level repository scope
+repo_firmware,analog_control,contains,structure,,,
+repo_firmware,frontend_boundary,contains,structure,,,
+repo_firmware,timing_subsystem,contains,structure,,,
+repo_firmware,trigger_pipeline,contains,structure,,,
+repo_firmware,transport_subsystem,contains,structure,,,
+repo_firmware,spy_buffer,contains,structure,,,
+repo_firmware,verification_layer,contains,structure,,,
+repo_firmware,build_system,contains,structure,,,
+timing_subsystem,endpoint_core,contains,structure,,,
+timing_subsystem,clock_select_mmcm,contains,structure,,,
+trigger_pipeline,xc_filter,contains,structure,,,
+trigger_pipeline,peak_descriptors,contains,structure,,,
+trigger_pipeline,stc3_builder,contains,structure,,,
+transport_subsystem,two_lane_mux,contains,structure,,,
+transport_subsystem,hermes_transport,contains,structure,,,
+build_system,fusesoc_graph,contains,structure,,,
+build_system,linux_chain,contains,structure,,,
+build_system,wsl_chain,contains,structure,,,
+build_system,implementation_backend,contains,structure,,,
+build_system,artifact_bundle,contains,structure,,,
+control_plane,analog_control,configures,dependency,AFE/DAC setup,,Software config ownership
+control_plane,timing_subsystem,configures,dependency,clock source / status,,Clock source selection and endpoint status
+control_plane,trigger_pipeline,configures,dependency,thresholds / modes,,Thresholds delays and trigger modes
+control_plane,spy_buffer,configures,dependency,capture control,,Spy enable and readback controls
+analog_control,frontend_boundary,readiness_prereq,dependency,config_ready,config_ready,AFE configuration must be applied first
+timing_subsystem,frontend_boundary,readiness_prereq,dependency,timing_ready,timing_ready,Frontend cannot trust alignment before timing is trusted
+analog_control,trigger_pipeline,readiness_prereq,dependency,AFE configured,config_ready,Trigger path depends on configured frontend
+timing_subsystem,trigger_pipeline,readiness_prereq,dependency,trusted clocks,timing_ready,Trigger path depends on trustworthy timing domain
+frontend_boundary,trigger_pipeline,readiness_prereq,dependency,alignment_valid,alignment_ready,Trigger must only consume trusted aligned words
+analog_control,spy_buffer,readiness_prereq,dependency,config_ready,config_ready,Spy path meaningful only after AFE setup
+timing_subsystem,spy_buffer,readiness_prereq,dependency,timing_ready,timing_ready,Spy path should use trusted timing state
+frontend_boundary,spy_buffer,readiness_prereq,dependency,alignment_valid,alignment_ready,Spy path should observe valid aligned words
+afe_block,frontend_boundary,streams_to,dependency,digitized samples,,Board sample ingress
+frontend_boundary,trigger_pipeline,streams_to,dependency,aligned words,,Data path into self-trigger logic
+trigger_pipeline,transport_subsystem,streams_to,dependency,records,,Trigger records enter shared readout
+frontend_boundary,spy_buffer,observes,dependency,debug tap,,Frontend words can be observed through spy path
+trigger_pipeline,spy_buffer,observes,dependency,trigger metadata,,Trigger metadata can be observed in debug path
+build_system,linux_chain,drives,dependency,implementation flow,,Native Linux flow entry point
+build_system,wsl_chain,drives,dependency,implementation flow,,WSL to Windows implementation flow
+fusesoc_graph,linux_chain,drives,dependency,source graph,,FuseSoC describes what Linux implementation builds
+fusesoc_graph,wsl_chain,drives,dependency,source graph,,FuseSoC describes what WSL/Windows implementation builds
+linux_chain,implementation_backend,drives,dependency,tool invocation,,Linux flow reaches vendor backend
+wsl_chain,implementation_backend,drives,dependency,tool invocation,,WSL flow reaches vendor backend
+implementation_backend,artifact_bundle,produces,dependency,build products,,bit bin xsa dtbo and reports
+analog_control,config_ready,asserts,dependency,AFE/DAC configured,,Neutral configuration-ready state
+timing_subsystem,timing_ready,asserts,dependency,trusted timing,,Neutral timing-ready state
+frontend_boundary,alignment_ready,asserts,dependency,alignment valid,,Neutral aligned-data-ready state
+config_ready,trigger_enable,enables,dependency,precondition,,Trigger enable depends on config_ready
+timing_ready,trigger_enable,enables,dependency,precondition,,Trigger enable depends on timing_ready
+alignment_ready,trigger_enable,enables,dependency,precondition,,Trigger enable depends on alignment_ready
+config_ready,spy_enable,enables,dependency,precondition,,Spy enable depends on config_ready
+timing_ready,spy_enable,enables,dependency,precondition,,Spy enable depends on timing_ready
+alignment_ready,spy_enable,enables,dependency,precondition,,Spy enable depends on alignment_ready
+trigger_enable,trigger_pipeline,qualifies,dependency,gates trigger activity,,Neutral trigger gating contract
+spy_enable,spy_buffer,qualifies,dependency,gates spy capture,,Neutral spy gating contract
+local_clk100,clock_select_mmcm,clock_source,clock,local reference,,Local clock path
+rx0_tmg,endpoint_core,clock_source,clock,timing ingress,,Recovered timing-link clock path
+endpoint_core,clock_select_mmcm,clock_source,clock,recovered 62.5 MHz,,Endpoint-derived timing source
+clock_select_mmcm,frontend_boundary,clocks,clock,capture clocks,,Trusted frontend capture domain
+clock_select_mmcm,trigger_pipeline,clocks,clock,trigger domain,,Trusted trigger domain
+clock_select_mmcm,transport_subsystem,clocks,clock,readout domain,,Trusted readout domain
+clock_select_mmcm,spy_buffer,clocks,clock,spy domain,,Trusted debug domain
+endpoint_core,frontend_boundary,qualifies,clock,endpoint ready,endpoint_ready and TIMESTAMP_OK,Timing readiness gates alignment
+endpoint_core,trigger_pipeline,qualifies,clock,timestamp / sync,endpoint_ready and TIMESTAMP_OK,Timing status qualifies trigger behavior
+endpoint_core,spy_buffer,qualifies,clock,timestamp / sync,endpoint_ready and TIMESTAMP_OK,Timing status qualifies spy observation
+frontend_boundary,xc_filter,streams_to,dependency,aligned sample words,,Aligned frontend words feed XC trigger stage
+xc_filter,peak_descriptors,streams_to,dependency,pulse-domain candidate,,Descriptor logic sees trigger-domain waveform
+peak_descriptors,stc3_builder,streams_to,dependency,descriptor fields,,Descriptor metadata enters framing stage
+stc3_builder,two_lane_mux,streams_to,dependency,framed records,,Per-channel records enter shared mux
+two_lane_mux,hermes_transport,streams_to,dependency,payload stream,,Shared mux emits transport payloads
+peak_descriptors,descriptor_sample_start,streams_to,dependency,descriptor offset,,Peak-descriptor path exports sample_start
+stc3_builder,descriptor_frame_timestamp,streams_to,dependency,frame header timestamp,,STC3 builder exports frame timestamp
+descriptor_channel_identity,descriptor_identity_key,configures,dependency,DAQ scope,,Channel identity is part of the downstream key
+descriptor_sample_start,descriptor_identity_key,streams_to,dependency,sample_start,,Descriptor-local sample offset participates in the key
+descriptor_frame_timestamp,descriptor_identity_key,streams_to,dependency,frame_timestamp,,Frame header timestamp participates in the key
+descriptor_handoff_fix,peak_descriptors,qualifies,dependency,same-cycle commit order,,Commit current Time_Start before capturing a new same-cycle trigger

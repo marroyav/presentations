@@ -1,0 +1,26 @@
+digraph "subsystem_hierarchy" {
+  graph [bgcolor="white", pad="0.10", nodesep="0.55", ranksep="0.85", splines="spline", overlap="false", rankdir="TB", fontname="Helvetica", fontsize="16", labelloc="t", labeljust="l"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  repo_firmware [shape="folder", style="rounded,filled", fillcolor="#F6F6F6", color="#5A5A5A", penwidth="2.0", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="daphne-firmware"];
+  control_plane [shape="box", style="rounded,filled", fillcolor="#DCEBFA", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Control plane"];
+  analog_control [shape="box", style="rounded,filled", fillcolor="#DFF0DF", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Analog\ncontrol"];
+  frontend_boundary [shape="box", style="rounded,filled", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Frontend\nboundary"];
+  timing_subsystem [shape="box", style="rounded,filled", fillcolor="#FCE7D3", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Timing\nsubsystem"];
+  trigger_pipeline [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Trigger\npipeline"];
+  transport_subsystem [shape="box", style="rounded,filled", fillcolor="#E9E0D8", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Readout /\ntransport"];
+  spy_buffer [shape="box", style="rounded,filled", fillcolor="#D9F0F0", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Spybuffer"];
+  verification_layer [shape="box", style="rounded,filled", fillcolor="#E9E3F6", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Verification\nformal + smoke"];
+  build_system [shape="box", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Build system"];
+  repo_firmware -> control_plane [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  repo_firmware -> analog_control [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  repo_firmware -> frontend_boundary [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  repo_firmware -> timing_subsystem [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  repo_firmware -> trigger_pipeline [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  repo_firmware -> transport_subsystem [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  repo_firmware -> spy_buffer [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  repo_firmware -> verification_layer [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  repo_firmware -> build_system [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  { rank=same; repo_firmware; }
+  { rank=same; control_plane; analog_control; frontend_boundary; timing_subsystem; trigger_pipeline; transport_subsystem; spy_buffer; verification_layer; build_system; }
+}

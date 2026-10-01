@@ -1,0 +1,1406 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usepackage{iftex}
+\input{../dune_dark_template_lab/font-presets}
+\DuneNoirUseHelvetica
+\makeatletter
+\input{../dune_dark_template_lab/beamerthemeDUNENoir.sty}
+\makeatother
+
+\setbeamertemplate{headline}{}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.8mm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{0.7mm}%
+  {\color{duneorange}\rule{0.13\paperwidth}{1.1pt}\par}%
+  \vspace{0.4mm}%
+}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[
+    wd=\paperwidth,
+    ht=4.6mm,
+    dp=1.0mm,
+    leftskip=0.8cm,
+    rightskip=0.8cm
+  ]{footline}%
+    {\tiny\textcolor{noirmuted}{\talkdate}}%
+    \hfill%
+    {\tiny\textcolor{duneorange}{\bfseries\insertframenumber}%
+      \textcolor{noirmuted}{/\inserttotalframenumber}}%
+  \end{beamercolorbox}%
+}
+
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{amsmath,amssymb}
+\usepackage{array,booktabs,tabularx}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{
+  arrows.meta,
+  calc,
+  fit,
+  positioning,
+  shapes.geometric,
+  backgrounds
+}
+
+\title[Executable SC/DPS Plan]{From Interfaces to an\\Executable SC/DPS Plan}
+\subtitle{A simulation and verification framework\\that turns system interactions\\into the development schedule}
+\author{Manuel Arroyave}
+\date{SC/DPS coordination discussion --- 29 July 2026}
+\newcommand{\mydate}{29 July 2026}
+
+\definecolor{evidencegreen}{HTML}{8FD6A9}
+\definecolor{projectioncyan}{HTML}{75C9D6}
+\definecolor{questionorange}{HTML}{F4A261}
+\definecolor{riskred}{HTML}{F28B82}
+\definecolor{warmyellow}{HTML}{E7C547}
+\definecolor{purpletest}{HTML}{B7A4E8}
+
+\setbeamercolor{panel evidence}{fg=noirbg,bg=evidencegreen}
+\setbeamercolor{panel projection}{fg=noirbg,bg=projectioncyan}
+\setbeamercolor{panel unresolved}{fg=noirbg,bg=questionorange}
+\setbeamercolor{panel decision}{fg=noirbg,bg=warmyellow}
+
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[noirbg] (current page.south west) rectangle (current page.north east);
+    \fill[noirpanelalt] (current page.north west)
+      rectangle ($(current page.north east)+(0,-3.15)$);
+    \fill[duneorange] ($(current page.north west)+(0.82,-0.72)$)
+      rectangle ++(1.55,0.08);
+    \fill[noircyan] ($(current page.south east)+(-2.8,0.8)$)
+      rectangle ++(1.9,0.08);
+    \IfFileExists{../dune_dark_template_lab/logos/DUNElogo_white.png}{%
+      \node[anchor=south east,opacity=0.13]
+        at ($(current page.south east)+(-0.55,1.45)$) {%
+        \includegraphics[width=0.33\paperwidth]
+          {../dune_dark_template_lab/logos/DUNElogo_white.png}%
+      };
+    }{}%
+    \IfFileExists{../dune_dark_template_lab/logos/FNAL-Logo-NAL-Light.png}{%
+      \node[anchor=south east]
+        at ($(current page.south east)+(-0.92,0.82)$) {%
+        \includegraphics[height=0.45cm]
+          {../dune_dark_template_lab/logos/FNAL-Logo-NAL-Light.png}%
+      };
+    }{}%
+    \node[
+      anchor=north west,
+      text width=0.78\paperwidth,
+      text=white,
+      font=\bfseries\fontsize{25}{28}\selectfont
+    ] at ($(current page.north west)+(0.82,-0.96)$) {\inserttitle};
+    \node[
+      anchor=north west,
+      text width=0.54\paperwidth,
+      text=noirmuted,
+      font=\fontsize{13}{17}\selectfont
+    ] at ($(current page.north west)+(0.82,-3.78)$) {\insertsubtitle};
+    \node[
+      anchor=north west,
+      text=noircyan,
+      font=\bfseries
+    ] at ($(current page.north west)+(0.82,-6.55)$) {\insertauthor};
+    \node[
+      anchor=north west,
+      text=noirmuted,
+      font=\small
+    ] at ($(current page.north west)+(0.82,-7.08)$) {\insertdate};
+  \end{tikzpicture}
+  \vfill
+}
+
+\newcommand{\eyebrow}[1]{{\color{noircyan}\scriptsize\bfseries #1\par}}
+\newcommand{\tinycite}[1]{{\color{noirmuted}\tiny #1\par}}
+\newcommand{\tightitem}{%
+  \setlength{\itemsep}{0.8mm}%
+  \setlength{\parskip}{0pt}%
+}
+
+\newcommand{\panelbox}[3][panel]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{#1}
+    {\usebeamercolor[fg]{#1}\bfseries #2\par}
+    \vspace{0.55mm}
+    {\usebeamercolor[fg]{#1}\footnotesize #3\par}
+  \end{beamercolorbox}
+}
+
+\newcommand{\fixedpanel}[4][panel]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{#1}
+    \begin{minipage}[t][#2][t]{\dimexpr\linewidth-8pt\relax}
+      \raggedright
+      {\usebeamercolor[fg]{#1}\bfseries #3\par}
+      \vspace{0.45mm}
+      {\usebeamercolor[fg]{#1}\footnotesize #4\par}
+    \end{minipage}
+  \end{beamercolorbox}
+}
+
+\newcommand{\evidencepill}[2]{%
+  \tikz[baseline=-0.55ex]\node[
+    rounded corners=3pt,
+    draw=#1,
+    fill=#1!18!noirbg,
+    inner xsep=4pt,
+    inner ysep=1.6pt,
+    text=#1,
+    font=\tiny\bfseries
+  ]{#2};%
+}
+
+\newcommand{\statcard}[3][panel alt]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=3pt,rounded=true]{#1}
+    {\color{noircyan}\bfseries\fontsize{12}{14}\selectfont #2\par}
+    \vspace{0.2mm}
+    {\color{noirmuted}\tiny #3\par}
+  \end{beamercolorbox}
+}
+
+\newcommand{\sectioncard}[2]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[noirpanelalt] (current page.south west)
+        rectangle (current page.north east);
+      \fill[duneorange] ($(current page.north west)+(0.9,-0.9)$)
+        rectangle ++(1.8,0.08);
+      \fill[noircyan] ($(current page.south east)+(-2.8,0.9)$)
+        rectangle ++(1.8,0.08);
+    \end{tikzpicture}
+    \vspace*{0.21\paperheight}
+    {\color{noirmuted}\small\bfseries #1\par}
+    \vspace{3mm}
+    {\color{white}\bfseries\fontsize{28}{31}\selectfont #2\par}
+  \end{frame}
+}
+
+\tikzset{
+  systembox/.style={
+    draw=noirline,
+    fill=noirpanelalt,
+    text=noirtext,
+    rounded corners=4pt,
+    align=center,
+    text width=2.25cm,
+    minimum height=0.9cm,
+    inner sep=4pt,
+    font=\scriptsize
+  },
+  systemcyan/.style={
+    systembox,
+    draw=noircyan,
+    fill=noircyan!16!noirpanel
+  },
+  systemmint/.style={
+    systembox,
+    draw=evidencegreen,
+    fill=evidencegreen!15!noirpanel
+  },
+  systemorange/.style={
+    systembox,
+    draw=questionorange,
+    fill=questionorange!15!noirpanel
+  },
+  systempurple/.style={
+    systembox,
+    draw=purpletest,
+    fill=purpletest!14!noirpanel
+  },
+  flowarrow/.style={-Latex,draw=noircyan,line width=0.85pt},
+  interfaceline/.style={draw=noircyan,line width=0.85pt},
+  evidencearrow/.style={
+    -Latex,
+    draw=purpletest,
+    dashed,
+    line width=0.85pt
+  },
+  evidenceline/.style={
+    draw=purpletest,
+    dashed,
+    line width=0.85pt
+  },
+  warnarrow/.style={-Latex,draw=questionorange,line width=0.9pt},
+  riskarrow/.style={-Latex,draw=riskred,line width=1.0pt},
+  labelnote/.style={
+    font=\tiny,
+    text=noirmuted,
+    align=center,
+    fill=noirbg,
+    inner sep=2pt
+  },
+  stagebox/.style={
+    draw=noirline,
+    fill=noirpanelalt,
+    text=noirtext,
+    rounded corners=4pt,
+    align=left,
+    text width=2.55cm,
+    minimum height=1.55cm,
+    inner sep=5pt,
+    font=\scriptsize
+  },
+  decisionbox/.style={
+    draw=warmyellow,
+    fill=warmyellow!14!noirpanel,
+    text=noirtext,
+    rounded corners=5pt,
+    align=left,
+    text width=2.5cm,
+    minimum height=1.65cm,
+    inner sep=6pt,
+    font=\scriptsize
+  }
+}
+
+\begin{document}
+
+{
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+}
+
+\begin{frame}[t]{This proposal connects existing work}
+\eyebrow{INTEGRATION, NOT A RESET}
+\vspace{1.2mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\fixedpanel{4.0cm}{What the collaboration already has}{
+\begin{itemize}\tightitem
+  \item Years of subsystem design, firmware, controls, and test-stand work.
+  \item Working protocols, serializers, device servers, ICDs, and DAQ packages.
+  \item Experienced consortium and integration teams who know their hardware.
+  \item Existing SC and DPS decisions that must remain traceable.
+\end{itemize}
+}
+
+\column{0.48\textwidth}
+\fixedpanel{4.0cm}{The missing shared artifact}{
+\begin{itemize}\tightitem
+  \item One lifecycle-aware view of interactions across subsystem boundaries.
+  \item Explicit ownership of normal control, protection, failure, and recovery.
+  \item An executable link from interface requirements to package-level tests.
+  \item A development schedule derived from real dependencies and risks.
+\end{itemize}
+}
+\end{columns}
+
+\vspace{1.2mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\centering
+\color{white}\bfseries
+Reuse the subsystem work. Connect it into one versioned, testable system contract.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[t]{Why move now?}
+\eyebrow{INTERFACE ASSUMPTIONS ARE BECOMING PHYSICAL CONSTRAINTS}
+\vspace{2mm}
+
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[stagebox,draw=evidencegreen] (design) at (1.45,0) {
+    \textcolor{evidencegreen}{\bfseries 1\enspace Design}\\[1mm]
+    Protocols, power architecture, authority, states, timing.
+  };
+  \node[stagebox] (procure) at (4.35,0) {
+    \textcolor{noircyan}{\bfseries 2\enspace Procurement}\\[1mm]
+    PLCs, PDUs, servers, switches, UPS, field interfaces.
+  };
+  \node[stagebox,draw=questionorange] (install) at (7.25,0) {
+    \textcolor{questionorange}{\bfseries 3\enspace Installation}\\[1mm]
+    Cabling, rack maps, network zones, interlock paths.
+  };
+  \node[stagebox,draw=riskred] (commission) at (10.15,0) {
+    \textcolor{riskred}{\bfseries 4\enspace Commissioning}\\[1mm]
+    Recovery, partial states, fault response, acceptance evidence.
+  };
+  \node[stagebox,draw=riskred] (operate) at (12.93,0) {
+    \textcolor{riskred}{\bfseries 5\enspace Operation}\\[1mm]
+    Availability, change control, incident response.
+  };
+
+  \draw[line width=6pt,evidencegreen!50]
+    (0.25,-1.42) -- (4.85,-1.42);
+  \draw[line width=6pt,questionorange!65]
+    (4.85,-1.42) -- (9.45,-1.42);
+  \draw[line width=6pt,riskred!75]
+    (9.45,-1.42) -- (13.95,-1.42);
+  \node[font=\tiny,text=noirbg] at (2.55,-1.42) {cheap to change};
+  \node[font=\tiny,text=noirbg] at (7.15,-1.42) {coordination cost grows};
+  \node[font=\tiny,text=noirbg] at (11.75,-1.42) {hardware/recovery rework};
+
+  \draw[draw=noircyan,line width=1.0pt] (0.25,-1.88) -- (13.52,-1.88);
+  \fill[noircyan]
+    (13.95,-1.88) -- (13.52,-1.64) -- (13.52,-2.12) -- cycle;
+  \node[labelnote,above] at (7.1,-1.88)
+    {project progression and increasing cost of change};
+\end{tikzpicture}
+
+\vspace{3mm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\panelbox{Move fast on unknowns}{
+Resolve ownership, state constraints, sequencing, and independent protection
+before they are frozen into hardware and deployment choices.}
+\column{0.48\textwidth}
+\panelbox{Do not rush protection}{
+Speed means earlier questions and executable evidence---not bypassing safety,
+consortium, electrical, or configuration reviews.}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{A draft bench already exists}
+\eyebrow{SEPARATE NATIVE PATHS; ONE OPERATOR AND TEST VIEW}
+\vspace{1mm}
+
+\begin{center}
+\resizebox{0.88\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[systemcyan,text width=2.75cm] (boards) at (0,1.45) {
+    190 DAPHNE + 480 WIB/PTC\\board services
+  };
+  \node[systemmint,text width=2.75cm] (pdu) at (0,0.48) {
+    108 PDUs\\SNMP endpoints
+  };
+  \node[systemmint,text width=2.75cm] (power) at (0,-0.49) {
+    208 power channels\\SCPI / native OPC-UA
+  };
+  \node[systemorange,text width=2.75cm] (env) at (0,-1.46) {
+    sensors, permits,\\alarms
+  };
+
+  \node[systemcyan,text width=3.20cm] (fleet) at (4.05,1.45) {
+    DAPHNE/WIB OPC-UA fleet\\shared bridge implementation
+  };
+  \node[systemmint,text width=3.20cm] (snmp) at (4.05,0.48) {
+    SNMP driver / bridge
+  };
+  \node[systemmint,text width=3.20cm] (supply) at (4.05,-0.49) {
+    supply driver / adapter
+  };
+  \node[systemorange,text width=3.20cm] (plc) at (4.05,-1.46) {
+    PLC/DPS or native OPC-UA\\hard action remains local
+  };
+
+  \node[systemorange,text width=3.25cm] (daq) at (8.65,2.55) {
+    DUNE DAQ native clients\\
+    \texttt{drunc}/appfwk + opmon
+  };
+  \node[systemmint,text width=3.25cm,minimum height=1.05cm] (ignition) at (8.65,0) {
+    Ignition Gateway on Linux\\
+    tags, alarms, history, navigation
+  };
+
+  \draw[interfaceline] (boards) -- (fleet);
+  \draw[interfaceline] (pdu) -- (snmp);
+  \draw[interfaceline] (power) -- (supply);
+  \draw[interfaceline] (env) -- (plc);
+  \draw[interfaceline] (boards.north east) to[out=24,in=180]
+    node[labelnote,above]{native ZMQ/protobuf} (daq.west);
+
+  \draw[interfaceline] (6.35,-1.46) -- (6.35,1.45);
+  \foreach \adapter in {fleet,snmp,supply,plc}
+    \draw[interfaceline] (\adapter.east) -- (6.35,0 |- \adapter.east);
+  \draw[interfaceline] (6.35,0) -- (ignition.west);
+
+  \node[labelnote,text width=2.9cm] at (6.35,1.88)
+    {SC provider boundary};
+  \node[labelnote,text width=3.3cm] at (8.65,1.38)
+    {unheaded lines = interfaces};
+  \node[labelnote,text=purpletest,text width=3.6cm] at (8.65,-1.18)
+    {evidence harness: timing, faults, readback, provenance};
+\end{tikzpicture}
+}
+\end{center}
+
+\vspace{0.2mm}
+\tinycite{\centering
+Current synthetic inventory: 1,818 logical objects \textbullet\
+40,755 published variables \textbullet\
+986 writable endpoints \textbullet\
+one shared Ignition operator layer.}
+
+\end{frame}
+
+\begin{frame}[t]{Evidence must remain labelled}
+\eyebrow{WHAT WAS MEASURED, WHAT WAS PROJECTED, WHAT IS STILL OPEN}
+\vspace{1.6mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\fixedpanel[panel evidence]{4.93cm}{Tested locally}{
+\begin{itemize}\tightitem
+  \item 12,000 balanced configure/readback trials; zero observed errors.
+  \item One 40,755-variable OPC-UA snapshot in 0.516 s.
+  \item One local pass over 986 writable endpoints in 0.517 s.
+  \item Four same-host OPC-UA processes at the measured monitoring knee.
+\end{itemize}
+\vfill
+\evidencepill{evidencegreen}{T = workstation evidence}
+}
+
+\column{0.32\textwidth}
+\fixedpanel[panel projection]{4.93cm}{Source-derived / projected}{
+\begin{itemize}\tightitem
+  \item DAPHNE explicit-wait floor: 2.6901 s per board.
+  \item Four-FEMB WIB explicit-wait floor: 16.01--16.10 s.
+  \item \texttt{drunc}/appfwk fan-out and queue models.
+  \item Bridge/leaf sizing with posterior timeout and retry uncertainty.
+\end{itemize}
+\vfill
+\evidencepill{projectioncyan}{P = planning model}
+}
+
+\column{0.32\textwidth}
+\fixedpanel[panel unresolved]{4.93cm}{Not yet demonstrated}{
+\begin{itemize}\tightitem
+  \item Real PLCs, switches, detector networks, and production endpoints.
+  \item Hardware I/O and calibration time beyond explicit source waits.
+  \item Full Ignition subscription, historian, alarm, and client load.
+  \item Safety integrity, physical interlocks, failover, or production sizing.
+\end{itemize}
+\vfill
+\evidencepill{questionorange}{U = owner input / test needed}
+}
+\end{columns}
+
+\vspace{0mm}
+\centering
+\color{noirmuted}\scriptsize
+The bench is useful because it separates these categories instead of turning a local result into a detector guarantee.
+\end{frame}
+
+\begin{frame}[t]{Monitoring is not the sizing workload}
+\eyebrow{CONFIGURATION, QUEUES, AND RECOVERY SET THE CRITICAL PATH}
+\vspace{1.0mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.61\textwidth}
+\begin{tikzpicture}[x=0.125cm,y=0.76cm]
+  \node[anchor=east,font=\scriptsize,text=noirmuted] at (0,4.1) {OPC-UA snapshot};
+  \draw[fill=noircyan!65,draw=noircyan,rounded corners=1pt]
+    (0.3,3.85) rectangle (0.82,4.35);
+  \node[anchor=west,font=\scriptsize,text=noirtext] at (1.05,4.1)
+    {0.516 s \quad 40,755 variables, local software path};
+
+  \node[anchor=east,font=\scriptsize,text=noirmuted] at (0,3.1) {DAPHNE board};
+  \draw[fill=evidencegreen!55,draw=evidencegreen,rounded corners=1pt]
+    (0.3,2.85) rectangle (3.0,3.35);
+  \node[anchor=west,font=\scriptsize,text=noirtext] at (3.22,3.1)
+    {2.69 s \quad explicit source waits};
+
+  \node[anchor=east,font=\scriptsize,text=noirmuted] at (0,2.1)
+    {190-DAPHNE fleet};
+  \draw[fill=evidencegreen!72,draw=evidencegreen,rounded corners=1pt]
+    (0.3,1.85) rectangle (3.0,2.35);
+  \node[anchor=west,font=\scriptsize,text=noirtext] at (3.22,2.1)
+    {2.69 s \quad one projected wave};
+
+  \node[anchor=east,font=\scriptsize,text=noirmuted] at (0,1.1) {WIB board};
+  \draw[fill=questionorange!60,draw=questionorange,rounded corners=1pt]
+    (0.3,0.85) rectangle (16.4,1.35);
+  \node[anchor=west,font=\scriptsize,text=noirtext] at (16.62,1.1)
+    {16.10 s};
+
+  \node[anchor=east,font=\scriptsize,text=noirmuted] at (0,0.1) {480-WIB fleet};
+  \draw[fill=riskred!62,draw=riskred,rounded corners=1pt]
+    (0.3,-0.15) rectangle (48.6,0.35);
+  \node[anchor=east,font=\scriptsize\bfseries,text=noirbg] at (48.1,0.1)
+    {48.30 s};
+
+  \draw[draw=noirline] (0.3,-0.55) -- (50.2,-0.55);
+  \foreach \x/\label in {0/0,10/10,20/20,30/30,40/40,50/50} {
+    \draw[draw=noirline] ({0.3+\x},-0.48) -- ({0.3+\x},-0.62);
+    \node[font=\tiny,text=noirmuted] at ({0.3+\x},-0.82) {\label s};
+  }
+\end{tikzpicture}
+
+\vspace{1mm}
+\tinycite{Fleet rows are no-failure floors for four shared bridge queues with
+48 active leaves each: 47--48 DAPHNEs/bridge form one 2.69 s wave; 120
+WIBs/bridge form three 16.10 s waves. Both are projections, not hardware
+measurements.}
+
+\column{0.36\textwidth}
+\fixedpanel{5.2cm}{Why configuration is heavier}{
+\begin{itemize}\tightitem
+  \item Explicit firmware calibration and verification waits.
+  \item DAQ controller/application nesting and bounded fan-out.
+  \item Per-bridge queues, timeout, retry, and independent readback.
+  \item State, power, and timing prerequisites before a command is legal.
+\end{itemize}
+\vspace{2mm}
+\textcolor{noircyan}{\bfseries Planning point}\\
+1 Ignition Gateway\\
+4 DAPHNE/WIB bridge instances\\
+47--48 DAPHNE + 120 WIB/bridge\\
+48 active leaves/bridge
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{The proposal in one line}
+\eyebrow{THE MATRIX PRODUCES THE SCHEDULE}
+\vspace{2mm}
+
+\begin{center}
+\resizebox{0.97\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0.52cm]
+  \node[systemcyan,text width=2.35cm,minimum height=1.35cm] (inputs) {
+    Controlled\\interface inputs\\[1mm]
+    \tiny variables, commands, schemas
+  };
+  \node[systemorange,text width=2.35cm,minimum height=1.35cm,right=of inputs] (matrix) {
+    Stage-aware\\interaction matrix\\[1mm]
+    \tiny states, interlocks, recovery
+  };
+  \node[systemorange,text width=2.35cm,minimum height=1.35cm,right=of matrix] (graph) {
+    Dependency +\\hazard graph\\[1mm]
+    \tiny critical paths, unknowns
+  };
+  \node[systemmint,text width=2.35cm,minimum height=1.35cm,right=of graph] (packages) {
+    Work packages +\\acceptance tests\\[1mm]
+    \tiny owners, evidence gates
+  };
+  \node[systemmint,text width=2.35cm,minimum height=1.35cm,right=of packages] (schedule) {
+    Staffed technical\\schedule\\[1mm]
+    \tiny effort, people, dependencies
+  };
+  \node[systempurple,text width=2.35cm,minimum height=1.35cm,right=of schedule] (evidence) {
+    Continuous\\verification evidence\\[1mm]
+    \tiny CI, VST, releases
+  };
+  \draw[flowarrow] (inputs) -- (matrix);
+  \draw[warnarrow] (matrix) -- (graph);
+  \draw[warnarrow] (graph) -- (packages);
+  \draw[flowarrow] (packages) -- (schedule);
+  \draw[evidencearrow] (schedule) -- (evidence);
+  \coordinate (feedbackright) at ($(evidence.south)+(0,-0.52)$);
+  \coordinate (feedbackleft) at ($(matrix.south)+(0,-0.52)$);
+  \draw[evidencearrow,rounded corners=3pt]
+    (evidence.south) -- (feedbackright) --
+    node[labelnote,below] {results update the controlled baseline}
+    (feedbackleft) -- (matrix.south);
+\end{tikzpicture}
+}
+\end{center}
+
+\vspace{1.0mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=7pt,rounded=true]{panel decision}
+\centering
+\color{noirbg}\bfseries\fontsize{12}{14}\selectfont
+The development schedule is an output of the interaction matrix---\\
+not a calendar assembled from independent subsystem task lists.
+\end{beamercolorbox}
+
+\vspace{1mm}
+\centering
+\color{noirmuted}\scriptsize
+The matrix sets priority and order. Effort estimates, staffing, procurement, and review capacity set dates.
+\end{frame}
+
+\begin{frame}[t]{What must be captured in the matrix?}
+\eyebrow{ENOUGH INFORMATION TO TURN EACH INTERACTION INTO WORK AND EVIDENCE}
+\vspace{1.5mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\fixedpanel{3.7cm}{Identity and authority}{
+\begin{itemize}\tightitem
+  \item Source and destination.
+  \item Variable or command; type, unit, range, rate.
+  \item Command owner and permitted actor.
+  \item Applicable lifecycle stage.
+  \item Source ICD/schema and controlled revision.
+\end{itemize}
+}
+
+\column{0.32\textwidth}
+\fixedpanel{3.7cm}{Constraints and response}{
+\begin{itemize}\tightitem
+  \item Preconditions and allowed detector states.
+  \item Permits, inhibits, and interlocks.
+  \item Sequence, deadline, timeout, stale limit.
+  \item Expected response and independent readback.
+  \item Failure, fallback, retry, and safe response.
+\end{itemize}
+}
+
+\column{0.32\textwidth}
+\fixedpanel{3.7cm}{Closure and evidence}{
+\begin{itemize}\tightitem
+  \item Recovery, reset, rollback, and latching.
+  \item Responsible subsystem and integration owners.
+  \item Acceptance test and quantitative criterion.
+  \item Simulator, VST, hardware, or proof evidence.
+  \item Explicit unknown, conflict, and due date.
+\end{itemize}
+}
+\end{columns}
+
+\vspace{1mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\centering\small
+Every unresolved cell is visible schedule risk; every closed row can become a reviewed work package and regression test.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[t]{Stage and state both matter}
+\eyebrow{THE CONSTRAINTS ARE NOT ONLY A FUNCTION OF CRYOGENICS}
+\vspace{1.3mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.39\textwidth}
+\begin{tikzpicture}[node distance=0.33cm]
+  \node[systemcyan,text width=4.75cm] (install) {
+    \textbf{Installation}\\partial inventory, temporary services
+  };
+  \node[systemcyan,text width=4.75cm,below=of install] (integration) {
+    \textbf{Integration}\\mixed firmware, incomplete dependencies
+  };
+  \node[systemorange,text width=4.75cm,below=of integration] (commission) {
+    \textbf{Commissioning}\\energization, fault tests, recovery
+  };
+  \node[systemmint,text width=4.75cm,below=of commission] (operation) {
+    \textbf{Operation}\\stable authority, alarms, controlled change
+  };
+  \node[systemorange,text width=4.75cm,below=of operation] (maintenance) {
+    \textbf{Maintenance / recovery}\\bypasses, rollback, requalification
+  };
+  \draw[flowarrow] (install) -- (integration);
+  \draw[flowarrow] (integration) -- (commission);
+  \draw[flowarrow] (commission) -- (operation);
+  \draw[warnarrow] (operation) -- (maintenance);
+\end{tikzpicture}
+
+\column{0.57\textwidth}
+\fixedpanel{2.0cm}{State axes that change an allowed action}{
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}lX@{}}
+Cryogenics & warm, cool-down, stable, abnormal\\
+Power & absent, partial, ramping, stable, trip\\
+DAQ/timing & boot, initialised, configured, running, fault\\
+Network & healthy, degraded, partitioned, stale\\
+Authority & local, commissioning, SC, DAQ, DPS, maintenance\\
+\end{tabularx}
+}
+
+\vspace{1.0mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{panel alt}
+\centering
+\color{white}\bfseries\small
+Allowed action depends on\\[-0.2mm]
+\textcolor{noircyan}{lifecycle \(\cdot\) state \(\cdot\) permits
+\(\cdot\) communications \(\cdot\) authority}
+\end{beamercolorbox}
+
+\vspace{0.5mm}
+\scriptsize
+Each consortium must define both normal SC behavior and its DPS/failure
+contract at these boundaries. Nominal variables alone do not define the
+integration behavior.
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{One actor, two clients, independent protection}
+\eyebrow{THE LOGICAL CONTRACT BEHIND DAPHNE AND WIB INTEGRATION}
+\vspace{1.2mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.66\textwidth}
+\begin{center}
+\resizebox{0.99\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[systemcyan,text width=2.5cm] (hw) at (0,1.9) {
+    Firmware + hardware\\registers, sensors, faults
+  };
+  \node[systempurple,text width=2.5cm] (actor) at (3.55,1.9) {
+    One target-side\\board actor
+  };
+  \node[systemcyan,text width=2.35cm] (proto) at (7.0,1.9) {
+    Canonical\\ZMQ/protobuf
+  };
+  \node[systemorange,text width=2.55cm] (daq) at (10.5,3.0) {
+    DUNE DAQ\\appfwk controller + opmon
+  };
+  \node[systemmint,text width=2.55cm] (sc) at (10.5,0.8) {
+    OPC-UA bridge\\Ignition + history
+  };
+  \draw[interfaceline] (hw) -- (actor);
+  \draw[interfaceline] (actor) -- (proto);
+  \draw[interfaceline] (proto) -- (daq);
+  \draw[interfaceline] (proto) -- (sc);
+
+  \node[systemorange,text width=2.5cm] (hazard) at (0,-1.2) {
+    Hazard sensors\\permits / contacts
+  };
+  \node[
+    systembox,
+    draw=riskred,
+    fill=riskred!13!noirpanel,
+    text width=2.5cm
+  ] (dps) at (3.55,-1.2) {
+    DPS PLC / local\\protection logic
+  };
+  \node[
+    systembox,
+    draw=riskred,
+    fill=riskred!13!noirpanel,
+    text width=2.35cm
+  ] (inhibit) at (7.0,-1.2) {
+    Hard inhibit /\\power action
+  };
+  \draw[riskarrow] (hazard) -- (dps);
+  \draw[riskarrow] (dps) -- (inhibit);
+  \draw[evidenceline] (dps) -- node[labelnote,below,sloped]{status} (sc);
+  \draw[riskarrow,dashed,bend left=20] (inhibit.north) to
+    node[labelnote,right]{overtake} (actor.south);
+\end{tikzpicture}
+}
+\end{center}
+
+\column{0.31\textwidth}
+\fixedpanel{5.15cm}{Non-negotiable rules}{
+\begin{itemize}\tightitem
+  \item One process owns AXI, I2C, SPI, DAC, reset, and power transactions.
+  \item DAQ and SC may read the same cached status in parallel.
+  \item Every write is serialized, state/authority gated, audited, and read back.
+  \item \texttt{opmonlib} is a DAQ projection, not a second device schema.
+  \item Required protection must survive the failures for which it is credited.
+\end{itemize}
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Example: power loss exposes a system requirement}
+\eyebrow{A CONDITIONAL QUESTION, NOT A CLAIM THAT THE CURRENT DESIGN IS UNSAFE}
+\vspace{1mm}
+
+\begin{center}
+\resizebox{0.91\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0.75cm and 0.85cm]
+  \node[systemorange,text width=3.05cm,minimum height=1.0cm] (loss) {
+    Facility / rack\\power loss
+  };
+  \node[systemorange,text width=3.2cm,minimum height=1.0cm,right=1.35cm of loss,yshift=1.05cm] (wib) {
+    WIEC/WIB low voltage\\decays
+  };
+  \node[systemorange,text width=3.2cm,minimum height=1.0cm,right=1.35cm of loss,yshift=-1.05cm] (bias) {
+    APA bias system\\shutdown/discharge
+  };
+  \node[systempurple,text width=3.25cm,minimum height=1.0cm,right=1.2cm of wib,yshift=-1.05cm] (sc) {
+    SC/Ignition request\\may disappear with power/network
+  };
+  \node[systemmint,text width=3.35cm,minimum height=1.0cm,right=1.2cm of sc] (independent) {
+    Independent DPS /\\hard-interlock path
+  };
+
+  \draw[warnarrow] (loss) -- (wib);
+  \draw[warnarrow] (loss) -- (bias);
+  \draw[evidencearrow] (loss) -- (sc);
+  \draw[draw=riskred,dashed,line width=1pt,<->] (wib) --
+    node[labelnote,right,text width=2.0cm]
+      {required ordering?\\hold-up times?}
+    (bias);
+  \draw[riskarrow] (independent) -- (wib);
+  \draw[riskarrow] (independent) -- (bias);
+  \draw[evidenceline] (sc) -- (independent);
+
+  \node[
+    draw=riskred,
+    fill=riskred!12!noirpanel,
+    text=noirtext,
+    rounded corners=4pt,
+    align=left,
+    text width=13.2cm,
+    inner sep=6pt,
+    below=1.05cm of sc
+  ] {
+    \textbf{Question to close:} if WIB power is not UPS-backed, what mechanism
+    guarantees the required ordering between APA-bias removal and WIB power loss?
+    If software cannot survive the event, the guarantee must be owned elsewhere.
+  };
+\end{tikzpicture}
+}
+\end{center}
+
+\vspace{0mm}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\panelbox{Inputs needed}{UPS/hold-up, discharge time, field wiring, PLC/DPS logic, network and power failure modes.}
+\column{0.32\textwidth}
+\panelbox{Matrix output}{Requirement, owner, independent path, allowed states, timing bound, recovery rule.}
+\column{0.32\textwidth}
+\panelbox{Schedule output}{Design task, integration test, proof test, acceptance gate, unresolved deadline.}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{What must be managed---and where}
+\eyebrow{THE CONFIGURATION BASELINE IS LARGER THAN SOURCE CODE}
+\vspace{1.2mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.34\textwidth}
+\fixedpanel{4.65cm}{Controlled in Git}{
+\begin{itemize}\tightitem
+  \item Matrix, interface register, ADRs, risks, ownership.
+  \item Canonical schemas, descriptors, compatibility policy.
+  \item Firmware/server/DAQ/bridge source and tests.
+  \item PLC logic and approved deployment exports.
+  \item Deployment templates, release BOM, rollback.
+  \item Test definitions and evidence metadata.
+\end{itemize}
+}
+
+\column{0.30\textwidth}
+\fixedpanel{4.65cm}{External sources of record}{
+\begin{itemize}\tightitem
+  \item EDMS: approved requirements and ICDs.
+  \item HWDB: installed identity, topology, connections.
+  \item Artifact registry: firmware, packages, containers, checksums.
+  \item Secret store: keys, tokens, credentials.
+  \item Historian/operations DB: runtime samples and alarm state.
+\end{itemize}
+}
+
+\column{0.32\textwidth}
+\fixedpanel{4.65cm}{Managed as one release}{
+\begin{itemize}\tightitem
+  \item Firmware/register ABI.
+  \item Board service + schema.
+  \item DUNE DAQ package + opmon mapping.
+  \item OPC-UA bridge + Ignition export.
+  \item DPS/permit revision.
+  \item Configuration/HWDB export.
+  \item Cross-system acceptance evidence.
+\end{itemize}
+\vspace{1mm}
+\textcolor{questionorange}{\bfseries Rule}\\
+One compatible bill of materials pins the exact tested set.
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Make the repositories enforce the contract}
+\eyebrow{COLLABORATION-OWNED GOVERNANCE + EXECUTABLE COMPATIBILITY}
+\vspace{1.3mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.62\textwidth}
+\begin{center}
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[
+    systemcyan,
+    text width=9.45cm,
+    minimum height=0.85cm
+  ] (group) at (0,3.25) {Collaboration-controlled Git group / namespace};
+
+  \node[systembox,text width=2.75cm] (schema) at (-3.25,1.78) {
+    Interface baselines\\ICDs, schemas, matrices
+  };
+  \node[systembox,text width=2.75cm] (sim) at (0,1.78) {
+    Simulators + adapters\\faults, protocol oracles
+  };
+  \node[systembox,text width=2.75cm] (prod) at (3.25,1.78) {
+    Development packages\\firmware, bridges, PLC/SC
+  };
+
+  \node[
+    systempurple,
+    text width=9.45cm,
+    minimum height=1.05cm,
+  ] (ci) at (0,0.15) {
+    Protected CI evidence gate\\
+    schema compatibility, contract tests, negative/fault cases, readback,
+    version matrix
+  };
+  \node[
+    systemmint,
+    text width=9.45cm,
+    minimum height=0.85cm,
+  ] (release) at (0,-1.25) {
+    Reviewed release + signed evidence package
+  };
+
+  \draw[interfaceline] (group.south) -- (0,2.58);
+  \draw[interfaceline] (-3.25,2.58) -- (3.25,2.58);
+  \foreach \repo/\xpos in {schema/-3.25,sim/0,prod/3.25}
+    \draw[interfaceline] (\xpos,2.58) -- (\repo.north);
+
+  \draw[evidenceline] (-3.25,1.04) -- (3.25,1.04);
+  \foreach \repo/\xpos in {schema/-3.25,sim/0,prod/3.25}
+    \draw[evidenceline] (\repo.south) -- (\xpos,1.04);
+  \draw[evidenceline] (0,1.04) -- (ci.north);
+  \draw[flowarrow] (ci) -- (release);
+\end{tikzpicture}
+}
+\end{center}
+
+\column{0.35\textwidth}
+\fixedpanel{5.30cm}{Controls to agree with DAQ Git admins}{
+\begin{itemize}\tightitem
+  \item Named maintainers, CODEOWNERS, interface owners.
+  \item Protected branches and release rules.
+  \item Required peer and interface-owner reviews.
+  \item Versioned schemas and compatibility policy.
+  \item Reuse DUNE DAQ release and CI conventions.
+  \item Retained CI evidence and risk/decision records.
+\end{itemize}
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Parallel lanes, explicit convergence gates}
+\eyebrow{INDEPENDENT IMPLEMENTATION WHERE POSSIBLE; SHARED DECISIONS WHERE REQUIRED}
+\vspace{1.2mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.59\textwidth}
+\begin{center}
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[
+    systemcyan,
+    text width=9.1cm,
+    minimum height=0.85cm
+  ] (baseline) at (4.7,2.45) {
+    Shared baseline (Gate 0)\\
+    governance + matrix v0 + schema registry + compatibility policy
+  };
+
+  \node[
+    systempurple,
+    text width=2.7cm,
+    minimum height=2.05cm
+  ] (boardslane) at (1.5,0.65) {
+    \textbf{Lane A: board services}\\[1mm]
+    DAPHNE hooks + actor\\
+    WIB hooks + actor
+  };
+  \node[
+    systemmint,
+    text width=2.7cm,
+    minimum height=2.05cm
+  ] (clientlane) at (4.7,0.65) {
+    \textbf{Lane B: clients + protection}\\[1mm]
+    OPC-UA + DAQ clients\\
+    rack power + DPS permit
+  };
+  \node[
+    systemcyan,
+    text width=2.7cm,
+    minimum height=2.05cm
+  ] (testlane) at (7.9,0.65) {
+    \textbf{Lane C: test + deployment}\\[1mm]
+    simulator + evidence\\
+    infrastructure + deployment
+  };
+
+  \foreach \lane in {boardslane,clientlane,testlane}
+    \draw[evidenceline]
+      (baseline.south -| \lane.north) -- (\lane.north);
+
+  \node[
+    systembox,
+    draw=warmyellow,
+    fill=warmyellow!14!noirpanel,
+    text width=9.1cm,
+    minimum height=0.95cm
+  ] (gate) at (4.7,-1.55) {
+    Pilot convergence: authority + states + protection timing + recovery\\
+    release BOM + crossing-fault evidence
+  };
+  \foreach \lane in {boardslane,clientlane,testlane}
+    \draw[interfaceline]
+      (\lane.south) -- (gate.north -| \lane.south);
+\end{tikzpicture}
+}
+\end{center}
+
+\column{0.38\textwidth}
+\fixedpanel{5.2cm}{May proceed in parallel}{
+\begin{itemize}\tightitem
+  \item Lane A: DAPHNE and WIB hooks and board actors.
+  \item Lane B: bridge/DAQ clients and rack-power/DPS path.
+  \item Lane C: simulator, CI evidence, and deployment skeleton.
+\end{itemize}
+\vspace{1mm}
+\textcolor{riskred}{\bfseries Must converge before writes/release}\\
+Canonical schema ownership; command authority; allowed states; timing and
+failure survival; independent readback; recovery; compatible artifact set.
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Begin with two vertical slices}
+\eyebrow{SMALL ENOUGH TO CLOSE; BROAD ENOUGH TO EXPOSE SYSTEM DEPENDENCIES}
+\vspace{1.0mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\fixedpanel{3.65cm}{1. Shared DAPHNE/WIB OPC-UA path}{
+\begin{itemize}\tightitem
+  \item Preserve native ZMQ/protobuf device contracts.
+  \item Publish both board classes through one fleet bridge implementation.
+  \item Exercise monitoring, guarded configuration, queueing, and readback.
+  \item Trace \texttt{drunc}/appfwk init and conf dependencies.
+  \item Measure bridge count, leaf concurrency, latency, error, and recovery.
+\end{itemize}
+}
+
+\column{0.48\textwidth}
+\fixedpanel{3.65cm}{2. Rack power and DPS-permit path}{
+\begin{itemize}\tightitem
+  \item PDU, WIENER, sensors, PLC/DPS permits, alarms, and latches.
+  \item Normal energization and controlled shutdown sequence.
+  \item Network loss, stale data, trip, reset, and recovery.
+  \item Demonstrate that Ignition cannot bypass the independent permit.
+  \item Capture owner-approved timing and failure evidence.
+\end{itemize}
+}
+\end{columns}
+
+\vspace{1mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\centering
+\textcolor{purpletest}{\bfseries Crossing test:}\quad
+inject one power, temperature, or communications fault that affects both
+board configuration and rack protection, then verify the complete recovery path.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[t]{A practical Vertical Slice Test platform}
+\eyebrow{DEVELOPMENT HARDWARE NOW; PRODUCTION SIZING FROM MEASUREMENT}
+\vspace{1mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.61\textwidth}
+\begin{center}
+\resizebox{0.93\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0.6cm and 0.62cm]
+  \node[systemcyan,text width=3.25cm,minimum height=1.2cm] (host1) {
+    Dell Precision 7680 \#1\\
+    Linux Ignition Gateway\\32 GB RAM
+  };
+  \node[systempurple,text width=3.25cm,minimum height=1.2cm,right=of host1] (host2) {
+    Dell Precision 7680 \#2\\
+    bridges, load + faults\\32 GB RAM
+  };
+  \node[systemorange,text width=3.45cm,minimum height=1.2cm,below=0.9cm of host1,xshift=1.95cm] (switch) {
+    Managed development switch\\
+    VLANs, counters, mirror port
+  };
+  \node[systemmint,text width=2.55cm,below left=0.8cm and -0.15cm of switch] (plc) {
+    PLC / DPS\\representative I/O
+  };
+  \node[systemmint,text width=2.55cm,right=0.45cm of plc] (power) {
+    PDU + WIENER\\or safe emulators
+  };
+  \node[systemcyan,text width=2.55cm,right=0.45cm of power] (boards) {
+    DAPHNE + WIB\\hardware or simulators
+  };
+  \draw[interfaceline] (host1) -- (switch);
+  \draw[interfaceline] (host2) -- (switch);
+  \draw[interfaceline] (switch) -- (plc);
+  \draw[interfaceline] (switch) -- (power);
+  \draw[interfaceline] (switch) -- (boards);
+\end{tikzpicture}
+}
+\end{center}
+
+\vspace{0.4mm}
+\tinycite{The workstations are a development/VST resource, not a proposed SURF production-server specification.}
+
+\column{0.36\textwidth}
+\fixedpanel{5.15cm}{Inputs still needed}{
+\begin{itemize}\tightitem
+  \item SURF Ignition server, redundancy, storage, and virtualization specs.
+  \item Controls network and managed-switch zones, routes, timing, and endpoint count.
+  \item PLC/DPS platform, representative endpoints, and safe test-I/O boundary.
+  \item Approved power/UPS/recovery cases and quantitative sizing criteria.
+\end{itemize}
+\vspace{0.6mm}
+\textcolor{noircyan}{\bfseries Architecture rule}\\
+Gateway, bridge-process, host, and failover counts are separate sizing decisions.
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Move quickly in the right order}
+\eyebrow{A DISCUSSION STARTING POINT---DATES FOLLOW OWNERSHIP AND STAFFING}
+\vspace{1.5mm}
+
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[decisionbox] (now) at (1.25,0) {
+    \textcolor{warmyellow}{\bfseries 1\enspace Now}\\[1mm]
+    Agree governance, matrix authority, owners, and pilot boundaries.
+  };
+  \node[decisionbox] (v0) at (4.15,0) {
+    \textcolor{warmyellow}{\bfseries 2\enspace Matrix v0}\\[1mm]
+    Issue one template; record known contracts, conflicts, and missing inputs.
+  };
+  \node[decisionbox] (pilots) at (7.05,0) {
+    \textcolor{warmyellow}{\bfseries 3\enspace Pilot closure}\\[1mm]
+    Link packages, run VST cases, close two vertical paths with evidence.
+  };
+  \node[decisionbox] (schedule) at (9.95,0) {
+    \textcolor{warmyellow}{\bfseries 4\enspace Staffed schedule}\\[1mm]
+    Convert matrix dependencies into estimates, milestones, and release gates.
+  };
+  \node[decisionbox] (scale) at (12.7,0) {
+    \textcolor{warmyellow}{\bfseries 5\enspace Scale-out}\\[1mm]
+    Repeat network/server curves; extend only through reviewed rows.
+  };
+  \draw[draw=noircyan,line width=1.1pt] (0.25,-1.30) -- (13.48,-1.30);
+  \fill[noircyan]
+    (13.92,-1.30) -- (13.48,-1.05) -- (13.48,-1.55) -- cycle;
+  \node[labelnote,above] at (7.1,-1.30)
+    {dependency order and increasing implementation scope};
+\end{tikzpicture}
+
+\vspace{4mm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\panelbox{Why this is faster}{
+Unknowns are assigned early; integration work is ordered by dependency;
+package changes receive immediate compatibility evidence.}
+\column{0.48\textwidth}
+\panelbox{Why this is safer}{
+Unsupported guarantees and software-independent protection paths become
+visible before commissioning, not during recovery from a failed test.}
+\end{columns}
+
+\vspace{2mm}
+\centering
+\color{noirmuted}\small
+The first deliverable is not more disconnected code: it is matrix v0 with owners, sources, and open questions.
+\end{frame}
+
+\begin{frame}[t]{Decisions requested from this group}
+\eyebrow{AUTHORIZE THE SHARED VERSIONED WORKSPACE, THEN THE WORK}
+\vspace{1.0mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\fixedpanel{3.2cm}{Authorize Gate 0}{
+\begin{enumerate}\tightitem
+  \item \textbf{Create a collaboration-controlled SC/DPS Git group} with DAQ
+    Git-admin support and named maintainers.
+  \item Use the interaction matrix to set technical priorities and schedule.
+  \item Name subsystem and lifecycle interface owners.
+  \item Approve two initial vertical slices and a crossing-fault case.
+\end{enumerate}
+}
+
+\column{0.48\textwidth}
+\fixedpanel{3.2cm}{Provide the missing inputs}{
+\begin{enumerate}\tightitem
+  \item Consortium variables, commands, constraints, interlocks, and recovery contracts.
+  \item DAQ Git-admin help creating the group and defining protections,
+    releases, and retained CI evidence.
+  \item SURF VST and production Ignition/server/network specifications.
+  \item PLC, switch, PDU, power, UPS, and VST endpoint availability.
+\end{enumerate}
+}
+\end{columns}
+
+\vspace{1mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel decision}
+\centering
+\color{noirbg}\bfseries\fontsize{11}{13}\selectfont
+Gate 0: create the shared Git group and publish matrix v0.\\
+That turns the simulator from isolated work into a versioned integration and
+verification framework---and makes labor and completion estimates credible.
+\end{beamercolorbox}
+\end{frame}
+
+\appendix
+
+\begin{frame}[t]{Appendix: current quantitative evidence}
+\eyebrow{LOCAL TEST BENCH AND SOURCE-DERIVED PLANNING VALUES}
+\vspace{1.5mm}
+
+\scriptsize
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}p{3.1cm}p{2.45cm}p{3.1cm}X@{}}
+\toprule
+Result & Value & Evidence class & Boundary \\
+\midrule
+Logical fleet & 1,818 objects & implemented + synthetic &
+190 DAPHNE, 480 WIB, 108 PDU, 208 power channels, sensors, permits, alarms.\\
+OPC-UA namespace & 40,755 variables & workstation test &
+One shared fleet endpoint; local Linux host.\\
+Balanced campaign & 12,000 attempts, 0 errors & workstation test &
+3,000 trials/class; simulator time scale zero.\\
+Bulk OPC-UA read & 0.516 s & workstation test &
+Software snapshot, not a real detector scan guarantee.\\
+OPC-UA process knee & 4 processes & workstation test &
+Same physical host; read and address-space churn workload.\\
+DAPHNE floor & 2.6901 s/board & source-derived projection &
+Explicit waits; some hardware programming time remains unknown.\\
+WIB floor & 16.01--16.10 s/board & source-derived projection &
+COLDADC calibration/SPI waits; other hardware I/O remains unknown.\\
+WIB fleet candidate & $4\times48$ leaves, 48.30 s floor &
+posterior-predictive projection &
+Four bridge queues, three waves; requires async configuration jobs.\\
+\bottomrule
+\end{tabularx}
+
+\vspace{1.5mm}
+\tinycite{Primary source: Far-Detector Rack-Scale Slow-Control Emulation and Interface Verification, DCE-FD2VD-2026-07-27.}
+\end{frame}
+
+\begin{frame}[t]{Appendix: terms that must not be conflated}
+\eyebrow{ONE WORD---``SERVER''---HAD BEEN HIDING FOUR DIFFERENT DECISIONS}
+\vspace{2mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.24\textwidth}
+\fixedpanel{3.35cm}{Ignition Gateway}{
+The SCADA application layer: tags, alarms, history, sessions, and operator
+views. One Gateway is the current development assumption.
+}
+\column{0.24\textwidth}
+\fixedpanel{3.35cm}{Bridge instance}{
+One OPC-UA endpoint/process translating native device protocols into a fleet
+namespace. Four is the same-host monitoring candidate.
+}
+\column{0.24\textwidth}
+\fixedpanel{3.35cm}{Leaf worker}{
+One active in-flight board configuration job. Forty-eight per bridge is the
+initial WIB planning point; it is not yet implemented.
+}
+\column{0.24\textwidth}
+\fixedpanel{3.35cm}{Physical host}{
+A Linux machine or VM carrying one or more processes. Host and failover counts
+require a multi-host, representative-network test.
+}
+\end{columns}
+
+\vspace{1mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+\centering
+\bfseries
+Four bridge processes on one workstation is neither four Ignition Gateways nor four physical servers.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[t]{Appendix: interaction-matrix starter row}
+\eyebrow{THE FORMAT SHOULD MAKE AN UNKNOWN IMPOSSIBLE TO HIDE}
+\vspace{1.3mm}
+
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\linewidth}{@{}p{1.55cm}p{1.35cm}p{1.65cm}p{1.65cm}p{1.55cm}p{1.65cm}p{1.55cm}X@{}}
+\toprule
+\textbf{Interaction} &
+\textbf{Stage / state} &
+\textbf{Authority} &
+\textbf{Precondition} &
+\textbf{Timing} &
+\shortstack[l]{\textbf{Failure}\\\textbf{/ fallback}} &
+\textbf{Owner} &
+\textbf{Evidence / status} \\
+\midrule
+Configure one WIB &
+commis\-sioning; powered; timing ready &
+DAQ request through guarded bridge &
+DPS permit; identity/config hash; FEMB power &
+16.10 s explicit-wait floor; timeout TBD &
+reject if permit lost; retry class TBD; independent readback &
+WIB / DAQ / SC / DPS owners to confirm &
+Serializer mapped; simulator exercised; full OPC-UA job queue and real hardware timing unresolved \\
+\addlinespace
+Rack power loss &
+all stages; abnormal power &
+independent protection path required &
+approved shutdown ordering and hold-up assumptions &
+APA-bias/WIB ordering bound TBD &
+software may disappear; protection must remain effective &
+electrical, APA-bias, WIB, SC/DPS owners to confirm &
+Conditional risk identified; physical path, timing, and proof test unresolved \\
+\bottomrule
+\end{tabularx}
+
+\vspace{1mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=4pt,rounded=true]{panel alt}
+\centering
+Rows begin as questions. They become schedule inputs only when the owner,
+source revision, acceptance criterion, and evidence route are explicit.
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[t]{Appendix: compare like with like}
+\eyebrow{QUASAR WAS THE BRIDGE; THE LARGE LOAD INCLUDED EMULATORS AND IGNITION TAGS}
+\vspace{0.4mm}
+
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{
+  @{}>{\bfseries}p{2.20cm}p{5.55cm}X@{}}
+\toprule
+ & \textbf{March 2026 WIB/Quasar test} &
+   \textbf{July 2026 local fleet bench} \\
+\midrule
+Runtime shape &
+Many Python WIB emulator processes/endpoints
+\(\rightarrow\) ZMQ \(\rightarrow\) Quasar &
+1,818 in-process logical objects
+\(\rightarrow\) shared async runtime.\\
+Namespace / tags &
+At 1,000 WIBs: \(\sim5.5\) million Ignition tags; only a small subset were
+OPC tags. &
+40,755 OPC-UA variables across the full fleet; compact read-only Ignition
+resources.\\
+\shortstack[l]{Observed\\resources} &
+At 480 WIBs: emulator 21.7 GB; Quasar 3.23 GB; Ignition 55.6 GB and
+\(\sim6.7\) CPU cores. &
+Emulator 0.65 GiB; DAPHNE bridge 0.05 GiB; Ignition 1.6 GiB.\\
+Test boundary &
+Large connection and Ignition tag/alarm stress test. &
+Loopback interface test; production scan classes, history, and client load not
+reproduced.\\
+\bottomrule
+\end{tabularx}
+
+\vspace{0mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=3pt,rounded=true]{panel alt}
+{\bfseries Controlled comparison: hold the workload fixed and vary one layer\par}
+\vspace{0.35mm}
+\scriptsize
+\begin{tabularx}{\dimexpr\linewidth-10pt\relax}{
+  @{}>{\bfseries}p{2.15cm}X@{}}
+Hold constant &
+480 identities and protobuf; OPC-UA nodes; Ignition UDTs/tags/alarms; scan,
+history, clients, and fault script.\\
+Experiment A &
+Same bridge and Ignition project; vary process-per-WIB versus shared-async
+emulation.\\
+Experiment B &
+Same emulator endpoints and Ignition project; vary Quasar versus the local
+bridge.\\
+Measure &
+Per-component CPU/RSS, descriptors, connections, cold start, throughput,
+p95/p99 latency, tag age/quality, errors, and reconnect recovery.\\
+\end{tabularx}
+\vspace{0.2mm}
+\centering\bfseries
+Only then compare efficiency against agreed latency, recovery, and resource
+headroom.
+\end{beamercolorbox}
+
+\vspace{0mm}
+\tinycite{\centering Sources: DUNE Slow Controls ZMQ/OPC-UA Spin Test,
+12 March 2026; DCE-FD2VD-2026-07-27.}
+\end{frame}
+
+\end{document}

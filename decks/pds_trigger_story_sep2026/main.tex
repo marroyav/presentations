@@ -313,7 +313,7 @@
 % Backup section retained in source, excluded from the PDF.
 % \appendix
 % \DuneSectionPage{BACKUP}{Study context, packet sizes and model limits}
-% 
+%
 % % Backup (former slide 7) -- Physics goal, not an efficiency claim.
 % \begin{frame}{The smallest pulses are worth keeping}
 %   \DuneBigStatement{SINGLE PHOTOELECTRONS: THE SMALLEST LIGHT SIGNALS}
@@ -322,7 +322,7 @@
 %   \bigskip
 %   {\small\color{DuneTextMuted}A larger usable, or fiducial, volume is the goal. The gain still needs to be measured.}
 % \end{frame}
-% 
+%
 % % Backup (former slide 8) -- The work done, with an explicit evidence boundary.
 % \begin{frame}{We tested the problem from C++ to gateware}
 %   \centering
@@ -340,7 +340,7 @@
 %   \medskip
 %   \DuneDiagramCaption{Grouped32 RTL replay: 379,656 descriptor words checked. Detector-wide losses below come from the C++ model.}
 % \end{frame}
-% 
+%
 % % Backup (former slide 9) -- Measured VD source traces replayed with output FIFO and lane drain.
 % \begin{frame}{One link: the VD activity fills the output FIFO}
 %   \small
@@ -361,7 +361,7 @@
 %     All 1,344 VD channels; 32 channels/board; eight 8.5-ms windows. C++ FIFO/readout model, not RTL validation.\\
 %     Threshold $>0.7$ PE. Rates vary across VD; 87 kHz/channel is the cathode reference. Signals here mean threshold candidates.}
 % \end{frame}
-% 
+%
 % % Backup (former slide 12) -- One decision: agree selection before overloading the link.
 % \begin{frame}{On one link, we must agree what gets through}
 %   \renewcommand{\arraystretch}{1.75}
@@ -375,7 +375,7 @@
 %   \medskip
 %   {\small\color{DuneTextMuted}Proposals for DAQ agreement. To reduce link traffic, selection must happen before transmission.}
 % \end{frame}
-% 
+%
 % % Backup (former slide 15) -- Close with the agreement and its concrete measurement.
 % \begin{frame}{Let's agree how much signal we can afford to lose}
 %   \DuneBigStatement{PDS + DAQ}
@@ -384,8 +384,8 @@
 %   \bigskip
 %   {\large\color{DuneSky}The test: keep weak pulses, their timing and their charge.\par}
 % \end{frame}
-% 
-% 
+%
+%
 % \begin{frame}{Frame formats and packet sizes}
 %   \small
 %   \renewcommand{\arraystretch}{1.35}
@@ -407,7 +407,7 @@
 %     {\small\color{DuneTextMuted}
 %     Boundary: DAPHNE frame words presented to Hermes. Hermes, UDP and Ethernet envelopes are not counted. The 256 / 5 packet size is known; its VD loss is not measured.}
 % \end{frame}
-% 
+%
 % \begin{frame}{Inputs to the VD activity estimate}
 %   \small
 %   \renewcommand{\arraystretch}{1.45}
@@ -426,7 +426,7 @@
 %   \bigskip
 %   {\large Result used in the talk: 87,467 candidates/s/channel\\for the VD cathode, before firmware losses.\par}
 % \end{frame}
-% 
+%
 % \begin{frame}{Scope of the gamma estimate}
 %   \begin{columns}[T,onlytextwidth]
 %     \begin{column}{0.47\textwidth}
@@ -453,7 +453,7 @@
 %   {\small\color{DuneTextMuted}
 %     Candidate timestamps were overlaid before the busy gate; analog waveform pileup was not rebuilt.}
 % \end{frame}
-% 
+%
 % \begin{frame}{How capture dead time must be counted}
 %   \small
 %   \renewcommand{\arraystretch}{1.42}
@@ -473,7 +473,7 @@
 %   {\small\color{DuneTextMuted}
 %     C++ architecture model: FIFO admission and lane drain included; completed frames enter FIFO occupancy as a block. Downstream Hermes stalls and RTL timing are not modeled. Full VD means 1,344 channels on 42 modeled boards.}
 % \end{frame}
-% 
+%
 % \begin{frame}{What buffering and continuation change}
 %   \renewcommand{\arraystretch}{1.55}
 %   \begin{tabularx}{\textwidth}{@{}p{0.23\textwidth}p{0.34\textwidth}>{\raggedright\arraybackslash}X@{}}
@@ -494,7 +494,7 @@
 %   \bigskip
 %   {\large These features reduce avoidable loss. They do not create output capacity.\par}
 % \end{frame}
-% 
+%
 % \begin{frame}{Four-link mapping and sender budget}
 %   \small
 %   \renewcommand{\arraystretch}{1.35}
@@ -514,5 +514,5 @@
 %     {\small\color{DuneTextMuted}
 %     Traffic cannot move between links. The 256 / 5 production mapping uses eight lanes and four links. Its VD-trace loss is not measured by the C++ legacy model. Values are frame words into Hermes with output ready; network overhead and outages are excluded.}
 % \end{frame}
-% 
+%
 \end{document}

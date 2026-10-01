@@ -1,0 +1,212 @@
+\newcommand{\sectioncard}[2]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[noirpanelalt] (current page.south west) rectangle (current page.north east);
+      \fill[duneorange] ($(current page.north west)+(0.9,-0.9)$) rectangle ++(1.8,0.08);
+      \fill[noircyan] ($(current page.south east)+(-2.8,0.9)$) rectangle ++(1.8,0.08);
+      \draw[noirline, line width=0.8pt] ($(current page.south west)+(0.9,1.1)$) -- ($(current page.south east)+(-0.9,1.1)$);
+    \end{tikzpicture}
+    \vspace*{0.21\paperheight}
+    {\color{noirmuted}\small\bfseries SECTION\par}
+    \vspace{3mm}
+    {\color{white}\bfseries\fontsize{29}{32}\selectfont #1\par}
+    \vspace{4mm}
+    {\color{noirmuted}\fontsize{13}{16}\selectfont #2\par}
+  \end{frame}
+}
+
+\newcommand{\eyebrow}[1]{%
+  {\color{noircyan}\small\bfseries #1\par}
+}
+
+\newcommand{\panelbox}[3][panel]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=8pt,rounded=true]{#1}
+    {\color{white}\bfseries #2\par}
+    \vspace{1mm}
+    {\small #3\par}
+  \end{beamercolorbox}
+}
+
+\newcommand{\statcard}[2]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=8pt,rounded=true]{panel alt}
+    {\color{duneorange}\bfseries\fontsize{16}{19}\selectfont #1\par}
+    \vspace{0.6mm}
+    {\color{noirmuted}\small #2\par}
+  \end{beamercolorbox}
+}
+
+\newcommand{\processcard}[2]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=7pt,rounded=true]{panel}
+    {\color{noircyan}\bfseries #1\par}
+    \vspace{0.8mm}
+    {\footnotesize #2\par}
+  \end{beamercolorbox}
+}
+
+\newcommand{\figureplaceholder}[2]{%
+  \begin{tikzpicture}
+    \node[
+      rounded corners=10pt,
+      draw=noirline,
+      fill=noirpanelalt,
+      minimum width=\linewidth,
+      minimum height=3.9cm,
+      inner sep=14pt
+    ] (box) {};
+    \draw[noirline, line width=1pt] ([xshift=12pt,yshift=-12pt] box.north west) -- ([xshift=-12pt,yshift=12pt] box.south east);
+    \draw[noirline, line width=1pt] ([xshift=-12pt,yshift=-12pt] box.north east) -- ([xshift=12pt,yshift=12pt] box.south west);
+    \node[align=center,text width=0.72\linewidth] at (box.center) {%
+      \color{white}\bfseries #1\\[3pt]
+      \color{noirmuted}\small #2
+    };
+  \end{tikzpicture}
+}
+
+\begin{document}
+
+{
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+}
+
+\sectioncard{Layout First}{Use more than one slide shape, or the whole deck feels flat}
+
+\begin{frame}[t]{Editorial Opening, Not Memo Opening}
+\begin{columns}[T,onlytextwidth]
+\column{0.58\textwidth}
+\eyebrow{OPEN WITH A CLAIM}
+{\color{white}\bfseries\fontsize{19}{23}\selectfont
+If the opening slide feels like a memo, the room will treat the whole deck like one. \par}
+
+\vspace{4mm}
+{\color{noirmuted}\large Current build: \dunenoirvariant\par}
+
+\column{0.38\textwidth}
+\panelbox{Better opening mix}{%
+one strong claim\\[1mm]
+one visual contrast\\[1mm]
+one consequence for the audience
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Use More Than One Slide Language}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\statcard{Hero}{One idea. High contrast. Slow the room down.}
+
+\column{0.32\textwidth}
+\statcard{Cards}{Fast scanning for comparisons and grouped points.}
+
+\column{0.32\textwidth}
+\statcard{Figure-led}{Let the image own the slide. Text only frames it.}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Figure-Led Layouts Feel Less Generic}
+\begin{columns}[T,onlytextwidth]
+\column{0.56\textwidth}
+\figureplaceholder{Drop a real diagram here}{A system sketch, waveform plot, or detector view should own the slide.}
+
+\column{0.4\textwidth}
+\panelbox{Annotate sparingly}{%
+what changed\\[1mm]
+what matters\\[1mm]
+where to look first
+}
+\end{columns}
+\end{frame}
+
+\sectioncard{Font Lab}{Try several voices, then keep the one that still reads instantly}
+
+\begin{frame}[t]{Font Voices In This Lab}
+\begin{columns}[T,onlytextwidth]
+\column{0.31\textwidth}
+\statcard{Open Sans}{Safest option for dense technical body text.}
+
+\column{0.31\textwidth}
+\statcard{Dosis}{More editorial. Better for titles than dense paragraphs.}
+
+\column{0.31\textwidth}
+\statcard{KoHo}{Most distinctive. Best with stronger diagrams and fewer words.}
+\end{columns}
+
+\vspace{3mm}
+\panelbox[panel alt]{Reading rule}{%
+Open Sans is safest. Dosis and KoHo are stronger voices and need more restraint.%
+}
+\end{frame}
+
+\begin{frame}[t]{Local Assets, Not Machine-Specific Luck}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\panelbox{Bundled into the lab}{%
+\texttt{fonts/} carries the tested Open Sans, Dosis, and KoHo files used by the presets.%
+}
+
+\column{0.48\textwidth}
+\panelbox{Dark-theme branding}{%
+\texttt{logos/DUNElogo\_white.png} and \texttt{logos/FNAL-Logo-NAL-Blue.png} are used directly in the theme.%
+}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Dark Theme Rules}
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\processcard{Contrast}{Keep secondary text muted so emphasis stays visible.}
+
+\column{0.32\textwidth}
+\processcard{Space}{Cards need more room on dark backgrounds.}
+
+\column{0.32\textwidth}
+\processcard{Accent}{Use orange and cyan as cues, not wallpaper.}
+\end{columns}
+
+\vspace{3mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=11pt,rounded=true,shadow=true]{panel soft}
+{\color{duneorange}\bfseries Rule of thumb\par}
+\vspace{1.5mm}
+{\color{noirbg}\small If more than one accent shouts, the slide stops feeling deliberate.}
+\end{beamercolorbox}
+\end{frame}
+
+\sectioncard{Workflow Example}{A process slide can replace a table when the message is sequence, not inventory}
+
+\begin{frame}[t]{Pipeline Slide Without a Table}
+\begin{columns}[T,onlytextwidth]
+\column{0.23\textwidth}
+\processcard{Signal}{Start from the one event the audience should picture.}
+
+\column{0.23\textwidth}
+\processcard{Descriptor}{Show what the board or algorithm extracts locally.}
+
+\column{0.23\textwidth}
+\processcard{Aggregation}{Show where multi-channel or multi-board context begins.}
+
+\column{0.23\textwidth}
+\processcard{Decision}{End on the detector or physics action.}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{What This Lab Is For}
+\begin{columns}[T,onlytextwidth]
+\column{0.6\textwidth}
+{\color{white}\bfseries\fontsize{19}{23}\selectfont
+Use this lab when the standard collaboration deck feels too flat for the story. \par}
+
+\vspace{4mm}
+{\color{noirmuted}\Large
+Clarity first. Style only where it improves hierarchy. \par}
+
+\column{0.36\textwidth}
+\panelbox{Next step for real talks}{%
+Lift the macros, the font preset you want, and only the slide types that fit the story.%
+}
+\end{columns}
+\end{frame}
+
+\end{document}

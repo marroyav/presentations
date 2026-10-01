@@ -10,6 +10,11 @@ decks. Beamer remains the PDF shell, while the repository now centralizes:
 - tokenized Graphviz diagrams and shared TikZ styles;
 - source audits for theme drift, density, long lists, and unexplained visuals.
 
+`main` is the maintained branch. The complete recovered historical collection
+is indexed in the [legacy catalogue](legacy/README.md); earlier workspaces and
+retired development states are preserved as described in the
+[recovery and consolidation record](docs/presentation-consolidation.md).
+
 Read [the framework guide](docs/framework-guide.md) for the research,
 tool choices, authoring rules, and migration sequence. The
 [theme reference](templates/dune-professional/README.md) documents the component

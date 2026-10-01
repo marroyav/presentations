@@ -1,0 +1,34 @@
+\documentclass[tikz,border=4pt]{standalone}
+
+\input{deadtime_diagram_styles.tex}
+
+\begin{document}
+\pagecolor{noirbg}
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+\node[stage, minimum width=1.4cm] (arrival) at (0.0,0.0) {Trigger};
+\node[stage, minimum width=2.1cm] (gate) at (2.2,0.0) {Accept gate\\builder idle};
+\node[hot, minimum width=3.0cm] (build) at (5.5,0.0) {1024-sample builder\\capture + pack now};
+\node[shared, minimum width=3.2cm] (out) at (9.1,0.0) {Shared output FIFO\\Hermes-input drain};
+
+\draw[flow] (arrival) -- (gate);
+\draw[flow] (gate) -- (build);
+\draw[flow] (build) -- (out);
+
+\node[reject, draw=duneorange] (busy) at (2.2,-1.45) {\texttt{busy\_count}};
+\node[reject, draw=noircyan] (full) at (9.1,-1.45) {\texttt{full\_count}};
+\draw[accent] (gate.south) -- (busy.north);
+\draw[subtle] (out.south) -- (full.north);
+
+\begin{pgfonlayer}{background}
+  \node[
+    draw=duneorange!65,
+    rounded corners=8pt,
+    fill=noirpanelalt,
+    fit=(arrival)(out)(busy)(full),
+    inner sep=9pt
+  ] {};
+\end{pgfonlayer}
+
+\end{tikzpicture}
+\end{document}

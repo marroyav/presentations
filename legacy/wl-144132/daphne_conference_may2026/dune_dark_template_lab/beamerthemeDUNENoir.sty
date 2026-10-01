@@ -1,0 +1,203 @@
+\mode<presentation>
+\RequirePackage{iftex}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,positioning}
+\usecolortheme{default}
+\useinnertheme{default}
+\useoutertheme{default}
+
+% --------------------------------------
+% TYPOGRAPHY
+% --------------------------------------
+\setbeamerfont{normal text}{size=\small}
+\setbeamerfont{title}{size=\Huge,series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{author}{size=\normalsize,series=\bfseries}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{block body}{size=\small}
+\setbeamerfont{headline}{size=\scriptsize,series=\bfseries}
+\setbeamerfont{footline}{size=\scriptsize}
+
+% --------------------------------------
+% COLORS
+% --------------------------------------
+\definecolor{noirbg}{HTML}{131B24}
+\definecolor{noirpanel}{HTML}{1C2834}
+\definecolor{noirpanelalt}{HTML}{2A3948}
+\definecolor{noirtitlebar}{HTML}{22303D}
+\definecolor{noirline}{HTML}{556779}
+\definecolor{noirtext}{HTML}{ECF1F4}
+\definecolor{noirmuted}{HTML}{C4CDD5}
+\definecolor{duneorange}{HTML}{F2682B}
+\definecolor{noircyan}{HTML}{92DDF2}
+\definecolor{noirmint}{HTML}{EAE0CC}
+
+\setbeamercolor{normal text}{fg=noirtext,bg=noirbg}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=noirmuted}
+\setbeamercolor{author}{fg=noircyan}
+\setbeamercolor{date}{fg=noirmuted}
+\setbeamercolor{frametitle}{fg=white,bg=noirbg}
+\setbeamercolor{headline}{fg=noirmuted,bg=noirbg}
+\setbeamercolor{footline}{fg=noirmuted,bg=noirbg}
+\setbeamercolor{section in toc}{fg=noirtext,bg=noirbg}
+\setbeamercolor{caption name}{fg=noirmuted}
+\setbeamercolor{itemize item}{fg=duneorange}
+\setbeamercolor{itemize subitem}{fg=noircyan}
+\setbeamercolor{enumerate item}{fg=duneorange}
+
+\setbeamercolor{block title}{fg=noircyan,bg=noirtitlebar}
+\setbeamercolor{block body}{fg=noirtext,bg=noirpanel}
+\setbeamercolor{block title alerted}{fg=duneorange!85!white,bg=noirtitlebar}
+\setbeamercolor{block body alerted}{fg=noirtext,bg=noirpanelalt}
+\setbeamercolor{block title example}{fg=noirmint,bg=noirtitlebar}
+\setbeamercolor{block body example}{fg=noirtext,bg=noirpanelalt}
+\setbeamercolor{panel}{fg=noirtext,bg=noirpanel}
+\setbeamercolor{panel alt}{fg=noirtext,bg=noirpanelalt}
+\setbeamercolor{panel accent}{fg=noirbg,bg=noircyan}
+\setbeamercolor{panel soft}{fg=noirbg,bg=noirpanelalt!18!white}
+
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamersize{text margin left=0.8cm, text margin right=0.8cm}
+\setlength{\leftmargini}{1.2em}
+\setlength{\leftmarginii}{1.1em}
+\setlength{\parskip}{0.22em}
+
+% --------------------------------------
+% FONT SETUP
+% --------------------------------------
+\usefonttheme{professionalfonts}
+\ifPDFTeX
+  \usepackage[scaled]{helvet}
+  \renewcommand*\familydefault{\sfdefault}
+  \usepackage[T1]{fontenc}
+\else
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \providecommand{\dunenoirsetupfonts}{%
+    \IfFontExistsTF{IBM Plex Sans}{
+      \setsansfont{IBM Plex Sans}
+      \setmainfont{IBM Plex Sans}
+    }{
+      \IfFontExistsTF{Helvetica Neue}{
+        \setsansfont{Helvetica Neue}
+        \setmainfont{Helvetica Neue}
+      }{
+        \setsansfont{Arial}
+        \setmainfont{Arial}
+      }
+    }
+    \IfFontExistsTF{JetBrainsMono Nerd Font Propo}{
+      \setmonofont{JetBrainsMono Nerd Font Propo}[Scale=0.92]
+    }{
+      \IfFontExistsTF{JetBrainsMono Nerd Font}{
+        \setmonofont{JetBrainsMono Nerd Font}[Scale=0.92]
+      }{
+        \setmonofont{Courier New}[Scale=0.92]
+      }
+    }
+  }
+  \dunenoirsetupfonts
+  \renewcommand*\familydefault{\sfdefault}
+\fi
+
+% --------------------------------------
+% LISTS AND TITLES
+% --------------------------------------
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\color{duneorange}\raisebox{0.18ex}{\scriptsize$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\color{noircyan}\raisebox{0.18ex}{\tiny$\blacktriangleright$}}
+\setbeamertemplate{frametitle}{%
+  \vspace*{0.8mm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{0.4mm}%
+}
+
+% --------------------------------------
+% BACKGROUND
+% --------------------------------------
+\addtobeamertemplate{background canvas}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[noirbg] (current page.south west) rectangle (current page.north east);
+    \fill[noirpanelalt] ($(current page.north east)+(-4.8,0)$) rectangle ($(current page.north east)+(0,-1.05)$);
+    \draw[noirline, line width=0.7pt] ($(current page.south west)+(0.8,0.78)$) -- ($(current page.south east)+(-0.8,0.78)$);
+    \fill[noircyan!14] ($(current page.south east)+(-3.4,0.86)$) rectangle ++(1.55,0.07);
+  \end{tikzpicture}
+}{}
+
+% --------------------------------------
+% HEADLINE AND FOOTLINE
+% --------------------------------------
+\setbeamertemplate{headline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=8.2mm,dp=0mm,leftskip=0.8cm,rightskip=0.8cm]{headline}%
+    \vspace{1.1mm}%
+    {\usebeamerfont{headline}\textcolor{noirmuted}{\insertshorttitle}}%
+  \end{beamercolorbox}%
+}
+
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=7.6mm,dp=2.2mm,leftskip=0.8cm,rightskip=0.8cm]{footline}%
+    \footerdunelogo\hspace{0.45em}{\usebeamerfont{footline}\textcolor{noirmuted}{\talkdate}}%
+    \hfill%
+    {\usebeamerfont{footline}\textcolor{duneorange}{\bfseries\insertframenumber}\textcolor{noirmuted}{/\inserttotalframenumber}}%
+  \end{beamercolorbox}%
+}
+
+% --------------------------------------
+% DATE HANDLING
+% --------------------------------------
+\newcommand{\talkdate}{%
+  \@ifundefined{mydate}
+  {\today}
+  {\mydate}
+}
+\newcommand{\footerdunelogo}{%
+  \IfFileExists{logos/logosolo.png}{%
+    \tikz[baseline=-0.55ex]\node[opacity=0.42,inner sep=0pt]{%
+      \includegraphics[height=0.26cm]{logos/logosolo.png}%
+    };%
+  }{}%
+}
+
+% --------------------------------------
+% TITLE PAGE
+% --------------------------------------
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[noirbg] (current page.south west) rectangle (current page.north east);
+    \fill[noirpanelalt] (current page.north west) rectangle ($(current page.north east)+(0,-2.65)$);
+    \fill[duneorange] ($(current page.north west)+(0.8,-0.62)$) rectangle ++(1.5,0.08);
+    \fill[noircyan] ($(current page.south east)+(-2.8,0.8)$) rectangle ++(1.9,0.08);
+    \IfFileExists{logos/DUNElogo_white.png}{%
+      \node[anchor=south east,opacity=0.13] at ($(current page.south east)+(-0.55,1.48)$) {%
+        \includegraphics[width=0.33\paperwidth]{logos/DUNElogo_white.png}%
+      };
+    }{}%
+    \IfFileExists{logos/FNAL-Logo-NAL-Light.png}{%
+      \node[anchor=south east] at ($(current page.south east)+(-0.92,0.82)$) {%
+        \includegraphics[height=0.45cm]{logos/FNAL-Logo-NAL-Light.png}%
+      };
+    }{%
+      \IfFileExists{logos/FNAL-Logo-NAL-Blue.png}{%
+        \node[anchor=south east] at ($(current page.south east)+(-0.92,0.82)$) {%
+          \includegraphics[height=0.45cm]{logos/FNAL-Logo-NAL-Blue.png}%
+        };
+      }{}%
+    }%
+  \end{tikzpicture}
+  \vspace*{2.85cm}
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+  \vspace{3mm}
+  {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+  \vspace{9mm}
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}
+  \vspace{1mm}
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}
+  \vfill
+}
+
+\mode<all>

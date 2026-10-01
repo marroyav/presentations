@@ -1,0 +1,5 @@
+# Preserve checksum-bound CSV evidence, including its original CRLF endings.
+*.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Historical snapshots retain their original formatting and line endings.
+legacy/** -text whitespace=-blank-at-eol,-blank-at-eof

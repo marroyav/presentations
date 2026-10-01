@@ -52,6 +52,20 @@
 \definecolor{DuneEditorialMuted}{HTML}{304E62}
 \definecolor{DuneEditorialInfo}{HTML}{7CAED5}
 \definecolor{DuneEditorialAccent}{HTML}{F2682B}
+\definecolor{DuneEditorialAccentDeep}{HTML}{DE6126}
+% Opt-in palette variant; does not change defaults for existing decks.
+\newcommand{\DuneUseDeepOrange}{%
+  \colorlet{DunePrimary}{DuneEditorialAccentDeep}%
+  \colorlet{DuneEditorialAccent}{DuneEditorialAccentDeep}%
+  \colorlet{DuneCoral}{DuneEditorialAccentDeep}%
+  \colorlet{DuneOrange}{DuneEditorialAccentDeep}%
+}
+% Readable foregrounds with the deeper orange reserved for filled accents.
+\newcommand{\DuneUseReadableOrange}{%
+  \colorlet{DunePrimary}{DuneEditorialAccentDeep}%
+  \colorlet{DuneEditorialAccent}{DuneCoral}%
+  \colorlet{DuneOrange}{DuneCoral}%
+}
 \definecolor{DuneEditorialRule}{HTML}{CED9E1}
 \definecolor{DuneEditorialSky}{HTML}{EFF5FA}
 \definecolor{DuneEditorialWarm}{HTML}{FDF0E9}

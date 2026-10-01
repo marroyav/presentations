@@ -1,0 +1,55 @@
+digraph "readiness_contracts" {
+  graph [bgcolor="white", pad="0.10", nodesep="0.45", ranksep="0.95", splines="spline", overlap="false", rankdir="LR", fontname="Helvetica", fontsize="16", labelloc="t", labeljust="l"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  subgraph cluster_control {
+    graph [label="Control", bgcolor="#EDF5FD", color="#D0D0D0", style="rounded"];
+    control_plane [shape="box", style="rounded,filled", fillcolor="#DCEBFA", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Control\nplane"];
+  }
+  subgraph cluster_analog {
+    graph [label="Analog", bgcolor="#EFF8EF", color="#D0D0D0", style="rounded"];
+    analog_control [shape="box", style="rounded,filled", fillcolor="#DFF0DF", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Analog\ncontrol"];
+  }
+  subgraph cluster_timing {
+    graph [label="Timing", bgcolor="#FFF1E4", color="#D0D0D0", style="rounded"];
+    timing_subsystem [shape="box", style="rounded,filled", fillcolor="#FCE7D3", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Timing\nsubsystem"];
+  }
+  subgraph cluster_frontend {
+    graph [label="Frontend", bgcolor="#F2FAEE", color="#D0D0D0", style="rounded"];
+    frontend_boundary [shape="box", style="rounded,filled", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Frontend\nboundary"];
+  }
+  subgraph cluster_contracts {
+    graph [label="Contracts", bgcolor="#FBF7E7", color="#D0D0D0", style="rounded"];
+    config_ready [shape="hexagon", style="rounded,filled", fillcolor="#F7F1D8", color="#5A5A5A", penwidth="1.8", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="config_ready"];
+    timing_ready [shape="hexagon", style="rounded,filled", fillcolor="#F7F1D8", color="#5A5A5A", penwidth="1.8", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="timing_ready"];
+    alignment_ready [shape="hexagon", style="rounded,filled", fillcolor="#F7F1D8", color="#5A5A5A", penwidth="1.8", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="alignment_ready"];
+    trigger_enable [shape="hexagon", style="rounded,filled", fillcolor="#F7F1D8", color="#5A5A5A", penwidth="1.8", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="trigger_enable"];
+    spy_enable [shape="hexagon", style="rounded,filled", fillcolor="#F7F1D8", color="#5A5A5A", penwidth="1.8", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="spy_enable"];
+  }
+  subgraph cluster_trigger {
+    graph [label="Trigger", bgcolor="#FCEBEC", color="#D0D0D0", style="rounded"];
+    trigger_pipeline [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Trigger\npipeline"];
+  }
+  subgraph cluster_debug {
+    graph [label="Debug", bgcolor="#EEF9F9", color="#D0D0D0", style="rounded"];
+    spy_buffer [shape="box", style="rounded,filled", fillcolor="#D9F0F0", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Spybuffer"];
+  }
+  control_plane -> analog_control [color="#4E79A7", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="AFE/DAC setup"];
+  control_plane -> timing_subsystem [color="#4E79A7", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="clock source / status"];
+  analog_control -> config_ready [color="#B6992D", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="AFE/DAC configured"];
+  timing_subsystem -> timing_ready [color="#B6992D", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="trusted timing"];
+  frontend_boundary -> alignment_ready [color="#B6992D", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="alignment valid"];
+  config_ready -> trigger_enable [color="#B07AA1", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  timing_ready -> trigger_enable [color="#B07AA1", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  alignment_ready -> trigger_enable [color="#B07AA1", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  config_ready -> spy_enable [color="#B07AA1", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  timing_ready -> spy_enable [color="#B07AA1", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  alignment_ready -> spy_enable [color="#B07AA1", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  trigger_enable -> trigger_pipeline [color="#8CD17D", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="gates trigger activity"];
+  spy_enable -> spy_buffer [color="#8CD17D", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="gates spy capture"];
+  { rank=same; control_plane; }
+  { rank=same; analog_control; timing_subsystem; frontend_boundary; }
+  { rank=same; config_ready; timing_ready; alignment_ready; }
+  { rank=same; trigger_enable; spy_enable; }
+  { rank=same; trigger_pipeline; spy_buffer; }
+}

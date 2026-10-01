@@ -119,6 +119,11 @@
       "tex": "DuneEditorialAccent",
       "purpose": "Decorative DUNE orange accent, paired with labels or geometry"
     },
+    "editorial-accent-deep": {
+      "hex": "#DE6126",
+      "tex": "DuneEditorialAccentDeep",
+      "purpose": "Opt-in darker orange for editorial accents and plots"
+    },
     "editorial-rule": {
       "hex": "#CED9E1",
       "tex": "DuneEditorialRule",

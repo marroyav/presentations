@@ -1,0 +1,24 @@
+digraph "build_flow" {
+  graph [bgcolor="white", pad="0.10", nodesep="0.55", ranksep="0.85", splines="spline", overlap="false", rankdir="LR", fontname="Helvetica", fontsize="16", labelloc="t", labeljust="l"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  subgraph cluster_build {
+    graph [label="Build", bgcolor="#F2F2F2", color="#D0D0D0", style="rounded"];
+    build_system [shape="box", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Build\nsystem"];
+    fusesoc_graph [shape="box", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="FuseSoC\nintent graph"];
+    linux_chain [shape="component", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Native Linux\nentrypoint"];
+    wsl_chain [shape="component", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="WSL + Windows\nentrypoint"];
+    implementation_backend [shape="component", style="rounded,filled,bold", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Vivado + XSCT\nimplementation"];
+    artifact_bundle [shape="component", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Artifacts\n.bit .bin .xsa .dtbo"];
+  }
+  build_system -> fusesoc_graph [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  fusesoc_graph -> linux_chain [color="#9C755F", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="source graph"];
+  fusesoc_graph -> wsl_chain [color="#9C755F", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="source graph"];
+  linux_chain -> implementation_backend [color="#9C755F", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="tool invocation"];
+  wsl_chain -> implementation_backend [color="#9C755F", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="tool invocation"];
+  implementation_backend -> artifact_bundle [color="#9C755F", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="build products"];
+  { rank=same; build_system; fusesoc_graph; }
+  { rank=same; linux_chain; wsl_chain; }
+  { rank=same; implementation_backend; }
+  { rank=same; artifact_bundle; }
+}

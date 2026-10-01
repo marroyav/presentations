@@ -1,0 +1,75 @@
+digraph "ip_hierarchy" {
+  graph [bgcolor="white", pad="0.15", nodesep="0.45", ranksep="0.75", splines="spline", overlap="false", rankdir="LR", fontname="Helvetica", fontsize="18", labelloc="t", labeljust="l", label="daphne-firmware IP and subsystem hierarchy"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  subgraph cluster_repository {
+    graph [label="Repository", bgcolor="#F3F3F3", color="#D0D0D0", style="rounded"];
+    repo_firmware [shape="folder", style="rounded,filled", fillcolor="#F6F6F6", color="#5A5A5A", penwidth="2.0", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="daphne-firmware"];
+  }
+  subgraph cluster_control {
+    graph [label="Control", bgcolor="#EDF5FD", color="#D0D0D0", style="rounded"];
+    control_plane [shape="box", style="rounded,filled", fillcolor="#DCEBFA", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Control plane"];
+  }
+  subgraph cluster_analog {
+    graph [label="Analog", bgcolor="#EFF8EF", color="#D0D0D0", style="rounded"];
+    analog_control [shape="box", style="rounded,filled", fillcolor="#DFF0DF", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Analog control"];
+  }
+  subgraph cluster_frontend {
+    graph [label="Frontend", bgcolor="#F2FAEE", color="#D0D0D0", style="rounded"];
+    frontend_boundary [shape="box", style="rounded,filled", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Frontend boundary"];
+    afe_block [shape="box", style="rounded,filled,dashed", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="AFE block (5 x 8 ch)"];
+  }
+  subgraph cluster_timing {
+    graph [label="Timing", bgcolor="#FFF1E4", color="#D0D0D0", style="rounded"];
+    timing_subsystem [shape="box", style="rounded,filled", fillcolor="#FCE7D3", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Timing subsystem"];
+    endpoint_core [shape="box", style="rounded,filled,dashed", fillcolor="#FCE7D3", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Endpoint / PDTS core"];
+    clock_select_mmcm [shape="box", style="rounded,filled,dashed", fillcolor="#FCE7D3", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Clock select + MMCM"];
+  }
+  subgraph cluster_trigger {
+    graph [label="Trigger", bgcolor="#FCEBEC", color="#D0D0D0", style="rounded"];
+    trigger_pipeline [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Trigger pipeline"];
+    xc_filter [shape="box", style="rounded,filled,dashed", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="XC filter / self-trigger"];
+    peak_descriptors [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Peak descriptors"];
+    stc3_builder [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="STC3 record builder"];
+  }
+  subgraph cluster_transport {
+    graph [label="Transport", bgcolor="#F3ECE8", color="#D0D0D0", style="rounded"];
+    transport_subsystem [shape="box", style="rounded,filled", fillcolor="#E9E0D8", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Readout / transport"];
+    two_lane_mux [shape="box", style="rounded,filled", fillcolor="#E9E0D8", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Two-lane multiplexer"];
+    hermes_transport [shape="box", style="rounded,filled,dashed", fillcolor="#E9E0D8", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Hermes transport"];
+  }
+  subgraph cluster_debug {
+    graph [label="Debug", bgcolor="#EEF9F9", color="#D0D0D0", style="rounded"];
+    spy_buffer [shape="box", style="rounded,filled", fillcolor="#D9F0F0", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Spybuffer"];
+  }
+  subgraph cluster_verification {
+    graph [label="Verification", bgcolor="#F3EEF9", color="#D0D0D0", style="rounded"];
+    verification_layer [shape="box", style="rounded,filled", fillcolor="#E9E3F6", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Formal + smoke tests"];
+  }
+  subgraph cluster_build {
+    graph [label="Build", bgcolor="#F2F2F2", color="#D0D0D0", style="rounded"];
+    build_system [shape="box", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Build system"];
+    fusesoc_graph [shape="box", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="FuseSoC graph"];
+    linux_chain [shape="component", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="Native Linux build"];
+    wsl_chain [shape="component", style="rounded,filled", fillcolor="#E7E7E7", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="11", margin="0.12,0.08", label="WSL + Windows build"];
+  }
+  repo_firmware -> control_plane [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  repo_firmware -> analog_control [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  repo_firmware -> frontend_boundary [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  repo_firmware -> timing_subsystem [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  repo_firmware -> trigger_pipeline [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  repo_firmware -> transport_subsystem [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  repo_firmware -> spy_buffer [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  repo_firmware -> verification_layer [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  repo_firmware -> build_system [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  timing_subsystem -> endpoint_core [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  timing_subsystem -> clock_select_mmcm [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  trigger_pipeline -> xc_filter [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  trigger_pipeline -> peak_descriptors [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  trigger_pipeline -> stc3_builder [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  transport_subsystem -> two_lane_mux [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  transport_subsystem -> hermes_transport [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  build_system -> fusesoc_graph [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  build_system -> linux_chain [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+  build_system -> wsl_chain [color="#7A7A7A", style="solid", penwidth="1.6", fontname="Helvetica", fontsize="10", arrowsize="0.8"];
+}

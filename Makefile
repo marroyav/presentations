@@ -23,6 +23,12 @@ diagrams: $(DIAGRAM_PDFS)
 %.pdf: %.dot.in templates/dune-professional/design-tokens.json scripts/render_diagram.py
 	$(PYTHON) scripts/render_diagram.py $< $@
 
+decks/grouped32_simulation_sep2026/design-tokens.json: decks/grouped32_simulation_sep2026/palette.py templates/dune-professional/design-tokens.json
+	$(PYTHON) decks/grouped32_simulation_sep2026/palette.py
+
+decks/grouped32_simulation_sep2026/diagrams/%.pdf: decks/grouped32_simulation_sep2026/diagrams/%.dot.in decks/grouped32_simulation_sep2026/design-tokens.json scripts/render_diagram.py
+	$(PYTHON) scripts/render_diagram.py $< $@ --tokens decks/grouped32_simulation_sep2026/design-tokens.json
+
 decks/%/main.pdf: decks/%/main.tex templates/dune-professional/beamerthemeDUNEProfessional.sty $$(wildcard decks/$$*/*.tex) $$(wildcard decks/$$*/fonts/*.ttf) $$(wildcard decks/$$*/fonts/*.tex) $$(wildcard decks/$$*/diagrams/*) $$(wildcard decks/$$*/figures/*) $$(wildcard decks/$$*/schematics.json) | diagrams
 	cd decks/$* && $(TECTONIC) $(TECTONIC_FLAGS) main.tex
 

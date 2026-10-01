@@ -1,0 +1,24 @@
+digraph "descriptor_identity" {
+  graph [bgcolor="white", pad="0.10", nodesep="0.50", ranksep="0.90", splines="spline", overlap="false", rankdir="LR", fontname="Helvetica", fontsize="16", labelloc="t", labeljust="l"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  frontend_boundary [shape="box", style="rounded,filled", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Aligned waveform\nper channel"];
+  xc_filter [shape="box", style="rounded,filled,dashed", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="XC self-trigger"];
+  peak_descriptors [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Peak descriptor\ncalculator"];
+  descriptor_sample_start [shape="hexagon", style="rounded,filled", fillcolor="#F7F1D8", color="#5A5A5A", penwidth="1.8", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="sample_start"];
+  stc3_builder [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="STC3 record\nbuilder"];
+  descriptor_frame_timestamp [shape="hexagon", style="rounded,filled", fillcolor="#F7F1D8", color="#5A5A5A", penwidth="1.8", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="frame_timestamp\n(trigger_timestamp - 64)"];
+  descriptor_channel_identity [shape="hexagon", style="rounded,filled", fillcolor="#DCEBFA", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="geoID +\nchannel_id"];
+  descriptor_identity_key [shape="box", style="rounded,filled", fillcolor="#F6F6F6", color="#5A5A5A", penwidth="2.0", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Descriptor key\n(geoID, channel_id,\nframe_timestamp + sample_start)"];
+  descriptor_handoff_fix [shape="note", style="rounded,filled", fillcolor="#FFF1E4", color="#C17D11", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Fixed Time_Start handoff\ncommit current descriptor\nbefore next trigger"];
+  frontend_boundary -> xc_filter [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="aligned sample words"];
+  xc_filter -> peak_descriptors [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="pulse-domain candidate"];
+  peak_descriptors -> stc3_builder [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="descriptor fields"];
+  peak_descriptors -> descriptor_sample_start [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="descriptor offset"];
+  stc3_builder -> descriptor_frame_timestamp [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="frame header timestamp"];
+  descriptor_channel_identity -> descriptor_identity_key [color="#4E79A7", style="dashed", penwidth="1.8", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="DAQ scope"];
+  descriptor_sample_start -> descriptor_identity_key [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="sample_start"];
+  descriptor_frame_timestamp -> descriptor_identity_key [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="frame_timestamp"];
+  descriptor_handoff_fix -> peak_descriptors [color="#8CD17D", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="same-cycle commit order"];
+  { rank=same; descriptor_sample_start; descriptor_frame_timestamp; descriptor_channel_identity; }
+}

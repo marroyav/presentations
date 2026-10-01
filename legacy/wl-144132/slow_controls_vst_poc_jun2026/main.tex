@@ -1,0 +1,463 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usepackage{iftex}
+\input{../dune_dark_template_lab/font-presets}
+\DuneNoirUseHelvetica
+\makeatletter
+\input{../dune_dark_template_lab/beamerthemeDUNENoir.sty}
+\makeatother
+
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\fi
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,fit,positioning}
+
+\title[Slow Controls VST PoC]{PDS Slow Controls Vertical Slice}
+\subtitle{What has been proven at CERN VST,\\and what remains in the development plan}
+\author{Manuel Arroyave}
+\date{June 30, 2026}
+\newcommand{\mydate}{June 30, 2026}
+
+\colorlet{pocgreen}{noirmint!92!white}
+\colorlet{pendingorange}{duneorange!76!white}
+\definecolor{softgreen}{HTML}{1E342E}
+\definecolor{softorange}{HTML}{3A2E28}
+
+\newcommand{\repoDaphneSc}{\href{https://github.com/marroyav/daphne-sc}{\texttt{github.com/marroyav/daphne-sc}}}
+\newcommand{\repoScPlan}{\href{https://github.com/marroyav/daphne_slow_controls_plan}{\texttt{github.com/marroyav/daphne\_slow\_controls\_plan}}}
+
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[noirbg] (current page.south west) rectangle (current page.north east);
+    \fill[noirpanelalt] (current page.north west) rectangle ($(current page.north east)+(0,-2.65)$);
+    \fill[duneorange] ($(current page.north west)+(0.8,-0.56)$) rectangle ++(1.5,0.08);
+    \fill[noircyan] ($(current page.south east)+(-2.8,0.8)$) rectangle ++(1.9,0.08);
+    \IfFileExists{logos/DUNElogo_white.png}{%
+      \node[anchor=south east,opacity=0.13] at ($(current page.south east)+(-0.55,1.48)$) {%
+        \includegraphics[width=0.33\paperwidth]{logos/DUNElogo_white.png}%
+      };
+    }{}%
+    \IfFileExists{logos/FNAL-Logo-NAL-Light.png}{%
+      \node[anchor=south east] at ($(current page.south east)+(-0.92,0.82)$) {%
+        \includegraphics[height=0.45cm]{logos/FNAL-Logo-NAL-Light.png}%
+      };
+    }{%
+      \IfFileExists{logos/FNAL-Logo-NAL-Blue.png}{%
+        \node[anchor=south east] at ($(current page.south east)+(-0.92,0.82)$) {%
+          \includegraphics[height=0.45cm]{logos/FNAL-Logo-NAL-Blue.png}%
+        };
+      }{}%
+    }%
+    \node[
+      anchor=north west,
+      align=left,
+      text=white,
+      font=\usebeamerfont{title}
+    ] at ($(current page.north west)+(0.8,-0.82)$) {\inserttitle};
+    \node[
+      anchor=north west,
+      align=left,
+      text=noirmuted,
+      text width=8.4cm,
+      font=\usebeamerfont{subtitle}
+    ] at ($(current page.north west)+(0.8,-4.95)$) {\insertsubtitle};
+    \node[
+      anchor=north west,
+      align=left,
+      text=noircyan,
+      font=\usebeamerfont{author}
+    ] at ($(current page.north west)+(0.8,-6.72)$) {\insertauthor};
+    \node[
+      anchor=north west,
+      align=left,
+      text=noirmuted,
+      font=\usebeamerfont{date}
+    ] at ($(current page.north west)+(0.8,-7.28)$) {\insertdate};
+  \end{tikzpicture}
+  \vfill
+}
+
+\newcommand{\eyebrow}[1]{{\color{noircyan}\small\bfseries #1\par}}
+\newcommand{\tightitem}{\setlength{\itemsep}{0.8mm}\setlength{\parskip}{0pt}}
+\newcommand{\statuspill}[2]{%
+  \tikz[baseline=-0.6ex]\node[
+    rounded corners=3pt,
+    draw=#1,
+    fill=#1!18!noirbg,
+    inner xsep=5pt,
+    inner ysep=2pt,
+    text=#1,
+    font=\scriptsize\bfseries
+  ]{#2};%
+}
+
+\tikzset{
+  proven/.style={
+    draw=pocgreen,
+    fill=pocgreen!18!noirpanel,
+    text=noirtext,
+    rounded corners=4pt,
+    align=center,
+    text width=1.92cm,
+    minimum height=0.78cm,
+    inner sep=3.5pt,
+    line width=0.75pt,
+    font=\tiny
+  },
+  planned/.style={
+    draw=pendingorange,
+    fill=pendingorange!15!noirpanel,
+    text=noirtext,
+    rounded corners=4pt,
+    align=center,
+    text width=1.92cm,
+    minimum height=0.78cm,
+    inner sep=3.5pt,
+    line width=0.75pt,
+    font=\tiny
+  },
+  equipment/.style={
+    draw=pocgreen,
+    fill=noirpanel,
+    text=noirtext,
+    rounded corners=5pt,
+    align=left,
+    inner sep=6pt,
+    line width=0.9pt,
+    font=\scriptsize
+  },
+  embedded/.style={
+    draw=pocgreen,
+    fill=pocgreen!13!noirpanelalt,
+    text=noirtext,
+    rounded corners=3pt,
+    align=center,
+    text width=4.05cm,
+    minimum height=0.65cm,
+    inner sep=2pt,
+    line width=0.65pt,
+    font=\scriptsize
+  },
+  embeddedplanned/.style={
+    draw=pendingorange,
+    fill=pendingorange!12!noirpanelalt,
+    text=noirtext,
+    rounded corners=3pt,
+    align=center,
+    text width=4.05cm,
+    minimum height=0.61cm,
+    inner sep=2pt,
+    line width=0.65pt,
+    font=\scriptsize
+  },
+  phase/.style={
+    draw=noirline,
+    fill=noirpanelalt,
+    text=noirtext,
+    rounded corners=4pt,
+    align=left,
+    text width=2.10cm,
+    minimum height=2.06cm,
+    inner sep=5pt,
+    font=\tiny
+  },
+  greenarrow/.style={-Latex, draw=pocgreen, line width=0.85pt},
+  orangearrow/.style={-Latex, draw=pendingorange, line width=0.85pt},
+  linklabel/.style={font=\tiny, text=noirmuted, fill=noirbg, inner xsep=3pt, inner ysep=1.5pt},
+  flowarrow/.style={-Latex, line width=0.9pt},
+  note/.style={font=\tiny, text=noirmuted, align=center}
+}
+
+\newcommand{\gaparrow}[3][]{%
+  \draw[#1] ($(#2.east)+(0.06,0)$) -- ($(#3.west)+(-0.06,0)$);%
+}
+
+\newcommand{\workcard}[3]{%
+  \begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{panel alt}
+  {\small\bfseries\textcolor{#1}{#2}\par}
+  \vspace{0.8mm}
+  {\footnotesize #3}
+  \end{beamercolorbox}%
+}
+
+\newcommand{\legend}{%
+  \statuspill{pocgreen}{green = tested at CERN VST}
+  \hspace{0.6em}
+  \statuspill{pendingorange}{orange = planned or not tested in this slice}
+}
+\newcommand{\headstatuspill}[2]{%
+  \tikz[baseline=-0.55ex]\node[
+    rounded corners=3pt,
+    draw=#1,
+    fill=#1!18!noirbg,
+    inner xsep=3.5pt,
+    inner ysep=1.4pt,
+    text=#1,
+    font=\tiny\bfseries
+  ]{#2};%
+}
+\newcommand{\headlegend}{%
+  \headstatuspill{pocgreen}{green = tested at CERN VST}
+  \hspace{0.35em}
+  \headstatuspill{pendingorange}{orange = planned or not tested in this slice}
+}
+\newcommand{\gapline}[2]{%
+  {\footnotesize\bfseries\textcolor{pendingorange}{#1}\par}
+  \vspace{0.25mm}
+  {\scriptsize #2\par}
+  \vspace{0.9mm}
+}
+
+\begin{document}
+
+{
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\begin{frame}[plain,noframenumbering]
+  \titlepage
+\end{frame}
+}
+
+{
+\setbeamertemplate{frametitle}{%
+  % \vspace*{1mm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \vspace{2mm}%
+  {\color{noircyan}\scriptsize\bfseries HARDWARE FIRST: THREE EQUIPMENT ITEMS IN THE TEST\hfill\headlegend\par}%
+  \vspace{-3mm}%
+  {\color{duneorange}\rule{0.13\paperwidth}{1.1pt}\par}%
+  \vspace{-1mm}%
+}
+\begin{frame}[t]{CERN VST Proof of Concept Boundary}
+\begin{tikzpicture}[remember picture,overlay,x=1cm,y=0.95cm]
+  \node[equipment, minimum width=4.6cm, minimum height=3.0cm, anchor=north west] (onl)
+    at ($(current page.north west)+(0.75,-3.08)$) {};
+  \node[anchor=north west, text=pocgreen, font=\scriptsize\bfseries]
+    at ($(onl.north west)+(0.18,-0.17)$) {ONL server};
+  \node[embedded] (onlkeithley) at ($(onl.north west)+(2.21,-1)$) {Keithley control\\USB/SCPI};
+  \node[embedded] (onlzmq) at ($(onl.north west)+(2.21,-1.8)$) {ZMQ client\\protobuf request/readback};
+  \node[embedded] (onlopc) at ($(onl.north west)+(2.21,-2.6)$) {OPC-UA loop\\open62541 namespace};
+
+  \node[equipment, minimum width=4.6cm, minimum height=3.0cm, anchor=north west] (daphne)
+    at ($(current page.north west)+(10.86,-3.08)$) {};
+  \node[anchor=north west, text=pocgreen, font=\scriptsize\bfseries]
+    at ($(daphne.north west)+(0.18,-0.17)$) {DAPHNE-15};
+  \node[embedded] (dfw) at ($(daphne.north west)+(2.18,-1.00)$) {daphne-firmware\\loaded on hardware};
+  \node[embedded] (dcpp) at ($(daphne.north west)+(2.18,-1.80)$) {daphne-server\\C++ + ZMQ server :40001};
+  \node[embeddedplanned] (drust) at ($(daphne.north west)+(2.18,-2.60)$) {Rust path\\Rust + C++ + ZMQ server};
+
+  \node[equipment, minimum width=4.60cm, minimum height=1.2cm, anchor=north west] (keithley)
+    at ($(current page.north west)+(5.68,-6.43)$) {};
+  \node[anchor=north west, text=pocgreen, font=\scriptsize\bfseries]
+    at ($(keithley.north west)+(0.18,-0.13)$) {Keithley power supply};
+  \node[anchor=north west, text=noirmuted, font=\scriptsize, align=center]
+    at ($(keithley.north west)+(0.18,-0.46)$) {VST emulator for PDU/PLC behavior;\\rail/readback stand-in for power controls.};
+
+  \draw[greenarrow]
+    ($(onl.east)+(0.08,0.43)$) -- node[linklabel,above] {Ethernet/TCP: ZMQ client to server}
+    ($(daphne.west)+(-0.08,0.43)$);
+  \draw[greenarrow]
+    ($(onl.south)+(0.80,-0.08)$) -- node[linklabel,above,sloped] {USB/SCPI}
+    ($(keithley.west)+(-0.08,0.25)$);
+  \draw[greenarrow]
+    ($(keithley.east)+(0.08,0.25)$) -- node[linklabel,above,sloped] {power rails/readback}
+    ($(daphne.south west)+(0.78,-0.08)$);
+
+  \node[anchor=west,font=\scriptsize,text=noirmuted,text width=14.2cm]
+    at ($(current page.north west)+(0.75,-8.2)$)
+    {Tested at CERN VST: ONL runs the Keithley control, ZMQ client, and OPC-UA loop; DAPHNE runs firmware plus the legacy C++ ZMQ server. The final PDU/PLC/interlock replacement and Rust/RPU server path remain planned.};
+\end{tikzpicture}
+\end{frame}
+}
+
+\begin{frame}[t]{Development Gaps Before Production}
+\eyebrow{WHAT THE VST PROOF DOES NOT YET DEFINE}
+\vspace{1.4mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.49\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{panel alt}
+{\small\bfseries\textcolor{noircyan}{Interfaces to freeze}\par}
+\vspace{1mm}
+\gapline{Hardware database}{
+SC schema and versioned JSON exports for device, endpoint, rack/slot, IP, outlet, owner, and dependency edges.
+}
+\gapline{OPC-UA namespaces}{
+Generated NodeIds, units, limits, quality, timestamps, ownership, and alarm metadata; no hand-maintained map.
+}
+\gapline{Missing contracts}{
+ZMQ/protobuf schemas, command acknowledgements, error taxonomy, retry rules, lifecycle states, and health readbacks.
+}
+\end{beamercolorbox}
+
+\column{0.49\textwidth}
+\begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{panel alt}
+{\small\bfseries\textcolor{noircyan}{Control path still open}\par}
+\vspace{1mm}
+\gapline{Interlocks and sensors}{
+PDU/PLC state, smoke sensors, trip latches, bounds, write-enable logic, and fail-closed behavior.
+}
+\gapline{Migration layers}{
+C++ reference path, Rust candidate path, and RPU-owned AFE access need shadow-mode tests before writes.
+}
+\gapline{Integration holes}{
+Ignition import, historian policy, alarm classes, deployment, credentials, subnets, and power-cycle recovery.
+}
+\end{beamercolorbox}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Development Plan: Keep the Interface Stable}
+\eyebrow{THE PLAN IS AN INTEGRATION SEQUENCE, NOT A REWRITE}
+\vspace{3mm}
+
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[phase, draw=pendingorange] (p0) at (1.13,0) {\textcolor{pendingorange}{\bfseries 0. Define inventory}\\
+  HWDB endpoint model: owner, rack/slot, IP, outlet, interlock, sensor.};
+
+  \node[phase, draw=pocgreen] (p1) at (4.09,0) {\textcolor{pocgreen}{\bfseries 1. Read-only VST slice}\\
+  DAPHNE-15 C++ server, ZMQ/protobuf, C++ \mbox{OPC-UA} bridge, read utility.};
+
+  \node[phase, draw=pendingorange] (p2) at (7.05,0) {\textcolor{pendingorange}{\bfseries 2. Add guarded controls}\\
+  PDU/supply readback first; writes only after bounds, ownership, and interlock state.};
+
+  \node[phase, draw=pendingorange] (p3) at (10.01,0) {\textcolor{pendingorange}{\bfseries 3. SCADA projection}\\
+  Ignition browses OPC-UA; alarms, historian tags, and operator screens follow the namespace.};
+
+  \node[phase, draw=pendingorange] (p4) at (12.97,0) {\textcolor{pendingorange}{\bfseries 4. Production rollout}\\
+  Extend to PDS, CRP bottom/top, Gizmo, PDUs, smoke/interlocks, and SURF computing.};
+
+  \gaparrow[greenarrow]{p0}{p1}
+  \gaparrow[orangearrow]{p1}{p2}
+  \gaparrow[orangearrow]{p2}{p3}
+  \gaparrow[orangearrow]{p3}{p4}
+\end{tikzpicture}
+
+\vspace{3mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=6pt,rounded=true]{panel alt}
+{\footnotesize
+\textbf{Sources:} \repoDaphneSc\ for the tested C++/OPC-UA vertical slice; \repoScPlan\ for topology and SC workflow planning.
+}
+\end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[t]{Rust vs C++: Decisions Still Open}
+\eyebrow{C++ IS THE LIVE HARDWARE REFERENCE; RUST IS THE COMPATIBILITY AND RPU-SAFETY PATH}
+\vspace{1mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\begin{exampleblock}{Tested reference}
+\scriptsize
+\begin{itemize}\tightitem
+  \item Legacy C++ \texttt{daphneServer} replies on DAPHNE-15 \texttt{40001}.
+  \item \texttt{ControlEnvelopeV2} readbacks are the current compatibility contract.
+  \item C++ OPC-UA bridge reads live values on ONL.
+\end{itemize}
+\end{exampleblock}
+
+\column{0.32\textwidth}
+\begin{block}{Rust target}
+\scriptsize
+\begin{itemize}\tightitem
+  \item Protocol-compatible server on a separate endpoint until parity.
+  \item Linux aggregates status and enforces preflight.
+  \item AFE-affecting commands fail closed without a valid RPU backend.
+\end{itemize}
+\end{block}
+
+\column{0.32\textwidth}
+\begin{alertblock}{Open questions}
+\scriptsize
+\begin{itemize}\tightitem
+  \item What response parity lets Rust replace or front C++?
+  \item Does OPC-UA remain a small C++ bridge or move into Rust?
+  \item What RPU ABI test is required before any AFE write migration?
+\end{itemize}
+\end{alertblock}
+\end{columns}
+
+\vspace{2mm}
+{\footnotesize
+Boundary: C++ legacy service is the tested hardware reference; Rust is for protocol-compatible service evolution and RPU-owned safety.
+}
+\end{frame}
+
+\begin{frame}[t]{Slow Controls Workflow Started Today}
+\eyebrow{WORKFLOW FIRST: INVENTORY, EXPORT, GENERATE, THEN CONNECT}
+\vspace{3mm}
+
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[planned, text width=1.55cm, minimum height=0.98cm] (hwdb) at (0.84,0) {HWDB interface\\device + endpoint};
+  \node[planned, text width=1.55cm, minimum height=0.98cm] (export) at (3.16,0) {JSON exports\\topology + controls};
+  \node[planned, text width=1.55cm, minimum height=0.98cm] (gen) at (5.48,0) {generated diagrams\\endpoint config};
+  \node[proven, text width=1.55cm, minimum height=0.98cm] (comm) at (7.80,0) {ZMQ/protobuf\\DAPHNE VST};
+  \node[proven, text width=1.55cm, minimum height=0.98cm] (opc) at (10.12,0) {OPC-UA namespace\\live scalars};
+  \node[planned, text width=1.55cm, minimum height=0.98cm] (ign) at (12.44,0) {Ignition\\alarms + historian};
+
+  \gaparrow[orangearrow]{hwdb}{export}
+  \gaparrow[orangearrow]{export}{gen}
+  \gaparrow[greenarrow]{gen}{comm}
+  \gaparrow[greenarrow]{comm}{opc}
+  \gaparrow[orangearrow]{opc}{ign}
+\end{tikzpicture}
+
+\vspace{3mm}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{exampleblock}{What we have}
+\scriptsize
+\begin{itemize}\tightitem
+  \item Draft SC plan and topology view.
+  \item DAPHNE-15 VST path through C++ server and OPC-UA bridge.
+  \item OPC-UA smoke read: heartbeat, VBIAS, rails, and summary.
+\end{itemize}
+\end{exampleblock}
+
+\column{0.48\textwidth}
+\begin{alertblock}{What is missing}
+\scriptsize
+\begin{itemize}\tightitem
+  \item Final HWDB SC schema and exports for all subsystems.
+  \item PDU, smoke, interlock, Gizmo, CRP top/bottom, and PDS interfaces.
+  \item Ignition tag model, alarms, historian, and operator screens.
+\end{itemize}
+\end{alertblock}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Immediate Work Packages}
+\eyebrow{NEXT: KEEP THE GREEN PATH STABLE; TURN ORANGE ITEMS GREEN}
+\vspace{2mm}
+
+\begin{columns}[T,onlytextwidth]
+\column{0.32\textwidth}
+\workcard{pocgreen}{1. Harden the VST slice}{
+Reviewed ONL OPC-UA bridge; DAPHNE remains read-only until ownership is settled.
+}
+
+\column{0.32\textwidth}
+\workcard{pendingorange}{2. Extend the device model}{
+PDU outlet map, smoke status, and interlock nodes before write paths.
+}
+
+\column{0.32\textwidth}
+\workcard{pendingorange}{3. Close implementation choices}{
+Rust/C++ parity on DAPHNE-15; RPU ABI test before AFE writes.
+}
+\end{columns}
+
+\vspace{3mm}
+\begin{beamercolorbox}[wd=\linewidth,sep=5pt,rounded=true]{panel alt}
+{\scriptsize
+CERN VST has proven the read-only DAPHNE-to-OPC-UA path. The full SC topology remains orange until HWDB exports, PDU/interlocks, Rust/RPU ownership, and Ignition are exercised.
+}
+\end{beamercolorbox}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,35 @@
+% Adapted from diagram 02: parallel source / DPS authority, then supervision.
+% Solid arrows carry condition or operational information; dashed arrows are
+% status copies, not control or reset paths. No numbered authority levels.
+\node[point,fill=BlueTint,text width=4.3cm,minimum width=4.6cm,minimum height=0.95cm]
+  (field) at (7.05,-1.98) {Source systems\NodeDetail{Local sensing and protection}};
+\node[point,text width=4.9cm,minimum width=5.2cm,minimum height=0.95cm]
+  (facility) at (3.00,-3.30) {Facility or source owner\NodeDetail{Original alarm, response and reset}};
+\node[point,fill=Ink,draw=Ink,text=white,text width=4.9cm,
+  minimum width=5.2cm,minimum height=0.95cm]
+  (protection) at (11.10,-3.30) {Detector protection (DPS)\NodeDetail{Approved action, latch and reset}};
+\draw[DuneOrange,line width=1.4pt] (protection.south west) -- (protection.south east);
+\node[point,fill=BlueTint,text width=4.9cm,minimum width=5.2cm,minimum height=0.95cm]
+  (supervision) at (7.05,-4.66) {Slow Controls\NodeDetail{Time, quality and detector context}};
+\node[point,text width=4.9cm,minimum width=5.2cm,minimum height=0.95cm]
+  (runcontrol) at (3.00,-6.15) {Run Control\NodeDetail{Run state and orderly stop}};
+\node[point,text width=4.9cm,minimum width=5.2cm,minimum height=0.95cm]
+  (operations) at (11.10,-6.15) {Operations\NodeDetail{Notification to the responsible team}};
+
+\draw[flow] ($(field.south)+(-1.10,0)$) -- (5.95,-2.62) --
+  node[edgelabel] {Facility condition} (3.00,-2.62) -- (facility.north);
+\draw[protectionflow] ($(field.south)+(1.10,0)$) -- (8.15,-2.62) --
+  node[edgelabel,text=Ink] {Approved state} (11.10,-2.62) -- (protection.north);
+\draw[statusflow] (facility.south) -- (3.00,-4.00) --
+  node[edgelabel] {Alarm copy} (6.10,-4.00) -- ($(supervision.north)+(-0.95,0)$);
+\draw[statusflow] (protection.south) -- (11.10,-4.00) --
+  node[edgelabel] {DPS status} (8.00,-4.00) -- ($(supervision.north)+(0.95,0)$);
+\draw[flow] ($(supervision.south)+(-0.95,0)$) -- (6.10,-5.44) --
+  node[edgelabel] {Availability / stop} (3.00,-5.44) -- (runcontrol.north);
+\draw[flow] ($(supervision.south)+(0.95,0)$) -- (8.00,-5.44) --
+  node[edgelabel] {Notification} (11.10,-5.44) -- (operations.north);
+\draw[flow] (runcontrol.east) -- node[edgelabel] {Run impact} (operations.west);
+
+\node[small,font=\fontsize{8.6}{10.8}\selectfont,text width=14.1cm]
+  at (0,-7.00)
+  {DUNE acknowledgment applies to the displayed copy, not the source alarm or DPS reset.};

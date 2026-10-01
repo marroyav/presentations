@@ -1,0 +1,128 @@
+\providecommand{\dunenoirsetupfonts}{}
+\newcommand{\DuneNoirLocalFontPath}{fonts}
+
+\newcommand{\DuneNoirMonoFallback}{%
+  \IfFontExistsTF{JetBrainsMono Nerd Font Propo}{
+    \setmonofont{JetBrainsMono Nerd Font Propo}[Scale=0.92]
+  }{
+    \IfFontExistsTF{JetBrainsMono Nerd Font}{
+      \setmonofont{JetBrainsMono Nerd Font}[Scale=0.92]
+    }{
+      \setmonofont{Courier New}[Scale=0.92]
+    }
+  }
+}
+
+\newcommand{\DuneNoirSansFallback}{%
+  \IfFontExistsTF{IBM Plex Sans}{
+    \setsansfont{IBM Plex Sans}
+    \setmainfont{IBM Plex Sans}
+  }{
+    \IfFontExistsTF{Helvetica Neue}{
+      \setsansfont{Helvetica Neue}
+      \setmainfont{Helvetica Neue}
+    }{
+      \setsansfont{Arial}
+      \setmainfont{Arial}
+    }
+  }
+}
+
+\newcommand{\DuneNoirUseHelvetica}{%
+  \renewcommand{\dunenoirsetupfonts}{%
+    \IfFontExistsTF{Helvetica Neue}{
+      \setsansfont{Helvetica Neue}
+      \setmainfont{Helvetica Neue}
+    }{
+      \IfFontExistsTF{Helvetica}{
+        \setsansfont{Helvetica}
+        \setmainfont{Helvetica}
+      }{
+        \DuneNoirSansFallback
+      }
+    }
+    \DuneNoirMonoFallback
+  }%
+}
+
+\newcommand{\DuneNoirUseOpenSans}{%
+  \renewcommand{\dunenoirsetupfonts}{%
+    \IfFileExists{\DuneNoirLocalFontPath/OpenSans.ttf}{
+      \setsansfont{Open Sans Custom}[
+        Path=\DuneNoirLocalFontPath/,
+        UprightFont={OpenSans.ttf},
+        ItalicFont={OpenSans-Italic.ttf},
+        BoldFont={OpenSans.ttf},
+        BoldItalicFont={OpenSans-Italic.ttf},
+        BoldFeatures={FakeBold=1.45},
+        BoldItalicFeatures={FakeBold=1.45}
+      ]
+      \setmainfont{Open Sans Custom}[
+        Path=\DuneNoirLocalFontPath/,
+        UprightFont={OpenSans.ttf},
+        ItalicFont={OpenSans-Italic.ttf},
+        BoldFont={OpenSans.ttf},
+        BoldItalicFont={OpenSans-Italic.ttf},
+        BoldFeatures={FakeBold=1.45},
+        BoldItalicFeatures={FakeBold=1.45}
+      ]
+    }{
+      \DuneNoirSansFallback
+    }
+    \DuneNoirMonoFallback
+  }%
+}
+
+\newcommand{\DuneNoirUseDosis}{%
+  \renewcommand{\dunenoirsetupfonts}{%
+    \IfFileExists{\DuneNoirLocalFontPath/Dosis.ttf}{
+      \setsansfont{Dosis Custom}[
+        Path=\DuneNoirLocalFontPath/,
+        UprightFont={Dosis.ttf},
+        ItalicFont={Dosis.ttf},
+        BoldFont={Dosis.ttf},
+        BoldItalicFont={Dosis.ttf},
+        ItalicFeatures={FakeSlant=0.16},
+        BoldFeatures={FakeBold=1.6},
+        BoldItalicFeatures={FakeBold=1.6,FakeSlant=0.16}
+      ]
+      \setmainfont{Dosis Custom}[
+        Path=\DuneNoirLocalFontPath/,
+        UprightFont={Dosis.ttf},
+        ItalicFont={Dosis.ttf},
+        BoldFont={Dosis.ttf},
+        BoldItalicFont={Dosis.ttf},
+        ItalicFeatures={FakeSlant=0.16},
+        BoldFeatures={FakeBold=1.6},
+        BoldItalicFeatures={FakeBold=1.6,FakeSlant=0.16}
+      ]
+    }{
+      \DuneNoirSansFallback
+    }
+    \DuneNoirMonoFallback
+  }%
+}
+
+\newcommand{\DuneNoirUseKoHo}{%
+  \renewcommand{\dunenoirsetupfonts}{%
+    \IfFileExists{\DuneNoirLocalFontPath/KoHo-Regular.ttf}{
+      \setsansfont{KoHo Custom}[
+        Path=\DuneNoirLocalFontPath/,
+        UprightFont={KoHo-Regular.ttf},
+        BoldFont={KoHo-Bold.ttf},
+        ItalicFont={KoHo-Italic.ttf},
+        BoldItalicFont={KoHo-BoldItalic.ttf}
+      ]
+      \setmainfont{KoHo Custom}[
+        Path=\DuneNoirLocalFontPath/,
+        UprightFont={KoHo-Regular.ttf},
+        BoldFont={KoHo-Bold.ttf},
+        ItalicFont={KoHo-Italic.ttf},
+        BoldItalicFont={KoHo-BoldItalic.ttf}
+      ]
+    }{
+      \DuneNoirSansFallback
+    }
+    \DuneNoirMonoFallback
+  }%
+}

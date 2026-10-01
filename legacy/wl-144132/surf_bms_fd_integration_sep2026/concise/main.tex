@@ -1,0 +1,182 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+\usepackage{fontspec}
+\setsansfont{LiberationSans-Regular.ttf}[
+  Path=fonts/,
+  BoldFont=LiberationSans-Bold.ttf,
+  ItalicFont=LiberationSans-Italic.ttf,
+  BoldItalicFont=LiberationSans-BoldItalic.ttf
+]
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+
+\definecolor{DuneBlue}{HTML}{7CAED5}
+\definecolor{DuneOrange}{HTML}{F2682B}
+\definecolor{Ink}{HTML}{1C2834}
+\definecolor{DeepBlue}{HTML}{304E62}
+\definecolor{Rule}{HTML}{CED9E1}
+\definecolor{BlueTint}{HTML}{F0F6FB}
+
+\setbeamercolor{normal text}{fg=Ink,bg=white}
+\setbeamercolor{structure}{fg=DeepBlue}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\setbeamersize{text margin left=0.85cm,text margin right=0.85cm}
+\setbeamertemplate{background canvas}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[white] (current page.south west) rectangle (current page.north east);
+    \fill[DuneBlue] (current page.north west) rectangle
+      ($(current page.north east)+(0,-0.07)$);
+    \node[anchor=north west,inner sep=0pt,text=DeepBlue,
+      font=\fontsize{8}{10}\selectfont]
+      at ($(current page.north west)+(0.85,-0.35)$)
+      {DUNE FAR DETECTOR\quad /\quad SURF};
+    \node[anchor=south east,inner sep=0pt,text=DeepBlue,
+      font=\fontsize{8}{10}\selectfont]
+      at ($(current page.south east)+(-0.85,0.35)$)
+      {\insertframenumber\,/\,5};
+  \end{tikzpicture}%
+}
+\hypersetup{
+  pdftitle={SURF--DUNE facility interface},
+  pdfauthor={DUNE Far Detector},
+  colorlinks=true,urlcolor=DeepBlue
+}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\raggedright
+\newcommand{\bodyfont}{\fontsize{13}{17}\selectfont}
+\newcommand{\smallfont}{\fontsize{11}{14}\selectfont}
+\tikzset{
+  heading/.style={anchor=north west,inner sep=0pt,text=Ink,align=left,
+    font=\fontsize{22}{25}\selectfont\bfseries},
+  body/.style={anchor=north west,inner sep=0pt,text=Ink,align=left,
+    font=\fontsize{13}{17}\selectfont},
+  small/.style={anchor=north west,inner sep=0pt,text=DeepBlue,align=left,
+    font=\fontsize{11}{14}\selectfont},
+  label/.style={anchor=north west,inner sep=0pt,text=DeepBlue,align=left,
+    font=\fontsize{10}{12}\selectfont\bfseries},
+  point/.style={draw=DeepBlue,line width=0.65pt,fill=white,
+    minimum width=4.03cm,minimum height=1.40cm,text width=3.65cm,inner sep=5pt,
+    align=center,font=\fontsize{13}{16}\selectfont,text=Ink},
+  flow/.style={-{Latex[length=2.5mm,width=1.8mm]},draw=DeepBlue,line width=1pt}
+}
+\newenvironment{slidecanvas}{%
+  \begin{tikzpicture}[remember picture,overlay,
+    shift={($(current page.north west)+(0.85,-0.95)$)},x=1cm,y=1cm]
+}{\end{tikzpicture}}
+\newcommand{\twocolrow}[3]{%
+  \node[body,text width=4.05cm] at (0,#1) {#2};
+  \node[body,text width=9.9cm] at (4.4,#1) {#3};
+}
+
+\begin{document}
+
+% 1. Native TikZ diagram. Coordinates are in centimetres from the content origin.
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \node[heading] at (0,0) {SURF--DUNE interface};
+    \node[small] at (0,-0.92) {Proposed functional architecture};
+    \node[label] at (0,-1.50) {SURF / SOURCE};
+    \node[label] at (5.10,-1.50) {CONTROLLED BOUNDARY};
+    \node[label] at (10.20,-1.50) {DUNE};
+    \draw[Rule,line width=0.6pt] (0,-1.87) -- (14.3,-1.87);
+    \node[label] at (0,-2.10) {MONITORING};
+    \node[point] (bms) at (2.02,-3.20) {BMS points};
+    \node[point] (reader) at (7.12,-3.20) {Controlled reader};
+    \node[point] (sc) at (12.22,-3.20) {Slow Controls};
+    \draw[flow] (bms.east) -- (reader.west);
+    \draw[flow] (reader.east) -- (sc.west);
+    \node[label] at (0,-4.10) {DETECTOR PROTECTION};
+    \node[point] (source) at (2.02,-5.20) {Approved source};
+    \node[point] (input) at (7.12,-5.20) {Supervised\\DPS input};
+    \node[point] (action) at (12.22,-5.20) {DPS action};
+    \draw[flow] (source.east) -- (input.west);
+    \draw[flow] (input.east) -- (action.west);
+    \foreach \protectionnode in {source,input,action}
+      \draw[DuneOrange,line width=2pt] (\protectionnode.south west) -- (\protectionnode.south east);
+    \node[body,text width=14.3cm] at (0,-6.29)
+      {The protection path is intended to work without BMS monitoring.};
+    \node[small,font=\fontsize{9}{11}\selectfont] at (0,-7.0)
+      {BMS: building management system.\quad DPS: detector protection system.};
+  \end{slidecanvas}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \node[heading] at (0,0) {Alarm and action ownership};
+    \node[label] at (0,-1.45) {FUNCTION};
+    \node[label] at (4.4,-1.45) {AUTHORITY};
+    \foreach \position in {-1.92,-3.01,-4.10,-5.19,-6.28}
+      \draw[Rule,line width=0.6pt] (0,\position) -- (14.3,\position);
+    \twocolrow{-2.18}{Facility alarm}{Facility or source owner: response and reset.}
+    \twocolrow{-3.27}{DUNE alarm mirror}{DUNE operator: acknowledgment of the mirror.}
+    \twocolrow{-4.36}{Data acquisition}{Run Control: run state and orderly stop.}
+    \twocolrow{-5.45}{Detector protection}{DPS owner: permit, inhibit, trip and reset.}
+    \node[small,text width=14.3cm] at (0,-6.70)
+      {DUNE acknowledgment leaves source alarms and protection latches with their owners.};
+  \end{slidecanvas}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \node[heading] at (0,0) {Facility conditions};
+    \node[label] at (0,-1.40) {CONDITION};
+    \node[label] at (4.4,-1.40) {PROPOSED RESPONSE};
+    \foreach \position in {-1.87,-2.72,-3.57,-4.42,-5.27,-6.12,-6.97}
+      \draw[Rule,line width=0.6pt] (0,\position) -- (14.3,\position);
+    \twocolrow{-2.10}{Power / reserve}{Run Control initiates the agreed orderly stop.}
+    \twocolrow{-2.95}{Network loss}{Old data: STALE. Missing state: UNKNOWN.}
+    \twocolrow{-3.80}{Fire / low oxygen}{Emergency response; mapped DPS action.}
+    \twocolrow{-4.65}{Liquid argon leak}{Response follows an explicit source leak state.}
+    \twocolrow{-5.50}{Cooling / water}{Local protection follows the agreed mapping.}
+    \twocolrow{-6.35}{Weather / access}{SURF restrictions inform operations.}
+  \end{slidecanvas}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \node[heading] at (0,0) {Protocol choices};
+    \node[label] at (0,-1.45) {INTERFACE};
+    \node[label] at (3.15,-1.45) {CANDIDATE};
+    \node[label] at (6.0,-1.45) {INFORMATION FLOW};
+    \foreach \position in {-1.92,-3.10,-4.28,-5.46}
+      \draw[Rule,line width=0.6pt] (0,\position) -- (14.3,\position);
+    \node[body] at (0,-2.23) {BMS readout};
+    \node[body] at (3.15,-2.23) {BACnet/IP};
+    \node[body,text width=8.3cm] at (6.0,-2.23) {Reader queries selected source points.};
+    \node[body] at (0,-3.41) {DUNE view};
+    \node[body] at (3.15,-3.41) {OPC UA};
+    \node[body,text width=8.3cm] at (6.0,-3.41) {Reader publishes to Slow Controls.};
+    \node[body] at (0,-4.59) {Health};
+    \node[body] at (3.15,-4.59) {SNMPv3};
+    \node[body,text width=8.3cm] at (6.0,-4.59) {Supported power and network telemetry.};
+    \node[small] at (0,-6.03) {BACnet/SC depends on SURF support.};
+    \node[small] at (0,-6.69) {The DPS protection interface is defined separately.};
+  \end{slidecanvas}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \node[heading] at (0,0) {From concept to agreed interface};
+    \foreach \position/\number in {-1.65/1,-3.45/2,-5.25/3}{
+      \node[anchor=north west,inner sep=0pt,text=DuneOrange,
+        font=\fontsize{25}{28}\selectfont] at (0,\position) {\number};
+      \draw[Rule,line width=0.55pt] (1.1,\position-1.36) -- (14.3,\position-1.36);
+    }
+    \node[body,font=\fontsize{16}{19}\selectfont\bfseries]
+      at (1.1,-1.65) {Point meaning and ownership};
+    \node[body,text width=13.2cm] at (1.1,-2.31)
+      {Each point has a defined source, state and owner.};
+    \node[body,font=\fontsize{16}{19}\selectfont\bfseries]
+      at (1.1,-3.45) {Data path and timing};
+    \node[body,text width=13.2cm] at (1.1,-4.11)
+      {The interface defines read access, update rate and data age.};
+    \node[body,font=\fontsize{16}{19}\selectfont\bfseries]
+      at (1.1,-5.25) {Response and recovery};
+    \node[body,text width=13.2cm] at (1.1,-5.91)
+      {Checks cover loss, approved protection action and reset.};
+  \end{slidecanvas}
+\end{frame}
+
+\end{document}

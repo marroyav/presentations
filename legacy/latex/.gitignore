@@ -1,0 +1,26 @@
+.DS_Store
+
+# LaTeX and Beamer build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+missfont.log
+
+# Python caches from figure-generation scripts
+__pycache__/
+*.py[cod]
+
+# Rendered visual-review screenshots
+**/review*/**/*.png

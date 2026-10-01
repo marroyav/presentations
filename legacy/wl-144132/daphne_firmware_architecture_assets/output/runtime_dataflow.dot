@@ -1,0 +1,20 @@
+digraph "runtime_dataflow" {
+  graph [bgcolor="white", pad="0.10", nodesep="0.45", ranksep="0.80", splines="spline", overlap="false", rankdir="LR", fontname="Helvetica", fontsize="16", labelloc="t", labeljust="l"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  afe_block [shape="box", style="rounded,filled,dashed", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="AFE block\n5 AFEs · 40 ch"];
+  frontend_boundary [shape="box", style="rounded,filled", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Frontend\nboundary"];
+  xc_filter [shape="box", style="rounded,filled,dashed", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="XC filter /\nself-trigger"];
+  peak_descriptors [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Peak\ndescriptors"];
+  stc3_builder [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="STC3 record\nbuilder"];
+  two_lane_mux [shape="box", style="rounded,filled", fillcolor="#E9E0D8", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Two-lane\nmultiplexer"];
+  hermes_transport [shape="box", style="rounded,filled,dashed", fillcolor="#E9E0D8", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Hermes\ntransport"];
+  spy_buffer [shape="box", style="rounded,filled", fillcolor="#D9F0F0", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Spybuffer"];
+  afe_block -> frontend_boundary [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="digitized samples"];
+  frontend_boundary -> spy_buffer [color="#76B7B2", style="dotted", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="debug tap"];
+  frontend_boundary -> xc_filter [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="aligned sample words"];
+  xc_filter -> peak_descriptors [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="pulse-domain candidate"];
+  peak_descriptors -> stc3_builder [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="descriptor fields"];
+  stc3_builder -> two_lane_mux [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="framed records"];
+  two_lane_mux -> hermes_transport [color="#444444", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="payload stream"];
+}

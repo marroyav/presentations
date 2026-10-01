@@ -1,0 +1,40 @@
+\documentclass[tikz,border=4pt]{standalone}
+
+\input{deadtime_diagram_styles.tex}
+
+\begin{document}
+\pagecolor{noirbg}
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+\node[stage, minimum width=1.4cm] (arrival) at (0.0,0.8) {Trigger};
+\node[stage, minimum width=2.7cm] (gate) at (2.7,0.8) {Accept gate\\256-sample spacing};
+\node[future, minimum width=2.1cm] (ring) at (5.9,0.8) {2048-sample\\ring RAM};
+\node[future, minimum width=1.9cm] (queue) at (5.9,-1.55) {Trigger queue\\4 deep};
+\node[shared, minimum width=2.4cm] (packer) at (8.9,-1.55) {Deferred 512-sample\\packer};
+\node[shared, minimum width=3.2cm] (out) at (12.8,-1.55) {Shared output FIFO\\Hermes-input drain};
+
+\draw[flow] (arrival) -- (gate);
+\draw[flow] (gate) -- (ring);
+\draw[flow, rounded corners=5pt] (ring.south) -- ++(0,-0.45) -| (queue.north);
+\draw[flow] (queue) -- (packer);
+\draw[flow] (packer) -- (out);
+
+\node[reject, draw=noirmint] (space) at (2.7,-3.05) {\texttt{spacing\_count}\\\texttt{ring\_count}};
+\node[reject, draw=noirmint] (queuec) at (5.9,-3.05) {\texttt{queue\_count}};
+\node[reject, draw=noircyan] (outc) at (12.8,-3.05) {\texttt{output\_count}\\\texttt{full\_count}};
+\draw[accent] (gate.south) -- (space.north);
+\draw[accent] (queue.south) -- (queuec.north);
+\draw[subtle] (out.south) -- (outc.north);
+
+\begin{pgfonlayer}{background}
+  \node[
+    draw=noirmint!70,
+    rounded corners=8pt,
+    fill=noirpanel,
+    fit=(arrival)(out)(space)(queuec)(outc),
+    inner sep=9pt
+  ] {};
+\end{pgfonlayer}
+
+\end{tikzpicture}
+\end{document}

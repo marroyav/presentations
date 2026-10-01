@@ -1,0 +1,87 @@
+\documentclass[aspectratio=169,10pt]{beamer}
+\input{deck-style}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \SlideTitle{How facility signals reach DUNE}
+      {Proposed paths for monitoring and detector protection.}
+    \input{figures/architecture}
+  \end{slidecanvas}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \SlideTitle{Alarm flow and ownership}
+      {Information moves through the experiment; authority stays with the owner.}
+    \input{figures/alarm-flow}
+  \end{slidecanvas}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \SlideTitle{Facility conditions}
+      {The source definition and agreed cause and effect determine the response.}
+    \node[label] at (0,-1.70) {CONDITION};
+    \node[label] at (4.05,-1.70) {POSSIBLE DUNE RESPONSE};
+    \foreach \position in {-2.05,-2.76,-3.47,-4.18,-4.89,-5.60,-6.31}
+      \draw[Rule,line width=0.45pt] (0,\position) -- (14.1,\position);
+    \TableRow{-2.27}{Power / reserve}{An agreed request for an orderly DAQ stop.}
+    \TableRow{-2.98}{Network / BMS loss}{Stale or unknown data; the loss is visible.}
+    \TableRow{-3.69}{Fire / low oxygen}{Source response; detector action only where approved.}
+    \TableRow{-4.40}{Cryogenic / LAr leak}{Response follows an explicitly defined source condition.}
+    \TableRow{-5.11}{Cooling / water}{Local protection; agreed DPS action where applicable.}
+    \TableRow{-5.82}{Weather / access}{SURF operating restrictions guide the response.}
+    \node[small,text width=14.1cm] at (0,-6.75)
+      {Loss of monitoring is a design case for the independent protection path.};
+  \end{slidecanvas}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \SlideTitle{Proposed data exchange}
+      {Protocol support and source ownership remain to be confirmed.}
+    \node[label] at (0,-1.70) {INTERFACE};
+    \node[label] at (3.15,-1.70) {CANDIDATE};
+    \node[label] at (6.0,-1.70) {INFORMATION FLOW};
+    \foreach \position in {-2.05,-3.13,-4.21,-5.29}
+      \draw[Rule,line width=0.45pt] (0,\position) -- (14.1,\position);
+    \node[body] at (0,-2.43) {BMS readout};
+    \node[body] at (3.15,-2.43) {BACnet/IP};
+    \node[body,text width=8.1cm] at (6.0,-2.43) {Reader queries selected source points.};
+    \node[body] at (0,-3.51) {DUNE view};
+    \node[body] at (3.15,-3.51) {OPC UA};
+    \node[body,text width=8.1cm] at (6.0,-3.51) {Reader publishes to Slow Controls.};
+    \node[body] at (0,-4.59) {Equipment health};
+    \node[body] at (3.15,-4.59) {SNMPv3};
+    \node[body,text width=8.1cm] at (6.0,-4.59) {Supported power and network telemetry.};
+    \node[small,text width=14.1cm] at (0,-5.84)
+      {Read access exchanges requests and replies without granting control authority.};
+    \node[small,text width=14.1cm] at (0,-6.34)
+      {BACnet/SC is an option where supported. The DPS interface is defined separately.};
+  \end{slidecanvas}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{slidecanvas}
+    \SlideTitle{From concept to agreed interface}
+      {Three areas for discussion with the source and experiment teams.}
+    \foreach \position/\number in {-1.95/1,-3.50/2,-5.05/3}{
+      \node[anchor=north west,inner sep=0pt,text=DeepBlue,
+        font=\fontsize{16}{19}\selectfont] at (0,\position) {\number};
+      \draw[Rule,line width=0.45pt] (1.0,\position-1.13) -- (14.1,\position-1.13);
+    }
+    \node[subheading] at (1.0,-1.95) {Point meaning and ownership};
+    \node[body,text width=13.1cm] at (1.0,-2.48)
+      {Each point has a defined source, state, quality and owner.};
+    \node[subheading] at (1.0,-3.50) {Data path and timing};
+    \node[body,text width=13.1cm] at (1.0,-4.03)
+      {The interface describes read access, update rate and data age.};
+    \node[subheading] at (1.0,-5.05) {Response and recovery};
+    \node[body,text width=13.1cm] at (1.0,-5.58)
+      {Checks cover alarm routing, loss, approved protection action and reset.};
+  \end{slidecanvas}
+\end{frame}
+
+\end{document}

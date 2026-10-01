@@ -1,0 +1,45 @@
+digraph "clock_topology" {
+  graph [bgcolor="white", pad="0.10", nodesep="0.55", ranksep="1.00", splines="spline", overlap="false", rankdir="LR", fontname="Helvetica", fontsize="16", labelloc="t", labeljust="l"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  subgraph cluster_clock {
+    graph [label="Clock", bgcolor="#FFF9E7", color="#D0D0D0", style="rounded"];
+    local_clk100 [shape="ellipse", style="rounded,filled,bold", fillcolor="#FFF7D6", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Local\nCLK100"];
+    rx0_tmg [shape="ellipse", style="rounded,filled,bold", fillcolor="#FFF7D6", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Timing link\nrx0_tmg"];
+  }
+  subgraph cluster_timing {
+    graph [label="Timing", bgcolor="#FFF1E4", color="#D0D0D0", style="rounded"];
+    endpoint_core [shape="box", style="rounded,filled,dashed", fillcolor="#FCE7D3", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Endpoint /\nPDTS core"];
+    clock_select_mmcm [shape="box", style="rounded,filled,dashed", fillcolor="#FCE7D3", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Clock select\n+ MMCM"];
+  }
+  subgraph cluster_frontend {
+    graph [label="Frontend", bgcolor="#F2FAEE", color="#D0D0D0", style="rounded"];
+    frontend_boundary [shape="box", style="rounded,filled", fillcolor="#E8F4E2", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Frontend\nboundary"];
+  }
+  subgraph cluster_trigger {
+    graph [label="Trigger", bgcolor="#FCEBEC", color="#D0D0D0", style="rounded"];
+    trigger_pipeline [shape="box", style="rounded,filled", fillcolor="#F8DCDD", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Trigger\npipeline"];
+  }
+  subgraph cluster_transport {
+    graph [label="Transport", bgcolor="#F3ECE8", color="#D0D0D0", style="rounded"];
+    transport_subsystem [shape="box", style="rounded,filled", fillcolor="#E9E0D8", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Readout /\ntransport"];
+  }
+  subgraph cluster_debug {
+    graph [label="Debug", bgcolor="#EEF9F9", color="#D0D0D0", style="rounded"];
+    spy_buffer [shape="box", style="rounded,filled", fillcolor="#D9F0F0", color="#5A5A5A", penwidth="1.7", fontname="Helvetica", fontsize="12", margin="0.16,0.10", label="Spybuffer"];
+  }
+  local_clk100 -> clock_select_mmcm [color="#59A14F", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="local reference"];
+  rx0_tmg -> endpoint_core [color="#59A14F", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="timing ingress"];
+  endpoint_core -> clock_select_mmcm [color="#59A14F", style="solid", penwidth="1.9", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="recovered 62.5 MHz"];
+  clock_select_mmcm -> frontend_boundary [color="#59A14F", style="solid", penwidth="2.0", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="capture clocks"];
+  clock_select_mmcm -> trigger_pipeline [color="#59A14F", style="solid", penwidth="2.0", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="trigger domain"];
+  clock_select_mmcm -> transport_subsystem [color="#59A14F", style="solid", penwidth="2.0", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="readout domain"];
+  clock_select_mmcm -> spy_buffer [color="#59A14F", style="solid", penwidth="2.0", fontname="Helvetica", fontsize="10.5", arrowsize="0.9", label="spy domain"];
+  endpoint_core -> frontend_boundary [color="#8CD17D", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  endpoint_core -> trigger_pipeline [color="#8CD17D", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  endpoint_core -> spy_buffer [color="#8CD17D", style="dashed", penwidth="1.7", fontname="Helvetica", fontsize="10.5", arrowsize="0.9"];
+  { rank=same; local_clk100; rx0_tmg; }
+  { rank=same; endpoint_core; }
+  { rank=same; clock_select_mmcm; }
+  { rank=same; frontend_boundary; trigger_pipeline; transport_subsystem; spy_buffer; }
+}

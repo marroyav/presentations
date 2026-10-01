@@ -1,0 +1,248 @@
+{
+  "views": {
+    "subsystem_hierarchy": {
+      "title": "daphne-firmware subsystem hierarchy",
+      "relations": ["contains"],
+      "rankdir": "TB",
+      "cluster_by": null,
+      "graph_attrs": {
+        "nodesep": "0.55",
+        "ranksep": "0.85",
+        "pad": "0.10"
+      },
+      "show_edge_labels": false,
+      "node_overrides": {
+        "repo_firmware": {"label": "daphne-firmware"},
+        "verification_layer": {"label": "Verification\\nformal + smoke"},
+        "build_system": {"label": "Build system"},
+        "fusesoc_graph": {"label": "FuseSoC\\nintent graph"},
+        "linux_chain": {"label": "Native Linux\\nbuild"},
+        "wsl_chain": {"label": "WSL + Windows\\nbuild"},
+        "trigger_pipeline": {"label": "Trigger\\npipeline"},
+        "transport_subsystem": {"label": "Readout /\\ntransport"},
+        "frontend_boundary": {"label": "Frontend\\nboundary"},
+        "timing_subsystem": {"label": "Timing\\nsubsystem"},
+        "analog_control": {"label": "Analog\\ncontrol"}
+      },
+      "node_ids": [
+        "repo_firmware",
+        "control_plane",
+        "analog_control",
+        "frontend_boundary",
+        "timing_subsystem",
+        "trigger_pipeline",
+        "transport_subsystem",
+        "spy_buffer",
+        "verification_layer",
+        "build_system"
+      ],
+      "ranks": [
+        ["repo_firmware"],
+        ["control_plane", "analog_control", "frontend_boundary", "timing_subsystem", "trigger_pipeline", "transport_subsystem", "spy_buffer", "verification_layer", "build_system"]
+      ]
+    },
+    "runtime_dataflow": {
+      "title": "daphne-firmware runtime acquisition path",
+      "relations": ["streams_to", "observes"],
+      "rankdir": "LR",
+      "cluster_by": null,
+      "graph_attrs": {
+        "nodesep": "0.45",
+        "ranksep": "0.80",
+        "pad": "0.10"
+      },
+      "show_edge_labels": true,
+      "label_mode": "label",
+      "node_overrides": {
+        "afe_block": {"label": "AFE block\\n5 AFEs · 40 ch"},
+        "frontend_boundary": {"label": "Frontend\\nboundary"},
+        "xc_filter": {"label": "XC filter /\\nself-trigger"},
+        "peak_descriptors": {"label": "Peak\\ndescriptors"},
+        "stc3_builder": {"label": "STC3 record\\nbuilder"},
+        "two_lane_mux": {"label": "Two-lane\\nmultiplexer"},
+        "hermes_transport": {"label": "Hermes\\ntransport"},
+        "spy_buffer": {"label": "Spybuffer"}
+      },
+      "node_ids": [
+        "afe_block",
+        "frontend_boundary",
+        "xc_filter",
+        "peak_descriptors",
+        "stc3_builder",
+        "two_lane_mux",
+        "hermes_transport",
+        "spy_buffer"
+      ]
+    },
+    "clock_topology": {
+      "title": "daphne-firmware clock and timing topology",
+      "relations": ["clock_source", "clocks", "qualifies"],
+      "rankdir": "LR",
+      "cluster_by": "group",
+      "graph_attrs": {
+        "nodesep": "0.55",
+        "ranksep": "1.00",
+        "pad": "0.10"
+      },
+      "show_edge_labels": true,
+      "label_mode": "label",
+      "hide_edge_labels_for_relations": ["qualifies"],
+      "node_overrides": {
+        "local_clk100": {"label": "Local\\nCLK100"},
+        "rx0_tmg": {"label": "Timing link\\nrx0_tmg"},
+        "endpoint_core": {"label": "Endpoint /\\nPDTS core"},
+        "clock_select_mmcm": {"label": "Clock select\\n+ MMCM"},
+        "frontend_boundary": {"label": "Frontend\\nboundary"},
+        "trigger_pipeline": {"label": "Trigger\\npipeline"},
+        "transport_subsystem": {"label": "Readout /\\ntransport"},
+        "spy_buffer": {"label": "Spybuffer"}
+      },
+      "node_ids": [
+        "local_clk100",
+        "rx0_tmg",
+        "endpoint_core",
+        "clock_select_mmcm",
+        "frontend_boundary",
+        "trigger_pipeline",
+        "transport_subsystem",
+        "spy_buffer"
+      ],
+      "ranks": [
+        ["local_clk100", "rx0_tmg"],
+        ["endpoint_core"],
+        ["clock_select_mmcm"],
+        ["frontend_boundary", "trigger_pipeline", "transport_subsystem", "spy_buffer"]
+      ]
+    },
+    "readiness_contracts": {
+      "title": "daphne-firmware readiness contracts",
+      "relations": ["configures", "asserts", "enables", "qualifies"],
+      "rankdir": "LR",
+      "cluster_by": "group",
+      "graph_attrs": {
+        "nodesep": "0.45",
+        "ranksep": "0.95",
+        "pad": "0.10"
+      },
+      "show_edge_labels": true,
+      "label_mode": "label",
+      "hide_edge_labels_for_relations": ["enables"],
+      "node_overrides": {
+        "control_plane": {"label": "Control\\nplane"},
+        "analog_control": {"label": "Analog\\ncontrol"},
+        "timing_subsystem": {"label": "Timing\\nsubsystem"},
+        "frontend_boundary": {"label": "Frontend\\nboundary"},
+        "config_ready": {"label": "config_ready", "shape": "hexagon"},
+        "timing_ready": {"label": "timing_ready", "shape": "hexagon"},
+        "alignment_ready": {"label": "alignment_ready", "shape": "hexagon"},
+        "trigger_enable": {"label": "trigger_enable", "shape": "hexagon"},
+        "spy_enable": {"label": "spy_enable", "shape": "hexagon"},
+        "trigger_pipeline": {"label": "Trigger\\npipeline"},
+        "spy_buffer": {"label": "Spybuffer"}
+      },
+      "node_ids": [
+        "control_plane",
+        "analog_control",
+        "timing_subsystem",
+        "frontend_boundary",
+        "config_ready",
+        "timing_ready",
+        "alignment_ready",
+        "trigger_enable",
+        "spy_enable",
+        "trigger_pipeline",
+        "spy_buffer"
+      ],
+      "exclude_edges": [
+        ["control_plane", "trigger_pipeline"],
+        ["control_plane", "spy_buffer"]
+      ],
+      "ranks": [
+        ["control_plane"],
+        ["analog_control", "timing_subsystem", "frontend_boundary"],
+        ["config_ready", "timing_ready", "alignment_ready"],
+        ["trigger_enable", "spy_enable"],
+        ["trigger_pipeline", "spy_buffer"]
+      ]
+    },
+    "build_flow": {
+      "title": "daphne-firmware build flow",
+      "relations": ["contains", "drives", "produces"],
+      "rankdir": "LR",
+      "cluster_by": "group",
+      "graph_attrs": {
+        "nodesep": "0.55",
+        "ranksep": "0.85",
+        "pad": "0.10"
+      },
+      "show_edge_labels": true,
+      "label_mode": "label",
+      "node_overrides": {
+        "build_system": {"label": "Build\\nsystem"},
+        "fusesoc_graph": {"label": "FuseSoC\\nintent graph"},
+        "linux_chain": {"label": "Native Linux\\nentrypoint"},
+        "wsl_chain": {"label": "WSL + Windows\\nentrypoint"},
+        "implementation_backend": {"label": "Vivado + XSCT\\nimplementation"},
+        "artifact_bundle": {"label": "Artifacts\\n.bit .bin .xsa .dtbo"}
+      },
+      "node_ids": [
+        "build_system",
+        "fusesoc_graph",
+        "linux_chain",
+        "wsl_chain",
+        "implementation_backend",
+        "artifact_bundle"
+      ],
+      "exclude_edges": [
+        ["build_system", "linux_chain"],
+        ["build_system", "wsl_chain"],
+        ["build_system", "implementation_backend"],
+        ["build_system", "artifact_bundle"]
+      ],
+      "ranks": [
+        ["build_system", "fusesoc_graph"],
+        ["linux_chain", "wsl_chain"],
+        ["implementation_backend"],
+        ["artifact_bundle"]
+      ]
+    },
+    "descriptor_identity": {
+      "title": "daphne-firmware descriptor identity path",
+      "relations": ["streams_to", "configures", "qualifies"],
+      "rankdir": "LR",
+      "cluster_by": null,
+      "graph_attrs": {
+        "nodesep": "0.50",
+        "ranksep": "0.90",
+        "pad": "0.10"
+      },
+      "show_edge_labels": true,
+      "label_mode": "label",
+      "node_overrides": {
+        "frontend_boundary": {"label": "Aligned waveform\\nper channel"},
+        "xc_filter": {"label": "XC self-trigger"},
+        "peak_descriptors": {"label": "Peak descriptor\\ncalculator"},
+        "descriptor_sample_start": {"label": "sample_start", "shape": "hexagon"},
+        "stc3_builder": {"label": "STC3 record\\nbuilder"},
+        "descriptor_frame_timestamp": {"label": "frame_timestamp\\n(trigger_timestamp - 64)", "shape": "hexagon"},
+        "descriptor_channel_identity": {"label": "geoID +\\nchannel_id", "shape": "hexagon"},
+        "descriptor_identity_key": {"label": "Descriptor key\\n(geoID, channel_id,\\nframe_timestamp + sample_start)", "penwidth": "2.0"},
+        "descriptor_handoff_fix": {"label": "Fixed Time_Start handoff\\ncommit current descriptor\\nbefore next trigger", "shape": "note", "fillcolor": "#FFF1E4", "color": "#C17D11"}
+      },
+      "node_ids": [
+        "frontend_boundary",
+        "xc_filter",
+        "peak_descriptors",
+        "descriptor_sample_start",
+        "stc3_builder",
+        "descriptor_frame_timestamp",
+        "descriptor_channel_identity",
+        "descriptor_identity_key",
+        "descriptor_handoff_fix"
+      ],
+      "ranks": [
+        ["descriptor_sample_start", "descriptor_frame_timestamp", "descriptor_channel_identity"]
+      ]
+    }
+  }
+}
