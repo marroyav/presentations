@@ -1,0 +1,58 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\setbeamercolor{normal text}{fg=DuneEditorialText,bg=DuneEditorialCanvas}
+\setbeamercolor{frametitle}{fg=DuneEditorialText,bg=DuneEditorialCanvas}
+\setbeamertemplate{background canvas}{\color{DuneEditorialCanvas}\rule{\paperwidth}{\paperheight}}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{\hspace{0.65cm}\textcolor{DuneEditorialMuted}{\footnotesize HD/VD DPS · Draft 0.1 · 22 September 2026}\hfill\textcolor{DuneEditorialMuted}{\footnotesize\insertframenumber}\hspace{0.65cm}\vspace{0.18cm}}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.7cm,text margin right=0.7cm}
+\title{Define the DPS boundaries first}
+\author{Prepared for Manuel Arroyave}
+\date{22 September 2026}
+\hypersetup{pdftitle={FD DPS: definitions and boundaries},pdfauthor={Draft prepared for Manuel Arroyave}}
+\renewcommand{\DuneDiagramCaption}[1]{\par\smallskip{\small\color{DuneEditorialMuted}#1\par}}
+\begin{document}
+
+\begin{frame}[plain]
+  % The reference slide retains its own title, caption, date and page label.
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[inner sep=0pt] at (current page.center)
+      {\includegraphics[width=\paperwidth,height=\paperheight]{diagrams/01_reference_architecture.pdf}};
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Smoke is an input. The PDU is an actuator.}
+  \centering
+  \includegraphics[width=\textwidth,height=0.67\textheight,keepaspectratio]{diagrams/04_rack_protection.pdf}
+  \DuneDiagramCaption{Map each outlet to its equipment. Keep required controls powered.}
+\end{frame}
+
+\begin{frame}{Start from the defined interfaces}
+  \centering
+  \includegraphics[width=0.98\textwidth,height=0.73\textheight,keepaspectratio]{diagrams/02_physical_interfaces.pdf}
+  \DuneDiagramCaption{A power boundary, a control interface and an ownership boundary are different things.}
+\end{frame}
+
+\begin{frame}{Warm electronics lose power; controls need backup}
+  \centering
+  \includegraphics[width=0.94\textwidth,height=0.72\textheight,keepaspectratio]{diagrams/03_power_domains.pdf}
+  \DuneDiagramCaption{DAQ chillers are unbacked: battery reserve alone does not define the shutdown window.}
+\end{frame}
+
+\begin{frame}{Five agreements make the interface precise}
+  \begin{enumerate}
+    \item \textbf{Limits:} the subsystem defines what can damage it.
+    \item \textbf{Condition:} the source team owns what it reports.
+    \item \textbf{Response:} DPS connects the agreed detector actions.
+    \item \textbf{Endpoint:} identify what acts and how we verify it.
+    \item \textbf{Failure:} define loss behavior and permission to restart.
+  \end{enumerate}
+  \medskip
+  \textbf{First result:} one boundary map, with an owner on both sides.\par
+  \smallskip
+  {\small Proposed rules. Detailed protocols and registers follow.}
+\end{frame}
+\end{document}

@@ -1,0 +1,108 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+% Lower the title rule so it clears the Fermilab logo.
+\expandafter\patchcmd\csname beamer@@tmpl@title page\endcsname
+  {(-2.8,0.79)}{(-2.8,0.50)}{}
+  {\PackageError{grouped32}{Could not lower the title rule}{Check the shared title template.}}
+\makeatother
+% Deck-local orange; leave the shared theme and other decks unchanged.
+\DuneUseReadableOrange
+\title{Self-trigger, with full-stream fidelity}
+\subtitle{Find pulses in the FPGA. \\ Match them in the DAQ.}
+\author{DAPHNE / PDS}
+\date{15 September 2026}
+\newcommand{\mydate}{15 September 2026}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+\newcommand{\firmwaresource}{https://github.com/DUNE-DAQ/daphne-firmware/tree/7a25777e}
+\begin{document}
+\begin{frame}[plain]\titlepage\end{frame}
+
+\begin{frame}{The second pulse continues in the next window}
+  \centering
+  \includegraphics[width=\textwidth,height=0.54\textheight,keepaspectratio]{figures/pulse-windows.pdf}\par
+  \includegraphics[width=0.94\textwidth,height=0.24\textheight,keepaspectratio]{diagrams/windows.pdf}\par
+  \DuneDiagramCaption{Illustration: the boundary splits the record, while continuation keeps the second pulse's tail.}
+\end{frame}
+
+\begin{frame}{The milestone is agreement with full stream}
+  \DuneBigStatement{THE GOAL}{Keep the same signal.\\ Make it easier to trigger on.}
+    {Match signal timing and charge, while giving the DAQ peak descriptors for online coincidences.}
+\end{frame}
+
+\begin{frame}{Full stream leaves pulse finding to the DAQ}
+  \centering
+  \includegraphics[width=\textwidth,height=0.64\textheight,keepaspectratio]{diagrams/raw-processing.pdf}\par
+  \DuneDiagramCaption{Raw waveforms still need online pulse finding before the DAQ can compare photon times.}
+\end{frame}
+
+\input{daq-budget.tex}
+
+\begin{frame}{Self-trigger moves that work into the FPGA}
+  \centering
+  \includegraphics[width=\textwidth,height=0.64\textheight,keepaspectratio]{diagrams/preprocessing.pdf}\par
+  \DuneDiagramCaption{Peak descriptors travel with the waveform.\\ The DAQ can use their times without repeating pulse finding on every sample.}
+\end{frame}
+
+\begin{frame}{Coincidences can form local PDS trigger activity}
+  \centering
+  \begin{tikzpicture}[x=1cm,y=1cm]
+    \fill[DuneSky!15!DuneBackground] (4.2,0.3) rectangle (5.2,3.3);
+    \foreach \y/\label in {3/A,2/B,1/C} {
+      \node[text=DuneText,anchor=east] at (0.9,\y) {Channel \label};
+      \draw[DuneTextMuted,line width=0.8pt] (1.2,\y) -- (8.3,\y);
+    }
+    \foreach \x/\y in {2/3,4.5/3,4.8/2,4.6/1,7.3/1} {
+      \fill[DuneEditorialAccent] (\x,\y) circle (0.09);
+    }
+    \node[text=DuneSky,anchor=south] at (4.7,3.5) {Same time window};
+    \draw[-Latex,DuneSky,line width=1.2pt] (5.3,2) -- (8.7,2);
+    \node[fill=DuneEditorialAccent,text=DuneOnAccent,rounded corners,align=center,inner sep=10pt] at (10.2,2) {Local PDS\\trigger activity};
+    \draw[-Latex,DuneTextMuted,line width=0.8pt] (1.2,0.15) -- (8.3,0.15);
+    \node[text=DuneTextMuted,anchor=north] at (4.7,0.05) {Descriptor time};
+  \end{tikzpicture}\par
+  \DuneDiagramCaption{Illustration. Compare times across channels on a shared clock.\\ Tune the coincidence window and multiplicity using signal and background studies.}
+\end{frame}
+
+\begin{frame}{Four channels share one builder}
+  \centering
+  \includegraphics[width=\textwidth,height=0.64\textheight,keepaspectratio]{diagrams/architecture.pdf}\par
+  \DuneDiagramCaption{Each builder packs waveform records and calculates peak descriptors. Eight builders serve 32 channels.}
+\end{frame}
+
+\begin{frame}{Replay the same signals through all three}
+  \centering
+  \includegraphics[width=\textwidth,height=0.64\textheight,keepaspectratio]{diagrams/milestone.pdf}\par
+  \DuneDiagramCaption{Use the same surface full-stream input, thresholds, and output limits.\\ Compare recovered pulses, peak times, and charge. Matched three-way results are still needed.}
+\end{frame}
+
+\begin{frame}{The peak descriptors match the input waveform}
+  \DuneBigStatement{FRESH RTL REPLAY}{379,656 descriptor words checked.}
+    {An independent calculation checks each saved record's peak summaries against the known input.}
+  \DuneDiagramCaption{Five deterministic cases. This checks descriptor correctness; it does not yet test local coincidence activity.}
+\end{frame}
+
+\input{results-slides.tex}
+\input{window-formats.tex}
+
+\begin{frame}{LArSoft supplies the detector-side load}
+  \centering
+  \includegraphics[width=\textwidth,height=0.64\textheight,keepaspectratio]{diagrams/larsoft.pdf}\par
+  \DuneDiagramCaption{Use physical activity to test pulse finding and coincidences. The grouped RTL replay currently uses synthetic waveforms.}
+\end{frame}
+
+\begin{frame}{The VD cathode sees the most activity}
+  \centering
+  \includegraphics[width=\textwidth,height=0.68\textheight,keepaspectratio]{figures/larsoft-rates.pdf}\par
+  \DuneDiagramCaption{Mean candidate rates above 0.7 PE. Intrinsic LAr: eight shards. Gamma addition: one window per source family, still a pilot.}
+\end{frame}
+
+\begin{frame}{Show the same signals in both readouts}
+  \centering
+  \includegraphics[width=\textwidth,height=0.64\textheight,keepaspectratio]{diagrams/milestone.pdf}\par
+  \DuneDiagramCaption{The milestone test: matched waveforms and backgrounds, then matched signal timing, charge, and local trigger activity.}
+\end{frame}
+
+\appendix
+\input{backup.tex}
+\end{document}

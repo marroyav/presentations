@@ -1,0 +1,14 @@
+digraph architecture {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.12", nodesep="0.22", ranksep="0.5"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=19, margin="0.18,0.16", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  a [label="Channel 0\nSample ring"]; b [label="Channel 1\nSample ring"];
+  c [label="Channel 2\nSample ring"]; d [label="Channel 3\nSample ring"];
+  {rank=same; a; b; c; d;}
+  builder [label="One shared builder\n312.5 MHz", fillcolor="{{editorial-accent}}", color="{{editorial-accent}}"];
+  store [label="Packet slots\n32 per channel\n62.5 MHz"];
+  lane [label="One output lane\nWhole packets", fillcolor="{{paper}}", color="{{paper}}"];
+  a -> builder; b -> builder; c -> builder; d -> builder;
+  builder -> store [label="Clock-crossing FIFO", fontname="Helvetica", fontsize=14, fontcolor="{{text}}"];
+  store -> lane;
+}

@@ -1,0 +1,12 @@
+digraph milestone {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", ranksep="0.6", nodesep="0.55"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=22, margin="0.2,0.23", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  input [label="Same full-stream input\nSurface detector sample", fillcolor="{{paper}}", color="{{paper}}"];
+  raw [label="Full stream\nReference pulse finding"];
+  old [label="Self-trigger 1024\nFixed window"];
+  st [label="Self-trigger 512\nRing buffer + continuation"];
+  compare [label="Compare the same signals\nTime / charge / efficiency", fillcolor="{{editorial-accent}}", color="{{editorial-accent}}"];
+  input -> old; input -> st; input -> raw;
+  old -> compare; st -> compare; raw -> compare;
+}

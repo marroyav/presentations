@@ -1,0 +1,17 @@
+
+\begin{frame}{Saving samples is not the same as finding pulses}
+  \centering
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Readout & Sample retention & Pulse finding \\
+    \midrule
+    Self-trigger 1024 & Limited by busy windows & FPGA descriptors \\
+    Self-trigger 512 + ring & Buffers reduce losses & FPGA descriptors \\
+    Full stream & Every sample$^{*}$ & DAQ must find the peaks \\
+    \bottomrule
+  \end{tabular}\par\medskip
+  Full stream is the sample reference.\par\smallskip
+  Self-trigger moves pulse finding into the FPGA.\par\medskip
+  \DuneDiagramCaption{$^{*}$Assuming lossless transport and storage. Saving all samples does not guarantee finding every pulse online.}
+\end{frame}

@@ -1,0 +1,19 @@
+digraph responsibility {
+  graph [rankdir=LR, bgcolor="{{editorial-canvas}}", pad=0.15, nodesep=0.40, ranksep=0.4,
+    fontname="DejaVu Sans", fontsize=14, label="Functional paths · physical routes remain to be assigned", labelloc=b,
+    fontcolor="{{editorial-muted}}"];
+  node [shape=box, style="rounded,filled", fillcolor="{{editorial-sky}}", color="{{editorial-muted}}",
+    fontcolor="{{editorial-text}}", fontname="DejaVu Sans", fontsize=20, margin="0.14,0.12", penwidth=1.25];
+  edge [color="{{editorial-text}}", penwidth=1.25, arrowsize=0.8, fontname="DejaVu Sans", fontsize=14,
+    fontcolor="{{editorial-text}}"];
+  source [label="Source\nCondition"];
+  dps [label="DPS / local\nProtection logic", fillcolor="{{editorial-warm}}"];
+  equipment [label="Subsystem\nAction endpoint"];
+  sc [label="Slow Controls\nMonitor / configure"];
+  {rank=same; dps; sc;}
+  source -> dps [label="input"];
+  dps -> equipment [label="action /\nfeedback", dir=both];
+  source -> sc [label="status"];
+  dps -> sc [label="DPS status", constraint=false];
+  sc -> equipment [label="configuration /\nstatus", dir=both];
+}

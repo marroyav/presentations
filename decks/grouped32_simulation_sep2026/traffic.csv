@@ -1,0 +1,5 @@
+population,board_channels,intrinsic_record_demand_gbps,gamma_pilot_record_demand_gbps,fullstream_14bit_raw_gbps,fullstream_records_gbps
+HD_APA_integrated,32,5.98130688,10.7778048,28,28.571428571428573
+VD_cathode,32,21.49588992,22.70404608,28,28.571428571428573
+VD_long_wall,32,7.4932224,13.09237248,28,28.571428571428573
+VD_short_wall,32,5.419008,9.38336256,28,28.571428571428573

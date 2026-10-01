@@ -1,0 +1,10 @@
+digraph coverage {
+  graph [rankdir=TB, bgcolor="{{background}}", pad="0.15", nodesep="0.4", ranksep="0.4"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=22, margin="0.3,0.2", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  a [label="Record A\nSamples 0-511"];
+  b [label="Record B\nSamples 256-767"];
+  {rank=same; a; b;}
+  union [label="Saved once: samples 0-767\n768 unique samples", fillcolor="{{coral}}", color="{{coral}}"];
+  a -> union; b -> union;
+}

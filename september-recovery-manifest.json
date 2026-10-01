@@ -1,0 +1,739 @@
+{
+  "archive": "/home/marroyav/backups/WL-123935-20260925/work-downloads-documents.tar.zst",
+  "host": "larsoft",
+  "sources": [
+    {
+      "archive_member": "work/presentations/decks/pds_activity_to_daphne_load_sep2026/results.csv",
+      "path": "decks/pds_activity_to_daphne_load_sep2026/results.csv",
+      "bytes": 793,
+      "sha256": "06017bd3f9baa6c07e763b5a37114b1580d9823832cd91d38f3d5777d3bfcaff"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_activity_to_daphne_load_sep2026/main.pdf",
+      "path": "decks/pds_activity_to_daphne_load_sep2026/main.pdf",
+      "bytes": 168140,
+      "sha256": "c89534c49775a778e01177e8080de366da8ff313baa33d6f509750d30d0f3a8a"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_activity_to_daphne_load_sep2026/gamma_pilot_results.csv",
+      "path": "decks/pds_activity_to_daphne_load_sep2026/gamma_pilot_results.csv",
+      "bytes": 708,
+      "sha256": "f8209cabcccbd2e0888dc7ca70bd2a8e4083e332fc1d7fb6470c829575d00bfe"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_activity_to_daphne_load_sep2026/README.md",
+      "path": "decks/pds_activity_to_daphne_load_sep2026/README.md",
+      "bytes": 6170,
+      "sha256": "3979337e78ddd3fcb663d64be91baed3e1d9e9a9c664e34e87ceafda6841dd38"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_activity_to_daphne_load_sep2026/main.tex",
+      "path": "decks/pds_activity_to_daphne_load_sep2026/main.tex",
+      "bytes": 22612,
+      "sha256": "926c1512febdf51156d4231844ed21dce878bac11cf7dde6bde2c63640939d15"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/figures/pulse-windows.pdf",
+      "path": "decks/pds_trigger_story_sep2026/figures/pulse-windows.pdf",
+      "bytes": 15009,
+      "sha256": "1db90026f88789b84a188ea0a4c954579fa6cc19bd7350db8ebe7a1645ee210a"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/figures/comparison_256_5_2_pilot.pdf",
+      "path": "decks/pds_trigger_story_sep2026/figures/comparison_256_5_2_pilot.pdf",
+      "bytes": 22126,
+      "sha256": "055ebab04ed79f48c076c3be333fc0009d0bbe5ff2a24da585fb41b75db8e090"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/figures/busy-rejection.pdf",
+      "path": "decks/pds_trigger_story_sep2026/figures/busy-rejection.pdf",
+      "bytes": 18230,
+      "sha256": "7e04bf83a21b9e151ba1a3c8baa19dbec1c26ba828d5d50450310dc23df4c322"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/figures/frequency_deadtime.pdf",
+      "path": "decks/pds_trigger_story_sep2026/figures/frequency_deadtime.pdf",
+      "bytes": 23535,
+      "sha256": "df7f5c2db24f6a64e90a326b82675ca18e902745905ae8466dd91ce0a47283d4"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/figures/frequency_deadtime.png",
+      "path": "decks/pds_trigger_story_sep2026/figures/frequency_deadtime.png",
+      "bytes": 187610,
+      "sha256": "6a52eb52ad2204c694410c00c57c9246db4d12e717684370c391ba8c793a1eb4"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/figures/pulse-windows.png",
+      "path": "decks/pds_trigger_story_sep2026/figures/pulse-windows.png",
+      "bytes": 121223,
+      "sha256": "c163d812f9fd7aeca3611685dded5c917b5e1ce5e793c5a01778b454d14e3246"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/analysis/results/frequency_sweep_summary.csv",
+      "path": "decks/pds_trigger_story_sep2026/analysis/results/frequency_sweep_summary.csv",
+      "bytes": 2633,
+      "sha256": "cc5192a665b0c33aa5aaecda167aa1bff374df1bf5decd92711b0fbeef38f58d"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/analysis/results/frequency_sweep_ideal_sender_superseded.csv",
+      "path": "decks/pds_trigger_story_sep2026/analysis/results/frequency_sweep_ideal_sender_superseded.csv",
+      "bytes": 24104,
+      "sha256": "33c1fd463c7976af4c9e1078f2498d3da0ad11af5d77dc6a4bae7e52b04b9cf1"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/analysis/results/frequency_sweep.csv",
+      "path": "decks/pds_trigger_story_sep2026/analysis/results/frequency_sweep.csv",
+      "bytes": 30157,
+      "sha256": "25c1eb7bb8551873462fd1794ae70d6be205fc9c51ed49112348e4e1d0d237eb"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/analysis/test_capture_deadtime.py",
+      "path": "decks/pds_trigger_story_sep2026/analysis/test_capture_deadtime.py",
+      "bytes": 3531,
+      "sha256": "e2c871c239904e4486540fb7863c76263958111c1418108a4016a709effcf8dd"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/analysis/fifo_capture_sim.cpp",
+      "path": "decks/pds_trigger_story_sep2026/analysis/fifo_capture_sim.cpp",
+      "bytes": 53305,
+      "sha256": "c0466940fc900efdf7fb592c73375d3ac1c404e2e322474354addbb4d68085e7"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/analysis/run_frequency_sweep.py",
+      "path": "decks/pds_trigger_story_sep2026/analysis/run_frequency_sweep.py",
+      "bytes": 7951,
+      "sha256": "5196257d3935b20bd24a05a6332a3adb3c4ab99ff35dc1ae2cf7d16470039533"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/analysis/capture_deadtime.py",
+      "path": "decks/pds_trigger_story_sep2026/analysis/capture_deadtime.py",
+      "bytes": 6148,
+      "sha256": "fee4dc754bdb9773fcc64a0aa26b78332786d7c95ccfb306684fb7ee2e4b2c14"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/main.pdf",
+      "path": "decks/pds_trigger_story_sep2026/main.pdf",
+      "bytes": 197033,
+      "sha256": "d1f1b00cf0f481dffecc486778d69df2b0bb4c18d0c273216f7c3512cb0281d6"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/README.md",
+      "path": "decks/pds_trigger_story_sep2026/README.md",
+      "bytes": 6318,
+      "sha256": "71b09a4c20905b83f61a5cbc344ebf5a84dad55292f226b5602e366244a19269"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/main.tex",
+      "path": "decks/pds_trigger_story_sep2026/main.tex",
+      "bytes": 25515,
+      "sha256": "fac48969418d2439011d827f66d8bed6fab05375e5bbe47d9c3c27d877e5ad62"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/render_continuation.py",
+      "path": "decks/pds_trigger_story_sep2026/render_continuation.py",
+      "bytes": 3453,
+      "sha256": "27f456c1f286f7a0c05795677a3ab4740f8216b83689502960551bebbd22681a"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/speaker_notes.md",
+      "path": "decks/pds_trigger_story_sep2026/speaker_notes.md",
+      "bytes": 26530,
+      "sha256": "ba20e69ad6913f539a2864401a85c0513241e5e25f84092abd5f70ebcdda3436"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/capture-loss-VD-one-link.csv",
+      "path": "decks/pds_trigger_story_sep2026/evidence/capture-loss-VD-one-link.csv",
+      "bytes": 808,
+      "sha256": "89d4050eef38f3925d4b103d8c9a424944774addde6c30418db2231dc4477d08"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/frequency-sweep-model.md",
+      "path": "decks/pds_trigger_story_sep2026/evidence/frequency-sweep-model.md",
+      "bytes": 3616,
+      "sha256": "a0b5c55cd60ccdd53b368b964a0ba5873d2db26bcd63d529c74d759dd623c25c"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/baseline-stc3_record_builder.vhd",
+      "path": "decks/pds_trigger_story_sep2026/evidence/baseline-stc3_record_builder.vhd",
+      "bytes": 13196,
+      "sha256": "bb0beef2b6d292948c0c4697f9c2d353d3741862fb3cb0e9944393ed8e1858fc"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/activity.csv",
+      "path": "decks/pds_trigger_story_sep2026/evidence/activity.csv",
+      "bytes": 793,
+      "sha256": "06017bd3f9baa6c07e763b5a37114b1580d9823832cd91d38f3d5777d3bfcaff"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/hermes-source-manifest.json",
+      "path": "decks/pds_trigger_story_sep2026/evidence/hermes-source-manifest.json",
+      "bytes": 3943,
+      "sha256": "4c4170c1c1c866380ea5f0d4cb5dad7e8bba21b2e54538fcd21a64428615722e"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/capture-loss-model.md",
+      "path": "decks/pds_trigger_story_sep2026/evidence/capture-loss-model.md",
+      "bytes": 3705,
+      "sha256": "29fd52bb2a53304617e4c051f8eb0c646d563c884f073964f69a7f8a163c0af5"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/manifest.json",
+      "path": "decks/pds_trigger_story_sep2026/evidence/manifest.json",
+      "bytes": 1638,
+      "sha256": "5aa1dd12f20321059a763204a92583ee0e999652c836f615d091e68c53cf8b10"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/busy-plot-provenance.json",
+      "path": "decks/pds_trigger_story_sep2026/evidence/busy-plot-provenance.json",
+      "bytes": 767,
+      "sha256": "4c12cbfba81328de5da4bd6d5f9f8c31b3c7b0299f5d95eabff80ac569e08cf5"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/baseline-release.md",
+      "path": "decks/pds_trigger_story_sep2026/evidence/baseline-release.md",
+      "bytes": 9017,
+      "sha256": "91f369ad6829148002c1c6ecf1f9dfc1769bd1c4370ce928231c01e15851df3e"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/hermes-link-budget.md",
+      "path": "decks/pds_trigger_story_sep2026/evidence/hermes-link-budget.md",
+      "bytes": 3600,
+      "sha256": "82a3fd22f195f5cddebe58194685715f2c5b32ea60b97e3faa956c77ba2a1b28"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/comparison_256_5_2_pilot.csv",
+      "path": "decks/pds_trigger_story_sep2026/evidence/comparison_256_5_2_pilot.csv",
+      "bytes": 1387,
+      "sha256": "35aea31cef0801645b654d6dba2c32e5be59a4129eeb9802568e98eda8c12c3e"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/grouped32-report.json",
+      "path": "decks/pds_trigger_story_sep2026/evidence/grouped32-report.json",
+      "bytes": 23534,
+      "sha256": "d8c67ba5da1ca6157f5451682d203227fba805e98f9c5de3effd18b54aaed376"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/gateware-build-handoff.md",
+      "path": "decks/pds_trigger_story_sep2026/evidence/gateware-build-handoff.md",
+      "bytes": 14764,
+      "sha256": "c5c3d5330479125fc6cf7c1ee79601f5fc75434fd95bda9addc1290f228b2238"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/capture-deadtime-correction.md",
+      "path": "decks/pds_trigger_story_sep2026/evidence/capture-deadtime-correction.md",
+      "bytes": 5657,
+      "sha256": "5bb276838f7898715d93206c6c9798959ae426a0e2d589cd9c4f147645b0a547"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/evidence/gamma-pilot.csv",
+      "path": "decks/pds_trigger_story_sep2026/evidence/gamma-pilot.csv",
+      "bytes": 708,
+      "sha256": "f8209cabcccbd2e0888dc7ca70bd2a8e4083e332fc1d7fb6470c829575d00bfe"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/HANDOFF.md",
+      "path": "decks/pds_trigger_story_sep2026/HANDOFF.md",
+      "bytes": 2509,
+      "sha256": "e77fcf5536d416ea0f65db5e24c7a263ce0b7ddeb60bc061576d0e22ee99a198"
+    },
+    {
+      "archive_member": "work/presentations/decks/pds_trigger_story_sep2026/plot_busy_rejection.py",
+      "path": "decks/pds_trigger_story_sep2026/plot_busy_rejection.py",
+      "bytes": 4209,
+      "sha256": "89cff37fb88a73e70405c2ff9bc008791b3309e206d0e7a80d9f0d1664974369"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/CONTROL_INTERFACE_DRAFT.md",
+      "path": "decks/fd_dps_boundaries_sep2026/CONTROL_INTERFACE_DRAFT.md",
+      "bytes": 11639,
+      "sha256": "b550b3a295d734cef190cbc6ce899ff1ce1dd2e9809a634e3bed39e169ec2348"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/02_physical_interfaces.pdf",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/02_physical_interfaces.pdf",
+      "bytes": 15787,
+      "sha256": "9fececbdcdbc1d56dd95242628d6037b2c3eb54fd1ae9bafd1c8fb0bb62f613f"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/01_reference_architecture.pdf",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/01_reference_architecture.pdf",
+      "bytes": 22043,
+      "sha256": "954433808a418c7f3092c6fbf0bcd34e2eebad829fece83126c78073f6e4bd0a"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/03_power_domains.pdf",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/03_power_domains.pdf",
+      "bytes": 11581,
+      "sha256": "eba2ca3f8cc41d1718313cb64b00abb52e06878f429b5124054c18b5d77c44d5"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/03_power_domains.dot.in",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/03_power_domains.dot.in",
+      "bytes": 1338,
+      "sha256": "7bd162d731e23ce21cbfaec4223db910d09c72d0c307aa19d5926e101f9d62d4"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/02_physical_interfaces.dot.in",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/02_physical_interfaces.dot.in",
+      "bytes": 1342,
+      "sha256": "589d74f34a00728b57f63382d3cce102a79858ac13b833dc3b696d276fe151f8"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/02_physical_interfaces.svg",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/02_physical_interfaces.svg",
+      "bytes": 6312,
+      "sha256": "d1efb8aee6ed7327d3f928e92f7ac0c330bf16169edd649b5051029bfbf132f6"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/04_rack_protection.svg",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/04_rack_protection.svg",
+      "bytes": 7106,
+      "sha256": "d576976e4b6b45086b8736751ae424157a6d452f1ccbe248a9e6bac855fc4690"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/04_rack_protection.dot.in",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/04_rack_protection.dot.in",
+      "bytes": 1289,
+      "sha256": "1d0250757961fc8ec8442fb9f0c268fd2084efed7eb6e7e1bdf9c5b43b222b12"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/03_power_domains.svg",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/03_power_domains.svg",
+      "bytes": 5980,
+      "sha256": "2ec738375f3c592f0dcbbf6c478ed475011bce5a751109b109cf462983bb6522"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/04_rack_protection.pdf",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/04_rack_protection.pdf",
+      "bytes": 14472,
+      "sha256": "48e425bc1de5cda43cfb1e479ea6d1b22a78b13d0e8b6c268d70788f03c46405"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/diagrams/01_reference_architecture.svg",
+      "path": "decks/fd_dps_boundaries_sep2026/diagrams/01_reference_architecture.svg",
+      "bytes": 131810,
+      "sha256": "2713a34a144a1542e60918b0c4386359ab772419bbfc12293426ee93b0f36e8e"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/previous/01_functional_handoff.dot.in",
+      "path": "decks/fd_dps_boundaries_sep2026/previous/01_functional_handoff.dot.in",
+      "bytes": 1109,
+      "sha256": "56370403d6046ab90ca865b0a47f30c2238695de9f94aa68fdb52835c97f33b5"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/previous/01_functional_handoff.svg",
+      "path": "decks/fd_dps_boundaries_sep2026/previous/01_functional_handoff.svg",
+      "bytes": 6024,
+      "sha256": "b67f69c847a2493f343e53fe352f2865984c7b3ac0fb37cba68ff3241e699fb4"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/previous/01_functional_handoff.pdf",
+      "path": "decks/fd_dps_boundaries_sep2026/previous/01_functional_handoff.pdf",
+      "bytes": 13599,
+      "sha256": "afe4363cf0619fa4d3fb004544998aa70f94d4c73ccbcff02c964d37e404969e"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/SOURCES.md",
+      "path": "decks/fd_dps_boundaries_sep2026/SOURCES.md",
+      "bytes": 5445,
+      "sha256": "34f6dc1cf75b4017282d480d896b0bfb8fc6e34e36e70ba798a94d9bb478b2ac"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/build.py",
+      "path": "decks/fd_dps_boundaries_sep2026/build.py",
+      "bytes": 634,
+      "sha256": "b28693a900f4acd802ff4af4eb4b1c92b2d599a286cc6df7e915464208027356"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/main.pdf",
+      "path": "decks/fd_dps_boundaries_sep2026/main.pdf",
+      "bytes": 82549,
+      "sha256": "4f0034a2b3ad1e203dc984955979ce884b787553ff37fb2172ec0390a9b448ed"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/RESPONSIBILITIES.md",
+      "path": "decks/fd_dps_boundaries_sep2026/RESPONSIBILITIES.md",
+      "bytes": 1960,
+      "sha256": "3df6ddf2c9fc5455b77dfefaa7260971548a3b19db5df35a89c5ccb550519328"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/README.md",
+      "path": "decks/fd_dps_boundaries_sep2026/README.md",
+      "bytes": 2375,
+      "sha256": "b8b5b07c43830d771d0334d61488006ebb75d59c6a6f0eb95356306c36cf9544"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/main.tex",
+      "path": "decks/fd_dps_boundaries_sep2026/main.tex",
+      "bytes": 2955,
+      "sha256": "d7890273694b8c4856dcdc57a8ce1684569e87a7f40dddfd40beee6825c7be7e"
+    },
+    {
+      "archive_member": "work/presentations/decks/fd_dps_boundaries_sep2026/HANDOFF.md",
+      "path": "decks/fd_dps_boundaries_sep2026/HANDOFF.md",
+      "bytes": 2632,
+      "sha256": "f173d78c789aa9598a370aab79c880a41e254a654a0d1c24db5d2b1f245b577c"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/design-tokens.json",
+      "path": "decks/grouped32_simulation_sep2026/design-tokens.json",
+      "bytes": 6521,
+      "sha256": "f09e50219ec1edb9bb8247d780f7ab85468ecde362b5d6d3db835d7e1099e1dc"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/coverage.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/coverage.pdf",
+      "bytes": 9031,
+      "sha256": "a3307c7aa62aa05b82671736d87591c3dd402ee10b70b9b80c93ff8213c21376"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/next.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/next.dot.in",
+      "bytes": 649,
+      "sha256": "462e890a7aac078903e1fd3379d3154e6aefecc026288bd7c18eb5a6108b964a"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/windows.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/windows.dot.in",
+      "bytes": 725,
+      "sha256": "be03ecf69755c4667a02f3b9d91a848ef629ad35943afc479017bbdb67a06213"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/fullstream.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/fullstream.pdf",
+      "bytes": 9516,
+      "sha256": "71d7723d30b9271a63319f8491ebe0eb521b39c861c9505038f694d06c55e636"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/larsoft.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/larsoft.pdf",
+      "bytes": 8598,
+      "sha256": "a1a8abc2adc6382371e0c4a827c52654bdf68f1c83ba82efa0e8b41e8e7603b6"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/windows.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/windows.pdf",
+      "bytes": 10248,
+      "sha256": "2f583f26f4ca52bc6314312666e64c063b6c8e371a18068955d20110ab7002d7"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/links.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/links.pdf",
+      "bytes": 8910,
+      "sha256": "e29c27ce9ca2977391d4b29e2bda14a170426e4b0b3888b8bc4e1a4c84cc5a69"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/replay.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/replay.dot.in",
+      "bytes": 948,
+      "sha256": "7d9033de80b00f6ecc2e642a0d7c4d5a4442e1dc717020fbbfecd2897aa4b69c"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/preprocessing.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/preprocessing.pdf",
+      "bytes": 9917,
+      "sha256": "6c088a8e2a7ffe987c5063f8d9e534dd967db5dc70059517f747b1acf2429d06"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/preprocessing.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/preprocessing.dot.in",
+      "bytes": 662,
+      "sha256": "c58489cd50a4192b1ef1700c05d509b7dcab5ad7ab329fb9193812237a7a9c80"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/raw-processing.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/raw-processing.pdf",
+      "bytes": 8235,
+      "sha256": "f344aba4dc7e9f57f159b2d469a6997da9d904c275cae9af002f563a249e39bc"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/replay.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/replay.pdf",
+      "bytes": 11539,
+      "sha256": "84834330e86c15f08ddc0962e8f2401e15f34498a8cd9701db1324ff4233b9b4"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/milestone.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/milestone.pdf",
+      "bytes": 14286,
+      "sha256": "daf23d8c7bc4671edd4499195431cece192f96f86372f4c5efb861a24f59f380"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/larsoft.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/larsoft.dot.in",
+      "bytes": 637,
+      "sha256": "6ca5f337fbef7ddf6fd120a72c001480dee14509c30b484d6d2bf0aa5cef10a2"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/raw-processing.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/raw-processing.dot.in",
+      "bytes": 665,
+      "sha256": "6eb6f45528f17df525f6f0a1d388290a74ca14e912710e0ff9ad40ff0cd29534"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/fullstream-mapping.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/fullstream-mapping.dot.in",
+      "bytes": 635,
+      "sha256": "a01d542e1499909862fa3d1b3dcb30941d389d604e310c7d2a001df9c3752cca"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/fullstream.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/fullstream.dot.in",
+      "bytes": 598,
+      "sha256": "adbec43874d8ccd3adac4239bf468f3fb7a88d28079294913a501cbd6912e1e7"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/next.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/next.pdf",
+      "bytes": 9370,
+      "sha256": "305cdeb0192a990ce5b01652281774a89d71ee42ffe8faaef664bbedd04aadc7"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/milestone.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/milestone.dot.in",
+      "bytes": 832,
+      "sha256": "d01b8859a5de1e700b4949a89335fa0c11b9bf2b58267af1f24b1db9933262d8"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/coverage.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/coverage.dot.in",
+      "bytes": 560,
+      "sha256": "e92dae66d5d6936ebb444ce63e9ccc3c211c1c1bb31d18d2cacd7c7fd7b31dcd"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/architecture.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/architecture.dot.in",
+      "bytes": 954,
+      "sha256": "b6642d72a848e671d11623e1b3083ff6fdd28e65becfff2377392458f59bf163"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/fullstream-mapping.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/fullstream-mapping.pdf",
+      "bytes": 9357,
+      "sha256": "f7b71f9f1dc85c3eb123ae178ee6c1fa39937fec73e7c7848e8dff1dac33ecfc"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/architecture.pdf",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/architecture.pdf",
+      "bytes": 10732,
+      "sha256": "8a143b0353c00e0b833065cc5b4198340cb9f7c44be5cf03896a3c7be92da65c"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/diagrams/links.dot.in",
+      "path": "decks/grouped32_simulation_sep2026/diagrams/links.dot.in",
+      "bytes": 897,
+      "sha256": "f9656bd8d47d4aef0856f9066613e98f84c0385969e0b3df09ae88c5a5b0a8cc"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/results.csv",
+      "path": "decks/grouped32_simulation_sep2026/results.csv",
+      "bytes": 919,
+      "sha256": "f50a5f19f70af1edc91eb01e41f7f7eb7e16923f504a4a7b95dbddad250afdb2"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/window-formats.tex",
+      "path": "decks/grouped32_simulation_sep2026/window-formats.tex",
+      "bytes": 1204,
+      "sha256": "a89ddc5d1fa06ce427845f6e815b89619fc35c2db0c9f61a01dd8f4e97eb7774"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/render_larsoft.py",
+      "path": "decks/grouped32_simulation_sep2026/render_larsoft.py",
+      "bytes": 7683,
+      "sha256": "633fb7d0a68d53655bb556cf8491cd9b73df09cc08d104025f77ca04cd6697f8"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/figures/traffic.pdf",
+      "path": "decks/grouped32_simulation_sep2026/figures/traffic.pdf",
+      "bytes": 13975,
+      "sha256": "83a78f1dcddaccb3e8d1172f563229174d07343cfda381bdb971bda9c53e728f"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/figures/pulse-windows.pdf",
+      "path": "decks/grouped32_simulation_sep2026/figures/pulse-windows.pdf",
+      "bytes": 15944,
+      "sha256": "cc279da4a0adedfef31dd13d3c88f7d6ff698078c0dc356b6f6adfea1289692f"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/figures/retention.png",
+      "path": "decks/grouped32_simulation_sep2026/figures/retention.png",
+      "bytes": 57102,
+      "sha256": "78ec4cf4011157abedb4217f790c8e8a77ab43e9ff1e2e086c54fce300f301cc"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/figures/descriptor-time.pdf",
+      "path": "decks/grouped32_simulation_sep2026/figures/descriptor-time.pdf",
+      "bytes": 20793,
+      "sha256": "fc6c27893bc81a774b8b4ab60c557ddc1a0e0fc81a9b7e644846073d9f6ec9dd"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/figures/retention.pdf",
+      "path": "decks/grouped32_simulation_sep2026/figures/retention.pdf",
+      "bytes": 13503,
+      "sha256": "213916618d4283ddb3227d0ade1217928918d5e9c9ca22072964b8fe2a8113f8"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/figures/descriptor-time.png",
+      "path": "decks/grouped32_simulation_sep2026/figures/descriptor-time.png",
+      "bytes": 256398,
+      "sha256": "49571826f5aa53674c5df52e37d41eec226e2e6a004878c2bc9b8ac8a86d593d"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/figures/larsoft-rates.pdf",
+      "path": "decks/grouped32_simulation_sep2026/figures/larsoft-rates.pdf",
+      "bytes": 12892,
+      "sha256": "4f06be72ed62738a07e8502eb035093a526e7a0c7fe1de787112ea8d6af23aee"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/figures/pulse-windows.png",
+      "path": "decks/grouped32_simulation_sep2026/figures/pulse-windows.png",
+      "bytes": 126953,
+      "sha256": "2ea3428d7b4368ad2487ff2113b7257121739ca24ffae2909f832b5dacdbc060"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/render_waveform.py",
+      "path": "decks/grouped32_simulation_sep2026/render_waveform.py",
+      "bytes": 3305,
+      "sha256": "d7f520c5a81512af51c529d5b6e9884d20e37b16276a5529a63695a693b6e8fe"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/backup.tex",
+      "path": "decks/grouped32_simulation_sep2026/backup.tex",
+      "bytes": 7065,
+      "sha256": "379cc0890dd6830a6730be85042427961479ebe94a648b3e963b6acd1cdb038d"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/main.pdf",
+      "path": "decks/grouped32_simulation_sep2026/main.pdf",
+      "bytes": 301662,
+      "sha256": "7adada5cb9205e02f2d02ccbf4d8c99602bd9f071770cf8ba38146249d065ba0"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/window-formats-source.md",
+      "path": "decks/grouped32_simulation_sep2026/window-formats-source.md",
+      "bytes": 1417,
+      "sha256": "7d9b82e2f77a78a45979475a70477d710bc5602950162d872e6a71e49b9d2063"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/packet-evidence.tex",
+      "path": "decks/grouped32_simulation_sep2026/packet-evidence.tex",
+      "bytes": 869,
+      "sha256": "d23d3d2d430eb7df26d136b30d34ec826a467f6a1706efe6b69b9df83114c9cc"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/README.md",
+      "path": "decks/grouped32_simulation_sep2026/README.md",
+      "bytes": 12940,
+      "sha256": "ea2c0e84548cd8231f27aa5d40881dca7573c3981976287b4cf70fa29227dd0b"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/palette.py",
+      "path": "decks/grouped32_simulation_sep2026/palette.py",
+      "bytes": 659,
+      "sha256": "4b252bf38dfc203eb10a4d6679fdbbfc4e5e5f4652c8fec8b8e98eb4d779ac6f"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/traffic.csv",
+      "path": "decks/grouped32_simulation_sep2026/traffic.csv",
+      "bytes": 385,
+      "sha256": "e3d952c33b0985a4e3944b37f7ab05b385a8546b965ac93ed16fefb7a2f59189"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/results-slides.tex",
+      "path": "decks/grouped32_simulation_sep2026/results-slides.tex",
+      "bytes": 736,
+      "sha256": "d5ba932c2d6465bb4f72c848e5d528e3299c32e57be3626e4249e925c34da785"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/render_descriptor_time.py",
+      "path": "decks/grouped32_simulation_sep2026/render_descriptor_time.py",
+      "bytes": 4081,
+      "sha256": "31f4ce561c9e38e12ceb29385a159b9e757c3b749b794cfbfd84734879331111"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/main.tex",
+      "path": "decks/grouped32_simulation_sep2026/main.tex",
+      "bytes": 5498,
+      "sha256": "ca06cf9235ec604de65307b5b3bc95b563ddeee9f1394ea8acab11f00e9fdf60"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/packet-summaries.json",
+      "path": "decks/grouped32_simulation_sep2026/evidence/packet-summaries.json",
+      "bytes": 2071,
+      "sha256": "f25fa21db08d653647f09ccd3695b4d3693c73091a8728f079a0c052d255b841"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/descriptor-example.json",
+      "path": "decks/grouped32_simulation_sep2026/evidence/descriptor-example.json",
+      "bytes": 418,
+      "sha256": "5f165591433e2137ac1b25e25111540c38d4256bae9310e2095913f6cbd39388"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/larsoft-README.md",
+      "path": "decks/grouped32_simulation_sep2026/evidence/larsoft-README.md",
+      "bytes": 6170,
+      "sha256": "3979337e78ddd3fcb663d64be91baed3e1d9e9a9c664e34e87ceafda6841dd38"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/larsoft-original-summary.json",
+      "path": "decks/grouped32_simulation_sep2026/evidence/larsoft-original-summary.json",
+      "bytes": 23262,
+      "sha256": "a1ac4a664e08c2af8bb711acea1e19cf08da83759cf5a9d35c55038fe8297421"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/larsoft-provenance.json",
+      "path": "decks/grouped32_simulation_sep2026/evidence/larsoft-provenance.json",
+      "bytes": 1382,
+      "sha256": "0796a7be572ca8986668bb3012717dd481762b741a9fa731aa4e2a7c446969f8"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/daq-document-notes.md",
+      "path": "decks/grouped32_simulation_sep2026/evidence/daq-document-notes.md",
+      "bytes": 3616,
+      "sha256": "5d21a5ff3402e0b17b6aa4bbc6efe7506ab5216fca67f09d2e1670791660f3d1"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/larsoft-gamma_pilot_results.csv",
+      "path": "decks/grouped32_simulation_sep2026/evidence/larsoft-gamma_pilot_results.csv",
+      "bytes": 708,
+      "sha256": "f8209cabcccbd2e0888dc7ca70bd2a8e4083e332fc1d7fb6470c829575d00bfe"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/fullstream-source-check.md",
+      "path": "decks/grouped32_simulation_sep2026/evidence/fullstream-source-check.md",
+      "bytes": 2629,
+      "sha256": "60d373db2981ba922b6497cae847c90805f93386e3dc3b498e51e648bbcbc912"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/larsoft-original-manifest.json",
+      "path": "decks/grouped32_simulation_sep2026/evidence/larsoft-original-manifest.json",
+      "bytes": 895,
+      "sha256": "c9678ddd57fcb34a57a83f267e7a9778ebc3669e86dcc32ab7c15a7d03077862"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/larsoft-results.csv",
+      "path": "decks/grouped32_simulation_sep2026/evidence/larsoft-results.csv",
+      "bytes": 793,
+      "sha256": "06017bd3f9baa6c07e763b5a37114b1580d9823832cd91d38f3d5777d3bfcaff"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/evidence/report.json",
+      "path": "decks/grouped32_simulation_sep2026/evidence/report.json",
+      "bytes": 23534,
+      "sha256": "d8c67ba5da1ca6157f5451682d203227fba805e98f9c5de3effd18b54aaed376"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/render_results.py",
+      "path": "decks/grouped32_simulation_sep2026/render_results.py",
+      "bytes": 7882,
+      "sha256": "5bab00685ace96ecb7e31f4a24b9f470fb9af2e55e43aaa05e3277d756a5fce2"
+    },
+    {
+      "archive_member": "work/presentations/decks/grouped32_simulation_sep2026/daq-budget.tex",
+      "path": "decks/grouped32_simulation_sep2026/daq-budget.tex",
+      "bytes": 472,
+      "sha256": "2369652a58a0eac29ed2231d7af768b774dbdb12ccbd46aa610fa7c87309eaeb"
+    }
+  ],
+  "missing": []
+}

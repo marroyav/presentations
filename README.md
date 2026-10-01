@@ -57,6 +57,10 @@ The repository currently builds:
 - `decks/detector_wide_interaction_matrix_sep2026/main.pdf`
 - `decks/lidine2024_pds_schematics/main.pdf`
 - [SURF–DUNE facility interface](decks/surf_bms_fd_integration_sep2026/main.pdf)
+- [PDS activity and DAPHNE load](decks/pds_activity_to_daphne_load_sep2026/main.pdf)
+- [PDS data acquisition and local trigger conditions — 17 September 2026](decks/pds_trigger_story_sep2026/main.pdf)
+- [Self-trigger, with full-stream fidelity — 15 September 2026](decks/grouped32_simulation_sep2026/main.pdf)
+- [FD detector-protection boundaries](decks/fd_dps_boundaries_sep2026/main.pdf)
 
 The [SURF–DUNE deck](decks/surf_bms_fd_integration_sep2026/README.md) includes a
 dated title page followed by five content slides on facility monitoring, alarm
@@ -107,3 +111,9 @@ Complete the generated audience/outcome brief before drafting slides. Run
 `make starter` builds `examples/framework_starter/main.pdf`, which demonstrates
 the recommended narrative structure, varied slide languages, and Graphviz
 pipeline.
+
+## Project terminology
+
+See the [FD protection and facility-interface glossary](../dune-docs-analysis/reports/project-glossary.md)
+in the sibling `dune-docs-analysis` workspace for organization/system distinctions,
+source links and unresolved ownership questions. This local link requires that workspace.

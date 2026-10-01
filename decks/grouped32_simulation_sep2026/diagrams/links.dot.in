@@ -1,0 +1,14 @@
+digraph links {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", ranksep="1.2", nodesep="0.28"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=23, margin="0.3,0.18", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  a [label="Channels 0-7\nLanes 0 + 1"]; b [label="Channels 8-15\nLanes 2 + 3"];
+  c [label="Channels 16-23\nLanes 4 + 5"]; d [label="Channels 24-31\nLanes 6 + 7"];
+  l0 [label="Link 0 / 10 Gbit/s", fillcolor="{{paper}}", color="{{paper}}"];
+  l1 [label="Link 1 / 10 Gbit/s", fillcolor="{{paper}}", color="{{paper}}"];
+  l2 [label="Link 2 / 10 Gbit/s", fillcolor="{{paper}}", color="{{paper}}"];
+  l3 [label="Link 3 / 10 Gbit/s", fillcolor="{{paper}}", color="{{paper}}"];
+  a -> l0; b -> l1; c -> l2; d -> l3;
+  {rank=same; a; b; c; d;}
+  a -> b -> c -> d [style=invis];
+}

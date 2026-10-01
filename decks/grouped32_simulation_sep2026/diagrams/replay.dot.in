@@ -1,0 +1,14 @@
+digraph replay {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", nodesep="0.45", ranksep="0.55"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=16,
+        margin="0.16,0.13", color="{{sky}}", fillcolor="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=1.8, arrowsize=0.8];
+  input [label="Same 32 channels\nSamples + triggers\nSame output stalls", fillcolor="{{paper}}", color="{{paper}}"];
+  grouped [label="Grouped RTL\n32 rings / 8 builders\n312.5 MHz builders"];
+  native [label="Native reference RTL\n32 individual builders\nSame 8 output lanes"];
+  oracle [label="Check the output\nSamples + pulse summaries", fillcolor="{{editorial-accent}}", color="{{editorial-accent}}"];
+  metrics [label="What survived?\nSamples / charge / timing", fillcolor="{{paper}}", color="{{paper}}"];
+  input -> grouped; input -> native;
+  grouped -> oracle; native -> oracle;
+  oracle -> metrics;
+}

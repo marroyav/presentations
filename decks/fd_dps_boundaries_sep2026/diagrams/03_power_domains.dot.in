@@ -1,0 +1,22 @@
+digraph power {
+  graph [rankdir=LR, bgcolor="{{editorial-canvas}}", pad=0.2, nodesep=0.3, ranksep=0.65,
+    fontname="DejaVu Sans", fontsize=13, fontcolor="{{editorial-muted}}",
+    label="DAQ/SC shared domain: working assumption U6\nFacility / cryogenics backup: separate domains (S1)", labelloc=b];
+  node [shape=box, style="rounded,filled", fillcolor="{{editorial-sky}}", color="{{editorial-muted}}",
+    fontcolor="{{editorial-text}}", fontname="DejaVu Sans", fontsize=18, margin="0.16,0.12", penwidth=1.25];
+  edge [color="{{editorial-text}}", penwidth=1.25, arrowsize=0.8, fontname="DejaVu Sans", fontsize=13,
+    fontcolor="{{editorial-text}}"];
+  normal [label="Normal detector power"];
+  warm [label="TPC / PDS warm electronics\nNo UPS"];
+  cuc [label="CUC DUNE UPS plan\nFinal circuits open"];
+  daq [label="DAQ + Slow Controls\nShared UPS domain"];
+  dpsfeed [label="UPS domain / feed\nAllocation open", style="rounded,filled,dashed", fillcolor="{{editorial-warm}}"];
+  dps [label="DPS + dependencies\nUPS required", fillcolor="{{editorial-warm}}"];
+  {rank=same; normal; cuc; dpsfeed;}
+  {rank=same; warm; daq; dps;}
+  normal -> warm [label="U2"];
+  cuc -> daq [label="S1 / U6"];
+  dpsfeed -> dps [label="U2", style=dashed];
+  normal -> cuc -> dpsfeed [style=invis, weight=5];
+  warm -> daq -> dps [style=invis, weight=5];
+}

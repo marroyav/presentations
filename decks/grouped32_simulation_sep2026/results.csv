@@ -1,0 +1,11 @@
+mode,scenario,implementation,packets,active_sample_loss_percent,charge_loss_percent,comparison_qualified
+0,simultaneous_continuous,grouped,3392,0.0,0.0,True
+0,simultaneous_continuous,native_reference,3392,0.0,0.0,True
+1,staggered_with_short_stalls,grouped,3372,0.0,0.0,True
+1,staggered_with_short_stalls,native_reference,3372,0.0,0.0,True
+2,long_backpressure_and_recovery,grouped,2224,34.77111972506394,34.774854157717314,True
+2,long_backpressure_and_recovery,native_reference,2200,35.48893062659847,35.50035485749754,True
+3,overlapping_forced_event_overload,grouped,3672,0.007243046675187159,0.006030427444203568,True
+3,overlapping_forced_event_overload,native_reference,3446,0.03328055067135516,0.03845618795640382,True
+4,acquisition_and_counter_reset,grouped,3296,2.828284846547313,2.8277524954988142,False
+4,acquisition_and_counter_reset,native_reference,3272,3.5475943094629203,3.5476118743309915,False

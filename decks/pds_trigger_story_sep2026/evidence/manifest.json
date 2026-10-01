@@ -1,0 +1,36 @@
+{
+  "copied_on": "2026-09-17",
+  "sources": [
+    {
+      "file": "activity.csv",
+      "original_path": "/home/neutrino/work/presentations/decks/pds_activity_to_daphne_load_sep2026/results.csv",
+      "sha256": "06017bd3f9baa6c07e763b5a37114b1580d9823832cd91d38f3d5777d3bfcaff"
+    },
+    {
+      "file": "gamma-pilot.csv",
+      "original_path": "/home/neutrino/work/presentations/decks/pds_activity_to_daphne_load_sep2026/gamma_pilot_results.csv",
+      "sha256": "f8209cabcccbd2e0888dc7ca70bd2a8e4083e332fc1d7fb6470c829575d00bfe"
+    },
+    {
+      "file": "grouped32-report.json",
+      "original_path": "/home/neutrino/work/presentations/decks/grouped32_simulation_sep2026/evidence/report.json",
+      "sha256": "d8c67ba5da1ca6157f5451682d203227fba805e98f9c5de3effd18b54aaed376"
+    },
+    {
+      "file": "baseline-release.md",
+      "original_path": "/home/neutrino/work/daphne/software/daphne-os/docs/releases/dual-gateware-2026.08.31-rc1.md",
+      "sha256": "91f369ad6829148002c1c6ecf1f9dfc1769bd1c4370ce928231c01e15851df3e"
+    },
+    {
+      "file": "gateware-build-handoff.md",
+      "original_path": "/home/neutrino/work/workflow/tasks/daphne/grouped256-production/HANDOFF.md",
+      "sha256": "c5c3d5330479125fc6cf7c1ee79601f5fc75434fd95bda9addc1290f228b2238"
+    },
+    {
+      "file": "baseline-stc3_record_builder.vhd",
+      "original_path": "/home/neutrino/work/daphne/firmware/repos/daphne-firmware/rtl/isolated/subsystems/trigger/stc3_record_builder.vhd",
+      "git_commit": "3f17f1bdb14f13fd64dac0d8866dc3dda9e8dd96",
+      "sha256": "bb0beef2b6d292948c0c4697f9c2d353d3741862fb3cb0e9944393ed8e1858fc"
+    }
+  ]
+}

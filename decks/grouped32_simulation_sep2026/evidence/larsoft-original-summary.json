@@ -1,0 +1,456 @@
+{
+  "classes": [
+    {
+      "accepted_count": 5638734,
+      "accepted_rate_hz_per_channel": 26151.741985752447,
+      "accepted_rate_sem_hz_per_channel": 21.817418841490138,
+      "busy_cycles": 525,
+      "candidate_rate_hz_per_channel": 43854.713935886015,
+      "candidate_rate_sem_hz_per_channel": 43.79154531431039,
+      "channel_inventory": 6000,
+      "combined_candidate_count": 9455778,
+      "dead_fraction": 0.40367318268258834,
+      "detector": "FD-HD",
+      "exact_tick_coincidences": 1317,
+      "exposure_s_per_shard": 0.004492,
+      "frame_samples": 512,
+      "gamma_candidate_count_reused": 4209416,
+      "gamma_candidate_rate_hz_per_channel": 19522.744137726328,
+      "gamma_source_family_windows": 4,
+      "independent_intrinsic_shards": 8,
+      "intrinsic_accepted_count": 3861479,
+      "intrinsic_accepted_rate_hz_per_channel": 17909.055914217868,
+      "intrinsic_candidate_count": 5247679,
+      "intrinsic_candidate_rate_hz_per_channel": 24338.07787919264,
+      "module_class": "apa-integrated",
+      "total_replayed_exposure_s": 0.035936
+    },
+    {
+      "accepted_count": 4534507,
+      "accepted_rate_hz_per_channel": 21030.47547491837,
+      "accepted_rate_sem_hz_per_channel": 15.229177744048066,
+      "busy_cycles": 1037,
+      "candidate_rate_hz_per_channel": 43854.713935886015,
+      "candidate_rate_sem_hz_per_channel": 43.79154531431039,
+      "channel_inventory": 6000,
+      "combined_candidate_count": 9455778,
+      "dead_fraction": 0.5204511992561585,
+      "detector": "FD-HD",
+      "exact_tick_coincidences": 1317,
+      "exposure_s_per_shard": 0.004492,
+      "frame_samples": 1024,
+      "gamma_candidate_count_reused": 4209416,
+      "gamma_candidate_rate_hz_per_channel": 19522.744137726328,
+      "gamma_source_family_windows": 4,
+      "independent_intrinsic_shards": 8,
+      "intrinsic_accepted_count": 3331783,
+      "intrinsic_accepted_rate_hz_per_channel": 15452.392215791035,
+      "intrinsic_candidate_count": 5247679,
+      "intrinsic_candidate_rate_hz_per_channel": 24338.07787919264,
+      "module_class": "apa-integrated",
+      "total_replayed_exposure_s": 0.035936
+    },
+    {
+      "accepted_count": 2101898,
+      "accepted_rate_hz_per_channel": 48297.288602941175,
+      "accepted_rate_sem_hz_per_channel": 60.38680632997918,
+      "busy_cycles": 525,
+      "candidate_rate_hz_per_channel": 92383.3869485294,
+      "candidate_rate_sem_hz_per_channel": 152.07830423556072,
+      "channel_inventory": 640,
+      "combined_candidate_count": 4020525,
+      "dead_fraction": 0.47720807605971854,
+      "detector": "FD-VD",
+      "exact_tick_coincidences": 323,
+      "exposure_s_per_shard": 0.0085,
+      "frame_samples": 512,
+      "gamma_candidate_count_reused": 214296,
+      "gamma_candidate_rate_hz_per_channel": 4924.0808823529405,
+      "gamma_source_family_windows": 4,
+      "independent_intrinsic_shards": 8,
+      "intrinsic_accepted_count": 2025094,
+      "intrinsic_accepted_rate_hz_per_channel": 46532.490808823524,
+      "intrinsic_candidate_count": 3806552,
+      "intrinsic_candidate_rate_hz_per_channel": 87466.72794117646,
+      "module_class": "cathode",
+      "total_replayed_exposure_s": 0.068
+    },
+    {
+      "accepted_count": 1502924,
+      "accepted_rate_hz_per_channel": 34534.09926470588,
+      "accepted_rate_sem_hz_per_channel": 26.152156342710928,
+      "busy_cycles": 1037,
+      "candidate_rate_hz_per_channel": 92383.3869485294,
+      "candidate_rate_sem_hz_per_channel": 152.07830423556072,
+      "channel_inventory": 640,
+      "combined_candidate_count": 4020525,
+      "dead_fraction": 0.6261871273030264,
+      "detector": "FD-VD",
+      "exact_tick_coincidences": 323,
+      "exposure_s_per_shard": 0.0085,
+      "frame_samples": 1024,
+      "gamma_candidate_count_reused": 214296,
+      "gamma_candidate_rate_hz_per_channel": 4924.0808823529405,
+      "gamma_source_family_windows": 4,
+      "independent_intrinsic_shards": 8,
+      "intrinsic_accepted_count": 1463031,
+      "intrinsic_accepted_rate_hz_per_channel": 33617.44025735294,
+      "intrinsic_candidate_count": 3806552,
+      "intrinsic_candidate_rate_hz_per_channel": 87466.72794117646,
+      "module_class": "cathode",
+      "total_replayed_exposure_s": 0.068
+    },
+    {
+      "accepted_count": 1399914,
+      "accepted_rate_hz_per_channel": 32167.141544117643,
+      "accepted_rate_sem_hz_per_channel": 31.71398759566818,
+      "busy_cycles": 525,
+      "candidate_rate_hz_per_channel": 53273.230698529405,
+      "candidate_rate_sem_hz_per_channel": 50.93420024205073,
+      "channel_inventory": 640,
+      "combined_candidate_count": 2318451,
+      "dead_fraction": 0.39618564291416986,
+      "detector": "FD-VD",
+      "exact_tick_coincidences": 499,
+      "exposure_s_per_shard": 0.0085,
+      "frame_samples": 512,
+      "gamma_candidate_count_reused": 992008,
+      "gamma_candidate_rate_hz_per_channel": 22794.301470588234,
+      "gamma_source_family_windows": 4,
+      "independent_intrinsic_shards": 8,
+      "intrinsic_accepted_count": 969292,
+      "intrinsic_accepted_rate_hz_per_channel": 22272.334558823528,
+      "intrinsic_candidate_count": 1326942,
+      "intrinsic_candidate_rate_hz_per_channel": 30490.395220588234,
+      "module_class": "long-wall",
+      "total_replayed_exposure_s": 0.068
+    },
+    {
+      "accepted_count": 1088876,
+      "accepted_rate_hz_per_channel": 25020.128676470587,
+      "accepted_rate_sem_hz_per_channel": 18.123372627949927,
+      "busy_cycles": 1037,
+      "candidate_rate_hz_per_channel": 53273.230698529405,
+      "candidate_rate_sem_hz_per_channel": 50.93420024205073,
+      "channel_inventory": 640,
+      "combined_candidate_count": 2318451,
+      "dead_fraction": 0.5303433197423625,
+      "detector": "FD-VD",
+      "exact_tick_coincidences": 499,
+      "exposure_s_per_shard": 0.0085,
+      "frame_samples": 1024,
+      "gamma_candidate_count_reused": 992008,
+      "gamma_candidate_rate_hz_per_channel": 22794.301470588234,
+      "gamma_source_family_windows": 4,
+      "independent_intrinsic_shards": 8,
+      "intrinsic_accepted_count": 817465,
+      "intrinsic_accepted_rate_hz_per_channel": 18783.662683823528,
+      "intrinsic_candidate_count": 1326942,
+      "intrinsic_candidate_rate_hz_per_channel": 30490.395220588234,
+      "module_class": "long-wall",
+      "total_replayed_exposure_s": 0.068
+    },
+    {
+      "accepted_count": 114186,
+      "accepted_rate_hz_per_channel": 26237.591911764703,
+      "accepted_rate_sem_hz_per_channel": 104.59943608989082,
+      "busy_cycles": 525,
+      "candidate_rate_hz_per_channel": 38181.29595588235,
+      "candidate_rate_sem_hz_per_channel": 118.57021598999482,
+      "channel_inventory": 64,
+      "combined_candidate_count": 166165,
+      "dead_fraction": 0.31281557488038997,
+      "detector": "FD-VD",
+      "exact_tick_coincidences": 19,
+      "exposure_s_per_shard": 0.0085,
+      "frame_samples": 512,
+      "gamma_candidate_count_reused": 70224,
+      "gamma_candidate_rate_hz_per_channel": 16136.029411764704,
+      "gamma_source_family_windows": 4,
+      "independent_intrinsic_shards": 8,
+      "intrinsic_accepted_count": 77293,
+      "intrinsic_accepted_rate_hz_per_channel": 17760.34007352941,
+      "intrinsic_candidate_count": 95960,
+      "intrinsic_candidate_rate_hz_per_channel": 22049.632352941175,
+      "module_class": "short-wall",
+      "total_replayed_exposure_s": 0.068
+    },
+    {
+      "accepted_count": 92540,
+      "accepted_rate_hz_per_channel": 21263.78676470588,
+      "accepted_rate_sem_hz_per_channel": 71.68360092489472,
+      "busy_cycles": 1037,
+      "candidate_rate_hz_per_channel": 38181.29595588235,
+      "candidate_rate_sem_hz_per_channel": 118.57021598999482,
+      "channel_inventory": 64,
+      "combined_candidate_count": 166165,
+      "dead_fraction": 0.4430836818824662,
+      "detector": "FD-VD",
+      "exact_tick_coincidences": 19,
+      "exposure_s_per_shard": 0.0085,
+      "frame_samples": 1024,
+      "gamma_candidate_count_reused": 70224,
+      "gamma_candidate_rate_hz_per_channel": 16136.029411764704,
+      "gamma_source_family_windows": 4,
+      "independent_intrinsic_shards": 8,
+      "intrinsic_accepted_count": 67316,
+      "intrinsic_accepted_rate_hz_per_channel": 15467.83088235294,
+      "intrinsic_candidate_count": 95960,
+      "intrinsic_candidate_rate_hz_per_channel": 22049.632352941175,
+      "module_class": "short-wall",
+      "total_replayed_exposure_s": 0.068
+    }
+  ],
+  "comparison": "gt",
+  "limitations": [
+    "The nominal intrinsic-LAr stream contains atmospheric 39Ar at 0.964 Bq/kg plus 85Kr, 42Ar, and 42K; it is not Ar-39-only.",
+    "Only one physical window exists for each gamma source family; that same gamma trace is reused with eight independent intrinsic-LAr shards.",
+    "Candidate streams were formed separately, so analog waveform pileup between source families is not modeled.",
+    "The gamma pilot includes cavern gamma, foam gamma, cryostat-neutron gamma, and cavern-neutron gamma sources; actual cavern neutrons and other unfinished background families are absent.",
+    "The deposited-energy audit was omitted after timing out, so the direct physical gamma run has no validated deposited-energy population distribution.",
+    "The replay is channel-local and excludes channel-to-board mapping, shared FIFO and lanes, serializer service, Hermes ready/back-pressure, link overhead, electronics noise, dark counts, afterpulsing, and cross-talk."
+  ],
+  "method": "Overlay independently candidateized nominal intrinsic-LAr and physical external-gamma ticks within the common digitizer window; remove exact same-tick duplicates; replay the XC legacy non-paralyzable fixed-record busy gate independently on each optical channel.",
+  "provenance": [
+    {
+      "common_digitizer_tick_bounds": [
+        -140687,
+        140687
+      ],
+      "detector": "FD-HD",
+      "gamma_campaign": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdhd-full-v6-waffles-c-pilot-v1-runtime-bg4",
+      "gamma_candidates_clipped_outside_common_window": 12,
+      "gamma_candidates_per_replayed_shard": 526193,
+      "gamma_inputs": [
+        {
+          "candidate_count_clipped": 11,
+          "candidate_count_in_common_digitizer_window": 506822,
+          "candidate_count_native": 506833,
+          "native_exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdhd-full-v6-waffles-c-pilot-v1-runtime-bg4/fdhd__paper-high-external-cavern-gamma__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "ecb0eae8dec50d8edc321236b4058b8ccba494d292e65de26bb6fa250f326084",
+          "source": "paper-high-external-cavern-gamma"
+        },
+        {
+          "candidate_count_clipped": 0,
+          "candidate_count_in_common_digitizer_window": 0,
+          "candidate_count_native": 0,
+          "native_exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdhd-full-v6-waffles-c-pilot-v1-runtime-bg4/fdhd__paper-high-external-cavern-neutron-gamma__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "b5f485eead9a691730155713d3e5d4298778c511e4147b06315ed07d2d343a24",
+          "source": "paper-high-external-cavern-neutron-gamma"
+        },
+        {
+          "candidate_count_clipped": 0,
+          "candidate_count_in_common_digitizer_window": 0,
+          "candidate_count_native": 0,
+          "native_exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdhd-full-v6-waffles-c-pilot-v1-runtime-bg4/fdhd__paper-high-external-cryostat-neutron-gamma__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "b5f485eead9a691730155713d3e5d4298778c511e4147b06315ed07d2d343a24",
+          "source": "paper-high-external-cryostat-neutron-gamma"
+        },
+        {
+          "candidate_count_clipped": 1,
+          "candidate_count_in_common_digitizer_window": 19371,
+          "candidate_count_native": 19372,
+          "native_exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdhd-full-v6-waffles-c-pilot-v1-runtime-bg4/fdhd__paper-high-external-foam-gamma__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "ffa4e0f60da16734799018391c8af4cf8d4118c99a8266484a7eac3eb893f1eb",
+          "source": "paper-high-external-foam-gamma"
+        }
+      ],
+      "intrinsic_campaign": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1",
+      "intrinsic_inputs": [
+        {
+          "candidate_count": 650396,
+          "exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1/fdhd__intrinsic-lar__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "d219b9c8b0f3cad3056d3499961d33bb16222675a34ebc12e6d55a5633aeb867",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 651769,
+          "exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1/fdhd__intrinsic-lar__s0001/candidate_activity/threshold_candidates.csv",
+          "sha256": "ca8bc8e16350945a35b313bc375b9dcc4eb72a051177fdd53fcdac176976c914",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 656986,
+          "exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1/fdhd__intrinsic-lar__s0002/candidate_activity/threshold_candidates.csv",
+          "sha256": "4ba3490b1d7161501ac0a3bb1b40af749457cf18ae053e931ec79c53b752f79c",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 656085,
+          "exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1/fdhd__intrinsic-lar__s0003/candidate_activity/threshold_candidates.csv",
+          "sha256": "501b947092da34705978382e30722fbdbe57519207bdf441b37e5d0d7d95f940",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 657103,
+          "exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1/fdhd__intrinsic-lar__s0004/candidate_activity/threshold_candidates.csv",
+          "sha256": "2416235eb9e0ecc9fb39a3649acb0212eddefd9bdf98e23d3db1d61d71d174bd",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 660259,
+          "exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1/fdhd__intrinsic-lar__s0005/candidate_activity/threshold_candidates.csv",
+          "sha256": "53f3cbf84bf2e43c2e45f81510287b3a818c07a89d639e26cba4c84f09601cb6",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 656231,
+          "exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1/fdhd__intrinsic-lar__s0006/candidate_activity/threshold_candidates.csv",
+          "sha256": "3dbdb75d0e58d15ff0ca11ea8325a02c6568dec551e3d54dcd38413d6029f499",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 658850,
+          "exposure_s": 0.004492,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdhd-full-v6-waffles-c-deap0964-production-v1/fdhd__intrinsic-lar__s0007/candidate_activity/threshold_candidates.csv",
+          "sha256": "b15fdd928b922c3cf8bb0ebe8baa44031a8476305ffe5168e5db935a3a4d3f70",
+          "source": "intrinsic-lar"
+        }
+      ]
+    },
+    {
+      "common_digitizer_tick_bounds": [
+        -265937,
+        265937
+      ],
+      "detector": "FD-VD",
+      "gamma_campaign": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdvd-full-v7-waffles-c-pilot-v1-runtime-bg4",
+      "gamma_candidates_clipped_outside_common_window": 1012,
+      "gamma_candidates_per_replayed_shard": 159568,
+      "gamma_inputs": [
+        {
+          "candidate_count_clipped": 964,
+          "candidate_count_in_common_digitizer_window": 153061,
+          "candidate_count_native": 154025,
+          "native_exposure_s": 0.008570000000000001,
+          "path": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdvd-full-v7-waffles-c-pilot-v1-runtime-bg4/fdvd__paper-high-external-cavern-gamma__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "da23c5c7716a9c52da3187dbe3aaddb6dca33c585617505f6c7989a518e1a1de",
+          "source": "paper-high-external-cavern-gamma"
+        },
+        {
+          "candidate_count_clipped": 0,
+          "candidate_count_in_common_digitizer_window": 0,
+          "candidate_count_native": 0,
+          "native_exposure_s": 0.008570000000000001,
+          "path": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdvd-full-v7-waffles-c-pilot-v1-runtime-bg4/fdvd__paper-high-external-cavern-neutron-gamma__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "b5f485eead9a691730155713d3e5d4298778c511e4147b06315ed07d2d343a24",
+          "source": "paper-high-external-cavern-neutron-gamma"
+        },
+        {
+          "candidate_count_clipped": 0,
+          "candidate_count_in_common_digitizer_window": 0,
+          "candidate_count_native": 0,
+          "native_exposure_s": 0.008570000000000001,
+          "path": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdvd-full-v7-waffles-c-pilot-v1-runtime-bg4/fdvd__paper-high-external-cryostat-neutron-gamma__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "b5f485eead9a691730155713d3e5d4298778c511e4147b06315ed07d2d343a24",
+          "source": "paper-high-external-cryostat-neutron-gamma"
+        },
+        {
+          "candidate_count_clipped": 48,
+          "candidate_count_in_common_digitizer_window": 6507,
+          "candidate_count_native": 6555,
+          "native_exposure_s": 0.008570000000000001,
+          "path": "/home/marroyav/work/dune-le-pds-qpix-v18/output/campaigns/qpix-paper-external-pds-fdvd-full-v7-waffles-c-pilot-v1-runtime-bg4/fdvd__paper-high-external-foam-gamma__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "219b6b11fcb17878d2424c00fca7155a5044e9f22674b5c8c2f52d91fa6325a9",
+          "source": "paper-high-external-foam-gamma"
+        }
+      ],
+      "intrinsic_campaign": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1",
+      "intrinsic_inputs": [
+        {
+          "candidate_count": 652155,
+          "exposure_s": 0.0085,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1/fdvd__intrinsic-lar__s0000/candidate_activity/threshold_candidates.csv",
+          "sha256": "ff336cb0b865e80e12a3c689d973cf5753012157492a071689e0cc4a560941b7",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 654034,
+          "exposure_s": 0.0085,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1/fdvd__intrinsic-lar__s0001/candidate_activity/threshold_candidates.csv",
+          "sha256": "70d5c94d8fe112d3256a3bb469a80a81f8aae6ec8e87e49db165d9dd4d1c1b02",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 658823,
+          "exposure_s": 0.0085,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1/fdvd__intrinsic-lar__s0002/candidate_activity/threshold_candidates.csv",
+          "sha256": "64e4fe45873d00cc026562ae5e40fc9a5633b1669e871b2e6437d00d370faac7",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 652615,
+          "exposure_s": 0.0085,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1/fdvd__intrinsic-lar__s0003/candidate_activity/threshold_candidates.csv",
+          "sha256": "bbf6c590ad29cef3dff8882490255e43d51379327a50496b242cfa8cdffe9947",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 655534,
+          "exposure_s": 0.0085,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1/fdvd__intrinsic-lar__s0004/candidate_activity/threshold_candidates.csv",
+          "sha256": "4137dada9bdfd90b4063f2f234651c4fe59ce391e5d29a1dc2ff076de83b069a",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 648648,
+          "exposure_s": 0.0085,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1/fdvd__intrinsic-lar__s0005/candidate_activity/threshold_candidates.csv",
+          "sha256": "713b2350a073d1f125f37385be9519a7076f0b4a76bc6c9dffdf0e6dbcf5701d",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 655427,
+          "exposure_s": 0.0085,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1/fdvd__intrinsic-lar__s0006/candidate_activity/threshold_candidates.csv",
+          "sha256": "4eb3805a4343f77c6ed713cd7eef3013f796e0307c17940f0ad75912236da730",
+          "source": "intrinsic-lar"
+        },
+        {
+          "candidate_count": 652218,
+          "exposure_s": 0.0085,
+          "path": "/home/marroyav/work/dune-le-pds/output/campaigns/pure-lar-radiological-pds-fdvd-full-v7-waffles-c-deap0964-production-v1/fdvd__intrinsic-lar__s0007/candidate_activity/threshold_candidates.csv",
+          "sha256": "4b5756310a908aee638713bb78ceebfeb972299d1f9040f8c1b45eae95b2328f",
+          "source": "intrinsic-lar"
+        }
+      ]
+    }
+  ],
+  "ratios": [
+    {
+      "frame_samples": 1024,
+      "vd_cathode_over_hd_accepted_rate": 1.642097883421246,
+      "vd_cathode_over_hd_candidate_rate": 2.106578259376872
+    },
+    {
+      "frame_samples": 512,
+      "vd_cathode_over_hd_accepted_rate": 1.8468096170898938,
+      "vd_cathode_over_hd_candidate_rate": 2.106578259376872
+    }
+  ],
+  "record_modes": [
+    {
+      "busy_cycles": 1037,
+      "frame_samples": 1024
+    },
+    {
+      "busy_cycles": 525,
+      "frame_samples": 512
+    }
+  ],
+  "sample_period_ns": 16.0,
+  "schema_version": 1,
+  "status": "candidate-level-intrinsic-plus-external-gamma-pilot-replay",
+  "threshold_pe": 0.7
+}

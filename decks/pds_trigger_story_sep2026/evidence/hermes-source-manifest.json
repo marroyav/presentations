@@ -1,0 +1,62 @@
+{
+  "checked_on": "2026-09-17",
+  "repository": "DUNE-DAQ/daphne-firmware",
+  "local_worktree": "/home/neutrino/work/daphne/firmware/worktrees/daphne-firmware-256-5-production",
+  "boundary": "DAPHNE frame words into Hermes; not measured Ethernet delivery",
+  "sources": [
+    {
+      "git_commit": "3f17f1bdb14f13fd64dac0d8866dc3dda9e8dd96",
+      "path": "rtl/isolated/subsystems/trigger/stc3_record_builder.vhd",
+      "sha256": "bb0beef2b6d292948c0c4697f9c2d353d3741862fb3cb0e9944393ed8e1858fc",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/3f17f1bdb14f13fd64dac0d8866dc3dda9e8dd96/rtl/isolated/subsystems/trigger/stc3_record_builder.vhd"
+    },
+    {
+      "git_commit": "3f17f1bdb14f13fd64dac0d8866dc3dda9e8dd96",
+      "path": "rtl/isolated/subsystems/readout/two_lane_readout_mux.vhd",
+      "sha256": "f5149ee3656a8239117f72b11fd259748875893edef1a03e900dbc43642b056b",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/3f17f1bdb14f13fd64dac0d8866dc3dda9e8dd96/rtl/isolated/subsystems/readout/two_lane_readout_mux.vhd"
+    },
+    {
+      "git_commit": "7a25777e23f6435f9c680d10299e6795a7dfc2c4",
+      "path": "docs/four-sfp-selftrigger-512.md",
+      "sha256": "d29aed5dd8ec69ce6fb038b48b83b0745b464ff56b8fdd4e9c5273f846027ff9",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/7a25777e23f6435f9c680d10299e6795a7dfc2c4/docs/four-sfp-selftrigger-512.md"
+    },
+    {
+      "git_commit": "7a25777e23f6435f9c680d10299e6795a7dfc2c4",
+      "path": "rtl/isolated/subsystems/readout/two_lane_readout_mux.vhd",
+      "sha256": "f4dfe062cbb25e60d5a80f0c22f72c5739b69dedac4d3110e1ed90d511d4b431",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/7a25777e23f6435f9c680d10299e6795a7dfc2c4/rtl/isolated/subsystems/readout/two_lane_readout_mux.vhd"
+    },
+    {
+      "git_commit": "e49c4aae562c7f13c4922098358179b293b8b3e5",
+      "path": "rtl/isolated/subsystems/readout/two_lane_readout_mux.vhd",
+      "sha256": "b69636efe8c3f8380475bef4f8a239ce5a35e0186df1853eca0ba5e318af341f",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/e49c4aae562c7f13c4922098358179b293b8b3e5/rtl/isolated/subsystems/readout/two_lane_readout_mux.vhd"
+    },
+    {
+      "git_commit": "e49c4aae562c7f13c4922098358179b293b8b3e5",
+      "path": "rtl/isolated/subsystems/readout/k26c_selftrigger_datapath_plane.vhd",
+      "sha256": "8f920c9cf5311f8b7627e1fd6bf8463a2d268b63d01951b974779ebc1af8923c",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/e49c4aae562c7f13c4922098358179b293b8b3e5/rtl/isolated/subsystems/readout/k26c_selftrigger_datapath_plane.vhd"
+    },
+    {
+      "git_commit": "e49c4aae562c7f13c4922098358179b293b8b3e5",
+      "path": "rtl/isolated/subsystems/readout/k26c_board_hermes_transport_plane.vhd",
+      "sha256": "5bd9bf20e9776cf1cab2813decfc5768724281b7beeb8fb605ae73eb671a1f95",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/e49c4aae562c7f13c4922098358179b293b8b3e5/rtl/isolated/subsystems/readout/k26c_board_hermes_transport_plane.vhd"
+    },
+    {
+      "git_commit": "e49c4aae562c7f13c4922098358179b293b8b3e5",
+      "path": "ip_repo/daphne_ip/src/dune.daq_user_hermes_daphne_1.0/src/deimos/daphne_top.vhd",
+      "sha256": "dadabd1e69a19c292882d42950766ef3ec0d63d0105d2080bde6b85a8863c72a",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/e49c4aae562c7f13c4922098358179b293b8b3e5/ip_repo/daphne_ip/src/dune.daq_user_hermes_daphne_1.0/src/deimos/daphne_top.vhd"
+    },
+    {
+      "git_commit": "e49c4aae562c7f13c4922098358179b293b8b3e5",
+      "path": "ip_repo/daphne_ip/src/dune.daq_user_hermes_daphne_1.0/src/deimos/tx_mux_ibuf.vhd",
+      "sha256": "757a60550ec9a74f2790264a1dd7a987ef3c47216a4c005d8f50fe6ea765afd3",
+      "url": "https://github.com/DUNE-DAQ/daphne-firmware/blob/e49c4aae562c7f13c4922098358179b293b8b3e5/ip_repo/daphne_ip/src/dune.daq_user_hermes_daphne_1.0/src/deimos/tx_mux_ibuf.vhd"
+    }
+  ]
+}

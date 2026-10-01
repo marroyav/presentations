@@ -1,0 +1,20 @@
+{
+  "source": "activity.csv",
+  "source_sha256": "06017bd3f9baa6c07e763b5a37114b1580d9823832cd91d38f3d5777d3bfcaff",
+  "renderer": "plot_busy_rejection.py",
+  "new_simulation": false,
+  "x": "Population mean candidate rate, Hz/channel",
+  "y": "Candidates rejected by channel-local busy gate, percent",
+  "threshold": "> 0.7 PE",
+  "background": "Nominal intrinsic-LAr mixture; no gamma overlay",
+  "sample_clock_hz": 62500000,
+  "busy_cycles": {
+    "1024": 1037,
+    "512": 525
+  },
+  "busy_microseconds": {
+    "1024": 16.592,
+    "512": 8.4
+  },
+  "interpretation": "Each marker is a population replay result, not a universal rate curve. Vertical segments pair the same candidates at two frame lengths. No shared readout or buffer/continuation gains included."
+}

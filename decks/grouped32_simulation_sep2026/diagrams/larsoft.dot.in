@@ -1,0 +1,10 @@
+digraph larsoft {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", ranksep="0.5"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=22, margin="0.2,0.23", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  source [label="Radioactive\nbackgrounds", fillcolor="{{paper}}", color="{{paper}}"];
+  light [label="Light in the\ndetector"];
+  response [label="Optical response\n+ candidate selection"];
+  times [label="Candidate times\nfor each channel", fillcolor="{{coral}}", color="{{coral}}"];
+  source -> light -> response -> times;
+}

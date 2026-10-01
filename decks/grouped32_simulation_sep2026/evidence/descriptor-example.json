@@ -1,0 +1,25 @@
+{
+  "illustration": true,
+  "baseline_adc": 4000,
+  "threshold_adc": 100,
+  "sample_ns": 16,
+  "positive_polarity": true,
+  "descriptors": [
+    {
+      "start": 64,
+      "end": 240,
+      "integral": 75666,
+      "peak": 1000,
+      "offset": 11,
+      "duration": 176
+    },
+    {
+      "start": 281,
+      "end": 335,
+      "integral": 11778,
+      "peak": 351,
+      "offset": 6,
+      "duration": 54
+    }
+  ]
+}

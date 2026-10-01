@@ -1,0 +1,10 @@
+digraph windows {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.2", ranksep="0.5"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=23, margin="0.23,0.30", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9, fontname="Helvetica", fontsize=17, fontcolor="{{text}}"];
+  quiet [label="64 pretrigger samples\nKeep recent history", fillcolor="{{paper}}", color="{{paper}}"];
+  first [label="Peak detected\nSave 512 samples", fillcolor="{{editorial-accent}}", color="{{editorial-accent}}"];
+  more [label="Second pulse still active\nOpen the next window"];
+  quiet -> first [label="trigger"];
+  first -> more [label="continue"];
+}

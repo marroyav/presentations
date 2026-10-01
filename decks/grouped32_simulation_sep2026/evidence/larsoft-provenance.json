@@ -1,0 +1,29 @@
+{
+  "snapshot_date": "2026-09-09",
+  "reused_not_rerun": true,
+  "sources": {
+    "results.csv": {
+      "source": "/home/neutrino/work/presentations/decks/pds_activity_to_daphne_load_sep2026/results.csv",
+      "sha256": "06017bd3f9baa6c07e763b5a37114b1580d9823832cd91d38f3d5777d3bfcaff"
+    },
+    "gamma_pilot_results.csv": {
+      "source": "/home/neutrino/work/presentations/decks/pds_activity_to_daphne_load_sep2026/gamma_pilot_results.csv",
+      "sha256": "f8209cabcccbd2e0888dc7ca70bd2a8e4083e332fc1d7fb6470c829575d00bfe"
+    },
+    "README.md": {
+      "source": "/home/neutrino/work/presentations/decks/pds_activity_to_daphne_load_sep2026/README.md",
+      "sha256": "3979337e78ddd3fcb663d64be91baed3e1d9e9a9c664e34e87ceafda6841dd38"
+    }
+  },
+  "traffic_board_channels": 32,
+  "sampling_hz": 62500000,
+  "adc_bits": 14,
+  "record_bytes": 960,
+  "fullstream_channels_per_logical_stream": 4,
+  "fullstream_streams_per_link": 2,
+  "fullstream_links_per_board": 4,
+  "fullstream_blocks_per_record": 35,
+  "fullstream_header_words": 5,
+  "fullstream_payload_words": 245,
+  "limits": "Homogeneous population means; no physical board map. Candidate traffic assumes one record per candidate before loss, continuation or merging. Full stream includes source-defined record headers, excludes network overhead. Gamma extension is a pilot, not a complete background prediction."
+}

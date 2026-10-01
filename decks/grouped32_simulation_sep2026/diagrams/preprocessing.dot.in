@@ -1,0 +1,10 @@
+digraph preprocessing {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", ranksep="0.45"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=22, margin="0.18,0.23", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  adc [label="ADC samples", fillcolor="{{paper}}", color="{{paper}}"];
+  find [label="FPGA\nFind activity\nBuild peak descriptors", fillcolor="{{editorial-accent}}", color="{{editorial-accent}}"];
+  output [label="Waveform windows\n+ peak descriptors"];
+  coincidence [label="DAQ\nCompare peak times"];
+  adc -> find -> output -> coincidence;
+}

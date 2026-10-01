@@ -1,0 +1,5 @@
+population,candidate_mean_khz_per_channel,candidate_min_khz_per_channel,candidate_max_khz_per_channel,accepted_1024_khz_per_channel,dead_1024_percent,accepted_512_khz_per_channel,dead_512_percent,board_channels,demand_512_gbit_per_second,demand_1024_gbit_per_second,hermes_input_512_gbit_per_second,hermes_input_1024_gbit_per_second,ideal_10g_utilization_512,ideal_10g_utilization_1024
+HD_APA_integrated,24.338,6.679,44.774,15.452,36.51,17.909,26.42,40,7.477,14.455,5.502,9.177,0.550,0.918
+VD_cathode,87.467,58.985,107.029,33.617,61.57,46.532,46.80,32,21.496,41.559,11.436,15.973,1.144,1.597
+VD_long_wall,30.490,20.029,40.162,18.784,38.39,22.272,26.95,32,7.493,14.487,5.474,8.925,0.547,0.893
+VD_short_wall,22.050,16.206,27.691,15.468,29.85,17.760,19.45,32,5.419,10.477,4.365,7.349,0.436,0.735

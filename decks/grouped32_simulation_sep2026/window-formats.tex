@@ -1,0 +1,28 @@
+\begin{frame}{More peak slots cost readout capacity}
+  \centering
+  {\small
+  \renewcommand{\arraystretch}{1.18}
+  \begin{tabular}{@{}lrrr@{}}
+    \toprule
+    Samples / peak slots & Bytes / frame & Missing descriptors & Dense lane use \\
+    \midrule
+    Current 512 / 5 & 960 & 50.3\% & 95.31\% \\
+    Compact 512 / 5 & 952 & 50.3\% & 94.53\% \\
+    256 / 2 & 480 & 61.3\% & 96.88\% \\
+    256 / 3 & 488 & 44.9\% & 98.44\% \\
+    256 / 5 & 504 & 18.9\% & \textcolor{DuneEditorialAccent}{101.56\%} \\
+    \bottomrule
+  \end{tabular}\par}
+  \vspace{0.04cm}
+  {\small
+  \(\displaystyle
+    U_{\mathrm{lane}}=\frac{4\,(B/8+2)}{N}\times100\%
+    \qquad
+    U_{256/5}=\frac{4\,(63+2)}{256}\times100\%=101.56\%
+  \)\par\smallskip
+  \(B\): frame bytes; \(N\): samples. Four channels share one internal lane.\par
+  One 64-bit word per cycle, plus two cycles per frame; continuous capture.\par
+  Above 100\%: sustained backlog. Intermittent capture uses less capacity.\par}
+  \vspace{0.04cm}
+  \DuneDiagramCaption{Descriptor loss: one synthetic case, 40 detected photons/channel/burst, 1.6\,\(\mu\)s slow light, extrapolated +5 V afterpulsing. Simplified peak-count model; waveform charge retained.}
+\end{frame}

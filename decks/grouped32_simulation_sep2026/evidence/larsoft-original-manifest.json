@@ -1,0 +1,27 @@
+{
+  "outputs": [
+    {
+      "path": "combined_deadtime_by_shard.csv",
+      "sha256": "007daea6f83ecb2a9fe309a06dddd63de116c588dae6bc9374a54314e579fb51",
+      "size_bytes": 9212
+    },
+    {
+      "path": "combined_deadtime_summary.csv",
+      "sha256": "9175275b57826cc0cda8b7d0cab7c53f45105a92fe0250346568743aea24cc22",
+      "size_bytes": 2490
+    },
+    {
+      "path": "combined_deadtime_summary.json",
+      "sha256": "a1ac4a664e08c2af8bb711acea1e19cf08da83759cf5a9d35c55038fe8297421",
+      "size_bytes": 23262
+    },
+    {
+      "path": "STATUS.md",
+      "sha256": "ffe575a56da0a100e08a0568a54201a86164f6ce08fdcd37ccc272e0b4a2881a",
+      "size_bytes": 832
+    }
+  ],
+  "schema_version": 1,
+  "script": "/home/marroyav/work/dune-le-pds-qpix-v18/scripts/replay_intrinsic_gamma_pilot_deadtime.py",
+  "script_sha256": "a2a539bb0fa9daf7a483c9265e22a996b896677bd7226996b8ab25a8b1d89dde"
+}

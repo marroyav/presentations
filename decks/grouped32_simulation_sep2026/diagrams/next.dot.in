@@ -1,0 +1,10 @@
+digraph next {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", ranksep="0.6"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=23, margin="0.22,0.25", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  larsoft [label="LArSoft\nCorrelated waveforms", fillcolor="{{paper}}", color="{{paper}}"];
+  map [label="Real board map\nChannels to lanes", fillcolor="{{coral}}", color="{{coral}}"];
+  rtl [label="Grouped RTL\nSame thresholds"];
+  measure [label="Signal retained?\nCharge and timing"];
+  larsoft -> map -> rtl -> measure [style=dashed];
+}

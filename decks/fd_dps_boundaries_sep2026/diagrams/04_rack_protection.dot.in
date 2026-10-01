@@ -1,0 +1,24 @@
+digraph rack {
+  graph [rankdir=LR, bgcolor="{{editorial-canvas}}", pad=0.16, nodesep=0.6, ranksep=0.34,
+    fontname="DejaVu Sans", fontsize=14, fontcolor="{{editorial-muted}}",
+    label="Functional example · proposed DPS logic allocation", labelloc=b];
+  node [shape=box, style="rounded,filled", fillcolor="{{editorial-sky}}", color="{{editorial-muted}}",
+    fontcolor="{{editorial-text}}", fontname="DejaVu Sans", fontsize=20, margin="0.14,0.12", penwidth=1.25];
+  edge [color="{{editorial-text}}", penwidth=1.25, arrowsize=0.8, fontname="DejaVu Sans", fontsize=14,
+    fontcolor="{{editorial-text}}"];
+  observed [label="MONITORING\nSensor / outlet state"];
+  sc [label="Slow Controls\nMonitor / configure"];
+  operator [label="Operator"];
+  smoke [label="DPS CONTROL\nSmoke input"];
+  dps [label="DPS / local\nProtection logic", fillcolor="{{editorial-warm}}"];
+  pdu [label="Raritan PDU\nAssigned outlets", fillcolor="{{editorial-warm}}"];
+  load [label="Connected\nequipment"];
+  {rank=same; observed; smoke;}
+  {rank=same; sc; dps;}
+  {rank=same; operator; pdu;}
+  observed -> sc -> operator;
+  smoke -> dps -> pdu -> load;
+  dps -> sc [label="status", style=dashed, constraint=false];
+  observed -> smoke [style=invis, weight=10];
+  operator -> pdu [style=invis, weight=10];
+}

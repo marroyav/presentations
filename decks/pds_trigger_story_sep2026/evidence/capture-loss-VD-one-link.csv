@@ -1,0 +1,5 @@
+scenario,frame_samples,channels,boards,links_per_board,source_windows,observation_channel_ticks,candidate_requests,accepted_frames,sent_frames,rejected_trigger_requests,busy_rejections,fifo_full_rejections,missing_threshold_candidates,dead_time_percent,missing_candidate_percent,rejected_request_percent
+intrinsic,1024,1344,42,1,8,5712000000,5228561,1458758,1450786,3769803,1601838,2167965,2267339,34.60458,43.36449,72.09481
+intrinsic,512,1344,42,1,8,5712000000,5228561,2352463,2335267,2876098,1557145,1318953,1496057,21.53604,28.61317,54.99679
+intrinsic_plus_gamma,1024,1344,42,1,8,5712000000,6502824,1495830,1487150,5006994,1994733,3012261,3136942,42.79717,48.23969,76.99721
+intrinsic_plus_gamma,512,1344,42,1,8,5712000000,6502824,2610683,2592436,3892141,2009947,1882194,2113250,27.78560,32.49742,59.85763

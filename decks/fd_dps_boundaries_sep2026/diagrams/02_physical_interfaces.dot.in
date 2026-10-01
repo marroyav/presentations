@@ -1,0 +1,22 @@
+digraph boundaries {
+  graph [rankdir=LR, bgcolor="{{editorial-canvas}}", pad=0.2, nodesep=0.30, ranksep=0.42,
+    fontname="DejaVu Sans", fontsize=13, fontcolor="{{editorial-muted}}", splines=polyline,
+    label="Defined interfaces · hardware allocation follows\nInstallation unverified. Bonding details omitted.", labelloc=b];
+  node [shape=box, style="rounded,filled", fillcolor="{{editorial-sky}}", color="{{editorial-muted}}",
+    fontcolor="{{editorial-text}}", fontname="DejaVu Sans", fontsize=18, margin="0.15,0.12", penwidth=1.25];
+  edge [color="{{editorial-text}}", penwidth=1.25, arrowsize=0.8, fontname="DejaVu Sans", fontsize=13,
+    fontcolor="{{editorial-text}}"];
+  xfmr [label="Detector transformer\nCryo mezzanine"];
+  dist [label="Detector distribution\nPanels / racks"];
+  plc [label="Local TPC/BDE PLC"];
+  supply [label="PL506 / ISEG channels"];
+  facility [label="Facility source\nApproved state"];
+  receiver [label="Supervised DPS input\nDUNE DPS", fillcolor="{{editorial-warm}}"];
+  {rank=same; xfmr; plc; facility;}
+  {rank=same; dist; supply; receiver;}
+  xfmr -> dist [label="secondary supply\nS1"];
+  plc -> supply [label="enable / inhibit\nS3"];
+  facility -> receiver [label="defined handoff\nU4"];
+  xfmr -> plc -> facility [style=invis, weight=10];
+  dist -> supply -> receiver [style=invis, weight=10];
+}

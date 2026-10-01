@@ -1,0 +1,11 @@
+digraph fullstream_mapping {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", ranksep="0.7", nodesep="0.55"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=24, margin="0.25,0.25", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  a [label="Stream A\n4 channels"];
+  b [label="Stream B\n4 channels"];
+  link [label="One physical link\n8 channels", fillcolor="{{coral}}", color="{{coral}}"];
+  board [label="Four links\n32 channels / board", fillcolor="{{paper}}", color="{{paper}}"];
+  a -> link; b -> link;
+  link -> board;
+}

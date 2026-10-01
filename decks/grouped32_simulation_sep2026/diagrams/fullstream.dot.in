@@ -1,0 +1,9 @@
+digraph fullstream {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", ranksep="0.8", nodesep="0.65"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=24, margin="0.25,0.25", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  adc [label="Same ADC stream\n32 channels"];
+  full [label="Full stream\nSend every sample", fillcolor="{{paper}}", color="{{paper}}"];
+  trigger [label="Self-trigger\nSend selected windows", fillcolor="{{coral}}", color="{{coral}}"];
+  adc -> full; adc -> trigger;
+}

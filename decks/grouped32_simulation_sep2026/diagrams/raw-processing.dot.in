@@ -1,0 +1,10 @@
+digraph raw_processing {
+  graph [rankdir=LR, bgcolor="{{background}}", pad="0.15", ranksep="0.45"];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=22, margin="0.18,0.23", fillcolor="{{sky}}", color="{{sky}}", fontcolor="{{on-accent}}"];
+  edge [color="{{sky}}", penwidth=2, arrowsize=0.9];
+  adc [label="ADC samples\nContinuous stream", fillcolor="{{paper}}", color="{{paper}}"];
+  network [label="Full-stream\nreadout"];
+  find [label="DAQ\nFind pulses\nMeasure time and charge", fillcolor="{{editorial-accent}}", color="{{editorial-accent}}"];
+  coincidence [label="DAQ\nFind coincidences"];
+  adc -> network -> find -> coincidence;
+}

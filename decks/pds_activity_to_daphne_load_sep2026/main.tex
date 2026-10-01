@@ -1,0 +1,483 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% Requested editorial face.  The family is installed locally and Tectonic
+% resolves it through fontconfig.
+\newcommand{\DuneFontSetup}{%
+  \RequirePackage{fontspec}%
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}%
+  \setsansfont{JetBrains Mono}%
+  \setmainfont{JetBrains Mono}%
+  \setmonofont{JetBrains Mono}%
+  \renewcommand*\familydefault{\sfdefault}%
+}
+
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning}
+
+\title{PDS background activity and dead time}
+\subtitle{Current estimate, simulation chain, and remaining uncertainty}
+\author{Manuel Arroyave}
+\date{PDS discussion -- September 2026}
+\newcommand{\mydate}{September 2026}
+
+% The footer logo in the shared theme is intentionally lifted on the title
+% slide so it cannot collide with the lower blue rule.
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[DuneBackground] (current page.south west) rectangle (current page.north east);
+    \fill[DuneTitleSurface]
+      (current page.north west) rectangle ($(current page.north east)+(0,-3.03)$);
+    \fill[DunePrimary]
+      ($(current page.north west)+(0.82,-0.58)$) rectangle ++(1.55,0.075);
+    \fill[DuneSky]
+      ($(current page.south east)+(-2.8,0.79)$) rectangle ++(1.88,0.065);
+    \IfFileExists{\DuneLogoPath/DUNElogo_white.png}{%
+      \node[anchor=south east,opacity=0.13,inner sep=0pt]
+        at ($(current page.south east)+(-0.55,1.42)$)
+        {\includegraphics[width=0.34\paperwidth]{\DuneLogoPath/DUNElogo_white.png}};
+    }{}%
+    \IfFileExists{\DuneLogoPath/FNAL-Logo-NAL-Light.png}{%
+      \node[anchor=south east,inner sep=0pt]
+        at ($(current page.south east)+(-0.92,1.08)$)
+        {\includegraphics[height=0.42cm]{\DuneLogoPath/FNAL-Logo-NAL-Light.png}};
+    }{}%
+    \node[anchor=north west,inner sep=0pt]
+      at ($(current page.north west)+(0.82,-0.88)$)
+      {\DuneFitBox{0.82\paperwidth}{1.48cm}{%
+        {\color{DuneText}\bfseries\fontsize{25}{28}\selectfont\inserttitle}}};
+    \node[anchor=north west,inner sep=0pt]
+      at ($(current page.north west)+(0.82,-3.55)$)
+      {\DuneFitBox{0.62\paperwidth}{1.35cm}{%
+        {\color{DuneTextMuted}\fontsize{13}{17}\selectfont\insertsubtitle}}};
+    \node[anchor=north west,text=DuneSky,font=\bfseries,inner sep=0pt]
+      at ($(current page.north west)+(0.82,-6.30)$) {\insertauthor};
+    \node[anchor=north west,text=DuneTextMuted,font=\small,inner sep=0pt]
+      at ($(current page.north west)+(0.82,-6.82)$) {\insertdate};
+  \end{tikzpicture}%
+  \vfill
+}
+
+\newcommand{\rate}[1]{\textbf{#1}\,kHz/ch}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Candidate activity is not board acceptance}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.60\textwidth}
+      \DuneBigStatement{NOMINAL INTRINSIC-LAr RESULT}
+        {A VD cathode channel sees 3.59 times the HD candidate activity.}
+        {The mixture is dominated by atmospheric \(^{39}\)Ar; at the same 0.7-PE threshold: \rate{87.47} for VD cathode and \rate{24.34} for HD.}
+    \end{column}
+    \begin{column}{0.36\textwidth}
+      \DuneCompactNumberBlock{paper}{01}{LArSoft output}
+        {Candidate times and rates.}
+      \smallskip
+      \DuneCompactNumberBlock{sky}{02}{Firmware estimate}
+        {Channel-local busy gate.}
+      \smallskip
+      \DuneCompactNumberBlock{coral}{03}{Not yet modeled}
+        {Shared board transport.}
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}{Assumptions: source, threshold, and pulse shape}
+  \framesubtitle{dunesw v10\_22\_00d01 \quad | \quad LArSoft v10\_22\_00 \quad | \quad art 3.14.04}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.20}
+  \begin{tabular}{@{}p{0.27\textwidth}p{0.67\textwidth}@{}}
+    \toprule
+    Item & Condition used for the headline result \\
+    \midrule
+    Source & Uniform intrinsic-LAr mixture: atmospheric \(^{39}\)Ar at \(0.964\,\mathrm{Bq/kg}\), plus released \(^{85}\)Kr, \(^{42}\)Ar, and \(^{42}\)K; eight independent shards per detector. \\
+    Optical threshold & Every local candidate above \(0.7\) PE is counted. \textbf{There is no 10-MeV trigger cut.} Energy is retained only for classification and auditing. \\
+    Pulse model & The 16 Waffles NP02 cathode C-channel \texttt{large\_pulses\_zero\_subtract} waveforms form one common SPE-shape set for HD and VD. \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \DuneCompactColorBlock{coral}{MODEL ASSUMPTION}{The common C-channel pulse set isolates geometry and activity}
+    {It is not evidence that HD and VD have identical gain, noise, PDE, or technology-specific SPE shapes.}
+\end{frame}
+
+\begin{frame}{What we simulated---in chronological order}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.05}
+  \begin{tabular}{@{}p{0.07\textwidth}p{0.25\textwidth}p{0.61\textwidth}@{}}
+    \toprule
+    Step & Operation & Meaning \\
+    \midrule
+    1 & Physical source & LArSoft draws radioactive decays during a known time interval, or one gamma from a controlled energy/face cell. \\
+    2 & Full geometry & Geant4 transports particles through the complete HD-v6 or VD-v7 detector geometry. \\
+    3 & Optical response & Energy deposited in liquid argon produces light and the detector-specific photon response. \\
+    4 & Common pulse model & Detected light is shaped with the same 16 Waffles NP02 cathode-C templates in both technologies. \\
+    5 & Candidate + firmware & A strict $>0.7$-PE crossing forms a candidate; XC fixed-record busy time is applied afterward, channel by channel. \\
+    \bottomrule
+  \end{tabular}
+
+  \smallskip
+  \centering
+  \textbf{Physical windows give Hz; stratified particles give response.}\\
+  A response matrix becomes a rate only after applying the physical source weights.
+\end{frame}
+
+\begin{frame}{Full geometry and channel denominator}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.20}
+  \begin{tabular}{@{}p{0.27\textwidth}p{0.67\textwidth}@{}}
+    \toprule
+    Item & Condition used for the headline result \\
+    \midrule
+    FD-HD full detector & LArSoft \texttt{dune10kt\_v6\_full}: 6,000 APA-integrated optical hardware channels; HD is the reference. \\
+    FD-VD full detector & LArSoft \texttt{dunevd10kt\_3view\_30deg\_v7\_full}: 1,344 channels---640 cathode, 640 long-wall, and 64 short-wall. \\
+    Optical response & Geometry and photon transport remain technology-specific. Only the Waffles C-channel SPE pulse-shape set is common. \\
+    Denominator & All hardware channels in the relevant population, including quiet channels; units are candidates per channel per second. \\
+    \bottomrule
+  \end{tabular}
+
+  \smallskip
+  \DuneCompactColorBlock{paper}{DEFINITION}{Candidate \(\neq\) accepted frame}
+    {A candidate is a threshold-crossing opportunity on one channel. Firmware acceptance is evaluated afterward.}
+\end{frame}
+
+\begin{frame}{What drives the nominal intrinsic-LAr rate}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.20}
+  \begin{tabular}{@{}p{0.19\textwidth}p{0.50\textwidth}p{0.25\textwidth}@{}}
+    \toprule
+    Component & Generator content & Share of generated primaries \\
+    \midrule
+    \(^{39}\)Ar & Atmospheric argon at \(0.964\,\mathrm{Bq/kg}\) & \textbf{89.4\%} \\
+    \(^{85}\)Kr & Released intrinsic-LAr normalization & 10.6\% \\
+    \(^{42}\)Ar, \(^{42}\)K & Released intrinsic-LAr normalizations & $<0.02\%$ combined \\
+    Other families & Detector materials, radon chains, and external sources & Not in this baseline \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \DuneCompactColorBlock{coral}{CORRECTION}{The 24.34/87.47-kHz numbers are not Ar-39-only}
+    {The source labels are merged before optical simulation. We can state the generated-primary mix, but cannot assign the final candidates to one isotope from this sample.}
+\end{frame}
+
+\begin{frame}{Background scope: what is not closed}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.16}
+  \begin{tabular}{@{}p{0.22\textwidth}p{0.47\textwidth}p{0.25\textwidth}@{}}
+    \toprule
+    Family & Current content & Status \\
+    \midrule
+    External \(\gamma\) & Cavern-wall and foam; cryostat- and cavern-neutron-induced \(\gamma\) generators & One physical window per family; \textbf{pilot only} \\
+    Neutrons / captures & Actual cavern neutrons, capture timing and secondary \(\gamma\), alpha-capture \(\gamma\) & Not closed; excluded \\
+    Remaining radon & \(^{214}\)Bi and the missing \(^{219}\)Rn/\(^{220}\)Rn chain rows & Incomplete; excluded \\
+    Electronics & Dark counts, line/electronics noise, afterpulsing, and cross-talk & No validated physical-rate component \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \DuneCompactColorBlock{coral}{NO TOTAL-BACKGROUND CLAIM}{The gamma extension is a first physical-window estimate}
+    {Its candidate ticks are overlaid with the nominal stream before XC busy time. More gamma windows and the missing families are still required.}
+\end{frame}
+
+\begin{frame}{The matched gamma-response pilot is complete}
+  \framesubtitle{Conditional detector response---physical gamma weights are not yet applied}
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.22}
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    Detector & Incident $\gamma$ & Active-LAr deposit & $>0.7$-PE response & Probability \\
+    \midrule
+    FD-HD & 10,000 & 2,458 & 2,358 & \textbf{23.58\%} \\
+    FD-VD & 10,000 & 1,868 & 1,782 & \textbf{17.82\%} \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneCompactColorBlock{paper}{EVENT RESPONSE}{VD / HD = 0.756}
+        {This compares the same artificial proposal: ten energy bins, five entry faces, and 200 independent gammas per cell.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneCompactColorBlock{sky}{CHANNEL-NORMALIZED YIELD}{VD / HD = 0.912}
+        {Candidate counts divided by 1,344 VD or 6,000 HD channels and by the same number of injected gammas.}
+    \end{column}
+  \end{columns}
+
+  \smallskip
+  {\color{DuneTextMuted}\footnotesize HD low-z gave zero active-LAr deposits despite verified inward directions; retain as a pilot observation and validate more densely.}
+\end{frame}
+
+\begin{frame}{What is---and is not---a background-rate result}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.06}
+  \begin{tabular}{@{}p{0.27\textwidth}p{0.23\textwidth}p{0.44\textwidth}@{}}
+    \toprule
+    Quantity & Status & Correct interpretation \\
+    \midrule
+    Nominal intrinsic LAr & \textbf{Rate-ready} & $^{39}$Ar at $0.964$ Bq/kg plus $^{85}$Kr, $^{42}$Ar, and $^{42}$K; eight windows per detector. \\
+    External-$\gamma$ response matrix & \textbf{Complete} & Conditional efficiency versus energy and face; not Hz/channel. \\
+    Physical external-$\gamma$ rate & \textbf{Pilot complete} & Released physical generators in full geometry; one window per source family. \\
+    Total background stream & Not closed & Requires all source families overlaid in time before XC and shared-board back-pressure. \\
+    \bottomrule
+  \end{tabular}
+
+  \smallskip
+  \centering
+  \textbf{Two labels are kept separate: nominal intrinsic LAr and intrinsic LAr + gamma pilot.}\\
+  Neither is yet a complete board-level background model.
+\end{frame}
+
+\begin{frame}{Physical gamma pilot: first absolute rates}
+  \framesubtitle{One full-geometry physical window per source family; strict $>0.7$ PE}
+  \small
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.20}
+  \begin{tabular}{@{}lrrr@{}}
+    \toprule
+    Population & Cavern wall & Foam & Total gamma \\
+    & \multicolumn{3}{c}{kHz per channel} \\
+    \midrule
+    HD APA-integrated & 18.805 & 0.719 & \textbf{19.523} \\
+    VD cathode & 4.731 & 0.184 & \textbf{4.915} \\
+    VD long wall & 21.805 & 0.943 & \textbf{22.749} \\
+    VD short wall & 15.461 & 0.675 & \textbf{16.136} \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \DuneCompactColorBlock{coral}{PILOT LIMIT}{Zero observed is not zero expected}
+    {The cryostat-neutron- and cavern-neutron-gamma generators produced one primary each and no candidates in these windows. The deposited-energy audit also timed out, so the energy population is not yet validated.}
+\end{frame}
+
+\begin{frame}{Nominal intrinsic-LAr activity depends on position}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.62\textwidth}
+      \small
+      \setlength{\tabcolsep}{4pt}
+      \renewcommand{\arraystretch}{1.24}
+      \begin{tabular}{@{}lrrr@{}}
+        \toprule
+        Population & Mean & Min--max & Mean / HD \\
+        & \multicolumn{2}{c}{kHz per channel} & \\
+        \midrule
+        HD APA-integrated & \textbf{24.34} & 6.68--44.77 & 1.00 \\
+        VD cathode & \textbf{87.47} & 58.99--107.03 & \textbf{3.59} \\
+        VD long wall & 30.49 & 20.03--40.16 & 1.25 \\
+        VD short wall & 22.05 & 16.21--27.69 & 0.91 \\
+        \bottomrule
+      \end{tabular}
+    \end{column}
+    \begin{column}{0.34\textwidth}
+      \DuneFixedColorBlock{paper}{2.00cm}{READ THE RANGE}{Mean \(\neq\) maximum}
+        {Hottest VD cathode channel: \rate{107.03}.}
+      \smallskip
+      \DuneFixedColorBlock{sky}{2.00cm}{NOMINAL RATIO}{Cathode / HD = 3.59}
+        {\(87.47/24.34\), before firmware loss.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Candidate-level gamma overlay: provisional load}
+  \framesubtitle{Gamma candidates overlaid before XC busy time; one gamma trace reused with eight independent intrinsic-LAr shards}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.13}
+  \begin{tabular}{@{}lrrrrr@{}}
+    \toprule
+    Population & Intrinsic LAr & Gamma & Combined & \multicolumn{2}{c}{Accepted [kHz/ch]} \\
+    & \multicolumn{3}{c}{candidate kHz/ch} & 1024 & 512 \\
+    \midrule
+    HD APA-integrated & 24.338 & 19.523 & \textbf{43.855} & 21.030 & \textbf{26.152} \\
+    VD cathode & 87.467 & 4.924 & \textbf{92.383} & 34.534 & \textbf{48.297} \\
+    VD long wall & 30.490 & 22.794 & \textbf{53.273} & 25.020 & \textbf{32.167} \\
+    VD short wall & 22.050 & 16.136 & \textbf{38.181} & 21.264 & \textbf{26.238} \\
+    \bottomrule
+  \end{tabular}
+
+  \smallskip
+  \DuneCompactColorBlock{sky}{WHAT THE OVERLAY ADDS}{Cross-source candidate-level pileup}
+    {Busy rejection is computed after merging timestamps: HD 52.05\% $\rightarrow$ 40.37\%, and VD cathode 62.62\% $\rightarrow$ 47.72\%, for 1024 $\rightarrow$ 512 samples.}
+  \smallskip
+  {\color{DuneTextMuted}\footnotesize VD gamma candidates are clipped from the native 8.57-ms window to the nominal 8.50-ms window before overlay. Analog pileup and shared board back-pressure are not modeled.}
+\end{frame}
+
+\begin{frame}{The conversion to offered board traffic is explicit}
+  \small
+  \[
+    W_{\rm rec}=8+7\left\lceil\frac{N_s}{32}\right\rceil,
+    \quad B_{\rm rec}=64W_{\rm rec},
+    \quad \boxed{T_{\rm board}=N_{\rm ch}R_{\rm cand/ch}B_{\rm rec}}
+  \]
+
+  \centering
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.25}
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    Case & Channels & Rate/ch & Bits/record & Offered traffic \\
+    \midrule
+    VD cathode, 512 & 32 & 87.47 kHz & 7,680 & \textbf{21.5 Gbit/s} \\
+    HD, 512 & 40 & 24.34 kHz & 7,680 & \textbf{7.48 Gbit/s} \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \footnotesize
+  \(512\rightarrow120\) 64-bit words; \(1024\rightarrow232\) words \(=14{,}848\) bits.
+
+  \medskip
+  \DuneCompactColorBlock{coral}{CHANNEL COUNT MATTERS}{Homogeneous VD-cathode / HD board load = 2.87}
+    {This is an offered-load illustration, not an accepted-output prediction or a detector wiring claim.}
+\end{frame}
+
+\begin{frame}{Why \(14\times512\times32\) is not yet throughput}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \DuneFixedColorBlock{paper}{2.65cm}{BITS IN ONE BOARD-WIDE SET}{A size, not a rate}
+        {\(14\,\mathrm{bit/sample}\times512\,\mathrm{sample/frame}\times32\,\mathrm{ch}=229{,}376\,\mathrm{bit}\).}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \DuneFixedColorBlock{sky}{2.65cm}{BITS PER SECOND}{Multiply by activity}
+        {With the modeled record overhead: \(32\,\mathrm{ch}\times R_{\rm ch}\times7{,}680\,\mathrm{bit/frame}\).}
+    \end{column}
+  \end{columns}
+
+  \medskip
+  \DuneCompactColorBlock{coral}{512 + 50\% OVERLAP}{Overlap changes acceptance opportunities, not record size}
+    {Each fragment is still 7,680 bits. The 256 overlapping samples are retransmitted unless firmware coalesces them: \(T=R_{\rm accepted,overlap}\times7{,}680\).}
+
+\end{frame}
+
+\begin{frame}{What the present firmware replay actually does}
+  \footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.06}
+  \begin{tabular}{@{}p{0.25\textwidth}p{0.32\textwidth}p{0.365\textwidth}@{}}
+    \toprule
+    Stage & Included here & Still separate \\
+    \midrule
+    Candidate formation & LArSoft timestamp for each strict $>0.7$-PE episode & Continuous ADC overlay across source families \\
+    XC channel logic & Fixed busy gate: 1,037 cycles for 1024; 525 for 512 & ADC-level XC FIR/CFD decision and efficiency \\
+    Window overlap & Record size is unchanged & 512 + overlap acceptance/coalescing policy \\
+    Shared transport & None & Board map, FIFO, lanes, serializer, Hermes ready, and 10-Gbit/s back-pressure \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \centering
+  \textbf{Keep the evidence separate:} the $>89\%$ result is from a different XC injected-signal test at 1 PE and above; it is not an efficiency measured by this replay.
+\end{frame}
+
+\begin{frame}{Hermes back-pressure changes acceptance}
+  \framesubtitle{Intrinsic-LAr + one-window gamma pilot; homogeneous-board illustration}
+  \footnotesize
+  \textbf{Sender input:} $T_{\rm in}=R_{\rm accepted,local}B_{\rm record}$;
+  queue growth: $dQ/dt=\max(0,T_{\rm in}-C_{\rm payload})$, where
+  $C_{\rm payload}<10$ Gbit/s.
+
+  \centering
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.00}
+  \begin{tabular}{@{}lrrl@{}}
+    \toprule
+    Population & 512 demand $\rightarrow T_{\rm in}$ & 1024 demand $\rightarrow T_{\rm in}$ & Ideal-link test \\
+    \midrule
+    HD & 13.47 $\rightarrow$ 8.03 & 26.05 $\rightarrow$ \textbf{12.49} & 1024 saturates \\
+    VD cathode & 22.70 $\rightarrow$ \textbf{11.87} & 43.90 $\rightarrow$ \textbf{16.41} & \textbf{both saturate} \\
+    VD long wall & 13.09 $\rightarrow$ 7.91 & 25.31 $\rightarrow$ \textbf{11.89} & 1024 saturates \\
+    VD short wall & 9.38 $\rightarrow$ 6.45 & 18.14 $\rightarrow$ \textbf{10.10} & 1024 at limit \\
+    \bottomrule
+  \end{tabular}
+
+  All traffic values are Gbit/s for one homogeneous board and one 10-Gbit/s sender. ``Demand'' is before the local gate; $T_{\rm in}$ is after it.
+
+  \DuneCompactColorBlock{coral}{CONSEQUENCE}{The ideal 10-Gbit/s comparison is already unfavorable}
+    {All 1024-sample populations meet or exceed line rate; VD cathode also exceeds it at 512. Usable payload is below 10 Gbit/s, so final loss requires Hermes ready, FIFO depth, and the real channel-to-sender map.}
+\end{frame}
+
+\begin{frame}{512 samples improves the channel-local estimate}
+  \framesubtitle{Nominal intrinsic-LAr baseline; fixed-record busy gate applied independently per channel}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.19}
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    Population & \multicolumn{2}{c}{Accepted rate [kHz/ch]} & \multicolumn{2}{c}{Rejected while busy} \\
+    & 1024 & 512 & 1024 & 512 \\
+    \midrule
+    HD APA-integrated & 15.45 & \textbf{17.91} & 36.5\% & \textbf{26.4\%} \\
+    VD cathode & 33.62 & \textbf{46.53} & 61.6\% & \textbf{46.8\%} \\
+    VD long wall & 18.78 & \textbf{22.27} & 38.4\% & \textbf{27.0\%} \\
+    VD short wall & 15.47 & \textbf{17.76} & 29.9\% & \textbf{19.5\%} \\
+    \bottomrule
+  \end{tabular}
+
+  \medskip
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneCompactColorBlock{paper}{SUPPORTED}{The direction of the effect}
+        {Shortening 1024 to 512 samples increases accepted candidate rate in every population tested.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneCompactColorBlock{coral}{NOT SUPPORTED YET}{A board-level dead-time number}
+        {This replay has no shared FIFO, serializer, lane assignment, or Hermes ready/back-pressure.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{The remaining uncertainty is architectural}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{paper}{2.55cm}{WHAT WE KNOW}{Detector-side activity}
+        {Nominal intrinsic-LAr rates and ranges, a one-window physical gamma pilot, VD populations, and the direction of the 512-sample effect.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{sky}{2.55cm}{WHAT IS REQUIRED}{A board-aware replay}
+        {Map channel \(\rightarrow\) board \(\rightarrow\) sender; replay correlated times through FIFO, serializer, Hermes ready, and the 10-Gbit/s link.}
+    \end{column}
+  \end{columns}
+
+  \medskip
+  \DuneCompactColorBlock{coral}{REPORTING RULE}{Keep the labels separate}
+        {Candidate activity, channel-local acceptance, and offered sender traffic are different quantities. Reserve \emph{board throughput/dead time} for the mapped model.}
+
+\end{frame}
+
+\begin{frame}{What we can say today}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneCompactColorBlock{paper}{DETECTOR ACTIVITY}{The VD cathode is demanding}
+        {Intrinsic LAr: 87.47 versus HD 24.34 kHz/ch (3.59$\times$). Gamma pilot: 92.38 versus 43.85 (2.11$\times$).}
+      \smallskip
+      \DuneCompactColorBlock{sky}{RECORD LENGTH}{512 samples helps}
+        {VD-cathode rejection: 61.6\% $\rightarrow$ 46.8\% in the baseline; 62.6\% $\rightarrow$ 47.7\% with the gamma pilot.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneCompactColorBlock{coral}{TRANSPORT LIMIT}{One 10-Gbit/s link is tight}
+        {Gamma pilot after the local gate: VD cathode 11.87 Gbit/s at 512; 16.41 Gbit/s at 1024.}
+      \smallskip
+      \DuneCompactColorBlock{paper}{NEXT CLOSURE}{The estimate remains provisional}
+        {Repeat gamma windows; add missing backgrounds; validate energy; then map boards, FIFO, lanes, serializer, and Hermes ready.}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\end{document}
