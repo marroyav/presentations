@@ -1,0 +1,31 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+
+\title{PDS PoF budget}
+\author{PDS / Slow Controls}
+\date{14 October 2026}
+
+\begin{document}
+\begin{frame}{PoF hardware budget: Opta and Beckhoff}
+  40 racks $\times$ 2 boxes. One enable per box. USD retail estimates.\par
+  \bigskip
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}Xlrr@{}}
+    \toprule
+    Readings per box & Platform & Per rack & 40 racks\\
+    \midrule
+    7 V + 1 T & Opta & \$380--395 & \$15.2--15.8k\\
+              & Beckhoff I/O & \$1,269--1,499 & \$50.8--60.0k\\
+    \midrule
+    8 V + 8 T & Opta & \$759--791 & \$30.4--31.6k\\
+              & Beckhoff I/O & \$1,624--2,084 & \$65.0--83.4k\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  \textbf{8 V + 8 T case: Opta hardware costs about \$33--53k less.}\par
+  \medskip
+  Existing Beckhoff PLC reused. Installation and engineering excluded.
+\end{frame}
+\end{document}

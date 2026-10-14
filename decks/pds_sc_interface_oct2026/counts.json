@@ -1,0 +1,62 @@
+{
+  "workbook": "/home/arroyave/Downloads/PDS_Operational_Variables_v1.1_Draft.xlsx",
+  "sha256": "583ff7edc920ecacbed307dcaf03a02bcb7fe0059ce766fe8777ddc15fa1a98f",
+  "tabs": {
+    "DAQ": {
+      "total": 53,
+      "control": 49,
+      "publish": 4,
+      "known": 53,
+      "pending": 0
+    },
+    "OPMON": {
+      "total": 28,
+      "control": 0,
+      "publish": 28,
+      "known": 28,
+      "pending": 0
+    },
+    "SC": {
+      "total": 27,
+      "control": 0,
+      "publish": 27,
+      "known": 27,
+      "pending": 0
+    },
+    "PoF": {
+      "total": 16,
+      "control": 0,
+      "publish": 16,
+      "known": 0,
+      "pending": 16
+    },
+    "SSP": {
+      "total": 19,
+      "control": 7,
+      "publish": 12,
+      "known": 19,
+      "pending": 0
+    },
+    "WIENER": {
+      "total": 6,
+      "control": 2,
+      "publish": 4,
+      "known": 0,
+      "pending": 6
+    },
+    "PDU": {
+      "total": 10,
+      "control": 1,
+      "publish": 9,
+      "known": 10,
+      "pending": 0
+    }
+  },
+  "totals": {
+    "total": 159,
+    "control": 59,
+    "publish": 100,
+    "known": 137,
+    "pending": 22
+  }
+}

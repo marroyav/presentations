@@ -1,0 +1,12 @@
+SC–PDS–DPS interface
+1. Title and responsibilities.
+2. One OPC UA boundary for all five system interfaces.
+3. Existing ICD DAPHNE control path.
+4. Control and Publish scope; OPMON contains data metrics.
+5. PoF per box: 8 T + 8 V + one enable, three I/O terminals.
+6. PoF rack draft: 40 mini-racks, 80 boxes, 640 drivers.
+7. Rack monitoring: draft 44 PDUs, 440 outlets and reference sensor profile.
+8. SC metadata: identity, access, limits, hysteresis and timing.
+9. Variable definitions: original 159-row catalogue.
+10. FD-VD expansion: 20,804 allocated points plus population-dependent additions.
+11–12. Backup: implementation differences and sources.

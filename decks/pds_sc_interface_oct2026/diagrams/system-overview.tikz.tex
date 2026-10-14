@@ -1,0 +1,25 @@
+% One SC-facing protocol boundary. All five system interfaces are peers.
+% Native transport and service location belong in subsystem details.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \useasboundingbox (-0.10,-4.0) rectangle (14.30,0.85);
+  \node[box,text width=3.4cm,draw=DuneSky] (sc) at (7.1,0)
+    {\textbf{Slow Controls}\\Ignition};
+  \coordinate (bus) at (7.1,-1.7);
+  \draw[draw=DuneSky] (sc.south) -- node[right,font=\normalsize\bfseries]
+    {OPC UA} (bus);
+  \draw[draw=DuneSky] (1.4,-1.7) -- (12.8,-1.7);
+
+  \node[box,text width=2.30cm,minimum height=1.15cm] (daphne) at (1.4,-3.15)
+    {\textbf{DAPHNE}};
+  \node[box,text width=2.30cm,minimum height=1.15cm] (cal) at (4.25,-3.15)
+    {\textbf{PDS\\calibration box}};
+  \node[box,text width=2.30cm,minimum height=1.15cm] (pof) at (7.1,-3.15)
+    {\textbf{PoF}};
+  \node[box,text width=2.30cm,minimum height=1.15cm] (ps) at (9.95,-3.15)
+    {\textbf{WIENER\\power supply}};
+  \node[box,text width=2.30cm,minimum height=1.15cm] (pdu) at (12.8,-3.15)
+    {\textbf{PDU}};
+
+  \foreach \device/\x in {daphne/1.4,cal/4.25,pof/7.1,ps/9.95,pdu/12.8}
+    \draw[both,draw=DuneSky] (\device.north) -- (\x,-1.7);
+\end{tikzpicture}

@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-14",
+  "status": "provisional integration sizing; not an approved BOM",
+  "user_direction": "Reuse the Beckhoff PLC and the flange-side connection already in the project scope; SC-facing interface remains OPC UA.",
+  "inputs": {
+    "temperatures_per_box": 8,
+    "voltages_per_box": 8,
+    "channels_per_box": 8,
+    "count_source": "Latest user correction, 2026-10-14: eight channels, 8 V and 8 T; working sizing inventory"
+  },
+  "products": {
+    "EL3208": {
+      "role": "temperature input",
+      "channels": 8,
+      "signal": "2-wire compatible RTD",
+      "url": "https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3208.html"
+    },
+    "EL3068": {
+      "role": "voltage input",
+      "channels": 8,
+      "signal": "0\u201310 V, single-ended",
+      "url": "https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3068.html"
+    },
+    "EL1859": {
+      "role": "one box-enable output; optional incoming enable/disable input",
+      "inputs": 8,
+      "outputs": 8,
+      "signal": "24 V DC",
+      "url": "https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed1xxx-digital-input/el1859.html",
+      "used_outputs_per_box": 1,
+      "optional_used_inputs_per_box": 1
+    }
+  },
+  "cases": {
+    "eight_channels": {
+      "channels_per_box": 8,
+      "boxes_in_shared_bank": 1,
+      "temperature_channels_per_terminal": 8,
+      "modules": {
+        "temperature": 1,
+        "voltage": 1,
+        "mixed_digital": 1
+      },
+      "total": 3
+    },
+    "two_eight_channel_boxes": {
+      "channels_per_box": 8,
+      "boxes_in_shared_bank": 2,
+      "temperature_channels_per_terminal": 8,
+      "modules": {
+        "temperature": 2,
+        "voltage": 2,
+        "mixed_digital": 1
+      },
+      "total": 5,
+      "condition": "Both box enables, and optional incoming enables, use one shared EL1859 in a common I/O bank."
+    },
+    "eight_channels_with_two_channel_EL3202": {
+      "channels_per_box": 8,
+      "boxes_in_shared_bank": 1,
+      "temperature_channels_per_terminal": 2,
+      "modules": {
+        "temperature": 4,
+        "voltage": 1,
+        "mixed_digital": 1
+      },
+      "total": 6
+    }
+  },
+  "excluded": [
+    "PLC CPU and existing OPC UA/platform implementation",
+    "EtherCAT coupler/end terminal and power-feed infrastructure",
+    "PoF signal conditioning, connectors and wiring",
+    "independent DPS/protective I/O",
+    "proof of free DIN space, E-bus power and existing spare channels"
+  ],
+  "sources": {
+    "rack_cells": {
+      "path": "/home/arroyave/work/racks/data/fd2-estimate-cells.csv",
+      "locators": [
+        "FD2 MiniRack combined!F8",
+        "FD2 MiniRack combined!F11",
+        "BDE Aux Rack!K20:K21",
+        "FD2 MiniRack combined!A1",
+        "FD2 MiniRack combined!B8",
+        "FD2 MiniRack combined!B11",
+        "Power Summary!B17"
+      ],
+      "meaning": "May 2025 plan corroborates eight drivers/crate and mentions EL3202 flange RTD modules; current channel count comes from user correction.",
+      "sha256": "7c5aad7cd5bdf25c297a681585e5b1a1cba9e23fbc0eddb97cbf00487f08c300"
+    },
+    "infrastructure": {
+      "path": "/home/arroyave/work/racks/sources/power-planning/2026-06-10_SC_Infrastructure_and_Installation.pdf",
+      "pages": [
+        4,
+        5
+      ],
+      "meaning": "Planning diagrams show Beckhoff PLC, EtherCAT remote I/O and flange interfaces; not proof of commissioning or spare capacity",
+      "sha256": "8a40338cf3efc91396d62ead3f4d15dcf9c7da827b5772e47cf9a2e345aab7a2"
+    },
+    "rack_workbook": {
+      "path": "/home/arroyave/work/racks/sources/rack-estimates/FD2_Rack_Estimates_May_2025_TMS.xlsx",
+      "locators": [
+        "FD2 MiniRack combined!F8",
+        "FD2 MiniRack combined!F11",
+        "FD2 MiniRack combined!A1",
+        "FD2 MiniRack combined!B8",
+        "FD2 MiniRack combined!B11",
+        "Power Summary!B17"
+      ],
+      "sha256": "ce887de4442c46f611c1dd2d72688bc7ec80033612ec40604bcdfef430f2706b"
+    }
+  },
+  "source_presentation": {
+    "path": "/home/arroyave/Downloads/PoF-Housing-update-peter-20261014.pptx",
+    "sha256": "562ecfefad5076c951929a0b26e81b3aa62c4a2f37944fbcf917071d654123af",
+    "reviewed": "2026-10-14",
+    "slides": {
+      "1": "Reports 4\u20137 laser-PS voltage readings at about 3.3 V and one chassis RTD; OPC UA tested with UaExpert and FreeOpcUa; updates about 1 Hz.",
+      "2": "Burndy connector, cable and terminal-block assembly are work in progress.",
+      "3": "Two eight-channel chassis, each using an eight-pin Burndy connector and a terminal block to Opta I/O; no box-enable path or pin allocation shown."
+    },
+    "interpretation": "Connector/terminal-block reuse with Beckhoff is an integration proposal pending electrical/pinout mapping. Opta OPC UA client tests do not qualify Beckhoff wiring compatibility.",
+    "inventory_discrepancy": "Source scope of 4\u20137 voltages + one RTD differs from user 8 V + 8 T working sizing; preserve the latter as an explicitly labelled working case."
+  },
+  "control_scope": {
+    "box_enable_outputs_per_box": 1,
+    "analog_setpoints": 0,
+    "per_channel_feedback_inputs": 0,
+    "optional_incoming_enable_input_per_box": 1,
+    "count_source": "User correction: one enable per box; per-channel setpoints and feedback were unsupported sizing assumptions and have been removed.",
+    "electrical_interface": "Unverified; 24 V digital assumed for the example terminal.",
+    "optional_incoming_enable": "One incoming hardwired enable/disable signal fits a spare input on the same mixed terminal; its source, polarity and response remain to be defined."
+  },
+  "rack_deployment": {
+    "basis": "May 2025 FD2 rack draft; requested draft numbers, not installed inventory",
+    "mini_racks": 40,
+    "boxes_per_mini_rack": 2,
+    "total_boxes": 80,
+    "drivers_per_box": 8,
+    "total_drivers": 640,
+    "working_case_source": "User working inventory: 8 temperatures + 8 voltages + one normal enable per box. Not the signal inventory in the PoF team presentation.",
+    "per_rack": {
+      "temperature_inputs": 16,
+      "voltage_inputs": 16,
+      "box_enable_outputs": 2,
+      "signal_points": 34,
+      "temperature_terminals": 2,
+      "voltage_terminals": 2,
+      "shared_digital_terminals": 1,
+      "io_terminals": 5
+    },
+    "whole_draft": {
+      "temperature_inputs": 640,
+      "voltage_inputs": 640,
+      "box_enable_outputs": 80,
+      "signal_points": 1360,
+      "temperature_terminals": 80,
+      "voltage_terminals": 80,
+      "shared_digital_terminals": 40,
+      "io_terminals": 200
+    },
+    "bank_arrangement": "One common I/O bank per rack; the two boxes share one EL1859. Separate box banks need six terminals per rack, 240 overall.",
+    "source_locators": [
+      "FD2 MiniRack combined!A1",
+      "FD2 MiniRack combined!B8",
+      "FD2 MiniRack combined!B11",
+      "FD2 MiniRack combined!F8",
+      "FD2 MiniRack combined!F11",
+      "Power Summary!B17"
+    ],
+    "source_discrepancy": "July 2026 meeting notes mention 42 PoF racks versus 40 in drawing. This slide deliberately uses the user-requested May draft of 40."
+  }
+}

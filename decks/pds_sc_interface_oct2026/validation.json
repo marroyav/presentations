@@ -1,0 +1,142 @@
+{
+  "date": "2026-10-14",
+  "revision": "1.9",
+  "status": "passed",
+  "pdf_sha256": "2e4d5e4a7c23b88e69cf26a52d78bad0be395be27cbcb4d4ce502fcdde4dbfed",
+  "pages": 12,
+  "main_slides": 10,
+  "backup_slides": 2,
+  "counts": {
+    "total": 159,
+    "control": 59,
+    "publish": 100,
+    "known": 137,
+    "pending": 22
+  },
+  "icd_diagram_verbatim": true,
+  "overview_checks": [
+    "five system nodes share the same vertical coordinate",
+    "all are under the same OPC UA boundary",
+    "native-protocol labels absent from SC overview",
+    "title page restored with SC/PDS/DPS/DAQ responsibilities"
+  ],
+  "deck_source_errors": [],
+  "deck_source_advisories": [],
+  "overflow_warnings": 0,
+  "pages_checked": [
+    {
+      "page": 1,
+      "words": 47,
+      "min_text_pt": 7.54
+    },
+    {
+      "page": 2,
+      "words": 31,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 3,
+      "words": 64,
+      "min_text_pt": 6.16
+    },
+    {
+      "page": 4,
+      "words": 71,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 5,
+      "words": 69,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 6,
+      "words": 68,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 7,
+      "words": 59,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 8,
+      "words": 52,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 9,
+      "words": 69,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 10,
+      "words": 75,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 11,
+      "words": 99,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 12,
+      "words": 83,
+      "min_text_pt": 6.7
+    }
+  ],
+  "visual_review": "New Raritan rack-profile and FD-VD system-count slides, plus updated source slide, inspected at presentation size.",
+  "scope": "Design and implementation review; no device operations or deployment qualification.",
+  "pof_checks": {
+    "temperatures": 8,
+    "voltages": 8,
+    "box_enable_outputs": 1,
+    "analog_setpoints": 0,
+    "per_channel_feedback_inputs": 0,
+    "readout_terminals": 2,
+    "normal_control_terminals": 1,
+    "total_draft_terminals": 3,
+    "optional_incoming_enable_input_fits": true,
+    "workbook_total": 159,
+    "datasheet_links": 3,
+    "assumptions_recorded_in": "speaker-notes.txt"
+  },
+  "caption_check": "No diagram captions or Evidence annotations reintroduced.",
+  "rack_checks": {
+    "source": "May 2025 FD2 rack draft; cell text cross-checked",
+    "mini_racks": 40,
+    "boxes_per_rack": 2,
+    "boxes": 80,
+    "drivers": 640,
+    "temperature_inputs": 640,
+    "voltage_inputs": 640,
+    "box_enable_outputs": 80,
+    "signal_points": 1360,
+    "io_terminals_per_rack": 5,
+    "io_terminals_total": 200,
+    "working_sensor_case": "User 8 T + 8 V per box",
+    "digital_sharing": "one EL1859 per rack for its two boxes",
+    "independent_of_workbook_variable_rows": true
+  },
+  "system_checks": {
+    "scope": "FD-VD explicit draft case",
+    "allocated_subtotal": 20804,
+    "control": 10838,
+    "publish": 9966,
+    "board_count": 42,
+    "used_channels_per_board": 32,
+    "afe_groups_per_board": 4,
+    "data_links_per_board": 2,
+    "pdu_count": 44,
+    "outlets": 440,
+    "temperature_probes": 176,
+    "leak_detectors": 44,
+    "smoke_detectors": 44,
+    "native_contact_fields": 220,
+    "unallocated_additions": "6 \u00d7 total Hermes buffers + 12 \u00d7 HD-mezzanine AFE instances + defined WIENER power points",
+    "three_population_inputs_stay_blank": true,
+    "original_variable_sheets_unchanged": true,
+    "independent_group_arithmetic": "passed",
+    "workbook_sha256": "424c21190ca3bac5d1639d499707b23128ffaa4d90ef1b5305bdb14ee70a1c05"
+  }
+}

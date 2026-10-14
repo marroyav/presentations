@@ -1,0 +1,57 @@
+PDS PoF budget — one slide — 14 October 2026
+
+Both comparisons have 40 racks, two boxes per rack and one normal enable
+per box. Prices are published single-unit USD retail/reseller listings captured
+14 October 2026, not Beckhoff factory prices, a project quote or a landed cost.
+Ranges reflect the source listings, not a quantified uncertainty interval.
+
+SCOPE 1: up to 7 V + one two-wire PT100 RTD per box.
+The PoF team presentation reports 4–7 voltages and one chassis RTD; its
+figure shows two boxes connected through Burndy connectors and a terminal block
+to one Opta and an analog expansion. Cost the maximum of seven voltages.
+Opta: one AFX00003 Lite plus one AFX00007 analog expansion per rack. The
+base contributes eight voltage inputs; the expansion supplies the remaining
+six voltage and two RTD inputs. Two of four base relays provide box enables.
+Cost $379.50–395.35/rack; $15,180–15,814 across 40 racks.
+Beckhoff: one EL3208 for two RTDs, two EL3068 for 14 voltages and one shared
+EL1859 for the box enables. Cost $1,269.38–1,499.38/rack;
+$50,775.20–59,975.20 across 40 racks.
+
+SCOPE 2: user working inventory, 8 V + 8 T per box.
+Opta: two AFX00003 Lite plus two AFX00007 analog expansions per rack. Each
+base reads eight voltages; its expansion reads eight two-wire PT100 RTDs.
+Each box uses one relay for its enable. This is capacity-based sizing, not
+what the source presentation reports testing. Cost $759–790.70/rack;
+$30,360–31,628 for 40 racks. One CPU plus three analog expansions could
+also cover these inputs, at $836.90/rack using the lower listed prices;
+two CPU/expansion pairs are cheaper at those unit prices.
+Beckhoff: two EL3208 + two EL3068 + one shared EL1859 per rack.
+Cost $1,624.38–2,084.38/rack; $64,975.20–83,375.20 across 40 racks.
+The indicative hardware premium is $33,347.20–53,015.20 across 40 racks,
+combining the lowest Beckhoff total with the highest Opta total and vice versa.
+
+SOURCED UNIT PRICES (USD)
+AFX00003: 150.80; AFX00007: 228.70–244.55.
+EL3208: 355–585; EL3068: 382; EL1859 new-product listing: 150.38.
+Exact URLs are in estimates.json. Beckhoff reseller listings may not carry
+manufacturer warranty and are not a substitute for a direct project quote.
+
+COST BOUNDARY
+The existing Beckhoff CPU/OPC UA platform is provided at zero incremental CPU
+cost. The flange-side EtherCAT route is already in project scope. Extra
+couplers, end terminals, station power and spare capacity still need a final
+BOM. These are excluded, together with taxes/tariffs, shipping, volume
+discounts, sensors, connectors, cabling, conditioning, integration engineering,
+software validation, long-term support and independent DPS/protection I/O.
+Opta relay contacts and Beckhoff 24 V solid-state outputs require the matching
+box-enable electrical interface. The source does not show an enable pinout.
+Beckhoff’s integration and maintenance reuse is a separate engineering benefit;
+no monetary saving for it has been assumed.
+
+TECHNICAL SOURCES
+Arduino AFX00007 datasheet, pp.5–6: eight programmable input channels;
+all eight accept two-wire PT100 RTDs. Base Opta: eight voltage inputs and four
+relay outputs. Official source URLs are in estimates.json.
+PoF-Housing-update-peter-20261014.pptx, slides 1–3, SHA-256
+562ecfefad5076c951929a0b26e81b3aa62c4a2f37944fbcf917071d654123af.
+Presentation pricing and capabilities do not qualify an installed interface.

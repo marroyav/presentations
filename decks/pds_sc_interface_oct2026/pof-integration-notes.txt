@@ -1,0 +1,47 @@
+PoF — draft Beckhoff integration sizing · 14 October 2026
+
+User-specified scope: eight channels, 8 voltages, 8 temperatures, and ONE
+normal enable/disable for the whole PoF box. The per-channel setpoints,
+enables and feedback in the earlier sizing draft were unsupported assumptions.
+Reuse the Beckhoff PLC and flange-side connection already in project scope.
+SC continues to use OPC UA. The June 2026 infrastructure plan (pages 4–5)
+shows the planned EtherCAT/remote-I/O route; spare capacity is not established.
+
+Draft I/O per eight-channel box:
+- 8 temperatures: 1 x EL3208, 8 compatible 2-wire RTD inputs.
+- 8 voltages: 1 x EL3068, 8 single-ended 0–10 V inputs.
+- 1 box enable/disable output: 1 x EL1859, using 1 of its 8 outputs.
+Total: 3 I/O terminals. Readout alone uses 2; box control adds 1.
+If an incoming hardwired enable/disable signal is required, it uses 1 of the
+8 EL1859 inputs. It does not require another terminal. Its source, polarity,
+response timing and recovery behavior remain to be agreed.
+
+Confirm temperature sensor type/wiring, voltage-monitor range, digital logic
+levels, grounding and connector pinout. The enable output commands the box;
+it does not supply laser power. Conditioning or different terminals may be
+needed. Two-channel EL3202 RTD terminals need four modules for 8 temperatures,
+giving 6 I/O terminals overall instead of 3.
+
+Two boxes in one shared I/O bank can use 2 temperature + 2 voltage + 1 mixed
+digital terminal: 5 total. Separate banks with one full set per box use 6.
+Additional required box signals or protective I/O may increase these counts.
+CPU, coupler/power-feed and end terminals, wiring, DIN space and E-bus power
+checks are separate. An ordinary EL1859 does not qualify a laser-safety or
+DPS protection chain. The ICD requires an independent protection path.
+
+The PoF team's development and the integration preference remain distinct.
+The PoF team presentation is now reviewed: slides 1–3 report Opta OPC UA
+tests and a proposed Burndy/terminal-block interface. Connector assembly is
+WIP; no enable path or pin allocation is shown. Its 4–7 voltage + one RTD
+scope differs from the user working 8 V + 8 T sizing case. The rack draft
+supplies 40 mini-racks, two boxes per rack and eight drivers per box.
+Model capacities are checked against the linked Beckhoff datasheets in
+pof-io-sizing.json. Proposed controls do not become implemented workbook tags.
+The workbook retains 16 PoF Publish rows; all remain mapping pending. The
+box-enable control is a proposed interface, pending mapping and implementation.
+
+Deployment for the requested May rack draft: 40 racks x 2 boxes = 80 boxes;
+80 x 8 drivers = 640 drivers. Working I/O case: 640 T + 640 V + 80 enables
+= 1,360 physical points. At one shared bank per rack, 2 temperature + 2
+voltage + 1 mixed digital terminal = 5/rack, 200 overall. The later July
+40/42-rack discrepancy is not used to silently change the May draft.

@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-14",
+  "classification": "indicative public retail/reseller budget comparison; not a Beckhoff factory/project quotation",
+  "currency": "USD",
+  "prices": {
+    "AFX00003": {
+      "usd": 150.8,
+      "url": "https://www.mouser.com/en/ProductDetail/Arduino/AFX00003?qs=IPgv5n7u5QaBNj%252BbJNURUA%3D%3D"
+    },
+    "AFX00007": {
+      "usd": 228.7,
+      "url": "https://www.mouser.com/ProductDetail/Arduino/AFX00007?qs=wT7LY0lnAe0mR%2FhyEpgmZw%3D%3D"
+    },
+    "AFX00007_alternative": {
+      "usd": 244.55,
+      "url": "https://www.newark.com/arduino/afx00007/plc-8-analog-digital-input-output/dp/12AM5736"
+    },
+    "EL3208_low": {
+      "usd": 355.0,
+      "url": "https://www.nexinstrument.com/el3208"
+    },
+    "EL3208_high": {
+      "usd": 585.0,
+      "url": "https://www.teknihaus.com/el3208"
+    },
+    "EL3068": {
+      "usd": 382.0,
+      "url": "https://www.teknihaus.com/el3068"
+    },
+    "EL1859": {
+      "usd": 150.38,
+      "url": "https://www.radwell.com/Buy/BECKHOFF/BECKHOFF/EL1859"
+    }
+  },
+  "working_case": {
+    "scope": "two PoF boxes per rack; each 8 voltage readings + 8 two-wire RTDs + one box enable",
+    "Opta_BOM_per_rack": {
+      "AFX00003": 2,
+      "AFX00007": 2
+    },
+    "Beckhoff_BOM_per_rack": {
+      "EL3208": 2,
+      "EL3068": 2,
+      "EL1859": 1
+    },
+    "Opta_per_rack": [
+      759.0,
+      790.7
+    ],
+    "Beckhoff_per_rack": [
+      1624.38,
+      2084.38
+    ],
+    "Opta_40_racks": [
+      30360.0,
+      31628.0
+    ],
+    "Beckhoff_40_racks": [
+      64975.2,
+      83375.2
+    ],
+    "Beckhoff_premium_per_rack": [
+      833.68,
+      1325.38
+    ],
+    "Beckhoff_premium_40_racks": [
+      33347.2,
+      53015.2
+    ]
+  },
+  "single_Opta_per_rack_alternative": {
+    "BOM": {
+      "AFX00003": 1,
+      "AFX00007": 3
+    },
+    "usd": 836.9,
+    "note": "One CPU plus three eight-channel expansion modules can cover 16 V +16 RTD inputs under the two-wire RTD assumption; two CPU/module pairs are cheaper at these single-unit prices."
+  },
+  "team_presentation_case": {
+    "scope": "two boxes, each 4\u20137 voltage readings and one RTD",
+    "Opta_BOM_per_rack": {
+      "AFX00003": 1,
+      "AFX00007": 1
+    },
+    "usd": 379.5,
+    "note": "Smaller scope than the user 8 V +8 T per-box sizing; do not compare this BOM to the larger Beckhoff BOM."
+  },
+  "technical_source": "https://docs.arduino.cc/resources/datasheets/AFX00007-datasheet.pdf",
+  "technical_basis": "Arduino datasheet p.5\u20136 confirms eight programmable input channels and two-wire PT100 RTDs on all eight; Opta base supplies eight voltage inputs and four relay outputs. Beckhoff output is 24 V solid state; confirm the common box-enable electrical interface.",
+  "assumptions": [
+    "Existing Beckhoff PLC/OPC UA platform reused at zero additional CPU cost.",
+    "Remote EtherCAT connection/station already in scope; spare capacity is not qualified here.",
+    "8 voltage +8 temperature channels are user working scope, not the smaller team presentation scope."
+  ],
+  "excluded": [
+    "taxes, shipping and tariffs",
+    "volume discounts and project pricing",
+    "couplers, end terminals and extra station power if needed",
+    "sensors, connectors, cables and signal conditioning",
+    "engineering, software validation and long-term support",
+    "independent DPS/protection I/O"
+  ]
+}

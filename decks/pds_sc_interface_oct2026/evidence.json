@@ -1,0 +1,523 @@
+{
+  "date": "2026-10-14",
+  "kind": "document and implementation review",
+  "no_live_device_checks": true,
+  "icd": {
+    "edms_parent": "3309688",
+    "revision": "local draft 0.2",
+    "date": "2026-09-17",
+    "path": "/home/arroyave/work/icd-sc-pds",
+    "approval": "draft for review; not an approved release",
+    "figure": "section 3.1 DAPHNE service locations and protocol paths"
+  },
+  "files": {
+    "S1-services": {
+      "path": "/home/arroyave/work/icd-sc-pds/sections/03_protocols_services.tex",
+      "sha256": "7ef3b160f82a54d884487ab134a4be2c088cc3918cce700679a17d555dbc4cab"
+    },
+    "S1-physical": {
+      "path": "/home/arroyave/work/icd-sc-pds/sections/02_physical_interface.tex",
+      "sha256": "77884f75340c63f122e8eae3a63bce18fd72f9db203afba6fa2ebc8c6239b3ef"
+    },
+    "S1-responsibilities": {
+      "path": "/home/arroyave/work/icd-sc-pds/sections/01_responsibilities.tex",
+      "sha256": "d50fc136b01a6d6bed0880d6c2d1f2b57e653416e4066a63663a28fed346f62f"
+    },
+    "S1-interactions": {
+      "path": "/home/arroyave/work/icd-sc-pds/sections/05_proposed_matrix.tex",
+      "sha256": "bac6aeede3324f783ec836f07823fa9176828bb79b9a4e3c1f5dcf90c619bf32"
+    },
+    "S1-document": {
+      "path": "/home/arroyave/work/icd-sc-pds/main.tex",
+      "sha256": "5f43d05138a63365a637cc46a292ad049888e3d30dd52d13fd8302fd2a9dc110"
+    },
+    "historical-ICD": {
+      "path": "/home/arroyave/work/racks/sources/power-planning/2025-10-14_EDMS-3309688_DUNE_ICD_SC_PDS_v1.docx",
+      "sha256": "955501e5c6b7bae882e937964af1bfca1fc94c1f331e4a7571dc6fb0ff7f16df"
+    },
+    "S4-client": {
+      "path": "/home/arroyave/work/daphne-os/daphne-server/client/ssp_led_control.py",
+      "sha256": "3d4d9d984a0fc438901d33932c6163f3c44682f24c4be6e9c8ccfa0fc2325eac"
+    },
+    "S4-map": {
+      "path": "/home/arroyave/work/ssp-controller-review-20261005/Registers_v4.2a.xlsx",
+      "sha256": "a303517d2da01b669aa934d8e824e42a0f1d7914cf3536c1379e394f271d536d"
+    },
+    "S5": {
+      "path": "/home/arroyave/work/daphne-os/docs/kontron-wiener-power-control.md",
+      "sha256": "258643aee9cd568679be56867c9f990c8757194ca16c5f437b56cac5d24cbbb7"
+    },
+    "S6-bindings": {
+      "path": "/home/arroyave/work/racks/sources/docdb-32655-v8/PDU_UDTs_2026_06_03.json",
+      "sha256": "edb6beb2be3f7c9c91f15e17c99aecb86669f4b0d5690400e5b3d3c81c3678c1"
+    },
+    "S6-tests": {
+      "path": "/home/arroyave/work/racks/sources/docdb-32655-v8/PDU_Test_Matrix_G271_PX3.xlsx",
+      "sha256": "87d2556a2330f410b668ee4648cbe36a1534a29d1e95bc2297b6e5f3e9836093"
+    },
+    "S7": {
+      "path": "/home/arroyave/work/gizmo-icd/deliverables/GIZMo_Kria_DCS_Intake.xlsx",
+      "sha256": "71107acaf6bafab851ed0c628efe72339addc2207c8a4df8191d40b99a09491a"
+    },
+    "S8": {
+      "path": "/home/arroyave/Downloads/PDS_Operational_Variables_v1.1_Draft.xlsx",
+      "sha256": "583ff7edc920ecacbed307dcaf03a02bcb7fe0059ce766fe8777ddc15fa1a98f"
+    },
+    "PoF-rack-plan": {
+      "path": "/home/arroyave/work/racks/data/fd2-estimate-cells.csv",
+      "sha256": "7c5aad7cd5bdf25c297a681585e5b1a1cba9e23fbc0eddb97cbf00487f08c300"
+    },
+    "PoF-rack-workbook": {
+      "path": "/home/arroyave/work/racks/sources/rack-estimates/FD2_Rack_Estimates_May_2025_TMS.xlsx",
+      "sha256": "ce887de4442c46f611c1dd2d72688bc7ec80033612ec40604bcdfef430f2706b"
+    },
+    "PoF-infrastructure": {
+      "path": "/home/arroyave/work/racks/sources/power-planning/2026-06-10_SC_Infrastructure_and_Installation.pdf",
+      "sha256": "8a40338cf3efc91396d62ead3f4d15dcf9c7da827b5772e47cf9a2e345aab7a2"
+    },
+    "PoF-sizing": {
+      "path": "/home/arroyave/work/presentations/decks/pds_sc_interface_oct2026/pof-io-sizing.json",
+      "sha256": "5c4b028765503de45a3fb2c6bf47d75257702255f23f419f4cfe2837d9cf263f"
+    },
+    "system-counts": {
+      "path": "/home/arroyave/work/presentations/decks/pds_sc_interface_oct2026/system-counts.json",
+      "sha256": "cb191c32e1dc72e1ccdeb0d8dd933a0756b30c173a8ea634707aaaddccc73bfe"
+    },
+    "system-workbook": {
+      "path": "/home/arroyave/Downloads/PDS_Operational_Variables_v1.2_System_Draft.xlsx",
+      "sha256": "424c21190ca3bac5d1639d499707b23128ffaa4d90ef1b5305bdb14ee70a1c05"
+    },
+    "PDU-rack-guide": {
+      "path": "/home/arroyave/work/racks/sources/docdb-32655-v8/PX3_Rack_Protection_Setup.pdf",
+      "sha256": "df707a5e923cbcb81f2ae288c1a5705de8588f83475818f0ba3b2ce56fad7f72"
+    },
+    "PDU-top-plate-spec": {
+      "path": "/home/arroyave/work/presentations/decks/pds_sc_interface_oct2026/source-evidence/PX3-5147R-spec.pdf",
+      "sha256": "bc6aeb2851f9aa62062ad7678cc0e9ff6faf2e43403eeac9f59ae70ea5c6b73a"
+    },
+    "PDU-standard-rack-spec": {
+      "path": "/home/arroyave/work/presentations/decks/pds_sc_interface_oct2026/source-evidence/PX3-5170V-E2F5-spec.pdf",
+      "sha256": "1fc0c36a22168140006817deb3b9a389b45f6a6b19f391769550f83075c8ae2e"
+    }
+  },
+  "repositories": {
+    "icd-sc-pds": {
+      "path": "/home/arroyave/work/icd-sc-pds",
+      "revision": "bfb2a8b725d9a5a3b7a517f4f9e15fb953eed1f8",
+      "branch": "main",
+      "worktree_status": ""
+    },
+    "daphne-os": {
+      "path": "/home/arroyave/work/daphne-os",
+      "revision": "edc61f126b0a86e9373fb2635f684d053dfde082",
+      "branch": "develop",
+      "worktree_status": ""
+    },
+    "daphnemodules": {
+      "path": "/home/arroyave/work/daphnemodules-variable-review",
+      "revision": "ba6fd3c30b2dbb6e4186242b629fd068208c1e91",
+      "branch": "develop",
+      "worktree_status": ""
+    },
+    "hermesmodules-local": {
+      "path": "/home/arroyave/work/pds-trigger-scaffold/hermesmodules",
+      "revision": "d7de1de6627dff097f282d4753508b588dad10a9",
+      "branch": "marroyav/tp_ta_exploration",
+      "worktree_status": ""
+    }
+  },
+  "implementation_trace": "/home/arroyave/work/daphne-sc-intake-20261014/operational-subset-validation.json",
+  "implementation_trace_sha256": "d9a21703a03413ee3e71c28435edfd3acfcdbbbe52e3ebebe7a8618d7be4cedc",
+  "pof_io_sizing": {
+    "date": "2026-10-14",
+    "status": "provisional integration sizing; not an approved BOM",
+    "user_direction": "Reuse the Beckhoff PLC and the flange-side connection already in the project scope; SC-facing interface remains OPC UA.",
+    "inputs": {
+      "temperatures_per_box": 8,
+      "voltages_per_box": 8,
+      "channels_per_box": 8,
+      "count_source": "Latest user correction, 2026-10-14: eight channels, 8 V and 8 T; working sizing inventory"
+    },
+    "products": {
+      "EL3208": {
+        "role": "temperature input",
+        "channels": 8,
+        "signal": "2-wire compatible RTD",
+        "url": "https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3208.html"
+      },
+      "EL3068": {
+        "role": "voltage input",
+        "channels": 8,
+        "signal": "0\u201310 V, single-ended",
+        "url": "https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3068.html"
+      },
+      "EL1859": {
+        "role": "one box-enable output; optional incoming enable/disable input",
+        "inputs": 8,
+        "outputs": 8,
+        "signal": "24 V DC",
+        "url": "https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed1xxx-digital-input/el1859.html",
+        "used_outputs_per_box": 1,
+        "optional_used_inputs_per_box": 1
+      }
+    },
+    "cases": {
+      "eight_channels": {
+        "channels_per_box": 8,
+        "boxes_in_shared_bank": 1,
+        "temperature_channels_per_terminal": 8,
+        "modules": {
+          "temperature": 1,
+          "voltage": 1,
+          "mixed_digital": 1
+        },
+        "total": 3
+      },
+      "two_eight_channel_boxes": {
+        "channels_per_box": 8,
+        "boxes_in_shared_bank": 2,
+        "temperature_channels_per_terminal": 8,
+        "modules": {
+          "temperature": 2,
+          "voltage": 2,
+          "mixed_digital": 1
+        },
+        "total": 5,
+        "condition": "Both box enables, and optional incoming enables, use one shared EL1859 in a common I/O bank."
+      },
+      "eight_channels_with_two_channel_EL3202": {
+        "channels_per_box": 8,
+        "boxes_in_shared_bank": 1,
+        "temperature_channels_per_terminal": 2,
+        "modules": {
+          "temperature": 4,
+          "voltage": 1,
+          "mixed_digital": 1
+        },
+        "total": 6
+      }
+    },
+    "excluded": [
+      "PLC CPU and existing OPC UA/platform implementation",
+      "EtherCAT coupler/end terminal and power-feed infrastructure",
+      "PoF signal conditioning, connectors and wiring",
+      "independent DPS/protective I/O",
+      "proof of free DIN space, E-bus power and existing spare channels"
+    ],
+    "sources": {
+      "rack_cells": {
+        "path": "/home/arroyave/work/racks/data/fd2-estimate-cells.csv",
+        "locators": [
+          "FD2 MiniRack combined!F8",
+          "FD2 MiniRack combined!F11",
+          "BDE Aux Rack!K20:K21",
+          "FD2 MiniRack combined!A1",
+          "FD2 MiniRack combined!B8",
+          "FD2 MiniRack combined!B11",
+          "Power Summary!B17"
+        ],
+        "meaning": "May 2025 plan corroborates eight drivers/crate and mentions EL3202 flange RTD modules; current channel count comes from user correction.",
+        "sha256": "7c5aad7cd5bdf25c297a681585e5b1a1cba9e23fbc0eddb97cbf00487f08c300"
+      },
+      "infrastructure": {
+        "path": "/home/arroyave/work/racks/sources/power-planning/2026-06-10_SC_Infrastructure_and_Installation.pdf",
+        "pages": [
+          4,
+          5
+        ],
+        "meaning": "Planning diagrams show Beckhoff PLC, EtherCAT remote I/O and flange interfaces; not proof of commissioning or spare capacity",
+        "sha256": "8a40338cf3efc91396d62ead3f4d15dcf9c7da827b5772e47cf9a2e345aab7a2"
+      },
+      "rack_workbook": {
+        "path": "/home/arroyave/work/racks/sources/rack-estimates/FD2_Rack_Estimates_May_2025_TMS.xlsx",
+        "locators": [
+          "FD2 MiniRack combined!F8",
+          "FD2 MiniRack combined!F11",
+          "FD2 MiniRack combined!A1",
+          "FD2 MiniRack combined!B8",
+          "FD2 MiniRack combined!B11",
+          "Power Summary!B17"
+        ],
+        "sha256": "ce887de4442c46f611c1dd2d72688bc7ec80033612ec40604bcdfef430f2706b"
+      }
+    },
+    "source_presentation": {
+      "path": "/home/arroyave/Downloads/PoF-Housing-update-peter-20261014.pptx",
+      "sha256": "562ecfefad5076c951929a0b26e81b3aa62c4a2f37944fbcf917071d654123af",
+      "reviewed": "2026-10-14",
+      "slides": {
+        "1": "Reports 4\u20137 laser-PS voltage readings at about 3.3 V and one chassis RTD; OPC UA tested with UaExpert and FreeOpcUa; updates about 1 Hz.",
+        "2": "Burndy connector, cable and terminal-block assembly are work in progress.",
+        "3": "Two eight-channel chassis, each using an eight-pin Burndy connector and a terminal block to Opta I/O; no box-enable path or pin allocation shown."
+      },
+      "interpretation": "Connector/terminal-block reuse with Beckhoff is an integration proposal pending electrical/pinout mapping. Opta OPC UA client tests do not qualify Beckhoff wiring compatibility.",
+      "inventory_discrepancy": "Source scope of 4\u20137 voltages + one RTD differs from user 8 V + 8 T working sizing; preserve the latter as an explicitly labelled working case."
+    },
+    "control_scope": {
+      "box_enable_outputs_per_box": 1,
+      "analog_setpoints": 0,
+      "per_channel_feedback_inputs": 0,
+      "optional_incoming_enable_input_per_box": 1,
+      "count_source": "User correction: one enable per box; per-channel setpoints and feedback were unsupported sizing assumptions and have been removed.",
+      "electrical_interface": "Unverified; 24 V digital assumed for the example terminal.",
+      "optional_incoming_enable": "One incoming hardwired enable/disable signal fits a spare input on the same mixed terminal; its source, polarity and response remain to be defined."
+    },
+    "rack_deployment": {
+      "basis": "May 2025 FD2 rack draft; requested draft numbers, not installed inventory",
+      "mini_racks": 40,
+      "boxes_per_mini_rack": 2,
+      "total_boxes": 80,
+      "drivers_per_box": 8,
+      "total_drivers": 640,
+      "working_case_source": "User working inventory: 8 temperatures + 8 voltages + one normal enable per box. Not the signal inventory in the PoF team presentation.",
+      "per_rack": {
+        "temperature_inputs": 16,
+        "voltage_inputs": 16,
+        "box_enable_outputs": 2,
+        "signal_points": 34,
+        "temperature_terminals": 2,
+        "voltage_terminals": 2,
+        "shared_digital_terminals": 1,
+        "io_terminals": 5
+      },
+      "whole_draft": {
+        "temperature_inputs": 640,
+        "voltage_inputs": 640,
+        "box_enable_outputs": 80,
+        "signal_points": 1360,
+        "temperature_terminals": 80,
+        "voltage_terminals": 80,
+        "shared_digital_terminals": 40,
+        "io_terminals": 200
+      },
+      "bank_arrangement": "One common I/O bank per rack; the two boxes share one EL1859. Separate box banks need six terminals per rack, 240 overall.",
+      "source_locators": [
+        "FD2 MiniRack combined!A1",
+        "FD2 MiniRack combined!B8",
+        "FD2 MiniRack combined!B11",
+        "FD2 MiniRack combined!F8",
+        "FD2 MiniRack combined!F11",
+        "Power Summary!B17"
+      ],
+      "source_discrepancy": "July 2026 meeting notes mention 42 PoF racks versus 40 in drawing. This slide deliberately uses the user-requested May draft of 40."
+    }
+  },
+  "expanded_system_counts": {
+    "scope": "FD-VD explicit draft case; not final node inventory",
+    "inputs": [
+      [
+        "boards",
+        42,
+        "DAPHNE boards",
+        "Current local SC\u2013PDS ICD \u00a72.1: 1,344 channels / 32. May rack draft used 40 boards; not the same as 40 mini-racks."
+      ],
+      [
+        "channels",
+        32,
+        "Used channels per board",
+        "FD-VD design allocation. Set 40 to count the full implemented register capacity instead."
+      ],
+      [
+        "afes",
+        4,
+        "Used AFE groups per board",
+        "Working case: 32 used channels / 8 channels per AFE. Set 5 for full implemented AFE capacity."
+      ],
+      [
+        "links",
+        2,
+        "Data links per board",
+        "User direction: two data links per board."
+      ],
+      [
+        "cal",
+        8,
+        "PDS calibration boxes",
+        "Current local SC\u2013PDS ICD \u00a72.2 planning quantity."
+      ],
+      [
+        "cal_channels",
+        12,
+        "Channels per calibration box",
+        "Existing register map/client supports 12; optional 5-channel subset is not this case."
+      ],
+      [
+        "cal_voltages",
+        9,
+        "Board-voltage inputs per calibration box",
+        "Existing register map indices 0..8."
+      ],
+      [
+        "pof_boxes",
+        80,
+        "PoF boxes",
+        "May rack draft: 40 mini-racks \u00d7 2 boxes."
+      ],
+      [
+        "top_racks",
+        40,
+        "Top-plate mini-racks",
+        "May rack draft FD2 MiniRack combined!A1."
+      ],
+      [
+        "power_racks",
+        4,
+        "PDS power racks",
+        "May rack draft PD LV!B1 and RACKS allocation; differs from old one-crate emulator placement."
+      ],
+      [
+        "top_outlets",
+        8,
+        "Outlets per top-plate PDU",
+        "PX3-5147R vendor submittal rev20250625 p.2; candidate in March deck slide 24."
+      ],
+      [
+        "power_outlets",
+        30,
+        "Outlets per standard-rack PDU",
+        "PX3-5170V-E2F5 vendor submittal p.2 and DocDB 32655-v8 p.4."
+      ],
+      [
+        "temps",
+        4,
+        "Temperature probes per rack",
+        "DocDB 32655-v8 p.21: four Celsius sensors on reference unit. Repetition over all racks is the draft profile."
+      ],
+      [
+        "leaks",
+        1,
+        "Leak detectors per rack",
+        "DocDB 32655-v8 required hardware and rack-profile draft."
+      ],
+      [
+        "smoke_hubs",
+        1,
+        "Smoke interfaces per rack",
+        "One 4WTAR-B / DX-PD2C5 assembly per rack in the draft profile."
+      ],
+      [
+        "contacts",
+        5,
+        "Contact-state fields per smoke interface",
+        "Retained UDT has five directly sourced OnOff 1..5 Status fields; not five smoke detectors."
+      ],
+      [
+        "regulators",
+        4,
+        "PMBus regulators per board",
+        "Selected implemented scope 0..3."
+      ],
+      [
+        "fans",
+        2,
+        "Tachometers per board",
+        "Selected implemented scope 0..1."
+      ],
+      [
+        "current_adc",
+        10,
+        "Current ADC inputs per board",
+        "Selected scope 0..9 at configured mux; no additional sweep positions invented."
+      ],
+      [
+        "buffers",
+        null,
+        "Total Hermes input-buffer instances",
+        "Firmware reports n_srcs separately from data links; two links do not establish buffer count."
+      ],
+      [
+        "hd_afes",
+        null,
+        "Populated HD-mezzanine AFE instances",
+        "Count only applicable installed HD-mezzanine groups; do not apply HD-only fields blindly to optical FD-VD boards."
+      ],
+      [
+        "power_points",
+        null,
+        "Defined WIENER power-consumption points",
+        "Location and reader are not established. DC output power is not mains input consumption."
+      ]
+    ],
+    "tabs": {
+      "DAQ": {
+        "control": 9618,
+        "publish": 168,
+        "total": 9786,
+        "unallocated_patterns": 0
+      },
+      "OPMON": {
+        "control": 0,
+        "publish": 4914,
+        "total": 4914,
+        "unallocated_patterns": 6
+      },
+      "SC": {
+        "control": 0,
+        "publish": 1554,
+        "total": 1554,
+        "unallocated_patterns": 12
+      },
+      "PoF": {
+        "control": 80,
+        "publish": 1280,
+        "total": 1360,
+        "unallocated_patterns": 0
+      },
+      "SSP": {
+        "control": 584,
+        "publish": 512,
+        "total": 1096,
+        "unallocated_patterns": 0
+      },
+      "WIENER": {
+        "control": 116,
+        "publish": 174,
+        "total": 290,
+        "unallocated_patterns": 1
+      },
+      "PDU": {
+        "control": 440,
+        "publish": 1364,
+        "total": 1804,
+        "unallocated_patterns": 0
+      }
+    },
+    "totals": {
+      "control": 10838,
+      "publish": 9966,
+      "total": 20804,
+      "unallocated_patterns": 19
+    },
+    "additions": "6 \u00d7 B + 12 \u00d7 M + W",
+    "pdu": {
+      "racks": 44,
+      "pdus": 44,
+      "outlets": 440,
+      "temperatures": 176,
+      "leaks": 44,
+      "smoke_detectors": 44,
+      "native_contact_fields": 220
+    },
+    "sources": {
+      "icd": "/home/arroyave/work/icd-sc-pds/sections/02_physical_interface.tex",
+      "rack": "/home/arroyave/work/racks/data/fd2-estimate-cells.csv",
+      "px3_guide": "/home/arroyave/work/racks/sources/docdb-32655-v8/PX3_Rack_Protection_Setup.pdf",
+      "guide_locators": "p.4 hardware; p.8 smoke; p.21 four Celsius sensors",
+      "pdu_udt": "/home/arroyave/work/racks/sources/docdb-32655-v8/PDU_UDTs_2026_06_03.json",
+      "pdu_vendor_urls": [
+        "https://cdn.raritan.com/product-selector/pdus/PX3-5147R/PX3-5147R-spec.pdf",
+        "https://cdn.raritan.com/product-selector/pdus/PX3-5170V-E2F5/PX3-5170V-E2F5-spec.pdf"
+      ]
+    }
+  },
+  "pof_inventory_correction": {
+    "date": "2026-10-14",
+    "source": "user correction",
+    "working_count": "8 temperatures + 8 voltages per eight-channel PoF box",
+    "status": "PoF mapping pending"
+  },
+  "editorial_guidance": [
+    "https://www.gov.uk/guidance/government-design-principles",
+    "https://www.gov.uk/service-manual/design/writing-for-user-interfaces"
+  ]
+}

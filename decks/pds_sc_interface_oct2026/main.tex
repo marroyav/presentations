@@ -1,0 +1,217 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\input{diagrams/icd-style}
+\title[SC--PDS--DPS interface]{SC--PDS--DPS interface}
+\subtitle{Control, monitoring and protection}
+\author{PDS / Slow Controls / Detector Protection}
+\date{14 October 2026 --- draft 1.9}
+\input{counts}
+\input{system-counts}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \DuneEyebrow{DUNE / 14 OCTOBER 2026 / DRAFT FOR DISCUSSION}
+  \bigskip
+  {\bfseries\fontsize{28}{32}\selectfont SC--PDS--DPS interface\par}
+  \medskip
+  {\large Control, monitoring and protection\par}
+  \bigskip
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabularx}{\textwidth}{@{}p{1.2cm}X@{}}
+    \textbf{PDS} & Equipment, native services and operating limits.\\
+    \textbf{SC} & OPC UA integration, permissions, health and availability.\\
+    \textbf{DPS} & Agreed protection, independent of SC and DAQ.\\
+    \textbf{DAQ} & Readout configuration, acquisition and use of SC availability.\\
+  \end{tabularx}\par
+\end{frame}
+
+\begin{frame}{Every system reaches SC through OPC UA}
+  \centering
+  \input{diagrams/system-overview.tikz.tex}\par
+  \raggedright
+  Commands use request/response. Monitoring is published.
+\end{frame}
+
+\begin{frame}[plain]
+  \relax
+  {\large\bfseries DAPHNE control path\par}
+  \smallskip
+  \centering
+  \begingroup
+    \ICDLabelBackground
+    \begin{adjustbox}{max width=0.98\textwidth,max totalheight=6.75cm}
+      \input{diagrams/daphne-icd.tikz.tex}
+    \end{adjustbox}
+  \endgroup\par
+\end{frame}
+
+\begin{frame}{Keep the variables we can read}
+  \relax
+  \small
+  \renewcommand{\arraystretch}{1.40}
+  \begin{tabularx}{\textwidth}{@{}p{3.0cm}X X@{}}
+    \toprule
+    System & Control & Publish\\
+    \midrule
+    DAPHNE & Applied DAQ settings & Hardware V/I/P/T, bias and AFE state\\
+    PoF & --- & 8 temperatures + 8 voltages\\
+    PDS calibration box & Pulse settings, bias and enable & Status and monitor readbacks\\
+    WIENER PS & Voltage demand and output switch & Measured V/I, status; power reader pending\\
+    PDU & Outlet switch & Power, outlet state and fitted sensors\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  \normalsize
+  OPMON publishes data counters and Hermes queries.
+\end{frame}
+
+\begin{frame}{PoF: 3 I/O terminals, one enable per box}
+  Reuse the Beckhoff PLC and flange-side EtherCAT connection.\par
+  \medskip
+  {\small
+  \renewcommand{\arraystretch}{1.18}
+  \begin{tabularx}{\textwidth}{@{}Xr l r@{}}
+    \toprule
+    Signal & Points & Example terminal & Modules\\
+    \midrule
+    Temperature inputs & 8 & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3208.html}{EL3208: 8 RTD inputs} & 1\\
+    Voltage inputs & 8 & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3068.html}{EL3068: 8 analog inputs} & 1\\
+    Box enable/disable & 1 output & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed1xxx-digital-input/el1859.html}{EL1859: use 1 of 8 outputs} & 1\\
+    \midrule
+    \textbf{Eight-channel draft case} & & & \textbf{3}\\
+    \bottomrule
+  \end{tabularx}\par}
+  \smallskip
+  \textbf{One enable controls the whole box.} Readout: 2 terminals; box control adds 1.
+\end{frame}
+
+\begin{frame}{Rack draft: 40 mini-racks, 80 PoF boxes}
+  Working I/O case: 8 T + 8 V + one enable per box.\par
+  \medskip
+  {\small
+  \renewcommand{\arraystretch}{1.18}
+  \begin{tabularx}{\textwidth}{@{}Xrr@{}}
+    \toprule
+    Quantity & Per mini-rack & 40 mini-racks\\
+    \midrule
+    PoF boxes & 2 & 80\\
+    Laser drivers & 16 & 640\\
+    Temperature inputs & 16 & 640\\
+    Voltage inputs & 16 & 640\\
+    Box-enable outputs & 2 & 80\\
+    \midrule
+    \textbf{Signal points} & \textbf{34} & \textbf{1,360}\\
+    \textbf{I/O terminals} & \textbf{5} & \textbf{200}\\
+    \bottomrule
+  \end{tabularx}\par}
+  \medskip
+  Per rack: 2 EL3208 + 2 EL3068 + 1 shared EL1859.
+\end{frame}
+
+\begin{frame}{Rack monitoring: 44 PDUs, 440 outlets}
+  Draft allocation: one PDU per rack.\par
+  \medskip
+  \renewcommand{\arraystretch}{1.30}
+  \begin{tabularx}{\textwidth}{@{}Xlrr@{}}
+    \toprule
+    Rack group & PDU model & PDUs & Outlets\\
+    \midrule
+    40 top-plate mini-racks & PX3-5147R & 40 & 320\\
+    4 PDS power racks & PX3-5170V-E2F5 & 4 & 120\\
+    \midrule
+    \textbf{Total} & & \textbf{44} & \textbf{440}\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  Draft profile per rack: 4 temperatures, 1 leak detector, 1 smoke detector.\par
+  \medskip
+  \textbf{176 temperature probes, 44 leak detectors, 44 smoke detectors.}
+\end{frame}
+
+\begin{frame}{Define each SC point before using it}
+  \begin{enumerate}
+    \setlength{\itemsep}{0.8em}
+    \item \textbf{Source:} device, channel, NodeId, units and scaling.
+    \item \textbf{Access:} Control or Publish, with an owner.
+    \item \textbf{Limits:} alarm levels, hysteresis and on-delay.
+    \item \textbf{Handling:} scan/history rate, stale data and response.
+  \end{enumerate}
+  \medskip
+  Unknown values stay blank. Protection actions need agreement with DPS.
+\end{frame}
+
+\begin{frame}{The draft contains \TotalVariables\ variable rows}
+  \relax
+  \centering
+  \small
+  \setlength{\tabcolsep}{9pt}
+  \renewcommand{\arraystretch}{1.10}
+  \begin{tabular}{@{}lrrrr@{}}
+    \toprule
+    Tab & Total & Control & Publish & Pending\\
+    \midrule
+    \CountsRows
+    \midrule
+    \textbf{Total} & \textbf{\TotalVariables} & \textbf{\TotalControl} & \textbf{\TotalPublish} & \textbf{\TotalPending}\\
+    \bottomrule
+  \end{tabular}\par
+  \medskip
+  \raggedright\normalsize
+  Next: map PoF and WIENER, verify PDU assignments, and export existing readers.
+\end{frame}
+
+\begin{frame}{FD-VD draft subtotal: \SystemSubtotal\ variables}
+  42 boards $\times$ 32 active channels; 84 data links.\par
+  \medskip
+  {\small
+  \renewcommand{\arraystretch}{1.10}
+  \begin{tabularx}{\textwidth}{@{}Xrrr@{}}
+    \toprule
+    Interface & Control & Publish & Subtotal\\
+    \midrule
+    \SystemCountsRows
+    \midrule
+    \textbf{Total allocated} & \textbf{\SystemControl} & \textbf{\SystemPublish} & \textbf{\SystemSubtotal}\\
+    \bottomrule
+  \end{tabularx}\par}
+  \medskip
+  Add 6 per Hermes input buffer, 12 per populated HD-mezzanine AFE,\par
+  and 1 per defined WIENER power-consumption point.
+\end{frame}
+
+\appendix
+\begin{frame}{Backup: design and implementation differ}
+  \relax
+  \small
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}p{2.7cm}XX@{}}
+    \toprule
+    & ICD draft 0.2 design & Selected implementation\\
+    \midrule
+    DAPHNE commands & DAQ and SC use bridge arbitration. & DAQ has direct ZeroMQ calls; V3 FE and clock commands are separate.\\
+    Monitoring & Board publishes; bridge supplies SC and opmon. & Existing reads/queries do not establish this publication path. Some readers are local only.\\
+    OPMON scope & Data monitoring reaches DAQ through the bridge. & This inventory removes hardware V/T from OPMON; code migration remains.\\
+    Other systems & Calibration and PoF use SC adapters. & Calibration register client and PX3 bindings exist. PoF/WIENER mapping and SC exports remain open.\\
+    \bottomrule
+  \end{tabularx}\par
+\end{frame}
+
+\begin{frame}{Backup: sources}
+  \relax
+  \small
+  \begin{itemize}
+    \setlength{\itemsep}{0.45em}
+    \item SC--PDS ICD: local draft 0.2, \S\S1--3; revision \texttt{bfb2a8b}. DAPHNE figure copied verbatim.
+    \item \texttt{daphne-os develop edc61f1}; \texttt{daphnemodules develop ba6fd3c}; local Hermes \texttt{d7de1de}.
+    \item PDS calibration-box register client and register map v4.2a.
+    \item WIENER guide; Raritan submittals; PDU definitions and sensor profile from DocDB 32655 v8.
+    \item PoF I/O draft: rack-planning data, SC infrastructure plan p.\ 4 and Beckhoff terminal datasheets.
+    \item SC intake template; operational workbook v1.2 with system inputs and indexed-point expansion.
+  \end{itemize}
+  \medskip
+  Draft for discussion. No live hardware or protection qualification.
+\end{frame}
+\end{document}

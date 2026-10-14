@@ -54,6 +54,8 @@ make
 
 The repository currently builds:
 
+- [PDS PoF budget — 14 October 2026](decks/pds_pof_budget/main.pdf), one slide comparing Opta and Beckhoff I/O costs for the 7 V + 1 T and 8 V + 8 T scopes, with [sources and cost assumptions](decks/pds_pof_budget/speaker-notes.txt).
+- [SC–PDS–DPS interface — 14 October 2026](decks/pds_sc_interface_oct2026/main.pdf), with responsibilities, one OPC UA boundary for all five systems, the existing ICD DAPHNE diagram, draft PoF I/O sizing for 8 T + 8 V, two backup slides and [speaker notes](decks/pds_sc_interface_oct2026/speaker-notes.txt).
 - `decks/scdps_repo_plan_aug2026/main.pdf`
 - `decks/scdps_git_management_aug2026/main.pdf`
 - `decks/scdps_software_ownership_aug2026/main.pdf`

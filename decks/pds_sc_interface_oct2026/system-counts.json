@@ -1,0 +1,1655 @@
+{
+  "scope": "FD-VD explicit draft case; not final node inventory",
+  "source": "/home/arroyave/Downloads/PDS_Operational_Variables_v1.1_Draft.xlsx",
+  "source_sha256": "583ff7edc920ecacbed307dcaf03a02bcb7fe0059ce766fe8777ddc15fa1a98f",
+  "workbook": "/home/arroyave/Downloads/PDS_Operational_Variables_v1.2_System_Draft.xlsx",
+  "workbook_sha256": "424c21190ca3bac5d1639d499707b23128ffaa4d90ef1b5305bdb14ee70a1c05",
+  "inputs": [
+    [
+      "boards",
+      42,
+      "DAPHNE boards",
+      "Current local SC\u2013PDS ICD \u00a72.1: 1,344 channels / 32. May rack draft used 40 boards; not the same as 40 mini-racks."
+    ],
+    [
+      "channels",
+      32,
+      "Used channels per board",
+      "FD-VD design allocation. Set 40 to count the full implemented register capacity instead."
+    ],
+    [
+      "afes",
+      4,
+      "Used AFE groups per board",
+      "Working case: 32 used channels / 8 channels per AFE. Set 5 for full implemented AFE capacity."
+    ],
+    [
+      "links",
+      2,
+      "Data links per board",
+      "User direction: two data links per board."
+    ],
+    [
+      "cal",
+      8,
+      "PDS calibration boxes",
+      "Current local SC\u2013PDS ICD \u00a72.2 planning quantity."
+    ],
+    [
+      "cal_channels",
+      12,
+      "Channels per calibration box",
+      "Existing register map/client supports 12; optional 5-channel subset is not this case."
+    ],
+    [
+      "cal_voltages",
+      9,
+      "Board-voltage inputs per calibration box",
+      "Existing register map indices 0..8."
+    ],
+    [
+      "pof_boxes",
+      80,
+      "PoF boxes",
+      "May rack draft: 40 mini-racks \u00d7 2 boxes."
+    ],
+    [
+      "top_racks",
+      40,
+      "Top-plate mini-racks",
+      "May rack draft FD2 MiniRack combined!A1."
+    ],
+    [
+      "power_racks",
+      4,
+      "PDS power racks",
+      "May rack draft PD LV!B1 and RACKS allocation; differs from old one-crate emulator placement."
+    ],
+    [
+      "top_outlets",
+      8,
+      "Outlets per top-plate PDU",
+      "PX3-5147R vendor submittal rev20250625 p.2; candidate in March deck slide 24."
+    ],
+    [
+      "power_outlets",
+      30,
+      "Outlets per standard-rack PDU",
+      "PX3-5170V-E2F5 vendor submittal p.2 and DocDB 32655-v8 p.4."
+    ],
+    [
+      "temps",
+      4,
+      "Temperature probes per rack",
+      "DocDB 32655-v8 p.21: four Celsius sensors on reference unit. Repetition over all racks is the draft profile."
+    ],
+    [
+      "leaks",
+      1,
+      "Leak detectors per rack",
+      "DocDB 32655-v8 required hardware and rack-profile draft."
+    ],
+    [
+      "smoke_hubs",
+      1,
+      "Smoke interfaces per rack",
+      "One 4WTAR-B / DX-PD2C5 assembly per rack in the draft profile."
+    ],
+    [
+      "contacts",
+      5,
+      "Contact-state fields per smoke interface",
+      "Retained UDT has five directly sourced OnOff 1..5 Status fields; not five smoke detectors."
+    ],
+    [
+      "regulators",
+      4,
+      "PMBus regulators per board",
+      "Selected implemented scope 0..3."
+    ],
+    [
+      "fans",
+      2,
+      "Tachometers per board",
+      "Selected implemented scope 0..1."
+    ],
+    [
+      "current_adc",
+      10,
+      "Current ADC inputs per board",
+      "Selected scope 0..9 at configured mux; no additional sweep positions invented."
+    ],
+    [
+      "buffers",
+      null,
+      "Total Hermes input-buffer instances",
+      "Firmware reports n_srcs separately from data links; two links do not establish buffer count."
+    ],
+    [
+      "hd_afes",
+      null,
+      "Populated HD-mezzanine AFE instances",
+      "Count only applicable installed HD-mezzanine groups; do not apply HD-only fields blindly to optical FD-VD boards."
+    ],
+    [
+      "power_points",
+      null,
+      "Defined WIENER power-consumption points",
+      "Location and reader are not established. DC output power is not mains input consumption."
+    ]
+  ],
+  "tabs": {
+    "DAQ": {
+      "control": 9618,
+      "publish": 168,
+      "total": 9786,
+      "unallocated_patterns": 0
+    },
+    "OPMON": {
+      "control": 0,
+      "publish": 4914,
+      "total": 4914,
+      "unallocated_patterns": 6
+    },
+    "SC": {
+      "control": 0,
+      "publish": 1554,
+      "total": 1554,
+      "unallocated_patterns": 12
+    },
+    "PoF": {
+      "control": 80,
+      "publish": 1280,
+      "total": 1360,
+      "unallocated_patterns": 0
+    },
+    "SSP": {
+      "control": 584,
+      "publish": 512,
+      "total": 1096,
+      "unallocated_patterns": 0
+    },
+    "WIENER": {
+      "control": 116,
+      "publish": 174,
+      "total": 290,
+      "unallocated_patterns": 1
+    },
+    "PDU": {
+      "control": 440,
+      "publish": 1364,
+      "total": 1804,
+      "unallocated_patterns": 0
+    }
+  },
+  "totals": {
+    "control": 10838,
+    "publish": 9966,
+    "total": 20804,
+    "unallocated_patterns": 19
+  },
+  "additions": "6 \u00d7 B + 12 \u00d7 M + W",
+  "rows": [
+    {
+      "tab": "DAQ",
+      "tag": "Channels.Trim",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$3",
+      "quantity": 1344,
+      "basis": "Channel 0..39; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Channels.Offset",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$3",
+      "quantity": 1344,
+      "basis": "Channel 0..39; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.Attenuation",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.BiasSetCode",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE Global.BiasControlCode",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.AdcResolution",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.AdcOutputFormat",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.AdcMsbFirst",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.PgaLpfCutFrequency",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.PgaIntegratorDisabled",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.LnaClamp",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.LnaGain",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.LnaIntegratorDisabled",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.Frontend.SerializedDataRate",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.Frontend.PgaClampLevel",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.Frontend.ActiveTerminationEnable",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.AlignmentDelay",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE.AlignmentBitslip",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE Global.PowerState",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE Global.ResetAsserted",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "AFE Global.BiasEnable",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Channels.TriggerThreshold",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$3",
+      "quantity": 1344,
+      "basis": "Channel 0..39; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Channels.TriggerEnabled",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$3",
+      "quantity": 1344,
+      "basis": "Channel 0..39; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Run Configuration.SelfTriggerConfigRaw",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Run Configuration.SelfTriggerDelayRaw",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Run Configuration.SelfTriggerFilterOutputSelect",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Run Configuration.CompensatorMask",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Run Configuration.InverterMask",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.Timing.id",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.Timing.ctrl_ep_clk",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.Timing.reset_MMCM1",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.Timing.reset_endpoint",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Timing.Mmcm0Locked",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Timing.Mmcm1Locked",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Timing.EndpointFsmState",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Timing.TimestampValid",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Identity.CrateId",
+      "role": "Control",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Identity.SlotId",
+      "role": "Control",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Identity.DetectorId",
+      "role": "Control",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.DataLink.SourceMac",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.DataLink.SourceIp",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.DataLink.DestinationMac",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.DataLink.DestinationIp",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.DataLink.SourcePort",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Requested.DataLink.DestinationPort",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Hermes.Header.detid",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Hermes.Header.crateid",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Hermes.Header.slotid",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Hermes.UDP.ctrl.filter_control",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Hermes.UDP.src_addr_ctrl.use_external",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Hermes.Link.en",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Hermes.Link.tx_en",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "DAQ",
+      "tag": "Hermes.Link.en_buf",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Channels.TriggerRecordCount",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$3",
+      "quantity": 1344,
+      "basis": "Channel 0..39 / self-trigger; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Channels.TriggerBusyCount",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$3",
+      "quantity": 1344,
+      "basis": "Channel 0..39 / self-trigger; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Channels.TriggerFullCount",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$3",
+      "quantity": 1344,
+      "basis": "Channel 0..39 / self-trigger; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Opmon.StreamInfo.total_packets",
+      "role": "Publish",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Opmon.StreamInfo.new_packets",
+      "role": "Publish",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Opmon.StreamInfo.total_dropped_packets",
+      "role": "Publish",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Opmon.StreamInfo.new_dropped_packets",
+      "role": "Publish",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Opmon.ChannelInfo.total_triggers",
+      "role": "Publish",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Opmon.ChannelInfo.new_triggers",
+      "role": "Publish",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Opmon.ChannelInfo.total_packets",
+      "role": "Publish",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Opmon.ChannelInfo.new_packets",
+      "role": "Publish",
+      "expression": "0",
+      "quantity": 0,
+      "basis": "Alternative V2 implementation excluded from V3 case.",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.err",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.eth_rdy",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.src_rdy",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.udp_rdy",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.sent_arp_count",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.sent_ping_count",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.sent_udp_count",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.rcvd_arp_count",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.rcvd_ping_count",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.LinkInfo.rcvd_udp_count",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$5",
+      "quantity": 84,
+      "basis": "Per Hermes link; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.Buffer.blk_acc",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$21",
+      "quantity": null,
+      "basis": "Per Hermes input buffer; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.Buffer.blk_oflow",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$21",
+      "quantity": null,
+      "basis": "Per Hermes input buffer; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.Buffer.blk_rej",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$21",
+      "quantity": null,
+      "basis": "Per Hermes input buffer; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.Buffer.vol",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$21",
+      "quantity": null,
+      "basis": "Per Hermes input buffer; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.Buffer.blk_longlast",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$21",
+      "quantity": null,
+      "basis": "Per Hermes input buffer; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.Buffer.blk_lastnotval",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$21",
+      "quantity": null,
+      "basis": "Per Hermes input buffer; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "OPMON",
+      "tag": "Hermes.SampleTimestamp",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board; selected V3 case",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "Board Rails.3V3PDSVoltage",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "Board Rails.1V8PDSVoltage",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "Board Rails.3V3AVoltage",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "Board Rails.1V8AVoltage",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "Board Rails.Minus5VAVoltage",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "AFE.BiasVoltage",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$4",
+      "quantity": 168,
+      "basis": "AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Power5VRequested",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Power3V3Requested",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Voltage5V",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Current5V",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Power5V",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Alert5V",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Voltage3V3",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Current3V3",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Power3V3",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Alert3V3",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.BlockEnabled",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "HD Mezzanine.Configured",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$22",
+      "quantity": null,
+      "basis": "HD AFE 0..4",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "PMBus Regulators.Voltage",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$18",
+      "quantity": 168,
+      "basis": "Regulator 0..3",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "PMBus Regulators.Current",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$18",
+      "quantity": 168,
+      "basis": "Regulator 0..3",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "PMBus Regulators.Temperature",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$18",
+      "quantity": 168,
+      "basis": "Regulator 0..3",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "AFE Global.PowerState",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "AFE Global.ResetAsserted",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "AFE Global.BiasEnable",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "Fans.PwmCommand",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2",
+      "quantity": 42,
+      "basis": "Board",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "Fans.TachometerRaw",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$19",
+      "quantity": 84,
+      "basis": "Fan 0..1",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SC",
+      "tag": "Channels.CurrentMonitorRaw",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2*'System Inputs'!$B$20",
+      "quantity": 420,
+      "basis": "ADC input 0..9 / configured mux",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Temperature01",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Temperature02",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Temperature03",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Temperature04",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Temperature05",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Temperature06",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Temperature07",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Temperature08",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Voltage01",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Voltage02",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Voltage03",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Voltage04",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Voltage05",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Voltage06",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Voltage07",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.Voltage08",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "One instance of this specific temperature/voltage point per box; user 8 T + 8 V working case.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.ClockStatus",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6",
+      "quantity": 8,
+      "basis": "SSP module",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.TimingStatus",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6",
+      "quantity": 8,
+      "basis": "SSP module",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.MasterLogicStatus",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6",
+      "quantity": 8,
+      "basis": "SSP module",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.CalibrationStatus",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6",
+      "quantity": 8,
+      "basis": "SSP module",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.BiasStatus",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6",
+      "quantity": 8,
+      "basis": "SSP module",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.VoltageMonitorStatus",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6",
+      "quantity": 8,
+      "basis": "SSP module",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.CurrentMonitorStatus",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6",
+      "quantity": 8,
+      "basis": "SSP module",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.BiasVoltageRaw[{Channel}]",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Index 0..11",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.BiasCurrentRaw[{Channel}]",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Index 0..11",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.BoardVoltageRaw[{Input}]",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$8",
+      "quantity": 72,
+      "basis": "Index 0..8",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.FeedbackAdcRaw[{Channel}]",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Index 0..11",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.FeedbackAdcStatus[{Channel}]",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Index 0..11",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.PulseMode",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Channel 0..11; client also supports 5-channel subset",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.PulseCount",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$6",
+      "quantity": 8,
+      "basis": "SSP module",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.Pulse1Width[{Channel}]",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Channel 0..11; client also supports 5-channel subset",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.Pulse2Width[{Channel}]",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Channel 0..11; client also supports 5-channel subset",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.DoublePulseDelay[{Channel}]",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Channel 0..11; client also supports 5-channel subset",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.BiasCode[{Channel}]",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Channel 0..11; client also supports 5-channel subset",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "SSP",
+      "tag": "SSP.ChannelEnabled[{Channel}]",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$6*'System Inputs'!$B$7",
+      "quantity": 96,
+      "basis": "Channel 0..11; client also supports 5-channel subset",
+      "status": "Implemented reader"
+    },
+    {
+      "tab": "WIENER",
+      "tag": "WIENER.OutputVoltageSetpoint",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2+2*'System Inputs'!$B$6",
+      "quantity": 58,
+      "basis": "One DC output/board plus two outputs/calibration box; assigned outputs, not spare module capacity.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "WIENER",
+      "tag": "WIENER.OutputSwitch",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$2+2*'System Inputs'!$B$6",
+      "quantity": 58,
+      "basis": "One DC output/board plus two outputs/calibration box; assigned outputs, not spare module capacity.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "WIENER",
+      "tag": "WIENER.OutputSenseVoltage",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2+2*'System Inputs'!$B$6",
+      "quantity": 58,
+      "basis": "One DC output/board plus two outputs/calibration box; assigned outputs, not spare module capacity.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "WIENER",
+      "tag": "WIENER.OutputCurrent",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2+2*'System Inputs'!$B$6",
+      "quantity": 58,
+      "basis": "One DC output/board plus two outputs/calibration box; assigned outputs, not spare module capacity.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "WIENER",
+      "tag": "WIENER.OutputStatus",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$2+2*'System Inputs'!$B$6",
+      "quantity": 58,
+      "basis": "One DC output/board plus two outputs/calibration box; assigned outputs, not spare module capacity.",
+      "status": "Mapping pending"
+    },
+    {
+      "tab": "WIENER",
+      "tag": "WIENER.PowerConsumption",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$23",
+      "quantity": null,
+      "basis": "Undefined measurement locations; kept as a separate addition.",
+      "status": "Not implemented"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.InletPower",
+      "role": "Publish",
+      "expression": "('System Inputs'!$B$10+'System Inputs'!$B$11)",
+      "quantity": 44,
+      "basis": "Repeated reference rack profile; source proves reference hardware, not installed repetition.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.InletCurrent",
+      "role": "Publish",
+      "expression": "('System Inputs'!$B$10+'System Inputs'!$B$11)",
+      "quantity": 44,
+      "basis": "Repeated reference rack profile; source proves reference hardware, not installed repetition.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.OutletState[{Outlet}]",
+      "role": "Publish",
+      "expression": "'System Inputs'!$B$10*'System Inputs'!$B$12+'System Inputs'!$B$11*'System Inputs'!$B$13",
+      "quantity": 440,
+      "basis": "40 candidate 8-outlet top-plate PDUs + 4 standard 30-outlet PDUs; one PDU per rack is the draft allocation.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.OutletSwitch[{Outlet}]",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$10*'System Inputs'!$B$12+'System Inputs'!$B$11*'System Inputs'!$B$13",
+      "quantity": 440,
+      "basis": "40 candidate 8-outlet top-plate PDUs + 4 standard 30-outlet PDUs; one PDU per rack is the draft allocation.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.Temperature[{Sensor}]",
+      "role": "Publish",
+      "expression": "('System Inputs'!$B$10+'System Inputs'!$B$11)*'System Inputs'!$B$14",
+      "quantity": 176,
+      "basis": "Repeated reference rack profile; source proves reference hardware, not installed repetition.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.TemperatureState[{Sensor}]",
+      "role": "Publish",
+      "expression": "('System Inputs'!$B$10+'System Inputs'!$B$11)*'System Inputs'!$B$14",
+      "quantity": 176,
+      "basis": "Repeated reference rack profile; source proves reference hardware, not installed repetition.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.TemperatureAvailable[{Sensor}]",
+      "role": "Publish",
+      "expression": "('System Inputs'!$B$10+'System Inputs'!$B$11)*'System Inputs'!$B$14",
+      "quantity": 176,
+      "basis": "Repeated reference rack profile; source proves reference hardware, not installed repetition.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.LeakState[{Sensor}]",
+      "role": "Publish",
+      "expression": "('System Inputs'!$B$10+'System Inputs'!$B$11)*'System Inputs'!$B$15",
+      "quantity": 44,
+      "basis": "Repeated reference rack profile; source proves reference hardware, not installed repetition.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.LeakDetected[{Sensor}]",
+      "role": "Publish",
+      "expression": "('System Inputs'!$B$10+'System Inputs'!$B$11)*'System Inputs'!$B$15",
+      "quantity": 44,
+      "basis": "Repeated reference rack profile; source proves reference hardware, not installed repetition.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PDU",
+      "tag": "PDU.SmokeContactState[{Contact}]",
+      "role": "Publish",
+      "expression": "('System Inputs'!$B$10+'System Inputs'!$B$11)*'System Inputs'!$B$16*'System Inputs'!$B$17",
+      "quantity": 220,
+      "basis": "Repeated reference rack profile; source proves reference hardware, not installed repetition.",
+      "status": "Existing SC binding"
+    },
+    {
+      "tab": "PoF",
+      "tag": "PoF.BoxEnable",
+      "role": "Control",
+      "expression": "'System Inputs'!$B$9",
+      "quantity": 80,
+      "basis": "User-requested single enable per box; additional proposal, absent from the implemented-variable inventory.",
+      "status": "Proposed interface"
+    }
+  ],
+  "original_variable_sheets_unchanged": true,
+  "pdu": {
+    "racks": 44,
+    "pdus": 44,
+    "outlets": 440,
+    "temperatures": 176,
+    "leaks": 44,
+    "smoke_detectors": 44,
+    "native_contact_fields": 220
+  },
+  "sources": {
+    "icd": "/home/arroyave/work/icd-sc-pds/sections/02_physical_interface.tex",
+    "rack": "/home/arroyave/work/racks/data/fd2-estimate-cells.csv",
+    "px3_guide": "/home/arroyave/work/racks/sources/docdb-32655-v8/PX3_Rack_Protection_Setup.pdf",
+    "guide_locators": "p.4 hardware; p.8 smoke; p.21 four Celsius sensors",
+    "pdu_udt": "/home/arroyave/work/racks/sources/docdb-32655-v8/PDU_UDTs_2026_06_03.json",
+    "pdu_vendor_urls": [
+      "https://cdn.raritan.com/product-selector/pdus/PX3-5147R/PX3-5147R-spec.pdf",
+      "https://cdn.raritan.com/product-selector/pdus/PX3-5170V-E2F5/PX3-5170V-E2F5-spec.pdf"
+    ]
+  }
+}

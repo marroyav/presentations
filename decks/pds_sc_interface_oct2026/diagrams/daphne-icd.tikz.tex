@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+\node[box,text width=37mm] (ignition) at (0,0)
+ {SC server\\OPC UA client\\$\rightarrow$ Ignition};
+\node[box,text width=32mm] (daq) at (5.0,0) {DAQ CCM client\\opmon subscriber};
+\node[box,text width=35mm] (hermesclient) at (10.7,0)
+ {DAQ Hermes\\configuration client};
+\node[box,text width=75mm,minimum height=19mm] (ua) at (2.5,-2.3)
+ {SC bridge server\\ZMQ client $\rightarrow$ OPC UA bridge\\Integrated DAQ configuration};
+\node[box,text width=49mm,minimum height=18mm] (daphne) at (2.5,-5.8)
+ {DAPHNE\\AXI / OS $\rightarrow$ \code{daphne-server}\\$\rightarrow$ ZMQ};
+\node[box,text width=37mm,minimum height=18mm] (hermes) at (10.7,-5.8)
+ {Board-side Hermes\\IPBus / UDP\\Configuration endpoint};
+\node[draw=dunegreen,dashed,rounded corners,fit=(daphne)(hermes),inner sep=8pt,
+ label={[font=\footnotesize,text=dunegreen]below:One DAPHNE board; one shared 1\,Gb Ethernet CCM connection}] {};
+\draw[both] (ignition) -- node[left,font=\footnotesize]{OPC UA} (ignition |- ua.north);
+\draw[both] (daq) -- node[right,font=\footnotesize]{OPC UA} (daq |- ua.north);
+\draw[both] ([xshift=-11mm]ua.south) -- node[left,align=right,font=\footnotesize,fill=white,inner sep=2pt]
+ {Configuration\\request/response} ([xshift=-11mm]daphne.north);
+\draw[flow,draw=dunegreen] ([xshift=11mm]daphne.north) -- node[right,align=left,font=\footnotesize,fill=white,inner sep=2pt]
+ {Published\\monitoring} ([xshift=11mm]ua.south);
+\draw[both] (hermesclient.south) -- node[right,align=left,font=\footnotesize]
+ {IPBus / UDP\\configuration} (hermes.north);
+\end{tikzpicture}

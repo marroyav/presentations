@@ -1,0 +1,12 @@
+% The ICD's box/arrow grammar, using the shared presentation palette.
+\colorlet{duneblue}{DuneSky}
+\colorlet{dunegreen}{DuneSky}
+\providecommand{\code}[1]{\nolinkurl{#1}}
+% Preserve the ICD's two literal white label backgrounds on the dark canvas.
+\newcommand{\ICDLabelBackground}{\colorlet{white}{DuneBackground}}
+\tikzset{
+  box/.style={draw=DuneBorder,rounded corners=2pt,fill=DuneSurface,
+    text=DuneText,align=center,font=\small,inner sep=7pt},
+  flow/.style={-{Latex[length=2mm]},thick},
+  both/.style={{Latex[length=2mm]}-{Latex[length=2mm]},thick}
+}

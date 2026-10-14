@@ -1,0 +1,38 @@
+{
+  "revision": "1.9",
+  "classification": "system-flow",
+  "authority": "explanatory; local ICD draft, not live deployment qualification",
+  "tools": [
+    "TikZ",
+    "Tectonic"
+  ],
+  "source_icd": {
+    "path": "/home/arroyave/work/icd-sc-pds/sections/03_protocols_services.tex",
+    "revision": "bfb2a8b725d9a5a3b7a517f4f9e15fb953eed1f8",
+    "document": "SC\u2013PDS\u2013DPS ICD local draft 0.2, 17 September 2026",
+    "section": "3.1, DAPHNE service locations and protocol paths",
+    "source_sha256": "7ef3b160f82a54d884487ab134a4be2c088cc3918cce700679a17d555dbc4cab",
+    "copied_diagram_sha256": "fad8f499d541a3bd4c4ecb8883e1a67b90673df305d340b3d58afc95b907b38d",
+    "verbatim_source_comparison": "passed"
+  },
+  "overview": {
+    "scope": "DAPHNE, PDS calibration box, PoF, WIENER power supply and PDU as peers",
+    "protocol_boundary": "All five interfaces reach SC through OPC UA services/adapters; native protocols stay behind this boundary",
+    "visual": "Same shared dark palette and typography as the deck",
+    "qualification": "Intended architecture; adapter coverage and installed mapping remain open"
+  },
+  "figures": {
+    "icd-style.tex": {
+      "sha256": "4af9a4c73c37c8b9631b813710f5df52dec596d747c5722c0298b01b04c78ddf",
+      "kind": "native TikZ"
+    },
+    "system-overview.tikz.tex": {
+      "sha256": "cfe6f1a4050bf33d55d02d98a5a1252f3a44727ebdfa5ff075b2a7b18a3215e7",
+      "kind": "native TikZ"
+    },
+    "daphne-icd.tikz.tex": {
+      "sha256": "fad8f499d541a3bd4c4ecb8883e1a67b90673df305d340b3d58afc95b907b38d",
+      "kind": "native TikZ"
+    }
+  }
+}
