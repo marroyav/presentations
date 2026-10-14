@@ -1,0 +1,42 @@
+% Redrawn from PoF-Housing-update-peter-20261014.pptx, slide 3.
+% Signal topology preserved; photographed modules replaced by labelled boxes.
+\begin{tikzpicture}[
+  box/.style={draw=DuneBorder,fill=DuneSurface,rounded corners=2pt,
+    text=DuneText,align=center,font=\small,inner sep=5pt},
+  signal/.style={draw=DuneSky,thick,-{Latex[length=1.7mm]}},
+  power/.style={draw=DuneCoral,dashed,thick,-{Latex[length=1.5mm]}}
+]
+  \node[box,text width=1.9cm,minimum height=0.85cm] (box1) at (1,0)
+    {\textbf{PoF box 1}\\8 channels};
+  \node[box,text width=1.9cm,minimum height=0.85cm] (box2) at (3.8,0)
+    {\textbf{PoF box 2}\\8 channels};
+
+  \node[box,text width=4.65cm,minimum height=0.60cm] (terminal) at (2.4,-1.8)
+    {\textbf{Terminal block}};
+  \draw[signal] (box1.south) -- node[left,align=right,font=\small]
+    {8-pin\\Burndy} (1,-1.46);
+  \draw[signal] (box2.south) -- node[right,align=left,font=\small]
+    {8-pin\\Burndy} (3.8,-1.46);
+
+  \node[box,text width=1.9cm,minimum height=0.85cm] (opta) at (1,-3.1)
+    {\textbf{Opta}\\PLC};
+  \node[box,text width=1.9cm,minimum height=0.85cm] (analog) at (3.8,-3.1)
+    {\textbf{Analog}\\expansion};
+  \draw[signal] (1,-2.14) -- (opta.north);
+  \draw[signal] (3.8,-2.14) -- (analog.north);
+  \draw[draw=DuneBorder,thick] (opta.east) -- node[above,font=\small] {bus} (analog.west);
+
+  \node[box,text width=1.9cm,minimum height=0.75cm] (network) at (0.5,-4.85)
+    {Local network};
+  \draw[signal] (opta.south west) |- (0.5,-4.16)
+    -- node[right,font=\small] {Ethernet} (network.north);
+
+  \node[box,text width=1.9cm,minimum height=0.75cm] (supply) at (3.8,-4.85)
+    {\textbf{12 V DC}\\power supply};
+  \coordinate (powerbus) at (3.8,-4.0);
+  \draw[power] (supply.north) -- (analog.south);
+  \draw[power] (powerbus) -- (1,-4.0) -- (opta.south);
+  \node[text=DuneText,align=center,font=\small] (ac) at (3.8,-5.8)
+    {Rack 120 V AC};
+  \draw[power] (ac.north) -- (supply.south);
+\end{tikzpicture}

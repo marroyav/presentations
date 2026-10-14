@@ -4,7 +4,8 @@ One slide · 14 October 2026 · USD indicative hardware estimates.
 
 Audience: PDS and SC integration teams comparing the PoF team’s Opta
 implementation with I/O added to the existing Beckhoff platform.
-Outcome: distinguish the two monitoring scopes and their hardware budgets.
+Outcome: show the PoF team’s intended topology and distinguish the two
+monitoring scopes and their hardware budgets.
 
 The slide compares two boxes per rack, 40 racks, one enable per box:
 
@@ -19,7 +20,13 @@ inventory, sized from manufacturer channel capacities. Both assume two-wire
 PT100 RTDs and a compatible single box-enable interface. Neither budget
 qualifies the PoF connector or electrical mapping.
 
-`main.tex` and `main.pdf` are the slide. `speaker-notes.txt` records the BOM,
+`main.tex` and `main.pdf` are the slide.
+`diagrams/team-topology.tikz.tex` redraws slide 3 of the team presentation using
+the shared theme: two eight-channel boxes, eight-pin Burndy connections,
+terminal block, Opta plus analog expansion, 12 V DC supply and local Ethernet.
+The topology is labelled for the team’s 7 V + 1 T scope; the larger-budget case
+uses the separate equipment quantities in the table.
+`diagrams/provenance.json` records source identity and redraw boundaries. `speaker-notes.txt` records the BOM,
 limits and sources. `estimates.json` preserves the prices, URLs and arithmetic;
 `validation.json` records the build and review. No figure captions or
 verification comments are displayed.

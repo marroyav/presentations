@@ -55,3 +55,20 @@ relay outputs. Official source URLs are in estimates.json.
 PoF-Housing-update-peter-20261014.pptx, slides 1–3, SHA-256
 562ecfefad5076c951929a0b26e81b3aa62c4a2f37944fbcf917071d654123af.
 Presentation pricing and capabilities do not qualify an installed interface.
+
+TOPOLOGY ON THE SLIDE
+The left panel redraws the team’s slide 3 in native TikZ. Two boxes, each
+containing eight laser channels, reach a shared terminal block through
+eight-pin Burndy connectors. The block connects to the Opta PLC and its
+attached analog expansion. Ethernet reaches the local network. A 12 V DC
+supply fed by rack 120 V AC powers both modules. Dashed coral lines show
+power; sky arrows show monitoring/network connections.
+Photographed modules are replaced by named blocks; the plug, enclosure and
+controller details do not specify pin allocations. Power arrows show power
+flow into the supply/modules; the source’s AC label is retained. The bus
+connection is drawn explicitly for the source’s attached expansion module.
+The source photo’s AFX00002 label differs from slide 1’s AFX00003 specification;
+the redraw says Opta PLC, while the cost uses AFX00003 as specified in the text.
+No additional Ignition node, enable wiring or Beckhoff path is added. The
+monitoring topology remains the team’s smaller scope; the larger case uses
+the separate two-controller/two-expansion budget described above.

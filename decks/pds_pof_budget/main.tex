@@ -10,22 +10,38 @@
 \begin{document}
 \begin{frame}{PoF hardware budget: Opta and Beckhoff}
   40 racks $\times$ 2 boxes. One enable per box. USD retail estimates.\par
-  \bigskip
-  \renewcommand{\arraystretch}{1.35}
-  \begin{tabularx}{\textwidth}{@{}Xlrr@{}}
-    \toprule
-    Readings per box & Platform & Per rack & 40 racks\\
-    \midrule
-    7 V + 1 T & Opta & \$380--395 & \$15.2--15.8k\\
-              & Beckhoff I/O & \$1,269--1,499 & \$50.8--60.0k\\
-    \midrule
-    8 V + 8 T & Opta & \$759--791 & \$30.4--31.6k\\
-              & Beckhoff I/O & \$1,624--2,084 & \$65.0--83.4k\\
-    \bottomrule
-  \end{tabularx}\par
-  \bigskip
-  \textbf{8 V + 8 T case: Opta hardware costs about \$33--53k less.}\par
   \medskip
-  Existing Beckhoff PLC reused. Installation and engineering excluded.
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.40\textwidth}
+      \textbf{Team topology: 7 V + 1 T}\par
+      \smallskip
+      \begin{adjustbox}{max width=\linewidth,max totalheight=5.25cm}
+        \input{diagrams/team-topology.tikz.tex}
+      \end{adjustbox}
+    \end{column}
+    \begin{column}{0.57\textwidth}
+      {\small
+      \setlength{\tabcolsep}{4pt}
+      \renewcommand{\arraystretch}{1.15}
+      \begin{tabularx}{\linewidth}{@{}Xrr@{}}
+        \toprule
+        Platform & Per rack & 40 racks\\
+        \midrule
+        \multicolumn{3}{@{}l}{\textbf{7 V + 1 T per box}}\\
+        Opta & \$380--395 & \$15.2--15.8k\\
+        Beckhoff I/O & \$1,269--1,499 & \$50.8--60.0k\\
+        \midrule
+        \multicolumn{3}{@{}l}{\textbf{8 V + 8 T per box}}\\
+        Opta & \$759--791 & \$30.4--31.6k\\
+        Beckhoff I/O & \$1,624--2,084 & \$65.0--83.4k\\
+        \bottomrule
+      \end{tabularx}\par}
+      \medskip
+      \textbf{8 V + 8 T: Opta hardware costs about \$33--53k less.}
+      \medskip
+      \small Existing Beckhoff PLC reused.\par
+      Hardware only; installation and engineering excluded.
+    \end{column}
+  \end{columns}\par
 \end{frame}
 \end{document}

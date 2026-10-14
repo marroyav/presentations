@@ -1,13 +1,16 @@
 {
   "date": "2026-10-14",
   "pages": 1,
-  "pdf_sha256": "3a288ea0d0eb48e0201edbdf358a93a2843a9f82f067938e55f6f567b1966c66",
+  "pdf_sha256": "605be6421724f140a8a7109ee58ebf1b8976da2a2cf90cc11d26081292681a70",
   "source_audit": "passed",
   "shared_design_token_and_contrast_audit": "passed",
   "cost_arithmetic": "both cases and 40-rack totals independently recomputed from unit prices",
-  "visual_review": "Single slide inspected: both scope groups, four cost rows, existing-PLC assumption and exclusions visible.",
+  "visual_review": "Single slide inspected after adding source-based TikZ topology; connector, power and Ethernet paths visible beside both price cases.",
   "text_within_page": true,
   "overflow_warnings": 0,
   "sources": "estimates.json and speaker-notes.txt",
-  "classification": "Budget estimate from public reseller listings; no project quote or device qualification."
+  "classification": "Budget estimate from public reseller listings; no project quote or device qualification.",
+  "min_text_pt": 6.7,
+  "topology_source": "PoF team presentation slide 3; diagrams/provenance.json",
+  "topology": "Native TikZ; no added enable path or Beckhoff wiring. Diagram explicitly labelled for the smaller team scope."
 }
