@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-14",
-  "revision": "1.9",
+  "date": "2026-10-15",
+  "revision": "2.0",
   "status": "passed",
-  "pdf_sha256": "2e4d5e4a7c23b88e69cf26a52d78bad0be395be27cbcb4d4ce502fcdde4dbfed",
-  "pages": 12,
-  "main_slides": 10,
-  "backup_slides": 2,
+  "pdf_sha256": "5955158430a910d8275edc13d3f4a1a71775a2dbf84c60957d888d86c0730da9",
+  "pages": 13,
+  "main_slides": 9,
+  "backup_slides": 4,
   "counts": {
     "total": 159,
     "control": 59,
@@ -41,51 +41,56 @@
     },
     {
       "page": 4,
-      "words": 71,
+      "words": 74,
       "min_text_pt": 6.7
     },
     {
       "page": 5,
-      "words": 69,
+      "words": 81,
       "min_text_pt": 6.7
     },
     {
       "page": 6,
-      "words": 68,
-      "min_text_pt": 6.7
-    },
-    {
-      "page": 7,
       "words": 59,
       "min_text_pt": 6.7
     },
     {
-      "page": 8,
+      "page": 7,
       "words": 52,
       "min_text_pt": 6.7
     },
     {
-      "page": 9,
+      "page": 8,
       "words": 69,
       "min_text_pt": 6.7
     },
     {
+      "page": 9,
+      "words": 89,
+      "min_text_pt": 6.7
+    },
+    {
       "page": 10,
-      "words": 75,
+      "words": 67,
       "min_text_pt": 6.7
     },
     {
       "page": 11,
-      "words": 99,
+      "words": 67,
       "min_text_pt": 6.7
     },
     {
       "page": 12,
-      "words": 83,
+      "words": 99,
+      "min_text_pt": 6.7
+    },
+    {
+      "page": 13,
+      "words": 84,
       "min_text_pt": 6.7
     }
   ],
-  "visual_review": "New Raritan rack-profile and FD-VD system-count slides, plus updated source slide, inspected at presentation size.",
+  "visual_review": "PoF topology, scope, system subtotal and both Beckhoff backup slides inspected at presentation size.",
   "scope": "Design and implementation review; no device operations or deployment qualification.",
   "pof_checks": {
     "temperatures": 8,
@@ -133,10 +138,22 @@
     "leak_detectors": 44,
     "smoke_detectors": 44,
     "native_contact_fields": 220,
-    "unallocated_additions": "6 \u00d7 total Hermes buffers + 12 \u00d7 HD-mezzanine AFE instances + defined WIENER power points",
+    "unallocated_additions": "6 × total Hermes buffers + 12 × HD-mezzanine AFE instances + defined WIENER power points",
     "three_population_inputs_stay_blank": true,
     "original_variable_sheets_unchanged": true,
     "independent_group_arithmetic": "passed",
     "workbook_sha256": "424c21190ca3bac5d1639d499707b23128ffaa4d90ef1b5305bdb14ee70a1c05"
+  },
+  "pof_team_checks": {
+    "diagram_identical_to_single_slide_comparison": true,
+    "main_slide": 5,
+    "monitoring_per_box": "4–7 laser voltages + one chassis RTD",
+    "reported_updates_hz": 1,
+    "beckhoff_backup_slides": [
+      10,
+      11
+    ],
+    "catalogue_and_system_counts_unchanged": true,
+    "system_count_working_case_labelled": true
   }
 }

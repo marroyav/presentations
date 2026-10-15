@@ -6,14 +6,14 @@
 \title[SC--PDS--DPS interface]{SC--PDS--DPS interface}
 \subtitle{Control, monitoring and protection}
 \author{PDS / Slow Controls / Detector Protection}
-\date{14 October 2026 --- draft 1.9}
+\date{15 October 2026 --- draft 2.0}
 \input{counts}
 \input{system-counts}
 
 \begin{document}
 
 \begin{frame}[plain]
-  \DuneEyebrow{DUNE / 14 OCTOBER 2026 / DRAFT FOR DISCUSSION}
+  \DuneEyebrow{DUNE / 15 OCTOBER 2026 / DRAFT FOR DISCUSSION}
   \bigskip
   {\bfseries\fontsize{28}{32}\selectfont SC--PDS--DPS interface\par}
   \medskip
@@ -57,7 +57,7 @@
     System & Control & Publish\\
     \midrule
     DAPHNE & Applied DAQ settings & Hardware V/I/P/T, bias and AFE state\\
-    PoF & --- & 8 temperatures + 8 voltages\\
+    PoF & --- & Team plan: 4--7 V + 1 chassis RTD\\
     PDS calibration box & Pulse settings, bias and enable & Status and monitor readbacks\\
     WIENER PS & Voltage demand and output switch & Measured V/I, status; power reader pending\\
     PDU & Outlet switch & Power, outlet state and fitted sensors\\
@@ -68,47 +68,32 @@
   OPMON publishes data counters and Hermes queries.
 \end{frame}
 
-\begin{frame}{PoF: 3 I/O terminals, one enable per box}
-  Reuse the Beckhoff PLC and flange-side EtherCAT connection.\par
-  \medskip
-  {\small
-  \renewcommand{\arraystretch}{1.18}
-  \begin{tabularx}{\textwidth}{@{}Xr l r@{}}
-    \toprule
-    Signal & Points & Example terminal & Modules\\
-    \midrule
-    Temperature inputs & 8 & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3208.html}{EL3208: 8 RTD inputs} & 1\\
-    Voltage inputs & 8 & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3068.html}{EL3068: 8 analog inputs} & 1\\
-    Box enable/disable & 1 output & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed1xxx-digital-input/el1859.html}{EL1859: use 1 of 8 outputs} & 1\\
-    \midrule
-    \textbf{Eight-channel draft case} & & & \textbf{3}\\
-    \bottomrule
-  \end{tabularx}\par}
-  \smallskip
-  \textbf{One enable controls the whole box.} Readout: 2 terminals; box control adds 1.
-\end{frame}
-
-\begin{frame}{Rack draft: 40 mini-racks, 80 PoF boxes}
-  Working I/O case: 8 T + 8 V + one enable per box.\par
-  \medskip
-  {\small
-  \renewcommand{\arraystretch}{1.18}
-  \begin{tabularx}{\textwidth}{@{}Xrr@{}}
-    \toprule
-    Quantity & Per mini-rack & 40 mini-racks\\
-    \midrule
-    PoF boxes & 2 & 80\\
-    Laser drivers & 16 & 640\\
-    Temperature inputs & 16 & 640\\
-    Voltage inputs & 16 & 640\\
-    Box-enable outputs & 2 & 80\\
-    \midrule
-    \textbf{Signal points} & \textbf{34} & \textbf{1,360}\\
-    \textbf{I/O terminals} & \textbf{5} & \textbf{200}\\
-    \bottomrule
-  \end{tabularx}\par}
-  \medskip
-  Per rack: 2 EL3208 + 2 EL3068 + 1 shared EL1859.
+\begin{frame}{PoF: the team's proposed topology}
+  \begin{columns}[c,onlytextwidth]
+    \begin{column}{0.46\textwidth}
+      \centering
+      \begin{adjustbox}{max width=\linewidth,max totalheight=5.7cm}
+        \input{diagrams/pof-team-topology.tikz.tex}
+      \end{adjustbox}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{Two boxes share one controller}\par
+      \medskip
+      One Opta + one analog expansion.\par
+      \bigskip
+      \textbf{Monitoring per box}\par
+      \medskip
+      4--7 laser voltages.\par
+      One chassis temperature (RTD).\par
+      \bigskip
+      \textbf{SC through OPC UA}\par
+      \medskip
+      Reported updates: about 1 Hz.\par
+      \bigskip
+      Rack draft: 40 mini-racks,\par
+      80 boxes, 640 laser drivers.
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{Rack monitoring: 44 PDUs, 440 outlets}
@@ -164,10 +149,12 @@
 \end{frame}
 
 \begin{frame}{FD-VD draft subtotal: \SystemSubtotal\ variables}
+  \small
   42 boards $\times$ 32 active channels; 84 data links.\par
-  \medskip
+  PoF count uses the 8 T + 8 V + one enable working case.\par
+  \smallskip
   {\small
-  \renewcommand{\arraystretch}{1.10}
+  \renewcommand{\arraystretch}{1.00}
   \begin{tabularx}{\textwidth}{@{}Xrrr@{}}
     \toprule
     Interface & Control & Publish & Subtotal\\
@@ -177,12 +164,55 @@
     \textbf{Total allocated} & \textbf{\SystemControl} & \textbf{\SystemPublish} & \textbf{\SystemSubtotal}\\
     \bottomrule
   \end{tabularx}\par}
-  \medskip
+  \smallskip
   Add 6 per Hermes input buffer, 12 per populated HD-mezzanine AFE,\par
   and 1 per defined WIENER power-consumption point.
 \end{frame}
 
 \appendix
+\begin{frame}{Backup: Beckhoff I/O per PoF box}
+  Reuse the Beckhoff PLC and flange-side EtherCAT connection.\par
+  \medskip
+  {\small
+  \renewcommand{\arraystretch}{1.18}
+  \begin{tabularx}{\textwidth}{@{}Xr l r@{}}
+    \toprule
+    Signal & Points & Example terminal & Modules\\
+    \midrule
+    Temperature inputs & 8 & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3208.html}{EL3208: 8 RTD inputs} & 1\\
+    Voltage inputs & 8 & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3068.html}{EL3068: 8 analog inputs} & 1\\
+    Box enable/disable & 1 output & \href{https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed1xxx-digital-input/el1859.html}{EL1859: use 1 of 8 outputs} & 1\\
+    \midrule
+    \textbf{Eight-channel draft case} & & & \textbf{3}\\
+    \bottomrule
+  \end{tabularx}\par}
+  \smallskip
+  \textbf{One enable controls the whole box.} Readout: 2 terminals; box control adds 1.
+\end{frame}
+
+\begin{frame}{Backup: Beckhoff sizing for 40 mini-racks}
+  Working I/O case: 8 T + 8 V + one enable per box.\par
+  \medskip
+  {\small
+  \renewcommand{\arraystretch}{1.18}
+  \begin{tabularx}{\textwidth}{@{}Xrr@{}}
+    \toprule
+    Quantity & Per mini-rack & 40 mini-racks\\
+    \midrule
+    PoF boxes & 2 & 80\\
+    Laser drivers & 16 & 640\\
+    Temperature inputs & 16 & 640\\
+    Voltage inputs & 16 & 640\\
+    Box-enable outputs & 2 & 80\\
+    \midrule
+    \textbf{Signal points} & \textbf{34} & \textbf{1,360}\\
+    \textbf{I/O terminals} & \textbf{5} & \textbf{200}\\
+    \bottomrule
+  \end{tabularx}\par}
+  \medskip
+  Per rack: 2 EL3208 + 2 EL3068 + 1 shared EL1859.
+\end{frame}
+
 \begin{frame}{Backup: design and implementation differ}
   \relax
   \small
@@ -208,7 +238,7 @@
     \item \texttt{daphne-os develop edc61f1}; \texttt{daphnemodules develop ba6fd3c}; local Hermes \texttt{d7de1de}.
     \item PDS calibration-box register client and register map v4.2a.
     \item WIENER guide; Raritan submittals; PDU definitions and sensor profile from DocDB 32655 v8.
-    \item PoF I/O draft: rack-planning data, SC infrastructure plan p.\ 4 and Beckhoff terminal datasheets.
+    \item PoF team presentation, 14 October 2026; rack draft, SC plan p.\ 4 and Beckhoff datasheets.
     \item SC intake template; operational workbook v1.2 with system inputs and indexed-point expansion.
   \end{itemize}
   \medskip

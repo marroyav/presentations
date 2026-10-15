@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-15",
+  "classification": "explanatory native TikZ redraw of user-supplied topology",
+  "source": {
+    "path": "/home/arroyave/Downloads/PoF-Housing-update-peter-20261014.pptx",
+    "slide": 3,
+    "pptx_sha256": "562ecfefad5076c951929a0b26e81b3aa62c4a2f37944fbcf917071d654123af",
+    "image_member": "ppt/media/image1.svg",
+    "image_sha256": "1fb27a9522a450473c13d338175a432917243b501b1090b862fab17e944562b1"
+  },
+  "rendered_source": "pof-team-topology.tikz.tex",
+  "sha256": "0030a0b10d98369617698cfb1c1c51ba2e3d5fec34834acfcea89a626cfb2761",
+  "preserved": [
+    "two PoF chassis with eight laser channels each",
+    "eight-pin Burndy connectors into shared terminal block",
+    "terminal block to Opta and analog expansion",
+    "12 V DC supply and rack 120 V AC",
+    "Ethernet to local network"
+  ],
+  "presentation_changes": [
+    "replace product photographs with labelled boxes",
+    "draw expansion attachment as bus",
+    "draw power flow into supply and modules",
+    "use shared DUNE palette and typography"
+  ],
+  "limits": [
+    "not a pinout or wiring qualification",
+    "no enable wiring inferred",
+    "costed AFX00003 comes from source slide 1; source slide 3 photograph shows AFX00002"
+  ],
+  "copied_from": "decks/pds_pof_budget/diagrams/team-topology.tikz.tex"
+}

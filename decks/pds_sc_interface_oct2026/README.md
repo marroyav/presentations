@@ -1,6 +1,6 @@
 # SC–PDS–DPS interface
 
-Draft 1.9 · 14 October 2026 · ten main slides and two backup slides.
+Draft 2.0 · 15 October 2026 · nine main slides and four backup slides.
 
 The audience needs to understand the connections, ownership, selected variables
 and unfinished integration work. The deck opens with the SC–PDS–DPS title and responsibilities. Its overview
@@ -46,7 +46,9 @@ Implementation baseline: daphne-os develop `edc61f1`, daphnemodules develop
 WIENER integration guide and PX3 SC bindings. Exact paths and hashes are in
 `evidence.json`. No device reads/writes or protection qualification were done.
 
-PoF now uses the corrected working inventory of 8T+8V. WIENER power consumption still needs a
+The catalogue and system estimate retain the 8T+8V working inventory, distinct
+from the team proposal in the main section. The system-count slide labels this
+scope explicitly; this editorial revision does not recalculate the workbook. WIENER power consumption still needs a
 measurement definition and reader. Unknown SC metadata stays blank.
 
 ## Files and build
@@ -67,9 +69,14 @@ tectonic --chatter minimal --keep-logs main.tex
 The evidence script uses the Python standard library. All diagrams render in
 Tectonic; no external diagram renderer is required. PDFs open in Zen.
 
-## PoF I/O sizing slide
+## PoF team topology and Beckhoff backup
 
-Slide 5 uses the corrected eight-channel inventory: 8 T + 8 V. Readout uses
+Slide 5 reuses the TikZ diagram from the single-slide PoF comparison unchanged.
+`diagrams/pof-team-provenance.json` records its source. It shows the team's
+4–7 laser voltages and one chassis RTD per box, OPC UA updates around 1 Hz,
+and the rack draft's 40 mini-racks, 80 boxes and 640 drivers.
+
+Backup slide 10 uses the eight-channel working inventory: 8 T + 8 V. Readout uses
 2 eight-channel input terminals. One mixed digital terminal supplies the
 single box enable/disable output, bringing the draft to **3 I/O terminals per PoF box**.
 An incoming hardwired enable/disable signal can use one input on that same terminal.
@@ -83,7 +90,7 @@ proposed interface, pending mapping and implementation.
 
 ## Rack-draft totals
 
-Slide 6 uses `FD2 MiniRack combined!A1,B8,B11,F8,F11` and
+Backup slide 11 uses `FD2 MiniRack combined!A1,B8,B11,F8,F11` and
 `Power Summary!B17` in the May 2025 rack workbook: **40 mini-racks,
 2 PoF boxes per rack, 8 drivers per box = 80 boxes and 640 drivers**.
 The user working case gives 640 T + 640 V + 80 enables = 1,360 signal

@@ -1,5 +1,5 @@
-PDS–Slow Controls interface · draft 1.9 · 14 October 2026
-Ten main slides, two backup slides. About six minutes.
+PDS–Slow Controls interface · draft 2.0 · 15 October 2026
+Nine main slides, four backup slides. About six minutes.
 
 1. Title and responsibilities
 The draft covers control, monitoring and protection. PDS owns equipment, native
@@ -32,40 +32,26 @@ The diagram's opmon subscriber is read-only. It does not make OPMON a control AP
 Select applied settings and observations with an existing reader. OPMON contains
 data monitoring and Hermes queries. Hardware V/T belongs to SC in this inventory;
 the code migration remains outstanding. Some Hermes queries are CLI-only.
-PoF's eight temperatures and eight voltages remain requested points awaiting channel
-mapping. Calibration monitor codes stay raw until scaling is verified. WIENER
+PoF displays the team's 4–7 voltages and one chassis RTD. The catalogue and
+system estimate retain the labelled 8 T + 8 V working case, awaiting mapping. Calibration monitor codes stay raw until scaling is verified. WIENER
 consumption needs a reader and a definition: DC output power is not AC mains
 consumption. AFE state is register readback, not measured analog power-good.
 
-5. PoF draft I/O sizing
-The user corrected the working count to eight channels: 8 temperatures + 8
-voltages, with one enable/disable for the entire box. One eight-channel RTD
-terminal and one voltage-input terminal cover readout. One mixed EL1859 supplies
-the single box-enable output: three terminals in total. If an incoming hardwired
-enable/disable signal is needed, it uses one input on that same EL1859.
-Reuse the existing Beckhoff platform and flange connection. Confirm the PoF
-sensor/pinout and RTD, 0–10 V and 24 V assumptions. CPU, couplers, power/space,
-extra box signals and independent DPS I/O are separate from this draft count.
-With two-channel EL3202 RTD modules, four temperature modules are needed and
-the total becomes six. The PoF team presentation has now been reviewed; its
-4–7 voltage readings and one chassis RTD differ from this user working case.
+5. PoF team topology
+Reuse the native TikZ diagram from the single-slide PoF comparison unchanged.
+Source: PoF-Housing-update-peter-20261014.pptx, slide 3. Two eight-channel boxes
+connect through eight-pin Burndy connectors to a shared terminal block, Opta
+and analog expansion. Preserve Ethernet and 12 V DC / 120 V AC power paths.
+Slide 1 proposes 4–7 laser-voltage readings and one chassis RTD per box, with
+roughly 1 Hz updates, and reports UaExpert and FreeOpcUa tests. This is the
+team proposal, distinct from the full-channel inventory used for our estimates.
+Source text specifies AFX00003; the photograph shows AFX00002, so the drawing
+keeps the generic Opta label. Client tests do not qualify our SC integration or
+establish Beckhoff compatibility with the connector. No enable pinout is shown
+or inferred. The May rack draft supplies 40 racks, 80 boxes and 640 drivers.
+The Beckhoff option and full-channel I/O sizing are in backup slides 10–11.
 
-6. Rack draft deployment
-The May 2025 FD2 workbook states 40 mini-racks in A1, with two PoF crates
-in B8 and B11. F8 and F11 specify eight drivers per crate. Power Summary B17
-independently lists 80 PoF crates. This gives 80 boxes and 640 drivers.
-At the user working case of 8 T + 8 V + one enable per box, each rack has
-16 T, 16 V and two enables: 34 signal points; 1,360 across all 40 racks.
-Each rack uses 2 EL3208 + 2 EL3068 + one shared EL1859: five terminals.
-The totals are 80 temperature + 80 voltage + 40 digital terminals = 200.
-Separate box I/O banks use 240 terminals overall instead. CPU/coupler/power
-feeds, protection I/O and conditioning are excluded as in the sizing notes.
-The July meeting's 42-versus-40 rack discrepancy remains distinct; this slide
-uses the requested May draft. Physical point counts do not alter the operational
-workbook's 159 variable rows/patterns. The team presentation reports 4–7 voltage
-readings and one RTD; the slide explicitly retains the user's 8 T + 8 V case.
-
-7. Raritan rack monitoring
+6. Raritan rack monitoring
 The PDS draft includes 40 shared mini-racks and four PDS power racks. Assign
 one PDU per rack for this planning count. The March candidate top-plate model
 is PX3-5147R; the vendor's rev20250625 submittal specifies eight outlets. The
@@ -80,14 +66,14 @@ The top-plate PDU was not in the March budget baseline; this projection counts
 the candidate for a complete draft scenario and does not claim procurement.
 PDS scope excludes unrelated TPC, DAQ server and central SC server racks.
 
-8. SC point definition
+7. SC point definition
 Complete the existing intake columns: source, type, units, scaling, access,
 limits, hysteresis, delay, scan and history. Unknown numbers remain blank.
 Quality, age, missing-data handling and recovery need agreement. An alarm tag
 does not implement or qualify a protection action. Hardware sampling and SC
 subscription/history timing are separate choices.
 
-9. Variable definitions and next work
+8. Variable definitions and next work
 159 variable rows/patterns: 59 Control and 100 Publish. 137 have a code reader or
 retained SC binding; 22 await a mapping/reader (16 PoF, six WIENER). These totals
 are not expanded channel counts or deduplicated physical sensors. Reader evidence
@@ -96,7 +82,7 @@ Next: map PoF and WIENER, verify the installed PDU, export existing hardware
 readers and agree the SC metadata. Control classifies a setting, not permission
 for every SC client to write it.
 
-10. FD-VD expanded instance count
+9. FD-VD expanded instance count
 The 159-definition catalogue is not the deployed tag count. Indexed patterns
 expand by actual scope: channels, AFE groups, boards, links and rack sensors.
 Use 42 DAPHNE boards from the current ICD, 32 used channels and four used AFE
@@ -125,14 +111,42 @@ these additions; the main slide uses the 32-channel design-active case.
 `System Expansion` records each definition, scope, role and formula. The
 original variable sheets are compared cell-for-cell and remain unchanged.
 
-11. Backup: design versus implementation
+10. Backup: Beckhoff I/O per PoF box
+The user corrected the working count to eight channels: 8 temperatures + 8
+voltages, with one enable/disable for the entire box. One eight-channel RTD
+terminal and one voltage-input terminal cover readout. One mixed EL1859 supplies
+the single box-enable output: three terminals in total. If an incoming hardwired
+enable/disable signal is needed, it uses one input on that same EL1859.
+Reuse the existing Beckhoff platform and flange connection. Confirm the PoF
+sensor/pinout and RTD, 0–10 V and 24 V assumptions. CPU, couplers, power/space,
+extra box signals and independent DPS I/O are separate from this draft count.
+With two-channel EL3202 RTD modules, four temperature modules are needed and
+the total becomes six. The PoF team presentation has now been reviewed; its
+4–7 voltage readings and one chassis RTD differ from this user working case.
+
+11. Backup: Beckhoff rack sizing
+The May 2025 FD2 workbook states 40 mini-racks in A1, with two PoF crates
+in B8 and B11. F8 and F11 specify eight drivers per crate. Power Summary B17
+independently lists 80 PoF crates. This gives 80 boxes and 640 drivers.
+At the user working case of 8 T + 8 V + one enable per box, each rack has
+16 T, 16 V and two enables: 34 signal points; 1,360 across all 40 racks.
+Each rack uses 2 EL3208 + 2 EL3068 + one shared EL1859: five terminals.
+The totals are 80 temperature + 80 voltage + 40 digital terminals = 200.
+Separate box I/O banks use 240 terminals overall instead. CPU/coupler/power
+feeds, protection I/O and conditioning are excluded as in the sizing notes.
+The July meeting's 42-versus-40 rack discrepancy remains distinct; this slide
+uses the requested May draft. Physical point counts do not alter the operational
+workbook's 159 variable rows/patterns. The team presentation reports 4–7 voltage
+readings and one RTD; the slide explicitly retains the user's 8 T + 8 V case.
+
+12. Backup: design versus implementation
 The local ICD is the architecture source. The develop snapshots are the reader
 and applied-command source. Do not describe the architecture as already deployed.
 General board-temperature and typed I2C health exports remain gaps. Regulator
 PMBus temperature readers exist locally. V3 ConfigureFE and ConfigureCLKs are
 separate. Do not infer ten implemented board-temperature tags from the older ICD.
 
-12. Backup: sources
+13. Backup: sources
 The primary ICD is local draft 0.2, revision bfb2a8b, dated 17 September 2026.
 It remains pending review/approval. The older EDMS rev. 1.0 copy is retained only
 as historical evidence. This revision does not carry forward its disputed optical
@@ -144,9 +158,9 @@ Context retained in notes, omitted from slides
 Slide 1: Based on the SC--PDS--DPS ICD, local draft 0.2.
 Slide 2: Interface design. Adapter coverage and deployment remain to be verified.
 Slide 4: PoF and WIENER rows include pending mappings/readers. Some DAPHNE and calibration readers still need SC exports.
-Slide 5: An incoming hardwired enable/disable signal can use one input on the same EL1859. No extra terminal is needed for that input.
-Slide 5: Draft assumes 2-wire RTDs, 0--10 V voltage readings and 24 V digital signals. Confirm the PoF pinout and signal levels.
-Slide 5: I/O terminals only. Station power/space and independent DPS I/O require separate sizing.
-Slide 9: Rows/patterns, not physical channel totals. 137 have reader/binding evidence; 22 await a mapping or reader. OPC UA coverage is separate.
-Slide 11: General board-temperature and I2C health exports remain gaps. Raw/cached readbacks retain their source meaning.
-Slide 12: Exact paths, hashes and implementation limits are supplied with the sources.
+Slide 10: An incoming hardwired enable/disable signal can use one input on the same EL1859. No extra terminal is needed for that input.
+Slide 10: Draft assumes 2-wire RTDs, 0--10 V voltage readings and 24 V digital signals. Confirm the PoF pinout and signal levels.
+Slide 10: I/O terminals only. Station power/space and independent DPS I/O require separate sizing.
+Slide 8: Rows/patterns, not physical channel totals. 137 have reader/binding evidence; 22 await a mapping or reader. OPC UA coverage is separate.
+Slide 12: General board-temperature and I2C health exports remain gaps. Raw/cached readbacks retain their source meaning.
+Slide 13: Exact paths, hashes and implementation limits are supplied with the sources.
