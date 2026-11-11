@@ -1,0 +1,9 @@
+{
+  "revision": "2026-10-27 VD narrative rewrite",
+  "pages": 17,
+  "main_slides": 8,
+  "backup_slides": 9,
+  "overfull_boxes": 0,
+  "visual_review": "All 17 rendered pages inspected; final edits on pages 4, 6, 7, 9, 14 and 15 rendered and inspected again. No clipping or overlap observed.",
+  "verification": "verification-20261027-vd-narrative.json"
+}

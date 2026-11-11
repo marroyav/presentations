@@ -1,0 +1,20 @@
+% Keep the SC/DAQ OPC UA route and Hermes IPBus/UDP route distinct.
+\begin{tikzpicture}
+  \node[dps controller] (dps) at (-5,0) {DPS PLC};
+  \node[dps node] (sc) at (0,0) {SC / Ignition};
+  \node[dps node] (daq) at (5,0) {DAQ\\CCM / Hermes};
+  \node[dps node] (bridge) at (0,-1.7) {PDS control\\interface};
+  \node[dps load] (supply) at (-5,-3.25) {WIENER\\LV supply};
+  \node[dps node] (daphne) at (5,-3.25) {DAPHNE\\Bias and readout};
+
+  \draw[dps both] (dps.east) -- node[dps label,above] {OPC UA} (sc.west);
+  \draw[dps both] (sc.south) -- node[dps label,left] {OPC UA} (bridge.north);
+  \draw[dps both] (daq.west) -- (2.45,0)
+    -- node[dps label,right] {OPC UA} (2.45,-1.7) -- (bridge.east);
+  \draw[dps both] (bridge.south) -- (0,-3.25)
+    -- node[dps label,above] {ZMQ control / status} (daphne.west);
+  \draw[dps both] (daq.south) -- node[dps label,left,pos=0.65] {IPBus / UDP} (daphne.north);
+  \draw[dps both] (dps.south) -- node[dps label,right] {SNMP} (supply.north);
+  \draw[dps power] (supply.south) -- (-5,-4.1)
+    -- node[dps label,above] {48 V power} (5,-4.1) -- (daphne.south);
+\end{tikzpicture}

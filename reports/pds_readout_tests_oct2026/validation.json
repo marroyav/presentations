@@ -1,0 +1,24 @@
+{
+  "validation": "3-page PDF; no layout warnings; all run IDs and branch pins present; remote minimal heads match source pins",
+  "files": {
+    "README.md": "ff0d10a034cc8059845c94efe3d5d75cf81b666b7386f7e0cdd7c56c960647b1",
+    "build_report.py": "3028d622ba664464865cbb5b88b0432fd923ea7c10ab522b6572fc68cf58e111",
+    "evidence/diagnostic-pins.json": "f79827a999561c3ec6101f1e590bfe195be5d1f8439f5a95790f8d0b0f0d6854",
+    "evidence/measurements.json": "195501cda9d2933599b9aaa6e531ac740746ea0c3e481d43cbfa2713fd576601",
+    "evidence/minimal-pins.json": "bde6203da73efe2f9793e44a5cb25b22794cd8cc2b91429d9212d305a0e2986f",
+    "evidence/provenance.json": "eda1febecb89d924a3deaef53fcd3f74f05a338ee918c6fa03a09fcb4a436d51",
+    "evidence/rate-sweeps.csv": "8273c7ef977598834981d92656915c30b2762f15efead722146f1d7e7d7af266",
+    "evidence/remote-refs.json": "234f4671cfc9fe8a4a5279bbeb18617b82e7894ba985459e644d42dfbcd325b6",
+    "evidence/steady571on-workers-by-rate.csv": "31260e9e2ccaca4f2386b33b09200868a0a29e76562fff0a7f2a82cb897c9282",
+    "evidence/steady571on-workers.csv": "0d699ee7d93894a32fb2576f0e9fa65b19d6e6510cdd064dd81700fd8a9cdae3",
+    "evidence/timing571on-workers-by-rate.csv": "0e70611aaf142829fed2c85c832ba9a2d4912e830c85bb1a783c58ceeae95202",
+    "evidence/timing571on-workers.csv": "f9c3b2c63114a0b876b135d5fad64b349cc5d5b461c252e3182337f3bbe64bff",
+    "evidence/timing571raw4-workers-by-rate.csv": "c5f350089baa4e160b87e3f726b9f1b18d002a9f9ca0cd83f1b30593a8bc7f1e",
+    "evidence/timing571raw4-workers.csv": "898e38589447dd88b80c864dcb92a5d5b00912f94c0aa401655f79770a119c9f",
+    "incoming.tex": "b95aaf2b9d6f564f0eec971b00014b9f60128c935f63bd35c60883cfec6a788a",
+    "instrumented.tex": "fe74f491f7e848226288d1e8d433633a0dd1392c1b887a0e3b5004248f2d19f7",
+    "main.pdf": "0c17b6f3707c3dd1fb35c29dd0d7b23a9ea7d6d6288dfd2c6779f2654cd0fdd4",
+    "main.tex": "b86cc78f92b111e5e4cbdfbfe9b92052897f79fe3ef729a070001d351429d071",
+    "windows.tex": "7bccb0ca904e3a73c32f6d0f840dd93a36cc3a4311dee5bec8605632ced15637"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "script_sha256": "370913cb7353ba1248b3bd8520f4100f5e4403cc28967c11556321b122c0585d",
+  "design_tokens_sha256": "10bcab0dc5da1d7ee2b4b42e7a2ff83fc98b66a0f5657086dc94e8ee11ad3fec",
+  "frozen_files": {
+    "plot-data.npz": "07f7e0488b260642935524d5ee7d9baaf5f82759b2b372eb92abb6bc0ea2e8fa",
+    "statistics.json": "94eeeb76d22f766ce93309ce771d084d0a340c20b8673c4354983324a0a2e405"
+  },
+  "figures": {
+    "figures/01-charge-and-pds.pdf": "4b9c5c45bcad0dffdb2ec0a133ba8f08797ca18a4471f94794834fddd382d61d",
+    "figures/01-charge-and-pds.png": "093e0ee0f895c5563a4a35518b581c23e2c36ab2f6ce42f649338235edee76d6",
+    "figures/02-opposite-charge-signs.pdf": "8f2315a5fb3949b737ae63c5d4f3752940cd014f86255ff2c573ea121dcc00bf",
+    "figures/02-opposite-charge-signs.png": "dfb8835969e403f86ae625eee03ecc411359fdeb6c451cab0fb6bf5a0edfcdd5",
+    "figures/03-disconnected-inputs.pdf": "b6361d97804628901d8f7a0456f64911f17244127d3fe8bf87568d06e1f3d6b7",
+    "figures/03-disconnected-inputs.png": "96c41b6be010f21d046e2e91a58140402e682ce238f456ca47da59209b9a676b",
+    "figures/04-pds-prediction.pdf": "2fc08701dac10ad74e6e7e742e63312f9ae7285f27d071c1258e944d81763f2d",
+    "figures/04-pds-prediction.png": "4765b87e1420a0b34cf4c317d0482f1b712394dac028b96b66cb8408e17e62f6",
+    "figures/05-charge-light-timing.pdf": "a4e0abac70963a973666d4ab15fe369c212a9cac729aa7f4429d0691de2f7b05",
+    "figures/05-charge-light-timing.png": "ef85194738c659ed61c8b408a3603d442df682b2980c52b5d61fc358d57aadf8",
+    "figures/06-july-voltage.pdf": "0a653d1df2207d50b0de99880bdb1a93d2b44c6fdc3e08318f4ce4f7f245e0a0",
+    "figures/06-july-voltage.png": "3a077da32f6e617540759e4219431387430342f0b2e61840ee653252d09aa9b4"
+  },
+  "checks": [
+    "Frozen input hashes match",
+    "Seven-run total: 1,531 saved events",
+    "Charge screen: 1,516 candidates",
+    "Clear November charge pattern: 1,355 / 1,376",
+    "No interpolation across missing samples",
+    "No new fits or detector decoding"
+  ]
+}

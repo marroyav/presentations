@@ -1,0 +1,26 @@
+SD DPS test setup — input from Manuel, 10 November 2026
+
+Machine: dune-fd-test01
+Location: Nevada room, SD
+Available equipment and software reported by Manuel:
+- PDU
+- Smoke sensors
+- Relay
+- GIZMo
+- Ignition
+- OPC UA bridges
+- Emulators
+
+Manuel intends to expand this setup similarly to the Batavia setup and requested
+a combined progress-and-plans slide immediately before the Detector transition.
+
+This is a user-reported inventory and expansion intent. No new remote inspection,
+connectivity check, protection test, component selection or delivery date is claimed.
+
+Batavia source: Nichols-DPS-FDC I&I Workshop-Nov2026.pptx, slides 15–16.
+Reported progress: initial demonstrator design completed using SBND/Iceberg
+experience; reviewed with the WIEC team at BNL.
+Reported next steps: implement BNL feedback, test fan tachometer reading,
+assemble the demonstrator and install it in HEERC G271.
+The downloaded draft is discussion input; its status has not been independently
+verified. No claim that this demonstrator is assembled or commissioned is made.

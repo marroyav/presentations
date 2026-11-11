@@ -1,0 +1,295 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{VD detector protection}
+\subtitle{Existing hardware, inhibit paths and VD additions}
+\author{Manuel Arroyave}
+\date{I\&I workshop draft --- 27 October 2026}
+\newcommand{\mydate}{27 October 2026}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+\newcommand{\planningnote}[1]{\par\medskip{\footnotesize\color{DuneTextMuted}#1\par}}
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{DPS arbitrates protection; SC operates, monitors and logs}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \textbf{DPS} & \textbf{Detector Protection System.} Uses facility and detector conditions to allow or block actions; issues permits, inhibits and trips.\\
+    \textbf{SC} & \textbf{Slow controls, using Ignition.} Operates and monitors the detector; owns the data and event logs, including DPS decisions.\\
+    \textbf{BMS} & \textbf{Building Management System.} Controls building services. FFDG BMS and \mbox{SDSTA BMS} are separate systems.\\
+    \textbf{Local\newline interlocks} & \textbf{Equipment-level protection.} Can trip without waiting for SC or the central DPS.\\
+  \end{tabularx}\par
+  \bigskip
+  \textbf{An operating request cannot override a protection trip.}
+\end{frame}
+
+\begin{frame}{DPS receives inputs from four system domains}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.7cm}>{\RaggedRight\arraybackslash}X@{}}
+    \textbf{FFDG BMS} & API through the Batavia server at FNAL $\rightarrow$ SC $\rightarrow$ DPS.\\
+    \textbf{SDSTA BMS} & Interface under investigation: available signals and connection points.\\
+    \textbf{Cryogenics} & Selected process conditions. Each inhibit names the actual instrument or controller that supplies them.\\
+    \textbf{Detector} & SC, the detector subsystems, and \textbf{rack infrastructure}: racks, PDUs and rack sensors.\\
+  \end{tabularx}\par
+  \bigskip
+  Example: low liquid level withdraws the HV permit. SC logs the condition,
+  DPS decision and equipment state.
+  \planningnote{The FFDG route is the working integration basis. SDSTA retains personnel-safety responsibility. Facility and cryogenic systems retain control of their services.}
+\end{frame}
+
+\begin{frame}{VD uses SNMP control and dedicated protection I/O}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.45cm,minimum height=1.35cm,inner sep=5pt,font=\small},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.3pt},
+    duplex/.style={arrows={Stealth-Stealth},draw=DuneSky,line width=1.3pt}]
+    \node[box,text width=2.8cm,minimum height=1.0cm] (sc) at (-5.1,1.25) {\textbf{SC / Ignition}\\operations and logs};
+    \node[box,fill=DuneSky,text width=2.8cm,minimum height=1.0cm] (plc) at (0,1.25) {\textbf{VD DPS PLC}\\CUC proposed};
+    \node[box] (sub) at (-5.1,-1.35) {\textbf{Subsystems}\\OPC UA\\interfaces};
+    \node[box] (io) at (-1.7,-1.35) {\textbf{BDE / bias I/O}\\input signals and\\inhibit outputs};
+    \node[box] (lv) at (1.7,-1.35) {\textbf{Subsystem supplies}\\PL506 / ISEG\\PDS LV};
+    \node[box,fill=DuneCoral] (rack) at (5.1,-1.35) {\textbf{Rack\\infrastructure}\\PDUs and\\rack sensors};
+    \draw[duplex] (sc.east) -- node[above,font=\small] {OPC UA} (plc.west);
+    \draw[duplex] (sc.south) -- node[right,font=\small] {OPC UA} (sub.north);
+    \draw[duplex] (plc.south) -- (0,0.1) -- (-1.7,0.1) -- (io.north);
+    \node[anchor=south,font=\small] at (-1.7,0.13) {EtherCAT};
+    \draw[duplex] (plc.east) -- node[above,font=\small] {SNMP control / status} (5.1,1.25);
+    \draw[draw=DuneSky,line width=1.3pt] (5.1,1.25) -- (5.1,0.1) -- (1.7,0.1);
+    \draw[edge] (1.7,0.1) -- (lv.north);
+    \draw[edge] (5.1,0.1) -- (rack.north);
+    \draw[edge,draw=DuneCoral] (io.south) -- (-1.7,-2.5) --
+      node[below,font=\small] {PL506 / ISEG wired inhibits} (1.7,-2.5) -- (lv.south);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{PDUs and WIENER supplies share SNMP control/status. BDE/bias also have dedicated wired protection.}
+  \planningnote{PLC = programmable logic controller; CUC = Central Utility Cavern; LV = low voltage. Additional subsystem exchanges go through SC. TDE has PDU control now; other interfaces remain options. HD may extend this system or use another PLC.}
+\end{frame}
+
+\begin{frame}{BDE already defines a distributed protection system}
+  BDE = bottom drift electronics. I/O = inputs and outputs.\par\medskip
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=3.1cm,minimum height=1.05cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box,fill=DuneSky] (io) at (-4,0) {BDE auxiliary rack\\remote I/O};
+    \node[box] (lv) at (1.6,1.1) {2 LV racks\\2 PL506 supplies};
+    \node[box,fill=DuneCoral] (wiec) at (1.6,-1.1) {8 WIECs\\8 PTCs + 48 WIBs};
+    \draw[edge] (io.north east) -| (-1.7,1.1) -- node[above,font=\small] {inhibits} (lv.west);
+    \draw[edge,<->] (io.south east) -| (-1.7,-1.1) -- node[below,font=\small] {EtherCAT} (wiec.west);
+    \draw[edge] (lv.east) -- (4.35,1.1) -- node[right,font=\small] {48 V} (4.35,-1.1) -- (wiec.east);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Ten groups: 20 PL506 supplies, 80 WIECs and 480 WIBs.}
+  \medskip
+  \raggedright The auxiliary I/O also connects fans, heaters and temperature sensors.
+  \planningnote{WIEC = warm interface electronics crate; PTC = power and timing card; WIB = warm interface board. June 2026 layout; fan/heater wiring omitted here.}
+\end{frame}
+
+\begin{frame}{BDE drawings, parts and software are already available}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \textbf{TPC protection panel designs}\par\medskip
+      \colorbox{DunePaper}{\includegraphics[page=2,width=\dimexpr\linewidth-2\fboxsep\relax,height=3.1cm,keepaspectratio,
+        trim=290bp 500bp 900bp 430bp,clip]{figures/tpc-panel-reference.pdf}}\par
+      \medskip\DuneDiagramCaption{Central PLC, bias I/O and LV/fan/heater reference panels.}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{BDE Ignition screens}\par\medskip
+      \includegraphics[page=7,width=\linewidth,height=3.1cm,keepaspectratio,
+        trim=10bp 210bp 460bp 74bp,clip]{figures/sc-progress-june2026.pdf}\par
+      \planningnote{Existing display of WIEC groups; June 2026 SC progress presentation.}
+    \end{column}
+  \end{columns}\par
+  \medskip
+  Parts list: CX5140 PLC, EK1100 couplers, EK1521 fibre links and EL2124 inhibit outputs.
+  \planningnote{Historical TPC reference: EDMS 2401090 v4, sheet 2, with parts and power workbooks. The VD baseline is eight WIECs per group.}
+\end{frame}
+
+\begin{frame}{Trace each inhibit to the hardware it uses}
+  The matrix gives the condition and action. Trace the full path for each affected load.\par
+  \bigskip
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.2cm,minimum height=1.35cm,inner sep=5pt,font=\small},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (source) at (-5.5,0) {Condition\\and source};
+    \node[box] (input) at (-2.75,0) {Input signal\\and connection};
+    \node[box,fill=DuneSky] (decision) at (0,0) {DPS / local\\decision};
+    \node[box,fill=DuneCoral] (output) at (2.75,0) {Output\\and load};
+    \node[box] (feedback) at (5.5,0) {Equipment state\\and feedback};
+    \draw[edge] (source) -- (input);
+    \draw[edge] (input) -- (decision);
+    \draw[edge] (decision) -- (output);
+    \draw[edge] (output) -- (feedback);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Record the rack, connector, protocol, channel, power feed and allowed detection-to-shutdown time.}
+  \bigskip
+  \raggedright Use the existing rack lists, interfaces, panel drawings, parts and power calculations.\par
+  \medskip
+  \textbf{Result:} hardware already covered, additions with quantities, and open choices that change those quantities.
+  \planningnote{Count shared inputs and outputs once, even when several inhibits use them. Wiring and software work are listed separately from hardware purchases.}
+\end{frame}
+
+\begin{frame}{BDE cooling already has an input-to-inhibit path}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=1.75cm,minimum height=1.25cm,inner sep=4pt,font=\small},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (fan) at (-5.75,0.6) {Fan status\\DB25 cable};
+    \node[box] (input) at (-3.45,0.6) {EL1004\\input I/O};
+    \node[box,fill=DuneSky] (plc) at (-1.15,0.6) {DPS PLC\\cooling rule};
+    \node[box] (output) at (1.15,0.6) {EL2124\\5 V output};
+    \node[box,fill=DuneCoral] (supply) at (3.45,0.6) {PL506\\channel inhibit};
+    \node[box] (load) at (5.75,0.6) {Affected WIEC\\48 V feed};
+    \draw[edge] (fan) -- (input);
+    \draw[edge] (input) -- (plc);
+    \draw[edge] (plc) -- (output);
+    \draw[edge] (output) -- (supply);
+    \draw[edge] (supply) -- (load);
+    \node[font=\small] at (-2.3,1.55) {EtherCAT};
+    \node[font=\small] at (0,1.55) {EtherCAT};
+    \node[font=\small] at (2.3,1.55) {Wired};
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Cooling fault $\rightarrow$ withdraw the permit for the affected PL506 channel.}
+  \medskip
+  \raggedright \textbf{Feedback:} PL506 state and voltage/current $\rightarrow$ SNMP $\rightarrow$ DPS;
+  OPC UA carries the result to SC for logging.\par
+  \medskip
+  \textbf{VD allocation check:} six fan-status signals per WIEC means 48 per
+  eight-WIEC group. Match these to the populated VD inputs and cables.\par
+  \planningnote{The six-fan WIEC note differs from the four-fan ICEBERG reference. These are baseline requirements, not new-module counts. Fan voting and allowed shutdown time remain to be agreed.}
+\end{frame}
+
+\begin{frame}{Rack infrastructure is a separate protection system}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.0cm,minimum height=1.05cm,inner sep=5pt,font=\small},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt},
+    duplex/.style={arrows={Stealth-Stealth},draw=DuneSky,line width=1.2pt}]
+    \draw[draw=DuneBorder,line width=1pt,fill=DuneSurface] (0.3,-0.9) rectangle (3.7,2.45);
+    \node[font=\small\bfseries] at (2,2.2) {Rack infrastructure};
+    \node[box,text width=2.2cm] (sc) at (-5.5,0) {SC / Ignition\\operations\\and logs};
+    \node[box,fill=DuneSky] (plc) at (-1.8,0) {DPS PLC\\arbitration};
+    \node[box,fill=DuneCoral,text width=2.4cm] (pdu) at (2,0) {PDU\\local trips\\outlet control};
+    \node[box,text width=1.8cm] (load) at (5.6,0) {Subsystem\\loads};
+    \node[box,text width=2.8cm,minimum height=0.9cm] (sensors) at (2,1.45) {Smoke + humidity\\temperature / leak};
+    \draw[duplex] (sc.east) -- node[above,font=\small] {OPC UA} (plc.west);
+    \draw[duplex] (plc.east) -- node[above,font=\small] {SNMP} (pdu.west);
+    \draw[edge] (pdu.east) -- node[above,font=\small] {AC power} (load.west);
+    \draw[edge] (sensors.south) -- (pdu.north);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Count the rack, PDUs, sensors and interface parts once. Link each subsystem to its PDU outlets.}
+  \medskip
+  \raggedright Local PDU rules protect the mapped outlets. Humidity is monitored;
+  a humidity shutdown needs a stated requirement.\par
+  \planningnote{The PX3 package supplies the smoke interface, powered contact hub and relay. Temperature/leak sensors are included where fitted. Reset and re-enable remain separate actions.}
+\end{frame}
+
+\begin{frame}{Detector additions follow the existing VD hardware}
+  \small
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{1.9cm}>{\RaggedRight\arraybackslash}p{4.7cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{System} & \textbf{Starting hardware} & \textbf{What determines additions}\\
+    \midrule
+    BDE / HVS & BDE I/O; PL506 / ISEG inhibits; Heinzinger and cRIO & Signal and load mapping against the existing VD design\\
+    PDS / PoF & 34 LV feeds; 80 PoF boxes & Opta PLC or Beckhoff PLC: local I/O, power, enclosures and cables\\
+    TDE & 20 racks; current control through PDUs & Crate status / external inhibit retained as future options\\
+    CalCI & Existing instrumentation and calibration descriptions & Status, optical permits and actuator connections\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  \normalsize The 80 PoF boxes have 1,280 monitoring values. Each controller
+  option must cover the same physical signals and required actions.
+  \planningnote{PDS = photon detection system; PoF = power over fibre; TDE = top drift electronics; HVS = high-voltage system; CalCI = calibration and cryogenic instrumentation. These values are not a central DPS terminal count.}
+\end{frame}
+
+\begin{frame}{Facility interfaces need named signals and routes}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Source} & \textbf{Hardware consequence of the path review}\\
+    \midrule
+    FFDG BMS & Use the API through Batavia and SC. Name the required points; the API exchange itself adds no discrete or analog DPS terminals.\\
+    SDSTA BMS & The survey identifies available signals, controllers and connection points. Those determine any interface hardware.\\
+    Cryogenics & Name the measurement or controller status and its transport. Some level measurements come through detector instrumentation and SC.\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  \textbf{FAC-01 example:} map the fire-alarm signal to the drift-HV and CRP/FC
+  bias shutdown paths before assigning an additional facility input.
+  \planningnote{The known FFDG API route does not establish that every required alarm is exposed on it. SDSTA interface work remains under investigation.}
+\end{frame}
+
+\begin{frame}{Test arbitration, trips and recovery on the bench}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.25cm,minimum height=1.0cm,inner sep=5pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (in) at (-4.8,0) {Fault input or\\conflicting request};
+    \node[box,fill=DuneSky] (plc) at (-1.6,0) {DPS PLC\\arbitration};
+    \node[box,fill=DuneCoral] (out) at (1.6,0) {Supply inhibit\\or PDU command};
+    \node[box] (state) at (4.8,0) {Equipment state\\and feedback};
+    \draw[edge] (in) -- (plc);
+    \draw[edge] (plc) -- (out);
+    \draw[edge] (out) -- (state);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Use the BDE vertical-slice work and G271 equipment for representative VD paths.}
+  \bigskip
+  Measure detection through completed shutdown. Test local trips, SC and fieldbus
+  loss, reset and re-enable. Verify that SC logs the decisions and equipment states.\par
+  \bigskip
+  No critical sub-ms function has been identified so far. Simulation prepares the
+  fault and load cases; hardware tests measure the complete response.
+\end{frame}
+
+\begin{frame}{Take the VD hardware to review in June 2027}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Work before review} & \textbf{Result for procurement}\\
+    \midrule
+    Trace the VD inhibits & Existing hardware, added channels and cables, quantities and open alternatives\\
+    Build representative paths & Measured trip time, failure/recovery results and SC logging\\
+    Prepare purchases & Panel space and power, drawings, parts lists, costs, lead times and spares\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  After readiness review: order the hardware and install it in the site sequence.
+  \planningnote{Possible facility-interface need: summer 2027. Full VD response-matrix review: early 2028. The current path review establishes the requirements that affect hardware purchases.}
+\end{frame}
+
+\begin{frame}{I will lead the VD hardware work with a control engineer}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.1cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Proposed contribution} & \textbf{Work}\\
+    \midrule
+    Manuel + control engineer & VD design, SURF interfaces and procurement package\\
+    Terri and Trevor & BDE panels, PLC/I/O implementation and bench work\\
+    Geoff + Manuel & SC commands, PDU protection and recovery\\
+    Vivian + consortia / DPS & Equipment requirements and ICD updates\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  \textbf{Support needed:} control-engineering time and access to the existing test stands.
+  \planningnote{SURF work: inspection maps are ready; access is being coordinated with Rachel, with Dale Curran identified as an SDSTA integration contact.}
+\end{frame}
+
+\appendix
+\input{backup-slides.tex}
+\end{document}

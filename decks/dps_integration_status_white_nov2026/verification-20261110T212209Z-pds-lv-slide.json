@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-11-10T21:23:44.462751+00:00",
+  "request": "Add one combined DAPHNE and PDS calibration-box LV slide immediately after PoF.",
+  "pre_change_archive": "archive/20261110T212209Z-before-pds-lv-slide",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "exit_code": 0,
+  "build_evidence": "verification-20261110T212209Z-pds-lv-slide-evidence.json",
+  "checks": {
+    "slides_before": 43,
+    "slides_after": 44,
+    "new_slide": 19,
+    "predecessor_slide": 18,
+    "all_existing_slide_bodies_retained": true,
+    "working_feed_count": 34,
+    "unresolved_inhibit_wiring_marked": true,
+    "source_audit_errors": [],
+    "source_audit_advisories": [],
+    "tex_layout_warnings": [],
+    "plain_slides_without_footer": [
+      1,
+      13,
+      28
+    ]
+  },
+  "visual_review": {
+    "reviewer": "Codex; no human approval recorded",
+    "slide": 19,
+    "scale_pixels": 1400,
+    "result": "Native TikZ shows separate DAPHNE and calibration power branches. Labels fit without crossings, overlaps or clipping. Grey preview saved; open allocations and proposal status are explicit."
+  },
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/main.tex": "5d9cd92de5faf2bad722147b18b09c48012d9812636037a6c743b7fbaf0899e1",
+    "decks/dps_integration_status_white_nov2026/deck-style.tex": "712115e2df2f13952afeea5fc92bff6a3c95962c6931352149742042bab3aff3",
+    "decks/dps_integration_status_white_nov2026/diagrams/pds-lv.tikz.tex": "2cf974fa9c7607d8a103bc7cc10562a50dd7e96823790172d75a257aa977cd7f",
+    "decks/dps_integration_status_white_nov2026/diagrams/styles.tex": "d8f29a9ed0239362432509bb35d23c461d967df3be8bd8d8d3d25005260c4659",
+    "decks/dps_integration_status_white_nov2026/README.md": "3c92ac69cc1878e7e01b44ae68429995fb3ff7fcaaad11a79df25184a038b790",
+    "decks/dps_integration_status_white_nov2026/sources.json": "7470cb1aee1384c6f942e8d30504b845e59f427af469f1c9de72f465a1ddb4ae",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "a8311486899708ee908672f786440cfa1fa6ecd31a347a9922f0e99ac1e825c1",
+    "decks/dps_integration_status_oct2026/architecture-inputs-20261027.txt": "6cc5656cb0c1ef529317b2b2845c3a6b0f7480d777ebc97be4ae8f519ef1dc44",
+    "/home/arroyave/work/vd-dps-plan/inhibit-path-review-20261027/hardware-baseline.txt": "d44ae907a0a4afc7ed2f746e493b94519d5791a51ba13caa534790a497e80e7e",
+    "/home/arroyave/work/racks/sources/power-planning/2025-10-14_EDMS-3309688_DUNE_ICD_SC_PDS_v1.docx": "955501e5c6b7bae882e937964af1bfca1fc94c1f331e4a7571dc6fb0ff7f16df",
+    "/home/arroyave/Downloads/Nichols-DPS-FDC I&I Workshop-Nov2026.pptx": "0364761c27cf87a7dfeb8982a81cc082a03e82aba6041b8f66578750855cd2c7"
+  },
+  "output_sha256": {
+    "main.pdf": "4f824cdd365ab6efa0f8d76a784d7108a2c78615d9c676418f1c088ac02730d4",
+    "main.txt": "6288314731f64f3e22d97de77bd41dae86c5c86d9f0ffeedda9ea53838b073b5",
+    "review/slide-19.png": "3684faab709925d98e355d3fc308f3bd1456a85c09401978261c13d6a9b8b1cf",
+    "review/slide-19-grayscale.png": "38162ed88e66994c3585af362fcfc0986e8ba679dbc317b6078ab9c588590e58",
+    "review/slide-index.csv": "2ef1384b095ca1e9a83734eb8088dd0947d777df2e5e7d59ce5b90da1c645a5f",
+    "review/contact-19.png": "3441a6b14cba81c68d775ea00459439ca5b8ffc564a0a53dabced31208ed3fe5"
+  }
+}

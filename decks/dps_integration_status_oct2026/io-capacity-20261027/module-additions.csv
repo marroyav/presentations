@@ -1,0 +1,7 @@
+interface,category,additional_modules,basis
+Existing VD BDE protection,VD baseline,0,Eight WIECs per group already in the VD baseline
+PDU and LV supply SNMP control/status,Network interface,0,No discrete/analog DPS terminal channels for SNMP exchange itself
+Subsystem OPC UA exchange through SC,Network interface,0,No discrete/analog DPS terminal channels for OPC UA exchange itself
+New hardwired facility and equipment interfaces,Physical I/O,,Needs the VD channel allocation; not counted from HD population differences
+PD flange sensors/heaters,Conditional workbook option,,Six-module option recorded in workbook; VD applicability and multiplicity not established
+Additional E-bus supply sections,Support hardware,,Depends on actual VD baseline bank loading and added physical modules

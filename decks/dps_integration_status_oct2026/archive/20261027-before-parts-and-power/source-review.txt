@@ -1,0 +1,182 @@
+DPS I&I presentation — review of the available material
+27 October 2026 | Scope: vertical drift (VD)
+
+The presentation should explain how we extend the documented BDE hardware to
+cover VD. We already have rack allocations, panel designs, an equipment list,
+power calculations, a control architecture, Ignition screens, test-stand
+material and a first set of subsystem requirements. The engineering task is
+to reconcile these records and specify the additions.
+
+Earlier edits treated several documented items as information still to be
+collected. That understated the work already done and made the proposed next
+steps too vague. This review corrects that reading of the source material.
+
+1. What the rack records establish
+
+FD2_Rack_Estimates_May_2025_TMS.xlsx, RACKS sheet:
+- 20 BDE LV racks, 10 BDE auxiliary racks, 10 bias-HV racks.
+- 20 TDE, 4 PD LV, 2 drift-HV, 2 reserved drift-HV, 8 spare/CalCI positions.
+- Total: 76 numbered mezzanine positions, SEDM-01 through SEDM-76.
+- A separate sheet describes 40 top-plate mini-racks.
+
+BDE Aux Rack!B14:C14 reserves 12U for DPS equipment. B57 and B59:B61 list
+8 dual-fibre PTC connections, 8 fan cables, 8 heater cables and 8 RTD cables.
+Bias HV Rack!B15:C15 also reserves 12U for the DPS interface to the ISEG supplies.
+Its B3 note explicitly calls this a first pass based on the earlier detector
+layout. The workbook supplies a real space and cabling basis, with that limit.
+
+Thus the VD allocation has ten BDE auxiliary locations and ten bias-HV
+locations with 12U DPS allowances. These are rack-space allocations, not a
+claim that twenty completed panel assemblies exist. An I/O station, a physical
+panel, a rack position and a software group are different counts.
+
+The shared infrastructure draft lists 'DPS remote I/O: 76'. The reviewed
+primary records establish 76 rack positions, not 76 remote-I/O stations. Do not
+use that number as an I/O quantity without its separate source and mapping.
+June's architecture shows ten BDE groups and ten bias-HV groups. The supplied
+October architecture has additional remote-I/O multiplicity markings; use its
+panel/coupler map to count stations rather than equating them to rack totals.
+
+The May allocation and later March/July 80-rack planning statements need a
+category/revision check before ordering. A different total does not erase the
+known BDE rack allocation or require starting the inventory again.
+
+2. The VD BDE grouping is explicit
+
+Ting Miao, Slow Controls Progress, 10 June 2026, slide 6 (PDF page 7):
+20 rows of four WIECs and one PL506 each, grouped into DPS PLC I/O-01 through
+I/O-10. It includes an actual BDE Ignition front-end screenshot.
+
+Ting Miao, SC Infrastructure and Installation, same date, slide 4 (PDF page 5):
+one BDE auxiliary rack per group; two LV racks per group; four WIECs per PL506.
+The diagram shows EtherCAT to the PTCs, power to fans/heaters and supply
+interlocks. It separately shows ten bias-HV rack groups and drift-HV I/O.
+
+EDMS 3293079 v1, attachment internal revision 1.4, pp. 4–7:
+80 WIECs for VD, six WIBs per WIEC, 20 PL506 supplies. Section 5 specifies
+PL506 channel inhibits, bias-supply inhibits, fan/heater status and a
+bidirectional PLC/PTC path. Fan/heater inhibit grouping is still a decision
+in that text. Monitoring sampling rates are not a qualified trip time.
+
+The slides can therefore show 10 BDE groups -> 20 PL506 supplies -> 80 WIECs
+and 480 WIBs. Use the documented architecture and screen; describe what must
+be added for the other VD systems.
+
+3. Panel drawings, components and power calculations already exist
+
+EDMS 2401090 v4, CE Safety Interlock System, contains:
+- F10xxxxxx-Prelim_-_DDSS_Controls.pdf: wiring and panel drawings; sheet 2
+  includes central-PLC, bias-I/O and LV/fan/heater panel arrangements.
+- CE_Interlock_Parts_List.xlsx, updated 11 April 2023: CX5140 PLC, EK1100
+  couplers, OPC UA licensing, 5 V outputs, RTD modules, fan inputs/outputs,
+  fibre interfaces, supplies, wiring, production spares and historical costs.
+- DDSS_Controls_Power_Analysis.xlsx: PLC, TPC-LV and bias-HV rack calculations.
+- Interface_to_DUNE_Detector_Safety_System: architecture and panel explanation.
+
+These are useful engineering starting documents. Their older 25-LV-rack,
+150-flange and five-bias-rack quantities are not the VD quantities. The older
+drawing uses a CX5120; the 2023 list uses a CX5140. That is a specific revision
+reconciliation, not a reason to say the PLC design is unknown. Historical costs
+need updating before procurement; production spares do not establish unused
+installed I/O channels.
+
+4. Rack protection has a concrete design question
+
+Brandon Howe, PX3 Rack Protection Setup, 5 June 2026, DUNE-doc-32655 v8,
+pp. 3–6 and 14–16:
+- Ignition normally reads sensors and commands outlets over SNMP.
+- When Ignition is unreachable, PX3 event rules and Lua provide local fallback.
+- The fallback handles smoke, water and temperature, preserving NET_SWITCH.
+- Power is not automatically restored after a fallback trip.
+- The reference configuration uses a fixed 60 C temperature fallback and
+  5000 ms SNMP polling. These are configuration values, not universal VD limits.
+- Ignition reachability is checked by ping. A responsive host does not establish
+  that its protection application is processing sensor data and commands.
+
+The original deck asked whether the PDU could do things already described in
+this guide. The useful work is to agree whether normal rack protection remains
+in Ignition, becomes local in the PDU, or is implemented in DPS, and how each
+system exchanges trip status, requests and reset. This is directly relevant to
+Manuel's proposed boundary and to the hardware connection count.
+
+A targeted prototype test should leave the gateway host reachable while the
+relevant application/driver is stalled. Also test network loss, rule behaviour,
+trip feedback and deliberate recovery. This is a proposed test, not an observed
+failure of an installed rack.
+
+The later PX4/iX12 notes describe different models and candidate interfaces.
+Do not transfer those capabilities or accessory assumptions to the PX3 setup
+without the selected model/firmware and circuit definition.
+
+5. The matrix has a bounded job before procurement
+
+The existing integration matrix has 46 rules from 16 sources. It already
+records omissions, inferences and conflicts. Reuse it to extract the signals
+that affect hardware: source and destination, electrical interface, protocol,
+quantity, allowable total response, loss-of-signal state and feedback.
+
+A useful example is the conflict over PrM illumination and PDS bias: the
+existing sources disagree about bias exclusion versus continued acquisition
+with activity tagging. That can change which physical permits or status
+connections are needed. The discussion therefore belongs before purchasing,
+even though detailed thresholds and the full response matrix can mature later.
+
+The PDS inventory supplies another concrete example: 80 PoF boxes with 8
+voltage and 8 temperature readings per box imply 1,280 monitoring values.
+They do not imply 1,280 central-PLC terminals. The local acquisition, signal
+conditioning, aggregation and protective output decide the module count.
+Group calibration and cryogenic instrumentation under CalCI without duplicating
+items already present in the subsystem lists. Verify which CalCI interfaces
+are required rather than adding a second generic hardware inventory.
+
+6. The PLC proposal and the CUC location
+
+A commercial PLC with distributed I/O is supported by the existing BDE design,
+Manuel's stated intent and the supplied Marco/Vivian discussion. It should be
+presented as the proposed VD implementation. The choice rests on reuse,
+maintainability, I/O compatibility and measured behaviour for the required
+functions. Absence of a known sub-ms function alone is not a timing qualification.
+
+Use a complete timing budget: hazardous condition, sensor detection, transport,
+PLC processing, output and completed equipment action. The current SC emulator
+results concern software monitoring/configuration workloads on a host; they do
+not measure the PLC/fieldbus/actuator trip path. Use the framework to prepare
+requirements and fault cases, then measure representative hardware paths.
+
+The central PLC can be proposed in the CUC with distributed I/O at detector
+racks. The June and supplied October detector-control diagrams still label
+its rack TBD. The process-controls architecture shows CUC cryogenic/ODH PLCs,
+but does not assign the DPS a rack beside them. Specify the CUC-to-VD fieldbus
+route and control-power/network dependencies as part of that placement.
+
+Per Manuel's latest instruction, this presentation covers VD. HD will later
+use an extension or a separate PLC. Do not include HD quantities in the VD
+parts list or turn that future choice into an immediate VD requirement.
+
+7. What the workshop should achieve
+
+Show the VD hardware and quantities first, then identify the additions and
+specific unresolved interfaces. Marco's system introduction can carry the
+broader system-role explanation. Manuel's talk should establish:
+- the BDE hardware and software to reuse;
+- a VD rack/panel/I/O allocation for the added subsystem connections;
+- the SC/DPS/PDU control decision, timing requirements and facility exchanges;
+- prototype work using the existing Fermilab arrangements;
+- the drawings, parts list, costs, lead times, spares, results and installation
+  sequence needed for the June 2027 design and procurement-readiness review.
+
+The July G271 deck (DUNE-doc-37378 v2, pp. 3–4) distinguishes installed PDU,
+PL506, mini-MPOD and switch from then-planned WIEC/PLC additions. The June SC
+progress deck also identifies the IERC vertical-slice work. Use this equipment
+and experience, while checking current availability and the configuration needed
+for each added test. No new bench results were produced by this review.
+
+The supplied email proposes possible summer 2027 facility interfaces and the
+full VD response-matrix review in early 2028. There is no need to invent exact
+monthly milestones before the engineering support and test time are agreed.
+
+Source handling
+The reviewed source files are recorded, with hashes and relevant locations,
+in sources.json. Existing EDMS metadata was checked on 21 October; this review
+read those local copies without claiming a fresh latest-revision check.
+No live equipment, services, protection logic or outside messages were changed.

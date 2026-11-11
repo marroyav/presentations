@@ -1,0 +1,178 @@
+{
+  "checked_at": "2026-10-28T19:33:33.439845+00:00",
+  "revision": "Public-audience polish with unchanged 20-slide structure; 336 combined microTCA count; hierarchical device list; draw.io diagrams; downloaded EDMS source review",
+  "pre_change_archive": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/archive/20261028T190842Z-before-public-polish",
+  "git": {
+    "repository": "/home/arroyave/work/presentations",
+    "head": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "dirty": true,
+    "status_sha256": "aa8b7a65aeb9318b97a1de3c358d0e534c77f0b8591ccf2ad62d9f2ab25d69c9",
+    "tracked_diff_sha256": "b58927e84d55107fdbab1e446a0e12fe3a80f6903a77a8dc739ecb5d17894b92",
+    "deck_is_untracked": true,
+    "note": "This record hashes the untracked deck explicitly. Unrelated root Makefile/README and other decks were not edited."
+  },
+  "host": "debian",
+  "runtime": {
+    "record_python": "3.13.5",
+    "renderer_python": "/tmp/pds-slide-review-20261020/bin/python",
+    "chromium": "Existing Playwright headless Chromium build 1228",
+    "make": "GNU Make 4.4.1"
+  },
+  "commands": [
+    {
+      "command": "make -C /home/arroyave/work/presentations decks/dps_integration_status_oct2026/main.pdf",
+      "exit_code": 0
+    },
+    {
+      "command": "pdftotext -layout main.pdf main.txt",
+      "cwd": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026",
+      "exit_code": 0
+    },
+    {
+      "command": "pdftoppm -scale-to 1400 -png main.pdf /tmp/dps-public-final",
+      "cwd": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026",
+      "exit_code": 0,
+      "note": "Full 35-page render followed by targeted re-renders of changed slides 6 and 16."
+    },
+    {
+      "command": "/tmp/pds-slide-review-20261020/bin/python diagrams/render_drawio.py",
+      "cwd": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026",
+      "exit_code": 0
+    },
+    {
+      "command": "scripts/audit_decks.py audit_file with backup/diagram inputs expanded; PyMuPDF word bounds and content checks; source SHA-256 checks; hierarchy parent/source checks",
+      "exit_code": 0
+    },
+    {
+      "command": "Playwright open local device-hierarchy.html; check window.mm, node rendering and JavaScript errors; inspect screenshot",
+      "exit_code": 0
+    }
+  ],
+  "diagram_tools": {
+    "drawio_session": "mcp-mvshw6fs-dj19z5",
+    "tools": [
+      "start_session",
+      "create_new_diagram",
+      "edit_diagram",
+      "screenshot_diagram",
+      "export_diagram"
+    ],
+    "editable_file": "diagrams/dps-public.drawio",
+    "pages": [
+      "Overview",
+      "DAPHNE",
+      "Power over fibre",
+      "Ionization lasers",
+      "Rack protection"
+    ],
+    "markmap_tool": "markdown_to_mindmap",
+    "markmap_output": "device-hierarchy.html",
+    "postprocessing": "Retain HTML SVG labels without duplicate fallback text when printing vector PDFs; set initialExpandLevel=2 in local hierarchy HTML."
+  },
+  "acceptance_criteria": {
+    "pages": "20 main + 15 backup = 35",
+    "main_sequence": "Existing 20 topics retained; matrix 6, logic 7, empty Detector 8",
+    "microtca": "336 total across TDE and DAQ/timing, not TDE alone",
+    "counts": "34 PDS LV feeds; 400 PoF readings; original VD BDE and HV counts retained",
+    "source_errors": 0,
+    "source_hash_mismatches": 0,
+    "off_page_text": 0,
+    "overfull_boxes": 0,
+    "hierarchy": "All 100 entries have valid parents and source IDs; entries include grouping nodes and attached hardware",
+    "visual": "No overlaps or clipped labels; projected figures remain legible"
+  },
+  "checks": {
+    "pages": 35,
+    "main_slides": 20,
+    "backup_slides": 15,
+    "source_count": 56,
+    "source_hash_mismatches": [],
+    "layout_errors": [],
+    "hierarchy_entries": 100,
+    "hierarchy_orphans": [],
+    "hierarchy_missing_sources": [],
+    "overfull_boxes": 0,
+    "sequence": "Matrix 6, DPS logic 7, Detector 8; existing 20 main topics retained",
+    "microtca": "336 TDE + DAQ/timing combined",
+    "pof": "400 readings",
+    "pds_lv": "34 feeds",
+    "audit": [
+      [],
+      [
+        "/tmp/dps-public-combined.tex: 1 frame(s) exceed the source-density guide; review at projector size",
+        "/tmp/dps-public-combined.tex: 15 visual frame(s) lack \\DuneDiagramCaption"
+      ]
+    ]
+  },
+  "hierarchy_html_check": {
+    "javascript_errors": [],
+    "visible_nodes": 11,
+    "initialExpandLevel": 2,
+    "contains_336": true,
+    "loads_locally": true
+  },
+  "visual_review": "All 35 pages inspected from 1400-pixel renders, using six contact sheets and individual views of the overview, DAPHNE, hierarchy pages and revised figures. Slides 6 and 16 were rendered again and inspected after the final label/connector changes. No visible clipping or overlapping labels. All five draw.io pages were inspected using tool screenshots and their exported PDF appearance. The interactive hierarchy was opened locally and its collapsed initial view inspected.",
+  "advisory_review": "The source-density advisory affects the complete ICD figure in the backups and was checked visually. The caption advisory reflects removal of repeated Diagram labels and use of concise body explanations / captionline, as requested by Manuel.",
+  "edms_review": {
+    "file": "edms-export-review-20261028.txt",
+    "members_in_archive": 26,
+    "exact_preexisting_source_matches": [
+      "panel-drawing",
+      "parts-list",
+      "power-analysis",
+      "ddss-logic-history"
+    ],
+    "additional_historical_material_reviewed": [
+      "Hardware assumptions",
+      "DDSS controls parts list",
+      "September 2020 interface slides",
+      "May 2020 interlock slides",
+      "September 2020 action matrix",
+      "October 2020 Technical Board slides"
+    ]
+  },
+  "sha256": {
+    "README.md": "94e5ce4e13ee7b8f9b23f1ae1dda6df9c8f1631fd4b3c7820b1083ce744858f5",
+    "architecture-corrections-20261028.txt": "2b7313a8eb3bc102ff60528bd545336aba90cb6f83595248f844113d2d397be4",
+    "architecture-inputs-20261027.txt": "6cc5656cb0c1ef529317b2b2845c3a6b0f7480d777ebc97be4ae8f519ef1dc44",
+    "backup-slides.tex": "171020460d20a233c14bd1b0919b98e99da90580a16826f6a3b37770c0e6d5b1",
+    "device-hierarchy.csv": "5879872ffb0f63529c05918546926e5acca2dccce2a55a865af220daab2ff2a6",
+    "device-hierarchy.html": "cd0b726d887f3953b1f2f5006ed7335b17afc06e7c8c52de0dd21de70d5a5732",
+    "device-hierarchy.txt": "397dcf8370803e9dd0a2ef447778a2ee156026d691ae468383c0a17bf761bcf6",
+    "diagrams/daphne-icd-reference.tex": "890e6dec7dde96f5ea9ea73f035c8fe5a0ec405a555ace29d26803b9db9e253f",
+    "diagrams/daphne.drawio.svg": "050271a03a3931d011bab921ce2a57cb9b651c255da3028153fe63e99a1ad262",
+    "diagrams/dps-public.drawio": "c6f6b126d3e0e9121295bb1f125c9939b3456564526d135fddd04bce65842273",
+    "diagrams/lasers.drawio.svg": "ec0aa10a2dfdc8eb4f3d26f6f81e2af41ea24a69df65576765a451caf08f01fd",
+    "diagrams/overview.drawio.svg": "71a1dd3ed74f77af8b8dd7c53e052307dedd57a1ff44490e6caee18a205f0b02",
+    "diagrams/pof.drawio.svg": "bc5cd2c0a5f55f698680c1190bb46d20977343ad59c54ec16652642fa51dc1e1",
+    "diagrams/racks.drawio.svg": "e86fb9623a99c5823fe7d47b4491c7e93908f0f7a62cfe85cfe368cc88855c2b",
+    "diagrams/render_drawio.py": "f5d07247550ea74f6e77faae5dd488b0ac88177d797dbde730d7afbf8ad71e2d",
+    "diagrams/site-boundaries.tex": "1ced215320e4ecdc09d5aa100fe1a7dbfef78c65c3ebf47d2620568afad32e6b",
+    "edms-export-review-20261028.txt": "633f756b04d134dcb8192f14ac19ee7b1623a78f0d24bcba26387dd8cc8e4aa9",
+    "figures/drawio-daphne.pdf": "fb89421c6a65e47605d71e1c824401c03c4a6c3e16bee80ce7e78203632a1b9e",
+    "figures/drawio-lasers.pdf": "ffae3dc16aa954878a0e88d4ebe4c0e23142d17f626a7f5afa4478bee26429cc",
+    "figures/drawio-overview.pdf": "6509fb53b2d422fcde43103614e38574ddd89f5f77999f66982eed6d2771cc22",
+    "figures/drawio-pof.pdf": "e9fea4f4a1703887a61473f3d07e2489a880d7a42a1b9025fbaacb84c4426890",
+    "figures/drawio-racks.pdf": "9327c6ce4150d2bc3b5345e4b5e3faab88b2d73e9c938aedda45841c53d6a142",
+    "figures/sc-progress-june2026.pdf": "ae9ff086c81c9b2306c1313ea34fc2693ae95893982d6ca8c4a085eff1335edc",
+    "figures/tpc-panel-reference.pdf": "b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c",
+    "main.pdf": "a21a75599d0ff3d22f894ccff3392e529dfec2c9f2492d5c2976352f3eea19f3",
+    "main.tex": "41ad868ebb6fc0554123510388e711e922a98aa9d88db23710886894583c1565",
+    "main.txt": "a99c7aea2bf3794b41514f6adad42c4a9bbb19a500144833b4e1135821fdc74f",
+    "render-check.json": "8cb816b271d2e33e50a51a9607d43e765f63563e4c6c83b36726ff9e603151e7",
+    "source-review.txt": "da188fc32a106d05f5eaa40065c9387af19e03624d9f8fa3cee9e394f7dc4f33",
+    "sources-and-notes.txt": "5177ca3cf7263babbfc1709ebc5f96f8a2bc21dd5cfad6dd21026b0d3dbb1f70",
+    "sources.json": "b45b1d13ee0896977cd2ee9f9e3f3fd4f014449445be94cfe0914f7d1e5450f4",
+    "verification-20261028T193333Z-public-polish-build.log": "afcff2f92f4ed34ce59a09c69e6c37aaa305b031d657579f0852185f99f4145a"
+  },
+  "build_log": "verification-20261028T193333Z-public-polish-build.log",
+  "limits": [
+    "Presentation, source and layout review only; no new installed-hardware, controller or end-to-end timing qualification.",
+    "Device hierarchy is the known working inventory, including attached hardware and external interfaces. Unnumbered devices still need allocation; it is not an IP registry or approved bill of materials.",
+    "336 microTCA crates is the confirmed combined TDE + DAQ/timing count. No current subsystem split, PDU quantity or new I/O count is inferred.",
+    "Historical Detector 1 / HD counts and proposed thresholds in the EDMS export are not adopted for VD. Controller and bias-output variants remain distinct in the source review.",
+    "The archive contents were verified locally. The linked EDMS project was not authenticated as a live complete project listing; no latest-revision claim is made.",
+    "BMS maps remain service-boundary schematics; SDSTA interfaces, CUC allocation and several interlock choices remain proposals or open items.",
+    "Build uses local fonts. Recorded font/PDF-version warnings do not affect the inspected render."
+  ]
+}

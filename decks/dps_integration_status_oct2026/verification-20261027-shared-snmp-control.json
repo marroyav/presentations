@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-10-27T21:01:58.310221+00:00",
+  "revision": "Shared SNMP control/status for PDUs and LV supplies",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_exit_code": 0,
+  "pages": 19,
+  "main_slides": 12,
+  "backup_slides": 7,
+  "changed_slides": [
+    4,
+    7,
+    8
+  ],
+  "source_errors": [],
+  "advisories": [
+    "main.tex + backup-slides.tex: 1 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "source_count": 20,
+  "visual_review": "Changed slides 4, 7 and 8 rendered at 1700 pixels and inspected. No overlap or clipping after widening the shared device box and wrapping the OPC UA label on slide 8. Other main-slide bodies and all backup slides match the preceding revision.",
+  "advisory_review": "Source-density advisories include TikZ diagram code. The changed diagrams were inspected visually.",
+  "content_review": [
+    "Slides 4 and 7 group PDUs and LV supplies on one SNMP control/status link to the DPS PLC.",
+    "SNMP supported by the PX3 guide sections 2/4.3, BDE ICD section 3.2 and June SC Progress slide 26.",
+    "SC/Ignition uses OPC UA to the PLC; subsystem OPC UA interfaces remain through SC, which keeps the logs.",
+    "Existing BDE EtherCAT and hardwired supply inhibits remain in their hardware context; these do not replace the shared SNMP network interface.",
+    "Slide 8 labels the PDU example with OPC UA between Ignition and PLC, and SNMP between PLC and PDU.",
+    "No bridge-server implementation added. PDS count 34 and TDE current/future scope remain unchanged."
+  ],
+  "sha256": {
+    "main.tex": "1af4664401778149d0345041e10c409b431b39ac6c3a6241506f5f521c791d82",
+    "backup-slides.tex": "82b09bb916627fa96922fbdd84a2d08d6fb7dd067aabde1d32e37bb8898edd08",
+    "main.pdf": "2352ef2b41f7aa60da21db3fcbf90c668cc94711fda739214b4ebb49c6f84c21",
+    "main.txt": "bf13229d61bdbc2540d96f49f056ba46fbd4f4447d1847ee794cc6dd00a0bbf5",
+    "README.md": "99984effe3f64f51acafb0b9c33d91f84d6ec52d6a164cc76bbb82576cb34d4d",
+    "architecture-inputs-20261027.txt": "dfb3783e8ac68ef923f1769a5c8da2d7f3408ddaa4dfb7e8328a929abd00b61a",
+    "sources.json": "5cd24cdb69db6cbad574355ae1544f39eabc19afb737db315972887c0ec7957a",
+    "sources-and-notes.txt": "6310c2981e3c0f24fdbbdd1e203d335b77d4b728fb1174d43a8997988bf60b11",
+    "source-review.txt": "7dd12a3660742d4cd1bb71a51859b223572018654b8311e5f0d71ee3394fadfa"
+  },
+  "limits": [
+    "Presentation and source review only. Protocol support and Manuel's selected control architecture do not establish a deployed or tested PLC SNMP implementation."
+  ]
+}

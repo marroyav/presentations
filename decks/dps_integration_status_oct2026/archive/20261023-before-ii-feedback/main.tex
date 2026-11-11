@@ -1,0 +1,186 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{Connecting detector protection}
+\subtitle{Status and next steps}
+\author{Manuel Arroyave}
+\date{23 October 2026}
+\newcommand{\mydate}{23 October 2026}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Three systems, three jobs}
+  \renewcommand{\arraystretch}{1.7}
+  \begin{tabularx}{\textwidth}{@{}l>{\RaggedRight\arraybackslash}X@{}}
+    \textbf{DPS} & \textbf{Detector Protection System}\\[-1mm]
+                & Stops equipment when conditions are unsafe.\\
+    \textbf{SC}  & \textbf{Slow controls}\\[-1mm]
+                & Runs and monitors the detector.\\
+    \textbf{BMS} & \textbf{Building Management System}\\[-1mm]
+                & Runs and monitors building services.\\
+  \end{tabularx}\par
+  \bigskip
+  \par\DuneSourceLine{SC--DPS interface, v1, pp.~4--5}{https://edms.cern.ch/document/2907050/1}
+\end{frame}
+
+\begin{frame}{Detector protection needs facility information}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=3.2cm,minimum height=1.05cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (building) at (-4.3,1.35) {Building services};
+    \node[box] (cryo) at (-4.3,0) {Cryogenics};
+    \node[box] (detector) at (-4.3,-1.35) {Detector conditions};
+    \node[box,fill=DuneSky,text width=2.5cm] (dps) at (0,0) {DPS\\protection rules};
+    \node[box,fill=DuneCoral,text width=2.5cm] (equipment) at (4,0) {Equipment\\permit or stop};
+    \draw[edge] (building.east) -- (-2.25,1.35) |- (dps.west);
+    \draw[edge] (cryo) -- (dps);
+    \draw[edge] (detector.east) -- (-2.25,-1.35) |- (dps.west);
+    \draw[edge] (dps) -- (equipment);
+  \end{tikzpicture}\par
+  \medskip
+  \raggedright
+  \DuneDiagramCaption{Each protection input needs a defined meaning and owner.}
+  \bigskip
+  Liquid level below limit; high voltage on $\rightarrow$ high voltage off.\par
+  \medskip
+  \par\DuneSourceLine{SC--DPS interface, v1, p.~13}{https://edms.cern.ch/document/2907050/1}
+\end{frame}
+
+\begin{frame}{Protection can block an operating request}
+  {\color{DuneSky}\small Proposed control rule\par}
+  \bigskip
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=3.1cm,minimum height=1.05cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (request) at (-3.8,1.1) {SC\\operating request};
+    \node[box,fill=DuneCoral] (equipment) at (3.8,1.1) {Equipment};
+    \node[box,fill=DuneSky] (permit) at (-3.8,-1.2) {DPS\\required conditions};
+    \node[box] (local) at (3.8,-1.2) {Local interlocks};
+    \draw[edge] (request) -- node[above,font=\small] {command} (equipment);
+    \draw[edge] (permit.east) -- (0,-1.2) |- node[pos=0.8,below,font=\small] {allow / block} (equipment.south west);
+    \draw[edge] (local) -- node[right,font=\small] {trip} (equipment);
+  \end{tikzpicture}\par
+  \medskip
+  \raggedright
+  \DuneDiagramCaption{Local trips need not wait for remote data.}
+  \medskip
+  SC cannot override a trip. Facility safety keeps control of its services.
+  \medskip
+  \par\DuneSourceLine{SC--DPS roles, v1, pp.~4--5}{https://edms.cern.ch/document/2907050/1}
+\end{frame}
+
+\begin{frame}{We have a starting point}
+  \renewcommand{\arraystretch}{1.55}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}X>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Available} & \textbf{Still needed}\\
+    \midrule
+    SC--DPS interface; subsystem drafts & Agreed scope and protection rules\\
+    Facility drawings; inspection maps & Verified panels, wiring and signal lists\\
+    Hardware designs; test examples & Bench hardware and current controller projects\\
+    BMS data prototype & Live values, hosting and access\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  {\small First control and interlock tables prepared. Cabinet survey pending.\par}
+  \medskip
+  {\footnotesize\color{DuneTextMuted}Progress recorded 21 October 2026.\par}
+  \par\DuneSourceLine{SC--DPS interface and subsystem documents}{https://edms.cern.ch/project/CERN-0000266175}
+\end{frame}
+
+\begin{frame}{Use early cryogenics work to agree the boundary}
+  \large
+  The early review asked for signal lists, controller locations and failure behaviour.\par
+  \bigskip
+  Use that work to define what DPS needs from cryogenics.\par
+  \bigskip
+  \textbf{Agree now:} each signal, action and response to lost status.
+  \bigskip
+  \par\DuneSourceLine{Early cryogenics review charge}{https://edms.cern.ch/document/2386382/1}
+  \par\DuneSourceLine{Detector protection inputs, v1, p.~13}{https://edms.cern.ch/document/2907050/1}
+\end{frame}
+
+\begin{frame}{An interlock matrix connects a condition to an action}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}X>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Condition} & \textbf{Action}\\
+    \midrule
+    Liquid level below limit; high voltage on & Switch off high voltage\\
+    Smoke in a rack & Cut power to that rack\\
+    Signal lost & Response to agree\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  Define the rule for installation, tests and operation.\par
+  \medskip
+  Agree how fast to act, what happens on failure and who may reset.
+  \bigskip
+  \par\DuneSourceLine{Documented examples, v1, p.~13}{https://edms.cern.ch/document/2907050/1}
+\end{frame}
+
+\begin{frame}{Each consortium reviews its protection rules}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabularx}{\textwidth}{@{}l>{\RaggedRight\arraybackslash}X@{}}
+    \textbf{Group} & \textbf{Discussion}\\
+    \midrule
+    Charge readout & Cooling, power and local faults\\
+    Photon detectors & Power, temperature and lasers\\
+    High voltage & Liquid level, pressure and supply faults\\
+    Cryogenic instrumentation & Which measurements DPS needs\\
+    Data acquisition / installation & Rack protection, cooling and power\\
+  \end{tabularx}\par
+  \bigskip
+  Facility teams define the building signals in both directions.
+  \medskip
+  \par\DuneSourceLine{Subsystem interfaces and responsibilities, v1}{https://edms.cern.ch/document/2907050/1}
+\end{frame}
+
+\begin{frame}{Build one protection path, then extend it}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{paper}{1.75cm}{1}{Agree}
+        {One rule, its owners and its operating stages.}
+      \bigskip
+      \DuneFixedColorBlock{sky}{1.75cm}{3}{Test}
+        {Normal operation, faults, lost signals and recovery.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{sky}{1.75cm}{2}{Map}
+        {Source, controller, output and equipment feedback.}
+      \bigskip
+      \DuneFixedColorBlock{coral}{1.75cm}{4}{Extend}
+        {Verify on site, then repeat for each subsystem.}
+    \end{column}
+  \end{columns}
+  \bigskip
+  In parallel: publish agreed BMS values for experiment use.
+\end{frame}
+
+\begin{frame}{Agree integration requirements now}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{@{}l>{\RaggedRight\arraybackslash}X@{}}
+    \textbf{Who} & \textbf{Next action}\\
+    \midrule
+    DPS and SC leads & Agree scope and Fermilab responsibility\\
+    Each consortium & Name a contact; review its interlock matrix\\
+    SDSTA, LBNF and cryogenics & Agree the signals and who owns them\\
+    Our team & Verify panels; test the first protection path\\
+  \end{tabularx}\par
+  \bigskip
+  \large Agree these requirements before interfaces are fixed.\par
+  \medskip
+  {\footnotesize\color{DuneTextMuted}SDSTA operates SURF; LBNF is the facility project.}
+\end{frame}
+
+\end{document}

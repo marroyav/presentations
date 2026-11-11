@@ -1,0 +1,87 @@
+{
+  "question": "What does the local analysis add beyond the EDMS material supplied for this study?",
+  "baseline_documents": [
+    {
+      "identity": "EDMS 3493627 version 1, Presentations; NP04 Ground Bounce discussion, A. Cervera, 20 July 2026",
+      "path": "/home/arroyave/work/ground-shake-recovery-20261015/edms/ground_shake_200726.pdf",
+      "sha256": "6ff093fe51ee692a33e83718e18abca19840d100d0dd95dec760df78bf50bb54",
+      "pages": 85,
+      "status_at_retrieval": "In Work",
+      "review": "All extracted page text reviewed; key topology and early-pulse pages also rendered. Historical v1 copy; current EDMS access failed because the CERN ticket expired."
+    },
+    {
+      "identity": "EDMS 3493642 version 1 associated Evolving material Google Slides",
+      "path": "/home/arroyave/work/ground-shake-recovery-20261015/edms/snapshots/20261028/3493642-evolving-material.pdf",
+      "pages": 4,
+      "snapshot_date": "2026-10-28",
+      "retrieval_record": "/home/arroyave/work/ground-shake-recovery-20261015/edms/snapshots/20261028/retrieval.json",
+      "review": "Four-page export inspected. Contains warm-gas example at 42 kV, a TPC study-plan link and an empty Coupling between daphnes heading. This mutable associated file is not an approved EDMS revision."
+    }
+  ],
+  "comparisons": [
+    {
+      "topic": "Slow charge precursor and opposite APA signs",
+      "EDMS_pages": [9, 14, 79],
+      "already_present": "Slow precursor and opposite charge polarity are explicit; a population study was requested.",
+      "addition": "Counted clear opposite signals in 1355 of 1376 November records and measured shape agreement.",
+      "classification": "Reproduction and quantitative extension, not a newly discovered phenomenon.",
+      "local_result": "electrical-pattern-20261023/sequence-results.json"
+    },
+    {
+      "topic": "Electrical contribution and disconnected PDS inputs",
+      "EDMS_pages": [13, 21, 23, 31, 59],
+      "already_present": "Disconnected PDS inputs respond; the electronics component and AFE-related pattern are already discussed.",
+      "addition": "Fit connected-input changes from disconnected inputs; test on another run and compare with references from other events. Compare early- and main-trained fits and per-channel errors.",
+      "classification": "New quantitative validation of a known effect, not discovery of pickup or proof of its cause.",
+      "local_result": "electrical-pattern-20261023/results.json"
+    },
+    {
+      "topic": "Early sharp pulses and pairs",
+      "EDMS_pages": [40, 41],
+      "already_present": "Early sharp activity and coincident PDS-channel signals are shown; an optical interpretation was not established for the disturbance.",
+      "addition": "Same-board pair inventory: 101 of 716 run32731 records have at least two selected candidates, 80 exactly two, 125 consecutive pairs. Two examples have gaps of 22.528 and 65.536 microseconds.",
+      "classification": "Added measurements of early-pulse structure, not proof of a new optical process, fixed delay or source.",
+      "local_result": "double-pulse-display/results.json"
+    },
+    {
+      "topic": "First selected PDS pulse versus slow charge precursor",
+      "EDMS_pages": [9, 38, 42],
+      "already_present": "Precursor order and TPC/PDS comparison were discussed; further correlation study was requested.",
+      "addition": "A fixed delay from the first selected pulse gives 66.057 microseconds mean error for the APA1 two-ADC marker in 225 unused run32739 records; a fixed phase from the main shake gives 33.423 microseconds. Early PDS features reduce slow-charge amplitude error by 4.1 percent in a separate 477-record test.",
+      "classification": "Added test of a proposed relationship; no universal causal clock or prediction of shake occurrence established.",
+      "local_result": "electrical-pattern-20261023/sequence-results.json"
+    },
+    {
+      "topic": "Charge-light matching",
+      "EDMS_pages": [29, 39, 40, 42],
+      "already_present": "The source slides ask for evidence of real charge/light and discuss drift timing, without establishing a matched interaction.",
+      "addition": "The 325-microsecond timing peak survives borrowing PDS pulse trains from other selected events. In run32731 event33, the whole selected APA2 charge feature is already visible before both proposed PDS parents, excluding that assignment under recorded timing.",
+      "classification": "Added comparison and assignment exclusion. No unique 3D charge-light match or optical origin established.",
+      "local_result": "charge-light-matching/report-data.json"
+    },
+    {
+      "topic": "High voltage, wire bias and slow controls",
+      "EDMS_pages": [10, 13, 34, 35, 42, 58, 70, 85],
+      "already_present": "HV dependence of rate/amplitude and a preliminary reduction of the precursor with U bias removed are reported. The bias comparison was explicitly marked as needing careful investigation.",
+      "addition": "Systematic archived-level comparisons against three waveform features within two November runs: 32 sufficiently sampled monitors and 96 paired tests. No pair passes the primary repeatability cutoff; one binning-sensitive current hint is retained.",
+      "classification": "New narrowly scoped screen. It does not reproduce, replace or refute the HV rate study or the bias-off comparison.",
+      "local_result": "sc-correlation-20261027/report-data.json"
+    },
+    {
+      "topic": "Independent ADC decoder check",
+      "EDMS_pages": [17, 62, 65, 66, 67],
+      "already_present": "Analogue oscilloscope observations already support a real readout disturbance.",
+      "addition": "Independent official-format decoding reproduces selected recorded ADC values, including code jumps.",
+      "classification": "Software/data validation, not a new physical explanation.",
+      "local_result": "adc-glitches/README.txt"
+    }
+  ],
+  "unfinished_questions": [
+    "Direct waveform-versus-bias analysis of the runs30201/30202 ramp, with comparable PDS coverage; the existing bias-ramp code compares SC voltage records only.",
+    "Geometrically consistent full-track/light matching, including all observed charge arrival times.",
+    "Matched non-shake records and live time for excess, false-alarm and shake-rate tests.",
+    "Validated circuit response and run-specific wiring/configuration."
+  ],
+  "overall_assessment": "Additional quantitative tests and constraints are documented. No new cause, confirmed optical flash or validated physical mechanism has been established.",
+  "novelty_scope": "Relative to the inspected 85-page July EDMS presentation and four-page evolving-material snapshot. Not a field-wide priority claim. Separately linked historical Indico decks and the linked TPC planning document were not all accessible or reviewed."
+}

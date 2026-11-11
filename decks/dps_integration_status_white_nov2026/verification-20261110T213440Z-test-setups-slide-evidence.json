@@ -1,0 +1,58 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-10T21:35:35.109105+00:00",
+  "task": "dps-test-setups-slide-20261110",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 30,
+    "tracked_diff_sha256": "86b3dcdabe5ec2aeadc5f5e59f469a2641e381c90ad00bef131065200aef8aef",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261110T213440Z-test-setups-slide-build.log",
+      "sha256": "4881dfda3d16049eb3c8fdb9af7c05da78f9ce171116d80d50d7fa1dc1001de9"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "0855ea6d95ffb10abd96c161a8a579e538469893585ed512588f00fd731f712a"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/deck-style.tex",
+      "sha256": "712115e2df2f13952afeea5fc92bff6a3c95962c6931352149742042bab3aff3"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/test-setups-input-20261110.txt",
+      "sha256": "486b6a549fc0a5ec806ea64f2e6ce69220b36aa80355a36c2926878088d420cc"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "d5cb599a75438c7d1ee9601bed504443204248269d2f2d52ee0bb92560a0c65d"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "922257fa51a87f183cdb48ba128294ba7526689b8fe0b2b89801f7c9666326b2"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "f4ed97f1f12d18b5f4d4a30e85aee23b4346271c404f4d6a1e4cfd0fe8436a93"
+    },
+    {
+      "path": "/home/arroyave/Downloads/Nichols-DPS-FDC I&I Workshop-Nov2026.pptx",
+      "sha256": "0364761c27cf87a7dfeb8982a81cc082a03e82aba6041b8f66578750855cd2c7"
+    }
+  ],
+  "limitations": "Presentation checks only. Batavia status is reported from Trevor\u2019s draft; the SD setup is reported by Manuel. Expansion is planned. No remote inspection, new protection test or engineering approval."
+}

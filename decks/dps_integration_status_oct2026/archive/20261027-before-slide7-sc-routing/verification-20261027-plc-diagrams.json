@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-27T20:13:22.942119+00:00",
+  "revision": "Slides 4 and 7: PLC path and VD physical arrangement",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_exit_code": 0,
+  "pages": 19,
+  "main_slides": 12,
+  "backup_slides": 7,
+  "changed_slides": [
+    4,
+    7
+  ],
+  "source_errors": [],
+  "advisories": [
+    "main.tex + backup-slides.tex: 1 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "advisory_review": "Slide 7 has many TikZ nodes/routing instructions. Rendered at 1700 pixels and inspected; labels fit, connections are distinct and no overlap or clipping is present.",
+  "visual_review": "Final slides 4 and 7 rendered and inspected at 1700 pixels. Other slide source bodies match the preceding revision.",
+  "content_review": [
+    "Slide 4: SC/Ignition ↔ OPC UA ↔ DPS PLC; permits/inhibits from the PLC; conditions/faults return to it; SC logs remain explicit.",
+    "Slide 7: proposed CUC PLC with distinct existing BDE/bias I/O, added VD interfaces, and PDU branches; EtherCAT is only assigned to the existing I/O branch."
+  ],
+  "sha256": {
+    "main.tex": "5ed50581f329ab92d7d5e52da9cd0612c8961637d2a5e14d38852ea69519c521",
+    "backup-slides.tex": "250911db90381903c52ec89db6dd32ea6e4efc16aebcd125aab11f542838e803",
+    "main.pdf": "1c5b884a82580a2b3a36e86caf162870cae0f0b5a78eabb299657d1225de3c3f",
+    "main.txt": "a23038d50f3baea4dd969a5c0e2d1e9dcbded80eb9cc660082e9b86dbc64f564",
+    "README.md": "7645014702838d45241dbbca1bf7cc46726e824fa6f22154847ba44320ccbeb1",
+    "architecture-inputs-20261027.txt": "3770e069e7fc184f185cf6acb6387b1872f8af2d66a90894a50a974df7338395",
+    "sources.json": "d232d8c6c7913d76400aca7bdde827d3fa9a4b3e6cab227c98b4add98c27d4f5",
+    "sources-and-notes.txt": "ef09c2ae000fb87b490025510051c2520018a630a2e1b8a11c56d0fef479a27e",
+    "source-review.txt": "9b83efdbba4967fea26be3f8fb8e72570fe629a342d0a2e1a482f0f30a69fc54"
+  },
+  "limits": [
+    "Presentation/source review only; no new equipment or hardware-response qualification.",
+    "CUC placement is proposed; facility paths and added-interface transports are selected per function."
+  ]
+}

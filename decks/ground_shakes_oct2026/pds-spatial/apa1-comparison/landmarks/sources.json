@@ -1,0 +1,115 @@
+{
+  "sources": [
+    {
+      "id": "EDMS3493627-r1",
+      "path": "/home/arroyave/work/ground-shake-recovery-20261015/edms/ground_shake_200726.pdf",
+      "sha256": "6ff093fe51ee692a33e83718e18abca19840d100d0dd95dec760df78bf50bb54",
+      "url": "https://edms.cern.ch/document/3493627/1",
+      "title": "Ground shakes, Anselmo Cervera Villanueva",
+      "revision": "1",
+      "status": "In Work, archived metadata dated 2026-07-21; not checked for current approval",
+      "pages": [
+        18,
+        28
+      ],
+      "render_width": 1700
+    },
+    {
+      "id": "GVS_NuFact2025",
+      "path": "/home/arroyave/work/ground-shake-data/analysis/detector-landmarks-20261103/sources/GVS_NuFact2025.pdf",
+      "sha256": "a3cdffd40f840bebcd427168b4e57570da0982243e2679ba2cbcb1053a8b0bf9",
+      "url": "https://indico.cern.ch/event/1528564/contributions/6607236/attachments/3126220/5549799/GVS_NuFact2025.pdf",
+      "title": "Off-line Data Quality Monitoring for ProtoDUNE, Gabriela Vitti Stenico",
+      "revision": "Dated presentation, 2025-09-04; no engineering revision stated",
+      "status": "Public presentation; use page 7 diagram for detector context only",
+      "pages": [
+        7
+      ],
+      "render_width": 1800
+    }
+  ],
+  "renders": [
+    {
+      "source": "EDMS3493627-r1",
+      "pdf_page": 18,
+      "path": "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/apa1-comparison/landmarks/EDMS3493627-r1-p18.png",
+      "command": [
+        "pdftoppm",
+        "-f",
+        "18",
+        "-l",
+        "18",
+        "-singlefile",
+        "-scale-to",
+        "1700",
+        "-png",
+        "/home/arroyave/work/ground-shake-recovery-20261015/edms/ground_shake_200726.pdf",
+        "/home/arroyave/work/ground-shake-data/analysis/detector-landmarks-20261103/sources/EDMS3493627-r1-p18"
+      ],
+      "sha256": "00fcb836f1c3ae257b7b4d6b319f7eefec01b43b8fb338779f064e4d326c391c"
+    },
+    {
+      "source": "EDMS3493627-r1",
+      "pdf_page": 28,
+      "path": "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/apa1-comparison/landmarks/EDMS3493627-r1-p28.png",
+      "command": [
+        "pdftoppm",
+        "-f",
+        "28",
+        "-l",
+        "28",
+        "-singlefile",
+        "-scale-to",
+        "1700",
+        "-png",
+        "/home/arroyave/work/ground-shake-recovery-20261015/edms/ground_shake_200726.pdf",
+        "/home/arroyave/work/ground-shake-data/analysis/detector-landmarks-20261103/sources/EDMS3493627-r1-p28"
+      ],
+      "sha256": "fed34cba88ae314e4ecee20c07634f4fc8a7827a1bef858cf66973096581c6e5"
+    },
+    {
+      "source": "GVS_NuFact2025",
+      "pdf_page": 7,
+      "path": "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/apa1-comparison/landmarks/GVS_NuFact2025-p7.png",
+      "command": [
+        "pdftoppm",
+        "-f",
+        "7",
+        "-l",
+        "7",
+        "-singlefile",
+        "-scale-to",
+        "1800",
+        "-png",
+        "/home/arroyave/work/ground-shake-data/analysis/detector-landmarks-20261103/sources/GVS_NuFact2025.pdf",
+        "/home/arroyave/work/ground-shake-data/analysis/detector-landmarks-20261103/sources/GVS_NuFact2025-p7"
+      ],
+      "sha256": "2a5b3477f1ebe8153f4ad4412601b70e5065cdb31ae2a05390f80f3bee3babe4"
+    }
+  ],
+  "claims": [
+    {
+      "claim": "The field-cage side is at the right of the APA2 geographical grid.",
+      "source": "EDMS3493627-r1",
+      "page": 18,
+      "orientation": "The source photograph is explicitly flipped left to right to match the plots. This is a display convention, not a surveyed coordinate frame."
+    },
+    {
+      "claim": "The source identifies a laser (IoL) opening and periscope in this drift volume.",
+      "source": "EDMS3493627-r1",
+      "page": 28,
+      "limit": "No position is assigned to a PDS module or channel."
+    },
+    {
+      "claim": "The yellow beam arrow enters the drift volume beside the labelled APA1/APA2 pair.",
+      "source": "GVS_NuFact2025",
+      "page": 7,
+      "limit": "An overview illustration, not a survey. Beam height, angle and projection onto module rows are not derived."
+    }
+  ],
+  "display": "Only the physical map has a field-cage edge. AFE order is an electronics arrangement. All source images retain their original orientation; SVG view boxes show the cited figure/photo without altering their pixels.",
+  "not_established": [
+    "Metric coordinates of field cage, beam axis, laser opening or support beams relative to the PDS modules.",
+    "A common physical source of ground-shake events."
+  ]
+}

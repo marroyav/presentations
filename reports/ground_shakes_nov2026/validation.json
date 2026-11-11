@@ -1,0 +1,19 @@
+{
+  "created_utc": "2026-11-06T00:02:54.252492+00:00",
+  "command": "make ground-shakes-report",
+  "checks": {
+    "two_pages": true,
+    "reported_counts_in_pdf": true,
+    "no_tex_overflow_or_underflow": true,
+    "both_final_pages_visually_inspected": true,
+    "historical_source_orientation_checked": true
+  },
+  "limitations": "Summary of existing analyses. Historical source-map agreement, not an as-built survey or engineering approval. No new waveform analysis.",
+  "files": {
+    "main.pdf": "babfcabdcc51bfcc9750722c42fc78747e69b0a5040ee6d9a3d81f46c60a9dbd",
+    "main.tex": "0fee3451422cf5731e357636e3d37a37977ff0f8a075b863ab29b63f4a976a98",
+    "values.tex": "d0eb8567633fab6d402e87e9e282e8a9d27b48a7dd56c41e184137684c6b76bc",
+    "README.md": "e15260ed4f7d72c30d63ea5b0fe986e2c9ef5699a1212b2ec40f671326de04c7",
+    "build_report.py": "221a6b0d8f928ced9328f758b29b2a10e2da40ef542015c736cc2c4f3718b066"
+  }
+}

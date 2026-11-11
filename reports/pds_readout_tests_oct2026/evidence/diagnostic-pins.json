@@ -1,0 +1,26 @@
+{
+  "purpose": "Optional per-worker wall/CPU histograms, paired off/on acquisition, then bounded raw-worker experiment",
+  "repositories": {
+    "datahandlinglibs": {
+      "head": "0fbadfdfaa93559a1299c72949d0afc56a3bd54d",
+      "branch": "marroyav/pds-timing-fddaq-v5.7.1",
+      "status": "",
+      "bundle_sha256": "7f1ffc1fabcdd865304f34ee89ee32568d87d9989ae81231307d0ab741a41115"
+    },
+    "dpdklibs": {
+      "head": "19e3a45121bab06048edc978734f0823eb4dfce5",
+      "branch": "marroyav/pds-timing-fddaq-v5.7.1",
+      "status": "",
+      "bundle_sha256": "d3b2bf44893040ca34a519587c7f1c1304d5c57460b3832d02b56aca53add54f"
+    },
+    "appmodel": {
+      "head": "99df9b6ab94e6bd2f617161a1c33c310fbb02c77",
+      "purpose": "Optional raw processing cores and bounded queue configuration; empty preserves inline path"
+    }
+  },
+  "acceptance": {
+    "software": "Build and package tests pass, no new external library",
+    "hardware": "Both RX and four source workers sampled; cleanup repeated; exact clock and publication errors retained; off/on same load and affinity; saved-window decode and bias/lock checks",
+    "approval": "Engineering measurements only; no claim of production qualification"
+  }
+}

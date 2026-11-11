@@ -1,0 +1,203 @@
+VD device hierarchy — working inventory
+28 October 2026
+
+Network endpoints, external-system interfaces and equipment attached to them.
+Counts are shown where available. Unnumbered entries still need an allocation.
+336 microTCA crates is the combined TDE + DAQ/timing total; no split is assumed.
+PDUs and shared I/O are counted once. Detailed status and sources are in the CSV.
+
+- VD control and protection network
+  - Shared controls and network infrastructure
+    - Slow controls / Ignition services
+      OPC UA; operations and logging
+      - Logging and database services
+        SC owns the common long-term record
+      - Operator and engineering workstations
+        SC and PLC programming access
+    - Control-network switches
+      Copper/fibre Ethernet; management protocol by device
+    - Network routers and firewalls
+      Controlled exchange between facility, detector and DAQ networks
+    - Central DPS PLC
+      OPC UA to SC; SNMP to PDUs/supplies; EtherCAT to remote I/O
+      - 24 V DC supplies and control panels
+        Power to PLC and remote I/O
+      - Remote I/O stations
+        EtherCAT; station count and allocation require panel mapping
+        - EK1100 couplers, EK1110 extension and EK1521 fibre links
+          EtherCAT
+        - EL1004 digital-input terminals
+          Fan-status inputs
+        - EL2124 output terminals
+          Wired supply inhibits
+        - EL3202-0010 temperature-input terminals
+          Flange RTDs
+        - EL9410 supply terminals and EL9011 end caps
+          Panel supply and termination
+        - Fan/heater power output terminals (EL2034 / EL2878-005)
+          24 V fan/heater outputs; module allocation by panel
+          Reference component families; VD population to map
+        - Humidity / dew-point analog-input terminals (EL3052 / EL3058)
+          Environmental transmitter to central PLC; separate from rack-PDU humidity
+          Reference component families; VD allocation to map
+        - EL9100 power terminals, EL9070 shields and panel distribution
+          Fan/heater and RTD support; terminal population by panel
+          Reference component families; VD population to map
+  - Facility systems connected through SC
+    External control domains; not detector-LAN device counts
+    - FFDG DUNE FD building management
+      Metasys API in Batavia to SC
+      - Metasys service and building controllers
+        BACnet within BMS; API at the SC boundary
+        - HVAC, chilled-water, pump, sump and power interfaces
+          Owned by BMS; individual points from the survey
+    - SDSTA SCADA
+      Interface and protocols under investigation
+      - Controllers, field I/O and network connections
+        Installed inventory to be established by survey
+    - Cryogenic controls
+      One interface to SC from the internally divided system
+      - Process and safety PLCs
+        Within the cryogenic control domain
+      - Cryogenic gateways, operator and engineering stations
+        Internal cryogenic control network
+      - Process instruments, valves and other controlled equipment
+        Attached to cryogenic PLCs; detailed point list is outside this deck
+  - Bottom Drift Electronics (BDE) — 10 groups
+    - Auxiliary racks / low-voltage racks
+      10 auxiliary racks and 20 LV racks
+    - WIENER PL506 low-voltage supplies — 20 supplies
+      DPS/SNMP plus wired channel inhibits
+    - Warm interface electronics crates (WIECs) — 80 crates
+      48 V from PL506; distributed control
+      - Power and timing cards (PTCs) — 80 cards
+        EtherCAT
+      - Warm interface boards (WIBs) — 480 boards
+        Readout/configuration; protected through crate supply
+      - Cooling fans and heaters
+        Fan status to remote I/O; local power connections
+    - Flange temperature sensors
+      RTDs to remote I/O
+    - Ambient humidity / temperature / dew-point transmitter
+      Environmental input used by flange-heater logic
+      Historical TPC reference; VD placement and population not yet established
+  - microTCA crates: TDE + DAQ/timing total — 336 crates
+    Crate management, readout and timing paths are separate
+    - Carrier hubs (MCHs)
+      Crate management; DAQ/TDE status to SC
+    - White Rabbit timing modules (WR-MCHs)
+      Timing links; DAQ/TDE management
+    - AMC readout / timing modules
+      Managed through DAQ; composition depends on crate role
+    - Crate power units and fans
+      Local crate management; AC power through PDUs
+  - Top Drift Electronics (TDE) — 20 mezzanine racks
+    DPS control is limited to PDUs in the current scope
+    - Readout microTCA crates
+      Included once in the combined 336-crate total above
+    - WIENER MPOD MICRO 2 low-voltage crates — 20 supplies
+      SC/SNMP; dedicated DPS inhibit remains a possible addition
+      - Low-voltage modules
+        Module identity requires reconciliation between architecture and ICD
+      - Passive distribution / filter / fanout units — 20 units
+        LV cables to the front-end electronics
+    - Front-end boards and calibration units
+      Warm flange, LV and calibration connections; DAQ controls calibration
+    - White Rabbit switches — 24 switches
+      Timing network; DAQ/TDE management
+  - High-voltage system
+    - Heinzinger drift-HV supply — 1 supply
+      Analog control/readback; DPS wired interlock
+      - cRIO and LabVIEW control station
+        OPC UA through SC; analog I/O to supply
+    - ISEG bias crates — 10 crates
+      DPS/SNMP plus wired remote-I/O inhibits
+      - ISEG positive/negative HV modules
+        576 output channels: 480 CRP + 96 field cage
+    - Bias racks — 10 racks
+      Remote I/O plus supply equipment
+  - Photon Detection System (PDS)
+    - WIENER LV supplies and controllers — 34 LV feeds
+      DPS/SNMP; supply-controller quantity is not established by feed count
+    - DAPHNE readout boards — 42 boards (working count)
+      SC/OPC UA to ZMQ; DAQ Hermes/IPBus; separate data links
+    - Power-over-fibre laser boxes — 80 boxes
+      PDU-controlled AC power; local analog measurements
+      - Opta or Beckhoff monitoring PLCs
+        OPC UA to SC; analog inputs from boxes
+      - Voltage and temperature measurement inputs — 400 readings
+        4 voltage + 1 temperature per box; 320 V + 80 T
+      - Optional box-enable input
+        Additional control if the box exposes it
+    - Light-calibration boxes (LCMs) — 8 boxes (working count)
+      SC/OPC UA; native register protocol; LV and timing connections
+    - Local optical timing fanouts
+      Separate timing links to DAPHNE and calibration boxes
+  - Calibration and Cryogenic Instrumentation (CalCI)
+    - Temperature measurements
+      - Resistance temperature sensors (RTDs)
+        Cables to temperature readout; includes PrM temperature sensors
+        - Readout crates/cards, cRIO and LabVIEW station
+          SC/OPC UA
+      - Fibre temperature sensors
+        Optical fibres to interrogators
+        - Fibre interrogators and readout station
+          SC interface; native instrument protocol under review
+    - Liquid-level measurements
+      - CRP / field-cage level sensors and readout boards
+        SC/OPC UA through the level-meter service; populations under review
+      - Level transmitter and controller
+        Signal source and interface to be mapped
+    - Ionization-laser stations — 4 stations (working count)
+      SC/OPC UA via calibration interface board
+      - Calibration interface board and station controllers
+        OPC UA; station control/trigger connections
+      - Local safety interface, shutter and emission feedback
+        Independent safety interlocks; operational status to SC
+      - Station power/control electronics and computers
+        Local station connections
+    - Purity monitors
+      SC/OPC UA via LabVIEW; operating rule with PDS still under review
+      - HV/LV supplies and front-end electronics
+        Local monitor bias/readout; native interfaces under review
+      - Xenon flash lamp and lamp supply
+        Local lamp control and activity status
+      - Digitizers, photodiode trigger and LabVIEW computer
+        Readout and SC interface
+    - Pulsed neutron source and controller
+      SC/DAQ coordination; permits and native interface under review
+    - Other instruments shown in the SC architecture
+      - Cold cameras and camera interface
+        ONVIF / camera-control interface
+      - GIZMO
+        OPC UA shown; device allocation to be detailed
+      - Impedance monitor
+        Instrument control/readout interface to be detailed
+      - Berghof and Siemens S7-1200 instrument controllers
+        Shown in the architecture; assignment and connections require detailed mapping
+  - Rack infrastructure
+    Count once; referenced by each subsystem
+    - Raritan PX3 PDUs
+      DPS/SNMP; local outlet-trip rules
+      - Smoke detectors and end-of-line relays
+        4WTAR-B / EOLR-1 reference; dry-contact signal
+      - DX-PD2C5 contact interfaces and detector supplies
+        PDU sensor interface; 12 V smoke-detector supply
+      - Humidity, temperature and water-leak sensors
+        PDU peripheral inputs; fitted sensors by rack
+      - Controlled outlets and connected loads
+        Subsystem supplies, PoF, crates, computers and other rack equipment
+    - Mezzanine rack positions — 76 positions
+      Includes reserved/spare positions; separate 40-roof-rack concept
+  - DAQ and timing equipment
+    Readout/timing links are separate from SC device management
+    - DAQ computers and readout switches
+      DAQ data network; selected status to SC
+    - Timing/readout microTCA crates
+      Included once in the combined 336-crate total above
+    - GPS interface boards (GIBs)
+      OPC UA to SC; timing links
+    - GPS-disciplined oscillator
+      Timing reference; management support per device
+    - Timing masters, distribution and fanouts
+      Dedicated timing network

@@ -1,0 +1,899 @@
+VD detector protection
+
+
+System roles, BDE hardware and the VD extension
+
+
+
+
+Manuel Arroyave
+I&I workshop draft — 27 October 2026
+DPS arbitrates protection; SC operates, monitors and logs
+
+DPS                     Detector Protection System. Uses facility and detector conditions to allow or
+                        block actions; issues permits, inhibits and trips.
+
+SC                      Slow controls, using Ignition. Operates and monitors the detector; owns the
+                        data and event logs, including DPS decisions.
+
+BMS                     Building Management System. Controls building services. FFDG BMS and
+                        SDSTA BMS are separate systems.
+
+Local                   Equipment-level protection. Can trip without waiting for SC or the central DPS.
+interlocks
+
+An operating request cannot override a protection trip.
+
+
+
+      27 October 2026                                                                                   2/19
+DPS receives inputs from four system domains
+
+            FFDG BMS
+
+
+            SDSTA BMS
+                                                                                        Detector actions
+                                                          DPS
+                                                                                        permits / inhibits
+             Cryogenics                                arbitration
+                                                                                          rack power
+
+             DETECTOR
+
+          SC        Subsystems
+
+
+
+ Diagram. Example: low liquid level withdraws the HV permit. SC logs the condition, decision and equipment state.
+
+   This is the logical system view. Facility and cryogenic systems retain control of their services. SDSTA retains
+                                            personnel-safety responsibility.
+
+
+  27 October 2026                                                                                                    3/19
+Detector: SC talks to the DPS PLC over OPC UA
+
+                                                                            permits /
+          SC / Ignition                                                      inhibits         Subsystems
+                                                      DPS PLC
+           control and            OPC UA                                                     BDE, HV, PDS
+                                                      protection
+           monitoring              control                                                     TDE, CalCI
+                                                      arbitration
+              logs                 status                                  conditions /      local interlocks
+                                                                              faults
+
+
+Diagram. The PLC applies the protection rules and sends permits or inhibits. SC receives status and events over OPC UA
+                                                 and keeps the logs.
+
+
+                                   Local interlocks remain at the equipment.
+
+PLC = programmable logic controller; HV = high voltage; PDS = photon detection system; TDE = top drift electronics; CalCI
+                         = calibration and cryogenic instrumentation. BDE is expanded next.
+
+
+
+     27 October 2026                                                                                                 4/19
+BDE already defines a distributed protection system
+BDE = bottom drift electronics. I/O = inputs and outputs.
+
+                                                 inhibits          2 LV racks
+                                                                2 PL506 supplies
+
+                 BDE auxiliary rack
+                                                                                                 48 V
+                    remote I/O
+                                                                   8 WIECs
+                                                EtherCAT       8 PTCs + 48 WIBs
+
+                          Diagram. Ten groups: 20 PL506 supplies, 80 WIECs and 480 WIBs.
+
+The auxiliary I/O also connects fans, heaters and temperature sensors.
+
+WIEC = warm interface electronics crate; PTC = power and timing card; WIB = warm interface board. June 2026 layout;
+fan/heater wiring omitted here.
+
+
+     27 October 2026                                                                                              5/19
+    BDE drawings, parts and software are already available
+    8                                                                                                                       7                                                                                                                                                                                                                                                                                      6                                               5                                                                                                                        4                                                                                                                                             3                                       2                                                           1
+
+
+
+
+H
+    TPC protection panel designs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             95
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          H
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              BDE Ignition screens
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              BDE Project page (start page with WIEC crates)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             94
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             93
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             92
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             91
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             90
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             89
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             88
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             87
+
+
+
+
+                                                                                                                                                                                                                                          19.00                                                                                                                                                                                                                                                                                                                                                                         19.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             86
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             85
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             84
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             83
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               GUI is organized according CRP nam
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               20 rows each has 4 WIECs and 1 PL5
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             82
+G                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            81                                                                                           G
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             80
+                2.00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         79
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         3.00                                                                                                                                                                                                                                                                                       3.00                     78
+                                                                                                                                                                                        EK1110
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         EK1100
+                                                                                                                                                            EL3052
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      EL9187
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   EL9410
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  EL9187
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         EL2088
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  EL9187
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           EL9011
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             77
+                                                               CX5120
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             76
+                                                                                                                                                                                                                                                                                                                                                                     TB1
+                                                                                                                                                                                                                                                                                                                                                                     TB2
+                                                                                                                                                                                                                                                                                                                                                                     TB3
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                TB4
+                                                                                                                                                                                                                                                                                                                                                                                                                                                TB5
+                                                                                                                                                                                                                                                                                                                                                                                                                                                TB6
+                                                                                                                                                                                                                                                                                                                                                                                                                                                TB7
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              TB8
+                                                                                                                                                                                                                                                                                                                       CB1          CB2                   CB3                                                 PS1                         CB4
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             75
+        7.00    3.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             74
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             73
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         4.00                                                                                                                                                                                                                                                                                                                72
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             71
+                2.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    7.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             70
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             69
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-01NN   WIEC-01NC   WIEC-01SC   WIEC-01SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                   14.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             68
+                                                                                                                                                                                                                        4U Panel
+F                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            67                                                                                           F
+                        1.00                                                                                                                    11.50                                                                                                                                                                                                                                                    6.50
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-02NN   WIEC-02NC   WIEC-02SC   WIEC-02SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             66
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             65
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             64
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             63
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    TB1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    TB2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    TB3
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         TB4
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         TB5
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         TB6
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         TB7
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               CB1       CB2               CB3            PS1      CB4
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                           5.50
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-03NN   WIEC-03NC   WIEC-03SC   WIEC-03SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             62
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             61
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             60
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    4.00                     59
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-04NN   WIEC-04NC   WIEC-04SC   WIEC-04SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             58
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             57
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                           1.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             56
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              8U Panel                                                                                                                                                       55
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             54
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-05NN   WIEC-05NC   WIEC-05SC   WIEC-05SS   PL
+                                                                                                                                                                                                                                          19.00                                                                                                                                                                                                                                   2.00                                                                                              11.50                                                                                                                                   5.50
+
+E                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            53                                                                                           E
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             52
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             51
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             50
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-06NN   WIEC-06NC   WIEC-06SC   WIEC-06SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         3.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             49
+                                                                                   EL3202-0010
+
+
+
+
+                                                                                                                                              EL3202-0010
+
+
+
+
+                                                                                                                                                                                                          EL3202-0010
+
+
+
+
+                                                                                                                                                                                                                                                                                      EL3202-0010
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                   EL3202-0010
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                 EL3202-0010
+                                 EK1100
+
+
+
+
+                                             EL1004
+
+                                                      EL2034
+
+                                                                 EL2034
+
+
+
+
+                                                                                                 EL1004
+
+                                                                                                                   EL2034
+
+                                                                                                                            EL2034
+
+
+
+
+                                                                                                                                                                     EL1004
+
+                                                                                                                                                                              EL2034
+
+                                                                                                                                                                                                 EL2034
+
+
+
+
+                                                                                                                                                                                                                                 EL9410
+
+                                                                                                                                                                                                                                           EL1004
+
+                                                                                                                                                                                                                                                             EL2034
+
+                                                                                                                                                                                                                                                                           EL2034
+
+
+
+
+                                                                                                                                                                                                                                                                                                     EL1004
+
+                                                                                                                                                                                                                                                                                                              EL2034
+
+                                                                                                                                                                                                                                                                                                                        EL2034
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                 EL1004
+
+                                                                                                                                                                                                                                                                                                                                                            EL2034
+
+                                                                                                                                                                                                                                                                                                                                                                       EL2034
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                     EL9505
+
+                                                                                                                                                                                                                                                                                                                                                                                                               EL2124
+
+                                                                                                                                                                                                                                                                                                                                                                                                                        EL2124
+                                                                                                                                                                                                                                                                                                                                                                                                                                 EL9011
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             48
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             47
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  TB12
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             46
+
+                8.00
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             45
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             44                                                                                                                                                                  WIEC-07NN   WIEC-07NC   WIEC-07SC   WIEC-07SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             43
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             42
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-08NN   WIEC-08NC   WIEC-08SC   WIEC-08SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             41
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             40
+
+D                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            39
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          D
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             38
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-09NN   WIEC-09NC   WIEC-09SC   WIEC-09SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             37
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             36
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             35
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             34
+
+        21.00                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                33
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             32
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             31
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-10NN   WIEC-10NC   WIEC-10SC   WIEC-10SS   PL
+                                          EK1100
+
+
+
+
+                                                                          EL1521
+
+
+
+
+                                                                                                          EL1521
+
+
+
+
+                                                                                                                                     EL1521
+
+
+                                                                                                                                                                     EL9410
+
+
+                                                                                                                                                                                       EL1521
+
+
+
+
+                                                                                                                                                                                                                        EL1521
+
+
+
+
+                                                                                                                                                                                                                                                    EL1521
+
+
+                                                                                                                                                                                                                                                                      EL9011
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             30
+                                                                                                                                                                                                                                                                               TB11
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                       PS1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             29
+
+                10.50                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        28
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             27
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-11NN   WIEC-11NC   WIEC-11SC   WIEC-11SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             26
+
+
+C                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            25
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          C
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         6.50
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             24
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             23
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-12NN   WIEC-12NC   WIEC-12SC   WIEC-12SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             22
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             21
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-13NN   WIEC-13NC   WIEC-13SC   WIEC-13SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             20
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             19
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             18
+                                                                                                                                                                                                                                                                                                                                                                                                                            TB10
+                                                                                                                                                                                                                                                                                                                                                             TB1
+                                                                                                                                                                                                                                                                                                                                                                     TB2
+                                                                                                                                                                                                                                                                                                                                                                           TB3
+                                                                                                                                                                                                                                                                                                                                                                                 TB4
+                                                                                                                                                                                                                                                                                                                                                                                               TB5
+                                                                                                                                                                                                                                                                                                                                                                                                      TB6
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                            TB7
+                                                                                                                                                                                                                                                                                                                                                                                                                            TB8
+                                                                                                                                                                                                                                                                                                                                                                                                                            TB9
+
+
+
+
+                                                                                                                                                                                                                                                             CB1                CB2                 CB3       CB4                CB5             CB6                                                           CB4
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             17
+                2.50
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-14NN   WIEC-14NC   WIEC-14SC   WIEC-14SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         2.00                                                                                                                                                                                                                                                                                                                16
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             15
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             14
+                                                                                                                                                                                                                                               12U Panel                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     13
+                          1.50                                                                       7.50                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    12
+
+
+B
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             11
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             10
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          B                                                                      WIEC-15NN   WIEC-15NC   WIEC-15SC   WIEC-15SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             9
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             8
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             7
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-16NN   WIEC-16NC   WIEC-16SC   WIEC-16SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         Panel Layouts                                                                                                                                                                                                                                                                                                       6
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             5
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Existing display of WIEC groups; June 2026 SC progress
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             4
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             3
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-17NN   WIEC-17NC   WIEC-17SC   WIEC-17SS   PL
+
+    Diagram. Central PLC, bias I/O and LV/fan/heater
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             1
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ITEM      SUPPLIER           PART NO.               DESCRIPTION         QTY.      REF. DES.
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             T. Nichols
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        PARTS LIST
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-18NN   WIEC-18NC   WIEC-18SC   WIEC-18SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              I. Young
+A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             T. Shaw
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          A
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   DUNE
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-19NN   WIEC-19NC   WIEC-19SC   WIEC-19SS   PL
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              presentation.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Detector Safety System
+
+
+
+
+    panels.
+    8                                                                                                                       7                                                                                                                                                                                                                                                                                      6                                               5                                                                                                                        4                                                                                                                                             3
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ND / TSD / ENG
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 0U5R6
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    E       F10xxxxxx
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     2   OF    2    -
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 WIEC-20NN   WIEC-20NC   WIEC-20SC   WIEC-20SS   PL
+
+
+
+
+    Parts list: CX5140 PLC, EK1100 couplers, EK1521 fibre links and EL2124 inhibit outputs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     6    June 10, 2026           Ting Miao / Slow Controls / June 2026 FDC I&I
+
+
+
+
+    TPC reference: EDMS 2401090 v4, sheet 2, with parts and power workbooks. PLC = programmable logic controller.
+
+
+
+                                                                                                   27 October 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       6/19
+VD proposal: a PLC in the CUC, I/O at the detector
+
+                                                                                         FFDG BMS
+      SC / Ignition          OPC UA            VD DPS PLC                 inputs
+                                                                                         SDSTA BMS
+     control and logs                          CUC proposed
+                                                                                          Cryogenics
+
+                    OPC UA                                EtherCAT        control / status
+   VD
+   RACKS
+                                                                                           PDUs
+     VD additions                            BDE / bias HV
+                                                                                        rack power
+    PDS, TDE, CalCI                         existing I/O panels
+                                                                                      local interlocks
+
+
+       Diagram. Additional interfaces use OPC UA through SC. The DPS PLC controls the PDUs directly.
+
+    CUC = Central Utility Cavern. Dashed inputs: paths selected per function. HD: extension or separate PLC.
+
+
+  27 October 2026                                                                                              7/19
+Ignition controls the PLC; the PLC controls the PDU
+
+                                                              Local interlocks
+                                                         smoke / water / temperature
+                                                                          trip
+            Ignition
+                                      DPS PLC                        PDU                         Rack
+            control
+                                      arbitration                 rack power                   equipment
+           and logs
+
+                                                state / trip feedback
+               decisions / events
+
+   Diagram. The PLC arbitrates Ignition’s commands. Local interlocks can trip independently; SC logs the outcome.
+
+ PDU = power distribution unit. An Ignition command cannot override a trip. Reset and re-enable are separate actions.
+
+
+
+
+    27 October 2026                                                                                                 8/19
+The VD extension adds subsystem and facility interfaces
+
+VD scope                         Added DPS interface
+
+PDS: 34 LV feeds; 80             Supply control, fault feedback and local PoF readout/control
+PoF boxes
+TDE: 20 racks                    Crate-status exchange and external inhibit interface
+Drift HV / CalCI                 Level, temperature and optical-source status; inhibits and operation per-
+                                 mits
+Facility interfaces              FFDG BMS, SDSTA BMS and cryogenic conditions for DPS arbitration
+
+The 80 PoF boxes have 1,280 monitoring values. Local readout handles the measurements;
+protection permits and feedback determine the DPS I/O.
+
+LV = low voltage; PoF = power over fibre. Parts, panel allocations and power estimates are in the backup slides.
+
+
+
+     27 October 2026                                                                                               9/19
+Test arbitration, trips and recovery on the bench
+
+
+          Fault input or                                      Supply inhibit            Equipment
+                                      DPS PLC
+           conflicting                                          or PDU                     state
+                                      arbitration
+            request                                            command                 and feedback
+
+             Diagram. Use the BDE vertical-slice work and G271 equipment for representative VD paths.
+
+
+ Measure detection through completed shutdown. Test local trips, SC and fieldbus loss, reset and
+              re-enable. Verify that SC logs the decisions and equipment states.
+
+No critical sub-ms function has been identified so far. Simulation prepares the fault and load cases;
+                          hardware tests measure the complete response.
+
+
+
+
+    27 October 2026                                                                                     10/19
+Take the VD hardware to review in June 2027
+
+
+Work before review            Result for procurement
+
+Adapt the BDE design          VD panels, added I/O, CUC fieldbus routes and power allocation
+
+Test the interfaces           Trip-time, failure and recovery results; SC/PDU integration
+
+Prepare purchases             Drawings, parts and cable lists, costs, lead times and spares
+
+
+After readiness review: order the hardware and install it in the site sequence.
+
+Possible facility-interface need: summer 2027. Full VD response-matrix review: early 2028. The early matrix work supplies
+requirements that affect hardware purchases.
+
+
+
+
+     27 October 2026                                                                                                11/19
+I will lead the VD hardware work with a control engineer
+
+
+Proposed contribution               Work
+
+Manuel + control engineer           VD design, SURF interfaces and procurement package
+
+Terri and Trevor                    BDE panels, PLC/I/O implementation and bench work
+
+Geoff + Manuel                      SC commands, PDU protection and recovery
+
+Vivian + consortia / DPS            Equipment requirements and ICD updates
+
+
+Support needed: control-engineering time and access to the existing test stands.
+
+SURF work: inspection maps are ready; access is being coordinated with Rachel, with Dale Curran identified as an SDSTA
+integration contact.
+
+
+
+
+     27 October 2026                                                                                             12/19
+Backup: VD rack space already allocated to DPS
+
+
+Rack type                      Count      DPS equipment / connections
+
+BDE auxiliary                       10    12U per rack; eight WIEC connections per rack
+
+BDE low voltage                     20    One PL506 per rack; four WIECs per supply
+
+Bias high voltage                   10    12U per rack for the DPS interface to ISEG supplies
+
+
+The auxiliary racks contain the WIEC I/O; the bias racks contain the ISEG inhibit outputs.
+
+May 2025 VD rack workbook; June 2026 BDE layout. U is rack height. These are design allocations; the bias-HV sheet is a
+first estimate.
+
+
+
+
+     27 October 2026                                                                                              13/19
+The VD bias-panel draft specifies two DIN rails per rack
+
+Component                                                                                   Per rail   10 racks
+
+EK1100 EtherCAT coupler                                                                           1         20
+EL9410 supply terminal                                                                            1         20
+EL2124: four 5 V outputs                                                                         18        360
+EL9011 end cap                                                                                    1         20
+24 V power supply                                                                                 1         20
+
+Each rail occupies 337 mm. The draft provides 1,440 output channels; the working VD inventory lists
+576 bias channels.
+
+May 2025 workbook, Bias HV Rack!K17:K21. Quantities describe the first-pass panel layout.
+
+
+
+     27 October 2026                                                                                       14/19
+VD power estimates for the BDE racks
+
+
+Equipment                         Per rack                VD basis
+
+PL506 input                       2.25 kW                 20 racks: about 45.1 kW for the WIEC supplies
+
+Auxiliary DPS input               About 1.11 kW           10 racks: about 11.1 kW; eight WIECs per rack
+
+Bias DPS supply al-               24 V, 40 A              960 W DC capacity per rack in the workbook
+lowance
+
+
+The auxiliary estimate scales the recorded 831 W from six to eight WIECs: 831 × 8/6 = 1,108 W.
+
+Planning estimates from the May 2025 workbook. Linear scaling follows its VD note; it is not a measured load. Supply
+capacity is separate from AC demand.
+
+
+
+
+     27 October 2026                                                                                                   15/19
+Reference: local PDU trips and recovery
+
+PX3 setup guide                   Local behaviour documented
+
+Smoke, water, tempera-            Local event rules and scripts can switch off the protected outlets
+ture
+
+Network-switch outlet             Kept powered during the guide’s fallback shutdown
+
+After a local trip                Power is restored deliberately; no automatic restoration
+
+
+The VD control chain is Ignition → DPS PLC → PDU. Local trip status returns to the PLC and to SC
+for logging.
+
+DUNE-doc-32655 v8, pp. 3–6 and 14–16, supplies the reference local functions. The control chain follows the VD
+architecture.
+
+
+
+     27 October 2026                                                                                             16/19
+The VD inventory covers the other subsystem connections
+
+Subsystem                     Working inventory and interfaces
+
+PDS readout / calibra-        34 LV feeds in the current presentation scope; supply status and control
+tion                          interfaces
+Power over fibre              80 laser boxes; 640 temperature and 640 voltage readings; compact PLC
+(PoF)                         interface proposed
+TDE                           20 mezzanine racks; power supplies and readout-crate management
+Calibration / cryogenic       Level and temperature readout, purity monitors, ionization laser and neu-
+instrumentation               tron source
+
+VD allocation. Proposed routing: monitoring to Ignition through native drivers and OPC UA; protection permits and fault
+status exchanged with the local equipment.
+
+
+
+      27 October 2026                                                                                                17/19
+The BMS drawing identifies 20 control-panel symbols
+
+Drawing area                  Interfaces on the inspection maps
+
+CUC, level 4850               Eight panel references: air handling, chilled water, power and associated
+                              equipment
+
+Level 4910                    North and south sump interfaces, SP-1 and SP-2
+
+4850-08-ES group              Spare panel for future equipment; mapped to the access-drift inspection
+                              area
+
+Other 4850 areas              Chillers, pumps, ventilation and generator interfaces
+
+Inspection planned with Rachel; Dale Curran is the SDSTA integration contact identified for this work.
+
+U-FD-M-901 rev12, 14 February 2025; marked 4850/4910 maps and survey register. Symbols are drawing references; field
+observations are pending.
+
+
+     27 October 2026                                                                                           18/19
+Reference: the May 2025 VD rack inventory
+
+Rack type                                          Count       Rack type                                           Count
+
+BDE low voltage                                         20     PDS low voltage                                            4
+BDE auxiliary                                           10     Drift HV                                                   2
+TDE                                                     20     Reserved drift HV                                          2
+Bias HV                                                 10     Spare / CalCI                                              8
+
+
+76 numbered mezzanine positions: SEDM-01 to SEDM-76.
+
+The worksheet also has a separate concept for 40 top-plate mini-racks.
+
+May 2025 allocation: rack positions, distinct from PLC panels and remote-I/O stations. Includes the listed reserved and
+spare positions.
+
+
+
+
+      27 October 2026                                                                                                19/19
+

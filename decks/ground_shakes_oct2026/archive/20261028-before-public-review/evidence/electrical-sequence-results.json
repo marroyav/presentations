@@ -1,0 +1,436 @@
+{
+  "events": 1376,
+  "associations": [
+    {
+      "run": 32731,
+      "PDS_feature": "median_recorded_witness_peak_negative_edge_ADC",
+      "TPC_feature": "TPC_late_precursor_mean_directed_ADC",
+      "events": 655,
+      "Spearman_rho": 0.12068466752983376,
+      "within_file_rank_correlation": 0.12494259885619556,
+      "within_file_events": 655
+    },
+    {
+      "run": 32731,
+      "PDS_feature": "median_recorded_witness_peak_negative_edge_ADC",
+      "TPC_feature": "TPC_precursor_mean_slope_ADC_per_us",
+      "events": 655,
+      "Spearman_rho": -0.03792747858926708,
+      "within_file_rank_correlation": -0.04097757309047806,
+      "within_file_events": 655
+    },
+    {
+      "run": 32731,
+      "PDS_feature": "median_recorded_witness_peak_negative_edge_ADC",
+      "TPC_feature": "TPC_main_peak_median_mean_abs_ADC",
+      "events": 655,
+      "Spearman_rho": -0.11424939181941954,
+      "within_file_rank_correlation": -0.11433065194831836,
+      "within_file_events": 655
+    },
+    {
+      "run": 32731,
+      "PDS_feature": "recorded_early_PDS_candidates",
+      "TPC_feature": "TPC_late_precursor_mean_directed_ADC",
+      "events": 714,
+      "Spearman_rho": 0.18466103533168124,
+      "within_file_rank_correlation": 0.187529284880903,
+      "within_file_events": 714
+    },
+    {
+      "run": 32731,
+      "PDS_feature": "recorded_early_PDS_candidates",
+      "TPC_feature": "TPC_precursor_mean_slope_ADC_per_us",
+      "events": 714,
+      "Spearman_rho": -0.14877550736573655,
+      "within_file_rank_correlation": -0.15225289868233938,
+      "within_file_events": 714
+    },
+    {
+      "run": 32731,
+      "PDS_feature": "recorded_early_PDS_candidates",
+      "TPC_feature": "TPC_main_peak_median_mean_abs_ADC",
+      "events": 714,
+      "Spearman_rho": -0.2003619965681087,
+      "within_file_rank_correlation": -0.20161517057370112,
+      "within_file_events": 714
+    },
+    {
+      "run": 32731,
+      "PDS_feature": "largest_recorded_coincident_edge_channel_count",
+      "TPC_feature": "TPC_late_precursor_mean_directed_ADC",
+      "events": 714,
+      "Spearman_rho": 0.290024481173066,
+      "within_file_rank_correlation": 0.2984396808638919,
+      "within_file_events": 714
+    },
+    {
+      "run": 32731,
+      "PDS_feature": "largest_recorded_coincident_edge_channel_count",
+      "TPC_feature": "TPC_precursor_mean_slope_ADC_per_us",
+      "events": 714,
+      "Spearman_rho": -0.09631208978751185,
+      "within_file_rank_correlation": -0.09572440232299663,
+      "within_file_events": 714
+    },
+    {
+      "run": 32731,
+      "PDS_feature": "largest_recorded_coincident_edge_channel_count",
+      "TPC_feature": "TPC_main_peak_median_mean_abs_ADC",
+      "events": 714,
+      "Spearman_rho": -0.2171653331732696,
+      "within_file_rank_correlation": -0.21694321428802898,
+      "within_file_events": 714
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "median_recorded_witness_peak_negative_edge_ADC",
+      "TPC_feature": "TPC_late_precursor_mean_directed_ADC",
+      "events": 477,
+      "Spearman_rho": 0.001637237606520567,
+      "within_file_rank_correlation": -0.008725217564463395,
+      "within_file_events": 469
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "median_recorded_witness_peak_negative_edge_ADC",
+      "TPC_feature": "TPC_precursor_mean_slope_ADC_per_us",
+      "events": 477,
+      "Spearman_rho": -0.17463081156939275,
+      "within_file_rank_correlation": -0.18837019327857832,
+      "within_file_events": 469
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "median_recorded_witness_peak_negative_edge_ADC",
+      "TPC_feature": "TPC_main_peak_median_mean_abs_ADC",
+      "events": 477,
+      "Spearman_rho": -0.1551885588398733,
+      "within_file_rank_correlation": -0.1630967003269726,
+      "within_file_events": 469
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "recorded_early_PDS_candidates",
+      "TPC_feature": "TPC_late_precursor_mean_directed_ADC",
+      "events": 662,
+      "Spearman_rho": 0.07323931107839728,
+      "within_file_rank_correlation": 0.065934742234311,
+      "within_file_events": 662
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "recorded_early_PDS_candidates",
+      "TPC_feature": "TPC_precursor_mean_slope_ADC_per_us",
+      "events": 662,
+      "Spearman_rho": -0.17496054637437275,
+      "within_file_rank_correlation": -0.19305192161264556,
+      "within_file_events": 662
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "recorded_early_PDS_candidates",
+      "TPC_feature": "TPC_main_peak_median_mean_abs_ADC",
+      "events": 662,
+      "Spearman_rho": -0.16876710430052438,
+      "within_file_rank_correlation": -0.17765827934034023,
+      "within_file_events": 662
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "largest_recorded_coincident_edge_channel_count",
+      "TPC_feature": "TPC_late_precursor_mean_directed_ADC",
+      "events": 662,
+      "Spearman_rho": 0.13456494665094978,
+      "within_file_rank_correlation": 0.16932517606749733,
+      "within_file_events": 662
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "largest_recorded_coincident_edge_channel_count",
+      "TPC_feature": "TPC_precursor_mean_slope_ADC_per_us",
+      "events": 662,
+      "Spearman_rho": -0.13410938435030603,
+      "within_file_rank_correlation": -0.16787590667865177,
+      "within_file_events": 662
+    },
+    {
+      "run": 32739,
+      "PDS_feature": "largest_recorded_coincident_edge_channel_count",
+      "TPC_feature": "TPC_main_peak_median_mean_abs_ADC",
+      "events": 662,
+      "Spearman_rho": -0.17388476389083563,
+      "within_file_rank_correlation": -0.21529904733097555,
+      "within_file_events": 662
+    }
+  ],
+  "PDS_only_TPC_prediction": [
+    {
+      "split": "same_run_holdout",
+      "events": 194,
+      "mean_absolute_error_ADC": 3.2445825933248753,
+      "constant_training_median_error_ADC": 3.531411082474227,
+      "relative_MAE_improvement": 0.08122206179077562,
+      "rank_correlation_prediction_vs_TPC": 0.2541706662056606
+    },
+    {
+      "split": "other_run",
+      "events": 477,
+      "mean_absolute_error_ADC": 3.6052091883079607,
+      "constant_training_median_error_ADC": 3.7588443396226414,
+      "relative_MAE_improvement": 0.0408729751575998,
+      "rank_correlation_prediction_vs_TPC": 0.20819420810114114
+    }
+  ],
+  "fixed_delay_clock_tests": [
+    {
+      "TPC_APA": 1,
+      "threshold_ADC": 2,
+      "PDS_pulse": "first",
+      "split": "same_run_holdout",
+      "events": 117,
+      "training_fixed_PDS_to_TPC_delay_us": 40.70400000000001,
+      "training_shake_clock_onset_us": -148.224,
+      "fixed_PDS_delay_MAE_us": 64.93210256410256,
+      "shake_clock_only_MAE_us": 30.645606837606834,
+      "PDS_time_vs_TPC_onset_Spearman": -0.25316695405324097
+    },
+    {
+      "TPC_APA": 1,
+      "threshold_ADC": 2,
+      "PDS_pulse": "first",
+      "split": "other_run",
+      "events": 225,
+      "training_fixed_PDS_to_TPC_delay_us": 40.70400000000001,
+      "training_shake_clock_onset_us": -148.224,
+      "fixed_PDS_delay_MAE_us": 66.05710222222223,
+      "shake_clock_only_MAE_us": 33.42336,
+      "PDS_time_vs_TPC_onset_Spearman": -0.16979480036690028
+    },
+    {
+      "TPC_APA": 1,
+      "threshold_ADC": 2,
+      "PDS_pulse": "last",
+      "split": "same_run_holdout",
+      "events": 117,
+      "training_fixed_PDS_to_TPC_delay_us": 7.424000000000007,
+      "training_shake_clock_onset_us": -148.224,
+      "fixed_PDS_delay_MAE_us": 63.938735042735054,
+      "shake_clock_only_MAE_us": 30.645606837606834,
+      "PDS_time_vs_TPC_onset_Spearman": -0.26198743989052625
+    },
+    {
+      "TPC_APA": 1,
+      "threshold_ADC": 2,
+      "PDS_pulse": "last",
+      "split": "other_run",
+      "events": 225,
+      "training_fixed_PDS_to_TPC_delay_us": 7.424000000000007,
+      "training_shake_clock_onset_us": -148.224,
+      "fixed_PDS_delay_MAE_us": 63.674595555555555,
+      "shake_clock_only_MAE_us": 33.42336,
+      "PDS_time_vs_TPC_onset_Spearman": -0.28680654824757096
+    },
+    {
+      "TPC_APA": 1,
+      "threshold_ADC": 5,
+      "PDS_pulse": "first",
+      "split": "same_run_holdout",
+      "events": 118,
+      "training_fixed_PDS_to_TPC_delay_us": 63.488,
+      "training_shake_clock_onset_us": -126.464,
+      "fixed_PDS_delay_MAE_us": 63.85681355932203,
+      "shake_clock_only_MAE_us": 29.32718644067796,
+      "PDS_time_vs_TPC_onset_Spearman": -0.25952146235774237
+    },
+    {
+      "TPC_APA": 1,
+      "threshold_ADC": 5,
+      "PDS_pulse": "first",
+      "split": "other_run",
+      "events": 221,
+      "training_fixed_PDS_to_TPC_delay_us": 63.488,
+      "training_shake_clock_onset_us": -126.464,
+      "fixed_PDS_delay_MAE_us": 66.71406334841629,
+      "shake_clock_only_MAE_us": 30.781393665158372,
+      "PDS_time_vs_TPC_onset_Spearman": -0.21249883065050676
+    },
+    {
+      "TPC_APA": 1,
+      "threshold_ADC": 5,
+      "PDS_pulse": "last",
+      "split": "same_run_holdout",
+      "events": 118,
+      "training_fixed_PDS_to_TPC_delay_us": 30.72,
+      "training_shake_clock_onset_us": -126.464,
+      "fixed_PDS_delay_MAE_us": 64.8417627118644,
+      "shake_clock_only_MAE_us": 29.32718644067796,
+      "PDS_time_vs_TPC_onset_Spearman": -0.32047617592408717
+    },
+    {
+      "TPC_APA": 1,
+      "threshold_ADC": 5,
+      "PDS_pulse": "last",
+      "split": "other_run",
+      "events": 221,
+      "training_fixed_PDS_to_TPC_delay_us": 30.72,
+      "training_shake_clock_onset_us": -126.464,
+      "fixed_PDS_delay_MAE_us": 64.57571040723982,
+      "shake_clock_only_MAE_us": 30.781393665158372,
+      "PDS_time_vs_TPC_onset_Spearman": -0.3497690546938557
+    },
+    {
+      "TPC_APA": 2,
+      "threshold_ADC": 2,
+      "PDS_pulse": "first",
+      "split": "same_run_holdout",
+      "events": 118,
+      "training_fixed_PDS_to_TPC_delay_us": 42.75200000000001,
+      "training_shake_clock_onset_us": -147.968,
+      "fixed_PDS_delay_MAE_us": 64.68122033898305,
+      "shake_clock_only_MAE_us": 30.1993220338983,
+      "PDS_time_vs_TPC_onset_Spearman": -0.25242144044156434
+    },
+    {
+      "TPC_APA": 2,
+      "threshold_ADC": 2,
+      "PDS_pulse": "first",
+      "split": "other_run",
+      "events": 225,
+      "training_fixed_PDS_to_TPC_delay_us": 42.75200000000001,
+      "training_shake_clock_onset_us": -147.968,
+      "fixed_PDS_delay_MAE_us": 65.74762666666666,
+      "shake_clock_only_MAE_us": 33.05130666666667,
+      "PDS_time_vs_TPC_onset_Spearman": -0.17205857687248002
+    },
+    {
+      "TPC_APA": 2,
+      "threshold_ADC": 2,
+      "PDS_pulse": "last",
+      "split": "same_run_holdout",
+      "events": 118,
+      "training_fixed_PDS_to_TPC_delay_us": 7.423999999999992,
+      "training_shake_clock_onset_us": -147.968,
+      "fixed_PDS_delay_MAE_us": 63.2406779661017,
+      "shake_clock_only_MAE_us": 30.1993220338983,
+      "PDS_time_vs_TPC_onset_Spearman": -0.25702888019792175
+    },
+    {
+      "TPC_APA": 2,
+      "threshold_ADC": 2,
+      "PDS_pulse": "last",
+      "split": "other_run",
+      "events": 225,
+      "training_fixed_PDS_to_TPC_delay_us": 7.423999999999992,
+      "training_shake_clock_onset_us": -147.968,
+      "fixed_PDS_delay_MAE_us": 63.67914666666666,
+      "shake_clock_only_MAE_us": 33.05130666666667,
+      "PDS_time_vs_TPC_onset_Spearman": -0.28647033347604123
+    },
+    {
+      "TPC_APA": 2,
+      "threshold_ADC": 5,
+      "PDS_pulse": "first",
+      "split": "same_run_holdout",
+      "events": 116,
+      "training_fixed_PDS_to_TPC_delay_us": 66.81599999999999,
+      "training_shake_clock_onset_us": -124.672,
+      "fixed_PDS_delay_MAE_us": 64.7503448275862,
+      "shake_clock_only_MAE_us": 29.740137931034486,
+      "PDS_time_vs_TPC_onset_Spearman": -0.26964870943199076
+    },
+    {
+      "TPC_APA": 2,
+      "threshold_ADC": 5,
+      "PDS_pulse": "first",
+      "split": "other_run",
+      "events": 217,
+      "training_fixed_PDS_to_TPC_delay_us": 66.81599999999999,
+      "training_shake_clock_onset_us": -124.672,
+      "fixed_PDS_delay_MAE_us": 66.47977880184332,
+      "shake_clock_only_MAE_us": 31.493898617511523,
+      "PDS_time_vs_TPC_onset_Spearman": -0.19888535680185374
+    },
+    {
+      "TPC_APA": 2,
+      "threshold_ADC": 5,
+      "PDS_pulse": "last",
+      "split": "same_run_holdout",
+      "events": 116,
+      "training_fixed_PDS_to_TPC_delay_us": 34.048,
+      "training_shake_clock_onset_us": -124.672,
+      "fixed_PDS_delay_MAE_us": 66.19806896551724,
+      "shake_clock_only_MAE_us": 29.740137931034486,
+      "PDS_time_vs_TPC_onset_Spearman": -0.3448480819256664
+    },
+    {
+      "TPC_APA": 2,
+      "threshold_ADC": 5,
+      "PDS_pulse": "last",
+      "split": "other_run",
+      "events": 217,
+      "training_fixed_PDS_to_TPC_delay_us": 34.048,
+      "training_shake_clock_onset_us": -124.672,
+      "fixed_PDS_delay_MAE_us": 64.06842396313364,
+      "shake_clock_only_MAE_us": 31.493898617511523,
+      "PDS_time_vs_TPC_onset_Spearman": -0.3542155901162499
+    }
+  ],
+  "TPC_coherence": [
+    {
+      "run": 32731,
+      "events": 714,
+      "both_precursors_clear": 705,
+      "APA1positive_APA2negative": 705,
+      "APA1negative_APA2positive": 0,
+      "same_physical_sign": 0,
+      "median_sign_reversed_shape_correlation": 0.9641402497769131,
+      "clear_TPC_records_without_selected_early_109_PDS_candidate": 354
+    },
+    {
+      "run": 32739,
+      "events": 662,
+      "both_precursors_clear": 650,
+      "APA1positive_APA2negative": 650,
+      "APA1negative_APA2positive": 0,
+      "same_physical_sign": 0,
+      "median_sign_reversed_shape_correlation": 0.9698201108802448,
+      "clear_TPC_records_without_selected_early_109_PDS_candidate": 422
+    }
+  ],
+  "prediction_model": {
+    "features": [
+      "log1p recorded witness edge",
+      "recorded candidate count",
+      "recorded coincident channel count"
+    ],
+    "feature_center": [
+      4.2068228317960505,
+      0.702819956616052,
+      21.501084598698483
+    ],
+    "feature_scale": [
+      0.9362172907152558,
+      0.8361236014561029,
+      9.59135201787548
+    ],
+    "coefficients": [
+      11.652521691973968,
+      -0.9580343846370027,
+      0.018216212506181717,
+      1.79676072990105
+    ],
+    "training_constant_ADC": -124.672,
+    "method": "Linear ridge0.1 after training-only standardization, intercept unpenalized; same predefined split as waveform test."
+  },
+  "limits": [
+    "Conditional on shake-selected events and recorded PDS coverage; missing witness amplitudes are not set tozero.",
+    "Recorded candidate count0 means no qualifying candidate retained, not no light.",
+    "Amplitude is ADC per256ns, not calibrated light energy or pure electrical strength.",
+    "TPC precursor is a signed APA-median statistic, not reconstructed charge. Onset thresholds are diagnostic, not physical start times.",
+    "Main-shake amplitudes can be clipped, nonlinear or affected by rail codes; no physical energy calibration.",
+    "Within-file ranks reduce fixed file differences but do not remove temporal trends or all operating-state changes.",
+    "No p-values, discovery significance, normal-run false-alarm rate or causal source inference.",
+    "Prediction measures variation among recorded shakes; it is not a test of whether PDS predicts that a shake will occur."
+  ]
+}

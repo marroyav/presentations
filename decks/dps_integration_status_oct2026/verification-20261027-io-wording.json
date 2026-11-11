@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-10-27T19:18:51.663113+00:00",
+  "change": "Use existing BDE layout to size and place added DPS I/O.",
+  "source_errors": [],
+  "layout_errors": [],
+  "sha256": {
+    "main.tex": "5cba66205f7bcdc1b1a5cc23564ffd30412e161cfb781c6ccaf451eaadea30bd",
+    "main.pdf": "f4117aa68af418b467b17ced71b62d82db0f5bd5237e06484a34e9bf00026fe2"
+  }
+}

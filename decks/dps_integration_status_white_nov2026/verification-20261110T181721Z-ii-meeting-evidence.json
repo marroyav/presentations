@@ -1,0 +1,150 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-10T18:17:21.904147+00:00",
+  "task": "dps-ii-meeting-20261110",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 25,
+    "tracked_diff_sha256": "86b3dcdabe5ec2aeadc5f5e59f469a2641e381c90ad00bef131065200aef8aef",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=Tectonic 0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261110T181721Z-ii-meeting-build.log",
+      "sha256": "9d799ddc8ccfc4ea1e04a87ce2668fd9bba0bad8c8e331f1d65a74b8ef414625"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "9b5dcbee8aa4bd31f520e22eebb7a00f4c5f806f6f1f533538b194d8bdcd7c53"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/deck-style.tex",
+      "sha256": "a27d65ef9007a7be894e406bb4b68d72adc62d43ccb742abc0bb58a9350a2d3c"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/meeting-updates.tex",
+      "sha256": "ded0411e0501aec7f979ca01a8d4f7047f7f09c92cec9ba61e59b1f046b96dff"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/backup-slides.tex",
+      "sha256": "032517b11f9ebfd8d4f51c5873cdac69d462b03a21a95325e4fdf4fc5b556f5f"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "61acdb198e0102cb31ab09bc61aa627cea41a3d25edf11f1af4e31b6d9c36515"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "c54fe9e21f647455f95e3467b879c0a57eb3480e7b79b77a43dbe978d48930f6"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "052c95b524e1d485538aaf0b1da88fcc66cc3fe4fe6a67edb26cb4c80dc3f95f"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/commissioning-update-20261110.txt",
+      "sha256": "ca01af5b1d54b473f81413a7f5f9b7856608c5e20194e74277db625afd926d54"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/connection-register-template.csv",
+      "sha256": "300f973f477a3bafe98a701271fffa6e6e02fcb6fe2f2d28259d65c1a430860f"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/device-hierarchy.txt",
+      "sha256": "c0f1bec86a83a6229c9d13951a08d951d612adf5ba2db6c09fa04cd3b05628fe"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/device-hierarchy.csv",
+      "sha256": "8a9742eb8610ec30737b5fa8c6ba07a52a894e58df2ab77ee96ff5630fcdb7d6"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/device-hierarchy.html",
+      "sha256": "85af51bc9c8478e3d711b5dfebd43519dc86a4cb4a17e60e2bbe4c6d3ee21f67"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/lasers.tikz.tex",
+      "sha256": "bb142e56d7f1a796f094ed8bb3b1ffa8dcd8ff9b759999956180fc81a050b1fd"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/styles.tex",
+      "sha256": "d8f29a9ed0239362432509bb35d23c461d967df3be8bd8d8d3d25005260c4659"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/daphne.tikz.tex",
+      "sha256": "c820cc5a8e0767221eb240d51ba3f6140df97ab3805b57a986a3b2c49e4f9068"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/pof.tikz.tex",
+      "sha256": "45e5ec1f9e7218caf25a03578404d74d41e747c2f32581de7a4a05b4ca6c4a54"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/racks.tikz.tex",
+      "sha256": "c787cfc768d2ab01c6040aa13a8fe13c664bf5a40d21b40901689ad151d99710"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/site-boundaries.tex",
+      "sha256": "56867ffae8ce0dce065fc6d445ba9516dc1f1a5c95b056687c722cbd3c840dac"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/daphne-icd-reference.tex",
+      "sha256": "b539d4a84aaad18ff9b1cf9b35524fad461c2943e5f59a2485a7506781e19bc6"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/overview.tikz.tex",
+      "sha256": "9a061cd85954eedbfd76827d5bf7dbb7395c8ec031d70133416f8be1d432e10c"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/figures/tpc-panel-reference.pdf",
+      "sha256": "b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/figures/sc-progress-june2026.pdf",
+      "sha256": "ae9ff086c81c9b2306c1313ea34fc2693ae95893982d6ca8c4a085eff1335edc"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/archive/20261110T180644Z-before-ii-meeting-revision/main.pdf",
+      "sha256": "15659f94b2d7b4b6ef3bd80e86f5308bec242ae497bda3c933adb2e7bb6c5d19"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/Makefile",
+      "sha256": "091b000418f69033122a43ec4b4d926fe7c4e88e0778c136d6af31d0f81d42c7"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/beamerthemeDUNEProfessional.sty",
+      "sha256": "bc215c3cd376b01ed3169851922c095232468a6c9a8d22509e1e7047d7a8a98e"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/design-tokens.json",
+      "sha256": "5675e9b4f7f1e85e836201b49e2fff97efcabf4f3dbd39b005766ea4a357ec06"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/logos/logosolo.png",
+      "sha256": "ba6f7b86f5ed2f938a8f506101ba373086e5d724a55c988960317ee3caff7ce0"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/logos/FNAL-Logo-NAL-Blue.png",
+      "sha256": "fd5f90f44ec25251674ff90eb19b759acee290a722e8a5b1a491baae15224306"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/docs/framework-guide.md",
+      "sha256": "182d357595a695e6707607f59f4db61938d8e32f784d5045629d1a791bb00267"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/docs/diagram-guide.md",
+      "sha256": "57fd6e87f516bfc2fe248556e1f6884b213c34b7140a93d93bfb7ff46d810d06"
+    }
+  ],
+  "limitations": "Presentation build and content/layout verification only. Commissioning information is a user-reported discussion, not a service agreement or an installed-interface verification. Milestone dates and responder feedback are proposals. No new hardware qualification or engineering approval."
+}

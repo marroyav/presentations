@@ -1,0 +1,227 @@
+Building the detector protection
+system
+
+Hardware plan for the I&I workshop
+
+
+
+
+Manuel Arroyave
+Draft revised 27 October 2026
+Use a commercial PLC for DPS
+
+
+Proposal: use the bottom drift electronics (BDE) PLC design and add the inputs and
+outputs needed by the other systems.
+
+A programmable logic controller (PLC) applies the protection rules. Nearby I/O modules
+connect sensors and equipment.
+
+Use OPC UA for monitoring and agreed supervisory commands.
+Detector Protection System (DPS). Confirm the hardware choice after checking requirements and testing the prototype.
+
+
+
+
+     27 October 2026                                                                                               2/12
+BDE protection and rack PDUs
+
+
+Hardware                What we have                                     Next check
+
+BDE protection          PLC design documents, slides and                 With Terri and Trevor, identify what to
+                        Ignition front end available                     reuse and what DPS needs to add
+
+Distributed I/O         BDE panels distributed along the mez-            Use the BDE layout to size and place
+                        zanine                                           additional DPS I/O
+
+Rack power              Power distribution units (PDUs) are              Confirm models, sensors, trip logic
+                        planned                                          and external signals
+
+Based on the 25–26 October discussion and working hardware inventory. This is not an installed-equipment survey.
+
+
+
+
+     27 October 2026                                                                                               3/12
+Put I/O near the equipment it protects
+
+                  Slow controls
+                   monitoring
+                     / history
+
+                           OPC UA                                        status
+                    DPS PLC            fieldbus    Distributed I/O                      Sensors and
+                 protection rules                 near equipment                         equipment
+                                                                     permit / inhibit
+
+                Diagram. Proposed structure; confirm each connection, protocol and electrical interface.
+
+Decide how many PLCs we need and where to place them.
+
+BDE uses an EtherCAT protection connection. Its extension, capacity and timing remain to be tested.
+
+
+
+     27 October 2026                                                                                       4/12
+Check what each rack PDU can do locally
+
+A local interlock acts at the equipment, without waiting for the central DPS.
+
+
+
+  1                                                           2
+
+  Check the device                                            Check its DPS interface
+  Which sensors can trigger a trip? Which outlets             Can it accept an external permit and report a
+  switch off? What happens if its network                     trip? How do we reset it? Which status is
+  connection fails?                                           available over SNMP?
+
+
+
+Do not assume smoke, water or temperature sensing implies automatic shutdown. Confirm the model, configuration and
+wiring.
+
+
+
+
+      27 October 2026                                                                                           5/12
+List the signals and count the I/O
+
+
+Record for each path                   What we need to choose
+
+Source, destination, location          Panel layout and cable routes
+
+Signal type, range, protocol           Digital / analog I/O, isolation and gateways
+
+Channel / variable counts              Capacity, network load and spares
+
+Required action and total time         PLC, local interlock or dedicated connection
+
+Lost signal and recovery               Wiring, feedback and reset controls
+
+Use the matrix to check interface control documents (ICDs). Remove overlaps; add CALCI and missing systems.
+
+
+
+
+     27 October 2026                                                                                          6/12
+Confirm response times before choosing hardware
+
+
+
+So far, I have not found a critical protection function that needs a response below 1 ms.
+
+Each consortium must check the time from detecting a fault to completing the protective
+action.
+
+Test sensor, communication, PLC and equipment delays together.
+The consortia need to confirm this before procurement. Use a faster local interlock wherever the required response time
+demands it.
+
+
+
+
+     27 October 2026                                                                                                  7/12
+Check how DPS connects to the other systems
+
+
+Boundary                                 Work needed
+
+Slow controls (SC) / DPS                 With Geoff, agree command priority, trip reset and re-enable; SC
+                                         logs relevant data
+Cryogenics / instrumentation             Find the actual source of each measurement and its path to DPS
+LBNF/DUNE BMS / SDSTA                    Keep both building systems distinct; agree limited hardware I/O
+BMS                                      and where it connects
+Networks / OPC UA                        Agree monitoring, permitted commands and access across net-
+                                         works
+
+Personnel-safety alarms remain with SDSTA. Software monitoring links do not establish a qualified protection path.
+
+
+
+
+     27 October 2026                                                                                                 8/12
+Survey the facility interfaces at SURF
+
+
+  1                                                             2
+
+  Prepared                                                      Find on site
+  Marked inspection maps for levels 4850 and                    At the underground locations and Ross Dry:
+  4910. Coordinating access and safety                          installed controllers, I/O, panel space and
+  requirements with Rachel.                                     possible connection points.
+
+
+
+
+Ask Dale Curran at SDSTA about the controllers and available connections.
+
+Inspection planned for this week, subject to access and safety arrangements. Maps have not yet been shared; findings are
+pending.
+
+
+
+
+      27 October 2026                                                                                               9/12
+Test the PLC, remote I/O and equipment together
+
+
+Proposed bench tests                                       What to measure or check
+
+PLC + remote I/O + representative load                     Complete trip time under expected load
+
+Rack PDU + sensors + DPS interface                         Local shutdown, trip feedback and reset
+
+OPC UA + SC supervisory commands                           Command priority, logging and recovery
+
+Signal, fieldbus, network and power loss                   Defined equipment state and controlled restart
+
+Use the simulation framework to prepare cases, then test on hardware. Agree the Fermilab bench scope and any SURF
+tests, hosts and equipment.
+
+
+
+
+     27 October 2026                                                                                          10/12
+Design and test the hardware before June 2027
+
+
+Proposed period             Deliverable
+
+Now–December                Review BDE; survey interfaces; list I/O and timing requirements
+2026
+
+January–March               Design PLC topology, panels, cabling and networks; estimate cost and lead
+2027                        times
+
+April–June 2027             Test prototypes; document results; review design and procurement readiness
+
+After review                Order approved hardware; schedule installation with the site teams
+
+Check summer 2027 interface needs now. Target the full vertical drift (VD) response-matrix review for early 2028.
+
+
+
+
+     27 October 2026                                                                                                11/12
+Agree who does the work
+
+Proposed team                         Next action
+
+Manuel + process control              Design the hardware; prepare specifications and purchases
+engineer
+Terri, Trevor + Manuel                Review BDE implementation and what DPS must add
+Manuel + consortium con-              Confirm signals, timing and protection in each project phase
+tacts
+Manuel + Geoff                        Agree SC/DPS control and reset behaviour
+Vivian + subsystem / DPS              Update ICD connections and bench-test scope
+teams
+
+Confirm owners at I&I. When DPS is unavailable, propose that each consortium protects its equipment; agree this for every
+phase.
+
+
+     27 October 2026                                                                                                12/12
+

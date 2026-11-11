@@ -1,0 +1,98 @@
+VD DPS source review — system sequence, site boundaries and interlock review
+27 October 2026
+
+The deck now follows the requested system order. The matrix explains the method
+before the detector section; the next slide explains the DPS logic. A source
+statement, a working proposal and an implemented/tested function are kept distinct.
+
+BMS service boundary
+The FFDG–SDSTA MOU, DocDB 9333 v5, identifies SDSTA as SURF owner/operator and
+FFDG's separate DUNE role (pp3–4). It does not enumerate BMS points. The historical
+FSCF-EXC transition plan, DocDB 24103 v1, pp11–12 identifies Oro Hondo and Ross
+shaft responsibilities; section 5.1/p18 connects DUNE sump/drainage to mine drainage
+and surface pumping. The diagram uses these for the vertical site-service context.
+
+The actual FFDG building-service examples come from U-FD-M-901 rev12 and the
+panel survey register: CUC/cavern HVAC and chilled-water interfaces at 4850;
+SP-1/SP-2 at 4910. BSI section 230923 specifies Metasys and BACnet controller
+networks. That field protocol is not a replacement for the selected API-to-SC
+integration route. The map is a schematic; neither its lines nor the MOU prove
+installed BMS controllers, point lists or software authority.
+
+FFDG API status
+Manuel supplies the ISD/Batavia proposal and SBN exercise description. Local
+October records show Metasys presentValue requests denied for MONCMD-API licensing,
+historical sample extraction, and OPC UA snapshot replay. Tests do not establish
+continuous live data, sensor qualification or multi-experiment production use.
+The slide states the user-reported exercise and the outstanding live-data licence.
+No services were started and no remote API writes or external messages were sent.
+
+SDSTA status
+Survey and agreement work remain ongoing. Hardware models, exposed points and
+protocols are not invented from site ownership. Existing 4850/4910 inspection
+maps/register describe FFDG building panels, not an SDSTA controller inventory.
+
+Cryogenics
+Manuel clarifies that cryogenics is in the CUC and is one system to DUNE despite
+its internal control divisions. The May process-control architecture documents
+multiple control domains and dedicated process/safety PLC systems. The 2022 FDR
+supports design maturity, not a completed DUNE run-permit contract. The EDMS
+metadata last inspected on 21 October labels report 2819512 v1 In Work. The
+slide keeps readiness, threshold, data-quality, loss behavior and phase authority
+as an agreement needed with the owners. The existing matrix supplies the stated
+low-level, relief-valve and boiling-risk protection cases, without inventing limits.
+
+BDE/bias and hardware reuse
+The VD workbook and June layout establish 10 auxiliary groups, 20 LV racks,
+20 PL506 supplies, 80 WIECs and 480 WIBs. Historical panel/parts references and
+Ignition/test material already exist. The fan path is DB25/EL1004 -> EtherCAT ->
+PLC -> EL2124 -> PL506 inhibit. The bias path uses remote I/O and ISEG inhibits.
+The dashed fan-to-bias branch is explicitly conditional: the historical HD logic
+has that dependency; the current VD cooling proposal assigns LV only. It cannot
+be treated as approved VD bias logic. Six-fan status and fan-power figures remain
+conditional on the recovered WIEC interface note, not additions to buy.
+
+DAPHNE/DAQ figure
+The working repository /home/arroyave/work/icd-sc-pds is clean at bfb2a8b725d9a5a3b7a517f4f9e15fb953eed1f8.
+Figure 1 in sections/03_protocols_services.tex is the source. The main slide
+keeps SC/OPC UA, the shared interface, DAPHNE ZMQ, DAQ CCM and the separate
+Hermes IPBus/UDP route. It adds Manuel's DPS and SNMP LV-power branch. Server
+implementation details remain in the source-figure backup. The backup changes
+colours, spacing and typography only. The ICD is a working draft, pending approval.
+The example is DAPHNE-controlled SiPM bias; it is not a statement that DAPHNE
+switches cathode PoF bias. PDS LV remains Manuel's 34-feed scope; no supply-module
+population is derived from that number.
+
+PoF
+Manuel confirms 4 voltage readings + 1 chassis temperature per box. Across 80
+boxes this gives 400 readings. The former 1,280-reading case is superseded in
+this deck and remains only in archived/historical source material. The June SC
+presentation names Opta and Beckhoff alternatives. The October PDS interface
+presentation also describes a smaller 4–7-voltage + 1-RTD team proposal, but it
+is Manuel's current four-reading instruction that fixes this deck's count.
+PDU inhibition is the selected presentation path. A separate enable/inhibit
+is optional pending the physical box interface. No controller grouping or new
+terminal count is inferred from the monitoring population.
+
+CalCI
+The October SC architecture documents RTD/cRIO/LabVIEW, fibre-temperature
+interrogator, PrM and calibration-interface-board routes. Local inventories
+provide the equipment starting points and four-laser-station working count.
+They do not fix every native protocol, installed count or permit connector.
+The main slides split thermometry, lasers and PrM as requested. Working PDS
+rules O-002 and Q-001 are proposals. Q-001 allows acquisition with PrM activity
+tags; EDMS 3309688 v1 section 5 instead requests SiPM bias off. Both are shown
+as an unresolved requirement conflict, not silently merged.
+
+Rack package and retained quantities
+Rack/PDU/sensors form one system. PX3/4WTAR-B/DX-PD2C5/EOLR-1 hardware is a
+reference package. Local PDU protection is retained; humidity does not imply a
+trip rule. TDE remains 20 racks with PDU-only current control; other interfaces
+are future options. The rack-space, bias-capacity and power backups retain
+source allocations rather than claiming spare terminals or approved purchases.
+
+Verification limits
+Presentation/source/arithmetic checks only. No new installed-equipment,
+controller, field wiring or response-time qualification. Local pinned sources;
+no fresh EDMS latest-version check. See the immutable verification record and
+sources.json for paths, revisions, source hashes and output hashes.

@@ -1,0 +1,32 @@
+{
+  "source_sha256": {
+    "/home/arroyave/work/ground-shake-data/analysis/double-pulse-display/results.json": "bd22d5aea678d274ee27e8a3bd0d4f4ec95c646fdeb02ae4240d8bf8a12a80c6",
+    "/home/arroyave/work/ground-shake-data/analysis/electrical-pattern-20261023/sequence-event-metrics.json": "95f322fc3797ca876f48fd4489922029bcde9569061f03e1b771fde65ddd7c3a",
+    "/home/arroyave/work/ground-shake-data/analysis/electrical-pattern-20261023/sequence-results.json": "97b7bedee9059ea893a5b7f70afc0b90da64a2b0a93fcbc3713846ac050f7a70",
+    "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/track-onset-results.json": "c7d3dfdf2e3b0677c8780d9f85a272f351e5a0600757c5185d470c07120be142",
+    "/home/arroyave/work/ground-shake-data/analysis/electrical-pattern-20261023/results.json": "3b6604dffb9b7d2eb8d52136636c6627cbc616930bae6bedff96be5e03fbe7e8",
+    "/home/arroyave/work/ground-shake-data/analysis/double-pulse-display/README.txt": "c93d32f0a77f39e339d71741eddeb7731a9d742797d82a892eac7540c615a23e",
+    "/home/arroyave/work/ground-shake-data/analysis/double-pulse-display/make.py": "b4cc5f37f3f5811c4b04a6d0dcd51c9fcfb2e45f6753b5d4973897d7f20293fe",
+    "/home/arroyave/work/ground-shake-data/analysis/electrical-pattern-20261023/sequence.py": "b96bef8afb902e966869ac3d91625514148105614c307873e73e3bb3ba6e27a2",
+    "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/track_onsets.py": "204ad6d7d4a163ea26b8441cdae261e74308a7868cfdefb0ba691db4e6603463",
+    "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/README.txt": "45742da63e1de0e831d4695586c3c6c96317ac86338b051ca2d7915b0fe47b39",
+    "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/report-data.json": "a87115d5c9628a0c0fcf211344de7346d79579168db496152823a0fa8cf84905",
+    "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/event-mixing-results.json": "8bb7be4cc01c38f07d37709e0701b7da121796e485173cc2c1a7e3b8422c15b3",
+    "/home/arroyave/work/ground-shake-data/analysis/sc-correlation-20261027/report-data.json": "7c2786136c7c9e28128bd89c52ddfc8f96cc078ac4868c8626c9c1c87a7e0b0b",
+    "/home/arroyave/work/ground-shake-recovery-20261015/edms/ground_shake_200726.pdf": "6ff093fe51ee692a33e83718e18abca19840d100d0dd95dec760df78bf50bb54",
+    "/home/arroyave/work/ground-shake-recovery-20261015/edms/ground_shake_200726.txt": "6165ea28134cc3b68bf0d0151355181db87b1c7ac7557fabea9934d2cc825c9c",
+    "/home/arroyave/work/ground-shake-recovery-20261015/edms/3493627.json": "5d41b94bcc04e91d90531e893aee7e41b52c84951ad7b0a57c9c4622c317253b",
+    "/home/arroyave/work/ground-shake-recovery-20261015/edms/3493642.json": "8275a1042aa659a3194a6a560dcd2030b1a661b81b97549e68bb79cabd7f1849",
+    "/home/arroyave/work/ground-shake-recovery-20261015/edms/snapshots/20261028/3493642-evolving-material.pdf": "be60a0e2632237689448f8400791b88d64eb35b2eccded0ce7ae36371e177495",
+    "/home/arroyave/work/ground-shake-recovery-20261015/edms/snapshots/20261028/retrieval.json": "a384380557673080504a3c35135b3c0e6f4001995b09af28195c77775bf75afb",
+    "/home/arroyave/work/ground-shake-data/analysis/electrical-pattern-20261023/cache/r32731_e33.npz": "34e7acfaa80a51d14a4fd7c8ed545f030d4ce24cb8697e75453970f6dd272c97",
+    "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/cache/r32731_e33.npz": "587a466bb328d8705d4bf88c3e1f14308cd91a9316abf0d60e5fc246fd9835ee",
+    "/home/arroyave/work/ground-shake-data/analysis/electrical-pattern-20261023/cache/r32731_e52.npz": "b20432fae9097aae06cc12b3f1976579c10b9570c0511ce9cbc38647de3e1932",
+    "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/cache/r32731_e52.npz": "f7f420c81d05870f4e4bd958c096265d042a09af5aec9679d44d88bd0e674db6"
+  },
+  "frozen_sha256": {
+    "public-plot-data.npz": "1066c016e16a70a3aed3f6b660eb0c895b482cd7525d12942e08d6ab01221f72",
+    "public-review-data.json": "0ff61c02ff3a35b626b3fbc256378cbd1575391ae4d5dfdb765e27d23d234aca"
+  },
+  "scope": "Presentation of existing tests; separate known EDMS observations from added quantitative checks."
+}

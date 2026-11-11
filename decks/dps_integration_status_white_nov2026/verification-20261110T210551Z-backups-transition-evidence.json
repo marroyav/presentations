@@ -1,0 +1,54 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-10T21:06:27.457741+00:00",
+  "task": "dps-backups-transition-20261110",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 30,
+    "tracked_diff_sha256": "86b3dcdabe5ec2aeadc5f5e59f469a2641e381c90ad00bef131065200aef8aef",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261110T210551Z-backups-transition-build.log",
+      "sha256": "4881dfda3d16049eb3c8fdb9af7c05da78f9ce171116d80d50d7fa1dc1001de9"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "43d5cac27db63dcd74a9fbb52e972cf5b536d61a4cadb4d0de7c63e53671e48b"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/deck-style.tex",
+      "sha256": "712115e2df2f13952afeea5fc92bff6a3c95962c6931352149742042bab3aff3"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "77fadeac0e37b0e69ac48f2eb700d1ac51040f8a219c7fc90798233367c67e47"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "ea90172eb6376fa63384c17196a87a4cc114d4a23b2b273bf42f91a4a56a68be"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "475ea1e260066f529f665a948c59d9b099e2eed786c99980de53f72293ae4ee0"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/backup-slides.tex",
+      "sha256": "032517b11f9ebfd8d4f51c5873cdac69d462b03a21a95325e4fdf4fc5b556f5f"
+    }
+  ],
+  "limitations": "Presentation layout review only."
+}

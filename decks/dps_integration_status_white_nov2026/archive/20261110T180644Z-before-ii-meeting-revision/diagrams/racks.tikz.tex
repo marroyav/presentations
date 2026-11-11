@@ -1,0 +1,15 @@
+% The boundary groups rack sensors and the PDU, not every connected load.
+\begin{tikzpicture}
+  \draw[dps boundary] (0.45,-2.4) rectangle (4.45,1.1);
+  \node[dps heading] at (2.45,0.83) {RACK INFRASTRUCTURE};
+  \node[dps node,text width=3cm] (sc) at (-5.6,-1.7) {SC / Ignition\\Logs and requests};
+  \node[dps controller,text width=2.6cm] (dps) at (-1.65,-1.7) {DPS PLC\\Arbitration};
+  \node[dps node,text width=3.1cm] (sensors) at (2.45,0) {Smoke / humidity\\Temperature / leak};
+  \node[dps load,text width=3cm] (pdu) at (2.45,-1.7) {PDU\\Local trips / outlets};
+  \node[dps node,text width=1.8cm] (equipment) at (6,-1.7) {Connected\\equipment};
+
+  \draw[dps both] (sc.east) -- node[dps label,above=17pt] {OPC UA} (dps.west);
+  \draw[dps both] (dps.east) -- node[dps label,above=17pt,pos=0] {SNMP} (pdu.west);
+  \draw[dps flow] (sensors.south) -- (pdu.north);
+  \draw[dps power] (pdu.east) -- node[dps label,below=23pt] {AC power} (equipment.west);
+\end{tikzpicture}

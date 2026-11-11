@@ -1,0 +1,19 @@
+{
+  "question": "Do the saved slow-control levels track the size of the slow charge precursor or the recorded early PDS activity?",
+  "status": "Exploratory; conditional on saved shake records",
+  "archive_samples": 7744489,
+  "archive_files": 109,
+  "SC_channels": 34,
+  "event_records": 1531,
+  "shake_candidates": 1516,
+  "November_waveform_records": 1376,
+  "within_run_associations": 204,
+  "cross_run_pairs": 102,
+  "pairs_with_required_coverage_in_both_runs": 96,
+  "repeatable_effect_screen_candidates": [],
+  "same_timestamp_value_envelope_sensitivities": {
+    "median_min_envelope": [],
+    "median_max_envelope": []
+  },
+  "elapsed_seconds": 29.22494524694048
+}

@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-27T19:17:28.903373+00:00",
+  "change": "BDE documents, slides and Ignition front end confirmed available by Manuel; next step is reuse and additions.",
+  "source_errors": [],
+  "advisories": [],
+  "layout_errors": [],
+  "sha256": {
+    "main.tex": "0f4f6fc01403bf9340509ad175d956743153527dca94f3a8d09ebce2224d8f78",
+    "main.pdf": "667aee2864df23746c4eddaea23a2383a2fccb71a31145fa9c2d73b7d724cedd",
+    "sources-and-notes.txt": "47ace37880cc3ae181a8f5ab1668206c6b82b44c60ce8c18b0fd7e6a377bb31c",
+    "sources.json": "76b0d7f73ef776a27619089e46ae39614a65646ad66ae00bd15865f5361b19da"
+  }
+}

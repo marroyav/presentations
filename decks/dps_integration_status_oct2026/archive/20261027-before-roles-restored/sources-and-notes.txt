@@ -1,0 +1,213 @@
+VD detector protection — speaker notes
+I&I draft, 27 October 2026
+Eight main slides; nine backup slides.
+
+Opening
+
+For VD, I propose extending the existing BDE PLC system. We already have the
+panel drawings, parts lists, power calculations and Ignition front end. The
+work is to add the other VD interfaces, test the complete protection paths,
+and have the hardware ready for review and procurement in June 2027.
+
+1. VD detector protection
+
+This talk covers VD. HD can later use an extension of this system or its own
+PLC. Marco's introduction supplies the wider system context; this talk explains
+the hardware we can reuse and the work needed to cover the rest of VD.
+
+2. BDE already has the PLC and panel design
+
+The existing BDE design gives us a commercial PLC, distributed EtherCAT I/O,
+supply inhibits and an Ignition front end. For VD, ten auxiliary rack groups
+serve eighty WIECs through twenty PL506 supplies. We have enough material to
+start the VD engineering from an actual design.
+
+That is the reason for proposing a commercial PLC: we can reuse the design,
+expand it with industrial components and maintain it with controls-engineering
+support. No critical sub-millisecond function has been identified so far.
+The hardware tests will establish whether each complete path meets its limit.
+
+Source: June SC presentations, released BDE ICD and May VD rack workbook.
+The figure is the preliminary TPC reference drawing in EDMS 2401090 v4,
+sheet 2. It shows available engineering, not completed VD installation.
+The 2023 parts list names a CX5140; the earlier drawing uses a CX5120.
+
+3. Put the VD PLC in the CUC, with I/O near the equipment
+
+I propose placing the VD controller in the CUC beside the other PLC racks.
+The I/O remains distributed near the equipment, using the BDE arrangement
+along the mezzanine. The central PLC applies the protection rules shared
+between systems; local equipment protection remains at the equipment.
+
+OPC UA connects DPS to SC for monitoring and allowed supervisory operations.
+The facility input in this diagram represents selected conditions. Its
+hardware or software path depends on the function. The diagram does not
+assign every protection input to OPC UA.
+
+The June and October detector layouts still mark the central PLC rack TBD.
+CUC placement is our proposal, not a documented rack assignment. The hardware
+package includes the CUC-to-VD fieldbus route and control-power allocation.
+
+4. Add the VD interfaces that the BDE system does not cover
+
+The equipment inventories already set the scale. PDS has eighty PoF boxes
+and fifty-eight planned low-voltage feeds. TDE occupies twenty rack positions.
+CalCI supplies level, temperature and optical-source information, and needs
+interfaces for the applicable protection permits. Facility conditions connect
+through the separate LBNF/DUNE and SDSTA building systems and cryogenic systems.
+
+PoF is a useful example. Eight temperature and eight voltage readings per box
+give 1,280 monitoring values. Those values size the local readout. The permits,
+fault indications and shutdown groups determine the DPS connection count.
+The proposed extension therefore includes local PoF readout/control and the
+protection exchange; it does not allocate 1,280 central PLC terminals.
+
+The existing ICD matrix supplies the requirements that affect these purchases.
+One real conflict concerns purity-monitor light and PDS bias: earlier sources
+require bias off, while the later working PDS matrix allows acquisition with
+activity tagging. The chosen behaviour changes the required permits and
+feedback. That belongs in the hardware discussion now; detailed thresholds
+and the full response matrix can mature later.
+
+The TDE draft already describes local microTCA crate protection. Its external
+DPS inhibit remains a separate interface. The table describes proposed work,
+not agreed trip rules or finished terminal quantities. Personnel-safety alarms
+remain with SDSTA, as Marco describes in the supplied email.
+
+5. Protection must keep working when SC is unavailable
+
+The proposed division is that SC operates, sequences, displays and records;
+DPS and local protection enforce the equipment limits. An operating request
+cannot override a protection trip. Reset clears the trip only when permitted;
+re-enabling the equipment is a separate action.
+
+The PX3 guide makes the integration work concrete. Ignition normally monitors
+sensors and switches outlets over SNMP. When Ignition is unreachable, the PDU
+uses local rules for smoke, water and temperature and keeps the network-switch
+outlet powered. It does not automatically restore tripped outlets.
+
+The prototype with Geoff and the rack team must exercise this configuration
+with PLC protection and SC recovery. Include the case where the host still
+answers ping but its protection application has stalled: the guide's ping
+check establishes reachability, not application health. This is a proposed
+test, not a reported failure in an installed rack.
+
+6. Test the full protection path before buying the additions
+
+Use the BDE vertical-slice work and the G271 equipment to test representative
+VD paths. Inject a sensor or equipment fault, observe the PLC and I/O action,
+and measure when the affected supply or load reaches its protective state.
+The acceptance limit comes from the equipment owner and includes detection
+through completed shutdown. A PLC scan-time figure alone is insufficient.
+
+Then exercise SC loss, fieldbus interruption, control-power loss, reset and
+restart. The simulation framework prepares load and fault cases; the physical
+bench measures PLC, communication and equipment behaviour. A measured path
+that cannot meet its allowance needs a faster local action or another interface.
+
+June's SC progress presentation describes existing BDE vertical-slice work.
+The July G271 deck lists installed PDU, PL506, mini-MPOD and switch; WIEC/PLC
+additions were still planned in that document. These records establish useful
+test resources, not a completed VD prototype or current availability booking.
+
+7. Take the VD hardware to review in June 2027
+
+The review package follows directly from the design and tests: VD panel and
+I/O drawings, CUC fieldbus routes, power allocation, added parts and cables,
+test results, costs, lead times and spares. The existing component and power
+records supply the starting quantities and calculation method. New purchases
+cover the VD allocation and added interfaces.
+
+The hardware design and procurement-readiness review precede ordering. Site
+installation follows the required sequence; some facility interfaces may be
+needed in summer 2027. The full VD response matrix is due for review in early
+2028. The early matrix work has the narrower job of supplying the requirements
+that can change the hardware we buy.
+
+These dates follow Marco's proposed milestones. Intermediate monthly dates
+are not assigned without the engineering effort and test time to support them.
+
+8. I will lead the VD hardware work with a control engineer
+
+I can lead the VD design and SURF interface work with a process control
+engineer. Terri and Trevor bring the BDE panel and PLC experience. Geoff and I
+need to implement the SC/DPS/PDU command and recovery behaviour. Vivian, the
+consortia and DPS supply the equipment requirements and ICD updates.
+
+The workshop request is engineering time and access to the existing test
+stands so that we can deliver the June review package. These contributions
+are proposed; Trevor has not been assigned the process-control role.
+
+The SURF inspection maps are ready. I am coordinating access with Rachel and
+have identified Dale Curran as an SDSTA integration contact. The inspection
+will establish the actual controllers, I/O and connection points in the panels.
+Until DPS is active in an installation or commissioning phase, my proposal is
+that the equipment-owning consortium remains responsible for its protection.
+
+Backup slides
+
+9. VD rack-space allocation
+The May workbook reserves 12U in each of ten BDE auxiliary racks and ten bias-HV
+racks. These are design allocations, not twenty installed panel assemblies.
+The bias-HV sheet labels itself a first pass based on the earlier detector.
+
+10. One BDE group
+Ten groups each have two PL506 supplies, eight WIECs and forty-eight WIBs:
+20 supplies, 80 WIECs/PTCs and 480 WIBs overall. The diagram omits fan/heater
+wiring for readability. Group, coupler, panel and rack counts are distinct.
+
+11. Panel drawings and Ignition
+The two figures are genuine source excerpts: EDMS 2401090 v4 sheet 2 and
+June SC Progress PDF page 7. The parts list names CX5140, EK1100, EK1521,
+EL2124 and a TF6100 OPC UA licence, among the other field I/O and supplies.
+The earlier TPC drawing's panel sizes and older populations do not override
+the VD workbook's allocations. Historical prices are not current quotations.
+
+12. Bias-panel parts
+The VD workbook specifies two 337 mm DIN rails per rack. Each has an EK1100,
+EL9410, EL9011, eighteen EL2124 terminals and a 24 V supply. Ten racks imply
+twenty rails and 360 EL2124 terminals, or 1,440 output channels in that draft.
+The working VD inventory has 576 bias channels. The inhibit-to-supply mapping
+sets the purchase quantity; this difference is not verified spare capacity.
+
+13. Power estimates
+BDE LV RACK!D27 records 2,254 W expected AC input per PL506 for four WIECs.
+Twenty supplies therefore imply 45.08 kW, shown as about 45.1 kW.
+BDE Aux Rack!D14 records 831 W. K13:K14 identify its six-WIEC origin and an
+approximately 33% increase for eight. A linear planning estimate is therefore
+831 x 8/6 = 1,108 W per auxiliary rack, or 11.08 kW for ten. This is an
+explicit scaling assumption, not a fresh terminal-by-terminal calculation.
+Bias HV Rack!K22 gives 24 V x 40 A = 960 W supply capacity. Capacity and AC
+input demand are different quantities and are not added into a system total.
+The older DDSS workbook provides useful calculations, but its 25 LV / five
+bias rack population and some terminal types differ from the VD design.
+
+14. PX3 behaviour
+The June 2026 guide documents normal Ignition protection and conditional local
+fallback. It preserves NET_SWITCH and requires deliberate power restoration.
+It does not establish identical installation in every VD rack or a tested PLC
+permit interface. PX4/iX12 capabilities are not attributed to this PX3 setup.
+
+15. Other VD equipment
+The working PDS allocation uses 42 DAPHNE feeds, eight calibration-board feeds
+and eight pulser-bias feeds: 58 total. It proposes seven MPV8060i modules and
+one MPV8030i in at least one full-size MPOD crate. These are subsystem supply
+allocations, not DPS terminal quantities. PoF has no direct Ethernet interface
+in the inventory; its local readout/control needs the proposed interface.
+CalCI includes cryogenic instrumentation, purity monitors, ionisation lasers
+and the pulsed-neutron source without duplicating their inventory entries.
+
+16. Facility inspection
+U-FD-M-901 rev12 (14 February 2025) has twenty control-panel symbols, including
+eight CUC references and the north/south 4910 sump interfaces. The maps and
+survey register identify drawing references, not twenty confirmed installed
+cabinets. Field observations are pending. No inspection or external contact
+was performed as part of this presentation revision.
+
+17. Rack inventory
+The May workbook has 76 numbered mezzanine positions, SEDM-01 through SEDM-76,
+including reserved and spare positions. It separately describes forty top-plate
+mini-racks. Neither count establishes the number of remote-I/O stations.
+
+Source revisions, locations, file hashes and calculations: sources.json.
+Detailed technical findings: source-review.txt.

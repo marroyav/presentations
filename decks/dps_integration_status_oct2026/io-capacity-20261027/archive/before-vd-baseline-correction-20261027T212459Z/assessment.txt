@@ -1,0 +1,150 @@
+Slide 6: space and module additions for VD
+27 October 2026 — engineering estimate, not a released panel design
+
+There is room in the rack allocations for extension panels. The 12U already
+assigned to BDE is occupied by its protection equipment; it is not 12U of
+spare mounting area. The old panel drawing is crowded. Reserve 4U in each
+affected auxiliary rack as an initial extension allowance and lay out the
+actual terminals, supplies, cable ducts and connectors within that allowance.
+
+Space supported by the sources
+
+The May 2025 FD2 rack workbook has ten auxiliary racks. BDE Aux Rack!C14
+assigns 12U to DPS, covering U22–U33. Rows 26–44 explicitly label U3–U21
+as Space: a contiguous 19U block per rack. A note at U9 suggests possible
+ground-plane readout, so the entire block is not a dedicated DPS reservation.
+
+Each of ten bias racks also assigns 12U to DPS (Bias HV Rack!C15). The
+contiguous block U3–U12 is marked Space: 10U per rack. K17:K18 describe two
+rails and 337 mm of equipment on each. The usable rail length is not given;
+subtracting 337 mm from the full 19-inch panel width would ignore margins,
+supports, cable access and terminals.
+
+EDMS 2401090 v4, F10xxxxxx-Prelim_-_DDSS_Controls.pdf, sheet 2, shows:
+- A 4U central PLC panel using CX5120. Scaling the visible gap against the
+  19-inch dimension gives about 85–90 mm. The later parts list selects
+  CX5140, about 20 mm wider, leaving roughly 65–70 mm if the other positions
+  are unchanged: about five 12 mm terminals geometrically. This is an
+  estimate from the drawing, not a dimensioned or installed spare allowance.
+- A 12U TPC auxiliary panel. The upper I/O row is almost full; the lower row
+  contains the fibre junctions and power supply. The drawing uses the older
+  output-module arrangement and cannot be treated as the as-built layout of
+  the later parts list.
+- An 8U bias reference panel. Do not confuse that historical drawing with
+  the later VD workbook's 12U, two-rail allocation.
+
+The workbook itself says the PD flange addition brings DIN-rail use close
+to the maximum (BDE Aux Rack!K20:K21). This is evidence against claiming
+large spare terminal capacity from the slide 6 drawing.
+
+VD rebase of the existing six-WIEC parts pattern
+
+The April 2023 CE Interlock Parts List uses 25 six-WIEC groups. Divide its
+production quantities by 25, then apply the same allocation to eight WIECs
+per auxiliary rack. This is an explicit scaling assumption, not evidence
+that the VD fan/heater grouping has already been approved.
+
+Component       Six WIECs   Eight WIECs   Added/rack   Added/10 racks
+EL1004                  6             8            2               20
+EL2034                  6             8            2               20
+EL3202-0010             6             8            2               20
+EL2878-0005             3             4            1               10
+EK1521                  6             8            2               20
+Total added                                        9               90
+
+This preserves four fan feedbacks, four fan outputs, two RTDs and four
+heater outputs per WIEC from that parts pattern. The BDE ICD section 5
+still leaves fan/heater inhibit grouping to the consortium. Two existing
+EL2124 terminals provide eight inhibit outputs for the eight active PL506
+feeds in a VD group. Covering all twelve supply-channel positions would
+instead add one more EL2124 per group; unused positions are not counted here.
+
+The nine added modules occupy about 130 mm of aligned rail length in total:
+seven 12 mm terminals and two 23 mm EK1521 fibre junctions. That total is
+spread over the signal and fibre banks; it is not one continuous free gap.
+
+The workbook's PD-flange option adds 3 EL3202, 2 EL2878 and 1 EL9100 per
+auxiliary rack: six more modules, about 72 mm, or 60 modules across ten racks.
+This option is quoted as written. The workbook flags its inherited six-WIEC
+calculation; the actual VD PD flange population could change the option.
+
+Power sets another limit
+
+Using the 2023 module mix scaled to eight WIECs, the first bank's signal
+terminals draw about 3.86 A of typical E-bus current. Its EK1100 and one
+EL9410 provide two separately limited 2 A sections. The PD option adds
+0.77 A, taking the signal-terminal total to 4.63 A. The combined option
+therefore needs at least one additional E-bus supply section, such as
+another EL9410, even before any new facility I/O. The order of terminals
+must keep each section within its individual limit. These are typical
+electronics currents, not the 24 V fan/heater load calculation.
+
+The fibre bank is separate: eight EK1521 at 350 mA each total 2.8 A, which
+can be split four and four across its existing two 2 A sections. This does
+not establish unused current in the signal bank.
+
+Planning counts per affected auxiliary rack are therefore:
+- VD rebase only: nine added signal/link modules, before any additional
+  power-feed allowance needed by the final arrangement.
+- VD rebase plus the workbook PD option: fifteen added modules.
+- The same combined case plus one extra E-bus feed: sixteen, or 160 across
+  ten racks; 214 mm of added aligned module width distributed over the banks.
+No spare-parts allowance, new coupler/end cap for a separate station, new
+power supply, terminal block, fuse, connector or cable duct is included.
+
+Other DPS additions
+
+The stated architecture uses SNMP for PDUs and LV supplies and OPC UA for
+additional subsystem exchange through SC. Those connections require no
+additional discrete or analog I/O terminals merely because another device
+or software value is added. The 34 PDS LV feeds, 20 TDE racks and 1,280 PoF
+readings are not corresponding counts of central PLC terminal channels.
+
+The remaining physical additions are the selected facility and equipment
+contacts or signals: for example a facility alarm, cryogenic permit or HV
+inhibit. The current integration matrix names functions but does not give
+a complete wired channel allocation. A final module total for those
+interfaces is not supported yet. The counts above quantify the available
+BDE pattern and a documented option without inventing that channel map.
+
+Source locations and revisions
+
+1. FD2_Rack_Estimates_May_2025_TMS.xlsx:
+   BDE Aux Rack!C14,K13:K23,A26:B44,B57:B61;
+   Bias HV Rack!C15,K17:K21,A36:B45.
+2. EDMS 2401090 v4, CE_Interlock_Parts_List.xlsx, updated April 2023:
+   Interlocks M&S!C20,C24:C25,C28:C29; support parts C11:C15,C19,C21:C23,C26:C27.
+3. EDMS 2401090 v4, F10xxxxxx-Prelim_-_DDSS_Controls.pdf, sheet 2.
+4. EDMS 2401090 v4, DDSS_Controls_Power_Analysis.xlsx:
+   TPC LV Rack (x25), separate signal and fibre power sections. The sheet
+   has the older module mix; the 3.86 A estimate above uses the 2023 mix.
+5. EDMS 3293079 v1, BDE ICD internal revision 1.4, section 5, PDF p7.
+
+Manufacturer dimensions and current data checked 27 October 2026
+
+https://infosys.beckhoff.com/content/1033/cx51x0_hw/3664226315.html
+  CX5120 122 mm / CX5140 142 mm current listed widths. The older drawing
+  is consistent with an approximately 124 mm CX5120; use an approximate
+  20 mm increase, not a precision spare-length claim.
+https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed1xxx-digital-input/el1004.html
+  4 inputs, 12 mm aligned width, 90 mA typical E-bus current.
+https://www.beckhoff.com/en-gb/products/i-o/ethercat-terminals/el-ed2xxx-digital-output/el2034.html
+  4 outputs, 12 mm, 120 mA. Listed as last time buy; this estimate uses
+  the documented reference part, not a current procurement recommendation.
+https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed3xxx-analog-input/el3202-0010.html
+  2 RTD inputs, 12 mm, 190 mA.
+https://download.beckhoff.com/download/document/io/ethercat-terminals/EL28xx_en.pdf
+  EL2878-0005: 8 outputs, 12 mm aligned width, 100 mA.
+https://infosys.beckhoff.com/content/1033/ek112x_ek15xx/1881470603.html
+  EK1521: 23 mm aligned width, 350 mA.
+https://www.beckhoff.com/en-us/products/i-o/ethercat-terminals/el-ed2xxx-digital-output/el2124.html
+  4 outputs, 12 mm, 130 mA.
+https://infosys.beckhoff.com/content/1033/el9xxx/1246731659.html
+  EL9410: 2 A E-bus section, 12 mm aligned width.
+https://download.beckhoff.com/download/document/io/ethercat-terminals/ek110x_ek15xx_en.pdf
+  EK1100: maximum 2 A E-bus supply.
+
+Reproduction: run calculate.py in this directory. It reads the workbook
+cells, writes the module table and calculation JSON, and records source
+hashes, repository state and calculation checks in a new evidence file.
+No slide, drawing, workbook or installed equipment is changed by this work.

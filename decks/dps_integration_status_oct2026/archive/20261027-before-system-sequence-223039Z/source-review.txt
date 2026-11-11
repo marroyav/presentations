@@ -1,0 +1,87 @@
+VD DPS source review — inhibit paths and rack infrastructure
+27 October 2026
+
+Result
+The presentation connects the existing hardware to the procurement work:
+trace each VD inhibit, identify its existing equipment and missing connections,
+then count actual additions. It includes a separate rack-infrastructure system.
+The review does not yet provide a final new-I/O count or bill of materials.
+
+System roles and routes
+Original DPS/SC/BMS/local-interlock definitions retained. FFDG uses the API
+through Batavia and SC; SDSTA is under investigation. The single detector
+overview includes OPC UA through SC, shared SNMP PDU/supply control, and
+BDE/bias EtherCAT plus wired inhibits. The CUC location remains proposed.
+SC owns the logs; bridge-server implementation stays outside the presentation.
+Native protocol support does not establish an installed PLC implementation.
+
+Existing VD hardware
+The May VD workbook and June SC layout establish ten groups of eight WIECs,
+20 PL506 supplies, 80 PTCs/WIECs and 480 WIBs. The displayed EDMS 2401090
+panel is a historical reference with parts/power workbooks, not a verified
+populated VD panel. No six-to-eight WIEC conversion is counted as new scope.
+The HVS ICD also supplies a substantial inventory and cRIO/Heinzinger and
+ISEG interface description. The source differences in crate housing/location
+remain in the detailed FAC-01 review; they do not make HVS an undefined system.
+
+BDE cooling example
+The recovered WIEC note describes six individual fan power/return/RD circuits
+on the DB25 connector. The ICEBERG hardware note documents EL1004 inputs with
+pull-ups, EL2034 fan power/diagnostics, EL2124 5 V PL506 inhibit outputs and an
+EL9505 output-bank supply. The VD architecture connects remote I/O over EtherCAT.
+The path review identifies the fan inputs, PLC decision, wired inhibit and
+supply output; exact VD terminal and WIEC/channel allocations remain unmapped.
+
+The WIEC note is internal rev 0, modified 19 September 2025, from DocDB 34374
+v1. It is not established as the released EDMS v2 attachment. Its six fans
+differ from the four-fan ICEBERG reference. Assuming the six-fan interface
+throughout gives 48 fan-status signals per eight-WIEC group, or 480 for VD.
+These are baseline signal requirements, not additions or a terminal purchase.
+The cooling rule, allowed time and failure/recovery behavior still need agreement.
+
+Rack infrastructure
+The rack, feeds, PDU(s), smoke/humidity sensors and support parts form one
+system. Subsystem supplies and dedicated inhibits remain in their respective
+inventories. DocDB 32655 v8 describes PX3, DX-PD2C5, 4WTAR-B and EOLR-1 plus
+temperature/leak sensors and wiring. Humidity is included by Manuel; the guide
+recognizes humidity readings but supplies no humidity-probe model or trip rule.
+
+The guide is an Ignition-direct prototype with local fallback on loss of
+Ignition. The proposed VD chain is Ignition -> DPS PLC -> PDU; it needs matching
+trip/reachability/recovery configuration and tests. These are distinct maturity
+states, not competing descriptions of the selected control ownership.
+
+Hardware additions and alternatives
+PDS LV remains 34. PoF remains 80 boxes with 1,280 working monitoring values.
+June SC Progress slide 29 names Opta PLC and Beckhoff PLC alternatives. The
+October architecture labels Berghof; no controller choice or box/controller
+multiplicity is established by that label. Local signal types and actions
+determine the I/O and parts for each option. TDE remains PDU-only now, with
+future crate-status/external-inhibit options retained. CalCI uses its existing
+instrumentation and calibration descriptions as the review starting point.
+
+FFDG API points must be mapped to the conditions required by each rule.
+The API connection itself consumes no discrete/analog DPS channels. SDSTA
+hardware depends on the interface investigation. Cryogenic instrumentation
+and process-control sources are kept distinct. FAC-01 illustrates the need
+to map a specific alarm and its loads before assigning an extra facility input.
+
+Panel space and power
+The May sheet allocates 12U DPS per auxiliary/bias rack. It marks 19U Space
+in auxiliary racks and 10U in bias racks; these are not new reservations.
+Actual DIN-rail and electrical capacity follow the populated VD arrangement.
+The first-pass bias layout gives 360 EL2124 / 1,440 outputs, not a confirmed
+procurement quantity or verified spare capacity relative to 576 bias channels.
+
+Expected PL506 input is 20 x 2,254 W = 45.08 kW under workbook assumptions.
+At the six-fan note's 24 V, 0.33 A rating, fans alone are 8 x 6 x 0.33 x 24
+= 380.16 W per auxiliary group. This is not the total panel load. The earlier
+831 x 8/6 extrapolation is removed from the current power slide; the VD total
+needs actual fans, heaters and I/O. Bias supply allowance is 960 W DC capacity.
+
+Verification limits
+Local pinned sources only; no fresh EDMS latest-version check. Presentation
+and arithmetic checks do not establish wiring, settings, installed capacity
+or response-time qualification. The detailed reviews are in
+/home/arroyave/work/vd-dps-plan/inhibit-path-review-20261027/ and the separate
+rack-infrastructure-hardware-control.txt. Source paths/hashes are in sources.json.

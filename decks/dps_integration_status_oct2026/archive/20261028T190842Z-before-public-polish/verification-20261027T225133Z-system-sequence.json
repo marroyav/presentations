@@ -1,0 +1,111 @@
+{
+  "checked_at": "2026-10-27T22:51:33.712704+00:00",
+  "revision": "Consortium interlock matrix introduces the VD system review; BMS service maps, DPS logic and individual detector paths",
+  "pre_change_archive": "archive/20261027-before-system-sequence-223039Z/",
+  "git": {
+    "repository": "/home/arroyave/work/presentations",
+    "head": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "dirty": true,
+    "status_sha256": "aa8b7a65aeb9318b97a1de3c358d0e534c77f0b8591ccf2ad62d9f2ab25d69c9",
+    "tracked_diff_sha256": "b58927e84d55107fdbab1e446a0e12fe3a80f6903a77a8dc739ecb5d17894b92",
+    "deck_is_untracked": true,
+    "note": "Output hashes identify the deck revision. Unrelated root Makefile/README changes and other decks were not edited."
+  },
+  "commands": [
+    {
+      "command": "make -C /home/arroyave/work/presentations decks/dps_integration_status_oct2026/main.pdf",
+      "exit_code": 0
+    },
+    {
+      "command": "pdftotext -layout main.pdf main.txt",
+      "cwd": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026",
+      "exit_code": 0
+    },
+    {
+      "command": "pdftoppm -f 1 -l 31 -scale-to 1400 -png main.pdf /tmp/dps-system-slides/slide",
+      "cwd": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026",
+      "exit_code": 0,
+      "note": "Full render followed by targeted renders of changed pages after layout corrections."
+    },
+    {
+      "command": "scripts/audit_decks.py audit_file on main.tex with backup-slides.tex and both diagram inputs expanded",
+      "exit_code": 0
+    },
+    {
+      "command": "PyMuPDF page count and word bounds; source SHA-256 checks; matrix/brain/divider sequence and PoF content assertions",
+      "exit_code": 0
+    }
+  ],
+  "acceptance_criteria": {
+    "page_count": "20 main + 11 backup = 31",
+    "overfull_boxes": 0,
+    "source_audit_errors": 0,
+    "off_page_text_bounds": 0,
+    "source_hash_mismatches": 0,
+    "sequence": "Matrix 6, DPS logic 7, empty Detector divider 8",
+    "pof": "400 readings, with no superseded 1,280-reading claim in the PDF",
+    "visual_review": "No clipped diagrams, overlapping labels or unreadable new tables"
+  },
+  "pages": 31,
+  "main_slides": 20,
+  "backup_slides": 11,
+  "source_errors": [],
+  "advisories": [
+    "/tmp/dps-system-sequence-combined.tex: 7 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "layout_errors": [],
+  "source_count": 44,
+  "source_hash_mismatches": [],
+  "overfull_boxes": 0,
+  "sequence_check": "Matrix 6, DPS logic 7, empty Detector divider 8",
+  "pof_check": "400 readings; superseded 1,280 absent from PDF",
+  "dense_source_slides": [
+    2,
+    11,
+    12,
+    15,
+    17,
+    22,
+    23
+  ],
+  "visual_review": "All 31 pages reviewed from 1400-pixel renders, using individual views and contact sheets. Changed pages were rendered again after layout edits; final pages 1, 6, 12 and 14 were inspected individually. No visible clipping or overlapping labels. The full ICD diagram on backup page 23 was inspected after spacing corrections.",
+  "advisory_review": "Source-density advisories on slides 2, 11, 12, 15, 17, 22 and 23 include TikZ source. Rendered diagrams were inspected.",
+  "content_review": [
+    "Definitions retained: DPS arbitrates protection; SC operates, monitors and logs; local interlocks remain independent.",
+    "Facility overview routes FFDG, SDSTA and the single CUC cryogenic system through SC; SC/DPS use OPC UA.",
+    "BMS slides include schematic vertical service boundaries at 4850/4910; licence and SDSTA survey status remain explicit.",
+    "Matrix review precedes DPS logic and the Detector divider. Each proposed inhibit is traced from source through input, decision, actuator/load and feedback.",
+    "BDE design and VD rack counts retained; fan-to-bias dependency is conditional and historical HD evidence is distinguished from VD requirements.",
+    "DAPHNE main diagram adapts the working ICD and includes DAQ; full service diagram is retained in backup.",
+    "PoF uses the confirmed four voltage readings plus one temperature per box: 320 voltage plus 80 temperature readings. PDU inhibition and optional box enable remain distinct.",
+    "HV, CalCI thermometry, lasers and purity monitors have separate slides. Proposed laser and PrM rules and the PrM ICD conflict remain visible.",
+    "Rack infrastructure is separate; PDS LV scope is 34 feeds; TDE current control is PDU-only across 20 racks, with potential future interfaces retained.",
+    "June 2027 hardware/procurement readiness and early-2028 full VD response-matrix review are retained."
+  ],
+  "sha256": {
+    "main.tex": "7c36500d2d8f43a87836bfe9d069227d1d1df5dc78d53083b501e18d29be4030",
+    "backup-slides.tex": "4fea7b455a5d7f0fab10a74c750a5759a336712b1ad72d9b778027f85aa08e3c",
+    "main.pdf": "97f1aeffba767d17fe67730f0b708e1d32670d748eed41a2b39a7c44ae030e48",
+    "main.txt": "dd2afa464a19eb7b7ce7cdb74207c2f334d789349c9ddcfe9e419e3a45e85744",
+    "README.md": "f4b5f64d852ef9d26892de55d408c13cb203ebff1cedb8b138fe08b48bbce871",
+    "architecture-inputs-20261027.txt": "6cc5656cb0c1ef529317b2b2845c3a6b0f7480d777ebc97be4ae8f519ef1dc44",
+    "sources.json": "c37d5d54a52f6f393670b8573bca07039db15af52797b88bbc7ab61a36087df1",
+    "sources-and-notes.txt": "6720f6ca6ad3cb6e9da117ef256484a2340d659f90a1f3e9cc372a30f32909bf",
+    "source-review.txt": "118589d9748246565fdc79e415369b0619f6b9c153b0e86f253a3cef8b6cb16c",
+    "render-check.json": "1e9c2258bee8bb5ed80d1b654c38783283bb28c53272ab0d1e166f5063b1b5f7",
+    "diagrams/site-boundaries.tex": "1ced215320e4ecdc09d5aa100fe1a7dbfef78c65c3ebf47d2620568afad32e6b",
+    "diagrams/daphne-icd-reference.tex": "890e6dec7dde96f5ea9ea73f035c8fe5a0ec405a555ace29d26803b9db9e253f",
+    "figures/tpc-panel-reference.pdf": "b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c",
+    "figures/sc-progress-june2026.pdf": "ae9ff086c81c9b2306c1313ea34fc2693ae95893982d6ca8c4a085eff1335edc",
+    "verification-20261027T225133Z-system-sequence-build.log": "afcff2f92f4ed34ce59a09c69e6c37aaa305b031d657579f0852185f99f4145a"
+  },
+  "build_log": "verification-20261027T225133Z-system-sequence-build.log",
+  "limits": [
+    "Presentation and source review only; no installed wiring, controller logic or end-to-end response time has been qualified.",
+    "The interlock review is ongoing. No complete additions bill of materials or proven spare-I/O count is claimed.",
+    "BMS maps show service boundaries, not surveyed cross-sections or installed point inventories. SDSTA interfaces remain under investigation.",
+    "Local working ICDs and notes include proposals and unresolved conflicts. Source revisions are pinned locally; no fresh EDMS latest-version check was performed.",
+    "CUC DPS location and work assignments remain proposals. The PoF monitoring count does not establish the number of physical laser drivers or central DPS terminals.",
+    "Build used local fonts and included PDF 1.6 material in a PDF 1.5 output setting; warnings were recorded. Visual rendering passed."
+  ]
+}

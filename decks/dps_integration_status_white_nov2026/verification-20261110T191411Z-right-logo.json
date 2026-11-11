@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-11-10T19:14:11.810393+00:00",
+  "request": "Move the large grey DUNE logo to the right on title and Detector transition slides.",
+  "pre_change_archive": "archive/20261110T191149Z-before-right-logo",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "exit_code": 0,
+  "build_evidence": "verification-20261110T191411Z-right-logo-evidence.json",
+  "checks": {
+    "slides": 43,
+    "all_slide_text_retained": true,
+    "layout_changes_on_slides": [
+      1,
+      14
+    ],
+    "logo_width_cm": 5.2,
+    "logo_placement": "Right, vertically centred",
+    "plain_slide_footer_regions_blank": true,
+    "large_dune_pixels_neutral_grey": true,
+    "other_slide_footer_source_unchanged": true,
+    "tex_layout_warnings": [],
+    "source_audit_errors": [],
+    "source_audit_advisories": []
+  },
+  "visual_review": {
+    "reviewer": "Codex visual and source review; no human approval recorded",
+    "full_size_reviews": [
+      1,
+      14
+    ],
+    "scale_pixels": 1400,
+    "result": "Grey DUNE logos are on the right without overlapping the title text or centred Detector label. Neither slide has a footer."
+  },
+  "limits": "Layout change only. No new engineering claim or hardware test.",
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/main.tex": "458db948a376b76a6c0344f6b1c8570b0cd7de04b6d5aa1cc58a61b2a3dcee89",
+    "decks/dps_integration_status_white_nov2026/deck-style.tex": "f0a8f35117bd710d00d5239bd9aaff947f83fc45a02df03dd79911e2ad2b995c",
+    "decks/dps_integration_status_white_nov2026/README.md": "d0597b928504e5eb4d34422899d0fb0854e41600bb7d4d2d00ed3b5bca7c6ea1",
+    "decks/dps_integration_status_white_nov2026/sources.json": "736b130aa1ecf87c0c58ead0c0bdaba1d598c8e14beb487cdfb5bb1ce05275d3",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "b23a63863af28572694e22f918c115ba0905e638b3ec81adb64ddc6b7e3d81bb",
+    "templates/dune-professional/beamerthemeDUNEProfessional.sty": "bc215c3cd376b01ed3169851922c095232468a6c9a8d22509e1e7047d7a8a98e",
+    "templates/dune-professional/logos/DUNElogo_gray.pdf": "fc921d5b84aea693faa09f2573a84e6b66c3ae2a1c0041b4ad9771abde1fcd5e",
+    "templates/dune-professional/logos/FNAL-Logo-Black.pdf": "c966abfaf1ac66fa8e97d70a8676e7aa8b307adf31a81abb98baa0583b46f3cc"
+  },
+  "output_sha256": {
+    "main.pdf": "fa4a0cb4879609dd69b81fa118572bc7554d23d62337bda915efd6dd11d379b8",
+    "main.txt": "96927d1733b20fbbeacfa4914ff5010d85ef6b8c5e9f7e457ac8aca00f3a976b",
+    "review/slide-01.png": "f9d2fd52c150dc77853664895cd40233cebd960a0873de6427ae0d65aa566703",
+    "review/slide-14.png": "e613316996f2aeea34e569ebda5cbc9b0223dd078ed2d73a6e410571bc0cc563",
+    "review/contact-01.png": "0697ecfca7b68005fabfe04496456d64bc745fd5bd72b2d5d568be0703b3fc20",
+    "review/contact-13.png": "07d475128fce12134ffcc2b20f5badb819a1df760cbe5b88715a7f080138417e",
+    "review/grayscale-meeting.png": "05aaa6951ce519d965b95e2e0d7a250d79a16f1cbcd62b89e264ed6f47847a4b"
+  }
+}

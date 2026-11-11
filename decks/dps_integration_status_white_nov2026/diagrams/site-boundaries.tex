@@ -1,0 +1,18 @@
+% Schematic service boundary, not a surveyed section or controller inventory.
+\newcommand{\siteboundarymap}{%
+\begin{tikzpicture}[
+ box/.style={draw=DuneTextMuted,fill=none,text=DuneText,align=center,font=\small,inner sep=4pt},
+ level/.style={anchor=east,font=\small,text=DuneTextMuted}]
+ \node[font=\small\bfseries,align=center,text width=2.0cm] at (1.25,2.25) {SDSTA\\site services};
+ \node[font=\small\bfseries,align=center,text width=2.8cm] at (4.05,2.25) {FFDG DUNE FD\\building services};
+ \node[level] at (-0.05,1.25) {Surface};
+ \node[box,text width=1.95cm] (surface) at (1.25,1.25) {Oro Hondo\\Ross shaft};
+ \node[level] at (-0.05,0.25) {4850};
+ \node[box,text width=2.8cm] at (4.05,0.25) {CUC / caverns\\HVAC, chilled water};
+ \node[level] at (-0.05,-0.85) {4910};
+ \node[box,text width=2.8cm] at (4.05,-0.85) {SP-1 / SP-2\\sump interfaces};
+ \node[box,text width=1.95cm] (drainage) at (1.25,-1.85) {Mine drainage\\and pumping};
+ \draw[draw=DuneTextMuted,line width=0.7pt] (surface.south) -- (drainage.north);
+ \draw[-{Stealth},draw=DuneTextMuted,line width=0.7pt] (3.1,-1.3) -- (2.35,-1.65);
+\end{tikzpicture}%
+}

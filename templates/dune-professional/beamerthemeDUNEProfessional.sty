@@ -557,4 +557,62 @@
   }
 }
 
+
+% White profile for new decks. Keep canonical dark definitions intact for
+% existing decks and token audits. Call once, after loading the theme.
+\newcommand{\DuneUseWhite}{%
+  \colorlet{DuneBackground}{DuneEditorialCanvas}%
+  \colorlet{DuneSurface}{DuneEditorialCanvas}%
+  \colorlet{DuneSurfaceRaised}{DuneEditorialSky}%
+  \colorlet{DuneTitleSurface}{DuneEditorialCanvas}%
+  \colorlet{DuneText}{DuneEditorialText}%
+  \colorlet{DuneTextMuted}{DuneEditorialMuted}%
+  \colorlet{DuneBorder}{DuneEditorialMuted}%
+  \colorlet{DuneInfo}{DuneEditorialMuted}%
+  \colorlet{DuneSky}{DuneEditorialMuted}%
+  \colorlet{DuneCoral}{DuneEditorialText}%
+  \colorlet{DuneBg}{DuneBackground}%
+  \colorlet{DunePanel}{DuneSurface}%
+  \colorlet{DunePanelAlt}{DuneSurfaceRaised}%
+  \colorlet{DuneTitleBand}{DuneTitleSurface}%
+  \colorlet{DuneLine}{DuneBorder}%
+  \colorlet{DuneMuted}{DuneTextMuted}%
+  \colorlet{DuneCyan}{DuneInfo}%
+  \colorlet{DuneViolet}{DuneInfo}%
+  \setbeamercolor{dune block paper}{fg=DuneText,bg=DuneEditorialCanvas}%
+  \setbeamercolor{dune block sky}{fg=DuneText,bg=DuneEditorialSky}%
+  \setbeamercolor{dune block coral}{fg=DuneText,bg=DuneEditorialWarm}%
+  \setbeamercolor{dune role info}{fg=DuneOnDanger,bg=DuneInfo}%
+  \expandafter\def\csname DuneRoleText@info\endcsname{DuneOnDanger}%
+  \expandafter\def\csname DuneRoleText@evidence\endcsname{DuneOnDanger}%
+  \expandafter\def\csname DuneRoleText@success\endcsname{DuneOnDanger}%
+  \setbeamertemplate{background canvas}{\color{DuneBackground}\vrule width\paperwidth height\paperheight}%
+  \setbeamertemplate{frametitle}{%
+    \vspace{3mm}\insertframetitle\par
+    \ifx\insertframesubtitle\@empty\else
+      {\small\color{DuneTextMuted}\insertframesubtitle\par}%
+    \fi
+    \vspace{2mm}%
+  }%
+  \setbeamertemplate{footline}{%
+    \hfill{\color{DuneTextMuted}\scriptsize\insertframenumber}%
+    \hspace{0.78cm}\vspace{3mm}%
+  }%
+  \setbeamertemplate{title page}{%
+    \vfill
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+    \vspace{4mm}
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+    \vspace{8mm}
+    {\usebeamerfont{author}\color{DuneText}\insertauthor\par}%
+    \vspace{2mm}{\small\color{DuneTextMuted}\insertdate\par}%
+    \vfill
+  }%
+  \renewcommand{\DuneSectionPage}[3]{%
+    \begin{frame}[plain]
+      \DuneBigStatement{##1}{##2}{##3}%
+    \end{frame}%
+  }%
+}
+
 \mode<all>

@@ -1,0 +1,19 @@
+{
+  "question": "Do the saved slow-control levels track the size of the slow charge precursor or the recorded early PDS activity?",
+  "status": "Exploratory extension fixed before inspecting the new associations",
+  "method_revision": 2,
+  "revision_reason": "The initial audit found 935127 timestamps with multiple different archived values, concentrated in derived HV/current channels. Rejecting all such timestamps discarded much of those channels. Preserve each timestamp's median, minimum, maximum and sample count instead; test minimum and maximum envelopes as sensitivities. First-pass files are archived unchanged. Correlation criteria and time bins are unchanged.",
+  "scope": "Bracket all 1531 local event records against all 34 native archived monitors. Test the existing November waveform metrics separately in runs 32731 and 32739.",
+  "SC_window_seconds": [-30, 30],
+  "SC_level": "Median of timestamp-level medians in the window; at least one timestamp. For multiple values at one timestamp, retain their median, minimum, maximum and count. No interpolation or carry-forward. Test medians of timestamp minima and maxima as sensitivity bounds. Record the count, full observed range, maximum step between timestamp medians, preceding/following ages and nearest-sample age.",
+  "features": ["slow charge amplitude in ADC", "reported-disconnected-input PDS edge size in ADC/256ns", "fraction of records with a selected early DAPHNE109 pulse"],
+  "primary_aggregation_seconds": 60,
+  "sensitivity_aggregation_seconds": [120, 300],
+  "aggregation": "One equally weighted row per source file and UTC time bin; medians of SC level and amplitude, mean of binary PDS-pulse flag. Missing data stay missing.",
+  "associations": ["within-run Spearman rank correlation", "within-file rank correlation", "within-file rank correlation after removing linear time trends from both ranked quantities"],
+  "coverage_requirement": "At least 20 valid aggregated bins, 3 usable source files and 4 distinct SC levels in each run for the primary repeatability screen. Within-file calculations require at least 4 paired bins and varying SC and detector values.",
+  "repeatability_screen": "Same sign and absolute time-adjusted rank correlation at least 0.30 in both November runs. This descriptive threshold flags follow-up candidates, not discovery significance or proof of no association.",
+  "sensitivity_checks": ["120 and 300 second bins", "leave one source file out", "resample whole source files rather than individual events; treat intervals as sensitivity summaries, not population confidence limits"],
+  "no_claims": ["shake occurrence or rate versus slow controls", "absence of brief unrecorded electrical transients", "causal origin", "calibrated optical energy", "formal equivalence to zero correlation"],
+  "acceptance": ["all canonical input hashes and row counts checked", "failed query excluded and corrected-voltage retry chunks included", "exact boundary duplicates removed; same-timestamp values represented by median and full range, with counts retained", "all records and monitors accounted for", "all tested associations and coverage failures saved, including any positive result"]
+}

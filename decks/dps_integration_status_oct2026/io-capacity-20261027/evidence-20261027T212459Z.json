@@ -1,0 +1,44 @@
+{
+  "question": "Slide 6: space and I/O additions beyond the VD BDE baseline",
+  "created_at": "2026-10-27T21:24:59.725991+00:00",
+  "status": "Corrected scope; reviewer not assigned",
+  "source_commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+  "dirty_state": [
+    " M Makefile",
+    " M README.md",
+    "?? decks/dps_integration_status_oct2026/",
+    "?? decks/ground_shakes_oct2026/",
+    "?? decks/pds_calibration_daq_oct2026/",
+    "?? decks/pds_data_selection_oct2026/",
+    "?? decks/pds_readout_oct2026/",
+    "?? decks/pds_ta_run45392_oct2026/",
+    "?? decks/sc_simulation_results_oct2026/",
+    "?? reports/"
+  ],
+  "tracked_diff_sha256": "b58927e84d55107fdbab1e446a0e12fe3a80f6903a77a8dc739ecb5d17894b92",
+  "host": "debian",
+  "python": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]",
+  "run_path": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/io-capacity-20261027",
+  "command": "python3 /home/arroyave/work/presentations/decks/dps_integration_status_oct2026/io-capacity-20261027/calculate.py",
+  "inputs_sha256": {
+    "/home/arroyave/work/racks/sources/rack-estimates/FD2_Rack_Estimates_May_2025_TMS.xlsx": "ce887de4442c46f611c1dd2d72688bc7ec80033612ec40604bcdfef430f2706b",
+    "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/io-capacity-20261027/calculate.py": "284f268ed6c14f5105005c137d9ed37fea09d06689463f28f8f83b2d4f86a47f",
+    "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/io-capacity-20261027/assessment.txt": "cf5e43b884515a25a623f042faa6adb1a47ab33bdbfea1496a80570c1b8413f4"
+  },
+  "outputs_sha256": {
+    "calculation.json": "bb5fdf8b15e8d8a1855f9e0d5e34098f9f33562fe45ee3654af28cfa32ad3d9b",
+    "module-additions.csv": "61f0f3efc6a59634d99023ab60260dd8e7833aae17cdce438b1f9f4283dae55d"
+  },
+  "acceptance": [
+    "VD baseline is ten groups of eight WIECs",
+    "No HD conversion counted as additional VD scope",
+    "Workbook rack ranges and conditional option reproduced",
+    "Unknown physical I/O totals remain unset, not zero"
+  ],
+  "result": "All arithmetic and source-cell assertions passed",
+  "limits": [
+    "No installed-panel measurements",
+    "Actual VD spare rail capacity and physical additions are not established by the historical reference drawing",
+    "Network-interface counts exclude local subsystem readout hardware and any additional wired interlocks"
+  ]
+}

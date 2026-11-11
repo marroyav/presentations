@@ -1,0 +1,25 @@
+{
+  "created_utc": "2026-10-28T22:30:52.546086+00:00",
+  "change": "Removed the former slide 5 at the user's request; removed its notes and source section and renumbered the remaining references.",
+  "previous_version": "archive/20261028-before-removing-slide5/main.pdf",
+  "command": "tectonic --chatter minimal --keep-logs --keep-intermediates main.tex",
+  "checks": {
+    "PDF_pages": 13,
+    "main_slides": 8,
+    "backup_slides": 5,
+    "remaining_frame_contents_unchanged": true,
+    "removed_title_and_plot_annotation_absent_from_PDF": true,
+    "new_slide5": "A repeated source is still possible",
+    "footer_13_of_13_present": true,
+    "layout_warnings": 0
+  },
+  "sha256": {
+    "main.tex": "f529c684a027284f87bc74fc953e2fe3d25f5fb9aac024cc29fec288462de46b",
+    "main.pdf": "a2723ffea257235e55d2b7df9375aa2eb8310a0afcd5726356102d928a0bd9af",
+    "README.md": "3b9c826f5937b4e097062fd35402f6dd76de2a0e59fde2b3a372e372c7c6bcb0",
+    "SOURCES.md": "406b639c5caa67bfbeb0052f0eb43dc374efad2a73faff2397470a9e8182a9ec",
+    "speaker-notes.txt": "65d70b21ff1abbaf856102b4fe7b03dfeaad4654cbe878a34bf68ea4b3a3fd1f",
+    "evidence/build-20261028-slide5-removed.log": "7151d27757846ba4e1cefcabba63ddd790555e820d250591b311ce892193554a"
+  },
+  "reviewer": null
+}

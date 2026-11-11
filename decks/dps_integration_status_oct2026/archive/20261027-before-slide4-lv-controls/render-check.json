@@ -1,0 +1,10 @@
+{
+  "revision": "2026-10-27 slide 4 PDU control path",
+  "pages": 19,
+  "changed_slides": [
+    4
+  ],
+  "overfull_boxes": 0,
+  "visual_review": "Final slide 4 rendered at 1700 pixels and inspected. No overlap or clipping. Other slide source bodies match the preceding revision.",
+  "verification": "verification-20261027-slide4-pdu-path.json"
+}

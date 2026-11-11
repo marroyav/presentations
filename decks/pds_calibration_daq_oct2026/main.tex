@@ -1,0 +1,87 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{PDS calibration using drunc}
+\subtitle{Parameter scans and synchronized acquisition}
+\author{Manuel Arroyave}
+\date{20 October 2026}
+
+\newcommand{\ScanGrid}[2]{%
+  \begin{tikzpicture}[x=0.66cm,y=0.66cm]
+    \fill[DunePaper] (0,0) rectangle (3,3);
+    \draw[step=0.66cm,DuneBorder,line width=0.5pt] (0,0) grid (3,3);
+    \foreach \x in {0.5,1.5,2.5}
+      \foreach \y in {0.5,1.5,2.5}
+        \fill[DuneOnAccent] (\x,\y) circle (2pt);
+    \draw[-{Stealth},DuneSky,line width=1pt] (-0.12,-0.12) -- (3.5,-0.12);
+    \draw[-{Stealth},DuneSky,line width=1pt] (-0.12,-0.12) -- (-0.12,3.5);
+    \node[anchor=north,text=DuneText,font=\small] at (1.5,-0.38) {#1};
+    \node[rotate=90,anchor=south,text=DuneText,font=\small] at (-0.38,1.5) {#2};
+  \end{tikzpicture}%
+}
+
+\begin{document}
+\begin{frame}[plain]\titlepage\end{frame}
+\begin{frame}{Calibration scans a grid of settings}
+  \begin{columns}[c,onlytextwidth]
+    \begin{column}{0.31\textwidth}\centering
+      \ScanGrid{Offset}{VGAIN}
+    \end{column}
+    \begin{column}{0.31\textwidth}\centering
+      \ScanGrid{SiPM bias}{VGAIN}
+    \end{column}
+    \begin{column}{0.31\textwidth}\centering
+      \ScanGrid{LED bias}{SiPM bias}
+    \end{column}
+  \end{columns}
+  \bigskip
+  \centering
+  Each point: apply settings, acquire data.\par
+  \medskip
+  {\small
+    Also: trim, trigger thresholds, LED widths / delay.\par
+    Select wavelength, mask, pulse mode / burst.\par
+    Record rate, window, event count.\par}
+\end{frame}
+
+
+\begin{frame}{Drive DAPHNE and the calibration box in sync}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,minimum width=3.8cm,
+      minimum height=1cm,align=center},
+    edge/.style={-{Stealth},DuneSky,line width=1.2pt}]
+    \node[box,fill=DuneSky,minimum width=5.6cm] (clock) at (0,2) {Shared timing master + command};
+    \node[box] (daphne) at (-3,0) {DAPHNE capture};
+    \node[box] (led) at (3,0) {Calibration-box pulse};
+    \draw[edge] (clock.south) -- (0,1.2) -| (daphne.north);
+    \draw[edge] (0,1.2) -| (led.north);
+  \end{tikzpicture}\par
+  \bigskip
+  Verify LED-to-ADC delay and pulse counts.\par
+\end{frame}
+
+\begin{frame}{PDS needs a repeatable fast calibration loop in drunc}
+  \centering
+  \begin{tikzpicture}[
+      scan node/.style={fill=DunePaper,text=DuneOnAccent,minimum height=0.9cm,
+        minimum width=2.6cm,align=center,font=\normalsize},
+      edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[scan node,fill=DuneSky,minimum width=6cm] (boot) at (0,2.8) {Bring up readout services};
+    \node[scan node,fill=DuneCoral] (conf) at (-3.3,1) {Configure point};
+    \node[scan node] (start) at (0,1) {Start run};
+    \node[scan node] (data) at (3.3,1) {Take data};
+    \node[scan node] (stop) at (0,-0.6) {Stop run};
+    \node[scan node,fill=DuneSky,minimum width=6cm] (down) at (0,-2.2) {Shut down services};
+    \draw[edge] (boot.west) -| (conf.north);
+    \draw[edge] (conf) -- (start);
+    \draw[edge] (start) -- (data);
+    \draw[edge] (data.south) |- (stop.east);
+    \draw[edge] (stop.west) -| node[pos=0.25,below,font=\small,text=DuneSky] {Next point} (conf.south);
+    \draw[edge] (stop) -- node[right,font=\small,text=DuneSky] {Scan complete} (down);
+  \end{tikzpicture}
+  \par\smallskip
+  Expose calibration transitions in drunc; reconfigure between runs.
+\end{frame}
+\end{document}

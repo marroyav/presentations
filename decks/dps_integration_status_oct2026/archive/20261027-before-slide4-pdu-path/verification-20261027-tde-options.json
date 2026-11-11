@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-10-27T20:21:01.873727+00:00",
+  "revision": "TDE: PDU control now; other interfaces retained as future options",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_exit_code": 0,
+  "pages": 19,
+  "main_slides": 12,
+  "backup_slides": 7,
+  "changed_slides": [
+    7,
+    9,
+    17
+  ],
+  "source_errors": [],
+  "advisories": [
+    "main.tex + backup-slides.tex: 1 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "visual_review": "Changed slides 7, 9 and 17 rendered and inspected. Final two-line TDE entry on slide 9 checked again after wording cleanup; no clipping or overlap.",
+  "advisory_review": "Slide 7 diagram source-density advisory reviewed visually.",
+  "content_review": [
+    "TDE remains in the proposed additional interfaces.",
+    "Current TDE capability stated as PDU control only.",
+    "Crate status and external inhibit retained as possible future interfaces."
+  ],
+  "sha256": {
+    "main.tex": "21380c0bb605f45d0301d070d2f4f9d50b9313b7bb1511dbd494b361dc0c3275",
+    "backup-slides.tex": "82b09bb916627fa96922fbdd84a2d08d6fb7dd067aabde1d32e37bb8898edd08",
+    "main.pdf": "a3c0353c1be3867b13f3188451a1011a0b7088671ddd035daea478cdd011e811",
+    "main.txt": "5bc717cd45fb85e808e782da7cde76515bf5ac3be783f8c78721cf335ea302be",
+    "README.md": "27c2ecfbce85c5318bc81b7a864e36e597ee47fe09c71ae7a7b7542b5b629880",
+    "architecture-inputs-20261027.txt": "d91d4280814a613e1bd5a3a146f236f82cc40112db2a06b19f83c524798316c4",
+    "sources.json": "31550be8bf05df76ab89aa8eb93729a1c99452b3ae7bec7883ec5598bc67f40d",
+    "sources-and-notes.txt": "4b3a1653440d061d10bf34f055284551f0665b90316512f4da67c746e11c94f9",
+    "source-review.txt": "58768f0418f3fa252ace818d4f45a0412e77a92754681a51133d5a7aa542554e"
+  },
+  "limits": [
+    "TDE future interfaces are possibilities, not available capabilities or agreed additions.",
+    "Presentation/source review only; no equipment qualification."
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updated": "2026-09-08",
-  "description": "Canonical presentation tokens. The dark theme remains the default; opt-in light editorial tokens preserve the reviewed SURF interface layout.",
+  "updated": "2026-11-05",
+  "description": "Canonical presentation tokens. New decks use the white editorial profile; canonical dark values remain for compatibility with existing decks.",
   "brand_source": "https://www.fnal.gov/faw/designstandards/color-palette.html",
   "colors": {
     "background": {

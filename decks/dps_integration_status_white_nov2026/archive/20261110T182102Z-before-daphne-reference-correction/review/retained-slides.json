@@ -1,0 +1,212 @@
+[
+  {
+    "previous_slide": 1,
+    "current_slide": 3,
+    "title": "DPS protects equipment; SC operates and records",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 2,
+    "current_slide": 5,
+    "title": "Facility inputs reach DPS through slow controls",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 3,
+    "current_slide": 6,
+    "title": "The FFDG BMS connection needs an API licence",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 4,
+    "current_slide": 8,
+    "title": "The SDSTA SCADA interface needs a hardware survey",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 5,
+    "current_slide": 10,
+    "title": "Cryogenics presents one system to DUNE",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 6,
+    "current_slide": 11,
+    "title": "Trace each interlock from its source to the response",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 7,
+    "current_slide": 13,
+    "title": "A trip removes the permit; recovery needs a new request",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 8,
+    "current_slide": 14,
+    "title": "Detector",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 9,
+    "current_slide": 15,
+    "title": "Ten BDE groups use the existing bottom-drift design",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 10,
+    "current_slide": 17,
+    "title": "A cooling fault removes power from the affected crate",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 11,
+    "current_slide": 18,
+    "title": "SC carries DAPHNE bias requests and status",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 12,
+    "current_slide": 19,
+    "title": "DPS switches PoF power through the PDU",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 13,
+    "current_slide": 20,
+    "title": "Drift HV and bias supplies have separate inhibit paths",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 14,
+    "current_slide": 21,
+    "title": "Trace each protection input to a temperature sensor",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 15,
+    "current_slide": 22,
+    "title": "Proposed laser rules block conflicting PDS requests",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 16,
+    "current_slide": 23,
+    "title": "The purity-monitor inhibit rule still needs agreement",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 17,
+    "current_slide": 24,
+    "title": "Use rack sensors and PDUs for shared protection",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 18,
+    "current_slide": 25,
+    "title": "Measure the full path from fault to confirmed shutdown",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 19,
+    "current_slide": 27,
+    "title": "Prepare the hardware review for June 2027",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 20,
+    "current_slide": 28,
+    "title": "Agree responsibility and control-engineering support",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 21,
+    "current_slide": 29,
+    "title": "Existing panels and screens provide the BDE reference",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 22,
+    "current_slide": 30,
+    "title": "The fan trip removes the PL506 channel permit",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 23,
+    "current_slide": 31,
+    "title": "DAQ CCM and Hermes use distinct DAPHNE services",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 24,
+    "current_slide": 32,
+    "title": "Rack space is not a count of spare I/O terminals",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 25,
+    "current_slide": 33,
+    "title": "The bias draft provides 1,440 outputs for review",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 26,
+    "current_slide": 34,
+    "title": "Supply capacity differs from expected power use",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 27,
+    "current_slide": 35,
+    "title": "Map each rack package against the existing allowance",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 28,
+    "current_slide": 36,
+    "title": "Local PDU trips need deliberate power restoration",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 29,
+    "current_slide": 37,
+    "title": "Keep subsystem quantities separate from crate totals",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 30,
+    "current_slide": 38,
+    "title": "Survey the 20 panel references to find installed hardware",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 31,
+    "current_slide": 39,
+    "title": "The workbook allocates 76 mezzanine rack positions",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 32,
+    "current_slide": 40,
+    "title": "Count shared controls and rack devices once",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 33,
+    "current_slide": 41,
+    "title": "The 336-crate total spans TDE and DAQ/timing",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 34,
+    "current_slide": 42,
+    "title": "Keep PDS control and DAQ data links distinct",
+    "original_numeric_values_retained": true
+  },
+  {
+    "previous_slide": 35,
+    "current_slide": 43,
+    "title": "Instrument counts and interfaces still need allocation",
+    "original_numeric_values_retained": true
+  }
+]

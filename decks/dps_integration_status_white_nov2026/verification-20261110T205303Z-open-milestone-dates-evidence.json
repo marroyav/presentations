@@ -1,0 +1,54 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-10T20:54:56.030546+00:00",
+  "task": "dps-open-milestones-20261110",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 30,
+    "tracked_diff_sha256": "86b3dcdabe5ec2aeadc5f5e59f469a2641e381c90ad00bef131065200aef8aef",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261110T205303Z-open-milestone-dates-build.log",
+      "sha256": "9d799ddc8ccfc4ea1e04a87ce2668fd9bba0bad8c8e331f1d65a74b8ef414625"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "1ae7a1fb7fb9c52f3150df02b9e007dbc63ae5dfacf9700a9c34427b3abcc422"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/meeting-updates.tex",
+      "sha256": "9197ceb6fee7216d09d48e18ce7b57c8c1d994d1450d5f0a1662f91fea2f61c8"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "1f74e5774baead07686013f5d0c95bc7810808540b529101ece4012bc5b35b11"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "36a09ec3081dba7481a1f6b8455537db56ecb6fd298d7faf474481fcc003743c"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "3a25459b9883b111be6a4c9074570ed18bc4e83eb431af9b22f802b8c7853a98"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/deck-style.tex",
+      "sha256": "c49bce87cfa3f58945f5460a146106853a58d8f5aec30c61a59ff630c849b9e9"
+    }
+  ],
+  "limitations": "Presentation wording and layout review only; planning dates remain open."
+}

@@ -1,0 +1,60 @@
+Connecting detector protection — presentation notes
+23 October 2026
+
+Purpose
+Invite the collaboration to define protection requirements and interfaces.
+The deck is a status and planning discussion, not an approved control design.
+
+Shared references
+- SC–DPS interface, EDMS 2907050 v1, Released, Public:
+  https://edms.cern.ch/document/2907050/1
+  Pages 4–5: monitoring/control, hardware protection and responsibilities.
+  Page 13: cryogenic/HV conditions, fire, rack smoke and power removal.
+  Version 2 is an In Work revision:
+  https://edms.cern.ch/document/2907050/2
+- Early cryogenics review charge, EDMS 2386382 v1, Released, Public:
+  https://edms.cern.ch/document/2386382/1
+  The 2019 charge asks about interfaces, controller locations, network and
+  server failures, I/O lists and oxygen-deficiency protection. These are
+  questions for the design; they are not evidence of installed performance.
+  Public PDF access was checked on 23 October 2026:
+  https://edms.cern.ch/ui/file/2386382/1/LBNF_ProcessControls_PDR_Charge_Rev4_docx_cpdf.pdf
+- SC subsystem interface collection:
+  https://edms.cern.ch/project/CERN-0000266175
+- Review Office:
+  https://edms.cern.ch/nav/P:CERN-0000193817:V0/P:CERN-0000235211:V0
+
+What to say
+Slides 2–3: DPS protects equipment. SC operates and monitors it. BMS operates
+building services. Cryogenic and facility conditions can affect whether the
+detector may operate; each required signal needs an owner and a defined action.
+
+Slide 4: The diagram is a proposed control rule, not installed wiring. Normal
+SC commands and protection use separate paths. Local trips do not wait for
+remote monitoring. Facility safety keeps its own authority. Response times
+and the effect of a missing signal must be agreed for each function.
+
+Slide 5: The team has collected documents, prepared inspection maps and drafted
+control/interlock tables. A BMS access prototype exists; current-value use and
+its service arrangement remain unfinished. Hardware models in drawings are
+not a verified installed inventory. This status was recorded on 21 October.
+
+Slide 6: Use the existing cryogenics work rather than inventing a second process
+control system. The shared review charge gives a public starting point for
+questions about signals, safety interfaces and failures. Restricted review
+reports are deliberately excluded from the deck's citations.
+
+Slide 7: The first two rows paraphrase the released interface. The lost-signal
+row remains a decision. Each subsystem must define its operating stages,
+limits, response time, failure behavior and reset/re-enable authority.
+
+Slides 8–10: Ask each consortium for a contact and its interlock matrix.
+Discuss shared conditions with SDSTA, LBNF and cryogenics. Agree the SC–DPS
+scope and whether Fermilab takes full DPS accountability. Propose DPS review
+of the SC subsystem interface documents. Start with one reviewed protection
+path, then extend it. Publish BMS values as a separate monitoring service.
+
+Terminology
+SDSTA operates SURF. LBNF is the Long-Baseline Neutrino Facility project.
+The deck does not claim that both building-management systems are new or
+unbuilt. It asks to define their exchanges with DUNE before interfaces are fixed.

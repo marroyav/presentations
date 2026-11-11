@@ -1,0 +1,10 @@
+Manuel's corrections, 28 October 2026
+
+336 microTCA crates is the total across TDE and DAQ/timing, confirmed in
+Manuel's reply. This is not a TDE-only count. No current subsystem split or
+PDU quantity is inferred from that total. The earlier TDE ICD lists 320 TDE crates.
+
+Polish the slides for a broader audience while preserving the existing
+20-slide structure. Add a hierarchical device list and fix diagram overlaps.
+Use the newly installed diagram tool. Detailed source and engineering notes
+belong in the supporting files.

@@ -1,0 +1,44 @@
+slide,title,section
+1,VD detector protection system,main
+2,The full hardware connection list is still missing,main
+3,DPS protects equipment; SC operates and records,main
+4,Fire systems stay separate from detector protection,main
+5,Facility inputs reach DPS through slow controls,main
+6,The FFDG BMS connection needs an API licence,main
+7,Agree how FFDG status can support detector protection,main
+8,The SDSTA SCADA interface needs a hardware survey,main
+9,SDSTA proposes a restricted SCADA status interface,main
+10,Cryogenics presents one system to DUNE,main
+11,Trace each interlock from its source to the response,main
+12,Each group must identify its hardware connections,main
+13,A trip removes the permit; recovery needs a new request,main
+14,Detector,main
+15,Ten BDE groups use the existing bottom-drift design,main
+16,Extend the BDE approach into a full DPS concept,main
+17,A cooling fault removes power from the affected crate,main
+18,SC and DAQ use distinct DAPHNE service paths,main
+19,DPS switches PoF power through the PDU,main
+20,Drift HV and bias supplies have separate inhibit paths,main
+21,Trace each protection input to a temperature sensor,main
+22,Proposed laser rules block conflicting PDS requests,main
+23,The purity-monitor inhibit rule still needs agreement,main
+24,Use rack sensors and PDUs for shared protection,main
+25,Measure the full path from fault to confirmed shutdown,main
+26,"Collect the inputs, then review the full DPS concept",main
+27,Prepare the hardware review for June 2027,main
+28,Agree responsibility and control-engineering support,main
+29,Existing panels and screens provide the BDE reference,backup
+30,The fan trip removes the PL506 channel permit,backup
+31,DAQ CCM and Hermes use distinct DAPHNE services,backup
+32,Rack space is not a count of spare I/O terminals,backup
+33,"The bias draft provides 1,440 outputs for review",backup
+34,Supply capacity differs from expected power use,backup
+35,Map each rack package against the existing allowance,backup
+36,Local PDU trips need deliberate power restoration,backup
+37,Keep subsystem quantities separate from crate totals,backup
+38,Survey the 20 panel references to find installed hardware,backup
+39,The workbook allocates 76 mezzanine rack positions,backup
+40,Count shared controls and rack devices once,backup
+41,The 336-crate total spans TDE and DAQ/timing,backup
+42,Keep PDS control and DAQ data links distinct,backup
+43,Instrument counts and interfaces still need allocation,backup

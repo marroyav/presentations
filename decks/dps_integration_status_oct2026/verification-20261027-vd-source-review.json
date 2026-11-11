@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-27T19:27:08.633640+00:00",
+  "scope": "VD; HD deferred to extension or separate PLC",
+  "pages": 14,
+  "main_slides": 13,
+  "appendix_slides": 1,
+  "build": "make decks/dps_integration_status_oct2026/main.pdf",
+  "source_audit": {
+    "errors": [],
+    "advisories": []
+  },
+  "layout_errors": [],
+  "source_hashes_checked": 14,
+  "visual_review": "All 14 pages rendered and reviewed; panel background and BDE routing checked separately.",
+  "sha256": {
+    "main.tex": "980d6a7ac72305a8d40b4b5d704fb46c2a22b4af2f077f82853fbe7d2e904fe2",
+    "main.pdf": "f83c47bffdec2ece37c74312e9ea7a523b48a6855cf8b11e4874e7ba82a88493",
+    "sources-and-notes.txt": "3e57fb3819085fdfaf5d275f0a1c0d89a754dbb1ac4fcace63c96a9ca9d9d568",
+    "sources.json": "ddcf4fa3ec5d773c1e038b708bc6f4c803350fbb357bb7cc53c76dcec9c4cd13",
+    "source-review.txt": "c30947181b4d17bee28dae20e78bf931e61311c760b1b5975fe3ae06fb032436"
+  },
+  "limits": [
+    "Document/source review only; no live-system inspection or new hardware tests",
+    "Existing document versions read without a new remote latest-revision check"
+  ]
+}

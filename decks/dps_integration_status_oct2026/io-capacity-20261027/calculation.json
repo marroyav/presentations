@@ -1,0 +1,115 @@
+{
+  "status": "Corrected VD-only scope; new physical I/O total not established",
+  "scope": "Additional DPS interfaces beyond the existing VD BDE baseline",
+  "baseline": {
+    "aux_racks": 10,
+    "wiecs_per_aux": 8,
+    "total_wiecs": 80,
+    "pl506_supplies": 20,
+    "dps_allocation_U_per_aux": 12
+  },
+  "additional_interfaces": [
+    {
+      "interface": "Existing VD BDE protection",
+      "category": "VD baseline",
+      "additional_modules": 0,
+      "basis": "Eight WIECs per group already in the VD baseline"
+    },
+    {
+      "interface": "PDU and LV supply SNMP control/status",
+      "category": "Network interface",
+      "additional_modules": 0,
+      "basis": "No discrete/analog DPS terminal channels for SNMP exchange itself"
+    },
+    {
+      "interface": "Subsystem OPC UA exchange through SC",
+      "category": "Network interface",
+      "additional_modules": 0,
+      "basis": "No discrete/analog DPS terminal channels for OPC UA exchange itself"
+    },
+    {
+      "interface": "New hardwired facility and equipment interfaces",
+      "category": "Physical I/O",
+      "additional_modules": null,
+      "basis": "Needs the VD channel allocation; not counted from HD population differences"
+    },
+    {
+      "interface": "PD flange sensors/heaters",
+      "category": "Conditional workbook option",
+      "additional_modules": null,
+      "basis": "Six-module option recorded in workbook; VD applicability and multiplicity not established"
+    },
+    {
+      "interface": "Additional E-bus supply sections",
+      "category": "Support hardware",
+      "additional_modules": null,
+      "basis": "Depends on actual VD baseline bank loading and added physical modules"
+    }
+  ],
+  "total_new_physical_io_modules": null,
+  "rack_space": {
+    "aux_unassigned_contiguous_positions": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "aux_unassigned_contiguous_U": 19,
+    "bias_unassigned_contiguous_positions": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "bias_unassigned_contiguous_U": 10,
+    "bias_dps_allocation_U_per_rack": 12,
+    "bias_rail_occupied_length_mm_from_workbook": 337,
+    "new_dps_space_reserved_U": null,
+    "note": "Rack positions marked Space are not a reservation for DPS. Auxiliary U9 has a possible ground-plane readout note."
+  },
+  "vd_panel_spare_terminal_capacity": {
+    "modules": null,
+    "rail_length_mm": null,
+    "reason": "The slide 6 drawing is a historical reference. Its gaps and the HD per-group population do not establish free space in the VD eight-WIEC panel."
+  },
+  "pd_flange_option": {
+    "source": "BDE Aux Rack!K20:K21",
+    "components_as_written": {
+      "EL3202": 3,
+      "EL2878": 2,
+      "EL9100": 1
+    },
+    "modules_per_documented_package": 6,
+    "vd_new_packages": null,
+    "vd_new_module_total": null,
+    "note": "Retained as a conditional source item; not multiplied by ten or added to the VD baseline without a VD mapping."
+  },
+  "correction": {
+    "excluded_hd_to_vd_conversion_from_new_scope": true,
+    "previous_90_150_160_totals_withdrawn": true,
+    "previous_mandatory_4U_extension_inference_withdrawn": true,
+    "previous_extra_ebus_feed_inference_withdrawn": true,
+    "reason": "They depended on converting the historical six-WIEC pattern and assigning its bank arrangement to VD."
+  }
+}

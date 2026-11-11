@@ -1,0 +1,103 @@
+Ground shakes — public review, 28 October 2026
+
+The point of this presentation
+We added tests of possible relationships. We did not discover the charge
+precursor, opposite APA signs, disconnected-input response or electronics
+pattern: these already appear in EDMS 3493627 v 1. We have not found the cause.
+The strongest additional constraint is the charge-light mixing test: the
+apparent timing peak survives replacing an event's PDS pulses with other
+events' pulses. It therefore cannot identify a unique match by itself.
+
+1. What this analysis adds
+Say explicitly that the earlier slides are the starting point. The enlarged
+charge sample is a cross-check. The new work measures pair timing, tests the
+first-pulse clock and amplitude prediction, tests charge-light assignments,
+and checks electrical fits on an unused run. The SC extension is conditional
+on recorded shakes. These are additions to the evidence, not a diagnosed cause.
+
+2. Three signals, three names
+PDS means the photon-detection readout. A pulse on that readout need not be
+light: voltage interference also produces pulses. The example uses one
+connected input, channel 47 on DAPHNE 109, in run 32731 event 33.
+The sharp candidates are at about -183 and -161 microseconds. The slow charge
+precursor grows later in this example; its APA 1 two-ADC marker is -111.872
+microseconds. The main shake is the large charge threshold used as time zero.
+Top and middle are magnified pre-shake views. The lower trace uses the full
+charge scale. Earlier does not by itself mean causal. The small sharp pulses,
+the slow precursor and the main shake are separate measured features.
+
+3. Double pulses
+Event 33: 22.528 microseconds between selected pulses. Event 52: 65.536.
+The survey found at least two selected multichannel candidates in 101/716
+run 32731 records;80 have exactly two. Events with more than two give several
+consecutive pairs,125 total. The denominator is selected local shake records,
+not a complete detector exposure. Both times must be between -300 and-100
+microseconds; pulse merging suppresses separations below about 10 microseconds.
+Do not call these two confirmed optical flashes. They are also not the
+post-main reflections shown in the earlier EDMS topology slide.
+
+4. Relationship to the precursor and main event
+First means first retained multichannel candidate in the selection window,
+not necessarily the first pulse the detector produced. Readout gaps matter.
+The left panel has two pulse-before-marker examples and one marker-before-
+pulse example. The two-ADC crossing is a diagnostic marker, not an exact
+start time. The right panel is the stronger population test: learn a fixed
+pulse-to -charge delay on run 32731, then test it on 225 unused run 32739 records.
+Its average error is 66.1 microseconds. A fixed phase relative to the known
+main shake gives 33.4 microseconds. The first selected pulse is not a reliable
+clock for the slow charge change. This does not prove it has no physical role.
+Separately, early PDS features improve the slow-charge amplitude estimate by
+only 4.1%. Main-shake clipping prevents interpreting ADC size as physical energy.
+
+5. A charge-light assignment that fails
+The coloured diagonal is a localized collection-wire signal, not the smooth
+APA-average precursor. It is already observed at -331 microseconds. The two
+selected PDS pulses follow at -183 and-161. Under a common-interaction-time
+interpretation and the recorded timing, those later pulses cannot be parents
+of the whole earlier feature. Matching only a late piece would be misleading.
+This is an exploratory 2 D component, not a fitted 3 D track. Other later charge
+features remain compatible candidates; relative electronics latency is not
+independently calibrated. We do not conclude that there was no light.
+
+6. The timing peak
+For a particle interaction, prompt light can be followed by drifting charge.
+We searched that delay. A broad maximum near 325 microseconds looked tempting.
+We then kept each charge record and borrowed PDS pulse trains from other
+events in the same run, file and assembly. The peak remained. The peak can
+therefore arise from the common placement of features around the shake and
+the usable recording window. It cannot locate the source or select a unique
+light pulse. This comparison uses shake records; it is not a measurement of
+the ordinary-background rate. Full 3 D matching is unfinished.
+
+7. Electrical fit
+Electrical pickup and the electronics-dependent pattern were already in
+EDMS pp 21-23. The addition is a fit tested on an unused run and on the same
+target samples with substituted reference signals. Same-event references
+work better: relative root-squared error 0.918 versus 1.023. A value of 1 means
+predicting no change. The effect is partial and varies strongly by channel.
+It is not a fraction of light, a pure electrical subtraction, or proof of
+which board or cable started the disturbance. Disconnections are reported
+engineering facts; run-specific verification is still needed.
+
+8. Slow controls
+Do not say high voltage is unrelated to shakes. EDMS already reports HV
+rate/amplitude trends and a preliminary wire-bias effect. Our new test asks
+whether archived SC levels track three waveform measurements within the two
+November runs. It removes file offsets and within-file linear time trends.
+No eligible pair repeats at the predefined magnitude cutoff with one-minute
+bins. A filtered-current hint appears only for one binning/value treatment.
+This test does not establish zero correlation, test rate, or redo the bias-off
+comparison. The direct 30201/30202 waveform-versus-bias comparison remains open.
+
+9. What should follow
+Use the specific questions from EDMS: quantify the wire-bias transition and
+fit whole charge tracks. Add a matched sample without shakes to determine
+which early features are distinctive. More galleries alone cannot answer these.
+
+Document review limits
+Baseline: EDMS 3493627 v 1,85 pages,20 July 2026,locally recovered; not reverified as
+the latest revision because CERN authentication had expired. The associated
+EDMS 3493642 evolving-material Google Slides was exported on 28 October 2026:
+four pages,including a warm-gas example and an empty coupling section.
+No claim of field-wide novelty is made. See SOURCES.md and the dated baseline
+comparison for page references, source identity and the new-test classification.

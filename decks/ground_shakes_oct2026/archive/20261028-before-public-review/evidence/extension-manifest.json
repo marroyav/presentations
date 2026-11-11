@@ -1,0 +1,21 @@
+{
+  "source_root": "/home/arroyave/work/ground-shake-data/analysis",
+  "source_sha256": {
+    "electrical-pattern-20261023/results.json": "3b6604dffb9b7d2eb8d52136636c6627cbc616930bae6bedff96be5e03fbe7e8",
+    "electrical-pattern-20261023/sequence-results.json": "97b7bedee9059ea893a5b7f70afc0b90da64a2b0a93fcbc3713846ac050f7a70",
+    "sc-correlation-20261027/report-data.json": "7c2786136c7c9e28128bd89c52ddfc8f96cc078ac4868c8626c9c1c87a7e0b0b",
+    "sc-correlation-20261027/summary.json": "3c0428a8b3adb0e8cf3aa05acc39e201b87c5084df2de1e2a0ea21689d9d372c",
+    "sc-correlation-20261027/plan.json": "7c57c543bb08107cd5759043955d212034402ab8a36330058272ab2a21f0e4d6",
+    "sc-correlation-20261027/previous-results-audit.json": "0bc219c3d8a8cc239abf4b25ce3bef30b5e2fcbdec34790d74e53deeabc36fb6",
+    "sc-correlation-20261027/SC-replication.pdf": "49bc8dfd7141a2f8dfe079ff74fe9b2423818a15757828cadbb5b35b8a35033c",
+    "sc-correlation-20261027/SC-replication.png": "4e2c6ea2c7b898c4351c76d94cada2a93832a1bc5327d621ddf9859d703f48ed"
+  },
+  "figure_sha256": {
+    "figures/07-cross-run-electrical.pdf": "915d30749593f2fd7ab86d81bf74b9b6257cceec19d12c6224f897edbba7a6de",
+    "figures/07-cross-run-electrical.png": "0f6f0c39696b48084d81b07b01e38f4e4274b1e1ea166c326d261abab6c445be",
+    "figures/08-electronics-groups.pdf": "0dc11b37f82a9c8a555b1162872fe6f685ca8126803faca3bbd015c0ba555bee",
+    "figures/08-electronics-groups.png": "9c93d63016f3129330a010402ae5d17211409fcc6b31ac99f16302e8b7ca8c78"
+  },
+  "script_sha256": "47115aaff81495e5b9327fcee30b6379747d8e219b544d30846dc60f5565fe34",
+  "meaning": "Prediction score = 1 minus squared edge error / observed squared edge size. Not an optical/electrical fraction."
+}

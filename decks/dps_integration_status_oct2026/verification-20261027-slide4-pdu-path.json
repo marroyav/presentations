@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-10-27T20:29:22.573619+00:00",
+  "revision": "Slide 4: PDU power control and subsystem OPC UA through SC",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_exit_code": 0,
+  "pages": 19,
+  "main_slides": 12,
+  "backup_slides": 7,
+  "changed_slides": [
+    4
+  ],
+  "source_errors": [],
+  "advisories": [
+    "main.tex + backup-slides.tex: 2 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "visual_review": "Final slide 4 rendered at 1700 pixels and inspected. No overlap or clipping. Other slide source bodies match the preceding revision.",
+  "advisory_review": "Source-density advisories cover diagram code; changed slide 4 inspected, with previous slide 7 review retained.",
+  "content_review": [
+    "Main control path: DPS PLC → PDUs → subsystem power, with PDU feedback to the PLC.",
+    "Subsystem OPC UA exchange goes through SC; SC ↔ DPS PLC uses OPC UA.",
+    "SC owns logging; local interlocks retained.",
+    "No generic direct PLC-to-subsystem arrows on slide 4.",
+    "SC–OPC UA bridge servers excluded from slides and presentation implementation detail.",
+    "Dedicated BDE I/O and optional future TDE interfaces retained in their existing slides."
+  ],
+  "sha256": {
+    "main.tex": "0fd5a4128d1b347f48fe29ba66c9db1229688c05e57abf815303ad8f51450666",
+    "backup-slides.tex": "82b09bb916627fa96922fbdd84a2d08d6fb7dd067aabde1d32e37bb8898edd08",
+    "main.pdf": "bc70f11437155b3466a5297a66134fd568dd612619f257fd741ae8be0fec8714",
+    "main.txt": "cb2d08e99ad06365cec3fb3e6d8ed76e3b72a416d77efdd8b78f407d0c1d20d5",
+    "README.md": "c2de4cc983aac0c4996c83bc5a6dd877466db05c131d8ffc723108ef0cb2c0a7",
+    "architecture-inputs-20261027.txt": "b667f5896b2d6474f733bbe463f26a1e3450a13664df4da7a4bf2643ab79389d",
+    "sources.json": "47c601cec3aab339dc234a2aed964f7eb29c51dad5e672db47a228cf193d94b5",
+    "sources-and-notes.txt": "a0690c2a8f61d4c853bc69be080ea3358d228a46a6bd685ddef93869f04543f3",
+    "source-review.txt": "01ee1506fbb1afe825a7ec1d5ce6a11ce28da5eae277583da2f8a9bd71683fe6"
+  },
+  "limits": [
+    "Presentation/source review only; no equipment or hardware-response qualification."
+  ]
+}

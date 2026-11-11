@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-10-28T22:39:33.607553+00:00",
+  "change": "Define the selected TPC signals, replace ambiguous charge-feature/pair wording with timestamp comparisons, explain units and no waveform integration, and record the wider-window coverage limit on slide4. Former slide5 remains removed.",
+  "commands": [
+    ".venv/bin/python analysis/pds-shake-timing-20261028/window_coverage.py",
+    "python3 analysis/pds-shake-timing-20261028/plot_window_coverage.py",
+    "python3 prepare_figures.py",
+    "tectonic --chatter minimal --keep-logs --keep-intermediates main.tex",
+    "pdftoppm -f 4 -l 5 -scale-to 1440 -png main.pdf",
+    "pdftotext -bbox main.pdf",
+    "scripts.audit_decks.audit_file(main.tex)",
+    "git diff --check"
+  ],
+  "checks": {
+    "PDF_pages": 13,
+    "words_in_bounds": 1511,
+    "layout_warnings": 0,
+    "removed_slide_absent": true,
+    "units_and_no_integration_statement_present": true,
+    "Gaussian_limit_present": true,
+    "source_audit": "passed; no advisories",
+    "original_frozen_numerical_inputs": "unchanged",
+    "visual_review": "Revised slides4/5 and the wider-window coverage plot reviewed.",
+    "packet_coverage_events": 1378,
+    "saved_PDS_candidates_checked_against_packet_coverage": 2156,
+    "no_21channel_coverage_before_minus320_in_either_run": true,
+    "Gaussian_fit": "not performed; missing early coverage and signal-dependent selection prevent establishing the full shape"
+  },
+  "artifact_sha256": {
+    "main.tex": "051176b5f79e9d662f2ca07410c6e584e279f7cb9a99fa2ee1d6780b5ba4dc70",
+    "main.pdf": "9eb1115ed3cdacf3b098e2902413d2a162e73a411a00575ff86d54d1b092b88a",
+    "prepare_figures.py": "370913cb7353ba1248b3bd8520f4100f5e4403cc28967c11556321b122c0585d",
+    "README.md": "e15f3b295f529811831586c06b27dd54c9db78e3c2c2dd62d246671f7acef92d",
+    "SOURCES.md": "8074ca70a469a7afd2758f353012cc044d6e5cc9e270a3bcff52174349e5d089",
+    "speaker-notes.txt": "87274ad1e30cdfad38109fd588450ac67435cd5989ed75f210544cc97c56418b",
+    "figures/05-charge-light-timing.pdf": "a4e0abac70963a973666d4ab15fe369c212a9cac729aa7f4429d0691de2f7b05",
+    "figures/05-charge-light-timing.png": "ef85194738c659ed61c8b408a3603d442df682b2980c52b5d61fc358d57aadf8",
+    "evidence/figure-manifest.json": "231bc962e50fd8671c6523ea57ec5c2ae23f4cba8c1242ed3219319c3029a78e",
+    "evidence/build-20261028-tpc-signal-wording.log": "7151d27757846ba4e1cefcabba63ddd790555e820d250591b311ce892193554a"
+  },
+  "coverage_sha256": {
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/window-validation-20261028T223539216691Z.json": "7c948ac534ba74006f054588d691a404eb5d92f0f7adcc4ba30c9f82c7670331",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/window-coverage.json": "93b059dc05f471f4b1290717af2dfd3ea6b4872c7a4ef2938b851a275af62f15",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/window-coverage-events.json": "c07a3ea4ec21d94a572d4c87dcb8b23c1e02ea093a9cc6dacd3d48911b33bbc4",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/window-coverage.npz": "b20b7e83423a95c90fa77f5cb1cdadd6a29e0a4ba2cfea0eff82ec414fcf84dd",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/window_coverage.py": "8c626ac108bc7f91f9ae8f0ce32950ad5fe564214e342fe081926c23435806a4",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/plot_window_coverage.py": "9a7c772cb08f4d758e9bfcd88e211cdbba8f56ab87f1e9e2cd7161bb106aa289",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/extended-window-result.json": "35fd44399ec3f22250ed41b4c886b0e0f9c9ab52bb223a28669e27af819724ea",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/extended-timing-and-coverage.pdf": "560203d68ff3af81e30a3706c26c2b97cce78b6f5589d7f10cdd733c85ef9ef9",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/extended-timing-and-coverage.png": "2c37c5829fae820e576e32a0fe24a0dc32a80ace2bf0b169b90de76cb9cc617c"
+  },
+  "reviewer": null,
+  "limits": [
+    "TPC groups and PDS pulses are selected candidates, not confirmed physical matches.",
+    "The plotted ordinate counts time comparisons and divides by usable comparison time; it is not integrated charge or light.",
+    "Packet coverage is not a detection-efficiency correction; individual channels can record earlier samples without satisfying the21-channel selection.",
+    "No Gaussian shape or extrapolated tail established."
+  ]
+}

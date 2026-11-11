@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-11-10T19:16:59.205551+00:00",
+  "request": "Transition slide: grey DUNE on the left, Detector on the right.",
+  "pre_change_archive": "archive/20261110T191633Z-before-transition-left-logo",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "exit_code": 0,
+  "build_evidence": "verification-20261110T191633Z-transition-left-logo-evidence.json",
+  "checks": {
+    "slides": 43,
+    "all_slide_text_retained": true,
+    "changed_slide": 14,
+    "footer_blank": true,
+    "tex_layout_warnings": []
+  },
+  "visual_review": {
+    "reviewer": "Codex; no human approval recorded",
+    "slide": 14,
+    "scale_pixels": 1400,
+    "result": "Large grey DUNE on the left and Detector on the right, vertically centred, with no footer."
+  },
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/deck-style.tex": "67b1def9d683a9d626466abff7cb66feb982d94581254a52d9a1b0055dd22311",
+    "decks/dps_integration_status_white_nov2026/main.tex": "458db948a376b76a6c0344f6b1c8570b0cd7de04b6d5aa1cc58a61b2a3dcee89",
+    "decks/dps_integration_status_white_nov2026/README.md": "7a8bf6398f7509f5cb0103976796e184ee73015833a7096d6e357dfdc8037728",
+    "decks/dps_integration_status_white_nov2026/sources.json": "6b87f71276570a2c04fc55792cde8796a4f4e582d6311ad3a43022be6b387ce6",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "3999f6fcf8acc3af989763515508fc7d4d55a70dc64a28173533e6f3fba232bc",
+    "templates/dune-professional/logos/DUNElogo_gray.pdf": "fc921d5b84aea693faa09f2573a84e6b66c3ae2a1c0041b4ad9771abde1fcd5e"
+  },
+  "output_sha256": {
+    "main.pdf": "95cfd8f02a333492b91c76691b73ff93fa1ef1dbe310de14e364ab0e08de40a0",
+    "main.txt": "96927d1733b20fbbeacfa4914ff5010d85ef6b8c5e9f7e457ac8aca00f3a976b",
+    "review/slide-14.png": "4c5fbc7b28848ab3ab708b874a8776f231019c6ec679c54a27c838acc3b112c5",
+    "review/contact-13.png": "26ad5a063da1b72f5ed647ebb89b8e07a7d627813dec584c37fd026128159447",
+    "review/grayscale-meeting.png": "9a04b9082e6ebea5d386d2833687e861879c18ec9832ee2d8052c95a8c7c02db"
+  }
+}

@@ -20,7 +20,7 @@ theme or locally named color currently becomes another design system.
 The older `work/latex/daphne_presentations` collection contains useful material
 and several successful experiments, but it also contains copied Beamer themes,
 deck-local TikZ styles, and multiple diagram pipelines. The newer
-`work/presentations` repository already centralizes a dark theme and is the
+`work/presentations` repository centralizes a shared theme and is the
 right home for the framework.
 
 Migration should therefore be incremental. New decks start here. Existing decks
@@ -83,37 +83,29 @@ conversation, rewrite it. For example:
 
 ## Visual model
 
-The earlier DUNE clear/dark decks work best when their layouts change with the
-argument. This framework therefore treats color as a structural layer inside a
-stable dark canvas, not as a colored status label attached to every idea:
+Start new decks on white, with dark text and a restrained accent. Let plots,
+diagrams, and comparisons occupy the main area. Use whitespace and alignment
+to group information. Filled blocks are optional when containment adds meaning;
+they should not be the default container for every sentence.
 
-| Visual layer | Use |
-|---|---|---|
-| Warm paper | Sources, definitions, reference material, neutral proof |
-| Sky | Interfaces, flows, context, and supporting structure |
-| Coral | Ownership, active path, decision, and requested action |
-| Dark ink | Supporting material that should recede |
-| Red | A genuine hard danger or prohibited condition only |
+The [plotting guide](plotting-guide.md) covers scales, comparison, uncertainty,
+labels, and exports. The [diagram guide](diagram-guide.md) covers relationships,
+routing, boundaries, and review. Both use Tufte’s *The Visual Display of
+Quantitative Information*; the [source notes](visual-display-source.md) identify
+the inspected pages and separate the book’s ideas from local design choices.
 
-Sky and coral are high-luminance presentation tints of the established
-blue/orange families; they are layout surfaces, not additional institutional
-brand colors.
+The maintained starter calls `\DuneUseWhite` after loading the shared theme.
+Existing decks retain their current rendering unless they opt into that profile.
+Revise older decks when their content needs work; check their figures and local
+color overrides before switching profiles.
 
-Paper, sky, and coral are high-contrast filled surfaces with dark text. They
-create hierarchy through block size, placement, and relationship. A normal
-slide uses one dominant fill; a comparison or diagram may combine them because
-the layout itself explains the relationship. Green and gold remain optional
-data-visualization tokens rather than standard slide furniture. Labels, shapes,
-lines, and placement still carry the meaning when color is unavailable.
+Use the same geometry and encoding for related comparisons. Change the layout
+when the explanation needs it. Avoid alternating layouts merely to create rhythm.
+Keep labels, useful axes, and context even when simplifying a figure.
 
-The deck should alternate slide languages: editorial claim, asymmetric mosaic,
-section break, figure-led explanation, comparison, evidence table, pipeline,
-and decision close. Repeating a composition is useful for a real comparison;
-repeating it on every slide makes the deck feel like a form.
-
-The palette audit checks normal text at 4.5:1 and meaningful graphical cues at
-3:1. These are WCAG web thresholds, used here as measurable minimums; projected
-slides often benefit from exceeding them.
+The palette audit checks declared normal-text pairs at 4.5:1 and meaningful
+artwork at 3:1. Check the final PDF too: small labels, line widths, and projection
+can undermine a palette that passes numerical checks.
 
 ## Typography and density
 

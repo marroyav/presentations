@@ -1,0 +1,96 @@
+{
+  "task": "flow-svx",
+  "created_at": "2026-10-23T13:48:37.862489+00:00",
+  "repo_commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+  "working_tree": "Uncommitted; pre-existing Makefile/README edits and other untracked decks preserved.",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_result": "Passed",
+  "layout_messages": [],
+  "template_font_warning_count": 142,
+  "source_audit": {
+    "errors": [],
+    "advisories": []
+  },
+  "design_token_audit": "Passed: template tokens and contrast checks.",
+  "pdf_checks": {
+    "pages": 10,
+    "external_links": [
+      "https://edms.cern.ch/document/2386382/1",
+      "https://edms.cern.ch/document/2907050/1",
+      "https://edms.cern.ch/project/CERN-0000266175"
+    ],
+    "text_outside_page": [],
+    "local_citations": false
+  },
+  "visual_review": "All ten final slides reviewed as rendered images; consortium table also checked at full resolution.",
+  "public_references": [
+    {
+      "url": "https://edms.cern.ch/document/2907050/1",
+      "public_access": true,
+      "access_denied": false,
+      "anonymous": true
+    },
+    {
+      "url": "https://edms.cern.ch/project/CERN-0000266175",
+      "public_access": true,
+      "access_denied": false,
+      "anonymous": true
+    }
+  ],
+  "cryo_charge": "Public PDF and one-page charge read on 2026-10-23; EDMS 2386382 v1.",
+  "verification_tools": {
+    "tectonic": "Tectonic 0.17.0",
+    "pdfinfo": "Poppler",
+    "renderer": "PyMuPDF in existing slide-review environment"
+  },
+  "limits": [
+    "Presentation and proposals only; no hardware or commissioning acceptance.",
+    "Recorded work status is dated 2026-10-21.",
+    "Template font discovery uses installed system fonts; build emits portability warnings.",
+    "No external publication, email, server or equipment changes."
+  ],
+  "files": [
+    {
+      "path": "main.tex",
+      "sha256": "8aa8b8de9befc7edf9794590a45348982e126978ab2ca8e63112d28d0e506070"
+    },
+    {
+      "path": "main.pdf",
+      "sha256": "b73186a8eb641a85df60a930fa2bcd8aa311971f86d60d6c77b7f48881a3c40f"
+    },
+    {
+      "path": "README.md",
+      "sha256": "ef98a122291bca2281ff042b4184ab454b301a04723954b361d19a5cfd4b3029"
+    },
+    {
+      "path": "sources-and-notes.txt",
+      "sha256": "30cb8289ac701aa0df14072671b71a824193fa43bebfca806c2da767ef15fa8a"
+    },
+    {
+      "path": "sources.json",
+      "sha256": "889b3a5be9dc5609bef52f5fd8d3265394278a2c6cd6e0a47be4a70bf050ff56"
+    },
+    {
+      "path": "public-links-check.json",
+      "sha256": "ad7f13df7088949c4b5454a5c834d153b0f7b5be3a1dd95439bc9dd7ee491c5a"
+    },
+    {
+      "path": "render-check.json",
+      "sha256": "80c7335afc1f006cf2b2ceea95112b8d23707b8afc4d0799ccd6c688c262a104"
+    },
+    {
+      "path": "review/contact-sheet.png",
+      "sha256": "480fe1e9d4690149d087a17d5577621aca56bd7d1951bca372f4d1d63ccc2c88"
+    }
+  ],
+  "framework_inputs": [
+    {
+      "path": "templates/dune-professional/beamerthemeDUNEProfessional.sty",
+      "sha256": "9c02359eb1832b32ebb935da087188f5cad72436269bd72380041dc11ebf5141"
+    },
+    {
+      "path": "templates/dune-professional/design-tokens.json",
+      "sha256": "10bcab0dc5da1d7ee2b4b42e7a2ff83fc98b66a0f5657086dc94e8ee11ad3fec"
+    }
+  ]
+}

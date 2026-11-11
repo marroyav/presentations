@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-11-10T21:35:35.164123+00:00",
+  "request": "Add a Batavia/SD progress-and-plans slide immediately before Detector, including dune-fd-test01, PDU, smoke sensors, relay, GIZMo, Ignition, OPC UA bridges and emulators.",
+  "pre_change_archive": "archive/20261110T213440Z-before-test-setups-slide",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "exit_code": 0,
+  "build_evidence": "verification-20261110T213440Z-test-setups-slide-evidence.json",
+  "checks": {
+    "slides_before": 44,
+    "slides_after": 45,
+    "new_slide": 13,
+    "following_slide": 14,
+    "following_title": "Detector",
+    "all_existing_slide_bodies_retained": true,
+    "all_requested_local_items_included": true,
+    "reported_progress_and_plans_distinct": true,
+    "source_audit_errors": [],
+    "source_audit_advisories": [],
+    "tex_layout_warnings": [],
+    "plain_slides_without_footer": [
+      1,
+      14,
+      29
+    ]
+  },
+  "visual_review": {
+    "reviewer": "Codex; no human approval recorded",
+    "slide": 13,
+    "scale_pixels": 1400,
+    "result": "Two columns show reported Batavia progress/next steps and the available SD setup/planned expansion. Text fits without overlap or clipping; sources and test goal are explicit."
+  },
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/main.tex": "0855ea6d95ffb10abd96c161a8a579e538469893585ed512588f00fd731f712a",
+    "decks/dps_integration_status_white_nov2026/deck-style.tex": "712115e2df2f13952afeea5fc92bff6a3c95962c6931352149742042bab3aff3",
+    "decks/dps_integration_status_white_nov2026/test-setups-input-20261110.txt": "486b6a549fc0a5ec806ea64f2e6ce69220b36aa80355a36c2926878088d420cc",
+    "decks/dps_integration_status_white_nov2026/README.md": "d5cb599a75438c7d1ee9601bed504443204248269d2f2d52ee0bb92560a0c65d",
+    "decks/dps_integration_status_white_nov2026/sources.json": "922257fa51a87f183cdb48ba128294ba7526689b8fe0b2b89801f7c9666326b2",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "f4ed97f1f12d18b5f4d4a30e85aee23b4346271c404f4d6a1e4cfd0fe8436a93",
+    "/home/arroyave/Downloads/Nichols-DPS-FDC I&I Workshop-Nov2026.pptx": "0364761c27cf87a7dfeb8982a81cc082a03e82aba6041b8f66578750855cd2c7"
+  },
+  "output_sha256": {
+    "main.pdf": "11ec7281bcf413feb247d02118be2fcfe9b3e197055af87dcb73707b724b222e",
+    "main.txt": "905afea7699a2eaa92bb3a2bc8e9be5afc35a5d29f2123c62381a0ef3888771f",
+    "review/slide-13.png": "8a9fbf1ab14266b4a40d0d031ee530611a9984da2ec3a2b34ebcfe714643d344",
+    "review/slide-13-grayscale.png": "bc822932090e06d3dc946dc9f1aeeea901c7940d681080b3cb6798f866efa24c",
+    "review/slide-index.csv": "de0e0a2246a9429311b069c172e177ffb07cef916ab229564c62fcc62f1e7d83",
+    "review/contact-13.png": "eb10327997be4eba2eb46c2e0615e3cdc29e4d61b7f3d600b429c005797d3b67"
+  }
+}

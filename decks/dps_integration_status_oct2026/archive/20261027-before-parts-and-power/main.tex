@@ -1,0 +1,227 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{DPS hardware for vertical drift}
+\subtitle{Existing BDE design, additions and procurement}
+\author{Manuel Arroyave}
+\date{I\&I workshop draft --- 27 October 2026}
+\newcommand{\mydate}{27 October 2026}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+\newcommand{\planningnote}[1]{\par\medskip{\footnotesize\color{DuneTextMuted}#1\par}}
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Use a commercial PLC for VD detector protection}
+  \large
+  \textbf{Proposal:} use the bottom drift electronics (BDE) design
+  and add the inputs and outputs needed by the other VD systems.\par
+  \bigskip
+  Put the central programmable logic controller (PLC) in the CUC,
+  with distributed I/O near the equipment.\par
+  \bigskip
+  Use OPC UA to connect DPS status and agreed commands to slow controls.\par
+  \planningnote{CUC = Central Utility Cavern; central-PLC location proposed. HD can later use an extension or a separate PLC. This plan covers VD.}
+\end{frame}
+
+\begin{frame}{The VD rack plan already reserves space for DPS}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.4cm}r>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Rack type} & \textbf{Count} & \textbf{DPS equipment / connections}\\
+    \midrule
+    BDE auxiliary & 10 & 12U per rack; eight WIEC connections per rack\\
+    BDE low voltage & 20 & One PL506 per rack; four WIECs per supply\\
+    Bias high voltage & 10 & 12U per rack for the DPS interface to ISEG supplies\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  Use these locations and rack allocations to place the additional I/O.
+  \planningnote{May 2025 VD rack workbook; June 2026 BDE layout. U is rack height. These are design allocations; the bias-HV sheet is a first estimate.}
+\end{frame}
+
+\begin{frame}{One BDE I/O group serves eight WIECs}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=3.1cm,minimum height=1.05cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box,fill=DuneSky] (io) at (-4,0) {BDE auxiliary rack\\remote I/O};
+    \node[box] (lv) at (1.6,1.1) {2 LV racks\\2 PL506 supplies};
+    \node[box,fill=DuneCoral] (wiec) at (1.6,-1.1) {8 WIECs\\8 PTCs + 48 WIBs};
+    \draw[edge] (io.north east) -| (-1.7,1.1) -- node[above,font=\small] {inhibits} (lv.west);
+    \draw[edge,<->] (io.south east) -| (-1.7,-1.1) -- node[below,font=\small] {EtherCAT} (wiec.west);
+    \draw[edge] (lv.east) -- (4.35,1.1) -- node[right,font=\small] {48 V} (4.35,-1.1) -- (wiec.east);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Ten groups: 20 PL506 supplies, 80 WIECs and 480 WIBs.}
+  \medskip
+  \raggedright The auxiliary rack also connects the fans, heaters and temperature sensors.
+  \planningnote{WIEC = warm interface electronics crate; PTC = power and timing card; WIB = warm interface board. June 2026 layout; fan/heater wiring omitted here.}
+\end{frame}
+
+\begin{frame}{Panel drawings and the Ignition front end are available}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \textbf{TPC protection panel designs}\par\medskip
+      \colorbox{DunePaper}{\includegraphics[page=2,width=\dimexpr\linewidth-2\fboxsep\relax,height=3.35cm,keepaspectratio,
+        trim=290bp 500bp 900bp 430bp,clip]{figures/tpc-panel-reference.pdf}}\par
+      \medskip\DuneDiagramCaption{Central PLC, bias I/O and LV/fan/heater panels.}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{BDE Ignition screens}\par\medskip
+      \includegraphics[page=7,width=\linewidth,height=3.35cm,keepaspectratio,
+        trim=10bp 210bp 460bp 74bp,clip]{figures/sc-progress-june2026.pdf}\par
+      \planningnote{Existing display of WIEC groups; June 2026 SC progress presentation.}
+    \end{column}
+  \end{columns}\par
+  \medskip
+  Parts lists and power calculations are available too. Use them to specify the VD additions.
+  \planningnote{TPC reference: EDMS 2401090 v4, sheet 2. Use the VD rack allocations when adapting these panels.}
+\end{frame}
+
+\begin{frame}{The PX3 rack-protection setup already defines shutdown}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.7cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{June 2026 setup guide} & \textbf{Documented behaviour}\\
+    \midrule
+    Ignition connected & Ignition reads sensors and switches outlets over SNMP\\
+    Ignition unreachable & PX3 local rules handle smoke, water and temperature; the network-switch outlet stays on\\
+    After a fallback trip & Power is restored manually or through Ignition\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  Agree where the VD rack-protection logic will run: PDU, DPS PLC and Ignition each need a defined role.
+  \planningnote{DUNE-doc-32655 v8, PX3 Rack Protection Setup, pp.~3--6 and 14--16. Confirm the selected rack/PDU configuration against this reference setup.}
+\end{frame}
+
+\begin{frame}{Use the inventory to specify the additional I/O}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Existing material} & \textbf{Work for VD}\\
+    \midrule
+    Rack and panel inventory & Allocate terminals, power and cable routes for added signals\\
+    Subsystem hardware lists & Remove overlaps; complete CalCI and other missing connections\\
+    Interface documents and matrix & Resolve conflicting actions; record signal type, timing and feedback\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  \textbf{Example:} 80 PoF boxes $\times$ (8 temperatures + 8 voltages)
+  = 1,280 monitoring values.\par
+  \planningnote{Monitoring values are not automatically PLC terminals. Choose the readout and protection interfaces before counting modules. CalCI = calibration and cryogenic instrumentation; PoF = power over fibre.}
+\end{frame}
+
+\begin{frame}{Confirm the time allowed for each protective action}
+  \large
+  So far, I have not found a critical protection function
+  that needs a response below 1 ms.\par
+  \bigskip
+  Each consortium must specify the time from a hazardous condition
+  to the completed protective action.\par
+  \bigskip
+  Include detection, communication, PLC processing and equipment shutdown.\par
+  \planningnote{Use the simulation framework to prepare tests. Measure complete paths on hardware; add faster local protection wherever a confirmed requirement needs it.}
+\end{frame}
+
+\begin{frame}{Resolve the interfaces that affect hardware}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.3cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Interface} & \textbf{Decision needed}\\
+    \midrule
+    SC / DPS & With Geoff, agree command priority, reset and re-enable; use SC for relevant long-term records\\
+    Cryogenic measurements & Confirm each source and whether DPS needs a dedicated signal or a software exchange\\
+    LBNF/DUNE and SDSTA BMS & Select the limited hardware signals and their connection point; define software monitoring\\
+    CUC / detector mezzanine & Specify fieldbus routes, networks and control-power supplies\\
+    \bottomrule
+  \end{tabularx}
+  \planningnote{BMS = building management system. Keep the two BMSs distinct. SDSTA retains responsibility for personnel-safety alarms.}
+\end{frame}
+
+\begin{frame}{Use the SURF inspection to map the facility connections}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{paper}{2.7cm}{1}{Already prepared}
+        {Marked maps for levels 4850 and 4910, with drawing references and a panel survey register.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{sky}{2.7cm}{2}{Record on site}
+        {Controller and I/O models, panel labels, available terminals and connection routes underground and at Ross Dry.}
+    \end{column}
+  \end{columns}\par
+  \bigskip
+  Coordinate access with Rachel; ask Dale Curran about the SDSTA interfaces.
+  \planningnote{Inspection planned for this week, subject to access and safety arrangements. Maps are prepared but have not yet been shared.}
+\end{frame}
+
+\begin{frame}{Use the existing test stands for the VD additions}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}X>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Test} & \textbf{Measure or demonstrate}\\
+    \midrule
+    PLC, remote I/O, PTC and supply inhibit & Complete trip time and equipment feedback\\
+    PDU sensors and shutdown logic & Response with SC connected, lost or stalled\\
+    SC commands, reset and re-enable & Protection takes priority; recovery is deliberate\\
+    Fieldbus, network and power failures & Output states, lost branches and restart behaviour\\
+    \bottomrule
+  \end{tabularx}
+  \planningnote{Fermilab BDE/VST and G271 material already exists. Agree test time, configuration and extra equipment with the owners; identify any SURF test needed.}
+\end{frame}
+
+\begin{frame}{Prepare the VD design and purchases for June 2027}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Step} & \textbf{Result}\\
+    \midrule
+    Reconcile existing records & One VD rack, panel and I/O schedule; list added signals and unresolved requirements\\
+    Design and prototype & Updated drawings, power budget and test results for the added interfaces\\
+    June 2027 review & Parts list, costs, lead times, spares, installation sequence and procurement readiness\\
+    After review & Order approved hardware; install against confirmed site dates\\
+    \bottomrule
+  \end{tabularx}
+  \planningnote{Check possible summer 2027 facility-interface needs now. Full VD response-matrix review targets early 2028; hardware requirements are needed before purchasing.}
+\end{frame}
+
+\begin{frame}{Agree who does the work}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.1cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Proposed team} & \textbf{Next action}\\
+    \midrule
+    Manuel + control engineer & Specify VD additions, cost and procurement work\\
+    Terri, Trevor + Manuel & Reuse the BDE hardware design and test arrangements\\
+    Manuel + consortia & Resolve missing signals, timing and conflicting requirements\\
+    Manuel + Geoff & Agree SC/DPS commands, rack protection and recovery\\
+    Vivian + subsystem / DPS teams & Update ICDs and record the agreed interfaces\\
+    \bottomrule
+  \end{tabularx}
+  \planningnote{Confirm support and dates at I\&I. Agree who protects equipment in each installation and operating phase before DPS is available.}
+\end{frame}
+
+\appendix
+\begin{frame}{Reference: the May 2025 VD rack inventory}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}Xr>{\RaggedRight\arraybackslash}Xr@{}}
+    \toprule
+    \textbf{Rack type} & \textbf{Count} & \textbf{Rack type} & \textbf{Count}\\
+    \midrule
+    BDE low voltage & 20 & PDS low voltage & 4\\
+    BDE auxiliary & 10 & Drift HV & 2\\
+    TDE & 20 & Reserved drift HV & 2\\
+    Bias HV & 10 & Spare / CalCI & 8\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  \textbf{76 numbered mezzanine positions:} SEDM-01 to SEDM-76.\par
+  \medskip
+  The worksheet also has a separate concept for 40 top-plate mini-racks.
+  \planningnote{Counts are rack positions, not numbers of PLC panels or remote-I/O stations. Reconcile this May allocation with later changes before ordering.}
+\end{frame}
+\end{document}

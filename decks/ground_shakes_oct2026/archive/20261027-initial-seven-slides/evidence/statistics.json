@@ -1,0 +1,240 @@
+{
+  "run_screen": [
+    {
+      "run": 27938,
+      "events": 6,
+      "assessable": 6,
+      "screened_shake_candidates": 1
+    },
+    {
+      "run": 27951,
+      "events": 19,
+      "assessable": 10,
+      "screened_shake_candidates": 10
+    },
+    {
+      "run": 30201,
+      "events": 44,
+      "assessable": 44,
+      "screened_shake_candidates": 44
+    },
+    {
+      "run": 30202,
+      "events": 83,
+      "assessable": 83,
+      "screened_shake_candidates": 83
+    },
+    {
+      "run": 32730,
+      "events": 1,
+      "assessable": 0,
+      "screened_shake_candidates": 0
+    },
+    {
+      "run": 32731,
+      "events": 716,
+      "assessable": 716,
+      "screened_shake_candidates": 716
+    },
+    {
+      "run": 32739,
+      "events": 662,
+      "assessable": 662,
+      "screened_shake_candidates": 662
+    }
+  ],
+  "charge_light": {
+    "date": "2026-10-20",
+    "summary": [
+      [
+        "Physics question",
+        "Scintillation can precede charge by a drift delay. Prompt coincidence is a separate electrical-coupling diagnostic. Timing alone cannot classify either signal."
+      ],
+      [
+        "Data used",
+        "All 1,516 local TPC-screened shake candidates; 5,120 TPC channels/event. The delayed search uses 821 early multichannel PDS candidates in 598 events and both recorded TPC APAs."
+      ],
+      [
+        "Full charge windows",
+        "July TPC records extend to about +2.7 ms after the shake; October to +2.0 ms; November to +0.35 ms. The search uses the full records, not the earlier plot crop."
+      ],
+      [
+        "Delayed result",
+        "In November, the broad maximum near +325 µs appears for both the recorded PDS times and PDS trains mixed from different events in the same run/file. This screen has not isolated a unique event-specific drift match. Do not convert that maximum into a source distance."
+      ],
+      [
+        "Track causality",
+        "Charge/light matching must use the whole observed charge segment. In run32731 event33, an APA2 collection segment is already arriving before both selected PDS pulses, so that segment cannot originate from those later pulses."
+      ],
+      [
+        "What remains possible",
+        "Other charge-like segments occur later and remain compatible candidates. Multiple PDS parents, overlapping tracks and electrical residuals prevent a unique assignment. The main shake and finite readout can hide genuine drift arrivals."
+      ]
+    ],
+    "next_steps_existing_data": [
+      "Fit geometrically consistent U/V/X charge tracks and compare their full arrival intervals with each possible optical t0; preserve ambiguous assignments.",
+      "Compare candidate-track position and charge with the recorded PDS spatial pattern and waveform shape. Keep disconnected PDS inputs as electrical witnesses.",
+      "Repeat event mixing after these stricter spatial/shape tests. Review delayed double-pulse candidates only when both charge responses share compatible geometry and one common delay."
+    ],
+    "limits": "These are exploratory raw-ADC and plane-mapped topology screens, not deconvolved hits, fitted 3D tracks or confirmed optical flashes. The nominal official channel map is validated against its C++ implementation; the run reconstruction configuration and relative electronics latency are not independently calibrated. Mixed events test within-sample timing association, not normal-running background or prediction efficiency.",
+    "run_coverage": [
+      {
+        "run": 27938,
+        "TPC_shake_events": 1,
+        "selected_PDS_candidates": 1,
+        "TPC_first_us": -274.43199999999996,
+        "TPC_last_us": 2738.1759999999995
+      },
+      {
+        "run": 27951,
+        "TPC_shake_events": 10,
+        "selected_PDS_candidates": 12,
+        "TPC_first_us": -279.296,
+        "TPC_last_us": 2780.928
+      },
+      {
+        "run": 30201,
+        "TPC_shake_events": 44,
+        "selected_PDS_candidates": 5,
+        "TPC_first_us": -529.664,
+        "TPC_last_us": 2033.408
+      },
+      {
+        "run": 30202,
+        "TPC_shake_events": 83,
+        "selected_PDS_candidates": 0,
+        "TPC_first_us": -530.688,
+        "TPC_last_us": 2033.408
+      },
+      {
+        "run": 32731,
+        "TPC_shake_events": 716,
+        "selected_PDS_candidates": 478,
+        "TPC_first_us": -351.488,
+        "TPC_last_us": 354.04800000000006
+      },
+      {
+        "run": 32739,
+        "TPC_shake_events": 662,
+        "selected_PDS_candidates": 325,
+        "TPC_first_us": -350.46400000000006,
+        "TPC_last_us": 354.04800000000006
+      }
+    ],
+    "new_PNG_figures": 25,
+    "source_commit": "DUNE/duneprototypes fc784859b494792f08716ee7b3042a738bde302e",
+    "nominal_same_APA_delayed_pairs": 21944,
+    "multiple_selected_PDS_parent_pairs": 11759,
+    "mixed_eligible_PDS_candidates": 820
+  },
+  "electrical_pattern": {
+    "date": "2026-10-23",
+    "conclusions": [
+      "Both slow TPC precursors are clear in 1,355 of the 1,376 records. All 1,355 have APA1 positive and APA2 negative. Median shape correlations after reversing the APA2 sign are 0.964 and 0.970 in the two runs. This extends the earlier three-event check to the local November sample.",
+      "The disconnected reference channels 13/14/16 predict part of the early negative-going response on other channels. The relation transfers from run 32731 to run 32739 and beats references taken from different events. Typical-event improvement is small; stronger edges carry more weight in the pooled score.",
+      "Predictability is uneven: channels 12/15 and 40/42 are much better predicted than corner channels 20/22/24. This model leaves most of the corner response unexplained.",
+      "The linear fit learned from main-shake edges does not transfer to early edges. This could reflect different electrical modes, nonlinear response, or a model too simple for both regimes.",
+      "Early PDS features improve the held-out slow TPC amplitude prediction by only 4.1% over a constant guess. A fixed delay from the first selected early PDS candidate predicts the 2 ADC precursor crossing with 66.1 µs mean error, versus 33.4 µs using a fixed phase relative to the main shake.",
+      "Good prediction from an unlit input shows a shared response. Real optical activity can itself cause correlated pickup, so regression alone cannot isolate a pure electrical component or classify the residual as scintillation."
+    ],
+    "next_steps": [
+      "Review the 348 held-out pulse windows with substantial unexplained negative edges and adequate paired recording. Use the linked event views and recorded drift-time coverage; these are review candidates, not optical identifications.",
+      "Fit consistent U/V/X tracks for the best-covered candidates and compare the whole charge-arrival interval with each possible optical t0 and the PDS spatial pattern. Keep ambiguous matches.",
+      "Use the AFE 1/AFE 4 versus AFE 2 response difference, and the early/main transfer failure, as constraints on the DAPHNE circuit model. A common-ground node alone does not predict these unequal responses."
+    ],
+    "limits": "Data: 1,376 November events with DAPHNE 109; 505 used for training, 209 whole events held out in run 32731, and all 662 events in run 32739 held out. Missing self-triggered samples stay missing. Prediction requires two recorded disconnected witnesses. Channel 11 is excluded; rail bins and steps above 2,000 ADC are masked. Early PDS candidates are selected in −300 to −100 µs; other light can lie outside this selection. The three-tap filter uses one future 256 ns bin and is an offline shape test. No normal-run false-alarm rate, calibrated photon count, or causal source identification is obtained.",
+    "example_figures": [
+      "run32731_event33_pulse183296_edge-prediction.png",
+      "run32731_event33_pulse160768_edge-prediction.png",
+      "run32731_event52_pulse242688_edge-prediction.png",
+      "run32731_event52_pulse177152_edge-prediction.png",
+      "run32739_event5_pulse128000_edge-prediction.png"
+    ],
+    "shared_pattern_cross_run": {
+      "pooled_predictive_skill": 0.1963912407432562,
+      "median_event_predictive_skill": 0.021564459823823767,
+      "events_with_at_least50_edge_samples": 418,
+      "paired_actual_skill": 0.15685647325942342,
+      "paired_shuffled_skill": -0.04731696571098243
+    },
+    "main_to_early_cross_run_skill": -0.19435276959207193,
+    "review_candidates": 348
+  },
+  "PDS_only_TPC_prediction": [
+    {
+      "split": "same_run_holdout",
+      "events": 194,
+      "mean_absolute_error_ADC": 3.2445825933248753,
+      "constant_training_median_error_ADC": 3.531411082474227,
+      "relative_MAE_improvement": 0.08122206179077562,
+      "rank_correlation_prediction_vs_TPC": 0.2541706662056606
+    },
+    {
+      "split": "other_run",
+      "events": 477,
+      "mean_absolute_error_ADC": 3.6052091883079607,
+      "constant_training_median_error_ADC": 3.7588443396226414,
+      "relative_MAE_improvement": 0.0408729751575998,
+      "rank_correlation_prediction_vs_TPC": 0.20819420810114114
+    }
+  ],
+  "clock_test": {
+    "TPC_APA": 1,
+    "threshold_ADC": 2,
+    "PDS_pulse": "first",
+    "split": "other_run",
+    "events": 225,
+    "training_fixed_PDS_to_TPC_delay_us": 40.70400000000001,
+    "training_shake_clock_onset_us": -148.224,
+    "fixed_PDS_delay_MAE_us": 66.05710222222223,
+    "shake_clock_only_MAE_us": 33.42336,
+    "PDS_time_vs_TPC_onset_Spearman": -0.16979480036690028
+  },
+  "TPC_coherence": [
+    {
+      "run": 32731,
+      "events": 714,
+      "both_precursors_clear": 705,
+      "APA1positive_APA2negative": 705,
+      "APA1negative_APA2positive": 0,
+      "same_physical_sign": 0,
+      "median_sign_reversed_shape_correlation": 0.9641402497769131,
+      "clear_TPC_records_without_selected_early_109_PDS_candidate": 354
+    },
+    {
+      "run": 32739,
+      "events": 662,
+      "both_precursors_clear": 650,
+      "APA1positive_APA2negative": 650,
+      "APA1negative_APA2positive": 0,
+      "same_physical_sign": 0,
+      "median_sign_reversed_shape_correlation": 0.9698201108802448,
+      "clear_TPC_records_without_selected_early_109_PDS_candidate": 422
+    }
+  ],
+  "DCS": {
+    "27938": {
+      "center_UTC": "2024-07-10T06:35:00.599846+00:00",
+      "candidate_count": 1,
+      "reference_values_V": {
+        "15": 176371.59375,
+        "5": -370.0007629394531,
+        "12": -369.99981689453125
+      }
+    },
+    "27951": {
+      "center_UTC": "2024-07-10T11:27:28.478647+00:00",
+      "candidate_count": 10,
+      "reference_values_V": {
+        "15": 176370.875,
+        "5": -370.00022888183594,
+        "12": -369.9997863769531
+      }
+    }
+  },
+  "pulse_example": {
+    "run": 32731,
+    "event": 33,
+    "time_from_shake_us": -183.296
+  }
+}

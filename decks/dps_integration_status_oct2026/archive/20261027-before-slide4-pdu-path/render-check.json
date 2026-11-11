@@ -1,0 +1,12 @@
+{
+  "revision": "2026-10-27 TDE current and future interfaces",
+  "pages": 19,
+  "changed_slides": [
+    7,
+    9,
+    17
+  ],
+  "overfull_boxes": 0,
+  "visual_review": "Changed slides 7, 9 and 17 rendered and inspected. Final two-line TDE entry on slide 9 checked again after wording cleanup; no clipping or overlap.",
+  "verification": "verification-20261027-tde-options.json"
+}

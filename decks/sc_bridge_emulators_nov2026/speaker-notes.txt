@@ -1,0 +1,159 @@
+Title — What I added in PR #8
+Opening:
+I added three software devices that a bridge can talk to: a WIB, a DAPHNE and
+a Raritan PDU. They accept a subset of the devices' commands and return
+simulated replies. This lets us develop the bridge without the hardware.
+
+Comparison — Threads and asyncio handle waiting differently
+What to say:
+Threads give us several workers; the operating system schedules them. Asyncio
+lets tasks share an event loop. When one task awaits a reply, the loop can work
+on another task. Both approaches can keep other device requests moving.
+
+A blocking call keeps the current thread waiting. For example, a normal WIB
+socket receive waits for its reply or a timeout. If that call runs directly on
+the event-loop thread, the other tasks cannot progress during the wait. Use an
+async-compatible receive or put the blocking call in a worker thread.
+
+Shared data may need locks with threads. Asyncio also needs careful coordination
+when tasks share state; it does not remove all races. The table describes the
+usual models, and we can combine them in the bridge.
+
+Sources:
+https://docs.python.org/3.13/library/asyncio-eventloop.html#executing-code-in-thread-or-process-pools
+https://docs.python.org/3.13/library/socket.html#socket.socket.recv
+
+Step 1 — I added three simulated devices
+What to say:
+I added a small emulator package to dune-dscs. There is one program for each
+device type. WIB and DAPHNE use ZeroMQ and protobuf; the PDU uses SNMP v2c.
+Geoff can connect a client to these programs instead of a physical device.
+
+Where it is:
+src/dune_dscs/emulator/wib.py
+src/dune_dscs/emulator/daphne.py
+src/dune_dscs/emulator/pdu.py
+
+Step 2 — I used the existing message definitions
+What to say:
+I used the WIB and DAPHNE protobuf definitions so the emulator understands the
+expected messages. The PDU implements a small part of Raritan's PDU2-MIB: outlet
+names, counts, state and on/off commands. I recorded the protobuf source
+revisions and hashes, and documented the MIB revision.
+
+Concrete details if asked:
+WIB requests pack the command into Command.cmd. Replies are the raw expected
+protobuf message. DAPHNE uses ControlEnvelopeV2 and returns the request ID in
+correl_id, so the client can match each reply to its request.
+The PDU supports GET, GETNEXT, GETBULK and SET for its implemented subset.
+This is not a complete device implementation or proof of hardware compatibility.
+
+Where it is:
+src/dune_dscs/emulator/protocols/_generated/
+src/dune_dscs/emulator/protocols/protocol_sources.json
+docs/emulator.md
+
+Step 3 — I made commands change simulated state
+What to say:
+The programs remember changes in memory. For example, a WIB power command
+changes the stored FEMB power flags. A DAPHNE configuration changes stored
+thresholds. A PDU command changes an outlet's state. A later read can check
+those changes. We can therefore test more than whether a connection opens.
+
+Limits:
+WIB also holds register values and timing state. DAPHNE stores configuration
+and returns thresholds through its trigger-counter response. PDU switching
+is immediate. State is local to one process and is lost on restart.
+Some readings are fixed or empty placeholders. Boot timing, physical behaviour,
+DAQ samples, metering and complete protocol coverage are not implemented.
+
+Step 4 — I made each device easy to run
+What to say:
+I added one command-line entry point. Choose wib, daphne or pdu, then set the
+host and port if needed. Each device runs in its own process. The network
+servers already use asyncio: zmq.asyncio for the boards and PySNMP's asyncio
+transport for the PDU.
+
+Commands:
+uv sync
+uv run python -m dune_dscs.emulator wib
+uv run python -m dune_dscs.emulator daphne
+uv run python -m dune_dscs.emulator pdu
+
+Run the last three commands in separate terminals. Defaults are loopback only:
+WIB TCP 1234, DAPHNE TCP 40001, PDU UDP 1161. PDU outlets start off.
+The entry point closes the socket or SNMP dispatcher on shutdown.
+Malformed WIB requests still receive a reply so the REP socket can continue.
+DAPHNE preserves the routing frames and reply correlation.
+
+Where it is:
+src/dune_dscs/emulator/__main__.py
+docs/emulator.md
+
+Step 5 — I checked the emulators
+What to say:
+Before the latest push, we checked the real network messages, writes followed
+by reads, invalid requests and recovery. We also ran 963 independent emulator
+processes together. Seven were stopped and restarted, and all recovered.
+There were no unexpected failures.
+
+We then checked the full path into Ignition on dune-fd-test01: 480 WIBs,
+42 DAPHNEs and 105 rack PDUs. A separate temporary adapter read the native
+protocols and published OPC UA values. Ignition read 2,508 tags, all Good.
+We changed configurations three times and checked the results in Ignition.
+We stopped one of each device type. Their readings became Bad_NotConnected,
+while the other 624 devices kept updating. All three recovered after restart.
+The test adapter is outside PR #8. It is not the finished bridge.
+
+Exact result:
+480 WIBs, 42 DAPHNEs and 441 SNMP PDU instances.
+43,011 successful polls; 3,852 configuration/readback checks.
+18 failed polls during planned outages; zero unexpected failures.
+The 336 extra PDU instances were load placeholders, not TDE or DTS IPMI devices.
+These were local harness checks, not new automated tests committed to this PR.
+The PR's GitHub workflow runs Ruff on src, excluding generated protobuf files.
+The 963-device run did not test a production bridge, OPC UA, Ignition or hardware.
+
+Ignition integration result, 10 November:
+627 native device processes; 2,508 tags; eight acceptance checks passed.
+1,881 configuration/readback jobs; zero unexpected native polling failures.
+The 320 TDE and 16 DTS endpoints were excluded because their IPMI interfaces
+are not implemented. The earlier extra SNMP instances do not cover that gap.
+Configuration writes went through native protocol clients; OPC UA was read-only.
+Sequence tags tracked fresh acquisitions. Constant-value tag timestamps may
+remain unchanged in Ignition even while the adapter is polling successfully.
+The temporary test connection, project, tags, tunnel and processes were removed.
+Existing GIZMo connection configuration and project-manifest hashes did not change.
+This proves the tested emulator-to-Ignition path, not hardware behaviour,
+production capacity, alarms, historian operation or secure device protocols.
+
+Evidence:
+evidence/fleet-summary.json
+evidence/ignition-summary.json
+/home/arroyave/.local/share/dune-dscs-validation/pr8/20261109-pnlwdeiw/
+/home/arroyave/.local/share/dune-dscs-validation/pr8/20261110-ignition/
+
+Step 6 — Geoff can use them to test his bridge
+What to say:
+This PR gives Geoff the device side of the test. He can write the protocol
+clients and OPC UA server, point the clients at these emulators, and check the
+values in Ignition. Start with one device and check the value, quality,
+freshness and recovery before increasing the fleet.
+
+If Geoff asks about asyncio versus threads:
+The emulators already use asyncio. For the new bridge, use asyncua, zmq.asyncio
+and PySNMP's asyncio APIs. Put blocking IPMI calls behind a bounded worker pool.
+Using an executor still uses threads. That is a proposed bridge design; this PR
+does not implement it. The packaged bridge.py is still a placeholder.
+
+PR scope:
+PR #8 adds the emulator package, bundled protobuf bindings, documentation and
+a lint-command adjustment. It does not add a fleet manager or an OPC UA server.
+It does not change pyproject.toml dependencies.
+The earlier PR #4 has bridge protocol fixes, but it is closed and unmerged.
+
+Sources:
+https://github.com/DUNE/dune-dscs/pull/8
+https://github.com/DUNE/dune-dscs/tree/3a9e54e052fd441ba08e3c02a6f19076f4acdf1d/src/dune_dscs/emulator
+https://github.com/DUNE/dune-dscs/blob/3a9e54e052fd441ba08e3c02a6f19076f4acdf1d/docs/emulator.md
+https://github.com/DUNE/dune-dscs/pull/4

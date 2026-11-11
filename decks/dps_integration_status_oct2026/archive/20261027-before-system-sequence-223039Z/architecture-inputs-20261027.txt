@@ -1,0 +1,56 @@
+Presentation design basis — Manuel's clarifications through 27 October 2026
+
+Use VD only: ten BDE groups of eight WIECs, 80 WIECs, 20 PL506 supplies and
+480 WIBs. HD may later extend this system or use another PLC. CUC placement
+beside the other PLC racks is proposed, not an installed allocation.
+
+Preserve the definitions from the first presentation. DPS arbitrates protection;
+SC/Ignition operates, monitors and owns data/event logs. An operating request
+cannot override a protection trip. Keep FFDG BMS, SDSTA BMS, cryogenics and
+detector as four input domains. Detector includes SC, subsystems and the
+separate rack-infrastructure system. SDSTA retains personnel safety.
+
+FFDG uses the API through the Batavia server at FNAL; the detector-side path
+is through SC to DPS. SDSTA remains under investigation. Name each cryogenic
+or detector-instrumentation signal source rather than assigning all level
+measurements to cryogenic process control.
+
+Use one consistent detector overview:
+- SC/Ignition <-> OPC UA <-> DPS PLC.
+- Subsystem OPC UA interfaces go through SC. Bridge-server implementation is
+  outside the talk.
+- DPS PLC <-> SNMP <-> PDUs and WIENER LV supplies. Both use the same protocol.
+- Existing BDE/bias I/O uses EtherCAT to the PLC and wired supply inhibits.
+  These coexist with the supplies' network control/status and must be visible.
+- Ignition controls the PLC; the PLC controls the PDU. Retain local protection.
+
+Rack infrastructure is a separate system: rack/enclosure, AC feeds, PDUs,
+smoke/humidity sensors and sensor interfaces/power/relays/wiring. Include fitted
+temperature/leak sensors. Count that hardware once; detector subsystems reference
+its outlets and loads. Their supplies and dedicated inhibits remain in the
+subsystem inventory. Adding this system category does not itself add hardware.
+
+PDS LV count is 34; do not reconstruct it from the old 58-feed estimate. PoF
+has 80 boxes and a working inventory of 8 temperature + 8 voltage readings
+per box. Carry Opta PLC and Beckhoff PLC as local controller alternatives;
+controller grouping and physical I/O follow the actual box interfaces.
+
+TDE has twenty racks and current control through PDUs only. Preserve possible
+crate-status and external-inhibit extensions; do not describe those as available.
+HVS and BDE have substantial hardware descriptions. CalCI has useful material
+but needs a complete description of the relevant connections.
+
+The slide narrative now uses the matrix to trace each inhibit: condition and
+source -> input connection -> controller decision -> output/load -> feedback.
+Use existing rack lists, interfaces, drawings, parts and power calculations to
+identify reused hardware, missing components and quantities, and open choices.
+Count shared inputs/outputs once. Separate hardware additions from wiring or
+software work. Do not count an HD-to-VD conversion as additional VD scope.
+
+Show the BDE cooling path and separate rack infrastructure as concrete examples.
+Use those paths to explain panel space/power, prototype tests and procurement
+before June 2027. Full VD response-matrix review remains early 2028.
+
+The original presentation is preserved in archive/20261023-before-ii-feedback/.
+Prior versions of this design-basis file are retained with the archived decks.
+These instructions establish the presentation basis, not installed/tested status.

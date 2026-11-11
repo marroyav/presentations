@@ -1,0 +1,53 @@
+{
+  "review_date": "2026-10-20",
+  "repository": "https://github.com/DUNE/PDS",
+  "branches": [
+    {
+      "branch": "attscan_withLED",
+      "commit": "3a95b6952ec333dc57825afb9fd5aba48b0225d0"
+    },
+    {
+      "branch": "main",
+      "commit": "2a4a6a05d4762690d02507e8b538c7ef0dbb3d03"
+    },
+    {
+      "branch": "marroyav/calibration",
+      "commit": "bed0920192126456089d7d44930dbfb145268463"
+    },
+    {
+      "branch": "marroyav/commissioning_np02_02",
+      "commit": "1b91682985b447537a0e440a0dd67ce7384d4635"
+    },
+    {
+      "branch": "marroyav/mezz_comissionning",
+      "commit": "77c20dbde0cad5102e4e1d06e1c62cb5182524f1"
+    },
+    {
+      "branch": "marroyav/st-scan",
+      "commit": "356fb758f259d21aac2542f29c9faa729439af68"
+    },
+    {
+      "branch": "marroyav/tp_ta_exploration",
+      "commit": "ef49839c29d1f907e393c23422def26820a864d1"
+    },
+    {
+      "branch": "marroyav/vdcb-daq-scans",
+      "commit": "06efc5c17558b81cc4237a449e75ea3646f267c5"
+    },
+    {
+      "branch": "refactor/features_np02_commissioning",
+      "commit": "27016c78aed1393c4a5b1784be7b23ffbac6911f"
+    },
+    {
+      "branch": "refactor/pds-run-simplify",
+      "commit": "c2dd54e86e7a2fc226dcc8554f9be0a25e89fba2"
+    }
+  ],
+  "scope": [
+    "src",
+    "configs",
+    "docs"
+  ],
+  "method": "Fetch all remote heads; inspect scan implementations, configuration examples, SSP settings and calibration planner without switching branches. Local branch heads match their corresponding fetched remote heads. Uncommitted PDS documentation is excluded from source claims.",
+  "qualification": "Inventory of repository controls, not proof of a complete physics calibration programme."
+}

@@ -1,0 +1,16 @@
+{
+  "reason": "Before adding inhibit-path exercise, rack infrastructure and consistent control/protection paths",
+  "files": {
+    "main.tex": "1af4664401778149d0345041e10c409b431b39ac6c3a6241506f5f521c791d82",
+    "backup-slides.tex": "82b09bb916627fa96922fbdd84a2d08d6fb7dd067aabde1d32e37bb8898edd08",
+    "main.pdf": "2352ef2b41f7aa60da21db3fcbf90c668cc94711fda739214b4ebb49c6f84c21",
+    "main.txt": "bf13229d61bdbc2540d96f49f056ba46fbd4f4447d1847ee794cc6dd00a0bbf5",
+    "README.md": "99984effe3f64f51acafb0b9c33d91f84d6ec52d6a164cc76bbb82576cb34d4d",
+    "sources-and-notes.txt": "6310c2981e3c0f24fdbbdd1e203d335b77d4b728fb1174d43a8997988bf60b11",
+    "source-review.txt": "7dd12a3660742d4cd1bb71a51859b223572018654b8311e5f0d71ee3394fadfa",
+    "architecture-inputs-20261027.txt": "dfb3783e8ac68ef923f1769a5c8da2d7f3408ddaa4dfb7e8328a929abd00b61a",
+    "sources.json": "5cd24cdb69db6cbad574355ae1544f39eabc19afb737db315972887c0ec7957a",
+    "verification-latest.txt": "aac1d0b3c94b76afd847fdb72d25d406a0873b31a88c40f3f4afa7037cf51383",
+    "render-check.json": "e7aac9d6e5c1f63c3b8656406e6e9efab67184596a6158f8bf6e4c1a7090cce6"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-10-27T20:02:24.560730+00:00",
+  "revision": "Restored system definitions, detector hierarchy and Ignition/PLC/PDU chain",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_exit_code": 0,
+  "pages": 19,
+  "main_slides": 12,
+  "backup_slides": 7,
+  "source_errors": [],
+  "advisories": [
+    "main.tex + backup-slides.tex: 1 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "advisory_review": {
+    "frames": [
+      {
+        "slide": 4,
+        "title": "Inside the detector: SC and the subsystems feed DPS",
+        "source_characters": 1158
+      }
+    ],
+    "finding": "Diagram source exceeds the character guide because of nodes and routing. Inspected rendered frame at 1250 pixels; labels are readable and there is no clipping."
+  },
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "source_files_checked": 20,
+  "content_review": [
+    "Original DPS, SC and BMS definitions restored; local interlocks defined.",
+    "Four input domains named separately: FFDG BMS, SDSTA BMS, cryogenics, detector.",
+    "Detector block expanded to show SC and subsystems before BDE detail and the VD proposal.",
+    "SC owns logging; DPS performs arbitration.",
+    "Ignition → DPS PLC → PDU, with local trip and feedback paths; no competing control ownership.",
+    "PDS LV count is 34 in both main and backup slides; previous LV count removed."
+  ],
+  "visual_review": "All 19 final PDF pages rendered and inspected. No clipping or overlaps observed.",
+  "sha256": {
+    "main.tex": "7db59a6555dc90f09871c2712601cfae2f298562c787178f21fc9e34b36b2a2d",
+    "backup-slides.tex": "250911db90381903c52ec89db6dd32ea6e4efc16aebcd125aab11f542838e803",
+    "main.pdf": "0e5a28dca52b2b40d1babdcefbb4187b90499adb18bb9c1c705be1db8631fd5e",
+    "main.txt": "3b8ffbbe2eb2f8ab353929ae7c04c0295d8c485fad6aa44326244ea0703ab187",
+    "README.md": "d0313380efc3c673403568c40c58ddad7c229e2ac4fac48bc4c13054bcd741c0",
+    "architecture-inputs-20261027.txt": "8c1a253181fd4d506963b45ae32252fe38f5f75772c240eb938ea60a09f6a681",
+    "sources.json": "40a13bd9e2b506c5e79030d407af0de894349ee281f1b043c40dd20161ff86a8",
+    "sources-and-notes.txt": "75113e85bfe7f3b9fc087c57d3dc2bd929d01ab496d0cf73006a7e63afe8d910",
+    "source-review.txt": "98b04931b3e81672dbf451fe5bdc9a1ef06c94d609998a9094ac06b15cc42be7"
+  },
+  "limits": [
+    "Presentation/source review only; no hardware qualification or installed-equipment validation.",
+    "Local pinned references used; no fresh latest-revision check.",
+    "CUC location and proposed work assignments are not approved installation records.",
+    "PDS LV count and control hierarchy follow Manuel’s explicit corrections."
+  ]
+}

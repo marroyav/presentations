@@ -1,0 +1,95 @@
+{
+  "checked_at": "2026-10-27T22:09:10.600413+00:00",
+  "revision": "Trace each VD inhibit through existing hardware; BDE cooling example and separate rack infrastructure",
+  "pre_change_archive": "archive/20261027-before-inhibit-path-review-215939Z/",
+  "git": {
+    "repository": "/home/arroyave/work/presentations",
+    "head": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "dirty": true,
+    "status_sha256": "aa8b7a65aeb9318b97a1de3c358d0e534c77f0b8591ccf2ad62d9f2ab25d69c9",
+    "tracked_diff_sha256": "b58927e84d55107fdbab1e446a0e12fe3a80f6903a77a8dc739ecb5d17894b92",
+    "deck_is_untracked": true,
+    "note": "Deck output hashes below identify this revision. Unrelated root Makefile/README edits and other untracked decks were not changed."
+  },
+  "commands": [
+    {
+      "command": "make decks/dps_integration_status_oct2026/main.pdf",
+      "cwd": "/home/arroyave/work/presentations",
+      "exit_code": 0
+    },
+    {
+      "command": "pdftotext -layout main.pdf main.txt",
+      "cwd": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026",
+      "exit_code": 0
+    },
+    {
+      "command": "pdftoppm -f 1 -l 22 -scale-to 1400 -png main.pdf /tmp/dps-inhibit-slides/slide",
+      "cwd": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026",
+      "exit_code": 0
+    },
+    {
+      "command": "pdftoppm -f 18 -l 18 -scale-to 1400 -png main.pdf /tmp/dps-inhibit-slides/slide",
+      "cwd": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026",
+      "exit_code": 0,
+      "note": "After final slide-18 wording change"
+    },
+    {
+      "command": "scripts/audit_decks.py audit_file on main.tex with backup-slides.tex expanded",
+      "exit_code": 0
+    },
+    {
+      "command": "PyMuPDF page count/word bounds; SHA-256 check of all sources.json references",
+      "exit_code": 0
+    }
+  ],
+  "acceptance_criteria": {
+    "page_count": "14 main + 8 backup = 22",
+    "overfull_boxes": 0,
+    "source_audit_errors": 0,
+    "off_page_text_bounds": 0,
+    "source_hash_mismatches": 0,
+    "visual_review": "No overlapping labels, clipped boxes or illegible new tables"
+  },
+  "source_errors": [],
+  "advisories": [
+    "/tmp/dps-inhibit-review-combined.tex: 3 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "source_count": 29,
+  "pages": 22,
+  "main_slides": 14,
+  "backup_slides": 8,
+  "overfull_boxes": 0,
+  "visual_review": "All 22 pages inspected from 1400-pixel renders: individual views of the architecture, path method, BDE cooling, rack diagram and new tables; contact sheets for the other pages. Slide 18 re-rendered and inspected after the final wording change. No visible overlap or clipping.",
+  "advisory_review": "Source-density advisories affect slides [4, 8, 9]. Their TikZ source contributes to the count; rendered diagrams were inspected individually.",
+  "content_review": [
+    "Original DPS/SC/BMS/local-interlock definitions and four input domains retained; detector now includes rack infrastructure.",
+    "One consistent detector overview includes SC OPC UA, shared PDU/WIENER SNMP control/status and BDE/bias EtherCAT plus wired PL506/ISEG inhibits.",
+    "Slide 7 traces source, input, decision, output/load and feedback; records physical connections and allowed detection-to-shutdown time; shared I/O counted once.",
+    "Slide 8 uses the documented fan-status / EL1004 / PLC / EL2124 / PL506 path. Six-fan arithmetic is conditional baseline coverage, not a new-module count.",
+    "Slide 9 separates rack/PDU/sensors from subsystem supplies and dedicated inhibits. Humidity monitoring does not imply a shutdown rule.",
+    "Detector additions use 34 PDS LV feeds, 80 PoF boxes, Opta/Beckhoff alternatives, TDE PDU-only current control with future interfaces retained, and existing CalCI material.",
+    "FFDG uses API through Batavia and SC; availability of each required alarm remains to be mapped. SDSTA remains under investigation.",
+    "VD rack space and first-pass bias output capacity are distinct from proven spare terminals. Fan-only component load replaces the earlier linear HD-to-VD panel-power extrapolation.",
+    "Prototype tests and hardware/procurement readiness lead to June 2027 review; full VD response-matrix review remains early 2028."
+  ],
+  "sha256": {
+    "main.tex": "cd5c5fd4931888eefaa9a36cf1a8f103c51dd355abbf8d2e8377dc25f54dafb9",
+    "backup-slides.tex": "f1ac02f4fb1c9b045a7408b6a629af49644d5ade7b577e295cf884840ee0dcd3",
+    "main.pdf": "8d2716896b26e63af39f66bc93423b3396606fd6d8564df129dba0d09f877d2e",
+    "main.txt": "1f2faef8c9a1f6b95a1ddba23dabbf82d1605a3d3ebf98f0954166576bcb77c4",
+    "README.md": "10b314de4c384f5da2fc72fe15a7bfc350c13bf6751a7552642a72ceba97482c",
+    "architecture-inputs-20261027.txt": "63a92a50402fdd4409a34b8efac564e64d98c4b2ddeeda3eaa139db30a807b02",
+    "sources.json": "16fb5a84fba9867704849c87ee4790549ed7e4e3f29a21291e325dadc2a9fc70",
+    "sources-and-notes.txt": "65d5ae7173fb5cec7bcc2a532d6e088881d720b45bdd3c57eed8099b937e6a56",
+    "source-review.txt": "c6e587db6562698ce30a18abc866bb74c47e4d2f7f4cae1970c93d50698fa780",
+    "render-check.json": "c9cc5eaae0c76fd43bb9f76064bfa717d6c4b697cb421d3d9fd18a40ca78f6f4"
+  },
+  "build_log_sha256": "38675243fa9312d4abc7ede93e78df042faec617473d0946a32c63c04bf83d70",
+  "limits": [
+    "Presentation/source/arithmetic review only; no new installed-wiring, controller or response-time qualification.",
+    "The inhibit review remains underway. No complete new-I/O count or approved additions bill of materials is claimed.",
+    "Pinned local sources; no fresh EDMS latest-version check. CUC location and work assignments remain proposals."
+  ]
+}

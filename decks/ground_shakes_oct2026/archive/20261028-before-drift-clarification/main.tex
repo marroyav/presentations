@@ -1,0 +1,172 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{Ground shakes: what this analysis adds}
+\author{Manuel Arroyave}
+\date{28 October 2026}
+\renewcommand{\DuneDiagramCaption}[1]{{\small\color{DuneText}#1\par}}
+\newcommand{\PlotNote}[1]{\smallskip{\footnotesize\color{DuneTextMuted}#1\par}}
+\newcommand{\EDMS}[1]{\href{https://edms.cern.ch/document/3493627/1}{EDMS 3493627 v1, #1}}
+\begin{document}
+
+\begin{frame}{Ground shakes: what this analysis adds}
+\framesubtitle{ProtoDUNE-HD · A disturbance in the detector readout · Manuel Arroyave}
+\DuneCompactColorBlock{paper}{ALREADY IN THE EDMS SLIDES}{The charge precursor and electrical pickup}
+{A slow charge change precedes the main shake. Disconnected light-readout inputs also respond.}
+\medskip
+\DuneCompactColorBlock{sky}{ADDED HERE}{Tests of how the early pulses relate to charge}
+{The first pulse does not set a fixed timer. A timing peak does not establish a charge--light match.}
+\medskip
+\DuneCompactColorBlock{coral}{STILL OPEN}{What starts the disturbance}
+{We have added measurements and comparison tests. We have not identified the cause or confirmed an optical flash.}
+\PlotNote{Known observations: \EDMS{pp.\ 9, 21, 23, 79}. Seven 2024 runs; 1,531 saved records.}
+\end{frame}
+
+\begin{frame}{Three signals, three names}
+\framesubtitle{One recorded example: run 32731, event 33 · PDS means the light-readout system}
+\includegraphics[width=\textwidth]{figures/10-event-sequence.pdf}
+\DuneDiagramCaption{\textbf{Top:} two sharp PDS pulses. \textbf{Middle:} the slow charge change, called the precursor.
+\textbf{Bottom:} the much larger main shake at time 0. This shows their order in one record.}
+\PlotNote{Axes use different scales; gaps are unrecorded or excluded.
+One microsecond = one millionth of a second. Timing alone does not prove cause.}
+\end{frame}
+
+\begin{frame}{Some records contain two early pulses}
+\framesubtitle{Run 32731 · The same connected light-readout input, DAPHNE 109 channel 47}
+\includegraphics[width=\textwidth]{figures/11-double-pulses.pdf}
+\DuneDiagramCaption{Each dip is a pulse in the recorded signal. The two examples are about 23 and 66 microseconds apart.
+They do not show a fixed spacing. These early pairs are separate from the later main-shake reflections.}
+\PlotNote{Added count: 101 of 716 records have at least two selected pulses, 100--300 microseconds before the main shake.
+Pulse candidates are not confirmed light flashes; recording gaps limit this count.}
+\end{frame}
+
+\begin{frame}{The first pulse does not set a fixed timer}
+\framesubtitle{Added test: relate the first selected PDS pulse to the slow charge change}
+\includegraphics[width=\textwidth]{figures/12-first-pulse-clock.pdf}
+\DuneDiagramCaption{\textbf{Left:} in one example the charge marker comes before the first selected PDS pulse.
+\textbf{Right:} on 225 unused records, timing from that pulse gives twice the error of timing from the known main shake.}
+\PlotNote{The charge marker is a sustained 2-unit change, not an exact physical start.
+Earlier PDS pulses may be unrecorded. This is a comparison of saved shakes, not an early-warning test.}
+\end{frame}
+
+\begin{frame}{One proposed charge match fails the time-order check}
+\framesubtitle{Added charge--light test · Run 32731, event 33 · Part of the APA2 charge readout}
+\includegraphics[width=\textwidth]{figures/13-charge-before-pulses.pdf}
+\DuneDiagramCaption{Each row is a charge wire; colour shows its signal. The diagonal feature is already visible before both PDS pulses.
+Those later pulses cannot mark the start of the whole feature under the recorded timing.}
+\PlotNote{This rejects that particular assignment. Later charge features remain possible matches.
+Grey means excluded samples. The feature is not a fitted 3D track; electronics delays remain uncalibrated.}
+\end{frame}
+
+\begin{frame}{The timing peak survives swapping events}
+\framesubtitle{Added comparison: keep the charge record; replace its PDS pulses with pulses from other events}
+\includegraphics[width=\textwidth]{figures/05-charge-light-timing.pdf}
+\DuneDiagramCaption{Blue uses pulses from the same event. Orange uses pulses from other events.
+Both peak near 325 microseconds. The peak therefore does not identify which PDS pulse belongs to a charge feature.}
+\PlotNote{Light from one interaction should precede its drifting charge. This test has not found a unique match.
+It does not rule out light hidden by the shake or by missing readout.}
+\end{frame}
+
+\begin{frame}{The new model measures a known electrical effect}
+\framesubtitle{Electrical pickup was already documented in \EDMS{pp.\ 21--23}}
+\includegraphics[width=\textwidth]{figures/14-electrical-test.pdf}
+\DuneDiagramCaption{The model uses reported disconnected inputs to estimate connected-input signals.
+It performs better with signals from the same event. The addition is a quantitative test on a run that was excluded from fitting.}
+\PlotNote{The prediction is partial and varies by channel. It does not locate the source or separate pure light from electrical pickup.
+The disconnection state comes from the engineering report.}
+\end{frame}
+
+\begin{frame}{The slow-control result has a limited scope}
+\framesubtitle{Slow controls record operating values such as voltage and current}
+\DuneCompactColorBlock{sky}{ADDED TEST}{No relationship repeated consistently in both November runs}
+{We compared 32 sufficiently sampled monitors with three waveform measurements.
+No pair passed the stated repeatability check with one-minute bins.}
+\medskip
+\DuneCompactColorBlock{paper}{NOT RETESTED HERE}{The EDMS slides report effects of high voltage and wire bias}
+{Our test does not repeat the shake-rate study or the comparison with wire bias removed.
+It cannot support the claim “high voltage is unrelated to ground shakes”.}
+\medskip
+{\small A weak current hint depends on time binning and fails the other checks.
+Two ground monitors are too sparse. Slow samples cannot exclude a brief transient.\par}
+\PlotNote{Earlier observations: \EDMS{pp.\ 10, 34--35}. New test: runs 32731/32739;
+selected shake records only. Full plot and criteria are in the backup.}
+\end{frame}
+
+\begin{frame}{The next tests should answer the open questions}
+\DuneCompactColorBlock{paper}{USE EXISTING DATA}{Recheck the wire-bias change}
+{Compare the slow PDS signal across the bias ramp in runs 30201 and 30202.}
+\medskip
+\DuneCompactColorBlock{sky}{USE EXISTING DATA}{Fit whole charge tracks}
+{Compare each complete charge track with the position and timing of its possible light pulse.}
+\medskip
+\DuneCompactColorBlock{coral}{ADD THE MISSING COMPARISON}{Check similar records without shakes}
+{Use matched settings and measured observation time to check which early pulses distinguish shakes.}
+\PlotNote{Open questions from \EDMS{pp.\ 34--35, 39, 42}. The cause remains unresolved.}
+\end{frame}
+
+\appendix
+\begin{frame}{Backup: data and definitions}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.40\textwidth}
+\textbf{Saved 2024 records}\par\smallskip
+{\small\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\linewidth}{@{}Xrr@{}}
+\toprule Month & Run & Records\\\midrule
+July & 27938 & 6\\ & 27951 & 19\\
+October & 30201 & 44\\ & 30202 & 83\\
+November & 32730 & 1\\ & 32731 & 716\\ & 32739 & 662\\
+\midrule Total && 1,531\\\bottomrule
+\end{tabularx}}
+\end{column}
+\begin{column}{0.56\textwidth}
+\textbf{Charge readout (TPC)}\par
+{\small Measures signals from drifting electrons. APA1 and APA2 are the two charge-readout assemblies used here.}\par\medskip
+\textbf{Light readout (PDS)}\par
+{\small Records photon-sensor signals and electrical interference. A PDS pulse is not automatically a light flash.}\par\medskip
+\textbf{Slow controls (SC)}\par
+{\small Operating monitors: 34 channels, 7.74 million archived samples.}\par
+\end{column}
+\end{columns}
+\PlotNote{Automatic charge screen: 1,516 candidates, five below cut, ten unassessable.
+Selected files do not measure shake rate. No candidate has a complete 4 ms of pre-shake PDS readout.}
+\end{frame}
+
+\begin{frame}{Backup: the known charge pattern, counted again}
+\framesubtitle{Cross-check of earlier charge observations · \EDMS{pp.\ 14, 79}}
+\includegraphics[width=\textwidth]{figures/02-opposite-charge-signs.pdf}
+\DuneDiagramCaption{\textbf{Left:} APA1 rises while APA2 falls.
+\textbf{Right:} one dot per record; 1,355 of 1,376 November records have both slow signals clear.
+This extends the count. The opposite signs were already known.}
+\PlotNote{Median shape agreement after reversing APA2: 0.964 and 0.970.
+These are readout averages, not reconstructed particle charge or proof of a source.}
+\end{frame}
+
+\begin{frame}{Backup: the fit depends on the channel}
+\framesubtitle{Added numerical comparison · The electronics-dependent pattern was already in \EDMS{p.\ 21}}
+\includegraphics[width=\textwidth]{figures/08-electronics-groups.pdf}
+\DuneDiagramCaption{Each bar is a connected input. Taller bars mean better prediction from reported disconnected inputs.
+Some groups are predicted much better than others.}
+\PlotNote{AFE: an eight-channel front-end chip. Score: 0 = no gain over a zero-change guess; 1 = exact prediction.
+Trained on run 32731; tested on run 32739. A main-shake-trained fit fails on early pulses.}
+\end{frame}
+
+\begin{frame}{Backup: early pulses weakly predict charge size}
+\framesubtitle{Added test · Fit on run 32731; test on unused run 32739 records}
+\includegraphics[width=\textwidth]{figures/04-pds-prediction.pdf}
+\DuneDiagramCaption{\textbf{Left:} early PDS features reduce the slow-charge size error by only 4.1\%.
+\textbf{Right:} the first pulse is a worse clock for the charge marker than the known main shake. Lower bars are better.}
+\PlotNote{The two tests use 477 and 225 records, respectively. Signal size is in raw ADC units.
+These tests do not measure whether a pulse predicts that a shake will happen.}
+\end{frame}
+
+\begin{frame}{Backup: what the SC comparison actually tests}
+\framesubtitle{32 monitors × 3 measurements · Two November runs · Two further ground monitors too sparse}
+\includegraphics[width=\textwidth]{figures/09-SC-correlation.pdf}
+\DuneDiagramCaption{\textbf{Left:} each dot compares one monitor with one waveform measurement.
+No dot enters the shaded same-sign repeatability regions with one-minute bins.
+\textbf{Right:} the current hint changes with binning.}
+\PlotNote{Magnitude at least 0.30 in both runs, after file and time-trend adjustment.
+The two-minute hint also fails timestamp-envelope checks. This does not test shake rate or the bias-off contrast.}
+\end{frame}
+\end{document}

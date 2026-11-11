@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-27T19:33:56.175030+00:00",
+  "pages": 16,
+  "main_slides": 15,
+  "appendix_slides": 1,
+  "source_errors": [],
+  "advisories": [],
+  "layout_errors": [],
+  "visual_review": "New bias-parts and power slides inspected at 1300 pixels; figure slide shortened to remove overflow.",
+  "sha256": {
+    "main.tex": "a409f6e321c18f0efe76eb2694660e1f4d4380c9162b7b3f8b202522fa382200",
+    "main.pdf": "d108d3ad933c755fb103e06f6ac4fcf01a042cceb106f5737962c30ea6cb22f4",
+    "sources.json": "2092f2d8f62e8abdea9810b225dda416eb835faa657e0acd8bd551cf2fee4255",
+    "sources-and-notes.txt": "aab8cf14bf2053fa2ca84edeceb975fea1928fd75d7ec5092328f789f4ac9d62",
+    "source-review.txt": "f7b91a6ee5c07c400f2f1f7c90f743798659150699968ad23c1525b9b7bd27e1"
+  },
+  "limits": [
+    "Uses recorded workbook values and arithmetic; no new equipment qualification or complete VD power recalculation"
+  ]
+}

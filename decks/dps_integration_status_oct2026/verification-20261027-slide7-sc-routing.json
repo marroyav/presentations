@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-27T20:16:32.014102+00:00",
+  "revision": "Slide 7: additional interfaces through SC over OPC UA",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_exit_code": 0,
+  "pages": 19,
+  "main_slides": 12,
+  "backup_slides": 7,
+  "changed_slides": [
+    7
+  ],
+  "source_errors": [],
+  "advisories": [
+    "main.tex + backup-slides.tex: 1 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "advisory_review": "Rendered slide 7 inspected at 1700 pixels; routing and labels are readable without overlaps or clipping.",
+  "visual_review": "Slide 7 rendered and inspected after the route correction. Other slide bodies match the preceding revision.",
+  "content_review": [
+    "Additional VD interfaces ↔ OPC UA ↔ SC/Ignition ↔ OPC UA ↔ DPS PLC.",
+    "PDUs connect directly to DPS PLC for control/status; local interlocks retained.",
+    "Existing BDE/bias I/O connects to DPS PLC over EtherCAT."
+  ],
+  "sha256": {
+    "main.tex": "3b6dad4928643da70205bf477f7e223d7e79e28ea8cf8dd947acd83630e3ebf3",
+    "backup-slides.tex": "250911db90381903c52ec89db6dd32ea6e4efc16aebcd125aab11f542838e803",
+    "main.pdf": "1af67917c4b745c4821de2ff42624b56a5e16863abcf9a5b23a5c0dfe60556bc",
+    "main.txt": "4240bd555bcda86b6aba15f2d8aca6e31c2d7cb2805a56bb90ab563fc75f914a",
+    "README.md": "9c7a006c947bfa5bae5da82d79f938308986d090269430730e7a9362d62292fb",
+    "architecture-inputs-20261027.txt": "73641ba19ec78f108d4471a44dd450863cef47e5adb13a148dae39b5d0fe2883",
+    "sources.json": "07e196488098ebe59f00945e2738507bc5047c5620326d7da249c540a7726abf",
+    "sources-and-notes.txt": "2cf9560571fc517fbd1d85fd64ad49028d132650a73eab072ff8c710061e62ee",
+    "source-review.txt": "dc89b0031bfc3e1e11ca53e034c49e365f448421f6f3b3a33824f273aee71652"
+  },
+  "limits": [
+    "Presentation/source review only; no hardware qualification.",
+    "CUC placement remains proposed."
+  ]
+}

@@ -1,0 +1,81 @@
+Slide 6: space and I/O additions beyond the VD BDE baseline
+27 October 2026 — corrected after Manuel's scope clarification
+
+The starting point is VD: ten BDE auxiliary groups, eight WIECs per group,
+80 WIECs and 20 PL506 supplies. The existing BDE protection hardware belongs
+to that baseline. No HD-to-VD conversion is part of the new DPS scope.
+
+Correction to the previous estimate
+
+The earlier nine-module difference per group answered an HD-to-VD adaptation
+question. Its 90-, 150- and 160-module totals do not answer how much hardware
+is needed beyond the VD BDE system. Those totals are withdrawn. The related
+4U extension recommendation and definite extra E-bus feed claim are also
+withdrawn: they relied on assigning the historical panel arrangement to VD.
+The earlier calculation is preserved under archive/ as superseded evidence.
+
+What the VD workbook establishes about rack space
+
+BDE Aux Rack!C14 allocates 12U to DPS in each of ten auxiliary racks. The
+cells A26:B44 mark U3–U21 as Space: a contiguous 19U block per rack. U9 also
+has a possible ground-plane readout note. These positions are unassigned
+in this workbook, not newly reserved for DPS.
+
+Bias HV Rack!C15 allocates 12U to DPS in each of ten bias racks. A36:B45
+marks U3–U12 as Space: a contiguous 10U block per rack. K17:K18 describe two
+rails with 337 mm occupied on each. The usable rail length is not specified.
+
+Rack space and free DIN-rail length are distinct. The historical panel
+shown on slide 6 does not establish spare terminal capacity after the VD
+baseline equipment is placed. Its visible gaps must not be quoted as
+verified spare space in the VD panels.
+
+What extending the VD DPS adds
+
+- Existing VD BDE protection: zero new modules from changing the group size;
+  eight WIECs per group is already the baseline.
+- PDU and LV-supply SNMP exchange: zero added discrete or analog DPS I/O
+  terminals for the network connection itself.
+- Additional subsystem OPC UA exchange through SC: zero added discrete or
+  analog DPS terminals for that network connection itself.
+- Additional wired facility or equipment inputs, permits and inhibits:
+  count these from the VD signal allocation. The reviewed source matrix
+  names functions but does not establish a complete wired channel count.
+- Support hardware: derive any additional bus feeds, couplers, supplies and
+  terminal blocks from the actual VD bank arrangement and these new channels.
+
+The workbook records an optional PD-flange package in BDE Aux Rack!K20:K21:
+3 EL3202 + 2 EL2878 + 1 EL9100, six modules. The same notes identify inherited
+HD assumptions. Retain this as a source option; its applicability and number
+of instances in VD are not established. Do not multiply it by ten or count
+it as a new VD requirement without the VD flange/interface allocation.
+
+The 34 PDS LV feeds, 20 TDE racks and 1,280 PoF monitoring values remain
+system populations. They are not counts of new central DPS terminal channels.
+This says nothing about the hardware needed for local subsystem readout.
+
+Result
+
+The VD workbook supports rack-space figures of 19U per auxiliary rack and
+10U per bias rack marked Space. It does not establish a new reservation.
+The corrected additional physical I/O total and spare VD panel capacity
+remain unset. Zero applies to the network connections themselves, not to
+all future hardware additions. A per-rack extension size cannot yet be
+justified by the withdrawn HD conversion calculation.
+
+Sources
+
+/home/arroyave/work/racks/sources/rack-estimates/FD2_Rack_Estimates_May_2025_TMS.xlsx
+  BDE Aux Rack!B1:C1,C14,K13:K23,A26:B44;
+  Bias HV Rack!B1,C15,K17:K21,A36:B45.
+/home/arroyave/work/racks/sources/power-planning/2026-06-10_SC_Progress.pdf
+  Existing VD front-end grouping: ten I/O groups serving twenty PL506 rows.
+/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/architecture-inputs-20261027.txt
+  VD scope, shared SNMP control, subsystem OPC UA through SC, and TDE scope.
+
+Manuel's corrections: six is the HD reference; eight is VD; compute VD only.
+
+Reproduction: python3 calculate.py in this directory. The script reads the
+VD workbook directly, keeps the baseline outside the additions count and
+records the source cells, hashes and calculation checks. Current evidence
+is named in evidence-latest.txt. The presentation PDF is unchanged.

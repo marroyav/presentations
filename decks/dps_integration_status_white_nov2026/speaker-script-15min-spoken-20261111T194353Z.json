@@ -1,0 +1,189 @@
+{
+  "created_at": "2026-11-11T19:43:53.426402+00:00",
+  "purpose": "Rewrite the fifteen-minute Markdown script in natural spoken language",
+  "script": "speaker-script-15min.md",
+  "spoken_words_main_slides": 1878,
+  "target_duration_seconds": 900,
+  "implied_speech_rate_wpm": 133.5,
+  "timing_note": "Approximate rehearsal cues, with 2 seconds per slide allowed for pauses/changes. No measured delivery time.",
+  "schedule": [
+    {
+      "slide": 1,
+      "spoken_words": 60,
+      "target_start_seconds": 0,
+      "target_end_seconds": 30
+    },
+    {
+      "slide": 2,
+      "spoken_words": 65,
+      "target_start_seconds": 30,
+      "target_end_seconds": 60
+    },
+    {
+      "slide": 3,
+      "spoken_words": 69,
+      "target_start_seconds": 60,
+      "target_end_seconds": 95
+    },
+    {
+      "slide": 4,
+      "spoken_words": 67,
+      "target_start_seconds": 95,
+      "target_end_seconds": 125
+    },
+    {
+      "slide": 5,
+      "spoken_words": 61,
+      "target_start_seconds": 125,
+      "target_end_seconds": 155
+    },
+    {
+      "slide": 6,
+      "spoken_words": 62,
+      "target_start_seconds": 155,
+      "target_end_seconds": 185
+    },
+    {
+      "slide": 7,
+      "spoken_words": 58,
+      "target_start_seconds": 185,
+      "target_end_seconds": 215
+    },
+    {
+      "slide": 8,
+      "spoken_words": 67,
+      "target_start_seconds": 215,
+      "target_end_seconds": 245
+    },
+    {
+      "slide": 9,
+      "spoken_words": 68,
+      "target_start_seconds": 245,
+      "target_end_seconds": 275
+    },
+    {
+      "slide": 10,
+      "spoken_words": 71,
+      "target_start_seconds": 275,
+      "target_end_seconds": 310
+    },
+    {
+      "slide": 11,
+      "spoken_words": 70,
+      "target_start_seconds": 310,
+      "target_end_seconds": 345
+    },
+    {
+      "slide": 12,
+      "spoken_words": 68,
+      "target_start_seconds": 345,
+      "target_end_seconds": 375
+    },
+    {
+      "slide": 13,
+      "spoken_words": 92,
+      "target_start_seconds": 375,
+      "target_end_seconds": 420
+    },
+    {
+      "slide": 14,
+      "spoken_words": 13,
+      "target_start_seconds": 420,
+      "target_end_seconds": 430
+    },
+    {
+      "slide": 15,
+      "spoken_words": 67,
+      "target_start_seconds": 430,
+      "target_end_seconds": 460
+    },
+    {
+      "slide": 16,
+      "spoken_words": 69,
+      "target_start_seconds": 460,
+      "target_end_seconds": 495
+    },
+    {
+      "slide": 17,
+      "spoken_words": 67,
+      "target_start_seconds": 495,
+      "target_end_seconds": 525
+    },
+    {
+      "slide": 18,
+      "spoken_words": 74,
+      "target_start_seconds": 525,
+      "target_end_seconds": 560
+    },
+    {
+      "slide": 19,
+      "spoken_words": 70,
+      "target_start_seconds": 560,
+      "target_end_seconds": 595
+    },
+    {
+      "slide": 20,
+      "spoken_words": 76,
+      "target_start_seconds": 595,
+      "target_end_seconds": 630
+    },
+    {
+      "slide": 21,
+      "spoken_words": 62,
+      "target_start_seconds": 630,
+      "target_end_seconds": 660
+    },
+    {
+      "slide": 22,
+      "spoken_words": 62,
+      "target_start_seconds": 660,
+      "target_end_seconds": 690
+    },
+    {
+      "slide": 23,
+      "spoken_words": 68,
+      "target_start_seconds": 690,
+      "target_end_seconds": 725
+    },
+    {
+      "slide": 24,
+      "spoken_words": 71,
+      "target_start_seconds": 725,
+      "target_end_seconds": 755
+    },
+    {
+      "slide": 25,
+      "spoken_words": 76,
+      "target_start_seconds": 755,
+      "target_end_seconds": 795
+    },
+    {
+      "slide": 26,
+      "spoken_words": 82,
+      "target_start_seconds": 795,
+      "target_end_seconds": 830
+    },
+    {
+      "slide": 27,
+      "spoken_words": 65,
+      "target_start_seconds": 830,
+      "target_end_seconds": 865
+    },
+    {
+      "slide": 28,
+      "spoken_words": 78,
+      "target_start_seconds": 865,
+      "target_end_seconds": 900
+    }
+  ],
+  "pre_change_script": "archive/20261111T194353Z-before-spoken-script-rewrite/speaker-script-15min.md",
+  "source_sha256": {
+    "main.pdf": "c6b6813dfd2a2ef4a733eaed4fd144b95653ffdcb70f03340371fd8053171557",
+    "main.tex": "1deb3e4ce1bd62c9e515caa43526b88e0cf982201fb62824a18491f1c6d5b421",
+    "meeting-updates.tex": "405ec442afdfd3e3a0906a10c6cce985144d028688418174654a4fd7a5ef08d6",
+    "review/slide-index.csv": "de0e0a2246a9429311b069c172e177ffb07cef916ab229564c62fcc62f1e7d83"
+  },
+  "previous_script_sha256": "0daa36450fcac3c50c69f99e5475a75031b42506b74562b09601c2029bc5f123",
+  "script_sha256": "24bb0e99fd9a84ee98335e50b576f84fa5dde08b74dbd33c9bca12e1b48718ca",
+  "review": "Rewritten for a spoken delivery, using contractions, direct explanations and transitions. Reported Batavia progress, available SD equipment, proposed architecture, working counts, unresolved interlocks and open dates retained. Slides unchanged."
+}

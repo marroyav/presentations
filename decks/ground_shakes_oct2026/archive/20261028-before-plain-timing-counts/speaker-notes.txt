@@ -1,0 +1,123 @@
+Ground shakes — speaker notes, 28 October 2026
+
+1. Ground shakes
+We reviewed seven runs using charge, PDS and slow-control data. The charge
+precursor and electrical pickup were already shown in the EDMS slides. Here
+we ask how the early pulses relate to the precursor and the main shake, and
+whether any charge signals could belong to those pulses.
+
+2. Before the main shake
+Read the plots from top to bottom. Two PDS pulses appear first, at about -183
+and -161 microseconds. The small TPC precursor rises later. The main shake is
+at zero. The upper plots are magnified; the main shake is much larger.
+This example shows the order of the signals. It does not establish what
+causes them. PDS records both light and electrical pickup.
+
+3. Double pulses
+These two events have pulse gaps of about 23 and 66 microseconds. We found
+at least two early pulses in 101 of 716 run 32731 events. The search used the
+window from 100 to 300 microseconds before the main shake.
+Different gaps do not rule out one source. A source can fire twice at
+different intervals while keeping the same light-to-charge drift delay.
+We have not yet established whether these pulses are light.
+
+4. Timing of the early PDS pulse
+This is the histogram Manuel asked for: PDS pulse time minus main-shake time.
+We removed the old 100-300 microsecond cut. For each event, we take the largest
+sharp pulse before the small TPC precursor. There are 237 events in run 32731
+and 167 in run 32739. Their median times are 230 and 220 microseconds before
+the shake. The full range is about 73-316 microseconds before.
+So the two runs cover a similar broad interval. They do not give one narrow
+delay in this selected sample. Fifty-one of the 404 values fall outside the
+old 100-300 microsecond window. Taking the first pulse instead still gives
+a broad spread, with medians about 239 and 238 microseconds before the shake.
+This is timing relative to the main shake. We must match actual charge to a
+light pulse before interpreting a delay as drift distance.
+
+Would a wider window look Gaussian?
+We checked the actual PDS packets in all 1,378 November charge candidates.
+There is no 21-channel coverage earlier than about 320 microseconds before
+the shake. Our pulse finder cannot measure that early tail from the saved
+packets. Individual channels can have earlier samples; they are not enough
+for this particular selection. The original search already covered the
+available data back to -4,000 microseconds. A wider plot therefore adds empty
+space, not a tail. The before-precursor cut also limits the later side.
+We cannot say whether the full distribution is Gaussian. We would need
+recording and pulse selection that let us measure both sides of it.
+
+Histogram details, if asked
+The PDS search finds sharp negative edges on at least 21 channels of DAPHNE
+109. It searches the wider recorded window, from -4,000 to -20 microseconds.
+The precursor time is the existing APA1 two-ADC rise sustained for five bins;
+it is a readout marker, not an exact physical start. Largest means the
+largest median leading-edge change on recorded connected channels. It is
+not a measurement of photon yield. Of 1,378 November charge candidates,
+1,348 have a usable precursor time, 407 have an earlier pulse, and 404 have
+enough samples to rank pulse size. Missing packets and pulse thresholds can
+hide earlier activity. Some channels have samples before -320 microseconds,
+so that is not a hard recording boundary. Full definitions are in SOURCES.md.
+
+5. Timing of PDS and TPC signals
+We pick out short signals on neighbouring TPC wires that pass our automatic
+cuts. We do not yet know whether they are ionisation charge, electrical pickup
+or a mixture. Calling them "charge features" hid that distinction.
+The plot compares each selected group's time with the PDS pulse times.
+Blue pairs TPC signals with PDS pulses from the same event. Orange keeps the
+TPC signals but borrows PDS pulses from another event in the same run and file.
+Both have a broad peak near 325 microseconds.
+Each timing comparison uses two timestamps. As an illustration, PDS at -200
+microseconds and a selected TPC group at +100 give one entry at +300. We do
+not add or integrate the waveforms from either system. Each possible timing
+combination is counted; several combinations can use the same TPC signal.
+The vertical axis divides that count by usable comparison time and scales it
+to 100 microseconds. It does not measure charge, pulse area, confirmed
+charge-light matches or independent particles.
+That does not rule out a real source. If repeated interactions happen at the
+same place, their light-to-charge delays can be similar. Swapping events can
+keep that timing pattern, because we align them all to the main shake.
+My earlier wording overstated what this comparison could tell us. We need
+charge positions and corrected drift delays to distinguish a repeated source
+from electrical pickup or an effect of the recording windows.
+A drift delay gives information along the drift direction. It does not, by
+itself, identify a single point in the cryostat.
+
+6. Electrical pickup in the PDS
+The EDMS slides already show signals on disconnected channels. We use those
+channels to predict part of the connected-channel signal. We fit on run
+32731 and test on run 32739. Signals from the same event work better than
+signals borrowed from another event: errors are about 92% and 102%.
+Here 100% means predicting no signal change. The improvement is partial and
+varies by channel. This quantifies known pickup; it does not tell us which
+board, cable or physical process started it.
+
+7. Slow controls
+We checked whether 32 monitors follow three PDS and TPC measurements in the
+two November runs. No correlation passes our check in both runs with
+one-minute bins. A weak current hint changes when we change the bins.
+This does not overturn the earlier HV or wire-bias observations. We have not
+repeated the study of shake rate versus HV or the bias-off comparison. Slow
+sampling can also miss a short transient. Two ground monitors have too few
+samples for the comparison.
+
+8. Next checks
+First, fit the charge tracks and see whether different events point to the
+same place. Check whether the light-to-charge delay agrees with that position.
+For double pulses, look for two charge responses with the same gap and a
+common drift delay. We should also pass a repeated-source model through our
+actual recording windows before using event mixing to reject it.
+Revisit the wire-bias change in runs 30201 and 30202. Finally, compare with
+events without shakes, under similar conditions, to find what is distinctive.
+
+Backup: the small TPC precursor
+The earlier clock test has errors of 66.1 versus 33.4 microseconds on 225
+unused records. It times the small signal shared across the APA, not charge
+arriving from one location. It therefore does not test a fixed drift distance.
+The amplitude test uses 477 records and improves the size estimate by 4.1%.
+
+References
+The starting point is the recovered 85-page EDMS 3493627 v1 presentation,
+20 July 2026. The linked evolving material was exported on 28 October 2026.
+SOURCES.md gives page references, input files and the analysis definitions.
+The local EDMS copy has not been verified as the latest revision: CERN
+authentication had expired. No claim of novelty beyond the inspected slides
+is made.

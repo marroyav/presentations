@@ -1,0 +1,54 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-10T19:16:59.159112+00:00",
+  "task": "dps-transition-left-logo-20261110",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 30,
+    "tracked_diff_sha256": "86b3dcdabe5ec2aeadc5f5e59f469a2641e381c90ad00bef131065200aef8aef",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261110T191633Z-transition-left-logo-build.log",
+      "sha256": "9d799ddc8ccfc4ea1e04a87ce2668fd9bba0bad8c8e331f1d65a74b8ef414625"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/deck-style.tex",
+      "sha256": "67b1def9d683a9d626466abff7cb66feb982d94581254a52d9a1b0055dd22311"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "458db948a376b76a6c0344f6b1c8570b0cd7de04b6d5aa1cc58a61b2a3dcee89"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "7a8bf6398f7509f5cb0103976796e184ee73015833a7096d6e357dfdc8037728"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "6b87f71276570a2c04fc55792cde8796a4f4e582d6311ad3a43022be6b387ce6"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "3999f6fcf8acc3af989763515508fc7d4d55a70dc64a28173533e6f3fba232bc"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/logos/DUNElogo_gray.pdf",
+      "sha256": "fc921d5b84aea693faa09f2573a84e6b66c3ae2a1c0041b4ad9771abde1fcd5e"
+    }
+  ],
+  "limitations": "Presentation layout review only."
+}

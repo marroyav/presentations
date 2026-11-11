@@ -4,9 +4,9 @@ Shared presentation framework for DUNE SC/DPS, DAPHNE, and related technical
 decks. Beamer remains the PDF shell, while the repository now centralizes:
 
 - audience/outcome briefs and a maintained starter deck;
-- layout-first paper, sky, and coral surfaces with red reserved for hard danger;
+- white slides for new decks, with dark labels and restrained color;
 - an 11-point Beamer baseline and projector-size density checks;
-- section, statement, mosaic, comparison, pipeline, table, and decision layouts;
+- figure-led layouts and consistent comparisons;
 - tokenized Graphviz diagrams and shared TikZ styles;
 - source audits for theme drift, density, long lists, and unexplained visuals.
 
@@ -21,6 +21,13 @@ tool choices, authoring rules, and migration sequence. The
 API, layout grammar, and color system. The
 [electrical schematic framework](docs/schematic-framework.md) separates
 standalone explanatory drawings from ERC-backed hardware-authority exports.
+
+Use the [plotting guide](docs/plotting-guide.md) for quantitative evidence and the
+[diagram guide](docs/diagram-guide.md) for system relationships. They adapt
+Tufte’s *The Visual Display of Quantitative Information*; the
+[source notes](docs/visual-display-source.md) record the inspected book pages.
+New decks use the white starter. Existing decks keep their current rendering
+until deliberately migrated.
 
 ## Standalone schematics
 
@@ -54,8 +61,17 @@ make
 
 The repository currently builds:
 
+- [What I added in PR #8 — 9 November 2026](decks/sc_bridge_emulators_nov2026/main.pdf), six short steps explaining the emulator code and checks, plus a threads/asyncio comparison.
+- [Ground shakes — public review, 28 October 2026](decks/ground_shakes_oct2026/main.pdf), six main slides and three backups: known EDMS findings, double pulses, the PDS-to-shake histogram, charge/light matching and next checks, with data and channel-fit details in the backups. The timing interpretation keeps a recurring source location open; [sources and the EDMS comparison](decks/ground_shakes_oct2026/SOURCES.md) distinguish observations from hypotheses.
+- [VD detector protection — reviewed 27 October 2026](decks/dps_integration_status_oct2026/main.pdf), twelve main slides for I&I: system definitions, four DPS inputs, detector detail, existing BDE hardware, VD extension, Ignition → PLC → PDU control, tests and procurement. Seven backup slides retain parts, power and rack evidence.
+- [VD detector protection — November 2026 I&I meeting](decks/dps_integration_status_white_nov2026/main.pdf), 28 main slides and 15 backups. All earlier content is retained, with a title, date and both logos, commissioning updates, fire-system scope, connection collection and proposed milestones.
+- [Run 45392: PDS-TA-triggered readout](decks/pds_ta_run45392_oct2026/main.pdf), one slide on the matching PDS and emulated-charge windows.
+- [PDS calibration](decks/pds_calibration_daq_oct2026/main.pdf), four slides including the title, scan matrices, synchronized DAPHNE/calibration-box timing, and the requested DAQ loop.
+- [PDS readout](decks/pds_readout_oct2026/main.pdf), six slides: title, bottleneck tests, descriptor/raw processing, package changes, format compatibility, and Run 45392.
+- [PDS data selection](decks/pds_data_selection_oct2026/main.pdf), four slides including the title, live/replay TA capabilities, scintillation signatures, and integration needs.
 - [PDS PoF budget — 14 October 2026](decks/pds_pof_budget/main.pdf), one slide comparing Opta and Beckhoff I/O costs for the 7 V + 1 T and 8 V + 8 T scopes, with [sources and cost assumptions](decks/pds_pof_budget/speaker-notes.txt).
 - [SC–PDS–DPS interface — 14 October 2026](decks/pds_sc_interface_oct2026/main.pdf), with responsibilities, one OPC UA boundary for all five systems, the existing ICD DAPHNE diagram, draft PoF I/O sizing for 8 T + 8 V, two backup slides and [speaker notes](decks/pds_sc_interface_oct2026/speaker-notes.txt).
+- [Slow-controls simulation: results and a hands-on guide — 6 October 2026](decks/sc_simulation_results_oct2026/main.pdf), with a [beginner runbook](../sc_emu/RUNBOOK.md). Simulation source, tools and results live in the separate `sc_emu` repository.
 - `decks/scdps_repo_plan_aug2026/main.pdf`
 - `decks/scdps_git_management_aug2026/main.pdf`
 - `decks/scdps_software_ownership_aug2026/main.pdf`
@@ -79,6 +95,12 @@ The detector-interlock deck also includes a
 [plain-language collaboration guide](decks/detector_wide_interaction_matrix_sep2026/human/README.md)
 and a [searchable matrix by subsystem](decks/detector_wide_interaction_matrix_sep2026/human/index.html).
 These cover all 40 rows of the reviewed DPS draft, including open decisions.
+
+## Reports
+
+- [Ground shakes: what we found — 5 November 2026](reports/ground_shakes_nov2026/main.pdf): two plain-language pages on the measurements, completed analyses and checked PDS orientation. Build with `make ground-shakes-report`; [source notes](reports/ground_shakes_nov2026/README.md) retain methods and limits.
+
+- [DAPHNE-14 readout tests and merge plan — 23 October 2026](reports/pds_readout_tests_oct2026/main.pdf): three pages covering the 32-channel rate comparisons, processing measurements and candidate branches. Build with `make pds-readout-report`; source pins and measurements are included beside the report.
 
 ## Audit
 
@@ -116,8 +138,7 @@ Complete the generated audience/outcome brief before drafting slides. Run
 ## Framework starter
 
 `make starter` builds `examples/framework_starter/main.pdf`, which demonstrates
-the recommended narrative structure, varied slide languages, and Graphviz
-pipeline.
+white slides, a labeled illustrative plot, and a Graphviz diagram.
 
 ## Project terminology
 

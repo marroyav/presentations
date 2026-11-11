@@ -1,0 +1,258 @@
+{
+  "revision_date": "2026-10-27",
+  "scope": "VD only. HD later by extension or separate PLC.",
+  "context": "User-supplied I&I email thread, 23–26 October, and subsequent clarifications.",
+  "references": [
+    {
+      "id": "rack-workbook",
+      "path": "/home/arroyave/work/racks/sources/rack-estimates/FD2_Rack_Estimates_May_2025_TMS.xlsx",
+      "revision": "May 2025 VD planning workbook",
+      "location": "RACKS; BDE LV RACK!D27,K27:K29; BDE Aux Rack!B14:F14,K13:K23,B57,B59:B61; Bias HV Rack!B3,B15:F15,K17:K22; FD2 MiniRack combined",
+      "use": "VD rack allocations, bias-panel components and stated power assumptions",
+      "sha256": "ce887de4442c46f611c1dd2d72688bc7ec80033612ec40604bcdfef430f2706b"
+    },
+    {
+      "id": "sc-infrastructure",
+      "path": "/home/arroyave/work/racks/sources/power-planning/2026-06-10_SC_Infrastructure_and_Installation.pdf",
+      "revision": "Ting Miao, 10 June 2026",
+      "location": "Slide 4 / PDF p5; slides 8,10 / PDF pp9,11",
+      "use": "BDE groups and HV interfaces; central PLC location TBD",
+      "sha256": "8a40338cf3efc91396d62ead3f4d15dcf9c7da827b5772e47cf9a2e345aab7a2"
+    },
+    {
+      "id": "sc-progress",
+      "path": "/home/arroyave/work/racks/sources/power-planning/2026-06-10_SC_Progress.pdf",
+      "revision": "Ting Miao, 10 June 2026",
+      "location": "Slides 4–8 / PDF pp5–9, especially slide 6 / PDF p7",
+      "use": "BDE Ignition front end, 20 rows, 10 I/O groups and existing test work",
+      "sha256": "ae9ff086c81c9b2306c1313ea34fc2693ae95893982d6ca8c4a085eff1335edc"
+    },
+    {
+      "id": "bde-icd",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/3293079/1/DUNE_ICD_SC_TPCE-BDE_v1_docx_cpdf.pdf",
+      "revision": "EDMS 3293079 v1; attachment internal revision 1.4",
+      "location": "PDF pp4–8, especially section 5",
+      "use": "VD WIEC/WIB/PL506 counts; inhibit and feedback interfaces; Fermilab test arrangements",
+      "sha256": "d29cc863fd1cd1685db0979b1788709cc499736e1e0fad6033aca9be4c4481d5"
+    },
+    {
+      "id": "panel-drawing",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/F10xxxxxx-Prelim_-_DDSS_Controls.pdf",
+      "revision": "EDMS 2401090 v4; preliminary TPC reference drawing",
+      "location": "Sheet 2 / PDF p2",
+      "use": "Existing panel drawings; use as reference, not a new VD design",
+      "sha256": "b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c"
+    },
+    {
+      "id": "parts-list",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/CE_Interlock_Parts_List.xlsx",
+      "revision": "EDMS 2401090 v4; updated 11 April 2023",
+      "location": "Interlocks M&S rows 5–45",
+      "use": "Existing component choices, OPC UA licence, spares and historical costs; rebase quantities to VD",
+      "sha256": "c0f0605fbb6d4d7ed87081235b179f665db732dde3f890d71967da98600476bd"
+    },
+    {
+      "id": "power-analysis",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/DDSS_Controls_Power_Analysis.xlsx",
+      "revision": "EDMS 2401090 v4; older TPC population",
+      "location": "PLC Rack; TPC LV Rack; Bias HV Rack",
+      "use": "Existing calculation structure, not current VD totals",
+      "sha256": "7bb776e6b5f36948a8716f556104056f4b9dc63f52bb4f5a888ee5f76fc509e4"
+    },
+    {
+      "id": "px3-setup",
+      "path": "/home/arroyave/work/racks/sources/docdb-32655-v8/PX3_Rack_Protection_Setup.pdf",
+      "revision": "DUNE-doc-32655 v8; guide dated 5 June 2026",
+      "location": "PDF pp3–6,14–16",
+      "use": "Reference local trip functions and deliberate recovery. The presentation control chain follows manuel-architecture.",
+      "sha256": "df707a5e923cbcb81f2ae288c1a5705de8588f83475818f0ba3b2ce56fad7f72"
+    },
+    {
+      "id": "g271",
+      "path": "/home/arroyave/work/racks/sources/docdb-37378-v2/dune-sc-devices-g271.pdf",
+      "revision": "DUNE-doc-37378 v2; 7 July 2026",
+      "location": "PDF pp3–4",
+      "use": "Distinguishes installed test-rack items and then-planned additions",
+      "sha256": "b40bb9a9d207092bc2b7aa781bd686a417b7310684f16bedddc4ae2c777222d2"
+    },
+    {
+      "id": "sc-architecture",
+      "path": "/home/arroyave/work/kerberos-doc-access/record/architecture-inputs-20261021/DUNE Far Detector Slow Control System Architecture.pdf",
+      "revision": "User-supplied Trevor Nichols diagram; PDF metadata 7 October 2026; approval not established",
+      "location": "PDF p1",
+      "use": "PLC OPC UA/ADS; remote-I/O and equipment layout; central PLC rack TBD",
+      "sha256": "9771a3967d5644c1efbff134c7d88d3d12c0d3f92929ced515470d02532e2feb"
+    },
+    {
+      "id": "cryo-architecture",
+      "path": "/home/arroyave/work/kerberos-doc-access/record/architecture-inputs-20261021/LBNF Far Site Cryo Control System Architecture.pdf",
+      "revision": "User-supplied diagram; PDF metadata 4 May 2026; approval not established",
+      "location": "PDF p1",
+      "use": "CUC/VD/HD cryogenic and ODH domains; not a DPS rack allocation",
+      "sha256": "0b990b9865dddd722306e1f984f0e9f5a3a75eb07b6a0712380757edd5a1a1df"
+    },
+    {
+      "id": "pds-inventory",
+      "path": "/home/arroyave/work/vd-dps-plan/pds-hardware-control.md",
+      "revision": "Working inventory with user-supplied counts",
+      "location": "Inventory and SENSORS",
+      "use": "PoF box and monitoring populations only. PDS LV count is supplied by manuel-architecture; the older inventory does not govern that count.",
+      "sha256": "b46794086fec2e66287dff520c2dd62cdcf986902c03e7b822e3afc96963ced3"
+    },
+    {
+      "id": "matrix",
+      "path": "/home/arroyave/work/vd-dps-plan/integration-matrix-20261023/rules.json",
+      "revision": "23 October 2026; 46 rules from 16 sources",
+      "location": "Q-001, O-001 and hardware interface fields",
+      "use": "Requirements/conflicts useful for hardware selection; full response-matrix work remains",
+      "sha256": "0742692686ed5ac2e8f2b8494a6ed0fa1be6b28de4f4095661b93846a2be1b65"
+    },
+    {
+      "id": "simulation",
+      "path": "/home/arroyave/work/sc_emu/RESULTS.md",
+      "revision": "Reference software tests, October 2026",
+      "location": "Reference results and test limits",
+      "use": "Software monitoring/configuration evidence; no PLC trip-time qualification",
+      "sha256": "de269987cea890cd373d27a2588e79a9b7a162283bc055b7f9153c280f237873"
+    },
+    {
+      "id": "hv-inventory",
+      "path": "/home/arroyave/work/vd-dps-plan/hv-hardware-control.md",
+      "revision": "Working VD inventory",
+      "location": "Inventory and Hardware",
+      "use": "Ten bias crates and 576 bias channels; other provisional protocol choices are not adopted",
+      "sha256": "cd662776896157ada755a4eb02d8996bd3478fb960707750b4563dd7be77fc90"
+    },
+    {
+      "id": "site-survey",
+      "path": "/home/arroyave/work/vd-dps-plan/development-20261021/SITE_SURVEY.txt",
+      "revision": "Working inspection notes, October 2026",
+      "location": "Panel list and drawing references",
+      "use": "U-FD-M-901 rev12 references; planned observations distinguished from installed equipment",
+      "sha256": "7d5b35ee7e5847c3c1b7fdac2921adedd28efbd229be98a0608e724cc8afa4cf"
+    },
+    {
+      "id": "panel-register",
+      "path": "/home/arroyave/work/vd-dps-plan/development-20261021/panel-survey-register.csv",
+      "revision": "Working inspection register, October 2026",
+      "location": "S01–S20",
+      "use": "Twenty drawing symbols, including eight CUC references and two 4910 sump interfaces",
+      "sha256": "59fc499930c1729685fe1dbe88bded283ec6b4c79a0cec989b1ba95ccd446bfc"
+    },
+    {
+      "id": "manuel-architecture",
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/architecture-inputs-20261027.txt",
+      "revision": "User instructions, 27 October 2026",
+      "location": "System hierarchy, roles, PDS LV count, PLC/OPC UA paths and explicit slide 7 routing through SC",
+      "use": "Current presentation design basis",
+      "sha256": "73641ba19ec78f108d4471a44dd450863cef47e5adb13a148dae39b5d0fe2883"
+    },
+    {
+      "id": "original-presentation",
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/archive/20261023-before-ii-feedback/main.tex",
+      "revision": "Original 23 October 2026 presentation",
+      "location": "Three systems, three jobs; facility inputs; protection can block an operating request",
+      "use": "Restored definitions and conceptual sequence",
+      "sha256": "8aa8b8de9befc7edf9794590a45348982e126978ab2ca8e63112d28d0e506070"
+    },
+    {
+      "id": "sc-dps-interface",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/2907050/1/2023-07-10-FD1andFD2-SC_and_DDSS_interfaces_and_requirements_docx_cpdf.pdf",
+      "revision": "EDMS 2907050 v1, released copy checked 21 October",
+      "location": "PDF pp4–5 and p13",
+      "use": "Historical definitions and low-level/HV example; current roles follow Manuel and supplied email",
+      "sha256": "16b3699b46365b7172f39230db7bb275ae043a9dffe70d31246a30285824222a"
+    }
+  ],
+  "figures": [
+    {
+      "path": "figures/tpc-panel-reference.pdf",
+      "source_id": "panel-drawing",
+      "page": 2,
+      "trim_bp": [
+        290,
+        500,
+        900,
+        430
+      ],
+      "treatment": "Unmodified source PDF; clipped on slide; DunePaper background for transparent source. Reference panel layout, not a new VD electrical design."
+    },
+    {
+      "path": "figures/sc-progress-june2026.pdf",
+      "source_id": "sc-progress",
+      "page": 7,
+      "trim_bp": [
+        10,
+        210,
+        460,
+        74
+      ],
+      "treatment": "Unmodified source PDF; crop of existing BDE Ignition screenshot."
+    }
+  ],
+  "limits": [
+    "No new installed-equipment or timing validation.",
+    "Local pinned documents reviewed; no new EDMS latest-revision check.",
+    "CUC location, hardware additions and work assignments remain proposals.",
+    "Historical TPC quantities/costs are not VD procurement quantities/costs."
+  ],
+  "derived_quantities": {
+    "bias_rails": {
+      "calculation": "10 racks x 2 rails = 20 rails",
+      "source": "rack-workbook, Bias HV Rack!K17:K18"
+    },
+    "bias_output_modules": {
+      "calculation": "20 rails x 18 EL2124 = 360 modules; 360 x 4 outputs = 1440 outputs",
+      "status": "First-pass capacity, not approved purchase quantity"
+    },
+    "comparison_bias_channels": {
+      "value": 576,
+      "source": "rack-workbook, Power Summary!B22:B23; working VD HV inventory",
+      "note": "Map inhibits before interpreting unused output capacity."
+    },
+    "pl506_input_power": {
+      "calculation": "20 x 2254 W = 45080 W, displayed as about 45.1 kW",
+      "source": "rack-workbook, BDE LV RACK!D27,K27:K29",
+      "status": "Expected AC input estimate using workbook load and efficiency assumptions; not measured"
+    },
+    "auxiliary_panel_input_power": {
+      "calculation": "831 W x 8/6 = 1108 W per rack; 10 x 1108 W = 11080 W",
+      "source": "rack-workbook, BDE Aux Rack!D14,K13:K14",
+      "status": "Explicit linear scaling assumption from six to eight WIECs, following workbook note; not a new detailed power calculation"
+    },
+    "pof_monitoring": {
+      "calculation": "80 boxes x (8 temperature + 8 voltage readings) = 1280 monitoring values",
+      "source": "pds-inventory, SENSORS",
+      "status": "Working monitoring population, not central PLC terminal count"
+    }
+  },
+  "presentation": "Twelve main slides: definitions → four DPS inputs → detector detail → existing BDE design → VD proposal and Ignition/PLC/PDU chain → tests and procurement. Seven backup slides.",
+  "current_architecture": {
+    "source_id": "manuel-architecture",
+    "dps_input_domains": [
+      "FFDG BMS",
+      "SDSTA BMS",
+      "Cryogenics",
+      "Detector"
+    ],
+    "detector_contains": [
+      "SC",
+      "Subsystems"
+    ],
+    "sc_role": "Operation, monitoring and central data/event logging",
+    "dps_role": "Protection arbitration",
+    "pdu_control_chain": [
+      "Ignition",
+      "DPS PLC",
+      "PDU"
+    ],
+    "local_interlocks": "Retained; can trip independently",
+    "pds_lv_count": 34,
+    "count_basis": "Explicit correction by Manuel; replaces the prior PDS LV entry. No new supply-module count is inferred.",
+    "sc_dps_transport": "OPC UA: control requests, status and events between SC/Ignition and the DPS PLC",
+    "protection_path": "DPS PLC arbitrates; BDE/bias I/O uses EtherCAT, PDUs connect directly, and additional PDS/TDE/CalCI interfaces exchange through SC over OPC UA.",
+    "proposal_diagram": "Central VD DPS PLC in proposed CUC location; existing BDE/bias I/O over EtherCAT and direct PDU control/status. Additional VD interfaces connect through SC over OPC UA.",
+    "additional_interfaces": "PDS/TDE/CalCI additional interfaces ↔ OPC UA ↔ SC/Ignition ↔ OPC UA ↔ DPS PLC",
+    "pdu_connection": "Direct control/status between DPS PLC and PDUs; local interlocks retained"
+  }
+}

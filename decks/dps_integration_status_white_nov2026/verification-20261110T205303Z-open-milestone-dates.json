@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-11-10T20:54:56.073954+00:00",
+  "request": "Leave the planning dates open; retain the milestone outcomes.",
+  "pre_change_archive": "archive/20261110T205303Z-before-open-milestone-dates",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "exit_code": 0,
+  "build_evidence": "verification-20261110T205303Z-open-milestone-dates-evidence.json",
+  "checks": {
+    "slides_before": 42,
+    "slides_after": 42,
+    "changed_pages": [
+      25,
+      26
+    ],
+    "all_other_page_text_retained": true,
+    "milestone_dates_open": true,
+    "tex_layout_warnings": [],
+    "source_audit_errors": [],
+    "source_audit_advisories": []
+  },
+  "visual_review": {
+    "reviewer": "Codex; no human approval recorded",
+    "slides": [
+      25,
+      26
+    ],
+    "scale_pixels": 1400,
+    "result": "Undated milestone and hardware-review slides fit without clipping or overlap."
+  },
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/main.tex": "1ae7a1fb7fb9c52f3150df02b9e007dbc63ae5dfacf9700a9c34427b3abcc422",
+    "decks/dps_integration_status_white_nov2026/meeting-updates.tex": "9197ceb6fee7216d09d48e18ce7b57c8c1d994d1450d5f0a1662f91fea2f61c8",
+    "decks/dps_integration_status_white_nov2026/README.md": "1f74e5774baead07686013f5d0c95bc7810808540b529101ece4012bc5b35b11",
+    "decks/dps_integration_status_white_nov2026/sources.json": "36a09ec3081dba7481a1f6b8455537db56ecb6fd298d7faf474481fcc003743c",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "3a25459b9883b111be6a4c9074570ed18bc4e83eb431af9b22f802b8c7853a98",
+    "decks/dps_integration_status_white_nov2026/deck-style.tex": "c49bce87cfa3f58945f5460a146106853a58d8f5aec30c61a59ff630c849b9e9"
+  },
+  "output_sha256": {
+    "main.pdf": "7122fbcec1a2d88ece648677585fa6ca430e14c2bf6ca4bb6c580e565dcb1bf2",
+    "main.txt": "1ddb85bc6bce6b95ed15c1572df31c5ca68de2ef352c6c59441b3486f8969b32",
+    "review/slide-25.png": "75b483d4bed77ae6b15ed545827a8bad32473fe0d947977581ebb1d45475a8d4",
+    "review/slide-26.png": "d9d17b8fcc8e08de6b78c270a35dbe07ee273f9f1ab9ba636aa56a8546fcdac9",
+    "review/slide-index.csv": "dae2a19b4d1c0ba1f6dd4e9749a11f4ac994600d89b979fe47c588c56b6e39d9"
+  }
+}

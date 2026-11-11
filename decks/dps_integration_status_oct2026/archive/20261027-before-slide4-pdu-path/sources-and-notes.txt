@@ -1,0 +1,253 @@
+VD detector protection — speaker notes
+I&I draft, 27 October 2026
+Twelve main slides; seven backup slides.
+
+Opening
+
+DPS receives information from FFDG BMS, SDSTA BMS, cryogenics and the detector.
+It uses those conditions to arbitrate detector actions. Slow controls operates
+and monitors the detector and keeps the logs. I will first show those roles
+and the detector connections, then the BDE hardware we already have, and then
+how we propose extending it to the rest of VD.
+
+1. VD detector protection
+
+The talk covers VD. HD can later use an extension or a separate PLC. The
+sequence is system definitions, system inputs, detector detail, existing BDE
+engineering, the VD proposal, and the work needed before procurement.
+
+2. DPS arbitrates protection; SC operates, monitors and logs
+
+DPS is the Detector Protection System. It combines the relevant facility and
+detector conditions to allow or block detector actions. It issues permits,
+inhibits or trips. SC is slow controls: it runs and monitors the detector,
+provides the Ignition interface and owns the data and event logs. Those logs
+include the conditions, DPS decisions and resulting equipment states.
+
+BMS means Building Management System. FFDG BMS and SDSTA BMS are separate
+inputs, each controlling its own building services. A local interlock is
+protection at the equipment that can trip without waiting for SC or the
+central DPS. An operating command cannot override a protection trip.
+
+These restore the first presentation's definitions and incorporate Manuel's
+explicit SC logging and DPS arbitration roles. The older SC–DPS interface
+provides background; the current architecture inputs govern this presentation.
+
+3. DPS receives inputs from four system domains
+
+Keep the four sources visible: FFDG BMS, SDSTA BMS, cryogenics and detector.
+The detector contains SC and the subsystems. They supply operating requests,
+equipment conditions and faults; the building and cryogenic systems supply
+the relevant service conditions and alarms. DPS arbitrates the resulting
+actions. SC records the relevant inputs, decisions and equipment states.
+
+For example, a low liquid-level condition can withdraw the high-voltage permit.
+SC logs the condition, decision and actual HV state. This example does not
+assign the liquid-level sensor to a particular system: the selected cryogenic
+instrumentation signal and its route belong in the interface design.
+
+The diagram shows logical inputs, not a claim that every connection uses the
+same protocol. Facility and cryogenic controls retain their own service
+control. SDSTA retains personnel-safety responsibility.
+
+4. Detector: SC talks to the DPS PLC over OPC UA
+
+This expands the detector protection path. SC/Ignition exchanges control
+requests, status and events with the DPS PLC over OPC UA. The PLC performs
+arbitration and sends the permits or inhibits to the subsystem interfaces.
+Conditions and fault indications return from the subsystems to the PLC.
+SC receives the resulting decisions and states over OPC UA and owns the logs.
+
+The subsystem block contains BDE, high voltage, PDS, TDE and CalCI. PDS is
+photon detection; TDE is top drift electronics; CalCI covers calibration and
+cryogenic instrumentation. Local interlocks remain at the equipment. The
+next slide expands the existing BDE hardware behind this subsystem interface.
+
+5. BDE already defines a distributed protection system
+
+BDE is bottom drift electronics. The existing VD allocation has ten auxiliary
+I/O groups. Each group serves two PL506 low-voltage supplies and eight WIECs.
+A WIEC is a warm interface electronics crate; each has a power and timing
+card, or PTC, and six warm interface boards, or WIBs. The VD totals are twenty
+PL506 supplies, eighty WIECs/PTCs and 480 WIBs.
+
+The diagram shows the supply inhibit, EtherCAT exchange with the PTCs and
+48 V power path. Auxiliary I/O also connects the fans, heaters and temperature
+sensors. This is an existing distributed design, not a request to discover
+whether panels or I/O have been planned.
+
+Sources: June 2026 SC layout and Ignition screens, May VD rack workbook and
+the BDE ICD. A rack, physical panel, coupler and software group are distinct
+counts; the diagram uses the documented group arrangement.
+
+6. BDE drawings, parts and software are already available
+
+The TPC protection package contains the panel drawings, parts list and power
+calculations. The June SC material shows the BDE Ignition front end. The
+April 2023 parts list names a CX5140 PLC, EK1100 couplers, EK1521 fibre links
+and EL2124 inhibit outputs, among the other field I/O and supplies.
+
+This existing engineering is the basis for the VD extension. The preliminary
+TPC drawing and historical parts quantities need to be applied to the VD
+population. The drawing uses an earlier CX5120; the later list uses CX5140.
+The VD rack workbook supplies the ten BDE auxiliary and ten bias-HV rack
+allocations. Detailed component quantities and power estimates are in backup.
+
+7. VD proposal: a PLC in the CUC, I/O at the detector
+
+Use a commercial PLC and distributed I/O, extending the BDE design to the
+remaining VD systems. Place the central PLC in the CUC beside the other PLC
+racks, with I/O near the equipment. A PLC is a programmable logic controller;
+CUC is the Central Utility Cavern. This location is proposed: the source
+control drawings do not yet assign a DPS rack.
+
+The diagram separates the central PLC from equipment in the detector racks.
+SC/Ignition communicates with the PLC over OPC UA and owns the logs. The
+additional interfaces use OPC UA through SC. TDE stays in this proposed
+expansion as a future option: the control available for TDE now is through
+its PDUs only. Crate status and a separate external inhibit are possible
+extensions, not available interfaces. Exchange through SC follows the
+SC–PLC OPC UA connection. The existing BDE/bias
+I/O connects to the PLC over EtherCAT. The PDUs are controlled directly by
+the DPS PLC and return state and trip feedback to it. The PDU control chain
+and local trips are expanded on the next slide.
+
+FFDG BMS, SDSTA BMS and cryogenics supply the facility inputs. The dashed
+connection represents the selected hardware or software path for each input.
+The design work includes those paths, the CUC fieldbus route and control-power
+allocation. The added interfaces use the OPC UA route through SC; EtherCAT
+is shown on the existing BDE/bias I/O connection.
+
+Reuse, industrial component support and expansion are the reasons for this
+PLC proposal. No critical sub-millisecond protection function has been
+identified so far; the prototype must measure the complete required paths.
+
+8. Ignition controls the PLC; the PLC controls the PDU
+
+This is one control chain: Ignition → DPS PLC → PDU → rack equipment.
+Ignition supplies the control interface. The PLC arbitrates the requests
+against the protection conditions and commands the PDU. A PDU is a power
+distribution unit. Local interlocks can still trip on the applicable hazards
+without waiting for the central command path.
+
+PDU state and trip feedback return to the PLC. SC records that state and the
+DPS decisions and events. An Ignition command cannot override an active trip.
+Reset and re-enable remain separate actions. The prototype tests this chain,
+the local trips and the status returned to SC.
+
+Ignition and the PLC occupy different stages of this control chain. The PX3
+material supplies reference local functions and recovery behaviour for the
+prototype.
+
+9. The VD extension adds subsystem and facility interfaces
+
+Use 34 for the PDS LV count, as supplied by Manuel. The older inventory's
+per-device totals are not used to reconstruct that count. The table also
+uses eighty PoF boxes and twenty TDE rack positions. For TDE, the available
+control is through the PDUs only. Keep crate status and external inhibit as
+possible future interfaces if they are needed. CalCI and HV need level,
+temperature, optical-source status and the applicable permits or inhibits.
+The FFDG BMS, SDSTA BMS and cryogenic interfaces provide selected conditions
+for DPS arbitration.
+
+PoF means power over fibre. Eight temperature and eight voltage readings per
+box give 1,280 monitoring values. That population sizes the local readout.
+The protection permits, fault indications and shutdown groups determine the
+DPS I/O. Monitoring values are not one-for-one central PLC terminal counts.
+
+The existing ICD matrix supplies the requirements that affect these hardware
+connections. For example, purity-monitor light and PDS bias requirements differ
+between the earlier source and the later working interaction matrix. The
+selected rule changes the needed permits and feedback. This is the part of
+matrix work needed before purchasing; detailed thresholds can mature later.
+
+10. Test arbitration, trips and recovery on the bench
+
+Use the existing BDE vertical-slice work and G271 equipment for representative
+paths. Exercise conflicting requests, bad conditions and the resulting PLC
+arbitration. Measure detection through completed shutdown against the equipment
+owner's allowed time. A PLC scan-time figure alone does not establish it.
+
+Test local PDU trips, SC and fieldbus loss, reset and re-enable. Observe actual
+equipment state, and verify that SC logs the decisions and resulting states.
+The simulation framework prepares load and fault cases. The physical bench
+measures PLC, communications and equipment response.
+
+The June BDE material describes vertical-slice work. The July G271 deck lists
+installed PDU, PL506, mini-MPOD and switch; WIEC/PLC additions were then planned.
+Those sources establish test resources, not a completed VD qualification.
+
+11. Take the VD hardware to review in June 2027
+
+The package for review contains the VD panels and I/O, CUC fieldbus routes,
+power allocation, parts and cable lists, test results, costs, lead times and
+spares. Existing drawings and calculations supply the starting design. Added
+interfaces and the VD equipment allocation determine the purchases.
+
+The hardware design and procurement-readiness review precede ordering. Some
+facility interfaces may be needed in summer 2027. The full VD response matrix
+is due for review in early 2028. Early matrix work provides the requirements
+that can affect the hardware purchases. These are Marco's proposed milestones.
+
+12. I will lead the VD hardware work with a control engineer
+
+I can lead the VD hardware and SURF interface work with a process control
+engineer. Terri and Trevor bring the BDE design experience; Geoff and I work
+on the SC/DPS command chain, arbitration, PDU behaviour and recovery. Vivian,
+the consortia and DPS provide the equipment requirements and ICD updates.
+
+The requested support is engineering time and access to the existing test
+stands. The contributions are proposed, not assignments already accepted.
+The inspection maps are ready; I am coordinating access with Rachel and have
+identified Dale Curran as an SDSTA integration contact. Until DPS is active,
+my proposal is that each equipment-owning consortium retains protection
+responsibility during installation and commissioning.
+
+Backup slides
+
+13. VD rack space
+Ten BDE auxiliary racks and ten bias-HV racks each have 12U DPS allocations in
+the May workbook. These are design allocations, not installed assemblies.
+
+14. Bias-panel parts
+The workbook gives two 337 mm rails per bias rack. Each contains one EK1100,
+one EL9410, one EL9011, eighteen EL2124 terminals and one 24 V supply. Ten racks
+imply twenty rails and 360 EL2124 terminals, or 1,440 output channels in that
+first-pass layout. The working VD bias inventory has 576 channels. The actual
+inhibit mapping determines the purchase quantity; the difference is not
+verified spare capacity.
+
+15. Power
+The workbook records 2,254 W expected AC input per PL506. Twenty imply 45.08 kW,
+shown as about 45.1 kW. Its 831 W auxiliary estimate has a six-WIEC origin and
+a note requiring about 33% more for eight. Explicit linear scaling gives
+831 x 8/6 = 1,108 W per rack, or 11.08 kW for ten. This is a planning estimate.
+The bias supply allowance is 24 V x 40 A = 960 W DC capacity. It is distinct
+from AC demand and is not added into a combined input-power total.
+
+16. Local PDU trips and recovery
+The PX3 guide describes local event rules/scripts for smoke, water and
+temperature, preservation of the network-switch outlet during its fallback
+shutdown, and deliberate power restoration. The VD control chain remains
+Ignition → DPS PLC → PDU. Feedback reaches the PLC and SC's logs.
+
+17. Other VD equipment
+The PDS LV entry is 34. Retain the PoF monitoring and TDE rack populations and
+the CalCI equipment list. TDE has PDU control now; other interfaces remain
+possible extensions rather than available capabilities. No new MPOD module allocation is derived from the
+superseded PDS feed calculation. SC handles monitoring and logging; DPS
+arbitrates the relevant permits and inhibits.
+
+18. Facility inspection
+U-FD-M-901 rev12 has twenty control-panel symbols, including eight CUC
+references and the north/south 4910 sump interfaces. These are mapped drawing
+references; actual controllers, terminals and I/O await the field inspection.
+No inspection or external contact was performed during this slide revision.
+
+19. Rack inventory
+The May workbook has 76 numbered mezzanine positions, including reserved and
+spare positions. It separately describes forty top-plate mini-racks. The rack
+count is not a count of remote-I/O stations.
+
+Current architecture instructions: architecture-inputs-20261027.txt.
+Source revisions, locations, hashes and calculations: sources.json.

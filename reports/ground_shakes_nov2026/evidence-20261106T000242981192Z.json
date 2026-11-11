@@ -1,0 +1,257 @@
+{
+  "created_utc": "2026-11-06T00:02:42.931230+00:00",
+  "purpose": "Two-page plain-language summary of existing ground-shake analyses; no new raw-data analysis.",
+  "source_revision": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+  "source_worktree": " M Makefile\n M README.md\n M docs/framework-guide.md\n M docs/schematic-framework.md\n M examples/framework_starter/README.md\n M examples/framework_starter/diagrams/system-context.dot.in\n M examples/framework_starter/diagrams/system-context.pdf\n M examples/framework_starter/main.pdf\n M examples/framework_starter/main.tex\n M templates/dune-professional/README.md\n M templates/dune-professional/beamerthemeDUNEProfessional.sty\n M templates/dune-professional/design-tokens.json\n?? decks/dps_integration_status_oct2026/\n?? decks/ground_shakes_oct2026/\n?? decks/pds_calibration_daq_oct2026/\n?? decks/pds_data_selection_oct2026/\n?? decks/pds_readout_oct2026/\n?? decks/pds_ta_run45392_oct2026/\n?? decks/sc_simulation_results_oct2026/\n?? docs/diagram-guide.md\n?? docs/plotting-guide.md\n?? docs/visual-display-source.md\n?? reports/\n",
+  "host": "debian",
+  "python": "3.13.5",
+  "command": "python3 reports/ground_shakes_nov2026/build_report.py",
+  "acceptance": {
+    "inventory_counts": true,
+    "reported_pair_count": true,
+    "module_activity_counts": true,
+    "latest_timing_counts_including_M8": true,
+    "all_80_channel_positions_match_source_transcription": true
+  },
+  "orientation": {
+    "1": {
+      "endpoint": 104,
+      "rows_top_to_bottom_left_to_right": [
+        [
+          0,
+          2,
+          5,
+          7
+        ],
+        [
+          6,
+          4,
+          3,
+          1
+        ],
+        [
+          30,
+          32,
+          35,
+          37
+        ],
+        [
+          36,
+          34,
+          33,
+          31
+        ],
+        [
+          10,
+          12,
+          15,
+          17
+        ],
+        [
+          16,
+          14,
+          13,
+          11
+        ],
+        [
+          40,
+          42,
+          45,
+          47
+        ],
+        [
+          27,
+          25,
+          22,
+          20
+        ],
+        [
+          41,
+          43,
+          44,
+          46
+        ],
+        [
+          26,
+          24,
+          23,
+          21
+        ]
+      ],
+      "matches_analysis_map_and_extracted_order": true
+    },
+    "2": {
+      "endpoint": 109,
+      "rows_top_to_bottom_left_to_right": [
+        [
+          27,
+          25,
+          22,
+          20
+        ],
+        [
+          21,
+          23,
+          24,
+          26
+        ],
+        [
+          37,
+          35,
+          32,
+          30
+        ],
+        [
+          31,
+          33,
+          34,
+          36
+        ],
+        [
+          7,
+          5,
+          2,
+          0
+        ],
+        [
+          1,
+          3,
+          4,
+          6
+        ],
+        [
+          17,
+          15,
+          12,
+          10
+        ],
+        [
+          11,
+          13,
+          14,
+          16
+        ],
+        [
+          47,
+          45,
+          42,
+          40
+        ],
+        [
+          41,
+          43,
+          44,
+          46
+        ]
+      ],
+      "matches_analysis_map_and_extracted_order": true
+    }
+  },
+  "orientation_review": {
+    "source": "EDMS 3493627 v1",
+    "pages": [
+      18,
+      20,
+      21
+    ],
+    "APA2_field_cage_side": "Right in source view; top-right channel 109:20.",
+    "photo": "Page 18 explicitly says picture left-right flipped to match plots.",
+    "not_physical": "Page 21 intentionally reorders APA1 into APA2 electronics order.",
+    "limits": "Historical In Work presentation; no current as-built or beam/compass registration established. July APA1 wiring differs. No engineering approval."
+  },
+  "inputs": [
+    {
+      "path": "/home/arroyave/work/ground-shake-recovery-20261015/edms/ground_shake_200726.pdf",
+      "sha256": "6ff093fe51ee692a33e83718e18abca19840d100d0dd95dec760df78bf50bb54"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/all-runs/all-runs-summary.csv",
+      "sha256": "f0e7d96770c83fc2a9b9dc3bf6773e62ec0feef9c5830e20bb31591a7ee296b1"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/all-runs/README.txt",
+      "sha256": "d9eac0420eeb199c97039372d326c1bbec2791957d7ef37e2059011935b7ec95"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/double-pulse-display/results.json",
+      "sha256": "bd22d5aea678d274ee27e8a3bd0d4f4ec95c646fdeb02ae4240d8bf8a12a80c6"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/double-pulse-display/README.txt",
+      "sha256": "c93d32f0a77f39e339d71741eddeb7731a9d742797d82a892eac7540c615a23e"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/results.json",
+      "sha256": "2276061dd5cb5fcabac4f8b279be4da378745c59e93ae9bf8a232c5a6fe5a125"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/electrical-pattern-20261023/results.json",
+      "sha256": "3b6604dffb9b7d2eb8d52136636c6627cbc616930bae6bedff96be5e03fbe7e8"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/electrical-pattern-20261023/README.txt",
+      "sha256": "ed4c776bd94e39182545c84dedb7a515e2b5043a7587ec34b7bd59e0df957eac"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/event-mixing-results.json",
+      "sha256": "8bb7be4cc01c38f07d37709e0701b7da121796e485173cc2c1a7e3b8422c15b3"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/charge-light-matching/interpretation-20261028.json",
+      "sha256": "2b60a60a7e764b37f04e55f63de2daea1a034aab4dbe9089bb95852aebe98a7b"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/apa1-apa2-response-20261103/module-results.json",
+      "sha256": "37e4a13cbdf654ded6e0aa23b26005f25cf7aaeae169ff9cc5a544540427cd9e"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/apa1-apa2-response-20261103/apa1-extracted.json",
+      "sha256": "baccdc35d3d5272499a96b8b66e3eba8612b77602c016709d2f609f5f5454fb1"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/apa1-apa2-response-20261103/apa2-extracted.json",
+      "sha256": "95ccc1fd8e1d3a39c98c63f5e35dd4a5ec0e1ee630098f7ef93c0fff425f95b1"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/afe-comparison-20261103/results.json",
+      "sha256": "d4a0e44904291764e4a006a58548932566e44db0d2924f1d5a1e1401c6b63478"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/afe-comparison-20261103/README.txt",
+      "sha256": "a5c3ad8fecd3d62adc29a4936378bbb713e7447cf7d8a1bd5ee399926c03dec7"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/module-first-histogram-20261104/results.json",
+      "sha256": "2b9df215cf3f591160328f9c36c6537d172082a653926bb5c4aff80ebfdd2a3c"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/module-first-histogram-20261104/README.txt",
+      "sha256": "c276ac3018a3ded126bfe0b7cfa47608fe3f5e55d4b26298f7ab1ec39c5be480"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/sc-correlation-20261027/README.txt",
+      "sha256": "a426f38647e2fa5a71066df274b9ba6af9560d5594ad1fd8bf0c8f913b947d54"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/detector-landmarks-20261103/README.txt",
+      "sha256": "26324a723f9b08cecbe9ca2f0939b0130c2b0c609684d8f2a10c582dece6496a"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/first-pass/ProtoDUNE_HD_APA_maps_APA1_104.py",
+      "sha256": "edb7cdaed0637513c2faa07ef7421f7bc3d5e634a7ce106ed36c2669c439be34"
+    },
+    {
+      "path": "/home/arroyave/work/ground-shake-data/analysis/first-pass/ProtoDUNE_HD_APA_maps.py",
+      "sha256": "1efff00fc25e74938103a3c3434a4e4a8124f6c5bdc8395c924761779b298690"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/reports/ground_shakes_nov2026/build_report.py",
+      "sha256": "221a6b0d8f928ced9328f758b29b2a10e2da40ef542015c736cc2c4f3718b066"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/reports/ground_shakes_nov2026/main.tex",
+      "sha256": "0fee3451422cf5731e357636e3d37a37977ff0f8a075b863ab29b63f4a976a98"
+    }
+  ],
+  "reviewer": null
+}

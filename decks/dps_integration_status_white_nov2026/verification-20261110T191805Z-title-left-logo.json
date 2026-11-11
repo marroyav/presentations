@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-11-10T19:19:09.258322+00:00",
+  "request": "Title slide: grey DUNE on the left, VD detector protection system and remaining title text on the right.",
+  "pre_change_archive": "archive/20261110T191805Z-before-title-left-logo",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "exit_code": 0,
+  "build_evidence": "verification-20261110T191805Z-title-left-logo-evidence.json",
+  "checks": {
+    "slides": 43,
+    "all_slide_text_retained": true,
+    "changed_slide": 1,
+    "footer_blank": true,
+    "tex_layout_warnings": []
+  },
+  "visual_review": {
+    "reviewer": "Codex; no human approval recorded",
+    "slide": 1,
+    "scale_pixels": 1400,
+    "result": "Large grey DUNE on the left and title text on the right, with no overlap or footer. Transition layout retained."
+  },
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/deck-style.tex": "025317bea2dbd72f0b2ca187a4b996c3c72e16d97af73e49f07a593d090e2e84",
+    "decks/dps_integration_status_white_nov2026/main.tex": "458db948a376b76a6c0344f6b1c8570b0cd7de04b6d5aa1cc58a61b2a3dcee89",
+    "decks/dps_integration_status_white_nov2026/README.md": "9c513b2a90e166e94a512699c09cabcbbd7bea49c10c202a74f379e5766dc412",
+    "decks/dps_integration_status_white_nov2026/sources.json": "84f420b7fdeda421bafeaaa35458b294f49477eaa7aca2abd67b26983ac478d7",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "a85f1bfab57e7dff752862542bc84a8f6078d2a753a11d1bc7b8d2963b7b7b88",
+    "templates/dune-professional/logos/DUNElogo_gray.pdf": "fc921d5b84aea693faa09f2573a84e6b66c3ae2a1c0041b4ad9771abde1fcd5e"
+  },
+  "output_sha256": {
+    "main.pdf": "3cba7e53352afe47a7a037fb2355939d3ddddad00001ff4f99661a3002bfc5cf",
+    "main.txt": "b8dc249e76108500771c8e0b4ba790666243e03a01f83f09acdaee8b96b30975",
+    "review/slide-01.png": "7bf8f2ec546cffafd15a56f3be9ea6130a419325d1d8734ed4a3e7c8669bcfc7",
+    "review/contact-01.png": "b23a998882d2f86eff1c48c6973a35f4a2219621e6fe00a410faca030569f796",
+    "review/grayscale-meeting.png": "44d03a455e4f2f9a0f581e648cbba167344863521c27b25e62a7e0a336da8452"
+  }
+}

@@ -1,0 +1,141 @@
+\begin{frame}{Backup: VD rack space and the existing DPS allocation}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.4cm}r>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Rack type} & \textbf{Count} & \textbf{DPS allocation and workbook space}\\
+    \midrule
+    BDE auxiliary & 10 & 12U DPS; U3--U21 marked Space (19U); eight WIECs per rack\\
+    BDE low voltage & 20 & One PL506 per rack; four WIECs per supply\\
+    Bias high voltage & 10 & 12U DPS; U3--U12 marked Space (10U)\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  Space marked in the rack workbook is not a new DPS reservation.
+  Free DIN-rail length and I/O capacity depend on the populated VD panel.
+  \planningnote{May 2025 VD workbook: BDE Aux Rack and Bias HV Rack. Auxiliary U9 also has a possible ground-plane readout note. U is rack height.}
+\end{frame}
+
+\begin{frame}{The VD bias-panel draft specifies two DIN rails per rack}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}Xrr@{}}
+    \toprule
+    \textbf{Component} & \textbf{Per rail} & \textbf{10 racks}\\
+    \midrule
+    EK1100 EtherCAT coupler & 1 & 20\\
+    EL9410 supply terminal & 1 & 20\\
+    EL2124: four 5 V outputs & 18 & 360\\
+    EL9011 end cap & 1 & 20\\
+    24 V power supply & 1 & 20\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  Each rail occupies 337 mm. The draft provides 1,440 output channels;
+  the working VD inventory lists 576 bias channels.\par
+  \planningnote{May 2025 workbook, Bias HV Rack!K17:K21. This is the first-pass layout; the difference from 576 bias channels is not verified spare capacity.}
+\end{frame}
+
+\begin{frame}{Use the component loads for the VD power budget}
+  \small
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.7cm}>{\RaggedRight\arraybackslash}p{2.4cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Equipment} & \textbf{Power / capacity} & \textbf{Basis and limit}\\
+    \midrule
+    PL506 input & 2.25 kW each & 20 supplies: about 45.1 kW expected AC input\\
+    WIEC fans only & 380 W per group & $8\times6\times0.33\,\mathrm{A}\times24\,\mathrm{V}$; excludes heaters and I/O\\
+    Bias DPS supply allowance & 24 V, 40 A & 960 W DC capacity per rack in the workbook\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  The inherited 831 W auxiliary figure needs a VD component budget
+  covering fans, heaters and populated I/O.\par
+  \planningnote{May workbook; WIEC safety note, internal revision 0. Fan arithmetic assumes six fans per WIEC. Rated load, expected AC input and DC supply capacity are distinct.}
+\end{frame}
+
+\begin{frame}{Rack infrastructure already has a hardware reference}
+  \small
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.4cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Rack component} & \textbf{Reference hardware / allocation}\\
+    \midrule
+    PDU & Raritan PX3; inlet and outlet allocation for the connected loads\\
+    Smoke detector & 4WTAR-B and EOLR-1 end-of-line relay\\
+    Contact interface & DX-PD2C5; 12 V supply to the smoke detector\\
+    Humidity & Record the probe and peripheral interface for each rack\\
+    Temperature / water leak & PDU peripheral sensors where fitted\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  \normalsize The May workbook includes a 76-entry rack-protection/PDU allowance.
+  Map the actual rack packages against this existing allowance.\par
+  \planningnote{DUNE-doc-32655 v8, sections 3 and 5; May workbook, Standard Rack and Power Summary!B28. The guide does not specify a humidity probe model or trip requirement.}
+\end{frame}
+
+\begin{frame}{Reference: local PDU trips and recovery}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.7cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{PX3 setup guide} & \textbf{Local behaviour documented}\\
+    \midrule
+    Smoke, water, temperature & Local event rules and scripts can switch off the protected outlets\\
+    Network-switch outlet & Kept powered during the guide's fallback shutdown\\
+    After a local trip & Power is restored deliberately; no automatic restoration\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  The VD control chain is Ignition $\rightarrow$ DPS PLC $\rightarrow$ PDU.
+  Local trip status returns to the PLC and to SC for logging.
+  \planningnote{DUNE-doc-32655 v8 describes an Ignition-direct prototype with local fallback on loss of Ignition. The VD PLC command path requires matching reachability, trip and reset configuration; it is not a claim that the prototype already implements it.}
+\end{frame}
+
+\begin{frame}{The VD inventory covers the other subsystem connections}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Subsystem} & \textbf{Working inventory and interfaces}\\
+    \midrule
+    PDS readout / calibration & 34 LV feeds in the current presentation scope; supply status and control interfaces\\
+    Power over fibre (PoF) & 80 boxes; 640 temperature and 640 voltage readings; Opta PLC or Beckhoff PLC alternative\\
+    TDE & 20 mezzanine racks; PDU control now; other TDE interfaces are possible extensions\\
+    Calibration / cryogenic instrumentation & Level and temperature readout, purity monitors, ionization laser and neutron source\\
+    \bottomrule
+  \end{tabularx}
+  \planningnote{Additional subsystem exchanges use OPC UA through SC. June 2026 SC Progress, slide 29, names the PoF controller alternatives. Box count and monitoring values do not establish controller or central DPS terminal quantities.}
+\end{frame}
+
+\begin{frame}{The BMS drawing identifies 20 control-panel symbols}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.4cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Drawing area} & \textbf{Interfaces on the inspection maps}\\
+    \midrule
+    CUC, level 4850 & Eight panel references: air handling, chilled water, power and associated equipment\\
+    Level 4910 & North and south sump interfaces, SP-1 and SP-2\\
+    4850-08-ES group & Spare panel for future equipment; mapped to the access-drift inspection area\\
+    Other 4850 areas & Chillers, pumps, ventilation and generator interfaces\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  Inspection planned with Rachel; Dale Curran is the SDSTA integration contact identified for this work.
+  \planningnote{U-FD-M-901 rev12, 14 February 2025; marked 4850/4910 maps and survey register. Symbols are drawing references; field observations are pending.}
+\end{frame}
+
+\begin{frame}{Reference: the May 2025 VD rack inventory}
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}Xr>{\RaggedRight\arraybackslash}Xr@{}}
+    \toprule
+    \textbf{Rack type} & \textbf{Count} & \textbf{Rack type} & \textbf{Count}\\
+    \midrule
+    BDE low voltage & 20 & PDS low voltage & 4\\
+    BDE auxiliary & 10 & Drift HV & 2\\
+    TDE & 20 & Reserved drift HV & 2\\
+    Bias HV & 10 & Spare / CalCI & 8\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  \textbf{76 numbered mezzanine positions:} SEDM-01 to SEDM-76.\par
+  \medskip
+  The worksheet also has a separate concept for 40 top-plate mini-racks.
+  \planningnote{May 2025 allocation: rack positions, distinct from PLC panels and remote-I/O stations. Includes the listed reserved and spare positions.}
+\end{frame}

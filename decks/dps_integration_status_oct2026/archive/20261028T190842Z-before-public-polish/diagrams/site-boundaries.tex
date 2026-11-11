@@ -1,0 +1,21 @@
+% Schematic service boundary, not a surveyed section or controller inventory.
+\newcommand{\siteboundarymap}[2]{%
+\begin{tikzpicture}[
+ box/.style={text=DuneOnAccent,align=center,font=\small,inner sep=4pt},
+ level/.style={anchor=east,font=\small,text=DuneTextMuted}]
+ \node[font=\small\bfseries,align=center,text width=2.0cm] at (1.25,2.25) {SDSTA\\site services};
+ \node[font=\small\bfseries,align=center,text width=2.8cm] at (4.05,2.25) {FFDG DUNE FD\\building services};
+ \draw[draw=DuneBorder,line width=1pt] (0.05,1.83) -- (5.6,1.83);
+ \draw[draw=DuneSky,line width=2pt] (1.25,1.55) -- (1.25,-1.85);
+ \node[level] at (-0.05,1.25) {Surface};
+ \node[box,fill=#1,text width=1.95cm] at (1.25,1.25) {Oro Hondo\\Ross shaft};
+ \node[level] at (-0.05,0.25) {4850};
+ \draw[draw=DuneBorder] (0.05,0.25) -- (5.6,0.25);
+ \node[box,fill=#2,text width=2.8cm] at (4.05,0.25) {CUC / caverns\\HVAC, chilled water};
+ \node[level] at (-0.05,-0.85) {4910};
+ \draw[draw=DuneBorder] (0.05,-0.85) -- (5.6,-0.85);
+ \node[box,fill=#2,text width=2.8cm] at (4.05,-0.85) {SP-1 / SP-2\\sump interfaces};
+ \node[box,fill=#1,text width=1.95cm] at (1.25,-1.85) {Mine drainage\\and pumping};
+ \draw[-{Stealth},draw=DuneSky,line width=1pt] (3.1,-1.3) -- (2.35,-1.65);
+\end{tikzpicture}%
+}

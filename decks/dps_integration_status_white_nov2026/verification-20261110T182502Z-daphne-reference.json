@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-11-10T18:25:03.128708+00:00",
+  "request": "Replace the misleading simplified slide 18 diagram with the reference service diagram from slide 31.",
+  "pre_change_archive": "archive/20261110T182102Z-before-daphne-reference-correction",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "build_exit_code": 0,
+  "build_evidence": "verification-20261110T182502Z-daphne-reference-evidence.json",
+  "change": "Slide 18 directly includes diagrams/daphne-icd-reference.tex at the same width as slide 31. The reference source is unmodified. The merged CCM/Hermes diagram and added supply/power branch are retired to the archive. The proposed DPS bias path remains separate text.",
+  "checks": {
+    "pages": 43,
+    "changed_slides": [
+      18
+    ],
+    "other_42_slide_text_unchanged": true,
+    "slide_31_unchanged": true,
+    "shared_reference_source_unchanged": true,
+    "same_reference_source_and_width_on_slides": [
+      18,
+      31
+    ],
+    "simplified_daphne_source_archived_and_retired": true,
+    "ccm_and_hermes_separate": true,
+    "configuration_and_published_monitoring_separate": true,
+    "dps_bias_note_marked_proposed": true,
+    "pds_34_lv_feeds_and_pof_reference_retained": true,
+    "tex_layout_warnings": [],
+    "slide_18_word_bounds": "passed",
+    "date_and_both_logos_on_all_slides": true,
+    "source_audit_errors": [],
+    "source_audit_advisories": []
+  },
+  "source_reference": {
+    "repository": "/home/arroyave/work/icd-sc-pds",
+    "commit": "bfb2a8b725d9a5a3b7a517f4f9e15fb953eed1f8",
+    "file": "sections/03_protocols_services.tex",
+    "pinned_file_sha256": "7ef3b160f82a54d884487ab134a4be2c088cc3918cce700679a17d555dbc4cab"
+  },
+  "visual_review": {
+    "reviewer": "Codex source and visual review; no human approval recorded",
+    "changed_slide": 18,
+    "scale_pixels": 1400,
+    "colour_and_grayscale": "review/slide-18.png and review/slide-18-grayscale.png",
+    "result": "Reference diagram kept at the same size as slide 31. Caption and separate proposed bias note fit without clipping or overlap."
+  },
+  "limits": "Working document topology, not verification of installed hosts, endpoints or protection behaviour. All other 42 slides retain their previous text; slide 31 is unchanged.",
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/main.tex": "e9f4219b546ef03dffba4f8aa7d262cfecf37c6717a283696bc04e8f18dc6e92",
+    "decks/dps_integration_status_white_nov2026/backup-slides.tex": "032517b11f9ebfd8d4f51c5873cdac69d462b03a21a95325e4fdf4fc5b556f5f",
+    "decks/dps_integration_status_white_nov2026/deck-style.tex": "a27d65ef9007a7be894e406bb4b68d72adc62d43ccb742abc0bb58a9350a2d3c",
+    "decks/dps_integration_status_white_nov2026/README.md": "43aa27d017b676d5ee71a4bf8e2b99de91f41fba6535e7a381f5b00fcddbcca5",
+    "decks/dps_integration_status_white_nov2026/sources.json": "16b9544b85d2ee08d7426e9f7abe376d08af97b22bc55287f3dd4d055ea01b46",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "37474bcf45e396e8834b03885dfdf77bd74499bb02894f10cd971a8647c363b1",
+    "decks/dps_integration_status_white_nov2026/diagrams/daphne-icd-reference.tex": "b539d4a84aaad18ff9b1cf9b35524fad461c2943e5f59a2485a7506781e19bc6",
+    "decks/dps_integration_status_white_nov2026/archive/20261110T182102Z-before-daphne-reference-correction/main.pdf": "a3041d492e7d215b5dc7ccf5bcff6b9225c0a2c923a80ffc7b8290713c14e82f",
+    "decks/dps_integration_status_white_nov2026/archive/20261110T182102Z-before-daphne-reference-correction/diagrams/daphne.tikz.tex": "c820cc5a8e0767221eb240d51ba3f6140df97ab3805b57a986a3b2c49e4f9068",
+    "templates/dune-professional/beamerthemeDUNEProfessional.sty": "bc215c3cd376b01ed3169851922c095232468a6c9a8d22509e1e7047d7a8a98e"
+  },
+  "output_sha256": {
+    "main.pdf": "ace387c1d8cae864fb45f62363f4dd058b21e9050eab9ac997b73c83ea4dc21b",
+    "main.txt": "bb311b0d5139bba63b81790c69190668e6cf8ebfecb41eb64a42d329077bed1d",
+    "review/slide-18.png": "b2aa2a240f45be7c3e0e006eb61add5b538988c07554d7c7063daa0ff7debdf3"
+  }
+}

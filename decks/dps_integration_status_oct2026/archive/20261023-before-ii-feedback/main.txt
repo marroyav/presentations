@@ -1,0 +1,204 @@
+Connecting detector protection
+
+
+Status and next steps
+
+
+
+
+Manuel Arroyave
+23 October 2026
+Three systems, three jobs
+
+
+DPS       Detector Protection System
+
+          Stops equipment when conditions are unsafe.
+
+SC        Slow controls
+
+          Runs and monitors the detector.
+
+BMS       Building Management System
+
+          Runs and monitors building services.
+
+Source: SC–DPS interface, v1, pp. 4–5
+
+
+
+
+      23 October 2026                                   2/10
+Detector protection needs facility information
+
+                  Building services
+
+
+                                                        DPS            Equipment
+                      Cryogenics
+                                                   protection rules   permit or stop
+
+
+                Detector conditions
+
+
+Diagram. Each protection input needs a defined meaning and owner.
+
+
+Liquid level below limit; high voltage on → high voltage off.
+Source: SC–DPS interface, v1, p. 13
+
+
+
+
+      23 October 2026                                                                  3/10
+Protection        can block an operating request
+Proposed control rule
+
+
+
+                          SC                          command
+                                                                             Equipment
+                   operating request
+                                                           allow / block
+                                                                                   trip
+
+
+                         DPS
+                                                                           Local interlocks
+                  required conditions
+
+Diagram. Local trips need not wait for remote data.
+
+SC cannot override a trip. Facility safety keeps control of its services.
+Source: SC–DPS roles, v1, pp. 4–5
+
+
+
+
+      23 October 2026                                                                         4/10
+We have a starting point
+
+Available                                                Still needed
+
+SC–DPS interface; subsystem drafts                       Agreed scope and protection rules
+
+Facility drawings; inspection maps                       Verified panels, wiring and signal lists
+
+Hardware designs; test examples                          Bench hardware and current controller projects
+
+BMS data prototype                                       Live values, hosting and access
+
+
+First control and interlock tables prepared. Cabinet survey pending.
+
+Progress recorded 21 October 2026.
+Source: SC–DPS interface and subsystem documents
+
+
+
+
+     23 October 2026                                                                                 5/10
+Use early cryogenics work to agree the boundary
+
+
+
+The early review asked for signal lists, controller locations and failure behaviour.
+
+Use that work to define what DPS needs from cryogenics.
+
+Agree now: each signal, action and response to lost status.
+
+Source: Early cryogenics review charge
+Source: Detector protection inputs, v1, p. 13
+
+
+
+
+      23 October 2026                                                                  6/10
+An interlock matrix connects a condition to an action
+
+Condition                                                Action
+
+Liquid level below limit; high voltage on                Switch off high voltage
+
+Smoke in a rack                                          Cut power to that rack
+
+Signal lost                                              Response to agree
+
+
+Define the rule for installation, tests and operation.
+
+Agree how fast to act, what happens on failure and who may reset.
+
+Source: Documented examples, v1, p. 13
+
+
+
+
+      23 October 2026                                                              7/10
+Each consortium reviews its protection rules
+
+Group                                     Discussion
+
+Charge readout                            Cooling, power and local faults
+
+Photon detectors                          Power, temperature and lasers
+
+High voltage                              Liquid level, pressure and supply faults
+
+Cryogenic instrumentation                 Which measurements DPS needs
+
+Data acquisition / installation           Rack protection, cooling and power
+
+Facility teams define the building signals in both directions.
+Source: Subsystem interfaces and responsibilities, v1
+
+
+
+
+      23 October 2026                                                                8/10
+Build one protection path, then extend it
+
+ 1                                                   2
+
+ Agree                                               Map
+ One rule, its owners and its operating stages.      Source, controller, output and equipment
+                                                     feedback.
+
+
+
+
+ 3                                                   4
+
+ Test                                                Extend
+ Normal operation, faults, lost signals and          Verify on site, then repeat for each subsystem.
+ recovery.
+
+
+In parallel: publish agreed BMS values for experiment use.
+
+     23 October 2026                                                                                   9/10
+Agree integration requirements now
+
+
+Who                                    Next action
+
+DPS and SC leads                       Agree scope and Fermilab responsibility
+
+Each consortium                        Name a contact; review its interlock matrix
+
+SDSTA, LBNF and cryogenics             Agree the signals and who owns them
+
+Our team                               Verify panels; test the first protection path
+
+
+Agree these requirements before interfaces are fixed.
+
+SDSTA operates SURF; LBNF is the facility project.
+
+
+
+
+      23 October 2026                                                                  10/10
+

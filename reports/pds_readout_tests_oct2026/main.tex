@@ -1,0 +1,141 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=16mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,booktabs,tabularx,array,enumitem,microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small DAPHNE-14: readout tests and merge plan}\fancyhead[R]{\small 23 October 2026}\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\setlist[itemize]{leftmargin=*,nosep,topsep=3pt}
+\renewcommand{\arraystretch}{1.12}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\heading}[1]{\par\vspace{5pt}{\large\bfseries #1}\par\vspace{2pt}}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\begin{document}
+{\LARGE\bfseries PDS readout: tests, measurements and merge plan}\par
+Manuel Arroyave \hfill 23 October 2026
+
+\textbf{Result.} Continuous 32-channel reception was lossless at 27.13 kHz/channel for 120 s, with timing probes off and on. Higher-rate tests exposed waveform-history and TP-queue losses. Offloading raw processing removed NIC misses, but did not make 122.07 kHz/channel lossless.
+
+\heading{1. What we tested}
+DAPHNE-14, CAL2-256/pdts780 build \code{0x0b5ba9c0}: 32 channels, two data links, four eight-channel streams (sources 800--803). GIB endpoint \code{0x142}, locked. All AFE biases and bias enable were zero. Timing command 7 requested a waveform on every channel. Reported rates are actual master rates per channel.
+
+Reception ran on \code{np02-srv-001}, using the same Intel E810 port. TP generation was enabled; TA generation was disabled. Random 1 Hz decisions selected 10 ms windows (5 ms before/after). The Hermes-only frontend sent no AFE configuration. GCC 14.3, C++20, actual flags \code{-O2 -g}. No new external library was added.
+
+\begin{tabularx}{\linewidth}{@{}lYl@{}}\toprule
+Run / release & Data path & Worker CPUs, after RX 3,7 \\\midrule
+45451 / 5.6.2 & RX splits descriptors from waveforms; separate workers & Raw 1,5; descriptor 9,13 \\
+45453 / 5.7.1 & RX inserts history, then queues frame pointers for TPs & TP 1,5,9,13 \\
+45454 / 5.6.2 & Same split path; four raw workers & Raw 1,5,2,6; descriptor 9,13 \\\bottomrule
+\end{tabularx}
+Each ascending sweep used a 20 s warm-up at 9.77 kHz, then 60 s per rate, with paused counter-drain intervals. CPU masks and loaded libraries were checked after start. Four raw workers add two physical cores to the 5.6 case. These are prepared implementations, not an isolated release comparison.
+
+\heading{2. Rate sweeps: two different loss measurements}
+\textbf{Incoming loss} = (FPGA captures $-$ frames admitted to history) / FPGA captures.\par
+\textbf{Window loss} = (expected $-$ saved unique frames inside selected windows) / expected.\par
+Expected timestamps use each channel's generator phase and the actual fragment window. Warm-up/boundary windows are excluded; empty windows are included. Frames outside a selected window are intentionally omitted.
+
+\begin{minipage}[t]{0.49\linewidth}
+\textbf{Incoming waveform loss (\%)}\par
+\small
+\begin{tabular}{@{}rrrr@{}}\toprule
+kHz/ch & 5.6: 2 raw & 5.7: inline & 5.6: 4 raw \\\midrule
+\input{incoming.tex}
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}
+\textbf{Missing frames inside windows (\%)}\par
+\small
+\begin{tabular}{@{}rrrr@{}}\toprule
+kHz/ch & 5.6: 2 raw & 5.7: inline & 5.6: 4 raw \\\midrule
+\input{windows.tex}
+\end{tabular}
+\end{minipage}
+
+5.6 had zero NIC misses; losses occurred after reception. Its separate descriptor counters showed almost complete descriptor input even when waveform queues dropped data. In 5.7 inline, NIC misses appeared from 27.13 kHz/channel; TP queues also filled at higher rates. Baseline 5.7 had no complete TP-input/drop counter. TP output rate alone does not measure input completeness or physics efficiency.
+
+\textbf{Limits.} One sweep per case; no repeatability estimate or universal lossless threshold. Pauses can create expiry bursts. The earlier September 30 raw reference used 16 channels on one link; these tests use 32 channels on two links.
+
+\newpage
+\heading{3. Timing and four-worker experiments in 5.7}
+Runs 45456/45457: 20 s warm-up at 27.13 kHz, pause, then 80 s at the same rate. Run 45458: that warm-up, then 80 s each at 81.38 and 122.07 kHz, with pauses. Runs 45459/45460: one uninterrupted 120 s capture from empty history at 27.13 kHz.
+
+Run 45458 adds four raw workers on CPUs 1,5,2,6; TP workers use 9,13,4,8. This adds \textbf{four physical cores} to inline 5.7. Other application threads share 10,12,42,44 (two physical cores and their siblings). Pinning does not reserve a core.
+
+{\small\begin{tabularx}{\linewidth}{@{}rYrrrr@{}}\toprule
+Run & Mode & kHz/ch & Input loss \% & Window loss \% & NIC misses \\\midrule
+\input{instrumented.tex}
+\end{tabularx}}
+
+\heading{All measurements collected}
+{\small\begin{tabularx}{\linewidth}{@{}p{37mm}Y@{}}\toprule
+Measurement & Observation point / reported quantity \\\midrule
+Generator and FPGA & Accepted commands; per-channel captures, busy and full counters; bias and timing state before/after. All 32 channels matched the master at every point. \\
+Transport and queues & NIC missed packets; history admissions and insertion failures; raw/descriptor processed frames, drops, queue occupancy and waits; TP output/send failures. New probes add exact TP queue drops. \\
+RX and history & Sampled elapsed/thread CPU time per RX frame and history insertion; every UDP payload's elapsed maximum. \\
+TP workers & Successful enqueue-to-dequeue wait, and processing-function elapsed/thread CPU time, separately for each worker. \\
+Cleanup & Every check and cleanup call: elapsed/thread CPU time, whether cleanup ran, and frames removed. \\
+Distributions & About 1/1024 frames; worker-local histograms, published about once/s: frames, samples, mean, p50/p95/p99, sampled maximum, clock/publication errors. \\
+Independent checks & Saved-frame identity, wire version, channel/source mapping, timestamps, duplicates and selected-window counts; ADC unpacking on 32,768 samples/run. Per-thread CPU totals, masks and library hashes; late host CPU/RAM sampling. \\
+Separate CPU profile & Run 45455: 55 s at 99 Hz on RX and cleanup threads, at 27.13 kHz/channel; about 12,000 samples, none lost. Insertion, allocation and cleanup were visible. Excluded from rate comparisons. \\\bottomrule
+\end{tabularx}}
+
+\heading{What the measurements establish}
+\begin{itemize}
+\item Cleanup reached \textbf{7.528 s} (4.595 CPU s), removing 5.32 million frames after a pause/rate transition. The continuous instrumented run's maximum was 24.43 ms, removing 14,568 frames. History evicts by a ten-second age rule; configured size sets the cleanup threshold, not hard capacity.
+\item Inline RX recorded a \textbf{748.5 ms} whole-payload stall. Random frame sampling can miss a rare stall. Four raw workers removed NIC misses, but raw queues still lost frames. Batches held about eight frames on average (maximum 32).
+\item At 122.07 kHz/channel, TP queues dropped \textbf{10,183,647} frame-processing jobs on source 801 and \textbf{9,234,743} on 803; 800/802 had zero. No TP-send failure is needed for this loss to occur. Per source, history frames = TP frames processed + TP queue drops.
+\end{itemize}
+
+\textbf{Timing qualification.} Raw sampled CPU means do not reconcile with whole-thread CPU/frame totals. Empty-timer medians (about 140--150 ns CPU) do not justify a simple correction. Keep the raw distributions as diagnostics; qualify batch CPU timing before using them as absolute service costs. Both continuous off/on runs had zero acquisition losses; one pair cannot bound small observer overhead.
+
+\newpage
+\heading{4. Branches to review for develop / the next release}
+\textbf{Recommended review base: three functional patches.} All use the published branch\par
+\code{marroyav/pds-minimal-fddaq-v5.7.1}\par
+Remote heads were checked when preparing this report. These pins target \code{fddaq-v5.7.1-a9-1}; a rebase and CI check against develop remain necessary.
+
+\begin{tabularx}{\linewidth}{@{}p{31mm}p{24mm}Y@{}}\toprule
+Repository & Tested commit & Change / merge condition \\\midrule
+\href{https://github.com/DUNE-DAQ/datahandlinglibs/tree/marroyav/pds-minimal-fddaq-v5.7.1}{datahandlinglibs} & \code{5fb4c03cf3eb} & Drain post-processing before freeing referenced history storage. Small independent lifetime fix; does not resolve the shutdown abort. \\
+\href{https://github.com/DUNE-DAQ/fddetdataformats/tree/marroyav/pds-minimal-fddaq-v5.7.1}{fddetdataformats} & \code{35b805d2544d} & CAL2 format-4: 256 ADCs, five descriptors, 512-byte frame and Python bindings. \textbf{Compatibility work required before merge.} \\
+\href{https://github.com/DUNE-DAQ/fdreadoutlibs/tree/marroyav/pds-minimal-fddaq-v5.7.1}{fdreadoutlibs} & \code{a7bd4769f395} & Adapter sizing and descriptor-to-TP conversion on existing post-processing workers; mapping, masks and rejection checks. Coordinate with the format change. \\\bottomrule
+\end{tabularx}
+
+\textbf{Format gate.} The tested compact branch changes the fixed self-trigger type from 1024 to 256 samples. Mixed 1024/256 dispatch is not implemented or qualified. Add version-based selection, including the requested version-field expansion, before merging a replacement into develop. Preserve legacy 1024 and separate full-stream support; test all supported formats. Only CAL2 was hardware-tested here.
+
+\textbf{No functional patch needed for DAPHNE-14 in these three repositories:}\par
+\begin{tabularx}{\linewidth}{@{}lY@{}}\toprule
+Repository / release & Tested pin on the same published minimal branch \\\midrule
+hermesmodules v2.3.1 & \code{b8928d1d3f4d}: two advertised links, both configured; partial-link change unnecessary. \\
+dpdklibs v2.4.0 & \code{b91206fca180}: release source, rebuilt against the adapter. \\
+fdreadoutmodules v2.2.3 & \code{a039001d271d}: release source, rebuilt against matching headers. \\\bottomrule
+\end{tabularx}
+
+\heading{Keep performance and diagnostic changes separate}
+These branches are local and bundled at CERN; their names were absent from the upstream remote heads checked for this report.
+
+\code{marroyav/pds-raw-workers-fddaq-v5.7.1}\par
+\begin{tabularx}{\linewidth}{@{}lp{24mm}Y@{}}\toprule
+appmodel & \code{99df9b6ab94e} & Optional processing CPUs and bounded-queue schema. \\
+dpdklibs & \code{f060cfb1fa9b} & Owned frame batches, RX/worker handoff, drain/join and service counters. \\\bottomrule
+\end{tabularx}
+\textbf{Performance prototype: hold for further review.} Run 45458 used this code plus timing probes, not a probe-free qualification of these two heads. Raw loss and TP overload remain; verify ownership, stop/drain, CPU placement and sustained retention before proposing a separate merge.
+
+\code{marroyav/pds-timing-fddaq-v5.7.1}\par
+\begin{tabularx}{\linewidth}{@{}lp{24mm}Y@{}}\toprule
+ datahandlinglibs & \code{0fbadfdfaa93} & Histograms, timestamped TP queue entries and cleanup records; includes the minimal lifetime fix. \\
+ dpdklibs & \code{19e3a45121ba} & RX probes on top of the raw-worker prototype. \\\bottomrule
+\end{tabularx}
+\textbf{Diagnostic branches: keep out of the functional merge.} Timing is opt-in; calibrate the short CPU spans first. These heads are not independent alternatives to the raw-worker changes.
+
+\heading{Validation, open work and evidence}
+Minimal build: \textbf{23 package tests passed}. Worker/timing build: \textbf{25 passed}. Eight comparison/instrumentation runs decoded without format errors. All eight readout processes exited \textbf{134 during shutdown}; stop-run succeeded, other applications exited zero. Fix and retest clean shutdown. Repeat steady rate tests and improve TP conversion/cleanup before claiming high-rate losslessness.
+
+{\footnotesize
+Exact SHAs, push-state checks, per-rate counters, TP rates/drops, worker distributions, CPU totals and input hashes are bundled in \code{evidence/}. Run 45445 provides the earlier 32-channel functional check (4,507,055 TPs); its pre-publication note is superseded by the checked remote heads above.\par
+CERN campaign: \path{/nfs/home/np04daq/vst/daphne14-side-by-side-20261023}\par
+Build/evidence: \path{/nfs/home/np04daq/vst/pds-timing-fddaq-v5.7.1-20261023}\par
+No hardware restart or firmware reload was needed. Final state: channels paused/disabled, zero bias, timing locked.}
+\end{document}

@@ -1,0 +1,20 @@
+{
+  "checked_UTC": "2026-10-27T19:36:35.293313+00:00",
+  "PDF": {
+    "file": "main.pdf",
+    "sha256": "4e23217d1ebae4bc32cbdab6aee0adb899571d3ab970b20fec2f4ff3ddbf92a7",
+    "pages": 7
+  },
+  "slide_source_sha256": "836bad835592f038fdbef9e06ea37e18790e961bbd00b8f850a671fd827be29a",
+  "checks": {
+    "shared_design_tokens_and_contrast": "passed",
+    "deck_source_audit": "passed; no advisories",
+    "TeX_overfull_underfull_or_missing_glyphs": 0,
+    "text_outside_page_bounds": 0,
+    "key_numbers_in_PDF": "passed",
+    "relative_source_links": "passed",
+    "frozen_evidence_and_figure_hashes": "passed",
+    "visual_review": "all seven rendered slides checked"
+  },
+  "scope": "Presentation accuracy and layout checks; underlying analysis remains exploratory."
+}

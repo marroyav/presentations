@@ -1,0 +1,28 @@
+{
+  "scope": "23 October 2026 DAPHNE-14 32-channel readout campaign",
+  "input_sha256": {
+    "/home/arroyave/work/pds-side-by-side-20261023/results/v56/RESULT.json": "f7802a1ca0eb732564d917992e968b3b5cb624580168efa6df83d4f6b06d7531",
+    "/home/arroyave/work/pds-side-by-side-20261023/results/v571/RESULT.json": "12d2d114c67dd22c6f4fa1900204cdaa0f0bbad76bb3630ca0ca4982d0078d5c",
+    "/home/arroyave/work/pds-side-by-side-20261023/results/v56raw4/RESULT.json": "0523341199c326b37de23080332d634157a8d39c8c7dc18247a2a9d0eb885a38",
+    "/home/arroyave/work/pds-571-timing-20261023/results/timing571off/TIMING_RESULT.json": "7969e5f3ec2267ff6a7820ee7bcc5b0d239611ab44e07709292e8caaba022388",
+    "/home/arroyave/work/pds-571-timing-20261023/results/timing571on/TIMING_RESULT.json": "e9120ecf375b7d3606a70acc8e98e72bb813b4bae56c250ea17bd04cb0120e06",
+    "/home/arroyave/work/pds-571-timing-20261023/results/timing571raw4/TIMING_RESULT.json": "0a95ef413783173b3c9ba1c49112a1c8409c145740decc3415977948a710188e",
+    "/home/arroyave/work/pds-571-timing-20261023/results/steady571off/TIMING_RESULT.json": "3421f86eecc35fe36f04a9387c7d1681c8ff7caad397bae069a3c1940647202e",
+    "/home/arroyave/work/pds-571-timing-20261023/results/steady571on/TIMING_RESULT.json": "423c435aaefd99c99b62e852d57b8cb1bdd9ed2ef365c82dc7b0c4829f6e1b5d"
+  },
+  "remote_evidence": "/nfs/home/np04daq/vst/daphne14-side-by-side-20261023",
+  "diagnostic_build": "/nfs/home/np04daq/vst/pds-timing-fddaq-v5.7.1-20261023",
+  "review_status": "Engineering report; merge recommendations, not approval",
+  "excluded": "Run 45392 PDS-TA functional proof and earlier 16-channel studies are not reclassified as this 32-channel benchmark.",
+  "remote_heads_checked_at_utc": "2026-10-23T21:23:10.584163+00:00",
+  "prototype_pins": {
+    "appmodel": {
+      "head": "99df9b6ab94e6bd2f617161a1c33c310fbb02c77",
+      "branch": "marroyav/pds-raw-workers-fddaq-v5.7.1"
+    },
+    "dpdklibs": {
+      "head": "f060cfb1fa9bb7070f876c2f8dff1d855a5eaa25",
+      "branch": "marroyav/pds-raw-workers-fddaq-v5.7.1"
+    }
+  }
+}

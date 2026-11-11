@@ -1,0 +1,37 @@
+Presentation architecture supplied by Manuel — 27 October 2026
+
+These instructions take precedence over older working inventories and earlier
+assistant revisions of the presentation.
+
+- Restore the definitions from the original presentation.
+- Show four DPS input domains separately: FFDG BMS, SDSTA BMS, cryogenics,
+  and detector. Within detector, show SC and the detector subsystems.
+- SC operates and monitors the detector and owns the logs.
+- DPS performs arbitration: it uses the relevant conditions to permit or
+  inhibit detector actions. SC cannot override a protection trip.
+- In the detector detail, SC communicates with the DPS PLC over OPC UA.
+  The PLC sends permits/inhibits to subsystem interfaces and receives their
+  conditions and faults. Show the PLC explicitly in the protection path.
+- Expand the detector section, then show the existing BDE design and its
+  definitions before introducing the proposed VD extension.
+- PDS LV count is 34. This replaces the previous LV-feed count in the slides.
+  Do not reconstruct the count from the older PDS inventory's device totals.
+- Control chain: Ignition controls the PLC; the PLC controls the PDU.
+  The PLC performs arbitration. Local interlocks remain able to trip.
+  This is one control chain, not competing control owners or a transfer
+  from Ignition to the PLC.
+- Keep VD as the current scope. HD can later extend this system or use
+  another PLC. CUC placement beside the other PLC racks is proposed.
+
+The original presentation is preserved in:
+archive/20261023-before-ii-feedback/main.tex
+
+The current deck and speaker notes implement this architecture. The supplied
+statements establish the presentation's design basis; they are not a claim
+that the VD installation or its hardware tests are complete.
+
+Page 7 diagram layout used to implement these instructions
+The central PLC is shown above three detector-rack branches: existing BDE/bias
+I/O over EtherCAT, additional VD interfaces, and PDU control/status. SC uses
+OPC UA to the PLC. This is the presentation layout; detailed cable routes and
+the additional interface transports are not specified by this drawing.

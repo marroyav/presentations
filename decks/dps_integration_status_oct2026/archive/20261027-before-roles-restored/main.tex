@@ -1,0 +1,151 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{VD detector protection}
+\subtitle{Extending the BDE PLC system}
+\author{Manuel Arroyave}
+\date{I\&I workshop draft --- 27 October 2026}
+\newcommand{\mydate}{27 October 2026}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+\newcommand{\planningnote}[1]{\par\medskip{\footnotesize\color{DuneTextMuted}#1\par}}
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{BDE already has the PLC and panel design}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.43\textwidth}
+      \colorbox{DunePaper}{\includegraphics[page=2,width=\dimexpr\linewidth-2\fboxsep\relax,height=3.35cm,keepaspectratio,
+        trim=290bp 500bp 900bp 430bp,clip]{figures/tpc-panel-reference.pdf}}\par
+      \medskip\DuneDiagramCaption{TPC protection panel drawings.}
+    \end{column}
+    \begin{column}{0.53\textwidth}
+      Beckhoff PLC, distributed EtherCAT I/O and hardware supply inhibits.\par
+      \bigskip
+      VD allocation: 10 BDE auxiliary racks and 20 PL506 supplies for 80 WIECs.\par
+      \bigskip
+      Panel drawings, parts lists, power calculations and the Ignition front end already exist.
+    \end{column}
+  \end{columns}\par
+  \medskip
+  \textbf{Proposal: extend this design to VD, using industrial parts we can maintain and expand.}
+  \planningnote{BDE = bottom drift electronics; PLC = programmable logic controller; WIEC = warm interface electronics crate. Sources: TPC panel package, VD rack workbook and June 2026 SC presentations.}
+\end{frame}
+
+\begin{frame}{Put the VD PLC in the CUC, with I/O near the equipment}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.7cm,minimum height=1.05cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (sc) at (-4.4,1.3) {Slow controls\\Ignition};
+    \node[box,fill=DuneSky] (plc) at (0,1.3) {VD DPS PLC\\CUC proposed};
+    \node[box] (facility) at (4.4,1.3) {Facility / cryogenic\\conditions};
+    \node[box] (bde) at (-3.3,-1.1) {BDE and bias HV\\existing I/O design};
+    \node[box,fill=DuneCoral] (other) at (3.3,-1.1) {PDS, TDE, CalCI\\additional interfaces};
+    \draw[edge,<->] (sc) -- node[above,font=\small] {OPC UA} (plc);
+    \draw[edge,dashed] (facility) -- (plc);
+    \draw[edge,<->] (plc.south west) -- (-1,-0.1) -| (bde.north);
+    \draw[edge,<->] (plc.south east) -- (1,-0.1) -| (other.north);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Proposal: place the central PLC beside the other PLC racks in the CUC; retain distributed I/O.}
+  \planningnote{CUC = Central Utility Cavern. Dashed link: facility signals need a selected hardware or software path. PDS = photon detection; TDE = top drift electronics; CalCI = calibration and cryogenic instrumentation. HD can use an extension or a separate PLC later.}
+\end{frame}
+
+\begin{frame}{Add the VD interfaces that the BDE system does not cover}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Known VD scope} & \textbf{Proposed DPS addition}\\
+    \midrule
+    PDS: 80 PoF boxes; 58 LV feeds & Local PoF readout/control; supply inhibits and trip feedback\\
+    TDE: 20 racks & Crate-status exchange and external inhibit interface\\
+    CalCI & Level, temperature and optical-source status; operation permits\\
+    BMS / cryogenics & Selected facility conditions used by DPS; monitoring shared with SC\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  The 80 PoF boxes produce 1,280 monitoring values. Local readout handles that
+  volume; the protection permits determine the DPS I/O.\par
+  \planningnote{Working VD inventory and ICD matrix; exact trip scope remains subsystem-specific. BMS = building management system. SDSTA and LBNF/DUNE have separate BMSs.}
+\end{frame}
+
+\begin{frame}{Protection must keep working when SC is unavailable}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{paper}{2.65cm}{SC}{Operate and monitor}
+        {Commands, sequencing, displays and history. An operating request cannot override a protection trip.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{sky}{2.65cm}{DPS / local protection}{Protect equipment}
+        {PLC permits and device protection remain effective through an SC outage. Reset and re-enable are separate actions.}
+    \end{column}
+  \end{columns}\par
+  \bigskip
+  The PX3 setup already has local fallback. The VD prototype will exercise it together with PLC protection and SC recovery.
+  \planningnote{Proposed control model. The PX3 guide uses Ignition for normal protection and PDU fallback when Ignition is unreachable; this is a concrete integration test with Geoff and the rack team.}
+\end{frame}
+
+\begin{frame}{Test the full protection path before buying the additions}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.25cm,minimum height=1.0cm,inner sep=5pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (in) at (-4.8,0) {Sensor or equipment\\fault input};
+    \node[box,fill=DuneSky] (plc) at (-1.6,0) {PLC and\\remote I/O};
+    \node[box,fill=DuneCoral] (out) at (1.6,0) {Supply inhibit\\or trip output};
+    \node[box] (state) at (4.8,0) {Equipment state\\and feedback};
+    \draw[edge] (in) -- (plc);
+    \draw[edge] (plc) -- (out);
+    \draw[edge] (out) -- (state);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Use the BDE vertical-slice work and G271 equipment for representative VD paths.}
+  \bigskip
+  Measure detection through completed shutdown against the equipment's allowed
+  time. Exercise SC, fieldbus and power loss, then reset and restart.\par
+  \bigskip
+  No critical sub-ms function has been identified so far. The simulation prepares load and fault cases; the bench measures hardware behaviour.
+\end{frame}
+
+\begin{frame}{Take the VD hardware to review in June 2027}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Work before review} & \textbf{Result for procurement}\\
+    \midrule
+    Adapt the BDE design & VD panels, added I/O, CUC fieldbus routes and power allocation\\
+    Test the interfaces & Trip-time, failure and recovery results; SC/PDU integration\\
+    Prepare purchases & Drawings, parts and cable lists, costs, lead times and spares\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  After readiness review: order the hardware and install it in the site sequence.
+  \planningnote{Possible facility-interface need: summer 2027. Full VD response-matrix review: early 2028. The early matrix work supplies requirements that affect hardware purchases.}
+\end{frame}
+
+\begin{frame}{I will lead the VD hardware work with a control engineer}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.1cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Proposed contribution} & \textbf{Work}\\
+    \midrule
+    Manuel + control engineer & VD design, SURF interfaces and procurement package\\
+    Terri and Trevor & BDE panels, PLC/I/O implementation and bench work\\
+    Geoff + Manuel & SC commands, PDU protection and recovery\\
+    Vivian + consortia / DPS & Equipment requirements and ICD updates\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  \textbf{Support needed:} control-engineering time and access to the existing test stands.
+  \planningnote{SURF work: inspection maps are ready; access is being coordinated with Rachel, with Dale Curran identified as an SDSTA integration contact.}
+\end{frame}
+
+\appendix
+\input{backup-slides.tex}
+\end{document}

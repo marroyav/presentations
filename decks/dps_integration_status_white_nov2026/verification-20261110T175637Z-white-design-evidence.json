@@ -1,0 +1,114 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-10T17:56:37.487581+00:00",
+  "task": "dps-white-design-20261110",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 25,
+    "tracked_diff_sha256": "c6645991ce16f4c0ba42a65f217a4811c2b97286c9e5957bf4991cecc4536802",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=Tectonic 0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261110T175637Z-white-design-build.log",
+      "sha256": "9d799ddc8ccfc4ea1e04a87ce2668fd9bba0bad8c8e331f1d65a74b8ef414625"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "6a0d481a816ab8f322449bd95400e1d90ab0f99dc3773a7d6656ac6201b444d1"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/backup-slides.tex",
+      "sha256": "d6bdee925ef94e8293413914a487bc2261404a1b800e36b422aed16f6a14b213"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "95e14a7d41e1bfdd06bf34ccf10c614a0337a7bb059a4cf31bee408c4f6744c9"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "abff17665fe90947379731e525229a3939ed865b830fc546d7977cbf8a21b9ca"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "7e23a4dfe80e23454a9fffebad8496a0f983f797b872635c15c69bfc86a29f64"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/lasers.tikz.tex",
+      "sha256": "bb142e56d7f1a796f094ed8bb3b1ffa8dcd8ff9b759999956180fc81a050b1fd"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/styles.tex",
+      "sha256": "d8f29a9ed0239362432509bb35d23c461d967df3be8bd8d8d3d25005260c4659"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/daphne.tikz.tex",
+      "sha256": "c820cc5a8e0767221eb240d51ba3f6140df97ab3805b57a986a3b2c49e4f9068"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/pof.tikz.tex",
+      "sha256": "45e5ec1f9e7218caf25a03578404d74d41e747c2f32581de7a4a05b4ca6c4a54"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/racks.tikz.tex",
+      "sha256": "c787cfc768d2ab01c6040aa13a8fe13c664bf5a40d21b40901689ad151d99710"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/site-boundaries.tex",
+      "sha256": "56867ffae8ce0dce065fc6d445ba9516dc1f1a5c95b056687c722cbd3c840dac"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/daphne-icd-reference.tex",
+      "sha256": "b539d4a84aaad18ff9b1cf9b35524fad461c2943e5f59a2485a7506781e19bc6"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/overview.tikz.tex",
+      "sha256": "9a061cd85954eedbfd76827d5bf7dbb7395c8ec031d70133416f8be1d432e10c"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/figures/tpc-panel-reference.pdf",
+      "sha256": "b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/figures/sc-progress-june2026.pdf",
+      "sha256": "ae9ff086c81c9b2306c1313ea34fc2693ae95893982d6ca8c4a085eff1335edc"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/main.pdf",
+      "sha256": "eae9d7ae1f53f35ef47d946717a995a3304684ea8bc0d1c03bb683a6b085e6c7"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/Makefile",
+      "sha256": "091b000418f69033122a43ec4b4d926fe7c4e88e0778c136d6af31d0f81d42c7"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/beamerthemeDUNEProfessional.sty",
+      "sha256": "bc215c3cd376b01ed3169851922c095232468a6c9a8d22509e1e7047d7a8a98e"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/design-tokens.json",
+      "sha256": "5675e9b4f7f1e85e836201b49e2fff97efcabf4f3dbd39b005766ea4a357ec06"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/docs/framework-guide.md",
+      "sha256": "182d357595a695e6707607f59f4db61938d8e32f784d5045629d1a791bb00267"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/docs/diagram-guide.md",
+      "sha256": "57fd6e87f516bfc2fe248556e1f6884b213c34b7140a93d93bfb7ff46d810d06"
+    }
+  ],
+  "limitations": "Documentation and layout checks only. Engineering content retains the October baseline; no new hardware test, installation finding or engineering approval. The cropped reference PDF on slide 21 retains its source bytes."
+}

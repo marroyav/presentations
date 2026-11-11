@@ -108,6 +108,16 @@ zero unwaived ERC findings, stable KiCad 10 round trips, verified symbols and
 footprints, and zero visual collisions. AI remains an authoring accelerator;
 KiCad plus named engineering review remains the source of authority.
 
+## Relation to the presentation guides
+
+The [diagram guide](diagram-guide.md) adds rules for labels, comparison, and
+placing explanations beside the relevant objects. Its use of Tufte’s principles
+is documented in the [source notes](visual-display-source.md). Keep the white,
+monochrome schematic contract below when placing an artifact in a deck. The
+white presentation profile avoids surrounding it with a competing dark canvas.
+Simplification must preserve electrical symbols, junctions, identifiers, and
+engineering meaning.
+
 ## Non-negotiable visual contract
 
 The versioned tokens live in `schematics/style.json`.

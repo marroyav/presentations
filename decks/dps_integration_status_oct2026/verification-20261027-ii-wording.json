@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-27T18:54:58.907341+00:00",
+  "change": "Direct slide titles and plainer wording; proposal status and technical meaning retained.",
+  "source_errors": [],
+  "advisories": [],
+  "layout_errors": [],
+  "sha256": {
+    "main.tex": "ed14342de568def6f4cd4062db317dd64b508f7094b13cef7f640d28a83eb78e",
+    "main.pdf": "26d2ce279796c93b19809ce8807beed8f5d01abc674f7b156420ebed137e06be"
+  },
+  "limits": [
+    "Build and source checks only for this wording revision."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "created_UTC": "2026-10-27T20:08:34.802705+00:00",
+  "score_aggregations_independently_recomputed": 16,
+  "training_events": 505,
+  "test_events": 871,
+  "training_and_test_disjoint": true,
+  "clear_opposite_charge_records": 1355,
+  "November_records": 1376,
+  "recomputed_amplitude_prediction_errors": [
+    {
+      "split": "same_run_holdout",
+      "records": 194,
+      "constant_error_ADC": 3.531411082474227,
+      "PDS_model_error_ADC": 3.2445825933248753
+    },
+    {
+      "split": "other_run",
+      "records": 477,
+      "constant_error_ADC": 3.7588443396226414,
+      "PDS_model_error_ADC": 3.6052091883079607
+    }
+  ],
+  "metadata_correction": {
+    "file": "../electrical-pattern-20261023/sequence-results.json",
+    "field": "prediction_model.training_constant_ADC",
+    "stored_value": -124.672,
+    "correct_amplitude_training_median_ADC": 11.0625,
+    "reason": "sequence.py reuses the variable constant in the later timing loop before writing model metadata.",
+    "effect": "The previously saved amplitude predictions and both plotted errors reproduce exactly. Only this descriptive metadata field is wrong. Historical files are retained; the corrected value is recorded here."
+  },
+  "limits": "Checks arithmetic and saved split definitions, not physical origin or representative detector rates.",
+  "input_sha256": {
+    "results.json": "3b6604dffb9b7d2eb8d52136636c6627cbc616930bae6bedff96be5e03fbe7e8",
+    "score-sufficient-statistics.npz": "11a61ff4c7e3e1ba138d9e54cd57ba0677b8ef71ec497a0f61ce8d3ac0037d30",
+    "event-split.json": "11ba6ab0a4011805ff4762d5c8db992602afe13bb668e92cf67011cc2b00920d",
+    "sequence-event-metrics.json": "95f322fc3797ca876f48fd4489922029bcde9569061f03e1b771fde65ddd7c3a",
+    "sequence-results.json": "97b7bedee9059ea893a5b7f70afc0b90da64a2b0a93fcbc3713846ac050f7a70",
+    "sequence.py": "b96bef8afb902e966869ac3d91625514148105614c307873e73e3bb3ba6e27a2"
+  }
+}

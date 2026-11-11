@@ -1,0 +1,125 @@
+% New meeting material. Keep all earlier slides and technical backups.
+\newcommand{\DpsKnownAndMissing}{%
+\begin{frame}{The hardware connection list is still growing}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.47\textwidth}
+\textbf{Known starting points}\par\medskip
+Rack power distribution units (PDUs).\par\medskip
+The TPC electronics / Bottom Drift Electronics (BDE) protection design and its test work.
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Work still needed}\par\medskip
+A complete list of hardware inputs, outputs and feedback between the equipment and the \\ DPS Programable Logic Controller.\par\medskip
+A conceptual design covering all VD DPS connections.
+\end{column}
+\end{columns}\par\bigskip
+\textbf{Approach:} extend the existing TPC/BDE protection schema based on a central PLC.\par\medskip
+Agree a deadline for the consortia and LBNF to return their connection information.
+\end{frame}%
+}
+
+\newcommand{\DpsFireScope}{%
+\begin{frame}{Fire systems stay separate from detector protection}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.47\textwidth}
+\textbf{DPS scope}\par\medskip
+Equipment protection: permits, inhibits, power state and confirmation of the response.
+\end{column}
+\begin{column}{0.49\textwidth}
+\textbf{Separate fire-system scope}\par\medskip
+Fire detection, fire alarms and emergency response remain outside DPS control.
+\end{column}
+\end{columns}\par\bigskip
+\textbf{Could equipment status help responders?}\par\medskip
+Possible feedback includes affected racks, power state, completed shutdowns and event times.\par\medskip
+Ask the emergency response team which information would help. The need, route and responsibility for a feed are not agreed.\par\medskip
+\captionline{Rack smoke-contact hardware remains in the reference material; it does not define a DPS fire-alarm system.}
+\end{frame}%
+}
+
+\newcommand{\DpsFfdgUpdate}{%
+\begin{frame}{How FFDG BSI status can support detector protection}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.2cm}>{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\textbf{Reported in discussion} & \textbf{What we need to resolve}\\\midrule
+No 24-hour support; issues attended next business day & Decide a schema of human informed decisions using this and what happens when it is unavailable.\\
+Dedicated sensors recommended for critical equipment protection & Identify where detector-owned sensors are needed.\\
+%Possible existing SDSTA exchange, including fire variables & Confirm the existing route and whether anyone needs additional information from DPS.\\
+\bottomrule
+\end{tabularx}\par\medskip
+\textbf{BMS access alone does not establish a protection interface.}\par\medskip
+%\captionline{From Manuel's commissioning update. Service commitments and interface suitability still need agreement.}
+\end{frame}%
+}
+
+\newcommand{\DpsSdstaUpdate}{%
+\begin{frame}{SDSTA proposes a restricted SCADA status interface}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.6cm}>{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\textbf{Topic} & \textbf{Reported proposal / next input}\\\midrule
+%System & SDSTA SCADA; a transition away from legacy Johnson systems was reported.\\
+Interface & Modbus TCP, exposing a set of variables on selected ports. SDSTA retains control of its systems.\\
+Write access & Status-only intent. Agree and check that the interface rejects writes and commands.\\
+Variables & A list is pending, including Oro Hondo status and driver variables + HVAC.\\
+\bottomrule
+\end{tabularx}\par\medskip
+\textbf{Still to agree:} variable meaning, data quality, loss-of-data behaviour and network access.\par\medskip
+%\captionline{The protocol and platform transition are reported working inputs. They do not establish an installed or accepted interface.}
+\end{frame}%
+}
+
+\newcommand{\DpsConnectionCollection}{%
+\begin{frame}{Each group must identify its hardware connections}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.4cm}>{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\textbf{For every connection} & \textbf{Record}\\\midrule
+Source and destination & Equipment, rack / panel, connector, channel and drawing revision\\
+Signal and interface & Measurement or state; units, normal / fault values; wired I/O or network protocol\\
+Protection action & Condition, affected load, permit / inhibit and allowed response time\\
+Feedback and recovery & Equipment response; lost-signal behaviour; reset and re-enable\\
+Responsibility and gaps & Consortium or LBNF contact; evidence, missing items and next action\\
+\bottomrule
+\end{tabularx}\par\bigskip
+Use one common register for the consortia and the LBNF facility. Each group confirms that its list covers its hardware.
+\end{frame}%
+}
+
+\newcommand{\DpsExtendBde}{%
+\begin{frame}{Extend the BDE approach into a full DPS concept}
+\centering
+\begin{tikzpicture}[
+  box/.style={dps node,text width=2.7cm,minimum height=1.15cm},
+  flow/.style={dps flow}]
+  \node[box] (input) at (-5.1,0) {Hardware inputs\\and feedback};
+  \node[box] (brain) at (-1.7,0) {DPS brain\\BDE-based PLC};
+  \node[box] (output) at (1.7,0) {Remote I/O / PDUs\\Permits and inhibits};
+  \node[box] (load) at (5.1,0) {Protected loads\\Response checks};
+  \draw[flow] (input) -- (brain);
+  \draw[flow] (brain) -- (output);
+  \draw[flow] (output) -- (load);
+\end{tikzpicture}\par\medskip
+\raggedright\DuneDiagramCaption{Proposed extension of the existing TPC/BDE protection approach. Controller and I/O sizing follow the complete connection list.}\par\bigskip
+Reuse the PLC, remote-I/O and protection-rule approach where it fits. Map the additional subsystem and facility interfaces.\par\medskip
+SC carries operating requests and records equipment states and trips.\par\medskip
+Test each added path from the fault input to confirmed equipment response.
+\end{frame}%
+}
+
+\newcommand{\DpsMilestones}{%
+\begin{frame}{Collect the inputs, then review the full DPS concept}
+\textbf{Milestones for discussion; dates to be agreed}\par\bigskip
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4cm}>{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\textbf{Milestone} & \textbf{What closes it}\\\midrule
+Collect hardware connections & Every consortium and LBNF return their lists, confirm coverage and identify remaining gaps and owners.\\
+Review the full DPS concept & Review the architecture, controller / I/O allocation, interfaces, fault response and test plan. Record open choices.\\
+\bottomrule
+\end{tabularx}\par\bigskip
+\textbf{Next step:} agree a contact for each contributor.\par\medskip
+Set the schedule with the consortia and LBNF once the scope and available resources are clear.
+\end{frame}%
+}

@@ -1,0 +1,110 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\DuneUseWhite
+\title{What I added in PR \#8}
+\subtitle{WIB, DAPHNE and PDU emulators for bridge tests}
+\author{Manuel Arroyave}
+\date{10 November 2026}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+
+\begin{document}
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Threads and asyncio handle waiting differently}
+  \vfill
+  {\normalsize
+  \renewcommand{\arraystretch}{1.7}
+  \begin{tabular}{@{}p{0.22\textwidth}p{0.35\textwidth}p{0.35\textwidth}@{}}
+    & \textbf{Threads} & \textbf{Asyncio} \\
+    \textbf{Switching} & Operating system & Event loop, using \texttt{await} \\
+    \textbf{Slow device} & Other threads continue & Other tasks continue \\
+    \textbf{Library calls} & Can use blocking calls & Needs async calls \\
+    \textbf{Watch for} & Shared data may need locks & A blocking call can stall the loop
+  \end{tabular}\par}
+  \vfill
+  {\small A blocking WIB read can hold up the loop until its timeout.\par
+    Use an async read or a worker thread.\par}
+\end{frame}
+
+\begin{frame}{1. I added three simulated devices}
+  \framesubtitle{\href{https://github.com/DUNE/dune-dscs/pull/8}{DUNE/dune-dscs, PR \#8}}
+  \vfill
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.30\textwidth}
+      {\LARGE\bfseries WIB\par}\medskip
+      ZeroMQ + protobuf
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      {\LARGE\bfseries DAPHNE\par}\medskip
+      ZeroMQ + protobuf v2
+    \end{column}
+    \begin{column}{0.30\textwidth}
+      {\LARGE\bfseries PDU\par}\medskip
+      SNMP v2c / Raritan
+    \end{column}
+  \end{columns}
+  \bigskip\bigskip
+  {\Large A bridge can talk to them without the hardware.\par}
+  \vfill
+\end{frame}
+
+\begin{frame}{2. I used the existing message definitions}
+  \vfill
+  {\Large
+    WIB and DAPHNE: bundled protobuf definitions.\par\bigskip
+    PDU: Raritan PDU2-MIB outlet commands.\par\bigskip
+    I recorded the source revisions and hashes.\par}
+  \vfill
+\end{frame}
+
+\begin{frame}{3. I made commands change simulated state}
+  \vfill
+  {\large
+  \renewcommand{\arraystretch}{1.7}
+  \begin{tabular}{@{}p{0.22\textwidth}p{0.72\textwidth}@{}}
+    \textbf{WIB} & FEMB power, registers and timing state \\
+    \textbf{DAPHNE} & Configuration and trigger thresholds \\
+    \textbf{PDU} & Outlet on/off state
+  \end{tabular}\par}
+  \bigskip\bigskip
+  {\Large A write can be checked with a read.\par}
+  \vfill
+\end{frame}
+
+\begin{frame}{4. I made each device easy to run}
+  \vfill
+  {\normalsize\texttt{uv run python -m dune\_dscs.emulator wib}\par}
+  \bigskip\bigskip
+  {\Large
+    Choose \texttt{wib}, \texttt{daphne} or \texttt{pdu}.\par\bigskip
+    Each runs in its own process, using asyncio.\par}
+  \vfill
+  {\small Host and port are configurable; defaults use loopback.\par}
+\end{frame}
+
+\begin{frame}{5. I checked the emulators}
+  \framesubtitle{Local tests and Ignition on dune-fd-test01}
+  \vfill
+  {\Large
+    Ran 963 devices locally.\par\bigskip
+    Read 627 devices in Ignition.\par\bigskip
+    Checked writes, device loss and recovery.\par}
+  \vfill
+  {\small The Ignition test used a separate adapter, outside PR \#8.\par
+    Hardware and crate IPMI still need testing.\par}
+\end{frame}
+
+\begin{frame}{6. Geoff can use them to test his bridge}
+  \vfill
+  {\Large
+    Point the bridge's device clients at the emulators.\par\bigskip
+    Publish the results over OPC UA to Ignition.\par\bigskip
+    Start with one device, then increase the fleet.\par}
+  \vfill
+  {\small PR \#8 supplies the emulators. The new bridge is still to be written.\par}
+\end{frame}
+\end{document}

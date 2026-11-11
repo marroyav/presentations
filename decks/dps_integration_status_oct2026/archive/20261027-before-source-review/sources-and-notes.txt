@@ -1,0 +1,114 @@
+Building the detector protection system — speaker notes
+Draft revised 27 October 2026
+
+Purpose and provenance
+This revision uses the email thread supplied by Manuel: his 23 October draft
+request, Marco's 25 October response, Vivian's 26 October response, and Manuel's
+undated reply. It does not claim fresh EDMS verification or new hardware tests.
+The revised talk complements Marco's proposed introduction to system roles.
+The earlier deck and reference records are preserved in archive/.
+
+Slide 2 — Proposed PLC direction
+Manuel intends to use a commercial PLC based on BDE, with distributed I/O and
+OPC UA for monitoring/orchestration. Marco and Vivian favour an industrial PLC.
+This is a proposed design direction, not an approved purchase or vendor choice.
+Explain why it suits maintenance and expansion. Do not claim a guaranteed PLC
+response time or that FPGA hardware is ruled out for every local function.
+
+Slide 3 — What exists
+Manuel confirms that the BDE PLC design documents, slides and Ignition front
+end are already available. With Terri and Trevor, identify which parts can be
+reused and what the wider DPS needs to add. Check capacity and performance for
+the expanded system; availability of the material does not qualify that expansion.
+Use the documented BDE panel layout and I/O capacity to size and place the
+additional DPS I/O. Manuel confirms this information should already be in the
+available BDE material. The working inventory records EtherCAT protection links
+and distributed panels; it does not qualify the expanded DPS.
+The older shared infrastructure inventory assumes SNMP for the PLC supervisory
+interface. This assumption needs reconciliation with the proposed OPC UA path.
+Do not carry draft module or endpoint totals into procurement as agreed counts.
+
+Slide 4 — Proposed topology
+The diagram shows function and placement, not final wiring. Decide one central
+PLC versus multiple PLCs, failure domains, fieldbus segments and network access.
+Equipment status may include direct sensors or local controller feedback.
+Determine which information must use dedicated I/O rather than a software link.
+OPC UA monitoring or commands must not imply permission to override protection.
+
+Slide 5 — Rack protection
+PDU means power distribution unit. A local interlock is a protection action
+implemented at the equipment. Confirm each PDU model's sensor support, outlet
+switching, external permit and trip contacts, network behaviour and reset.
+Do not assume sensor support includes automatic shutdown or a hardwired permit.
+
+Slide 6 — Minimal inventory and ICDs
+The existing matrix collects consortium requests and identifies missing paths
+and conflicting requirements. Use only the detail needed for hardware sizing
+and ICD updates now; the full response matrix can develop in parallel.
+For each path record the source, destination, physical location, electrical
+signal/range, channel count, protocol, total response requirement and failure
+behaviour. Track each unresolved item with a contact and an agreed due date.
+Remove duplicate material and add CALCI; do not invent its scope or expansion.
+
+Slide 7 — Timing
+Manuel has not yet identified a critical function requiring sub-ms response.
+This is a review finding, not proof that no such requirement exists. Ask the
+consortia for the allowable time from fault detection to completed shutdown.
+Include sensor response, transport, PLC scan/load, outputs and actuator delay.
+A simulation can prepare and explore cases; hardware tests establish performance
+for the actual tested configuration. Confirm timing before procurement.
+
+Slide 8 — Boundaries
+Marco distinguishes LBNF/DUNE BMS and SDSTA BMS; hardware I/O is expected to be
+limited and its termination point remains open. Software exchange is proposed
+for monitoring. SDSTA retains personnel-safety alarm responsibility.
+Do not assume ODH/fire/smoke signals belong to LBNF/DUNE BMS. Do not assume a
+liquid-level value originates in cryogenic controls: it may come from cryogenic
+instrumentation through SC. Confirm source, owner, quality and failure state.
+Work with Geoff on SC/DPS command arbitration, reset and re-enable. Relevant
+long-term data should be logged through SC; avoid independent duplicate archives.
+
+Slide 9 — Survey
+Manuel reports marked inspection maps for the 4850 and 4910 levels; these have
+not yet been shared. Underground and Ross Dry inspection is planned this week,
+subject to access and safety arrangements being coordinated with Rachel.
+Dale Curran is a possible SDSTA integration contact identified by Manuel, who
+reports that Dale recently supported fire-system integration. Contact details
+are not reproduced and no meeting or commitment is claimed.
+Survey what is installed and where to connect. SDSTA input defines interface
+facts; it does not transfer responsibility for designing the DUNE DPS to SDSTA.
+
+Slide 10 — Prototype proposal
+Agree which equipment, engineering support and hosting are available at
+Fermilab, and whether a SURF bench or site test is useful. Test a representative
+complete protection path, then PDU behaviour and SC integration. Record required
+and measured timing, tested configuration, faults and recovery. Include loss of
+signal, fieldbus, network and power. No bench or test results are claimed here.
+
+Slide 11 — Schedule and procurement
+June 2027 design review, possible summer 2027 building interfaces and early 2028
+VD response-matrix review come from Marco's proposed path. The intervening
+work periods are planning proposals added in this revision, not agreed dates.
+Prepare a bill of materials, spare capacity, cable/panel specifications, costs,
+lead times and deployment sequence. Review procurement readiness before launch.
+Check long-lead risks and early site needs before promising delivery dates.
+
+Slide 12 — Responsibilities
+Manuel offers to lead hardware work with a process control engineer. Trevor is
+suggested as possible engineering support, not assigned to that role. Confirm
+support, reviewers, procurement owners and dates. Vivian offers to help update
+the DPS ICD with Terri, Trevor and others. Proposed contacts are not commitments.
+For installation, integration, commissioning and operation, agree who protects
+equipment while DPS is absent. Manuel proposes responsibility remains with the
+consortium owning that equipment; no agreement is claimed.
+
+Supporting local working inventories
+/home/arroyave/work/vd-dps-plan/bde-hardware-control.md
+/home/arroyave/work/vd-dps-plan/dps-infrastructure-hardware-control.md
+
+Historical reference
+SC–DPS interface EDMS 2907050 v1:
+https://edms.cern.ch/document/2907050/1
+This earlier ICD is context, not a complete or current hardware specification.
+The revised deck is grounded in the supplied discussion, not a fresh status
+check of that document or an assertion that its example interlocks are agreed.

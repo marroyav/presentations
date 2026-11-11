@@ -1,0 +1,44 @@
+{
+  "fddetdataformats": {
+    "baseline": "e99cb9f7eeee31929c979c8390701e4abf7a0bec",
+    "head": "35b805d2544decbeabdae190d7cae171cf6b9b37",
+    "branch": "marroyav/pds-minimal-fddaq-v5.7.1",
+    "source_status": "",
+    "diffstat": "include/fddetdataformats/DAPHNEEthFrame.hpp | 91 ++++++++++++++++++++------\n pybindsrc/daphneeth.cpp                     | 43 +++++--------\n unittest/DAPHNEEthFrame_test.cxx            | 99 +++++++++++++++++++++++++++++\n 3 files changed, 186 insertions(+), 47 deletions(-)"
+  },
+  "fdreadoutlibs": {
+    "baseline": "1eae29e03907ef53652093097a0fed826170bc66",
+    "head": "a7bd4769f3959d71ebfdd6ccaa80fd2ed0506fd2",
+    "branch": "marroyav/pds-minimal-fddaq-v5.7.1",
+    "source_status": "",
+    "diffstat": "CMakeLists.txt                                     |   3 +\n include/fdreadoutlibs/DAPHNEEthTypeAdapter.hpp     |   5 +-\n include/fdreadoutlibs/FDReadoutIssues.hpp          |   5 +\n .../daphneeth/DAPHNEEthFrameProcessor.hpp          |   1 +\n include/fdreadoutlibs/pds/DescriptorToTP.hpp       |  88 +++++++++++++++\n src/daphneeth/DAPHNEEthFrameProcessor.cpp          | 125 ++++++++++-----------\n unittest/PDSDescriptorFixtures.hpp                 |  34 ++++++\n unittest/PDSDescriptorToTP_test.cxx                |  93 +++++++++++++++\n unittest/PDSPostInsertion_test.cxx                 | 125 +++++++++++++++++++++\n 9 files changed, 408 insertions(+), 71 deletions(-)"
+  },
+  "datahandlinglibs": {
+    "baseline": "5d14d06cce8ecb234e3c824e0cc20d3b43980b2c",
+    "head": "5fb4c03cf3eb6c58274cbef226dcb5b76efa448e",
+    "branch": "marroyav/pds-minimal-fddaq-v5.7.1",
+    "source_status": "",
+    "diffstat": "include/datahandlinglibs/models/detail/DataHandlingModel.hxx | 3 ++-\n 1 file changed, 2 insertions(+), 1 deletion(-)"
+  },
+  "hermesmodules": {
+    "baseline": "b8928d1d3f4ddf23d5cdc5777527ce890bb666c6",
+    "head": "b8928d1d3f4ddf23d5cdc5777527ce890bb666c6",
+    "branch": "marroyav/pds-minimal-fddaq-v5.7.1",
+    "source_status": "",
+    "diffstat": ""
+  },
+  "dpdklibs": {
+    "baseline": "b91206fca1804ae9ff6a89984e8f5260ccca48b6",
+    "head": "b91206fca1804ae9ff6a89984e8f5260ccca48b6",
+    "branch": "marroyav/pds-minimal-fddaq-v5.7.1",
+    "source_status": "",
+    "diffstat": ""
+  },
+  "fdreadoutmodules": {
+    "baseline": "a039001d271d40f5fd74c7a0a2727b062115fa0a",
+    "head": "a039001d271d40f5fd74c7a0a2727b062115fa0a",
+    "branch": "marroyav/pds-minimal-fddaq-v5.7.1",
+    "source_status": "",
+    "diffstat": ""
+  }
+}

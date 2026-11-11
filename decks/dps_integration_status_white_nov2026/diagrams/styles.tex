@@ -1,0 +1,31 @@
+% White-profile system diagrams: dark outlines, labels and explicit line meaning.
+% Keep the same geometry as the native TikZ version of the October deck.
+\tikzset{
+  dps node/.style={
+    dune repo muted,draw=DuneTextMuted,fill=none,text=DuneText,line width=0.7pt,
+    rounded corners=0pt,font=\small,text width=2.8cm,
+    minimum height=0.95cm,inner sep=5pt
+  },
+  dps controller/.style={dps node},
+  dps load/.style={dps node},
+  dps flow/.style={
+    dune flow,-{Stealth[length=1.7mm,width=1.3mm]},
+    draw=DuneTextMuted,line width=1pt
+  },
+  dps both/.style={
+    dps flow,arrows={Stealth[length=1.7mm,width=1.3mm]-Stealth[length=1.7mm,width=1.3mm]}
+  },
+  dps power/.style={dps flow,draw=DuneText},
+  dps label/.style={
+    dune label,fill=none,text=DuneText,font=\small,inner sep=2pt
+  },
+  dps boundary/.style={draw=DuneTextMuted,fill=none,line width=0.7pt},
+  dps heading/.style={text=DuneText,font=\small\bfseries,inner sep=0pt}
+}
+
+% The normal deck build compiles these sources; no external renderer is needed.
+\newcommand{\dpsdiagram}[1]{%
+  \begin{adjustbox}{max width=\linewidth,max totalheight=4.6cm}%
+    \input{diagrams/#1.tikz.tex}%
+  \end{adjustbox}%
+}

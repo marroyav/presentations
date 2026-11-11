@@ -1,0 +1,6 @@
+model,function,source_cell,six_wiec_count,eight_wiec_count,added_per_aux,added_for_ten_aux,channels_per_module,added_aligned_width_mm,added_typical_ebus_mA
+EL1004,Fan feedback,Interlocks M&S!C29,6,8,2,20,4,24,180
+EL2034,Fan power outputs,Interlocks M&S!C28,6,8,2,20,4,24,240
+EL3202-0010,RTD inputs,Interlocks M&S!C20,6,8,2,20,2,24,380
+EL2878-0005,Heater outputs,Interlocks M&S!C24,3,4,1,10,8,12,100
+EK1521,PTC fibre links,Interlocks M&S!C25,6,8,2,20,1,46,700

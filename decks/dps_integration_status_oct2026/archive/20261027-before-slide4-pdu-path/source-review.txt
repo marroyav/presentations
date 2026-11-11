@@ -1,0 +1,123 @@
+DPS I&I source review — VD
+27 October 2026
+
+Current architecture
+
+The presentation restores the definitions and hierarchy from the original
+talk, with Manuel's explicit corrections. DPS receives inputs from FFDG BMS,
+SDSTA BMS, cryogenics and detector. SC and the subsystems sit within detector.
+SC operates, monitors and owns logging. SC communicates with the DPS PLC
+over OPC UA. The PLC arbitrates protection and sends permits/inhibits to the
+subsystem interfaces; conditions and faults return to the PLC. The PDU
+control chain is Ignition → DPS PLC → PDU, with independent local interlocks.
+There is no change of ownership between Ignition and the PLC: they are stages
+of that chain. PDS LV count is 34.
+
+These inputs are recorded in architecture-inputs-20261027.txt. They govern the
+presentation when an older working note or previous assistant draft differs.
+The original definitions are preserved in the archived 23 October main.tex.
+The older SC–DPS interface, EDMS 2907050 v1 pp4–5, supplies the historical
+system definitions. The supplied email and current instructions give the
+logging and arbitration roles used here.
+
+Existing BDE engineering
+
+The May VD rack workbook allocates 20 BDE LV racks, 10 BDE auxiliary racks
+and 10 bias-HV racks. Each auxiliary and bias rack has 12U for DPS. The bias
+sheet identifies its design as a first pass based on the earlier detector.
+These are rack-space allocations, not claims of completed installed panels.
+
+The June SC layout and Ignition screenshot show ten BDE groups. Each group
+contains two PL506 supplies and eight WIECs. The BDE ICD supplies six WIBs per
+WIEC: 80 WIECs/PTCs and 480 WIBs overall. I/O, PTC, WIEC and WIB definitions
+are now in the main talk before the proposed extension. A rack, I/O group,
+coupler and physical panel remain separate quantities.
+
+EDMS 2401090 v4 contains the TPC panel drawing, CE Interlock Parts List and
+DDSS Controls Power Analysis. The drawing names CX5120; the April 2023 parts
+list names CX5140. Other listed components include EK1100, EK1521 and EL2124,
+with RTD and fan/heater I/O, supplies and an OPC UA licence. The older 25 LV /
+five bias rack populations and historical costs are not VD purchase totals.
+The June 2026 Ignition screen is evidence of the existing front end, not a
+claim that every VD group has been commissioned.
+
+Parts and power applied to VD
+
+The VD bias-panel draft has two 337 mm DIN rails per rack. Per rail it lists
+1 EK1100, 1 EL9410, 1 EL9011, 18 EL2124 and one 24 V supply. Ten racks imply
+20 rails, 360 EL2124 modules and 1,440 output channels in that first-pass
+layout. The working VD inventory has 576 bias channels. The output-to-inhibit
+mapping sets the purchase count; spare installed capacity is not established.
+
+BDE LV RACK!D27 gives 2,254 W expected AC input per PL506, with four WIECs
+and the workbook efficiency assumption. Twenty supplies imply 45.08 kW.
+BDE Aux Rack!D14 gives 831 W; K13:K14 identify its six-WIEC origin and the
+approximately 33% increase for eight. Linear planning scaling gives 1,108 W
+per auxiliary rack, or 11.08 kW for ten. This is not a detailed new field-load
+calculation. Bias HV Rack!K22 gives 24 V x 40 A = 960 W DC capacity, a
+different quantity from expected AC demand. No combined DPS input total is
+claimed.
+
+PDS count and monitoring population
+
+The current presentation uses PDS LV = 34, supplied directly by Manuel. The
+older PDS working inventory is used for the 80 PoF boxes and eight temperature
+plus eight voltage readings per box. It is not used to reconstruct the current
+LV count or a new MPOD module allocation. The 1,280 PoF monitoring values size
+local readout; permits, fault status and shutdown groups determine DPS I/O.
+
+Arbitration and local PDU protection
+
+Ignition controls the DPS PLC; the PLC arbitrates and controls the PDU. Local
+interlocks remain capable of tripping. Equipment state and trip feedback return
+to the PLC, while SC owns the logs. Reset and re-enable are distinct actions.
+The diagram shows this chain explicitly and does not imply direct Ignition
+bypass of the PLC or an additional DPS long-term logging system.
+
+The PX3 guide supplies concrete reference local functions: smoke, water and
+temperature rules, a retained network-switch outlet during fallback shutdown,
+and deliberate restoration. These capabilities inform the prototype. They do
+not establish the completed VD configuration or override the stated chain.
+The earlier interpretation of this as a choice between Ignition and PLC
+ownership has been removed from the active deck and notes.
+
+Interfaces and testing
+
+The existing matrix contains hardware-relevant requirements and conflicts.
+The purity-monitor/PDS light and bias example changes which permits and
+feedback are needed, so it affects hardware before the full response matrix
+is complete. Manuel clarifies that current TDE control is through its PDUs
+only. Crate status and an external inhibit remain possible future extensions,
+retained in the proposal without claiming that they are available. Cryogenic instrumentation can supply
+level information; its origin is not assigned to cryogenic controls by the
+generic low-level/HV example.
+
+The June BDE/VST work and July G271 record supply existing test context. G271
+then listed PDU, PL506, mini-MPOD and switch as installed, with WIEC/PLC still
+planned. Test arbitration, local trips, the complete detection-to-shutdown
+time, SC/fieldbus loss, feedback, logging, reset and re-enable. The simulator
+prepares cases but does not qualify PLC, fieldbus or actuator timing.
+
+Location and site work
+
+The central VD PLC is proposed in the CUC beside the other PLC racks. The
+source detector-control diagrams still label its rack TBD. The proposal diagram now separates the CUC controller from the detector-rack
+hardware: existing BDE/bias I/O on EtherCAT, additional VD interfaces through
+SC over OPC UA, and direct PDU control/status from the DPS PLC. SC uses OPC UA
+to the PLC. The design must supply the actual
+fieldbus route, control power and network dependencies.
+The facility maps contain twenty control-panel symbols, including eight CUC
+references and two sump interfaces at 4910. Field observations are pending.
+The mapped symbols are not a claim of twenty inspected installed cabinets.
+
+Presentation sequence and limits
+
+Twelve main slides now explain definitions, the four inputs, detector detail,
+existing BDE hardware, the VD extension, the Ignition/PLC/PDU chain, interfaces,
+tests, the June 2027 review and procurement, and proposed contributions.
+Seven backup slides hold the detailed quantities and site material.
+HD remains a later extension or separate PLC. Review dates follow the supplied
+email. No equipment qualification, installation, outside contact or fresh
+EDMS latest-revision check was performed during this revision.
+
+Source paths, revisions, locations and hashes: sources.json.

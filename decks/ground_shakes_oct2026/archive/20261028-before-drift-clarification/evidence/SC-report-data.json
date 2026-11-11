@@ -1,0 +1,103 @@
+{
+  "conclusion": "No robust SC–waveform correlation found in the tested November sample.",
+  "tested": "32 sufficiently sampled monitors × 3 waveform measurements; two November runs; 60-second bins and source-file/time adjustment.",
+  "primary_eligible_pairs": 96,
+  "primary_repeatability_candidates": 0,
+  "single_run_examples": [
+    {
+      "tag": 20,
+      "label": "Ch03 -UP-MS-BR",
+      "feature": "PDS_witness_edge_ADC",
+      "eligible_both_runs": true,
+      "adjusted_rho": [
+        0.5010319685494015,
+        -0.033903901895806554
+      ],
+      "passes_descriptive_repeatability_screen": false
+    },
+    {
+      "tag": 1,
+      "label": "APA1 X Voltage",
+      "feature": "PDS_witness_edge_ADC",
+      "eligible_both_runs": true,
+      "adjusted_rho": [
+        -0.07640335944806764,
+        -0.48736587070431747
+      ],
+      "passes_descriptive_repeatability_screen": false
+    }
+  ],
+  "sensitivity_checks": [
+    {
+      "timestamp_value_choice": "median",
+      "bin_seconds": 60,
+      "eligible_pairs": 96,
+      "screen_candidates": []
+    },
+    {
+      "timestamp_value_choice": "median",
+      "bin_seconds": 120,
+      "eligible_pairs": 92,
+      "screen_candidates": [
+        {
+          "tag": 24,
+          "label": "Heinz I uA",
+          "feature": "TPC_slow_ADC",
+          "rho": [
+            0.33049798998195923,
+            0.3248843924466667
+          ]
+        }
+      ]
+    },
+    {
+      "timestamp_value_choice": "median",
+      "bin_seconds": 300,
+      "eligible_pairs": 0,
+      "screen_candidates": []
+    },
+    {
+      "timestamp_value_choice": "minimum-envelope-",
+      "bin_seconds": 60,
+      "eligible_pairs": 96,
+      "screen_candidates": []
+    },
+    {
+      "timestamp_value_choice": "minimum-envelope-",
+      "bin_seconds": 120,
+      "eligible_pairs": 92,
+      "screen_candidates": []
+    },
+    {
+      "timestamp_value_choice": "minimum-envelope-",
+      "bin_seconds": 300,
+      "eligible_pairs": 0,
+      "screen_candidates": []
+    },
+    {
+      "timestamp_value_choice": "maximum-envelope-",
+      "bin_seconds": 60,
+      "eligible_pairs": 96,
+      "screen_candidates": []
+    },
+    {
+      "timestamp_value_choice": "maximum-envelope-",
+      "bin_seconds": 120,
+      "eligible_pairs": 92,
+      "screen_candidates": []
+    },
+    {
+      "timestamp_value_choice": "maximum-envelope-",
+      "bin_seconds": 300,
+      "eligible_pairs": 0,
+      "screen_candidates": []
+    }
+  ],
+  "qualification": "A filtered-current/slow-charge hint passes the descriptive cutoff only with 120-second bins and central timestamp values; it fails the one-minute and value-envelope checks. Five-minute bins have too few within-file observations to decide.",
+  "missing_SC_channels_for_this_test": [
+    "GroundPlanes_Ch13",
+    "GroundPlanes_Ch15"
+  ],
+  "same_timestamp_groups_with_multiple_values": 935127,
+  "scope_limit": "These are waveform-feature comparisons within selected shakes, not tests of shake occurrence/rate or brief unrecorded transients."
+}

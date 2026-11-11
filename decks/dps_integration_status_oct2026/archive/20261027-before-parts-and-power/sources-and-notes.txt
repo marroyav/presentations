@@ -1,0 +1,132 @@
+DPS hardware for vertical drift — speaker notes
+Reviewed draft, 27 October 2026
+
+The main argument
+Use the existing BDE PLC design for VD. Show its racks, panels, distributed I/O
+and software first. Then explain the extra interfaces, prototype work and
+purchases needed. HD is a later extension or separate PLC, as Manuel requested.
+
+1. Title
+Thirteen main slides including the title, followed by one inventory reference.
+This talk complements Marco's proposed explanation of the different systems.
+
+2. Use a commercial PLC
+The proposal follows Manuel's intent and Marco/Vivian's email discussion.
+BDE already provides a commercial PLC design, parts list and distributed I/O.
+Propose the central PLC in the CUC; the source detector layouts still say
+TBD rack. Do not imply that a DPS rack space beside cryogenic PLCs is assigned.
+OPC UA is the intended supervisory interface; agree which commands are allowed.
+The older hardware parts list includes an OPC UA licence, and the supplied
+October detector architecture labels the PLC interface OPC UA and ADS.
+
+3. VD rack space
+The May workbook lists 20 BDE LV racks, 10 auxiliary racks and 10 bias-HV racks.
+It reserves 12U in each auxiliary rack and each bias-HV rack for DPS hardware.
+The BDE auxiliary sheet lists eight WIEC/PTC fibre links, fan, heater and RTD
+connections per rack. The bias-HV sheet says its layout is a first estimate.
+Describe twenty rack locations with DPS allocations, not twenty proven panel
+assemblies. The workbook's U reservations do not state unused channel capacity.
+
+4. BDE grouping
+The June infrastructure drawing repeats ten BDE groups, each with one auxiliary
+rack, two LV racks/PL506s and eight WIECs. The June Ignition layout shows I/O-01
+through I/O-10 and 20 rows, each with one PL506 and four WIECs. The BDE ICD gives
+six WIBs per VD WIEC. The totals are 20 PL506s, 80 PTCs/WIECs and 480 WIBs.
+The simplified diagram shows the PL506 inhibits, PTC EtherCAT link and LV feed.
+Fan/heater/RTD connections are mentioned below it rather than drawn.
+An I/O group can contain several couplers or physical panels; do not equate
+these numbers to a terminal/module count.
+
+5. Available engineering and software
+The left figure is an excerpt from the TPC panel reference drawing, EDMS
+2401090 v4, sheet 2. It is not a newly drawn or approved VD wiring design.
+The right figure is the June 2026 BDE Ignition screenshot. Both are genuine
+source excerpts, with crop coordinates and hashes in sources.json.
+The package also includes the April 2023 parts list and rack power analysis.
+Use the component choices, panel designs and interface work. Reconcile the
+older population, CPU version and component counts with the VD allocation.
+The source drawing is older than the VD rack workbook; its panel sizes do not
+override the 12U space reservations on slide 3.
+
+6. PX3 rack protection
+The June setup guide already documents normal protection in Ignition and
+local PDU fallback when Ignition is unreachable. The fallback preserves the
+NET_SWITCH outlet and does not restore power automatically. The diagram of
+a local trip must reflect this conditional behaviour rather than implying
+that every configured hazard always acts locally.
+Agree the normal protection roles with Geoff and the DPS/rack owners. This
+is an engineering decision that can change interfaces and required I/O.
+No claim is made that all VD racks use that configuration or have passed it.
+
+7. Inventory and hardware additions
+Use the existing subsystem lists and the 46-rule matrix. Extract the entries
+needed for the VD I/O schedule and bill of materials. Resolve real conflicts,
+including PrM/PDS requirements where the assumed protective action changes
+which permits or feedback are needed. Keep detailed rule tuning in the later
+response-matrix work.
+The 80 PoF boxes and 8 T + 8 V per box are Manuel's working inventory: 1,280
+monitoring values. Module quantities depend on acquisition, conditioning and
+aggregation. CalCI includes calibration and cryogenic instrumentation; merge
+overlapping records rather than inventing duplicate equipment.
+
+8. Response time
+No critical sub-ms requirement has been identified by Manuel so far. This is
+not proof that no faster local function is needed. Ask for the allowable time
+from the hazardous condition through detection to completed protective action.
+The emulator has software scaling and interface results; it has not qualified
+a PLC, EtherCAT chain, output or equipment shutdown. Use it to prepare cases,
+then measure the complete paths under representative load and failures.
+
+9. Interfaces
+Discuss concrete SC/DPS commands, reset and re-enable with Geoff. Alarm
+acknowledgement is separate from reset and permission to energise equipment.
+Identify the actual level/pressure source; cryogenic instrumentation and
+cryogenic controls are different systems. Choose the required transport rather
+than assuming all protection arrives through OPC UA.
+Keep LBNF/DUNE BMS and SDSTA BMS separate. Agree the limited hardware exchanges,
+termination point, software monitoring and relevant SC history. Personnel-safety
+alarms remain SDSTA's responsibility, as described in Marco's email.
+CUC placement requires an explicit fieldbus route and power/network allocation.
+
+10. SURF inspection
+The marked 4850/4910 maps and survey register exist. The site work should turn
+the drawing-based records into observed panel/controller/I/O/terminal details.
+Manuel is coordinating with Rachel and has identified Dale Curran as an SDSTA
+integration contact. No inspection or outside contact was performed by this
+presentation review. The stated visit remains subject to access arrangements.
+
+11. Tests
+Use the existing Fermilab BDE/VST and G271 work. The July G271 deck records
+installed PDU, PL506, mini-MPOD and switch, and then-planned WIEC/PLC additions.
+Confirm present equipment and reserve the configuration needed for each test.
+Measure one complete PTC/PLC/inhibit path, the PDU protection logic and recovery,
+SC/DPS command priority, and branch/power failures.
+Include an application-stall case with the gateway host still responding to
+ping. The guide's reachability check alone does not establish application health.
+This is a proposed test; it is not evidence of a known deployed failure.
+
+12. Review and procurement
+Prepare one reconciled VD rack/panel/I/O schedule, additional hardware drawings,
+power budget, parts/cable list, test evidence, costs, supplier lead times,
+spares and installation sequence. Review readiness before ordering.
+June 2027, possible summer 2027 facility interfaces and early 2028 full VD
+response-matrix review follow Marco's proposed milestones. Intermediate month
+assignments were removed because effort and engineering support are not agreed.
+
+13. Work assignments
+Manuel offers to lead the hardware effort with a control engineer. Trevor is
+not silently assigned that role. Terri and Trevor supply BDE design knowledge;
+Geoff is needed for the SC/DPS/PDU division; Vivian for the ICD update.
+Confirm support, task owners and dates. Agree protection responsibility during
+installation, integration, commissioning and operation, including periods before
+DPS is available. Manuel's starting proposal is that the equipment owner remains
+responsible during those periods; no agreement is claimed.
+
+14. Inventory reference
+The 76 entries are numbered mezzanine rack positions in the May workbook.
+The forty top-plate mini-racks are a separate worksheet. Do not use 76 as the
+number of PLC stations or sum overlapping quantities from different revisions.
+See source-review.txt for differences from later planning and earlier TPC counts.
+
+Source identities, locations and hashes: sources.json.
+Review findings and technical implications: source-review.txt.

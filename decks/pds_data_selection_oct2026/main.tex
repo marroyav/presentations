@@ -1,0 +1,62 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{PDS data selection}
+\subtitle{Trigger activities and scintillation signatures}
+\author{Manuel Arroyave}
+\date{20 October 2026}
+\begin{document}
+\begin{frame}[plain]\titlepage\end{frame}
+
+\begin{frame}{PDS TAs: live readout and replay builders}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{@{}lX@{}}
+    \toprule
+    Capability & Evidence \\
+    \midrule
+    Live prescaled TAs & Run 45392: 29 matching 1 ms PDS + emulated-charge windows. \\
+    Coincidence builder & Replay: six distinct channels in 10 $\mu$s; 93,126 TAs. \\
+    Prompt-light builder & Replay-tested descriptor prompt/total integral proxy. \\
+    \bottomrule
+  \end{tabularx}
+  \bigskip
+  {\small\color{DuneTextMuted}Live prescale fix: PDS TA type + one-tick sample units, via session-local interposer.\par
+    Coincidence and prompt-light algorithms tested in replay; live DAQ integration pending.}
+\end{frame}
+
+\begin{frame}{Scintillation motivates coincidence and light timing}
+  \centering
+  \begin{tikzpicture}[x=1cm,y=1cm]
+    \fill[DuneSky!15!DuneBackground] (0,0) rectangle (1.3,2.3);
+    \draw[-{Stealth},DuneTextMuted] (0,0) -- (11,0) node[right] {$t$};
+    \draw[-{Stealth},DuneTextMuted] (0,0) -- (0,2.6);
+    \draw[DuneCoral,line width=1.8pt]
+      (0.15,0.02) .. controls (0.35,0.04) and (0.43,2.2) .. (0.6,2.2)
+      .. controls (0.85,2.2) and (0.9,0.95) .. (1.5,0.8)
+      .. controls (3,0.48) and (6,0.08) .. (10.5,0.02);
+    \node[text=DuneSky,anchor=south] at (0.65,2.35) {Prompt};
+    \node[text=DuneText,anchor=south] at (5,0.7) {Scintillation tail};
+  \end{tikzpicture}\par
+  \medskip
+  Coincident channels $\quad\vert\quad$ Light sum $\quad\vert\quad$ Prompt / total\par
+  \medskip
+  {\small Thresholded descriptor sums are proxies.\par
+    Calibrated light and exact gate integration need waveforms.\par}
+  \smallskip
+  {\footnotesize\color{DuneTextMuted}Conceptual envelope, not a measurement.
+    \href{https://arxiv.org/abs/2203.16134}{Scintillation reference}.}
+\end{frame}
+
+\begin{frame}{Next: integrate and qualify physics TAs}
+  \DuneCompactColorBlock{sky}{INPUT}{Merge TPs across links by timestamp}
+    {Common watermarks, quiet-source progress, duplicate/loss accounting.}
+  \medskip
+  \DuneCompactColorBlock{coral}{SELECTION}{Register a PDS TA plugin + algorithm ID}
+    {Configure region, channel multiplicity, gates and overlap policy.}
+  \medskip
+  \DuneCompactColorBlock{paper}{VALIDATION}{Compare against calibrated waveform observables}
+    {Measure efficiency, accidental rate, latency and sustained throughput.}
+\end{frame}
+
+\end{document}

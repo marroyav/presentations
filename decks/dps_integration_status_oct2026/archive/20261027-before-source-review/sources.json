@@ -1,0 +1,24 @@
+{
+  "revision_date": "2026-10-27",
+  "primary_source": "User-supplied DPS presentation at I&I email thread, 23–26 October 2026, including Manuel’s undated reply",
+  "local_working_sources": [
+    "/home/arroyave/work/vd-dps-plan/bde-hardware-control.md",
+    "/home/arroyave/work/vd-dps-plan/dps-infrastructure-hardware-control.md"
+  ],
+  "proposals": [
+    "Commercial PLC based on BDE with distributed I/O",
+    "Prototype scope and test locations",
+    "Intermediate schedule and procurement preparation",
+    "Responsibilities and engineering support",
+    "Protection responsibility when DPS is unavailable"
+  ],
+  "limits": [
+    "No new hardware test, inspection or EDMS verification",
+    "No qualified response time or complete signal inventory",
+    "Workshop date and intermediate milestones not agreed",
+    "Sub-ms requirement remains subject to consortium confirmation"
+  ],
+  "user_clarifications": [
+    "BDE PLC design documents, slides and Ignition front end are already available."
+  ]
+}

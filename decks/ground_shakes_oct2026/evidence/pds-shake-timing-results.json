@@ -1,0 +1,477 @@
+{
+  "created_utc": "2026-10-28T22:25:18.940018+00:00",
+  "question": "Do large early PDS pulses occur at the same time relative to the ground shake?",
+  "summary": [
+    {
+      "run": 32731,
+      "charge_selected_records": 716,
+      "records_with_precursor_marker": 702,
+      "records_with_candidate_before_marker": 239,
+      "records_missing_existing_sequence_metrics": 2,
+      "old_window_first_us": {
+        "records": 353,
+        "quantiles_us": {
+          "min": -297.984,
+          "p05": -286.51520000000005,
+          "p25": -242.68800000000002,
+          "median": -181.248,
+          "p75": -134.144,
+          "p95": -105.47200000000001,
+          "max": -101.376
+        },
+        "outside_old_minus300_to_minus100_window": 0,
+        "standard_deviation_us": 59.68327018568944
+      },
+      "before_marker_first_us": {
+        "records": 239,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -310.47679999999997,
+          "p25": -278.528,
+          "median": -238.592,
+          "p75": -191.488,
+          "p95": -135.98720000000003,
+          "max": -95.232
+        },
+        "outside_old_minus300_to_minus100_window": 32,
+        "standard_deviation_us": 54.40557791659011
+      },
+      "before_marker_largest_edge_us": {
+        "records": 237,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -308.224,
+          "p25": -273.408,
+          "median": -230.4,
+          "p75": -183.296,
+          "p95": -123.08480000000004,
+          "max": -72.70400000000001
+        },
+        "outside_old_minus300_to_minus100_window": 28,
+        "standard_deviation_us": 56.88949020700913
+      },
+      "first_recorded_sample_us": {
+        "records": 714,
+        "quantiles_us": {
+          "min": -1283.7920000000001,
+          "p05": -907.0544000000001,
+          "p25": -633.26,
+          "median": -429.856,
+          "p75": -315.44,
+          "p95": -291.9584,
+          "max": -254.208
+        },
+        "outside_old_minus300_to_minus100_window": 645,
+        "standard_deviation_us": 208.15088038823419
+      }
+    },
+    {
+      "run": 32739,
+      "charge_selected_records": 662,
+      "records_with_precursor_marker": 646,
+      "records_with_candidate_before_marker": 168,
+      "records_missing_existing_sequence_metrics": 0,
+      "old_window_first_us": {
+        "records": 231,
+        "quantiles_us": {
+          "min": -295.936,
+          "p05": -287.744,
+          "p25": -244.73600000000002,
+          "median": -189.44,
+          "p75": -134.144,
+          "p95": -110.592,
+          "max": -103.424
+        },
+        "outside_old_minus300_to_minus100_window": 0,
+        "standard_deviation_us": 60.10705945241472
+      },
+      "before_marker_first_us": {
+        "records": 168,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -312.32,
+          "p25": -282.112,
+          "median": -237.568,
+          "p75": -187.392,
+          "p95": -128.81919999999997,
+          "max": -74.752
+        },
+        "outside_old_minus300_to_minus100_window": 25,
+        "standard_deviation_us": 58.55766645908789
+      },
+      "before_marker_largest_edge_us": {
+        "records": 167,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -308.224,
+          "p25": -278.528,
+          "median": -220.16,
+          "p75": -179.20000000000002,
+          "p95": -125.952,
+          "max": -74.752
+        },
+        "outside_old_minus300_to_minus100_window": 23,
+        "standard_deviation_us": 60.40123392239707
+      },
+      "first_recorded_sample_us": {
+        "records": 662,
+        "quantiles_us": {
+          "min": -1185.9520000000002,
+          "p05": -855.4968,
+          "p25": -562.128,
+          "median": -333.16,
+          "p75": -302.99199999999996,
+          "p95": -256.4248,
+          "max": -217.488
+        },
+        "outside_old_minus300_to_minus100_window": 516,
+        "standard_deviation_us": 201.69212471509948
+      }
+    }
+  ],
+  "all_run_endpoint_first_candidates": [
+    {
+      "run": 27938,
+      "endpoint": "104/105/107",
+      "records_with_this_group": 1,
+      "records_with_candidate": 1,
+      "first_candidate": {
+        "records": 1,
+        "quantiles_us": {
+          "min": -2587.648,
+          "p05": -2587.648,
+          "p25": -2587.648,
+          "median": -2587.648,
+          "p75": -2587.648,
+          "p95": -2587.648,
+          "max": -2587.648
+        },
+        "outside_old_minus300_to_minus100_window": 1,
+        "standard_deviation_us": 0.0
+      }
+    },
+    {
+      "run": 27938,
+      "endpoint": "109",
+      "records_with_this_group": 1,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 27938,
+      "endpoint": "111",
+      "records_with_this_group": 1,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 27938,
+      "endpoint": "112",
+      "records_with_this_group": 1,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 27938,
+      "endpoint": "113",
+      "records_with_this_group": 1,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 27951,
+      "endpoint": "104/105/107",
+      "records_with_this_group": 10,
+      "records_with_candidate": 9,
+      "first_candidate": {
+        "records": 9,
+        "quantiles_us": {
+          "min": -289.79200000000003,
+          "p05": -286.51520000000005,
+          "p25": -257.024,
+          "median": -236.544,
+          "p75": -115.712,
+          "p95": -104.2432,
+          "max": -99.328
+        },
+        "outside_old_minus300_to_minus100_window": 1,
+        "standard_deviation_us": 72.83199861138232
+      }
+    },
+    {
+      "run": 27951,
+      "endpoint": "112",
+      "records_with_this_group": 1,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 27951,
+      "endpoint": "113",
+      "records_with_this_group": 5,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 30201,
+      "endpoint": "104",
+      "records_with_this_group": 42,
+      "records_with_candidate": 12,
+      "first_candidate": {
+        "records": 12,
+        "quantiles_us": {
+          "min": -482.30400000000003,
+          "p05": -459.776,
+          "p25": -389.632,
+          "median": -346.112,
+          "p75": -258.56,
+          "p95": -122.26560000000003,
+          "max": -95.232
+        },
+        "outside_old_minus300_to_minus100_window": 8,
+        "standard_deviation_us": 114.35367142723878
+      }
+    },
+    {
+      "run": 30201,
+      "endpoint": "112",
+      "records_with_this_group": 41,
+      "records_with_candidate": 14,
+      "first_candidate": {
+        "records": 14,
+        "quantiles_us": {
+          "min": -476.16,
+          "p05": -456.192,
+          "p25": -420.352,
+          "median": -324.608,
+          "p75": -234.496,
+          "p95": -127.79520000000005,
+          "max": -39.936
+        },
+        "outside_old_minus300_to_minus100_window": 9,
+        "standard_deviation_us": 120.08088093328718
+      }
+    },
+    {
+      "run": 30201,
+      "endpoint": "113",
+      "records_with_this_group": 39,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 30202,
+      "endpoint": "104",
+      "records_with_this_group": 83,
+      "records_with_candidate": 8,
+      "first_candidate": {
+        "records": 8,
+        "quantiles_us": {
+          "min": -451.584,
+          "p05": -449.4336,
+          "p25": -393.216,
+          "median": -195.58400000000003,
+          "p75": -27.136,
+          "p95": -22.937600000000003,
+          "max": -21.504
+        },
+        "outside_old_minus300_to_minus100_window": 8,
+        "standard_deviation_us": 190.39224454793322
+      }
+    },
+    {
+      "run": 30202,
+      "endpoint": "112",
+      "records_with_this_group": 83,
+      "records_with_candidate": 3,
+      "first_candidate": {
+        "records": 3,
+        "quantiles_us": {
+          "min": -476.16,
+          "p05": -463.2576,
+          "p25": -411.648,
+          "median": -347.136,
+          "p75": -296.96000000000004,
+          "p95": -256.8192,
+          "max": -246.784
+        },
+        "outside_old_minus300_to_minus100_window": 2,
+        "standard_deviation_us": 93.8859034833712
+      }
+    },
+    {
+      "run": 30202,
+      "endpoint": "113",
+      "records_with_this_group": 82,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 32731,
+      "endpoint": "109",
+      "records_with_this_group": 714,
+      "records_with_candidate": 589,
+      "first_candidate": {
+        "records": 589,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -300.032,
+          "p25": -222.208,
+          "median": -130.048,
+          "p75": -72.70400000000001,
+          "p95": -27.648,
+          "max": -21.504
+        },
+        "outside_old_minus300_to_minus100_window": 255,
+        "standard_deviation_us": 87.26594643969375
+      }
+    },
+    {
+      "run": 32731,
+      "endpoint": "111",
+      "records_with_this_group": 711,
+      "records_with_candidate": 405,
+      "first_candidate": {
+        "records": 405,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -304.128,
+          "p25": -257.024,
+          "median": -193.536,
+          "p75": -111.616,
+          "p95": -31.744,
+          "max": -21.504
+        },
+        "outside_old_minus300_to_minus100_window": 126,
+        "standard_deviation_us": 86.83819420891656
+      }
+    },
+    {
+      "run": 32731,
+      "endpoint": "112",
+      "records_with_this_group": 713,
+      "records_with_candidate": 381,
+      "first_candidate": {
+        "records": 381,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -308.224,
+          "p25": -257.024,
+          "median": -191.488,
+          "p75": -109.568,
+          "p95": -33.792,
+          "max": -21.504
+        },
+        "outside_old_minus300_to_minus100_window": 120,
+        "standard_deviation_us": 85.8466690453959
+      }
+    },
+    {
+      "run": 32731,
+      "endpoint": "113",
+      "records_with_this_group": 716,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    },
+    {
+      "run": 32739,
+      "endpoint": "109",
+      "records_with_this_group": 662,
+      "records_with_candidate": 420,
+      "first_candidate": {
+        "records": 420,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -300.032,
+          "p25": -214.016,
+          "median": -122.88,
+          "p75": -68.608,
+          "p95": -27.545600000000093,
+          "max": -21.504
+        },
+        "outside_old_minus300_to_minus100_window": 202,
+        "standard_deviation_us": 88.61158702831551
+      }
+    },
+    {
+      "run": 32739,
+      "endpoint": "111",
+      "records_with_this_group": 650,
+      "records_with_candidate": 271,
+      "first_candidate": {
+        "records": 271,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -306.176,
+          "p25": -257.024,
+          "median": -185.344,
+          "p75": -113.664,
+          "p95": -41.984,
+          "max": -21.504
+        },
+        "outside_old_minus300_to_minus100_window": 78,
+        "standard_deviation_us": 84.24732745155245
+      }
+    },
+    {
+      "run": 32739,
+      "endpoint": "112",
+      "records_with_this_group": 648,
+      "records_with_candidate": 252,
+      "first_candidate": {
+        "records": 252,
+        "quantiles_us": {
+          "min": -316.416,
+          "p05": -310.272,
+          "p25": -258.56,
+          "median": -184.32,
+          "p75": -107.52,
+          "p95": -46.08,
+          "max": -23.552
+        },
+        "outside_old_minus300_to_minus100_window": 84,
+        "standard_deviation_us": 86.35807979505239
+      }
+    },
+    {
+      "run": 32739,
+      "endpoint": "113",
+      "records_with_this_group": 511,
+      "records_with_candidate": 0,
+      "first_candidate": {
+        "records": 0
+      }
+    }
+  ],
+  "limits": [
+    "t = PDS time minus the main-shake onset proxy; negative means before the main shake. This is not a measured electron drift time.",
+    "Main shake: start of strongest connected component with >=50% of sampled channels above 1000 ADC on both APAs, 2.048 us bins.",
+    "Pulses: existing >=21-channel fast-negative-edge candidates, searched in [-4000,-20) us wherever samples exist. Not confirmed light flashes or sparks.",
+    "Precursor: existing APA1 signed-median 2 ADC crossing, sustained five bins, with amplitude/noise eligibility and left-censor rejection. Diagnostic marker, not a physical charge arrival.",
+    "Largest means greatest median peak negative edge among recorded connected-input samples within +/-4.096 us of each candidate; >=21 channels with a valid edge required. Cached ADC uses 256 ns bins. It is not calibrated photon yield or integrated pulse size.",
+    "Reported disconnected DAPHNE109 channels 11,13,14,16 excluded only from amplitude ranking; original candidate membership unchanged.",
+    "One pulse per record: largest recorded edge before the marker. First before marker shown as a sensitivity comparison. Missing scores are not set to zero.",
+    "Individual PDS channels sometimes have samples earlier than -320 us. Those samples do not establish continuous >=21-channel coverage. Packet gaps, self-triggering and readout limits can hide earlier qualifying pulses. No live-time or efficiency correction.",
+    "Requiring a pulse before the precursor truncates timing in a record-dependent way. The old -300 to -100 us cut is shown separately, not reused for the wider histogram.",
+    "November is the supported precursor subset: 1378 charge candidates, 1376 with existing sequence metrics. Other run/endpoint first-candidate summaries use no precursor requirement and must not be pooled as the same population.",
+    "No fixed-location exclusion, causal claim, Gaussian width fit or independent-sample significance is inferred from these histograms."
+  ]
+}

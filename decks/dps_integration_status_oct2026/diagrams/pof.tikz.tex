@@ -1,0 +1,18 @@
+% The box-enable path is optional; the power-inhibit path uses the PDU.
+\begin{tikzpicture}
+  \node[dps node] (sc) at (-5,0) {SC / Ignition};
+  \node[dps node] (local) at (0,0) {Opta or Beckhoff\\Local PLC};
+  \node[dps load,minimum height=1.45cm] (box) at (5,-1.6)
+    {PoF laser box\\4 voltage readings\\1 temperature};
+  \node[dps controller] (dps) at (-5,-3.25) {DPS PLC};
+  \node[dps node] (pdu) at (0,-3.25) {Rack PDU};
+
+  \draw[dps both] (sc.east) -- node[dps label,above] {OPC UA} (local.west);
+  \draw[dps flow] (box.north) -- (5,0)
+    -- node[dps label,above] {Sensor inputs} (local.east);
+  \draw[dps both] (sc.south) -- node[dps label,right] {OPC UA} (dps.north);
+  \draw[dps both] (dps.east) -- node[dps label,above] {SNMP} (pdu.west);
+  \draw[dps power] (pdu.east) -- node[dps label,above] {AC power} (5,-3.25) -- (box.south);
+  \draw[dps flow,dashed] (local.south) -- (0,-1.6)
+    -- node[dps label,above] {Optional enable} (box.west);
+\end{tikzpicture}

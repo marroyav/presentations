@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-27T18:40:55.733821+00:00",
+  "pages": 12,
+  "build": "make decks/dps_integration_status_oct2026/main.pdf",
+  "source_audit": {
+    "errors": [],
+    "advisories": []
+  },
+  "layout_errors": [],
+  "visual_review": "All 12 pages reviewed as a contact sheet; topology reviewed separately after spacing adjustment.",
+  "sha256": {
+    "main.tex": "45e00e590026a4cef6487857d41d7bb75bd61f8f716a164d12d977ff875aedee",
+    "main.pdf": "14323d20a233bb10ad3b9e7a27c41847042ac01c2c8866b87728b2130271d12b",
+    "sources-and-notes.txt": "2416cbef9919f365f33d284ac5f0ebcb527320de6bcdb4487759908a67bc015c",
+    "sources.json": "8c1eec7cd4751ff285b5638e5bad48bb807494e29f15130df3069c45a49fe345"
+  },
+  "limits": [
+    "Presentation build and layout only; no hardware qualification, new site survey or external source-status verification."
+  ]
+}

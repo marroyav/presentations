@@ -1,0 +1,64 @@
+Presentation architecture supplied by Manuel — 27 October 2026
+
+These instructions take precedence over older working inventories and earlier
+assistant revisions of the presentation.
+
+- Restore the definitions from the original presentation.
+- Show four DPS input domains separately: FFDG BMS, SDSTA BMS, cryogenics,
+  and detector. Within detector, show SC and the detector subsystems.
+- SC operates and monitors the detector and owns the logs.
+- DPS performs arbitration: it uses the relevant conditions to permit or
+  inhibit detector actions. SC cannot override a protection trip.
+- Slide 4: DPS controls both PDUs and LV power supplies using the same
+  device protocol: SNMP. Group them on one control/status connection from
+  the DPS PLC. The previous assistant drawing incorrectly separated their
+  control paths and treated the BDE supply-inhibit wiring as the LV protocol.
+  The subsystem OPC UA path goes through SC, and SC communicates with the
+  DPS PLC over OPC UA. Replace the generic direct PLC–subsystem arrows.
+  Keep the dedicated BDE I/O description on the following slide.
+- SC–OPC UA bridge servers are outside this presentation. Do not add them
+  to the diagrams or describe their implementation in the talk.
+- Expand the detector section, then show the existing BDE design and its
+  definitions before introducing the proposed VD extension.
+- PDS LV count is 34. This replaces the previous LV-feed count in the slides.
+  Do not reconstruct the count from the older PDS inventory's device totals.
+- Control chain: Ignition controls the PLC; the PLC controls the PDU.
+  The PLC performs arbitration. Local interlocks remain able to trip.
+  This is one control chain, not competing control owners or a transfer
+  from Ignition to the PLC.
+- Slide 7: PDUs and LV supplies share the direct SNMP control/status
+  connection to the DPS PLC. The
+  additional PDS/TDE/CalCI interfaces use OPC UA through SC, which communicates
+  with the DPS PLC over OPC UA. Do not draw those additional interfaces as
+  a direct PLC branch. Existing BDE/bias I/O uses EtherCAT to the PLC.
+- TDE: current control is through its PDUs only. Retain TDE in the proposal
+  diagram and keep crate status / external inhibit as possible future
+  interfaces if needed. Do not describe them as available capabilities.
+- Keep VD as the current scope. HD can later extend this system or use
+  another PLC. CUC placement beside the other PLC racks is proposed.
+
+The original presentation is preserved in:
+archive/20261023-before-ii-feedback/main.tex
+
+The current deck and speaker notes implement this architecture. The supplied
+statements establish the presentation's design basis; they are not a claim
+that the VD installation or its hardware tests are complete.
+
+Page 7 diagram layout used to implement these instructions
+Additional VD interfaces sit below SC and connect to it over OPC UA. Existing
+BDE/bias I/O sits below the DPS PLC and uses EtherCAT. PDUs and LV supplies
+are grouped on the same SNMP control/status connection to the DPS PLC.
+SC and the PLC communicate
+over OPC UA. The controller's CUC location remains proposed. TDE
+remains in the additional-interface proposal as a future option; its current
+control path is through the PDUs only.
+
+Protocol evidence for the shared device connection
+The PX3 Rack Protection Setup guide, DUNE-doc-32655 v8, sections 2 and 4.3,
+specifies SNMP. The BDE ICD, EDMS 3293079 v1, section 3.2 (PDF p6), specifies
+SNMP agents for WIENER PL506 and MPOD supplies. Ting Miao's SC Progress,
+10 June 2026, slide 26 (PDF p27), also groups WIENER/ISEG supplies and PDUs
+under SNMP. These sources establish the device protocol; Manuel's
+instructions place the device-control connection at the DPS PLC in this
+presentation. The BDE ICD's TTL inhibits (section 5, PDF p7) remain additional
+hardware protection interfaces and are described on the BDE detail slide.

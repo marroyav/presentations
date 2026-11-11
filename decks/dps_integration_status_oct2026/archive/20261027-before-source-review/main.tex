@@ -1,0 +1,185 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{Building the detector protection system}
+\subtitle{Hardware plan for the I\&I workshop}
+\author{Manuel Arroyave}
+\date{Draft revised 27 October 2026}
+\newcommand{\mydate}{27 October 2026}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+\newcommand{\planningnote}[1]{\par\medskip{\footnotesize\color{DuneTextMuted}#1\par}}
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Use a commercial PLC for DPS}
+  \large
+  \textbf{Proposal:} use the bottom drift electronics (BDE) PLC design
+  and add the inputs and outputs needed by the other systems.\par
+  \bigskip
+  A programmable logic controller (PLC) applies the protection rules.
+  Nearby I/O modules connect sensors and equipment.\par
+  \bigskip
+  Use OPC UA for monitoring and agreed supervisory commands.\par
+  \planningnote{Detector Protection System (DPS). Confirm the hardware choice after checking requirements and testing the prototype.}
+\end{frame}
+
+\begin{frame}{BDE protection and rack PDUs}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.5cm}>{\RaggedRight\arraybackslash}X>{\RaggedRight\arraybackslash}X@{}}
+  \toprule
+  \textbf{Hardware} & \textbf{What we have} & \textbf{Next check}\\
+  \midrule
+  BDE protection & PLC design documents, slides and Ignition front end available & With Terri and Trevor, identify what to reuse and what DPS needs to add\\
+  Distributed I/O & BDE panels distributed along the mezzanine & Use the BDE layout to size and place additional DPS I/O\\
+  Rack power & Power distribution units (PDUs) are planned & Confirm models, sensors, trip logic and external signals\\
+  \bottomrule
+  \end{tabularx}
+  \planningnote{Based on the 25--26 October discussion and working hardware inventory. This is not an installed-equipment survey.}
+\end{frame}
+
+\begin{frame}{Put I/O near the equipment it protects}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,text width=2.3cm,minimum height=1.1cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box,fill=DuneSky] (plc) at (-4,0) {DPS PLC\\protection rules};
+    \node[box] (io) at (0,0) {Distributed I/O\\near equipment};
+    \node[box,fill=DuneCoral] (eq) at (4,0) {Sensors and\\equipment};
+    \node[box] (sc) at (-4,2) {Slow controls\\monitoring / history};
+    \draw[edge,<->] (plc) -- node[above,font=\small] {fieldbus} (io);
+    \draw[edge] (eq.north west) -- node[above,font=\small] {status} (io.north east);
+    \draw[edge] (io.south east) -- node[below,font=\small] {permit / inhibit} (eq.south west);
+    \draw[edge,<->] (sc) -- node[right,font=\small] {OPC UA} (plc);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Proposed structure; confirm each connection, protocol and electrical interface.}
+  \medskip
+  \raggedright Decide how many PLCs we need and where to place them.
+  \planningnote{BDE uses an EtherCAT protection connection. Its extension, capacity and timing remain to be tested.}
+\end{frame}
+
+\begin{frame}{Check what each rack PDU can do locally}
+  A local interlock acts at the equipment, without waiting for the central DPS.\par
+  \bigskip
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{paper}{2.6cm}{1}{Check the device}
+        {Which sensors can trigger a trip? Which outlets switch off? What happens if its network connection fails?}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{sky}{2.6cm}{2}{Check its DPS interface}
+        {Can it accept an external permit and report a trip? How do we reset it? Which status is available over SNMP?}
+    \end{column}
+  \end{columns}
+  \planningnote{Do not assume smoke, water or temperature sensing implies automatic shutdown. Confirm the model, configuration and wiring.}
+\end{frame}
+
+\begin{frame}{List the signals and count the I/O}
+  \renewcommand{\arraystretch}{1.45}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.5cm}>{\RaggedRight\arraybackslash}X@{}}
+  \toprule
+  \textbf{Record for each path} & \textbf{What we need to choose}\\
+  \midrule
+  Source, destination, location & Panel layout and cable routes\\
+  Signal type, range, protocol & Digital / analog I/O, isolation and gateways\\
+  Channel / variable counts & Capacity, network load and spares\\
+  Required action and total time & PLC, local interlock or dedicated connection\\
+  Lost signal and recovery & Wiring, feedback and reset controls\\
+  \bottomrule
+  \end{tabularx}
+  \planningnote{Use the matrix to check interface control documents (ICDs). Remove overlaps; add CALCI and missing systems.}
+\end{frame}
+
+\begin{frame}{Confirm response times before choosing hardware}
+  \large
+  So far, I have not found a critical protection function
+  that needs a response below 1 ms.\par
+  \bigskip
+  Each consortium must check the time from detecting a fault
+  to completing the protective action.\par
+  \bigskip
+  Test sensor, communication, PLC and equipment delays together.\par
+  \planningnote{The consortia need to confirm this before procurement. Use a faster local interlock wherever the required response time demands it.}
+\end{frame}
+
+\begin{frame}{Check how DPS connects to the other systems}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.5cm}>{\RaggedRight\arraybackslash}X@{}}
+  \toprule
+  \textbf{Boundary} & \textbf{Work needed}\\
+  \midrule
+  Slow controls (SC) / DPS & With Geoff, agree command priority, trip reset and re-enable; SC logs relevant data\\
+  Cryogenics / instrumentation & Find the actual source of each measurement and its path to DPS\\
+  LBNF/DUNE BMS / SDSTA BMS & Keep both building systems distinct; agree limited hardware I/O and where it connects\\
+  Networks / OPC UA & Agree monitoring, permitted commands and access across networks\\
+  \bottomrule
+  \end{tabularx}
+  \planningnote{Personnel-safety alarms remain with SDSTA. Software monitoring links do not establish a qualified protection path.}
+\end{frame}
+
+\begin{frame}{Survey the facility interfaces at SURF}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{paper}{2.7cm}{1}{Prepared}
+        {Marked inspection maps for levels 4850 and 4910. Coordinating access and safety requirements with Rachel.}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \DuneFixedColorBlock{sky}{2.7cm}{2}{Find on site}
+        {At the underground locations and Ross Dry: installed controllers, I/O, panel space and possible connection points.}
+    \end{column}
+  \end{columns}
+  \bigskip
+  Ask Dale Curran at SDSTA about the controllers and available connections.
+  \planningnote{Inspection planned for this week, subject to access and safety arrangements. Maps have not yet been shared; findings are pending.}
+\end{frame}
+
+\begin{frame}{Test the PLC, remote I/O and equipment together}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}X>{\RaggedRight\arraybackslash}X@{}}
+  \toprule
+  \textbf{Proposed bench tests} & \textbf{What to measure or check}\\
+  \midrule
+  PLC + remote I/O + representative load & Complete trip time under expected load\\
+  Rack PDU + sensors + DPS interface & Local shutdown, trip feedback and reset\\
+  OPC UA + SC supervisory commands & Command priority, logging and recovery\\
+  Signal, fieldbus, network and power loss & Defined equipment state and controlled restart\\
+  \bottomrule
+  \end{tabularx}
+  \planningnote{Use the simulation framework to prepare cases, then test on hardware. Agree the Fermilab bench scope and any SURF tests, hosts and equipment.}
+\end{frame}
+
+\begin{frame}{Design and test the hardware before June 2027}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.9cm}>{\RaggedRight\arraybackslash}X@{}}
+  \toprule
+  \textbf{Proposed period} & \textbf{Deliverable}\\
+  \midrule
+  Now--December 2026 & Review BDE; survey interfaces; list I/O and timing requirements\\
+  January--March 2027 & Design PLC topology, panels, cabling and networks; estimate cost and lead times\\
+  April--June 2027 & Test prototypes; document results; review design and procurement readiness\\
+  After review & Order approved hardware; schedule installation with the site teams\\
+  \bottomrule
+  \end{tabularx}
+  \planningnote{Check summer 2027 interface needs now. Target the full vertical drift (VD) response-matrix review for early 2028.}
+\end{frame}
+
+\begin{frame}{Agree who does the work}
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.2cm}>{\RaggedRight\arraybackslash}X@{}}
+  \toprule
+  \textbf{Proposed team} & \textbf{Next action}\\
+  \midrule
+  Manuel + process control engineer & Design the hardware; prepare specifications and purchases\\
+  Terri, Trevor + Manuel & Review BDE implementation and what DPS must add\\
+  Manuel + consortium contacts & Confirm signals, timing and protection in each project phase\\
+  Manuel + Geoff & Agree SC/DPS control and reset behaviour\\
+  Vivian + subsystem / DPS teams & Update ICD connections and bench-test scope\\
+  \bottomrule
+  \end{tabularx}
+  \planningnote{Confirm owners at I\&I. When DPS is unavailable, propose that each consortium protects its equipment; agree this for every phase.}
+\end{frame}
+\end{document}

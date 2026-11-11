@@ -1,0 +1,11 @@
+{
+  "release": "fddaq-v5.6.2-a9-1",
+  "sources": {
+    "appmodel": "3a2c8138a6e9a5828159f4de43e97148633689a5",
+    "dpdklibs": "0711edec6b40f52a19f522f0a321128dd7836b4e",
+    "fddetdataformats": "75451f42c049bf51132493075d61a1c884592425",
+    "fdreadoutlibs": "1bf594581feca8c23f3b11184ce63c709f4a9c6f"
+  },
+  "run45392_evidence_commit": "bed0920192126456089d7d44930dbfb145268463",
+  "triggeralgs": "v1.6.0 session-local compatibility interposer; installed library unchanged"
+}

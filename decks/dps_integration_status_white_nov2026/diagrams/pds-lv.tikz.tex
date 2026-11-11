@@ -1,0 +1,19 @@
+% Question: how does DPS control LV supplies for DAPHNE and PDS calibration?
+% Proposed SNMP control follows Manuel's architecture-inputs-20261027.txt.
+% Load families follow EDMS 3309688 v1, hardware interfaces and section 3.2.
+% Power arrows group feeds; separate supply outputs do not imply a shared rail.
+% The 34-feed scope does not establish module/crate counts or inhibit grouping.
+\begin{tikzpicture}
+  \node[dps controller] (dps) at (-5,0) {DPS PLC};
+  \node[dps node] (lv) at (0,0) {WIENER / MPOD\\LV supplies};
+  \node[dps load] (daphne) at (5,1) {DAPHNE boards};
+  \node[dps load] (calibration) at (5,-1) {PDS calibration box};
+
+  \draw[dps both] (dps.east) --
+    node[dps label,above=4pt] {SNMP} (lv.west);
+  \draw[dps power] ([yshift=2mm]lv.east) -- (2.3,0.2) -- (2.3,1)
+    -- node[dps label,above] {48 VDC} (daphne.west);
+  \draw[dps power] ([yshift=-2mm]lv.east) -- (2.3,-0.2) -- (2.3,-1)
+    -- node[dps label,pos=1,below,anchor=north east,xshift=-2pt,align=right]
+      {Board +\\pulser power} (calibration.west);
+\end{tikzpicture}

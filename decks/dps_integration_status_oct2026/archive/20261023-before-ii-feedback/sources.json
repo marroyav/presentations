@@ -1,0 +1,45 @@
+{
+  "checked_document_status_date": "2026-10-21",
+  "presentation_date": "2026-10-23",
+  "references": [
+    {
+      "id": "EDMS 2907050",
+      "version": "1",
+      "status": "Released",
+      "visibility": "Public",
+      "url": "https://edms.cern.ch/document/2907050/1",
+      "pages": [
+        4,
+        5,
+        13
+      ],
+      "pdf_sha256": "16b3699b46365b7172f39230db7bb275ae043a9dffe70d31246a30285824222a"
+    },
+    {
+      "id": "EDMS 2386382",
+      "version": "1",
+      "status": "Released",
+      "visibility": "Public",
+      "url": "https://edms.cern.ch/document/2386382/1",
+      "public_pdf": "https://edms.cern.ch/ui/file/2386382/1/LBNF_ProcessControls_PDR_Charge_Rev4_docx_cpdf.pdf",
+      "public_access_checked": "2026-10-23",
+      "pages": [
+        1
+      ],
+      "pdf_sha256": "ec5c1f54c8c6f7019014a4c7919fa89c4a9396a2c3984e27dc4c14890e041c97"
+    }
+  ],
+  "team_status": "Recorded 2026-10-21; no new plant access, hardware tests or deployment claimed.",
+  "proposals": [
+    "Control priority diagram",
+    "Consortium review programme",
+    "Development path",
+    "Accountability agreement"
+  ],
+  "limits": [
+    "No installed wiring or hardware qualification established.",
+    "Current-value BMS access remains unfinished in the recorded status.",
+    "Recent mailbox updates were unavailable; live CERN ticket access was unavailable.",
+    "Cryogenics review reports are restricted; the public review charge is cited instead."
+  ]
+}

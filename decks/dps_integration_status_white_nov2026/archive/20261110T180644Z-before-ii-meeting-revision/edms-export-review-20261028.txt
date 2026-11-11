@@ -1,0 +1,71 @@
+EDMS export review — 28 October 2026
+
+Question: are the downloaded files from the linked EDMS project used in the deck?
+Answer: the panel drawing, CE parts list, power analysis and v4 logic note were
+already used and match the new export byte for byte. The other engineering
+attachments have now been reviewed and recorded as historical design sources.
+
+Archive: /home/arroyave/Downloads/export_CERN-0000211239_2026-10-28.zip
+SHA-256: 2aeca419046b1c25c9d0a5da22f1c85d3bf406a5b9410e7a7c5625356f0ba7cd
+User-supplied project link: https://edms.cern.ch/ui/#!master/navigator/project?P:100667173:100667173:subDocs
+The export contains 26 members, with EDMS 2401090 v3/v4 names and duplicate files.
+This establishes the local export contents, not an authenticated live listing of
+every current document in the linked project.
+
+What the additional files contribute
+- Hardware assumptions, PDF pp1–3: PLC options, distributed I/O, fieldbus and
+  OPC UA/redundancy licences; humidity/dew-point and fan/heater interfaces.
+- September interface slides, pp5–14: panel roles and physical connections.
+- May interlocks slides, pp2–15: separate SC and EtherCAT networks and modular I/O.
+- September matrix, pp6–14: historical bias-before-LV shutdown, default inhibit,
+  heater/dew-point inputs and feedback that was still missing at that time.
+- October Technical Board slides, pp9–30: layered protection, distributed PLC
+  hardware, SC status exchange and the importance of matching logic to wiring.
+
+How the deck uses this
+- BDE description and trip example retain the physical PLC / EtherCAT / inhibit paths.
+- Device hierarchy now includes fan/heater outputs, environmental inputs,
+  power terminals and fieldbus extension/fibre components.
+- Procurement preparation includes software licences.
+- The VD fan-to-bias dependency and shutdown order remain to be agreed.
+
+Limits and differences that remain visible in the source notes
+- These 2020 documents describe Detector 1 / HD: 150 warm crates, 25 LV groups,
+  5 bias groups and 658 bias channels are not substituted for the VD counts.
+- The older DDSS parts sheet lists CX5120 and EL2088 bias outputs. The CE sheet
+  used previously lists CX5140 and EL2124, and contains April 2023 quotes.
+  Those variants are not treated as one current approved bill of materials.
+- Historical material shows four fans per flange; the later six-fan WIEC case
+  is a conditional allocation check, not a claim of 48 new inputs per VD group.
+- Historical missing-feedback statements do not qualify today's proposed SNMP
+  readback path. End-to-end timing and feedback still need bench tests.
+- Old heater thresholds are proposals, not VD operating settings.
+- Drawings and presentations are design references, not evidence of installation.
+
+Archive members and current source matches
+DDSS_Controls_Parts_List.xlsx | 975604436f0298180b9f762d60b5595364ed63f3b3136e587a5def2bb35fd248 | ddss-export-parts
+2401090_3_DDSS_Controls_Power_Analysis.xlsx | 7bb776e6b5f36948a8716f556104056f4b9dc63f52bb4f5a888ee5f76fc509e4 | power-analysis
+2401090_3_DDSS_TPC_Hardware_Assumptions_and_Considerations.docx | 8f54a10779baa64b4f316772266e948e06d1adf117e3a7fbde761e72c3250de1 | native/duplicate variant retained in archive
+2401090_3_DDSS_TPC_Hardware_Assumptions_and_Considerations_docx_cpdf.pdf | a6638beeac86a4dcd3880f18c7bbd46513b5dbce44ea878c9c3a684140b2bbba | native/duplicate variant retained in archive
+2401090_3_Engineering_Note_-_DDSS_Logic_Requirements__(2020-10-28_).docx | 9233d343034bfa435e1ac7e0d8dae7b24bf40f5e84c9bb5795857804a4b514fc | native/duplicate variant retained in archive
+2401090_3_Engineering_Note_-_DDSS_Logic_Requirements_(2020-10-28)_docx_cpdf.pdf | 7fae9d38b806a354c24095fe1a894c2f93ce4a469f73b252d83d89aa994d6677 | native/duplicate variant retained in archive
+2401090_3_F10xxxxxx-Prelim_-_DDSS_Controls.pdf | b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c | panel-drawing
+2401090_3_Interface_to_DUNE_Detector_Safety_System.pptx | 9c26fe3d911ff15822225cec0772a9dc15d20afe043d56a3b8cf2e7cf4b6f2e6 | native/duplicate variant retained in archive
+2401090_3_Interface_to_DUNE_Detector_Safety_System_pptx_cpdf.pdf | baba6dfe0a54e20dd10e9e28ff999efb6e6fbd505fe67ced39afc9e842f357a5 | native/duplicate variant retained in archive
+2401090_3_Interlocks_20200522.pptx | fb06633731e68541c1f20f98cb020dde2ca742d74b30bc8f3d644283d472b478 | native/duplicate variant retained in archive
+2401090_3_Interlocks_20200522_pptx_cpdf.pdf | f72dd7e3974a34c0335c9ab93c60e385be5d4c5466c1c7fc1ebacec9c3874987 | native/duplicate variant retained in archive
+2401090_3_Interlocks_Action-Matrix_20200910.pdf | 7e3a791617221be92bc504cca729f5d0582e0f0ee19818facf233356ccf99810 | ddss-export-matrix
+2401090_3_TechBoard_20201001.pdf | 02c609891d6a4d377acef0c370cb55e30b10010b0c6ead826dec839c6a642f08 | ddss-export-techboard
+CE_Interlock_Parts_List.xlsx | c0f0605fbb6d4d7ed87081235b179f665db732dde3f890d71967da98600476bd | parts-list
+2401090_4_DDSS_Controls_Power_Analysis.xlsx | 7bb776e6b5f36948a8716f556104056f4b9dc63f52bb4f5a888ee5f76fc509e4 | power-analysis
+2401090_4_DDSS_TPC_Hardware_Assumptions_and_Considerations.docx | 8f54a10779baa64b4f316772266e948e06d1adf117e3a7fbde761e72c3250de1 | native/duplicate variant retained in archive
+2401090_4_DDSS_TPC_Hardware_Assumptions_and_Considerations_docx_cpdf.pdf | b29fe7d931099c4fbea6c505140a6edfe42f22b583823c18eeb09bf122cfd811 | ddss-export-assumptions
+2401090_4_Engineering_Note_-_DDSS_Logic_Requirements__(2020-10-28_).docx | 9233d343034bfa435e1ac7e0d8dae7b24bf40f5e84c9bb5795857804a4b514fc | native/duplicate variant retained in archive
+2401090_4_Engineering_Note_-_DDSS_Logic_Requirements_(2020-10-28)_docx_cpdf.pdf | 695853a8972460aa65422f8446ea60841ecbb3d9a4e56dda14b8224e10788f17 | ddss-logic-history
+2401090_4_F10xxxxxx-Prelim_-_DDSS_Controls.pdf | b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c | panel-drawing
+2401090_4_Interface_to_DUNE_Detector_Safety_System.pptx | 9c26fe3d911ff15822225cec0772a9dc15d20afe043d56a3b8cf2e7cf4b6f2e6 | native/duplicate variant retained in archive
+2401090_4_Interface_to_DUNE_Detector_Safety_System_pptx_cpdf.pdf | d533ffb013312391aa4b5985b54b671a6525b8360be6b1971d6927009596cfbc | ddss-export-interface
+2401090_4_Interlocks_20200522.pptx | fb06633731e68541c1f20f98cb020dde2ca742d74b30bc8f3d644283d472b478 | native/duplicate variant retained in archive
+2401090_4_Interlocks_20200522_pptx_cpdf.pdf | a28edfbfbcf53f0239fd1e4acd1b7c9a6af2114fba3b76336bf10d477166cb30 | ddss-export-interlocks
+2401090_4_Interlocks_Action-Matrix_20200910.pdf | 7e3a791617221be92bc504cca729f5d0582e0f0ee19818facf233356ccf99810 | ddss-export-matrix
+2401090_4_TechBoard_20201001.pdf | 02c609891d6a4d377acef0c370cb55e30b10010b0c6ead826dec839c6a642f08 | ddss-export-techboard

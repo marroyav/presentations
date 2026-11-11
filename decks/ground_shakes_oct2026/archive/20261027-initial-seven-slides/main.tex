@@ -1,0 +1,115 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{Ground shakes}
+\author{Manuel Arroyave}
+\date{27 October 2026}
+
+% Figures need plain captions, not the shared component's "Diagram" prefix.
+\renewcommand{\DuneDiagramCaption}[1]{%
+  {\small\color{DuneText}#1\par}}
+\newcommand{\PlotNote}[1]{%
+  \smallskip{\footnotesize\color{DuneTextMuted}#1\par}}
+
+\begin{document}
+
+\begin{frame}{Ground shakes: cause still unresolved}
+  \framesubtitle{ProtoDUNE-HD · Manuel Arroyave · Analysis through 23 October 2026}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.39\textwidth}
+      \textbf{We checked seven runs.}\par
+      \smallskip
+      {\small
+      \renewcommand{\arraystretch}{1.16}
+      \begin{tabularx}{\linewidth}{@{}Xrr@{}}
+        \toprule
+        2024 data & Run & Events \\
+        \midrule
+        July & 27938 & 6 \\
+             & 27951 & 19 \\
+        October & 30201 & 44 \\
+                & 30202 & 83 \\
+        November & 32730 & 1 \\
+                 & 32731 & 716 \\
+                 & 32739 & 662 \\
+        \midrule
+        Total & & 1,531 \\
+        \bottomrule
+      \end{tabularx}}
+    \end{column}
+    \begin{column}{0.56\textwidth}
+      \textbf{We used charge and PDS data.}\par
+      {\small TPC: charge readout. PDS: photon detector readout.\par
+      We also checked July voltage records.}\par
+      \medskip
+      \textbf{Charge test: 1,516 possible shakes.}\par
+      {\small Five records did not pass the test; ten lacked usable charge data.}\par
+      \medskip
+      \begin{itemize}
+        \item Charge signals shift in opposite directions.
+        \item Disconnected PDS inputs also respond.
+        \item No unique charge--light match is established.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \PlotNote{Selected saved records. Automatic candidates are not confirmed shakes or a full-run rate.}
+\end{frame}
+
+\begin{frame}{A PDS pulse comes before the large disturbance}
+  \framesubtitle{Run 27938 · event 20576 · APA1 charge and continuous PDS readout}
+  \includegraphics[width=\textwidth]{figures/01-charge-and-pds.pdf}
+  \DuneDiagramCaption{Each row is one channel. Blue is below baseline; orange is above it.
+    The dashed line marks an early PDS pulse, about 180\,$\mu$s before the trigger (0).
+    Both systems then show a large disturbance. Grey means unrecorded.}
+  \PlotNote{ADC counts are raw signal units; $\mu$s means millionths of a second.
+    Colour limits clip large signals. Recorded timing; electronics delays uncorrected.}
+\end{frame}
+
+\begin{frame}{The slow charge signals move in opposite directions}
+  \framesubtitle{APA1 and APA2 are the two charge-readout assemblies used here}
+  \includegraphics[width=\textwidth]{figures/02-opposite-charge-signs.pdf}
+  \DuneDiagramCaption{\textbf{Left:} one event. APA1 rises while APA2 falls before the main shake.
+    \textbf{Right:} one dot per event. This pattern is clear in 1,355 of 1,376 November records.}
+  \PlotNote{The slow signal must exceed the noise cut in both assemblies.
+    Zero time is a charge-threshold reference, not the first physical disturbance.}
+\end{frame}
+
+\begin{frame}{Disconnected PDS inputs also carry pulses}
+  \framesubtitle{Run 32731 · event 33 · selected pulse 183.296\,$\mu$s before the main shake}
+  \includegraphics[width=\textwidth]{figures/03-disconnected-inputs.pdf}
+  \DuneDiagramCaption{\textbf{Left:} inputs 13, 14 and 16 were reported disconnected from the sensors.
+    \textbf{Right:} connected input 15 responds at the same time.
+    This supports electrical pickup. It does not identify what started the pulse.}
+  \PlotNote{Each line shows signal change in 256 ns steps. The reported disconnections still need run-specific confirmation.}
+\end{frame}
+
+\begin{frame}{Early PDS signals give weak predictions}
+  \framesubtitle{Trained on run 32731; tested on unused run 32739 events · Lower bars are better}
+  \includegraphics[width=\textwidth]{figures/04-pds-prediction.pdf}
+  \DuneDiagramCaption{\textbf{Left:} early PDS data reduce the charge-amplitude error by only 4.1\%.
+    \textbf{Right:} the early pulse predicts the 2 ADC charge crossing less accurately than the known main-shake time.
+    These checks use saved events.}
+  \PlotNote{This tests variation within selected shakes. It does not test whether PDS can predict that a shake will occur.}
+\end{frame}
+
+\begin{frame}{We found no unique charge--light match}
+  \framesubtitle{Early PDS pulses compared with later charge features · November runs}
+  \includegraphics[width=\textwidth]{figures/05-charge-light-timing.pdf}
+  \DuneDiagramCaption{The horizontal axis is charge time minus PDS time.
+    Blue uses pulses from the same event; dashed orange uses pulses from other events.
+    Both show the peak near 325\,$\mu$s. That peak alone does not link a PDS pulse to a charge track.}
+  \PlotNote{Counts account for recorded comparison time. Pulses are swapped within the same run, file and assembly.
+    This is not a normal-running background test.}
+\end{frame}
+
+\begin{frame}{July voltage records show no large ramp or trip}
+  \framesubtitle{Eleven July candidates; ten occur in one 26-second burst}
+  \includegraphics[width=\textwidth]{figures/06-july-voltage.pdf}
+  \DuneDiagramCaption{\textbf{Top:} cathode voltage change. \textbf{Bottom:} wire-bias change.
+    Dots are archived samples; vertical marks are shake candidates.
+    Sampling every 2--11 seconds cannot rule out a brief discharge.}
+  \PlotNote{Changes are relative to the preceding baseline: about 176 kV for the cathode and $-370$ V for the wire bias.}
+\end{frame}
+
+\end{document}

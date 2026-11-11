@@ -1,0 +1,52 @@
+% Meeting branding is local to this deck; the shared white profile is unchanged.
+\newcommand{\DpsMeetingDate}{November 2026}
+\newcommand{\mydate}{\DpsMeetingDate}
+\newcommand{\DpsFermilabLogo}{%
+  \includegraphics[height=2.8mm]{\DuneLogoPath/FNAL-Logo-Black.pdf}%
+}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=6.5mm,dp=0mm]{footline}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=west,inner sep=0pt]
+        at ([xshift=0.78cm,yshift=3.2mm]current page.south west) {\DpsFermilabLogo};
+      \node[text=DuneTextMuted,font=\footnotesize,inner sep=0pt]
+        at ([yshift=3.2mm]current page.south)
+        {I\&I meeting\enspace|\enspace\DpsMeetingDate};
+      \node[anchor=east,text=DuneTextMuted,font=\footnotesize,inner sep=0pt]
+        at ([xshift=-0.78cm,yshift=3.2mm]current page.south east) {\insertframenumber};
+    \end{tikzpicture}%
+  \end{beamercolorbox}%
+}
+
+% Large grey DUNE branding on the title and transitions, without any footer.
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[inner sep=0pt]
+      at ([xshift=-4cm]current page.center)
+      {\includegraphics[width=5.2cm,trim=2bp 2bp 2bp 2bp,clip]{\DuneLogoPath/DUNElogo_gray.pdf}};
+    \node[text=DuneText,font=\bfseries\fontsize{23}{28}\selectfont,
+      anchor=west,align=flush left,text width=7.2cm,inner sep=0pt]
+      at ([xshift=7.2cm,yshift=-3.1cm]current page.north west) {\inserttitle};
+    \node[text=DuneTextMuted,font=\large,anchor=west,align=left,text width=8cm,inner sep=0pt]
+      at ([xshift=7.2cm,yshift=-4.65cm]current page.north west) {\insertsubtitle};
+    \node[text=DuneText,font=\large\bfseries,anchor=west,inner sep=0pt]
+      at ([xshift=7.2cm,yshift=-6.5cm]current page.north west) {\insertauthor};
+    \node[text=DuneTextMuted,font=\normalsize,anchor=west,inner sep=0pt]
+      at ([xshift=7.2cm,yshift=-7.15cm]current page.north west) {\insertdate};
+  \end{tikzpicture}%
+}
+
+\newcommand{\DpsSectionTransition}[1]{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[inner sep=0pt]
+        at ([xshift=-4cm]current page.center)
+        {\includegraphics[width=5.2cm,trim=2bp 2bp 2bp 2bp,clip]{\DuneLogoPath/DUNElogo_gray.pdf}};
+      \node[text=DuneText,font=\bfseries\fontsize{30}{36}\selectfont,inner sep=0pt]
+        at ([xshift=2cm]current page.center) {#1};
+    \end{tikzpicture}
+  \end{frame}%
+}
+\newcommand{\DpsDetectorTransition}{\DpsSectionTransition{Detector}}
+\newcommand{\DpsBackupsTransition}{\DpsSectionTransition{Backups}}

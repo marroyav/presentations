@@ -1,0 +1,48 @@
+{
+  "question": "Slide 6: space for added I/O and potential VD module additions",
+  "created_at": "2026-10-27T21:08:52.789299+00:00",
+  "status": "Estimate; reviewer not assigned",
+  "source_commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+  "dirty_state": [
+    " M Makefile",
+    " M README.md",
+    "?? decks/dps_integration_status_oct2026/",
+    "?? decks/ground_shakes_oct2026/",
+    "?? decks/pds_calibration_daq_oct2026/",
+    "?? decks/pds_data_selection_oct2026/",
+    "?? decks/pds_readout_oct2026/",
+    "?? decks/pds_ta_run45392_oct2026/",
+    "?? decks/sc_simulation_results_oct2026/",
+    "?? reports/"
+  ],
+  "tracked_diff_sha256": "b58927e84d55107fdbab1e446a0e12fe3a80f6903a77a8dc739ecb5d17894b92",
+  "host": "debian",
+  "python": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]",
+  "run_path": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/io-capacity-20261027",
+  "command": "python3 /home/arroyave/work/presentations/decks/dps_integration_status_oct2026/io-capacity-20261027/calculate.py",
+  "inputs_sha256": {
+    "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/CE_Interlock_Parts_List.xlsx": "c0f0605fbb6d4d7ed87081235b179f665db732dde3f890d71967da98600476bd",
+    "/home/arroyave/work/racks/sources/rack-estimates/FD2_Rack_Estimates_May_2025_TMS.xlsx": "ce887de4442c46f611c1dd2d72688bc7ec80033612ec40604bcdfef430f2706b",
+    "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/F10xxxxxx-Prelim_-_DDSS_Controls.pdf": "b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c",
+    "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/DDSS_Controls_Power_Analysis.xlsx": "7bb776e6b5f36948a8716f556104056f4b9dc63f52bb4f5a888ee5f76fc509e4",
+    "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/io-capacity-20261027/calculate.py": "f07f13b1292683cd13f29056bb36a6c2572b9c92455c172716f7dd518c96eaf2",
+    "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/io-capacity-20261027/assessment.txt": "55809f4bd2a3c38111525d7fbbbc9e2cc6b32823abde75dd8b66ab8aeb98aaf1"
+  },
+  "outputs_sha256": {
+    "calculation.json": "1caaae200a63beadf8bbfc38a040024124ba10f5935c5cca4fb962950771ef4b",
+    "module-additions.csv": "c2edbe7b383ed32cf3d3d6976f4aa8c9a9425a3e3339fe77fbd76d55ec739a7e"
+  },
+  "acceptance": [
+    "Workbook rack ranges and allocations reproduced",
+    "VD delta totals 9 modules/130 mm per auxiliary group",
+    "PD option and E-bus additions recorded separately",
+    "No network tag counted as a physical I/O terminal"
+  ],
+  "result": "All arithmetic assertions passed",
+  "limits": [
+    "No installed-panel measurements",
+    "No new approved VD panel layout or BOM",
+    "Typical E-bus currents do not qualify power or timing performance",
+    "Facility hardwired channel count is not fixed by the current matrix"
+  ]
+}

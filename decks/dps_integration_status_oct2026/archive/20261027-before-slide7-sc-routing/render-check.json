@@ -1,0 +1,11 @@
+{
+  "revision": "2026-10-27 PLC diagrams",
+  "pages": 19,
+  "changed_slides": [
+    4,
+    7
+  ],
+  "overfull_boxes": 0,
+  "visual_review": "Final slides 4 and 7 rendered and inspected at 1700 pixels. Other slide source bodies match the preceding revision.",
+  "verification": "verification-20261027-plc-diagrams.json"
+}

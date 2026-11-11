@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-11-10T21:06:27.501598+00:00",
+  "request": "Add a Backups transition after slide 26.",
+  "pre_change_archive": "archive/20261110T210551Z-before-backups-transition",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "exit_code": 0,
+  "build_evidence": "verification-20261110T210551Z-backups-transition-evidence.json",
+  "checks": {
+    "slides_before": 42,
+    "slides_after": 43,
+    "new_transition_slide": 27,
+    "new_transition_text": "Backups",
+    "all_existing_slide_bodies_retained": true,
+    "responsibilities_first_backup_slide": 28,
+    "transition_footer_blank": true,
+    "tex_layout_warnings": [],
+    "source_audit_errors": [],
+    "source_audit_advisories": []
+  },
+  "visual_review": {
+    "reviewer": "Codex; no human approval recorded",
+    "slide": 27,
+    "scale_pixels": 1400,
+    "result": "Backups transition matches the Detector transition: grey DUNE on the left, text on the right, no footer."
+  },
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/main.tex": "43d5cac27db63dcd74a9fbb52e972cf5b536d61a4cadb4d0de7c63e53671e48b",
+    "decks/dps_integration_status_white_nov2026/deck-style.tex": "712115e2df2f13952afeea5fc92bff6a3c95962c6931352149742042bab3aff3",
+    "decks/dps_integration_status_white_nov2026/README.md": "77fadeac0e37b0e69ac48f2eb700d1ac51040f8a219c7fc90798233367c67e47",
+    "decks/dps_integration_status_white_nov2026/sources.json": "ea90172eb6376fa63384c17196a87a4cc114d4a23b2b273bf42f91a4a56a68be",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "475ea1e260066f529f665a948c59d9b099e2eed786c99980de53f72293ae4ee0",
+    "decks/dps_integration_status_white_nov2026/backup-slides.tex": "032517b11f9ebfd8d4f51c5873cdac69d462b03a21a95325e4fdf4fc5b556f5f"
+  },
+  "output_sha256": {
+    "main.pdf": "97fa2d35ca1f162b746ee9166d92520b9066698af43a433b4c53826a4d94d551",
+    "main.txt": "f551f3a860e237cbf2709f2047471fa00438eae7f59185a964c16af09bc9b60b",
+    "review/slide-27.png": "48b098d51d3f864ceebfeb9c82b72472c747febe29f2a01dc5f1460f3a2ac24e",
+    "review/contact-25.png": "7fa5ae84d5236fdd9a0ad17e2309f95e21cd5be3449abed83252729c94b12e0d",
+    "review/slide-index.csv": "ff924443c04bd6eba3e11c7ae332786224c169f96f5f098b82c0d651e781ddbf"
+  }
+}

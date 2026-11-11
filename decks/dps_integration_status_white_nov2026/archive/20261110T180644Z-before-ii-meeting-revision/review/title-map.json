@@ -1,0 +1,177 @@
+[
+  {
+    "slide": 1,
+    "before": "Definitions and responsibilities",
+    "after": "DPS protects equipment; SC operates and records"
+  },
+  {
+    "slide": 2,
+    "before": "How the systems connect",
+    "after": "Facility inputs reach DPS through slow controls"
+  },
+  {
+    "slide": 3,
+    "before": "FFDG BMS: the building-services interface",
+    "after": "The FFDG BMS connection needs an API licence"
+  },
+  {
+    "slide": 4,
+    "before": "SDSTA BMS: survey and interface status",
+    "after": "The SDSTA interface needs a hardware survey"
+  },
+  {
+    "slide": 5,
+    "before": "Cryogenics: one system to DUNE",
+    "after": "Cryogenics presents one system to DUNE"
+  },
+  {
+    "slide": 6,
+    "before": "Use the interlock matrix to review each system",
+    "after": "Trace each interlock from its source to the response"
+  },
+  {
+    "slide": 7,
+    "before": "DPS logic: allow, trip and recover",
+    "after": "A trip removes the permit; recovery needs a new request"
+  },
+  {
+    "slide": 8,
+    "before": "Detector",
+    "after": "Detector"
+  },
+  {
+    "slide": 9,
+    "before": "BDE: the existing bottom-drift design",
+    "after": "Ten BDE groups use the existing bottom-drift design"
+  },
+  {
+    "slide": 10,
+    "before": "BDE trip example: loss of fan cooling",
+    "after": "A cooling fault removes power from the affected crate"
+  },
+  {
+    "slide": 11,
+    "before": "PDS DAPHNE: bias control, power and DAQ",
+    "after": "SC carries DAPHNE bias requests and status"
+  },
+  {
+    "slide": 12,
+    "before": "Power over fibre: monitor and switch off locally",
+    "after": "DPS switches PoF power through the PDU"
+  },
+  {
+    "slide": 13,
+    "before": "High voltage: drift and detector bias",
+    "after": "Drift HV and bias supplies have separate inhibit paths"
+  },
+  {
+    "slide": 14,
+    "before": "CalCI: temperature measurements",
+    "after": "Trace each protection input to a temperature sensor"
+  },
+  {
+    "slide": 15,
+    "before": "CalCI: ionization lasers",
+    "after": "Proposed laser rules block conflicting PDS requests"
+  },
+  {
+    "slide": 16,
+    "before": "CalCI: purity monitors",
+    "after": "The purity-monitor inhibit rule still needs agreement"
+  },
+  {
+    "slide": 17,
+    "before": "Rack infrastructure: shared protection",
+    "after": "Use rack sensors and PDUs for shared protection"
+  },
+  {
+    "slide": 18,
+    "before": "Test the complete protection path",
+    "after": "Measure the full path from fault to confirmed shutdown"
+  },
+  {
+    "slide": 19,
+    "before": "Hardware review and procurement: June 2027",
+    "after": "Prepare the hardware review for June 2027"
+  },
+  {
+    "slide": 20,
+    "before": "Who does the work",
+    "after": "Agree responsibility and control-engineering support"
+  },
+  {
+    "slide": 21,
+    "before": "BDE reference: panels and operator screens",
+    "after": "Existing panels and screens provide the BDE reference"
+  },
+  {
+    "slide": 22,
+    "before": "BDE reference: the cooling-trip connections",
+    "after": "The fan trip removes the PL506 channel permit"
+  },
+  {
+    "slide": 23,
+    "before": "DAPHNE reference: control and monitoring services",
+    "after": "DAQ CCM and Hermes use distinct DAPHNE services"
+  },
+  {
+    "slide": 24,
+    "before": "VD rack space and DPS allocation",
+    "after": "Rack space is not a count of spare I/O terminals"
+  },
+  {
+    "slide": 25,
+    "before": "Bias-panel draft: two DIN rails per rack",
+    "after": "The bias draft provides 1,440 outputs for review"
+  },
+  {
+    "slide": 26,
+    "before": "VD power budget: component loads",
+    "after": "Supply capacity differs from expected power use"
+  },
+  {
+    "slide": 27,
+    "before": "Rack protection: reference hardware",
+    "after": "Map each rack package against the existing allowance"
+  },
+  {
+    "slide": 28,
+    "before": "Local PDU trips and recovery",
+    "after": "Local PDU trips need deliberate power restoration"
+  },
+  {
+    "slide": 29,
+    "before": "Other VD subsystem connections",
+    "after": "Keep subsystem quantities separate from crate totals"
+  },
+  {
+    "slide": 30,
+    "before": "BMS survey: 20 panel symbols in the drawing",
+    "after": "Survey the 20 panel references to find installed hardware"
+  },
+  {
+    "slide": 31,
+    "before": "VD rack inventory: May 2025 allocation",
+    "after": "The workbook allocates 76 mezzanine rack positions"
+  },
+  {
+    "slide": 32,
+    "before": "Device hierarchy: controls, facilities and racks",
+    "after": "Count shared controls and rack devices once"
+  },
+  {
+    "slide": 33,
+    "before": "Device hierarchy: readout electronics and HV",
+    "after": "The 336-crate total spans TDE and DAQ/timing"
+  },
+  {
+    "slide": 34,
+    "before": "Device hierarchy: PDS and DAQ / timing",
+    "after": "Keep PDS control and DAQ data links distinct"
+  },
+  {
+    "slide": 35,
+    "before": "Device hierarchy: calibration and instrumentation",
+    "after": "Instrument counts and interfaces still need allocation"
+  }
+]

@@ -1,0 +1,151 @@
+{
+  "status": "Engineering estimate; not reviewed or approved for procurement",
+  "scope": "VD; rebase the historical six-WIEC reference to ten eight-WIEC auxiliary groups",
+  "aux_racks": 10,
+  "existing_dps_allocation_U_per_aux": 12,
+  "unassigned_contiguous_aux_rack_positions": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "unassigned_contiguous_bias_rack_positions": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "bias_rail_occupied_length_mm_from_workbook": 337,
+  "module_additions": [
+    {
+      "model": "EL1004",
+      "function": "Fan feedback",
+      "source_cell": "Interlocks M&S!C29",
+      "six_wiec_count": 6,
+      "eight_wiec_count": 8,
+      "added_per_aux": 2,
+      "added_for_ten_aux": 20,
+      "channels_per_module": 4,
+      "added_aligned_width_mm": 24,
+      "added_typical_ebus_mA": 180
+    },
+    {
+      "model": "EL2034",
+      "function": "Fan power outputs",
+      "source_cell": "Interlocks M&S!C28",
+      "six_wiec_count": 6,
+      "eight_wiec_count": 8,
+      "added_per_aux": 2,
+      "added_for_ten_aux": 20,
+      "channels_per_module": 4,
+      "added_aligned_width_mm": 24,
+      "added_typical_ebus_mA": 240
+    },
+    {
+      "model": "EL3202-0010",
+      "function": "RTD inputs",
+      "source_cell": "Interlocks M&S!C20",
+      "six_wiec_count": 6,
+      "eight_wiec_count": 8,
+      "added_per_aux": 2,
+      "added_for_ten_aux": 20,
+      "channels_per_module": 2,
+      "added_aligned_width_mm": 24,
+      "added_typical_ebus_mA": 380
+    },
+    {
+      "model": "EL2878-0005",
+      "function": "Heater outputs",
+      "source_cell": "Interlocks M&S!C24",
+      "six_wiec_count": 3,
+      "eight_wiec_count": 4,
+      "added_per_aux": 1,
+      "added_for_ten_aux": 10,
+      "channels_per_module": 8,
+      "added_aligned_width_mm": 12,
+      "added_typical_ebus_mA": 100
+    },
+    {
+      "model": "EK1521",
+      "function": "PTC fibre links",
+      "source_cell": "Interlocks M&S!C25",
+      "six_wiec_count": 6,
+      "eight_wiec_count": 8,
+      "added_per_aux": 2,
+      "added_for_ten_aux": 20,
+      "channels_per_module": 1,
+      "added_aligned_width_mm": 46,
+      "added_typical_ebus_mA": 700
+    }
+  ],
+  "eight_wiec_rebase": {
+    "added_modules_per_aux": 9,
+    "added_modules_ten_aux": 90,
+    "added_aligned_width_mm_per_aux": 130
+  },
+  "pd_flange_option_from_workbook": {
+    "source": "BDE Aux Rack!K20:K21; this note inherits the earlier design assumptions",
+    "components": {
+      "EL3202": 3,
+      "EL2878": 2,
+      "EL9100": 1
+    },
+    "modules_per_aux": 6,
+    "modules_ten_aux": 60,
+    "aligned_width_mm_per_aux": 72
+  },
+  "combined_allowance_before_extra_ebus_feed": {
+    "modules_per_aux": 15,
+    "modules_ten_aux": 150,
+    "aligned_width_mm_per_aux": 202
+  },
+  "ebus_check": {
+    "scope": "Signal terminals on the first bank only; excludes field loads and optical-link bank",
+    "two_sections_capacity_mA": 4000,
+    "eight_wiec_signal_terminals_typical_mA": 3860,
+    "eight_wiec_plus_pd_option_typical_mA": 4630,
+    "extra_EL9410_for_combined_case_minimum": 1,
+    "combined_modules_including_extra_feed_per_aux": 16,
+    "combined_modules_including_extra_feed_ten_aux": 160,
+    "combined_added_aligned_width_including_extra_feed_mm_per_aux": 214,
+    "limit": "Typical-current arithmetic. Partition and actual peak currents must satisfy 2 A per section; field power is separate."
+  },
+  "network_connections": {
+    "extra_discrete_or_analog_terminals_for_snmp_or_opcua_alone": 0,
+    "note": "PDU, LV-supply and subsystem software connections do not map one-to-one to physical I/O terminals. Hardwired interfaces are additional."
+  },
+  "central_panel_drawing_estimate": {
+    "basis": "Manual reading of page 2 rendered at 3000 pixels; approximately 123-pixel gap over 681-pixel 19-inch panel width",
+    "nominal_gap_mm": 87.2,
+    "cx5140_width_increase_allowance_mm": 20,
+    "estimated_gap_after_cpu_change_mm": 67.2,
+    "geometric_12mm_module_count_after_cpu_change": 5,
+    "limit": "Scaled drawing estimate, not a dimensioned spare-space allocation; excludes wiring and service clearances."
+  },
+  "proposed_space_reservation": {
+    "aux_extension_U_per_affected_rack": 4,
+    "status": "Proposed layout allowance; not a completed panel design",
+    "note": "A separate extension panel gives room for the VD rebase and the optional PD hardware without relying on the crowded 2020 reference rails."
+  }
+}

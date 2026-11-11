@@ -1,0 +1,49 @@
+{
+  "reason": "Before Manuel system-by-system sequence, 27 October 2026",
+  "files": [
+    {
+      "file": "main.tex",
+      "sha256": "cd5c5fd4931888eefaa9a36cf1a8f103c51dd355abbf8d2e8377dc25f54dafb9"
+    },
+    {
+      "file": "backup-slides.tex",
+      "sha256": "f1ac02f4fb1c9b045a7408b6a629af49644d5ade7b577e295cf884840ee0dcd3"
+    },
+    {
+      "file": "main.pdf",
+      "sha256": "8d2716896b26e63af39f66bc93423b3396606fd6d8564df129dba0d09f877d2e"
+    },
+    {
+      "file": "main.txt",
+      "sha256": "1f2faef8c9a1f6b95a1ddba23dabbf82d1605a3d3ebf98f0954166576bcb77c4"
+    },
+    {
+      "file": "sources.json",
+      "sha256": "16fb5a84fba9867704849c87ee4790549ed7e4e3f29a21291e325dadc2a9fc70"
+    },
+    {
+      "file": "sources-and-notes.txt",
+      "sha256": "65d5ae7173fb5cec7bcc2a532d6e088881d720b45bdd3c57eed8099b937e6a56"
+    },
+    {
+      "file": "source-review.txt",
+      "sha256": "c6e587db6562698ce30a18abc866bb74c47e4d2f7f4cae1970c93d50698fa780"
+    },
+    {
+      "file": "architecture-inputs-20261027.txt",
+      "sha256": "63a92a50402fdd4409a34b8efac564e64d98c4b2ddeeda3eaa139db30a807b02"
+    },
+    {
+      "file": "README.md",
+      "sha256": "10b314de4c384f5da2fc72fe15a7bfc350c13bf6751a7552642a72ceba97482c"
+    },
+    {
+      "file": "render-check.json",
+      "sha256": "c9cc5eaae0c76fd43bb9f76064bfa717d6c4b697cb421d3d9fd18a40ca78f6f4"
+    },
+    {
+      "file": "verification-latest.txt",
+      "sha256": "333bbd717f6858c03c334320a1fbdc19ad40a8b36546cb24f2a098547c3f01d4"
+    }
+  ]
+}

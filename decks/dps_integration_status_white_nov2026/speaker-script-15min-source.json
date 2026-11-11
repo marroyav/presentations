@@ -1,0 +1,217 @@
+{
+  "created_at": "2026-11-11T19:32:58.142353+00:00",
+  "purpose": "Expanded, slide-matched speaking script for an approximately fifteen-minute DPS talk",
+  "script": "speaker-script-15min.txt",
+  "spoken_words_main_slides": 1755,
+  "target_duration_seconds": 900,
+  "timing_method": "Words per slide weighted across 844 seconds of speech plus 2 seconds per slide for pauses/changes; cues rounded to 5 seconds. Rehearsal estimates, not measured delivery.",
+  "implied_speech_rate_wpm": 124.8,
+  "schedule": [
+    {
+      "slide": 1,
+      "title": "VD Detector Protection System",
+      "spoken_words": 54,
+      "target_start_seconds": 0,
+      "target_end_seconds": 30
+    },
+    {
+      "slide": 2,
+      "title": "The hardware connection list is still growing",
+      "spoken_words": 59,
+      "target_start_seconds": 30,
+      "target_end_seconds": 60
+    },
+    {
+      "slide": 3,
+      "title": "DPS protects equipment; SC operates and records",
+      "spoken_words": 60,
+      "target_start_seconds": 60,
+      "target_end_seconds": 90
+    },
+    {
+      "slide": 4,
+      "title": "Facility inputs reach DPS through slow controls",
+      "spoken_words": 66,
+      "target_start_seconds": 90,
+      "target_end_seconds": 125
+    },
+    {
+      "slide": 5,
+      "title": "The FFDG BMS connection needs an API licence",
+      "spoken_words": 58,
+      "target_start_seconds": 125,
+      "target_end_seconds": 155
+    },
+    {
+      "slide": 6,
+      "title": "How FFDG BSI status can support detector protection",
+      "spoken_words": 56,
+      "target_start_seconds": 155,
+      "target_end_seconds": 180
+    },
+    {
+      "slide": 7,
+      "title": "The SDSTA SCADA interface needs a hardware survey",
+      "spoken_words": 55,
+      "target_start_seconds": 180,
+      "target_end_seconds": 210
+    },
+    {
+      "slide": 8,
+      "title": "SDSTA proposes a restricted SCADA status interface",
+      "spoken_words": 57,
+      "target_start_seconds": 210,
+      "target_end_seconds": 240
+    },
+    {
+      "slide": 9,
+      "title": "Cryogenics presents one system to DUNE",
+      "spoken_words": 63,
+      "target_start_seconds": 240,
+      "target_end_seconds": 270
+    },
+    {
+      "slide": 10,
+      "title": "Trace each interlock from its source to the response",
+      "spoken_words": 64,
+      "target_start_seconds": 270,
+      "target_end_seconds": 305
+    },
+    {
+      "slide": 11,
+      "title": "Each group must identify its hardware connections",
+      "spoken_words": 65,
+      "target_start_seconds": 305,
+      "target_end_seconds": 340
+    },
+    {
+      "slide": 12,
+      "title": "A trip removes the permit; recovery needs a new request",
+      "spoken_words": 67,
+      "target_start_seconds": 340,
+      "target_end_seconds": 370
+    },
+    {
+      "slide": 13,
+      "title": "Build on the Batavia and SD DPS test setups",
+      "spoken_words": 89,
+      "target_start_seconds": 370,
+      "target_end_seconds": 415
+    },
+    {
+      "slide": 14,
+      "title": "Detector",
+      "spoken_words": 15,
+      "target_start_seconds": 415,
+      "target_end_seconds": 425
+    },
+    {
+      "slide": 15,
+      "title": "Ten BDE groups use the existing bottom-drift design",
+      "spoken_words": 63,
+      "target_start_seconds": 425,
+      "target_end_seconds": 460
+    },
+    {
+      "slide": 16,
+      "title": "Extend the BDE approach into a full DPS concept",
+      "spoken_words": 66,
+      "target_start_seconds": 460,
+      "target_end_seconds": 490
+    },
+    {
+      "slide": 17,
+      "title": "A cooling fault removes power from the affected crate",
+      "spoken_words": 65,
+      "target_start_seconds": 490,
+      "target_end_seconds": 525
+    },
+    {
+      "slide": 18,
+      "title": "SC and DAQ use distinct DAPHNE service paths",
+      "spoken_words": 69,
+      "target_start_seconds": 525,
+      "target_end_seconds": 560
+    },
+    {
+      "slide": 19,
+      "title": "DPS switches PoF power through the PDU",
+      "spoken_words": 68,
+      "target_start_seconds": 560,
+      "target_end_seconds": 595
+    },
+    {
+      "slide": 20,
+      "title": "LV supplies power DAPHNE and PDS calibration boxes",
+      "spoken_words": 75,
+      "target_start_seconds": 595,
+      "target_end_seconds": 635
+    },
+    {
+      "slide": 21,
+      "title": "Drift HV and bias supplies have separate inhibit paths",
+      "spoken_words": 66,
+      "target_start_seconds": 635,
+      "target_end_seconds": 665
+    },
+    {
+      "slide": 22,
+      "title": "Trace each protection input to a temperature sensor",
+      "spoken_words": 61,
+      "target_start_seconds": 665,
+      "target_end_seconds": 700
+    },
+    {
+      "slide": 23,
+      "title": "Proposed laser rules block conflicting PDS requests",
+      "spoken_words": 63,
+      "target_start_seconds": 700,
+      "target_end_seconds": 730
+    },
+    {
+      "slide": 24,
+      "title": "The purity-monitor inhibit rule still needs agreement",
+      "spoken_words": 68,
+      "target_start_seconds": 730,
+      "target_end_seconds": 765
+    },
+    {
+      "slide": 25,
+      "title": "Use rack sensors and PDUs for shared protection",
+      "spoken_words": 66,
+      "target_start_seconds": 765,
+      "target_end_seconds": 800
+    },
+    {
+      "slide": 26,
+      "title": "Measure the full path from fault to confirmed shutdown",
+      "spoken_words": 71,
+      "target_start_seconds": 800,
+      "target_end_seconds": 835
+    },
+    {
+      "slide": 27,
+      "title": "Collect the inputs, then review the full DPS concept",
+      "spoken_words": 62,
+      "target_start_seconds": 835,
+      "target_end_seconds": 865
+    },
+    {
+      "slide": 28,
+      "title": "Prepare the hardware review",
+      "spoken_words": 64,
+      "target_start_seconds": 865,
+      "target_end_seconds": 900
+    }
+  ],
+  "backup_slides": "29–45; questions only",
+  "sources": {
+    "main.pdf": "c6b6813dfd2a2ef4a733eaed4fd144b95653ffdcb70f03340371fd8053171557",
+    "main.tex": "1deb3e4ce1bd62c9e515caa43526b88e0cf982201fb62824a18491f1c6d5b421",
+    "meeting-updates.tex": "405ec442afdfd3e3a0906a10c6cce985144d028688418174654a4fd7a5ef08d6",
+    "review/slide-index.csv": "de0e0a2246a9429311b069c172e177ffb07cef916ab229564c62fcc62f1e7d83"
+  },
+  "short_script_sha256": "8881568fbebe1939b02ceb31fc91747a3c18c864279b7e4ccfdf858c12bb1743",
+  "script_sha256": "30d6f3cbeaa435c9c0804ad8bce3bb4a2c5920a01c36c1e71e7e09784466a202",
+  "review": "Drafted from the current 45-page exported PDF and slide index. Architecture proposals, reported Batavia progress, local SD inventory, 34-feed PDS LV scope, unresolved trip rules and undated milestones retained. No presentation slides changed."
+}

@@ -1,0 +1,63 @@
+{
+  "created_utc": "2026-10-28T23:30:03.125156+00:00",
+  "question": "Where does the recorded APA2 PDS response appear and how does its distribution change?",
+  "command": "python3 build.py",
+  "cwd": "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial",
+  "host": "debian",
+  "python": "3.13.5",
+  "numpy": "2.2.4",
+  "matplotlib": "3.10.1+dfsg1",
+  "git_head": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+  "git_status": " M Makefile\n M README.md\n?? decks/dps_integration_status_oct2026/\n?? decks/ground_shakes_oct2026/\n?? decks/pds_calibration_daq_oct2026/\n?? decks/pds_data_selection_oct2026/\n?? decks/pds_readout_oct2026/\n?? decks/pds_ta_run45392_oct2026/\n?? decks/sc_simulation_results_oct2026/\n?? reports/\n",
+  "input_sha256": {
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/build.py": "b9a2c5ec55d66558c68130ba31d0f46d1b29b9108ba48a3e25e09fabee65bb10",
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/input-snapshots.json": "a2367112f8c53e82875586c7b17971bc736bdf131a96e87d1329f897d26ace81",
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/input-time-series.npz": "300e40643f78129c7bf0fbd90a4d41d7649f132a3dcdc42ad82e9442d22e5c94",
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/input-time-series-source.json": "7aad2eb01c8abcad281f70bc722f9a090e9fcc3f683655c304d72de909dd7eab"
+  },
+  "output_sha256": {
+    "run32731_event52_physical-map.pdf": "d63aca1e54b099edfd6636f181cb618ff29dd9d1d0712bcc1813632279fb40e5",
+    "run32731_event52_physical-map.png": "464d4a715b96bdb025706feffb53b9cfd917669e3982db012da65d4f73476a3f",
+    "run32731_event52_section-bars.pdf": "102fba2477c688e0038ead2fd6ee3ee5bb8905993f6882952ef4bcd25059de9a",
+    "run32731_event52_section-bars.png": "fe5274ff4739609184838edb2fa0794b12bc618390ca80e83c46b74f648a075e",
+    "run32731_event52_section-time.pdf": "988e12674b11ed7efa1768a3a77a3846db866ce7b55cc06b2a733127d4655fe4",
+    "run32731_event52_section-time.png": "b84d90d5094771cd5596b26ef8cff2b9d1a5ccdd4c56739c60eabd52da361078",
+    "run32731_event33_physical-map.pdf": "64d3b95c29e9534ccf20eff5c5f491be85b6768fe53c3b1ce6c07893aad97fe1",
+    "run32731_event33_physical-map.png": "ac91290db81db3dfd3a1271c718389f98d93a5be6ecd4574ee93be51b311862f",
+    "run32731_event33_section-bars.pdf": "54f3eb206a6e206fd4dfc8eb593b4ca0781a4ce40a493649d3932b61202ce74f",
+    "run32731_event33_section-bars.png": "42714534b2ce9db33027ba8661201b12dcd3ec3e4857ab29aecbf4d644a6dc09",
+    "run32731_event33_section-time.pdf": "9d7939bf8663f43c73185621f97c8f27849dd9fa2ad0ab9f9d40be66690111fa",
+    "run32731_event33_section-time.png": "de0154095416991bced1d284bf8d40df72d53342c06a866187d1bb389457d26a",
+    "apa2-pds-sections.pdf": "174f8f505e6f4dc992bf03d45638fbbffbcffb744e1a152a9e3e0f2dfd53f3bf"
+  },
+  "checks": [
+    {
+      "run": 32731,
+      "event": 52,
+      "missing_sections_remain_missing": true,
+      "disconnected_M8_excluded_from_section_values": true
+    },
+    {
+      "run": 32731,
+      "event": 33,
+      "missing_sections_remain_missing": true,
+      "disconnected_M8_excluded_from_section_values": true
+    }
+  ],
+  "metric": "Maximum absolute baseline-subtracted recorded nonrail connected-channel median per physical module. Not a sum, integral or photon yield.",
+  "selection": "Two existing user-selected APA2 examples; six existing snapshots per event plus existing 512 ns time series.",
+  "limits": [
+    "Historical slide-traced channel grid, not surveyed detector coordinates.",
+    "Physical mapping established here for109APA2andOctober104APA1only; other endpoints shown in electronics order.",
+    "Self-triggered gaps/selection; absent channels do not imply no light.",
+    "Shared fixed channel pedestal can be uncertain; its provenance retained perchannel.",
+    "512ns snapshot sampling can miss a narrow peak or channels with timing offsets.",
+    "ADC rail flags indicate codes0/16383, not proof of analog saturation; rails can reflect digitization faults.",
+    "No calibrated gains/photoelectrons; amplitude cannot be equated with light energy.",
+    "No optical-origin or source-localization claim from spatial profiles alone.",
+    "Disconnected-input status comes from user plus slide23, not independently read engineering report.",
+    "Section maxima depend on channel coverage; the companion coverage panel is required.",
+    "No propagation direction or source location is fitted. No across-event spatial population claim."
+  ],
+  "reviewer": null
+}

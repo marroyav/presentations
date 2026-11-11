@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-27T19:45:47.675007+00:00",
+  "revision": "VD narrative rewrite",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_exit_code": 0,
+  "pages": 17,
+  "main_slides": 8,
+  "backup_slides": 9,
+  "source_errors": [],
+  "advisories": [],
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "source_files_checked": 17,
+  "visual_review": "All 17 rendered pages inspected; final edits on pages 4, 6, 7, 9, 14 and 15 rendered and inspected again. No clipping or overlap observed.",
+  "sha256": {
+    "main.tex": "a90baf713ece5065ed05b42677ff2a41b58d5281b5aa6b3b6bda41040b22e6b1",
+    "backup-slides.tex": "90e4509334baa605ddb866a6d3cd3d4911f4c5b1d9fa43868e4ad9c5783f80d3",
+    "main.pdf": "a0251eca3fa5838c87d2af86b3f49c232f085974183362b52e41c7a715715a7e",
+    "main.txt": "ae7d12748459e24909b7b35ea379485c4479c76b620726b0dbe3a602618c1cd8",
+    "README.md": "12adccfdf55d5d5cbb6e3c23bff65cee315f398314a8cd6c1ea22e4834f41f2c",
+    "sources.json": "194139e1ceb9694f82bdbd4e5f4c5a20f5178047041e03f79bbd726b14223d4c",
+    "sources-and-notes.txt": "c0db175d2887d912a26e9f58be32cf6ebb780aff4f9407a7d9fb35fc52b6f2b7",
+    "source-review.txt": "7b5728268512c71dde1a41de59d9928f5eeb6c725455dda86af0ddc65dd503de"
+  },
+  "limits": [
+    "Presentation and source review only; no new hardware timing or installed-equipment validation.",
+    "Local source revisions used; no fresh latest-revision check.",
+    "Auxiliary power uses explicitly stated six-to-eight-WIEC linear scaling; no complete VD power qualification.",
+    "CUC location, added interfaces and team assignments remain proposals."
+  ]
+}

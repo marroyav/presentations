@@ -1,0 +1,17 @@
+% Local laser-safety interlocks remain independent of SC/DPS requests.
+\begin{tikzpicture}
+  \node[dps node] (sc) at (-5,0) {SC / Ignition};
+  \node[dps node,text width=3.2cm] (cib) at (0,0) {Calibration interface\\board (CIB)};
+  \node[dps load] (laser) at (5,0) {Ionization-laser\\station};
+  \node[dps controller] (dps) at (-5,-3) {DPS PLC};
+  \node[dps node,text width=3.2cm] (daq) at (0,-3) {DAQ\\Calibration requests};
+  \node[dps node] (safety) at (5,-3) {Local laser\\safety interlocks};
+
+  \coordinate (sc-requests) at ([xshift=8mm]sc.south);
+  \draw[dps both] (sc.east) -- node[dps label,above] {OPC UA} (cib.west);
+  \draw[dps both] (cib.east) -- (laser.west);
+  \draw[dps both] (dps.north) -- node[dps label,right,pos=0.3] {OPC UA} (sc.south);
+  \draw[dps both] (daq.north) -- (0,-1.55)
+    -- node[dps label,above] {Requests / status} (-4.2,-1.55) -- (sc-requests);
+  \draw[dps flow] (safety.north) -- (laser.south);
+\end{tikzpicture}

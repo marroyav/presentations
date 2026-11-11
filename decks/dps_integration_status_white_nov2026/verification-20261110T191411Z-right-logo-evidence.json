@@ -1,0 +1,62 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-10T19:14:27.497859+00:00",
+  "task": "dps-right-logo-20261110",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "6c09a21ce78c4912753270c35f0ae1c4d9e6dd9c",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 30,
+    "tracked_diff_sha256": "86b3dcdabe5ec2aeadc5f5e59f469a2641e381c90ad00bef131065200aef8aef",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261110T191411Z-right-logo-build.log",
+      "sha256": "dfc90a98f2378d00c5b51b03c9fca49f82e795692de4eb34fb51cdcb501b264e"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "458db948a376b76a6c0344f6b1c8570b0cd7de04b6d5aa1cc58a61b2a3dcee89"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/deck-style.tex",
+      "sha256": "f0a8f35117bd710d00d5239bd9aaff947f83fc45a02df03dd79911e2ad2b995c"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "d0597b928504e5eb4d34422899d0fb0854e41600bb7d4d2d00ed3b5bca7c6ea1"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "736b130aa1ecf87c0c58ead0c0bdaba1d598c8e14beb487cdfb5bb1ce05275d3"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "b23a63863af28572694e22f918c115ba0905e638b3ec81adb64ddc6b7e3d81bb"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/beamerthemeDUNEProfessional.sty",
+      "sha256": "bc215c3cd376b01ed3169851922c095232468a6c9a8d22509e1e7047d7a8a98e"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/logos/DUNElogo_gray.pdf",
+      "sha256": "fc921d5b84aea693faa09f2573a84e6b66c3ae2a1c0041b4ad9771abde1fcd5e"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/templates/dune-professional/logos/FNAL-Logo-Black.pdf",
+      "sha256": "c966abfaf1ac66fa8e97d70a8676e7aa8b307adf31a81abb98baa0583b46f3cc"
+    }
+  ],
+  "limitations": "Presentation placement review only; no hardware verification or engineering approval."
+}

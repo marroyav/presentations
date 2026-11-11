@@ -38,3 +38,12 @@ make
 Graphviz sources live in `diagrams/*.dot.in`. Use only tokens from
 `templates/dune-professional/design-tokens.json`; `make diagrams` renders them
 to vector PDF.
+
+## Visual guidance
+
+This starter uses `\DuneUseWhite`: white slides, dark labels, and minimal
+furniture. The example plot uses constructed values and makes no measurement
+claim. Replace it with evidence from the owning analysis.
+
+Read the [plotting guide](../../docs/plotting-guide.md) and
+[diagram guide](../../docs/diagram-guide.md) before adding figures.

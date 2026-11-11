@@ -1,0 +1,14 @@
+{
+  "created_utc": "2026-10-28T22:25:34.641254+00:00",
+  "analysis_directory": "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028",
+  "analysis_validation": "/home/arroyave/work/ground-shake-data/analysis/pds-shake-timing-20261028/validation-20261028T222519634929Z.json",
+  "sha256": {
+    "figures/15-pds-to-shake-histogram.png": "bda2e32cc6117b2940a4b51f400b5b9bde9aa2b415e93eeef8546aab8e72a630",
+    "figures/15-pds-to-shake-histogram.pdf": "93832d3ddad4b9a4f313fd0f53cd2f12045c0e2202495502f8b08d2f2a9d4e62",
+    "evidence/pds-shake-analysis-validation.json": "580090795979f67c11a58dca219905f3e5b2c80a950b12bd7ccb0227a737d4d3",
+    "evidence/pds-shake-timing-analysis.py": "d4f699e4b43ed2c2cc2df37f173b0f9b5b1f28ac4a1f2e09143c75324aa07030",
+    "evidence/pds-shake-timing-results.json": "2276061dd5cb5fcabac4f8b279be4da378745c59e93ae9bf8a232c5a6fe5a125",
+    "evidence/pds-shake-event-times.csv": "f36c2d9a83781f1c8f4011fff6bd42eb330a164fcb3cc3b59c085080ae3ed655"
+  },
+  "scope": "New histogram from existing candidate and precursor data. Later wording edit leaves all event-level timing values unchanged."
+}

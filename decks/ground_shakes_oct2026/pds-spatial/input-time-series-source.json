@@ -1,0 +1,5 @@
+{
+  "path": "/home/arroyave/work/ground-shake-data/analysis/whole-event-spatial/native-and-binned-data.npz",
+  "sha256": "b5a532271436d623c59392957311cdeac093d1946a5ce99db8a064ca8aa0df3b",
+  "method": "Existing 512 ns channel medians, native-sample counts and any-rail flags. No raw decoding."
+}

@@ -3,12 +3,13 @@
 \makeatletter
 \input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
 \makeatother
+\DuneUseWhite
+\usetikzlibrary{plotmarks}
 
 \title{Presentation title}
 \subtitle{State the audience outcome in one clear sentence}
 \author{Presentation author}
 \date{Meeting or event -- \today}
-\newcommand{\mydate}{\today}
 \hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
 
 \begin{document}
@@ -18,111 +19,66 @@
 \end{frame}
 
 \begin{frame}{Tell people the answer first}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.59\textwidth}
-      \DuneBigStatement{IF THEY REMEMBER ONE THING}
-        {Make it one clear sentence.}
-        {Say what changed and why it matters. Everything else earns its place by helping people understand or act.}
-    \end{column}
-    \begin{column}{0.37\textwidth}
-      \DuneCompactNumberBlock{coral}{01}{What happened?}
-        {Use a plain verb: changed, passed, failed, or needs a decision.}
-      \smallskip
-      \DuneCompactNumberBlock{sky}{02}{Why should we care?}
-        {Give only the context people need to understand the consequence.}
-      \smallskip
-      \DuneCompactNumberBlock{paper}{03}{What do you need?}
-        {Name who acts and what done looks like.}
-    \end{column}
-  \end{columns}
+  \DuneBigStatement{THE RESULT}
+    {Make one claim the evidence supports.}
+    {Say what changed, why it matters, and what remains uncertain.}
+  \vspace{5mm}
+  Name the person who acts next and the result they need to produce.
 \end{frame}
 
-\DuneSectionPage{MAKE IT EASY TO FOLLOW}{Give the story a rhythm}
-  {Move between a clear claim, the evidence, a useful picture, and the decision.}
+\begin{frame}{Compare conditions on the same scale}
+  \centering
+  \begin{tikzpicture}[x=1.65cm,y=0.48cm,font=\small]
+    % Illustrative coordinates only; no measured performance is claimed.
+    \draw[DuneTextMuted] (0,0) -- (4.6,0);
+    \draw[DuneTextMuted] (0,0) -- (0,6.5);
+    \foreach \x in {0,1,2,3,4} {
+      \draw[DuneTextMuted] (\x,0) -- (\x,-0.12)
+        node[below,text=DuneText] {\x};
+    }
+    \foreach \y in {0,2,4,6} {
+      \draw[DuneTextMuted] (0,\y) -- (-0.06,\y)
+        node[left,text=DuneText] {\y};
+    }
+    \node[below,text=DuneText] at (2,-0.75) {Time (s)};
+    \node[above right,text=DuneText] at (0,6.6) {Response (arbitrary units)};
+    \draw[DuneText,line width=1pt] plot[mark=*,mark size=1.7pt]
+      coordinates {(0,1) (1,2) (2,3) (3,4) (4,5)};
+    \draw[DuneTextMuted,dashed,line width=1pt] plot[mark=square*,mark size=1.7pt]
+      coordinates {(0,1) (1,1.5) (2,2) (3,2.5) (4,3)};
+    \node[right,text=DuneText] at (4.1,5) {Condition A};
+    \node[right,text=DuneTextMuted] at (4.1,3) {Condition B};
+  \end{tikzpicture}
 
-\begin{frame}{Give the strongest evidence the most space}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.58\textwidth}
-      \DuneFixedColorBlock{sky}{4.9cm}{THE THING THAT CONVINCED YOU}
-        {Show the clearest proof}
-        {Use one measured result, comparison, or observed behavior.\par\medskip
-         Make it large enough to read from the back, then say what it changes.}
-    \end{column}
-    \begin{column}{0.38\textwidth}
-      \DuneColorBlock{paper}{ENOUGH CONTEXT}{What am I looking at?}
-        {Show the one dependency or limit people need to read the result correctly.}
-      \smallskip
-      \DuneColorBlock{coral}{WHAT WE DO NOT KNOW YET}{Be honest about the gap}
-        {Say what will answer the question and who will do that work.}
-    \end{column}
-  \end{columns}
+  \vspace{3mm}
+  {\small Illustrative data: two constructed series demonstrate shared axes,
+  direct labels, and distinct marks. Replace with sourced measurements.\par}
 \end{frame}
 
-\begin{frame}{Use a diagram when it makes the story simpler}
+\begin{frame}{Label each relationship where it appears}
   \centering
   \includegraphics[width=0.91\textwidth,height=0.61\textheight,keepaspectratio]{diagrams/system-context.pdf}
 
-  \vspace{1mm}
-  \DuneDiagramCaption{The audience should see the relationship first; the caption tells them why it matters.}
+  \vspace{2mm}
+  \DuneDiagramCaption{Illustrative release process: source requirements guide
+  the code; an independent test informs the release decision. This is not an
+  installed system or an agreed assignment of responsibility.}
 \end{frame}
 
-\begin{frame}{Put the choice—and the line between choices—on screen}
+\begin{frame}{Keep the evidence and its limits together}
   \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.48\textwidth}
-      \DuneFixedColorBlock{sky}{3.4cm}{WHAT THE EVIDENCE SUPPORTS}
-        {Here is what we know}
-        {Show the evidence and say where the conclusion still holds.}
+    \begin{column}{0.47\textwidth}
+      \textbf{What the evidence supports}\par\medskip
+      Give the observation, units, source, and conditions needed to read it.
     \end{column}
-    \begin{column}{0.48\textwidth}
-      \DuneFixedColorBlock{coral}{3.4cm}{WHAT COULD CHANGE OUR MINDS}
-        {Here is what remains open}
-        {Name the failure, trigger, or new evidence that would change the recommendation.}
+    \begin{column}{0.47\textwidth}
+      \textbf{What remains open}\par\medskip
+      State the uncertainty and the check that could change the conclusion.
     \end{column}
   \end{columns}
-
-  \smallskip
-  \DuneCompactColorBlock{paper}{CLOSE THE GAP}{Say who goes next}
-    {Name the person who will answer the open question and what answer will be enough.}
-\end{frame}
-
-\begin{frame}{Give the story a beginning, a middle, and an end}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.235\textwidth}
-      \DuneNumberBlock{paper}{01}{The point}
-        {Say the conclusion before the supporting detail.}
-    \end{column}
-    \begin{column}{0.235\textwidth}
-      \DuneNumberBlock{sky}{02}{What supports it}
-        {Show the measurement, system, or source that convinced you.}
-    \end{column}
-    \begin{column}{0.235\textwidth}
-      \DuneNumberBlock{sky}{03}{Where it stops}
-        {Be clear about the uncertainty, risk, or responsibility line.}
-    \end{column}
-    \begin{column}{0.235\textwidth}
-      \DuneNumberBlock{coral}{04}{What happens next}
-        {End with a person, an action, and what done looks like.}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{End by asking for one thing}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.36\textwidth}
-      \DuneFixedColorBlock{coral}{3.6cm}{MAKE IT EASY TO REPEAT}
-        {Ask for one concrete action}
-        {Choose, review, fund, schedule, or test the specific thing on screen.}
-    \end{column}
-    \begin{column}{0.60\textwidth}
-      \DuneBigStatement{WHO GOES NEXT?}
-        {Name the person and what done looks like.}
-        {A date helps. A result everyone can recognize is even better.}
-    \end{column}
-  \end{columns}
-
-  \smallskip
-  \DuneCompactColorBlock{paper}{THE LAST WORD}{Leave the room with the decision}
-    {Move implementation detail to backup slides or a companion document.}
+  \vspace{8mm}
+  \textbf{Next action}\par\medskip
+  Name the person, the action, and the result that will close the question.
 \end{frame}
 
 \end{document}

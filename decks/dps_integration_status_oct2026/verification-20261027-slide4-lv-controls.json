@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-27T20:56:22.694498+00:00",
+  "revision": "Slide 4: DPS control of both PDUs and LV power supplies",
+  "build_command": "make decks/dps_integration_status_oct2026/main.pdf",
+  "build_exit_code": 0,
+  "pages": 19,
+  "main_slides": 12,
+  "backup_slides": 7,
+  "changed_slides": [
+    4
+  ],
+  "source_errors": [],
+  "advisories": [
+    "main.tex + backup-slides.tex: 2 frame(s) exceed the source-density guide; review at projector size"
+  ],
+  "layout_errors": [],
+  "source_hash_mismatches": [],
+  "source_count": 20,
+  "visual_review": "Final slide 4 rendered at 1700 pixels and inspected. No overlap or clipping. Labels distinguish PDU commands/status, LV enable/inhibit I/O and the SC OPC UA paths. Other main-slide bodies and all backup slides match the preceding revision.",
+  "advisory_review": "The source-density advisories include TikZ diagram code. Final slide 4 inspected; the previous visual review of unchanged slide 7 remains applicable.",
+  "content_review": [
+    "DPS PLC controls both rack PDUs and LV power supplies; separate branches are shown.",
+    "The LV supply branch is enable/inhibit I/O, consistent with the existing BDE/PL506 design.",
+    "PDU commands and status connect directly to the PLC; local interlocks remain.",
+    "Subsystem OPC UA communication goes through SC; SC communicates with the PLC via OPC UA and keeps the logs.",
+    "Bridge-server implementation remains outside the presentation.",
+    "BDE distributed I/O, PDS count of 34 and TDE current PDU-only control with possible future interfaces remain unchanged."
+  ],
+  "sha256": {
+    "main.tex": "636af142f0c683165a5791596ad5666c0dd50a3eaae60b4f6e5de4a30aabc8de",
+    "backup-slides.tex": "82b09bb916627fa96922fbdd84a2d08d6fb7dd067aabde1d32e37bb8898edd08",
+    "main.pdf": "589fe9dce39c022829fc8b0a92c9a303b116d0d654e391ebcc8712d38d116dd2",
+    "main.txt": "8dc468a1c7c76392eab6d1ca28a5ba74bb4f35a37e60a7947aaf6a6d8fb9c94a",
+    "README.md": "c875d71c75d8a502e01c8e43b8c67d2e6d52983aa7824a8e08e3f2407acf3db3",
+    "architecture-inputs-20261027.txt": "de0bb76218c26cddafd64877e996b4851c79ab1b215a6fccc98609a0599fb90e",
+    "sources.json": "1acbc2aadc2e46bff043fdfc1db8ccba159b869150b1e8a3032ea8798fdf7c26",
+    "sources-and-notes.txt": "da188160eb1d56c9c84bcfb0bf42a611ba3d3ee0f9bc47dc1bc35bcc093692d6",
+    "source-review.txt": "2548d1e95fe2369ea6b2189dbd6a00b9ad87cc4d2b813fe1524d70b1c08accfa"
+  },
+  "limits": [
+    "Presentation/source review only; no equipment or hardware-response qualification."
+  ]
+}

@@ -1,0 +1,122 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{PDS readout}
+\subtitle{Peak descriptors and trigger primitives}
+\author{Manuel Arroyave}
+\date{20 October 2026}
+\begin{document}
+\begin{frame}[plain]\titlepage\end{frame}
+
+\begin{frame}{Tests exposed a host-processing bottleneck}
+  \textbf{Test: 16 channels, 120 kHz target, noise descriptors.}\par
+  \medskip
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{@{}Xrrr@{}}
+    \toprule
+    Host processing & NIC loss & Raw queue loss & Descriptor loss \\
+    \midrule
+    Callbacks on RX thread & 51.91\% & --- & --- \\
+    Callbacks on workers & 0\% & 5.55\% & --- \\
+    Separate descriptor workers & 0\% & 4.37\% & 0\% \\
+    \bottomrule
+  \end{tabularx}
+  \bigskip
+  Offload callbacks so RX keeps draining the NIC ring.\par
+  \smallskip
+  Separate descriptors so raw backlog does not block TPs.\par
+  \medskip
+  {\small\color{DuneTextMuted}Host software changes; NIC firmware unchanged.\par
+    Separate short tests; descriptor populations vary. Not a losslessness qualification.}
+\end{frame}
+
+\begin{frame}{One frame feeds two host paths}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,minimum width=3.2cm,
+      minimum height=0.95cm,align=center},
+    edge/.style={-{Stealth},DuneSky,line width=1.2pt}]
+    \node[box,fill=DuneSky] (rx) at (-4,0) {DPDK RX};
+    \node[box] (meta) at (0,1) {64-byte metadata};
+    \node[box] (raw) at (0,-1) {Full waveform};
+    \node[box,fill=DuneCoral] (tp) at (4,1) {Descriptor worker\\TPs};
+    \node[box] (buffer) at (4,-1) {Raw worker\\Buffer};
+    \draw[edge] (rx.east) -- (-2,0) |- (meta.west);
+    \draw[edge] (-2,0) |- (raw.west);
+    \draw[edge] (meta) -- (tp);
+    \draw[edge] (raw) -- (buffer);
+  \end{tikzpicture}\par
+  \medskip
+  Metadata is queued before the raw-buffer callback.\par
+  Raw queue saturation need not discard descriptor work.\par
+  \medskip
+  \raggedright
+  {\small
+    \texttt{dpdklibs}: \texttt{IfaceWrapper.cpp}, \texttt{FrameWorker.hpp}\par
+    \texttt{fdreadoutlibs}: \texttt{DAPHNEEthFrameProcessor}, \texttt{DescriptorProcessor}\par}
+\end{frame}
+
+\begin{frame}{Package changes: descriptor TPs and TA handoff}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{@{}lX@{}}
+    \toprule
+    Package & Change \\
+    \midrule
+    \texttt{fddetdataformats} & Format-4 frame: 256 samples + five peak descriptors. \\
+    \texttt{fdreadoutlibs} & Validate descriptors, map channels, emit native TPs. \\
+    \texttt{dpdklibs} & Fork descriptor processing before raw buffering. \\
+    \texttt{appmodel} & Configure raw/descriptor workers and separate TPG. \\
+    \texttt{triggeralgs} & Session-local prescale fix: PDS type, one-tick samples. \\
+    \bottomrule
+  \end{tabularx}
+  \bigskip
+  {\small\color{DuneTextMuted}Tested base: fddaq-v5.6.2-a9-1. Source pins: companion notes.}
+\end{frame}
+
+\begin{frame}{Keep 1024, 256 and full-stream data supported}
+  \DuneCompactColorBlock{coral}{PROPOSED: fddetdataformats}{Expand the version field}
+    {Use the packet version to select 1024- or 256-sample decoding.}
+  \bigskip
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{@{}lX@{}}
+    \toprule
+    Format & Decoder \\
+    \midrule
+    1024 samples & Retain legacy decoding. \\
+    256 samples & Decode compact waveforms + peak descriptors. \\
+    Full stream & Retain streaming decoding. \\
+    \bottomrule
+  \end{tabularx}
+  \bigskip
+  Coordinate version encoding between firmware and DAQ.
+\end{frame}
+
+\begin{frame}{Run 45392 proved PDS-TA-triggered readout}
+  \centering
+  {\large PDS TPs $\rightarrow$ PDS TAs $\rightarrow$ TCs $\rightarrow$ MLT $\rightarrow$ readout\par}
+  \bigskip
+  \DuneCompactColorBlock{paper}{DECODED}{29 matching 1 ms windows}
+    {Every window: all 32 PDS channels across two links + emulated charge.}
+  \bigskip
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \raggedright
+      \textbf{PDS supplied the triggers}\par
+      \smallskip
+      \small Software captures; TA prescale 100.\par
+      Charge trigger generation disabled.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \raggedright
+      \textbf{PDS + charge payloads: 29/29 clean}\par
+      \smallskip
+      \small First record: TC metadata status 0x12;\par
+      candidate decoded, payloads complete.
+    \end{column}
+  \end{columns}
+  \bigskip
+  {\footnotesize\color{DuneTextMuted}\href{https://github.com/DUNE/PDS/tree/bed0920192126456089d7d44930dbfb145268463/deployments/cern-daphne14/20261020}{Evidence: decoded records + configuration}\par}
+\end{frame}
+
+\end{document}

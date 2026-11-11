@@ -1,0 +1,10 @@
+{
+  "revision": "2026-10-27 slide 4 PDU and LV supply control",
+  "pages": 19,
+  "changed_slides": [
+    4
+  ],
+  "overfull_boxes": 0,
+  "visual_review": "Final slide 4 rendered at 1700 pixels and inspected. No overlap or clipping. Labels distinguish PDU commands/status, LV enable/inhibit I/O and the SC OPC UA paths. Other main-slide bodies and all backup slides match the preceding revision.",
+  "verification": "verification-20261027-slide4-lv-controls.json"
+}

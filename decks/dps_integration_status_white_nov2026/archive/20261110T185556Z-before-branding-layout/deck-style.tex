@@ -1,0 +1,32 @@
+% Meeting branding is local to this deck; the shared white profile is unchanged.
+\newcommand{\DpsMeetingDate}{November 2026}
+\newcommand{\mydate}{\DpsMeetingDate}
+\newcommand{\DpsFooterLogos}{%
+  \includegraphics[height=3.0mm]{\DuneLogoPath/logosolo.png}%
+  \hspace{3mm}%
+  \includegraphics[height=2.6mm]{\DuneLogoPath/FNAL-Logo-NAL-Blue.png}%
+}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=6.5mm,dp=0mm]{footline}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=west,inner sep=0pt]
+        at ([xshift=0.78cm,yshift=3.2mm]current page.south west) {\DpsFooterLogos};
+      \node[text=DuneTextMuted,font=\footnotesize,inner sep=0pt]
+        at ([yshift=3.2mm]current page.south)
+        {I\&I meeting\enspace|\enspace\DpsMeetingDate};
+      \node[anchor=east,text=DuneTextMuted,font=\footnotesize,inner sep=0pt]
+        at ([xshift=-0.78cm,yshift=3.2mm]current page.south east) {\insertframenumber};
+    \end{tikzpicture}%
+  \end{beamercolorbox}%
+}
+
+% Keep the normal footer on the transition, with its title at the page centre.
+\newcommand{\DpsDetectorTransition}{%
+  \begin{frame}
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[text=DuneText,font=\bfseries\fontsize{30}{36}\selectfont,inner sep=0pt]
+        at (current page.center) {Detector};
+    \end{tikzpicture}
+  \end{frame}%
+}

@@ -1,46 +1,34 @@
 # DUNE Professional presentation theme
 
-This theme provides a layout-first visual language for DUNE/Fermilab technical
-decks. The dark canvas stays consistent, while slide composition alternates
-between editorial claims, filled mosaics, diagrams, comparisons, pipelines,
-tables, section breaks, and decision closes.
+New decks use a white canvas, dark text, and restrained accents. The maintained
+starter enables this profile after loading the shared theme:
+
+```tex
+\DuneUseWhite
+```
+
+The profile removes decorative title bands, background marks, and large logos.
+It keeps a simple title, content area, and page number. Existing decks retain
+the dark profile unless they call this command. Check deck-local overrides and
+embedded figures before switching an existing deck.
 
 ## Color system
 
-| Visual layer | Use | Token / block name |
-|---|---|---|
-| Paper | Sources, definitions, reference material, neutral proof | `DunePaper` / `paper` |
-| Sky | Interfaces, flows, system context, supporting structure | `DuneSky` / `sky` |
-| Coral | Ownership, the active path, decisions, requested action | `DuneCoral` / `coral` |
-| Ink | Supporting dark block when a light fill would compete | `ink` |
-| Red | A genuine hard danger or prohibited condition only | `danger` |
+Use `DuneText` for primary text and `DuneTextMuted` for supporting text and
+connections. In the white profile these map to the checked `editorial-text` and
+`editorial-muted` tokens on `editorial-canvas`. Keep color for a useful distinction,
+and pair it with a label, marker, or line pattern.
 
-The canonical values are in `design-tokens.json`. The build audit confirms that
-the JSON values match the Beamer theme and that every declared text/background
-pair meets its contrast target.
+`design-tokens.json` retains the canonical dark values and the white editorial
+palette. The white profile maps theme roles at runtime; it does not rewrite the
+registry or existing external figures. The audit checks the declared palette
+pairs. Inspect the final PDF to check composition and any mixed colors.
 
-These are compositional layers, not a status taxonomy. A normal slide uses one
-dominant light fill; a comparison or diagram may use two or three because the
-layout makes their relationship explicit. Never assign a new hue to every
-category. Use full blocks deliberately instead of scattering colored pills.
-
-For example:
-
-```tex
-\DuneColorBlock{sky}{SYSTEM CONTEXT}{One shared interface}
-  {The producer and every consumer use the same reviewed schema.}
-
-\DuneColorBlock{coral}{THE ASK}{Approve the canonical contract}
-  {Name the owner and the completion condition.}
-```
+Paper, sky, coral, ink, and danger block components remain available for older
+layouts. Use a fill only when it helps show grouping or meaning. A white deck
+does not need a colored block around every statement.
 
 ## Components
-
-The migrated SURF interface deck retains its reviewed light layout through the
-opt-in `DuneEditorial*` tokens in the same registry. They preserve its DUNE
-blue/orange accents and dark text. Its layout overrides do not change the
-default theme or other decks; meaningful diagram edges use dark ink, while the
-pale rules and blue accent are decorative.
 
 - `\DuneSectionPage{eyebrow}{title}{subtitle}`: full-canvas rhythm break.
 - `\DuneBigStatement{eyebrow}{claim}{support}`: editorial opening or close.
@@ -53,9 +41,8 @@ pale rules and blue accent are decorative.
 - `\DuneTakeaway`, `\DuneCallout`, `\DuneCard`, and `\DuneFixedCard`: compatibility
   components; do not build an entire new deck from one of these shapes.
 
-The maintained starter demonstrates the intended variation. Repeating a layout
-is fine when the audience should compare slides; repetition should be a choice,
-not the framework default.
+The maintained starter demonstrates a figure-led white deck. Reuse layouts
+when the audience needs to compare evidence.
 
 ## Typography
 
@@ -88,16 +75,20 @@ system topology, or any diagram where automatic layout is valuable.
 
 ```dot
 digraph example {
-  graph [bgcolor="{{background}}"];
-  source [fillcolor="{{paper}}", fontcolor="{{on-accent}}"];
-  interface [fillcolor="{{sky}}", fontcolor="{{on-accent}}"];
-  owner [fillcolor="{{coral}}", fontcolor="{{on-accent}}"];
-  source -> interface -> owner [color="{{sky}}"];
+  graph [bgcolor="{{editorial-canvas}}"];
+  node [shape=box, color="{{editorial-muted}}",
+        fontcolor="{{editorial-text}}"];
+  edge [color="{{editorial-muted}}", fontcolor="{{editorial-text}}"];
+  source -> interface [label="defines requirements"];
 }
 ```
 
 Run `make diagrams` to generate vector PDFs. Keep the source and generated PDF
 together so a deck remains buildable and reviewable.
+
+See the [plotting guide](../../docs/plotting-guide.md),
+[diagram guide](../../docs/diagram-guide.md), and
+[book source notes](../../docs/visual-display-source.md) for the design rules.
 
 ## Compatibility names
 

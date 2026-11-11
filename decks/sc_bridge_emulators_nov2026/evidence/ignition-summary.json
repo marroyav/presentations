@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-10",
+  "result": "PASS",
+  "repository": "https://github.com/DUNE/dune-dscs",
+  "tested_commit": "3a9e54e052fd441ba08e3c02a6f19076f4acdf1d",
+  "gateway": {
+    "host": "dune-fd-test01.fnal.gov",
+    "version": "8.3.8 (b2026071409)",
+    "license": "Trial active during all checks"
+  },
+  "native_emulator_counts": {
+    "wib": 480,
+    "daphne": 42,
+    "rack_pdu": 105
+  },
+  "total_emulator_processes": 627,
+  "ignition_opc_tags": 2508,
+  "acceptance_checks_passed": 8,
+  "native_configuration_readbacks": 1881,
+  "native_successful_polls_at_final_check": 102950,
+  "expected_outage_poll_failures": 136,
+  "unexpected_poll_failures": 0,
+  "restarted_devices": 3,
+  "healthy_devices_during_outage": 624,
+  "maximum_final_sequence_age_ms": 1211,
+  "path": "PR8 native emulator processes -> temporary asyncio OPC UA adapter -> SSH tunnel -> Ignition 8.3.8 OPC tags",
+  "cleanup": {
+    "all_native_processes_stopped": true,
+    "adapter_stopped": true,
+    "test_tunnel_removed": true,
+    "test_tags_removed": true,
+    "test_project_removed": true,
+    "test_connection_removed": true,
+    "existing_configuration_hashes_unchanged": true,
+    "temporary_session_cookie_removed": true
+  },
+  "limits": [
+    "Temporary adapter is not part of PR #8",
+    "No hardware qualification",
+    "320 TDE and 16 DTS IPMI endpoints are not emulated",
+    "SNMP v2c, anonymous OPC UA inside an SSH tunnel",
+    "Device configuration uses native protocol clients; OPC UA tags are read-only",
+    "Sequence tags establish freshness; unchanged values may retain old Ignition tag timestamps"
+  ],
+  "source_report_local_path": "/home/arroyave/.local/share/dune-dscs-validation/pr8/20261110-ignition/integration-report.json",
+  "source_report_sha256": "bc4dfe2f9379a9b1930efe7d529053f4c5f3e2f392faf37ff6b671a89257492e"
+}

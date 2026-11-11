@@ -1,0 +1,145 @@
+{
+  "checked_at": "2026-11-10T15:40:54.935753+00:00",
+  "revision": "Five draw.io system diagrams replaced with native TikZ; overview SDSTA label changed to SDSTA SCADA",
+  "pre_change_archive": "archive/20261110T153535Z-before-native-tikz",
+  "build": {
+    "command": "make decks/dps_integration_status_oct2026/main.pdf",
+    "exit_code": 0,
+    "log": "verification-20261110T154054Z-native-tikz-build.log",
+    "engine": "Tectonic 0.17.0"
+  },
+  "checks": {
+    "pages": 35,
+    "changed_slides": [
+      2,
+      11,
+      12,
+      15,
+      17
+    ],
+    "unchanged_slide_text_count": 30,
+    "new_off_page_words": [],
+    "changed_slides_off_page_words": [],
+    "baseline_off_page_words_in_cropped_reference_pdf": {
+      "slide": 21,
+      "count": 22,
+      "unchanged": true
+    },
+    "tex_layout_warnings": [],
+    "expanded_source_audit_errors": [],
+    "expanded_source_audit_advisories": [
+      "/tmp/dps-tikz-review/expanded.tex: 1 frame(s) exceed the source-density guide; review at projector size",
+      "/tmp/dps-tikz-review/expanded.tex: 15 visual frame(s) lack \\DuneDiagramCaption"
+    ],
+    "native_sources": [
+      "daphne.tikz.tex",
+      "lasers.tikz.tex",
+      "overview.tikz.tex",
+      "pof.tikz.tex",
+      "racks.tikz.tex"
+    ],
+    "external_drawio_build_inputs": false
+  },
+  "topology_comparison": {
+    "source": "Archived diagrams/dps-public.drawio",
+    "nodes": 29,
+    "connections": 28,
+    "details": [
+      {
+        "diagram": "overview",
+        "nodes": 7,
+        "connections": 6,
+        "node_labels_match": true,
+        "directions_match": true,
+        "connection_labels_match": true,
+        "dashed_paths_match": true
+      },
+      {
+        "diagram": "daphne",
+        "nodes": 6,
+        "connections": 7,
+        "node_labels_match": true,
+        "directions_match": true,
+        "connection_labels_match": true,
+        "dashed_paths_match": true
+      },
+      {
+        "diagram": "pof",
+        "nodes": 5,
+        "connections": 6,
+        "node_labels_match": true,
+        "directions_match": true,
+        "connection_labels_match": true,
+        "dashed_paths_match": true
+      },
+      {
+        "diagram": "lasers",
+        "nodes": 6,
+        "connections": 5,
+        "node_labels_match": true,
+        "directions_match": true,
+        "connection_labels_match": true,
+        "dashed_paths_match": true
+      },
+      {
+        "diagram": "racks",
+        "nodes": 5,
+        "connections": 4,
+        "node_labels_match": true,
+        "directions_match": true,
+        "connection_labels_match": true,
+        "dashed_paths_match": true
+      }
+    ],
+    "allowed_label_change": "Overview: SDSTA BMS -> SDSTA SCADA; Interface under study retained"
+  },
+  "build_dependency_check": {
+    "method": "make -n -W <source> <deck>/main.pdf schedules Tectonic",
+    "sources": {
+      "diagrams/daphne-icd-reference.tex": true,
+      "diagrams/daphne.tikz.tex": true,
+      "diagrams/lasers.tikz.tex": true,
+      "diagrams/overview.tikz.tex": true,
+      "diagrams/pof.tikz.tex": true,
+      "diagrams/racks.tikz.tex": true,
+      "diagrams/site-boundaries.tex": true,
+      "diagrams/styles.tex": true
+    }
+  },
+  "shared_design_tokens_audit": "python3 scripts/audit_design.py: passed",
+  "visual_review": {
+    "slides": [
+      2,
+      11,
+      12,
+      15,
+      17
+    ],
+    "render": "pdftoppm -scale-to 1600 -png",
+    "result": "All five final slides inspected. Rack labels and box widths adjusted after first render. No clipped or overlapping labels on converted diagrams."
+  },
+  "verification_limits": "Source comparison and slide rendering check that the conversion retains the documented logical interfaces. They do not verify installed equipment or approve protection logic. Existing cropped reference-PDF text on slide 21 is unchanged.",
+  "source_sha256": {
+    "Makefile": "091b000418f69033122a43ec4b4d926fe7c4e88e0778c136d6af31d0f81d42c7",
+    "decks/dps_integration_status_oct2026/README.md": "3ccd1272b8dba8b00ced5198e808e24db072be4c3dcac1f6e0e63682e73830b2",
+    "decks/dps_integration_status_oct2026/backup-slides.tex": "171020460d20a233c14bd1b0919b98e99da90580a16826f6a3b37770c0e6d5b1",
+    "decks/dps_integration_status_oct2026/diagrams/daphne-icd-reference.tex": "890e6dec7dde96f5ea9ea73f035c8fe5a0ec405a555ace29d26803b9db9e253f",
+    "decks/dps_integration_status_oct2026/diagrams/daphne.tikz.tex": "c820cc5a8e0767221eb240d51ba3f6140df97ab3805b57a986a3b2c49e4f9068",
+    "decks/dps_integration_status_oct2026/diagrams/lasers.tikz.tex": "bb142e56d7f1a796f094ed8bb3b1ffa8dcd8ff9b759999956180fc81a050b1fd",
+    "decks/dps_integration_status_oct2026/diagrams/overview.tikz.tex": "9a061cd85954eedbfd76827d5bf7dbb7395c8ec031d70133416f8be1d432e10c",
+    "decks/dps_integration_status_oct2026/diagrams/pof.tikz.tex": "45e5ec1f9e7218caf25a03578404d74d41e747c2f32581de7a4a05b4ca6c4a54",
+    "decks/dps_integration_status_oct2026/diagrams/racks.tikz.tex": "6b33be3ba9ab61d0c85b3d646f80a6de76da855c240343d82e700e09c20886ca",
+    "decks/dps_integration_status_oct2026/diagrams/site-boundaries.tex": "1ced215320e4ecdc09d5aa100fe1a7dbfef78c65c3ebf47d2620568afad32e6b",
+    "decks/dps_integration_status_oct2026/diagrams/styles.tex": "7a21026fc8df55525f9f3cfeab607d3db5f2bc92b692b59d497f98bbd4855008",
+    "decks/dps_integration_status_oct2026/main.tex": "84d25af5f5822b4044b998f93609c7de9b830c7c5f873f3570cc08b65f2558cf",
+    "decks/dps_integration_status_oct2026/sources-and-notes.txt": "09a3c9054031fcb2fa350af82b3ae77bde42e77f025693d38e10f7d2aad0bc5f",
+    "decks/dps_integration_status_oct2026/sources.json": "615db5c1804d83cbe2bac6cb668d0f348f293171b1da7240fe2bd1cd41fa0f9d",
+    "templates/dune-professional/beamerthemeDUNEProfessional.sty": "bc215c3cd376b01ed3169851922c095232468a6c9a8d22509e1e7047d7a8a98e",
+    "templates/dune-professional/design-tokens.json": "5675e9b4f7f1e85e836201b49e2fff97efcabf4f3dbd39b005766ea4a357ec06"
+  },
+  "archived_drawio_sha256": "c6f6b126d3e0e9121295bb1f125c9939b3456564526d135fddd04bce65842273",
+  "output_sha256": {
+    "main.pdf": "eae9d7ae1f53f35ef47d946717a995a3304684ea8bc0d1c03bb683a6b085e6c7",
+    "main.txt": "999e28c5cab653646dc627b3cbdcdaf30572ae92a945fd411f630d2ab13bc757"
+  }
+}

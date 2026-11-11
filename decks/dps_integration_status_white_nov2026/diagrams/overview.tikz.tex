@@ -1,0 +1,30 @@
+% Logical interfaces, adapted from the archived draw.io Overview page.
+% The dashed SDSTA connection remains under study.
+\begin{tikzpicture}
+  \draw[dps boundary] (-6.5,-4.25) rectangle (6.5,-2.9);
+  \node[dps heading] at (0,-3.07) {DETECTOR};
+
+  \node[dps node,text width=3.5cm] (ffdg) at (-4.85,0)
+    {FFDG DUNE FD BMS\\Metasys API -> OPC-UA};
+  \node[dps node,text width=3.5cm] (sdsta) at (0,0)
+    {SDSTA SCADA\\Modbus TCP -> OPC-UA};
+  \node[dps node,text width=3.5cm] (cryo) at (4.85,0)
+    {Cryogenics\\As one system OPC-UA };
+  \node[dps controller,text width=3.25cm] (sc) at (-3.6,-1.9)
+    {SC / Ignition\\Operations and logs};
+  \node[dps load,text width=3.25cm] (dps) at (3.6,-1.9)
+    {DPS PLC\\Protection arbitration};
+  \node[dps node,text width=3.25cm] (subsystems) at (-3.6,-3.7)
+    {Subsystems\\Control and status};
+  \node[dps node,text width=3.25cm] (equipment) at (3.6,-3.7)
+    {PDUs, supplies\\Remote I/O};
+
+  \coordinate (sc-ffdg) at ([xshift=-9mm]sc.north);
+  \coordinate (sc-cryo) at ([xshift=9mm]sc.north);
+  \draw[dps flow] (ffdg.south) -- (-4.85,-0.83) -| (sc-ffdg);
+  \draw[dps flow,dashed] (sdsta.south) -- (0,-0.98) -| (sc.north);
+  \draw[dps flow] (cryo.south) -- (4.85,-1.13) -| (sc-cryo);
+  \draw[dps both] (sc.east) -- node[dps label,above] {OPC UA} (dps.west);
+  \draw[dps both] (sc.south) -- node[dps label,right,pos=0.35] {OPC UA} (subsystems.north);
+  \draw[dps both] (dps.south) -- node[dps label,left,pos=0.35] {SNMP / EtherCAT} (equipment.north);
+\end{tikzpicture}

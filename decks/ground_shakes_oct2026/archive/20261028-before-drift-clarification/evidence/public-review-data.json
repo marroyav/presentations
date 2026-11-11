@@ -1,0 +1,125 @@
+{
+  "prepared_UTC": "2026-10-28T22:04:51.258882+00:00",
+  "pair_scope": {
+    "run": 32731,
+    "endpoint": 109,
+    "local_charge_shakes": 716,
+    "events_with_two_or_more_candidates_in_window": 101,
+    "events_with_exactly_two": 80,
+    "consecutive_pairs": 125,
+    "window_us": [
+      -300,
+      -100
+    ],
+    "limitations": [
+      "Pulse definition: previous>=21channel negative-edge clusters, not an optical template fit.",
+      "Endpoint kept fixed to avoid pairing different boards as separate flashes.",
+      "Events with>=3candidates contribute multiple consecutive pairs.",
+      "Selection window truncates allowed separations;10us cluster merging suppresses closer pairs.",
+      "Timing resolution2.048us and uncorrected board latency; no implication that decimal separations are exact physical delays.",
+      "Self-triggered packet selection/recording duration and potential ringing/digital artifacts can affect pair spacing.",
+      "No matched background pair distribution; no significance or random-noise rejection claimed."
+    ]
+  },
+  "double_pulse_examples": [
+    {
+      "run": 32731,
+      "event": 33,
+      "first_us": -183.296,
+      "second_us": -160.768,
+      "separation_us": 22.52799999999999,
+      "APA1_2ADC_crossing_us": -111.872
+    },
+    {
+      "run": 32731,
+      "event": 52,
+      "first_us": -242.68800000000002,
+      "second_us": -177.15200000000002,
+      "separation_us": 65.536,
+      "APA1_2ADC_crossing_us": -107.776
+    }
+  ],
+  "timing_examples": [
+    {
+      "run": 32731,
+      "event": 33,
+      "first_PDS_us": -183.296,
+      "charge_marker_us": -111.872
+    },
+    {
+      "run": 32731,
+      "event": 52,
+      "first_PDS_us": -242.68800000000002,
+      "charge_marker_us": -107.776
+    },
+    {
+      "run": 32739,
+      "event": 5,
+      "first_PDS_us": -128.0,
+      "charge_marker_us": -151.808
+    }
+  ],
+  "clock_test": {
+    "TPC_APA": 1,
+    "threshold_ADC": 2,
+    "PDS_pulse": "first",
+    "split": "other_run",
+    "events": 225,
+    "training_fixed_PDS_to_TPC_delay_us": 40.70400000000001,
+    "training_shake_clock_onset_us": -148.224,
+    "fixed_PDS_delay_MAE_us": 66.05710222222223,
+    "shake_clock_only_MAE_us": 33.42336,
+    "PDS_time_vs_TPC_onset_Spearman": -0.16979480036690028
+  },
+  "clock_arithmetic_independently_recomputed": true,
+  "track_segment": {
+    "index": 1,
+    "first_observed_charge_us": -331.008,
+    "last_observed_charge_us": -21.76,
+    "X_index_first": 498,
+    "X_index_last": 649,
+    "observed_wires": 151,
+    "pixels": 924,
+    "time_boundary_censored": true
+  },
+  "track_comparisons": [
+    {
+      "run": 32731,
+      "event": 33,
+      "APA": 2,
+      "PDS_time_us": -183.296,
+      "segment": 1,
+      "charge_first_us": -331.008,
+      "charge_last_us": -21.76,
+      "first_observed_charge_minus_PDS_us": -147.712,
+      "charge_already_arriving_before_PDS": true,
+      "time_boundary_censored": true,
+      "interpretation": "This entire observed segment cannot originate from this later PDS pulse under a common scintillation t0."
+    },
+    {
+      "run": 32731,
+      "event": 33,
+      "APA": 2,
+      "PDS_time_us": -160.768,
+      "segment": 1,
+      "charge_first_us": -331.008,
+      "charge_last_us": -21.76,
+      "first_observed_charge_minus_PDS_us": -170.23999999999998,
+      "charge_already_arriving_before_PDS": true,
+      "time_boundary_censored": true,
+      "interpretation": "This entire observed segment cannot originate from this later PDS pulse under a common scintillation t0."
+    }
+  ],
+  "electrical_paired_scores": [
+    0.15685647325942342,
+    -0.04731696571098243
+  ],
+  "electrical_median_event_score": null,
+  "limits": [
+    "Existing exploratory tests, not a newly established cause.",
+    "First pulse means first retained candidate in the selected window, not necessarily the first physical pulse.",
+    "Missing PDS samples and ADC rail bins remain gaps. Raw ADC is not calibrated light.",
+    "A threshold crossing is a timing marker, not a physical start time.",
+    "Charge segments are 2D raw-signal features, not fitted 3D tracks."
+  ]
+}

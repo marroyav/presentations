@@ -1,0 +1,15 @@
+{
+  "events": 2,
+  "stages": 6,
+  "first": {
+    "time": "-242.032 µs",
+    "status": "34/36 connected channels have usable samples; largest recorded signal: channel 1, module M6.",
+    "hasExactADC": true
+  },
+  "playAdvances": true,
+  "pauseStops": true,
+  "railFlagShown": true,
+  "otherEvent": "30/36 connected channels have usable samples; largest recorded signal: channel 1, module M6.",
+  "errors": [],
+  "viewer_sha256": "8223fd89fdeb1959c15bbf4272ccaf6177c77610cfaf1f86403cf9a6ec6e6e77"
+}

@@ -1,0 +1,89 @@
+Presentation basis — Manuel's instructions and clarifications, 27 October 2026
+
+Sequence
+1 definitions/responsibilities; 2 architecture; 3 FFDG DUNE FD BMS;
+4 SDSTA BMS; 5 cryogenics; 6 consortium interlock matrix; 7 DPS brain logic;
+8 empty Detector divider; 9 BDE system; 10 BDE fan/bias example;
+11 PDS DAPHNE including DAQ; 12 PDS PoF; 13 HV; 14 CalCI thermometry;
+15 CalCI lasers; 16 CalCI purity monitors; 17 racks. Finish with tests,
+procurement and work responsibilities. Detailed hardware/source material stays
+in the backups. There is no separate title page before the requested sequence.
+
+Roles and connections
+DPS arbitrates protection. SC/Ignition operates, monitors, coordinates requests
+and owns the logs. DAQ consumes detector availability and activity from SC.
+Equipment owners define protection requirements and allowed action times.
+Local interlocks remain effective; an operating request cannot override a trip.
+
+FFDG DUNE FD BMS -> SC; SDSTA BMS -> SC; cryogenics -> SC.
+SC <-> OPC UA <-> DPS. Below those systems, the detector has SC/OPC UA
+control/status and DPS/SNMP/EtherCAT equipment paths. Wired protection is
+connected through the remote I/O. Bridge-server deployment is outside the main
+talk; the source ICD figure is retained in a backup at Manuel's request.
+
+FFDG status from Manuel
+ISD proposes a Metasys API in Batavia as the interface with DUNE FD SC.
+The API has been exercised using SBN building data with an OPC UA server for
+experiments in that building. A licence for live data is still missing.
+Local records independently show historical data extraction/OPC UA replay and
+live presentValue licensing denial; they do not qualify a live protection path.
+
+SDSTA status from Manuel
+Hardware survey ongoing; available controllers, I/O, interfaces and protocols
+under investigation. Explore agreement options for the exchange. Use vertical
+service maps to show SDSTA's wider site scope and FFDG building services at
+4850/4910. The map is not an assertion that every site service is controlled
+by a single BMS or that its point/controller has already been identified.
+
+Cryogenics clarification
+Cryogenics lives in the CUC. Its controls are divided internally, but to DUNE
+it is a single system. Do not turn the internal divisions into three separate
+DPS interfaces. Describe process control, critical detector conditions and the
+interface; distinguish documented architecture from the run-state agreement
+still needed with cryogenics and detector owners.
+
+Interlock review and brain
+Introduce the matrix before the detector systems. Review the interlocks already
+proposed by each consortium and in the ICDs. Trace condition/source -> physical
+input -> controller decision -> actuator/load -> feedback. Use current rack,
+parts and power documents to identify coverage and actual additions. Keep
+conflicting requirements visible. Shared I/O is counted once.
+The brain is a commercial PLC based on BDE: validated conditions and requests,
+per-load permits, trip latches, output action and readback. Reset and re-enable
+are separate. Required failure responses are defined per function. CUC central
+PLC placement remains proposed; no installed location or qualified logic is claimed.
+
+VD hardware scope
+Ten BDE groups of eight WIECs, 80 WIECs, 20 PL506 supplies and 480 WIBs.
+Existing EtherCAT and dedicated PL506/ISEG inhibits coexist with SNMP control.
+Show fan cooling and the possible bias consequence without silently adopting
+the historical HD fan-to-bias rule as an approved VD dependency.
+HD can later extend the PLC system or use another PLC.
+
+PDS
+PDS LV scope remains 34 feeds. DAPHNE control path: DPS -> SC -> OPC UA
+interface -> DAPHNE; power branch: DPS -> SNMP -> LV supply -> DAPHNE.
+Use the working ICD diagram and include DAQ CCM/opmon and Hermes. A SiPM-bias
+inhibit example applies to DAPHNE-controlled bias; cathode power follows PoF.
+Software action needs acknowledgement/readback and response-time tests.
+
+PoF clarification confirmed by Manuel
+Four laser-voltage readings plus one chassis temperature per box.
+80 boxes x (4 V + 1 T) = 400 monitoring readings: 320 voltage, 80 temperature.
+This replaces the earlier 8 T + 8 V case for the current presentation. It does
+not change the physical laser-driver count or establish controller/module counts.
+Compare Opta and Beckhoff PLC options. Inhibit through the PDU; an additional
+control/enable signal is desirable if the box exposes one. Do not draw that
+optional signal as installed or selected.
+
+CalCI and racks
+Separate thermometry, ionization lasers and purity monitors. Instrumentation
+is distinct from cryogenic process controls. The PrM/SiPM-bias conflict remains
+open: older ICD requests bias off, current Q-001 proposes activity tagging.
+Rack infrastructure is its own system: racks, feeds, PDUs, smoke/humidity and
+sensor support. Include fitted temperature/leak sensors. Subsystems reference
+outlets rather than counting the rack hardware again. TDE has 20 racks and
+current PDU control only; retain future crate-status/external-inhibit options.
+
+These are the presentation instructions and working design basis. They do not
+establish installation, approved thresholds, full I/O allocation or qualification.

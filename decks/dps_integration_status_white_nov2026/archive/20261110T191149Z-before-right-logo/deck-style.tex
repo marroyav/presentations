@@ -1,0 +1,50 @@
+% Meeting branding is local to this deck; the shared white profile is unchanged.
+\newcommand{\DpsMeetingDate}{November 2026}
+\newcommand{\mydate}{\DpsMeetingDate}
+\newcommand{\DpsFermilabLogo}{%
+  \includegraphics[height=2.8mm]{\DuneLogoPath/FNAL-Logo-Black.pdf}%
+}
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=6.5mm,dp=0mm]{footline}%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=west,inner sep=0pt]
+        at ([xshift=0.78cm,yshift=3.2mm]current page.south west) {\DpsFermilabLogo};
+      \node[text=DuneTextMuted,font=\footnotesize,inner sep=0pt]
+        at ([yshift=3.2mm]current page.south)
+        {I\&I meeting\enspace|\enspace\DpsMeetingDate};
+      \node[anchor=east,text=DuneTextMuted,font=\footnotesize,inner sep=0pt]
+        at ([xshift=-0.78cm,yshift=3.2mm]current page.south east) {\insertframenumber};
+    \end{tikzpicture}%
+  \end{beamercolorbox}%
+}
+
+% Large grey DUNE branding on the two plain slides, without any footer.
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[inner sep=0pt]
+      at ([yshift=-1.85cm]current page.north)
+      {\includegraphics[width=6.2cm,trim=2bp 2bp 2bp 2bp,clip]{\DuneLogoPath/DUNElogo_gray.pdf}};
+    \node[text=DuneText,font=\bfseries\fontsize{23}{28}\selectfont,
+      align=center,text width=14cm,inner sep=0pt]
+      at ([yshift=-4.05cm]current page.north) {\inserttitle};
+    \node[text=DuneTextMuted,font=\large,align=center,text width=13.5cm,inner sep=0pt]
+      at ([yshift=-5.12cm]current page.north) {\insertsubtitle};
+    \node[text=DuneText,font=\large\bfseries,inner sep=0pt]
+      at ([yshift=-6.5cm]current page.north) {\insertauthor};
+    \node[text=DuneTextMuted,font=\normalsize,inner sep=0pt]
+      at ([yshift=-7.15cm]current page.north) {\insertdate};
+  \end{tikzpicture}%
+}
+
+\newcommand{\DpsDetectorTransition}{%
+  \begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[inner sep=0pt]
+        at ([yshift=-1.85cm]current page.north)
+        {\includegraphics[width=6.2cm,trim=2bp 2bp 2bp 2bp,clip]{\DuneLogoPath/DUNElogo_gray.pdf}};
+      \node[text=DuneText,font=\bfseries\fontsize{30}{36}\selectfont,inner sep=0pt]
+        at (current page.center) {Detector};
+    \end{tikzpicture}
+  \end{frame}%
+}

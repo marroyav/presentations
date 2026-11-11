@@ -1,0 +1,35 @@
+Commissioning update supplied by Manuel in this conversation on 10 November 2026.
+The email itself is undated. Relative time statements below have no confirmed start date.
+Retained in full as working context, not as an agreed service or interface specification.
+
+Hi Marco,
+
+quick update:
+
+I just had a talk with several ppl involved in the FFDG BMS commissioning for the FD.
+I was asked if we might use this FFDG FD BMS access for our own interlocks, which I answered affirmatively, and I received a very astringent response.
+
+  1.
+They do not plan to have a 24h service available for us. All issues related to FFDG BMS will be acknowledged and attended "next business day'".
+  2.
+They suggest in first place that if the variable in question might be impacting severely the safety status of the equipment, we should install our own sensors and do not rely on network.
+  3.
+They seem to have already communication with SDSTA Services BMS. (Fire and other variables.) So reluctant to receive information from DPS.
+
+On the SDSTA side I got something else, very surprising to me:
+Dale Curran tells me he has been in charge of LZ integration and several other SCADA systems underground from SDSTA Services.
+He says SDSTA services rely more on SCADA than BSI, therefore they are deprecating their Johnson's systems.
+(They expect them to be out in less than six months because they are unresponsive).
+For our integration:
+Since they are concerned about security, they want to use Modbus TCP between both interfaces, where they expose a small collection of variables in certain ports.
+He told me their expectation is while they keep control on their side, they can still claim to have an "air gapped control" for their SCADA.
+That is true if they set the interface to ignore writes or commands.
+He promised to send me a collection of variables they think might be useful for us including the Oro Hondo status and driver variables.
+I don't believe exposing an OPC-UA server to US in a VLAN network should be a big security concern for them, but it seems like it is.
+
+Tell me what you think.
+We might talk about this on Wednesday.
+
+Best,
+
+Manuel

@@ -1,0 +1,20 @@
+{
+  "script_sha256": "a446f7aa26c795d9b07c0fbfc379a2fdbf6b383a2a0ae9e84f37f2414ab4d16e",
+  "figure_sha256": {
+    "figures/10-event-sequence.pdf": "a8afb26d513bc8a86e8e2ed4d69405fd4971d9aaa3b5ecc237af0854c21c472e",
+    "figures/10-event-sequence.png": "d81d7bb2dbaa7da94dc68cb472832ba793d6f6ed250e784553eb5338e9864b09",
+    "figures/11-double-pulses.pdf": "062de1662b7c3053fff11b5b43985df7286957c4cbd9d1220752e8da1ce910c0",
+    "figures/11-double-pulses.png": "785d561851b429c7e9643418f82e44c359f328415fb875a021bb057379fce54c",
+    "figures/12-first-pulse-clock.pdf": "a33782c6100bb4315801707db32f094d5690b87364fac5094dc177d3654ee330",
+    "figures/12-first-pulse-clock.png": "aa725e0cd4adf488daf8d25f37cc3829afa855c0efe71a43ca18aa51bdd97033",
+    "figures/13-charge-before-pulses.pdf": "930a8bcf9acb9bd870ed09a4ed3a92d607a1bcc54586cde66774e692e9302ed6",
+    "figures/13-charge-before-pulses.png": "55f17dc2c7c8820ba0f5dfcaae3bd5ef51f992b683bcae62024992524500fcff",
+    "figures/14-electrical-test.pdf": "7ecd8d6f1a4a826052102e83d2b2e1e9e93994c4cc02fb54d0d2c6fe6f0b1022",
+    "figures/14-electrical-test.png": "9e4af50c38fa1b653f1fc4d8d01bda762155e95c31d6d42626a0100c0ec1052d"
+  },
+  "frozen_sha256": {
+    "public-plot-data.npz": "1066c016e16a70a3aed3f6b660eb0c895b482cd7525d12942e08d6ab01221f72",
+    "public-review-data.json": "0ff61c02ff3a35b626b3fbc256378cbd1575391ae4d5dfdb765e27d23d234aca"
+  },
+  "method": "Existing recorded samples; no interpolation, refit or new physics classification."
+}

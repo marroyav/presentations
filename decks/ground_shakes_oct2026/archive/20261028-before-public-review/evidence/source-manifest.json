@@ -1,0 +1,99 @@
+{
+  "created_UTC": "2026-10-27T19:32:54.912242+00:00",
+  "source_root": "/home/arroyave/work/ground-shake-data/analysis",
+  "sources": {
+    "report-20261015/report-data.json": {
+      "sha256": "4e21e9b67e5e67b49eb10b7c05cc870935e891efe97d758d9fe95ec00dc8a23e",
+      "bytes": 6811
+    },
+    "charge-light-matching/report-data.json": {
+      "sha256": "a87115d5c9628a0c0fcf211344de7346d79579168db496152823a0fa8cf84905",
+      "bytes": 3828
+    },
+    "electrical-pattern-20261023/report-data.json": {
+      "sha256": "19982f3a221c66dd1eff1cb87ed7ef0d885bb7ea19318df9b11c4e26059f80f3",
+      "bytes": 3539
+    },
+    "electrical-pattern-20261023/sequence-results.json": {
+      "sha256": "97b7bedee9059ea893a5b7f70afc0b90da64a2b0a93fcbc3713846ac050f7a70",
+      "bytes": 15222
+    },
+    "electrical-pattern-20261023/sequence-event-metrics.json": {
+      "sha256": "95f322fc3797ca876f48fd4489922029bcde9569061f03e1b771fde65ddd7c3a",
+      "bytes": 2898667
+    },
+    "dcs-association/dcs-matches.json": {
+      "sha256": "da3049c74203f780b7fea5dc43cdb65458bc93b8c4423e758d7cd34d6cfb2198",
+      "bytes": 342027
+    },
+    "all-runs/README.txt": {
+      "sha256": "d9eac0420eeb199c97039372d326c1bbec2791957d7ef37e2059011935b7ec95",
+      "bytes": 6505
+    },
+    "all-runs/all-runs-summary.csv": {
+      "sha256": "f0e7d96770c83fc2a9b9dc3bf6773e62ec0feef9c5830e20bb31591a7ee296b1",
+      "bytes": 311
+    },
+    "aligned-detectors/README.txt": {
+      "sha256": "6f155f354587ff6abbf7d1119804b9303c79b46e28e8e5a0ed92988a0417fd0c",
+      "bytes": 4696
+    },
+    "shared-precursor/README.txt": {
+      "sha256": "1de88c33984fc6484c1cec9e132f9f7c3b72d670dac8bd3385350e2a69fb235c",
+      "bytes": 1931
+    },
+    "electrical-pattern-20261023/README.txt": {
+      "sha256": "ed4c776bd94e39182545c84dedb7a515e2b5043a7587ec34b7bd59e0df957eac",
+      "bytes": 3453
+    },
+    "electrical-pattern-20261023/fit.py": {
+      "sha256": "830064740f497dc1280d1f9adf263c8aa4f9226ec6f4062fd87e6062df977a1e",
+      "bytes": 12392
+    },
+    "charge-light-matching/README.txt": {
+      "sha256": "45742da63e1de0e831d4695586c3c6c96317ac86338b051ca2d7915b0fe47b39",
+      "bytes": 2084
+    },
+    "charge-light-matching/event_mixing.py": {
+      "sha256": "ac635a0d34027e3ddfde633fc909c9e4151921a1e3825f3e2523df6764deb110",
+      "bytes": 6372
+    },
+    "charge-light-matching/event-mixing-results.json": {
+      "sha256": "8bb7be4cc01c38f07d37709e0701b7da121796e485173cc2c1a7e3b8422c15b3",
+      "bytes": 1951
+    },
+    "dcs-association/README.txt": {
+      "sha256": "d566c5243eb36d7ddf14809c581b1d5d6c81f52f077be0df3c042bb411768037",
+      "bytes": 3833
+    },
+    "dcs-association/plot_dcs.py": {
+      "sha256": "ba9a1f78814dfffea8860b02cd02d66b9921f3aae4bb302692941fcd01501a95",
+      "bytes": 2951
+    },
+    "aligned-detectors/aligned-data.npz": {
+      "sha256": "123f9181483a581da852d99fa3c162d8dcee96f0ff606495f25aa6c73808153f",
+      "bytes": 78468338
+    },
+    "shared-precursor/traces.npz": {
+      "sha256": "9cbbbb09a31434cea71b7f2acc98ad2543cca03823cb6e2adb22f71937562bda",
+      "bytes": 344180
+    },
+    "electrical-pattern-20261023/cache/r32731_e33.npz": {
+      "sha256": "34e7acfaa80a51d14a4fd7c8ed545f030d4ce24cb8697e75453970f6dd272c97",
+      "bytes": 45869
+    },
+    "charge-light-matching/event-mixed-drift-histograms.npz": {
+      "sha256": "eefced6cf8198688f4b17608f995054b70638cc3d2fd8e924977729c8eadb1fd",
+      "bytes": 9181
+    },
+    "dcs-association/july-dcs-series.npz": {
+      "sha256": "ce69da67445349e848ead9c9dae2825a82560fe5d8675bf5aaba3c6de67ee055",
+      "bytes": 2959359
+    }
+  },
+  "frozen_files": {
+    "plot-data.npz": "07f7e0488b260642935524d5ee7d9baaf5f82759b2b372eb92abb6bc0ea2e8fa",
+    "statistics.json": "94eeeb76d22f766ce93309ce771d084d0a340c20b8673c4354983324a0a2e405"
+  },
+  "status": "Existing exploratory results; no new detector analysis or data acquisition."
+}

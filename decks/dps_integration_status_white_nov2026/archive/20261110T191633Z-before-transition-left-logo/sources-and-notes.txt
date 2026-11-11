@@ -1,0 +1,301 @@
+VD detector protection — speaker notes
+I&I presentation, 28 October 2026
+
+The argument
+We begin with responsibilities and connections, then review the facility systems.
+The consortium interlock matrix introduces our method before the detector:
+check the proposed interlocks, trace each physical/control path, then identify
+hardware coverage and additions. The PLC logic explains how those functions
+are executed. Each detector system then gets its own description and example.
+
+1. Definitions and responsibilities
+DPS arbitrates protection. SC operates, monitors and coordinates requests; it
+owns the logs. DAQ consumes availability and activity. Equipment owners define
+limits, action time and scope. BMS and cryogenics retain control of their own
+systems. Local protection remains in place. During a phase without DPS, agree
+who protects the equipment; Manuel's starting proposal is its owning consortium.
+
+2. Facility information reaches DPS through SC
+FFDG BMS, SDSTA BMS and cryogenics each feed SC. SC and DPS communicate over
+OPC UA. Detector services communicate through SC/OPC UA; DPS uses SNMP for
+PDUs/WIENER supplies and EtherCAT for remote I/O. Wired supply inhibits are
+connected through that I/O. The SDSTA route is under investigation. The central
+DPS PLC in the CUC is a proposal. VD is the scope; HD may extend it or use another PLC.
+
+3. FFDG DUNE FD BMS
+ISD proposes a Metasys API in Batavia for the interface to DUNE FD SC. Manuel
+reports the API/SBN building exercise and OPC UA server for experiments there.
+The live-data licence is missing. Local tests demonstrate historical extraction
+and OPC UA replay, not a continuous qualified live feed. The native BMS field
+network is documented as BACnet; this is separate from the API integration.
+The vertical map locates DUNE building services within the wider SURF service
+infrastructure. Its 4850 HVAC/chilled-water and 4910 sump examples come from
+the BMS drawing/register. Cryogenic process control is outside the BMS scope shown.
+
+4. SDSTA BMS
+Reuse the map but highlight SDSTA site scope. Oro Hondo, Ross access/services
+and mine drainage extend beyond the detector caverns. The map does not assert
+that every named service is controlled by one BMS. The survey identifies actual
+controllers, I/O, available contacts, network/fibre ports and exported states.
+Protocols and exchange agreements remain under investigation. Rachel supports
+access coordination; Dale Curran is the identified SDSTA integration contact.
+Agree point meaning, ownership, allowable use, fault reporting and maintenance.
+
+5. Cryogenics
+Manuel clarifies that cryogenics lives in the CUC. Its internally divided
+controls appear as one system to DUNE. The architecture and historical design
+review describe process and safety controls. They do not constitute an agreed
+DUNE run-permit contract. Define the readiness states and valid source signals
+for each phase. Existing requirements identify low LAr level, relief-valve
+opening and specified boiling risks as HV/bias inputs. Some relevant levels
+originate in detector instrumentation; name the actual sensor/readout path.
+
+6. Start with the interlocks proposed by each consortium
+This is the transition into the detector review. The matrix contains the
+current ICD requirements and consortium proposals. Read each condition and
+proposed action, identify the protected loads, and trace source -> input ->
+decision -> actuator -> feedback. Include detection through completed shutdown.
+Use the existing rack lists, drawings, parts and power workbooks. Each reviewed
+rule contributes hardware already covered, additions with quantities, wiring/
+software tasks, and open choices that affect hardware. Several rules may use
+one physical endpoint; count it once. A missing description does not itself
+prove missing equipment. Keep requirement conflicts visible for owner agreement.
+
+7. DPS brain logic
+The commercial PLC extends the BDE approach. It receives conditions, input
+validity and SC requests; evaluates per-load permits; applies the outputs;
+and checks the resulting equipment state. A permitted enable requires a valid
+request, required conditions and no blocking trip. Trips retain cause/state.
+SC records cause, decision and readback. Reset and re-enable are separate.
+Specify stale-data, bus-loss and power-loss behavior per function rather than
+assuming a universal response. Existing local equipment interlocks remain active.
+These are the proposed logic principles, not a claim that the VD program is tested.
+
+8. Detector
+Intentionally empty divider, requested by Manuel.
+
+9. BDE system
+The VD baseline is ten groups of eight WIECs. Each uses one auxiliary I/O rack,
+two LV racks/two PL506 supplies and eight PTC/WIEC endpoints. Totals: 10 auxiliary
+racks, 20 LV racks, 20 PL506, 80 WIECs and 480 WIBs. Ten bias racks provide
+separate CRP/FC protection interfaces. Drawings, parts, power calculations,
+Ignition screens and test work already exist. No HD six-to-eight conversion
+is counted as VD additions. The detailed panel/screen source remains in the backups.
+
+10. BDE fan/bias example
+Fan RD signals enter via DB25 and EL1004, reach the PLC over EtherCAT, and
+operate the PL506 channel inhibit through EL2124. Readback should establish
+the affected WIEC's final voltage/state, not merely that a command was sent.
+The ISEG bias-inhibit route also exists. The dashed bias branch is conditional:
+the historical HD rule links cooling and APA bias; the current VD cooling row
+only assigns LV inhibition. A VD bias dependency needs explicit agreement.
+The six-fan note implies 48 fan-status signals per eight-WIEC group if that
+interface is used; it does not imply 48 additional inputs. Match terminals,
+cables, voting, startup behavior and action time to the actual VD design.
+
+11. PDS DAPHNE and DAQ
+The main diagram adapts Figure 1 of the working SC–PDS–DPS ICD. It retains the
+SC/OPC UA interface, DAPHNE ZMQ control/monitoring, DAQ CCM/opmon access and the
+separate Hermes IPBus/UDP configuration route. It adds DPS/SC OPC UA and the
+DPS/SNMP/LV supply power branch. The full source service figure is in backup 23;
+server deployment remains outside the main talk.
+Example: DPS requests a SiPM-bias inhibit through SC and the DAPHNE interface.
+Verify acknowledgement and measured bias state. SC advertises the resulting
+availability to DAQ, which uses it for run admission/recovery. The software
+path must satisfy the required response and failure behavior; it is not yet a
+qualified interlock. DAPHNE-controlled bias is distinct from cathode PoF power.
+The alternate power action uses the mapped LV supply via DPS/SNMP. PDS LV scope
+is 34 feeds; this does not establish one supply channel per board or module counts.
+
+12. PDS PoF
+Manuel confirms four voltage readings and one chassis temperature per box:
+80 boxes give 320 voltage and 80 temperature readings, total 400. This replaces
+the older 8 T + 8 V presentation case. It does not change the laser-driver count.
+Compare local Opta and Beckhoff PLC implementations against those physical
+signals. Monitoring reaches SC through OPC UA. The selected inhibition path
+is DPS -> SNMP -> rack PDU -> mapped PoF AC outlet. A separate box-enable
+signal is useful if available; it remains dashed/optional. Identify its electrical
+interface, affected channels and acknowledgement before specifying hardware.
+No DAQ interface or controller-per-box quantity is assigned to PoF.
+
+13. HV
+The HVS draft identifies one Heinzinger PNC HP300000, cRIO-9049 with NI-9239/9269,
+ten ISEG crates and 576 bias channels (480 CRP, 96 FC). The normal drift-HV
+control/readback is via LabVIEW/cRIO analog I/O. The DPS protection route uses
+EtherCAT remote I/O and a wired supply interlock. Bias supplies have both SNMP
+control/status and dedicated channel inhibits. Keep these roles distinct.
+The example combines low-level drift-HV inhibition with the separately stated
+requirement to shut down the associated FC terminations when drift HV trips.
+Map supply pins, channels and feedback; allow for voltage decay. The existing
+HVS/workbook disagreement over crate housing/location remains an engineering
+mapping item, not a reason to discard the established hardware description.
+
+14. CalCI thermometry
+RTDs use warm cables/readout and cRIO/LabVIEW. Fibre-temperature sensors use
+interrogator/readout services. Both publish through SC/OPC UA. Preserve sensor
+identity, position, source time and validity when data enters a protection rule.
+Thermal monitoring during cooldown/operation does not itself define a trip.
+The protected load, limit, persistence and required response must be stated.
+Level readout must be traced independently to its actual instrument/controller.
+Do not infer RTD/FBG population or a new central DPS terminal count from the diagram.
+
+15. CalCI lasers
+The local inventory has four ionization-laser stations; the October architecture
+shows the CIB OPC UA interface. The diagram links SC, DAQ/calibration requests,
+DPS via SC, the station controller and its independent local safety interlocks.
+Working rule O-002 denies conflicting laser/PDS operating requests and requires
+emission/shutter-off evidence before PDS return. It is an operating proposal,
+not an automatic PDS bias trip or a replacement for personnel laser safety.
+Trace station power, permits, output feedback and trigger connections. Exact
+native interfaces and installed equipment allocation still need completion.
+
+16. CalCI purity monitors
+The working hardware chain includes PrM HV/LV and front-end, xenon lamp,
+digitizer and LabVIEW control/readout. SC publishes activity/status to DAQ.
+Q-001 proposes allowing data acquisition with activity intervals and affected
+region tagged. The older EDMS PDS ICD instead requests SiPM bias off during PrM
+activity. This is a concrete requirement conflict for consortium agreement.
+Do not silently treat either proposal as approved. Trace lamp control/status,
+supply action and feedback; local electronics temperature and PrM RTDs are
+different measurements. Actual VD models/populations are not established by
+the simplified diagram.
+
+17. Rack infrastructure
+Racks, AC feeds, PDUs, smoke/humidity and sensor support are one system.
+Include temperature/leak sensors where fitted. Subsystems refer to PDU outlets;
+their supplies and dedicated inhibits remain in subsystem inventories. DPS
+controls PDUs over SNMP, with OPC UA to SC for requests/status/logging. Local
+PDU trips remain. Humidity monitoring does not create a shutdown requirement.
+TDE has 20 racks with PDU-only current control. Preserve crate-status/external-
+inhibit as future options. The PX3 guide is a reference prototype, not proof
+that its Ignition-direct fallback already implements the selected VD PLC chain.
+
+18. Bench tests
+Use BDE vertical-slice and G271 resources for representative paths. Inject a
+fault, observe actuator and final equipment state, and measure the whole delay.
+Test local trips, SC/bus/power loss, reset and re-enable, and SC logs. No critical
+sub-ms function has been identified so far in Manuel's review; consortia must
+check that assumption. Simulation prepares cases; hardware tests qualify timing.
+
+19. June 2027 hardware review
+The system/path review produces actual additions, channel/cable allocations
+and alternatives. Combine those with panel space, component power, drawings,
+parts, costs, lead times and spares. Procurement follows readiness review.
+Some facility interfaces may be needed in summer 2027. Full VD response-matrix
+review remains early 2028. These are the proposed milestones from the email thread.
+
+20. Responsibilities
+Manuel leads VD hardware with a control engineer. Terri/Trevor contribute BDE
+implementation and bench work. Geoff/Manuel address SC requests, protection and
+recovery. Vivian/consortia/DPS address equipment requirements and ICDs. These
+are proposed contributions, not accepted assignments. Control-engineering time
+and test-stand access are the concrete support needed.
+
+Backups
+21. Existing panel drawing and Ignition screen. Historical TPC source drawing,
+    not a verified installed VD panel. VD baseline remains eight WIECs/group.
+22. Detailed BDE cooling path and six-fan allocation check. Existing interfaces,
+    pending VD rule/mapping; no new-module purchase inferred.
+23. Working ICD Figure 1, with SC, DAQ CCM/opmon, Hermes and DAPHNE services.
+    Adapted only for slide styling/spacing; source commit bfb2a8b.
+24. VD rack space: 12U DPS in auxiliary/bias planning racks; 19U/10U marked Space.
+    Rack positions are not verified spare DIN rail or a new reservation.
+25. Bias draft: 20 rails x 18 EL2124 = 360 modules / 1,440 outputs. Do not subtract
+    576 bias channels and call the balance proven spare capacity.
+26. Power: PL506 expected input 20 x 2,254 W = 45.08 kW. Fans alone, conditional
+    on six per WIEC: 8 x 6 x 0.33 A x 24 V = 380.16 W/group. Bias supply allowance
+    24 V x 40 A = 960 W DC capacity. These are different quantities.
+27. Rack reference: PX3, 4WTAR-B, EOLR-1 and DX-PD2C5; humidity-probe identity
+    remains to be recorded. The 76-entry allowance is existing planning scope.
+28. PX3 local trips/recovery. The guide describes an Ignition-direct prototype
+    with fallback on loss of Ignition; selected VD PLC failure behavior needs tests.
+29. Other subsystem inventory, with the new 400-reading PoF case and TDE options.
+30. Twenty BMS drawing symbols are inspection references, not confirmed panels.
+    Eight are in the CUC area; SP-1/SP-2 are the 4910 sump interfaces.
+31. Seventy-six numbered mezzanine positions and a separate forty-mini-rack
+    top-plate concept. Rack positions, PDU counts and I/O station counts differ.
+
+
+28 October public-audience revision
+The 20 main-slide topics and order are unchanged. Detailed source IDs, historical
+qualifications and inspection logistics have been removed from the projected
+slides and remain in these notes and sources.json. The five complex diagrams on
+slides 2, 11, 12, 15 and 17 now come from editable draw.io pages.
+
+336 microTCA crates is the total across TDE and DAQ/timing, as Manuel clarified.
+Do not assign all 336 to TDE or infer PDU/switch quantities from that number.
+The individual subsystem split is not established by this revision.
+
+32. Device hierarchy: controls, facilities and racks
+Shared SC/DPS, network and rack devices are counted once. Facility domains retain
+their controls. Attached sensor and I/O devices are not all Ethernet endpoints.
+33. Device hierarchy: readout electronics and HV
+Lists the VD BDE and HV inventory and the combined microTCA population. TDE DPS
+control remains PDU-only; dedicated crate-status/inhibit interfaces are options.
+34. Device hierarchy: PDS and DAQ/timing
+The 42 DAPHNE boards and 8 calibration boxes are working-inventory counts. They
+do not establish a new number of power-supply controllers or physical LV modules.
+35. Device hierarchy: calibration and instrumentation
+Includes temperature, liquid level, lasers, purity monitors, neutron source and
+other instruments shown in the SC architecture. Unnumbered devices still need
+an allocation. The text/CSV hierarchy carries the detailed interfaces and status.
+
+The additional EDMS 2401090 attachments have been reviewed. See
+edms-export-review-20261028.txt for hashes, page references, exact matches and
+historical HD/VD distinctions. Fan/heater and environmental I/O families were
+added to the hierarchy; licences were added to procurement preparation. The
+historical bias-before-LV sequence is not adopted as an agreed VD rule.
+
+
+10 November native TikZ revision
+Slides 2, 11, 12, 15 and 17 now use diagrams/*.tikz.tex, compiled with the
+shared Beamer framework. Node labels and links retain the 28 October meaning,
+except SDSTA BMS is now SDSTA SCADA in the overview, following Manuel's example.
+The dashed SDSTA connection remains under study; the PoF enable remains optional.
+This changes the drawing source and build path, not the engineering status.
+The earlier sources and rendered deck are retained in archive/20261110T153535Z-before-native-tikz/.
+
+
+10 November white design version
+Separate version in dps_integration_status_white_nov2026. The shared white
+profile replaces the dark canvas and title bands. Diagram outlines and labels
+are dark, and nodes are unfilled. Captions explain arrows and dashed paths.
+Titles state the slide's point. Quantities and engineering qualifications
+retain the October baseline. No new site, equipment or protection test is claimed.
+Reference drawings and operator screenshots retain their original colours.
+
+
+November I&I meeting revision, 10 November 2026
+Manuel requested a title, November 2026 meeting identity and date on every slide,
+both DUNE and Fermilab logos, and a centred Detector transition.
+All earlier slides and technical backups remain in the main PDF, following
+his later instruction to keep everything for now. New slides cover the known
+BDE/PDU basis, the missing full connection list, extension of BDE, two proposed
+milestones, fire-system separation, and the FFDG / SDSTA commissioning update.
+31 January and 31 March 2027 are proposed planning dates, not agreed deadlines.
+The supplied email is retained in full in commissioning-update-20261110.txt.
+Its next-business-day support, six-month transition and Modbus TCP discussion
+are reported inputs, not formal commitments or verified installed interfaces.
+The email's air-gap wording is not adopted as a security conclusion. Read-only
+access, permitted variables and network controls still need agreement and checks.
+A possible equipment-status feed to responders is a discussion idea. No feed,
+recipient agreement or DPS role in fire detection/alarm control is claimed.
+
+
+DAPHNE reference correction, 10 November 2026
+At Manuel's request, slide 18 now includes the same native TikZ source as
+slide 31: diagrams/daphne-icd-reference.tex. The diagram file is unchanged.
+The working ICD at bfb2a8b distinguishes SC and DAQ CCM clients, configuration
+request/response, published monitoring, and the independent Hermes IPBus/UDP
+endpoint. The prior simplified diagram merged CCM and Hermes and obscured
+these distinctions. It is retained only in the pre-correction archive.
+The proposed DPS-to-SC-to-DAPHNE bias path is stated separately in text; the
+reference service diagram does not establish a DPS, SNMP supply or power link.
+The 34 PDS LV feeds, SC status/DAQ note and next-slide PoF reference remain.
+
+
+Branding layout clarification, 10 November 2026
+Title and Detector transition use a large grey DUNE mark on the right and no footer.
+Content and backup slides retain the meeting/date and page count, with only
+a black Fermilab logo. The existing DUNE and Fermilab logo shapes are retained
+through native SVG alpha masks and neutral fills; source PNGs are unchanged.

@@ -1,0 +1,20 @@
+{
+  "created_at": "20261028T190842Z",
+  "reason": "Before public-audience polish, 336 uTCA correction and device hierarchy",
+  "sha256": {
+    "main.txt": "dd2afa464a19eb7b7ce7cdb74207c2f334d789349c9ddcfe9e419e3a45e85744",
+    "backup-slides.tex": "4fea7b455a5d7f0fab10a74c750a5759a336712b1ad72d9b778027f85aa08e3c",
+    "sources.json": "c37d5d54a52f6f393670b8573bca07039db15af52797b88bbc7ab61a36087df1",
+    "README.md": "f4b5f64d852ef9d26892de55d408c13cb203ebff1cedb8b138fe08b48bbce871",
+    "main.tex": "7c36500d2d8f43a87836bfe9d069227d1d1df5dc78d53083b501e18d29be4030",
+    "main.pdf": "97f1aeffba767d17fe67730f0b708e1d32670d748eed41a2b39a7c44ae030e48",
+    "verification-latest.txt": "ae4be526b647e5f0981cede41484432f514dda7bc24857069835cac769464c1f",
+    "sources-and-notes.txt": "6720f6ca6ad3cb6e9da117ef256484a2340d659f90a1f3e9cc372a30f32909bf",
+    "architecture-inputs-20261027.txt": "6cc5656cb0c1ef529317b2b2845c3a6b0f7480d777ebc97be4ae8f519ef1dc44",
+    "source-review.txt": "118589d9748246565fdc79e415369b0619f6b9c153b0e86f253a3cef8b6cb16c",
+    "verification-20261027T225133Z-system-sequence.json": "3f51969fc5589f6a05962e5c57bbf8cf63e9c42f64c5a2c54cc9c398f96451eb",
+    "render-check.json": "1e9c2258bee8bb5ed80d1b654c38783283bb28c53272ab0d1e166f5063b1b5f7",
+    "diagrams/site-boundaries.tex": "1ced215320e4ecdc09d5aa100fe1a7dbfef78c65c3ebf47d2620568afad32e6b",
+    "diagrams/daphne-icd-reference.tex": "890e6dec7dde96f5ea9ea73f035c8fe5a0ec405a555ace29d26803b9db9e253f"
+  }
+}

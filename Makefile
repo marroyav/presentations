@@ -29,7 +29,7 @@ decks/grouped32_simulation_sep2026/design-tokens.json: decks/grouped32_simulatio
 decks/grouped32_simulation_sep2026/diagrams/%.pdf: decks/grouped32_simulation_sep2026/diagrams/%.dot.in decks/grouped32_simulation_sep2026/design-tokens.json scripts/render_diagram.py
 	$(PYTHON) scripts/render_diagram.py $< $@ --tokens decks/grouped32_simulation_sep2026/design-tokens.json
 
-decks/%/main.pdf: decks/%/main.tex templates/dune-professional/beamerthemeDUNEProfessional.sty $$(wildcard decks/$$*/*.tex) $$(wildcard decks/$$*/fonts/*.ttf) $$(wildcard decks/$$*/fonts/*.tex) $$(wildcard decks/$$*/diagrams/*) $$(wildcard decks/$$*/figures/*) $$(wildcard decks/$$*/schematics.json) | diagrams
+decks/%/main.pdf: decks/%/main.tex templates/dune-professional/beamerthemeDUNEProfessional.sty $$(wildcard decks/$$*/*.tex) $$(wildcard decks/$$*/fonts/*.ttf) $$(wildcard decks/$$*/fonts/*.tex) $$(wildcard decks/$$*/diagrams/*) $$(wildcard decks/$$*/figures/*) $$(wildcard decks/$$*/commands/*) $$(wildcard decks/$$*/schematics.json) | diagrams
 	cd decks/$* && $(TECTONIC) $(TECTONIC_FLAGS) main.tex
 
 schematics:
@@ -68,3 +68,18 @@ new-deck:
 
 clean:
 	find decks examples -type f \( -name '*.aux' -o -name '*.log' -o -name '*.nav' -o -name '*.out' -o -name '*.snm' -o -name '*.toc' -o -name '*.vrb' -o -name '*.xdv' \) -delete
+
+# Standalone report; build only this report with `make pds-readout-report`.
+PDS_READOUT_REPORT := reports/pds_readout_tests_oct2026
+.PHONY: pds-readout-report
+pds-readout-report: $(PDS_READOUT_REPORT)/main.pdf
+
+$(PDS_READOUT_REPORT)/main.pdf: $(PDS_READOUT_REPORT)/main.tex $(PDS_READOUT_REPORT)/build_report.py $(wildcard $(PDS_READOUT_REPORT)/evidence/*.json)
+	$(PYTHON) $(PDS_READOUT_REPORT)/build_report.py
+	cd $(PDS_READOUT_REPORT) && $(TECTONIC) $(TECTONIC_FLAGS) main.tex
+
+# Plain-language ground-shake summary; input checks precede the PDF build.
+.PHONY: ground-shakes-report
+ground-shakes-report:
+	$(PYTHON) reports/ground_shakes_nov2026/build_report.py
+	cd reports/ground_shakes_nov2026 && $(TECTONIC) $(TECTONIC_FLAGS) main.tex

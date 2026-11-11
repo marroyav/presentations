@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-09",
+  "result": "PASS",
+  "repository": "https://github.com/DUNE/dune-dscs",
+  "tested_commit": "3a9e54e052fd441ba08e3c02a6f19076f4acdf1d",
+  "source_report_sha256": "10e88d6123ea39925a0db9a0912f42948c70643ebc021c63ddcef71371d6dcd2",
+  "source_report_local_path": "/home/arroyave/.local/share/dune-dscs-validation/pr8/20261109-pnlwdeiw/report.json",
+  "native_emulator_counts": {
+    "wib_zmq": 480,
+    "daphne_zmq": 42,
+    "snmp_pdu": 441
+  },
+  "total_emulator_processes": 963,
+  "successful_polls": 43011,
+  "successful_configure_readbacks": 3852,
+  "restarted_devices": 7,
+  "planned_outage_seconds": 6,
+  "expected_outage_failures": 18,
+  "unexpected_failures": 0,
+  "duration_seconds": 56.547427196999706,
+  "cleanup_complete": true,
+  "qualification": "The 336 extra SNMP PDU instances were load placeholders. This run did not test uTCA/IPMI, a production bridge, OPC UA or Ignition; it is not a hardware or production-capacity qualification."
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "repo": "fddetdataformats",
+    "exit": 0,
+    "refs": "35b805d2544decbeabdae190d7cae171cf6b9b37\trefs/heads/marroyav/pds-minimal-fddaq-v5.7.1",
+    "error": ""
+  },
+  {
+    "repo": "fdreadoutlibs",
+    "exit": 0,
+    "refs": "a7bd4769f3959d71ebfdd6ccaa80fd2ed0506fd2\trefs/heads/marroyav/pds-minimal-fddaq-v5.7.1",
+    "error": ""
+  },
+  {
+    "repo": "datahandlinglibs",
+    "exit": 0,
+    "refs": "5fb4c03cf3eb6c58274cbef226dcb5b76efa448e\trefs/heads/marroyav/pds-minimal-fddaq-v5.7.1",
+    "error": ""
+  },
+  {
+    "repo": "hermesmodules",
+    "exit": 0,
+    "refs": "b8928d1d3f4ddf23d5cdc5777527ce890bb666c6\trefs/heads/marroyav/pds-minimal-fddaq-v5.7.1",
+    "error": ""
+  },
+  {
+    "repo": "dpdklibs",
+    "exit": 0,
+    "refs": "b91206fca1804ae9ff6a89984e8f5260ccca48b6\trefs/heads/marroyav/pds-minimal-fddaq-v5.7.1",
+    "error": ""
+  },
+  {
+    "repo": "fdreadoutmodules",
+    "exit": 0,
+    "refs": "a039001d271d40f5fd74c7a0a2727b062115fa0a\trefs/heads/marroyav/pds-minimal-fddaq-v5.7.1",
+    "error": ""
+  },
+  {
+    "repo": "appmodel",
+    "exit": 0,
+    "refs": "",
+    "error": ""
+  }
+]

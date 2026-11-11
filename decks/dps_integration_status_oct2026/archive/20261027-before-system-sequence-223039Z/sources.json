@@ -1,0 +1,439 @@
+{
+  "revision_date": "2026-10-27",
+  "scope": "VD only. HD later by extension or separate PLC.",
+  "context": "User-supplied I&I email thread, 23–26 October, and subsequent clarifications.",
+  "references": [
+    {
+      "id": "rack-workbook",
+      "path": "/home/arroyave/work/racks/sources/rack-estimates/FD2_Rack_Estimates_May_2025_TMS.xlsx",
+      "revision": "May 2025 VD planning workbook",
+      "location": "RACKS; BDE LV RACK!D27,K27:K29; BDE Aux Rack!B14:F14,K13:K23,B57,B59:B61; Bias HV Rack!B3,B15:F15,K17:K22; FD2 MiniRack combined; Standard Rack!B5:B7; Power Summary!B28; BDE Aux Rack!A26:B44; Bias HV Rack!A36:B45",
+      "use": "VD rack allocations, marked rack space, reference rack protection package, bias-panel components and stated power assumptions",
+      "sha256": "ce887de4442c46f611c1dd2d72688bc7ec80033612ec40604bcdfef430f2706b"
+    },
+    {
+      "id": "sc-infrastructure",
+      "path": "/home/arroyave/work/racks/sources/power-planning/2026-06-10_SC_Infrastructure_and_Installation.pdf",
+      "revision": "Ting Miao, 10 June 2026",
+      "location": "Slide 4 / PDF p5; slides 8,10 / PDF pp9,11",
+      "use": "BDE groups and HV interfaces; central PLC location TBD",
+      "sha256": "8a40338cf3efc91396d62ead3f4d15dcf9c7da827b5772e47cf9a2e345aab7a2"
+    },
+    {
+      "id": "sc-progress",
+      "path": "/home/arroyave/work/racks/sources/power-planning/2026-06-10_SC_Progress.pdf",
+      "revision": "Ting Miao, 10 June 2026",
+      "location": "Slides 4–8 / PDF pp5–9, especially slide 6 / PDF p7; slide 26 / PDF p27; slide 21 / PDF p22; slide 29 / PDF p30",
+      "use": "BDE Ignition front end, 20 rows, 10 I/O groups, existing test work and shared SNMP protocol for WIENER/ISEG supplies and PDUs; rack remote-I/O concept; Opta PLC and Beckhoff PLC alternatives for PoF",
+      "sha256": "ae9ff086c81c9b2306c1313ea34fc2693ae95893982d6ca8c4a085eff1335edc"
+    },
+    {
+      "id": "bde-icd",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/3293079/1/DUNE_ICD_SC_TPCE-BDE_v1_docx_cpdf.pdf",
+      "revision": "EDMS 3293079 v1; attachment internal revision 1.4",
+      "location": "PDF pp4–8: section 3.2 (p6) SNMP agents; section 5 (p7) TTL inhibits",
+      "use": "VD WIEC/WIB/PL506 counts, SNMP equipment interface, additional hardwired inhibits and Fermilab test arrangements",
+      "sha256": "d29cc863fd1cd1685db0979b1788709cc499736e1e0fad6033aca9be4c4481d5"
+    },
+    {
+      "id": "panel-drawing",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/F10xxxxxx-Prelim_-_DDSS_Controls.pdf",
+      "revision": "EDMS 2401090 v4; preliminary TPC reference drawing",
+      "location": "Sheet 2 / PDF p2",
+      "use": "Existing panel drawings; use as reference, not a new VD design",
+      "sha256": "b34e11bf4d0827fcb28a61625e878691e253856de07e5fc067c239ba5d5c7a9c"
+    },
+    {
+      "id": "parts-list",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/CE_Interlock_Parts_List.xlsx",
+      "revision": "EDMS 2401090 v4; updated 11 April 2023",
+      "location": "Interlocks M&S rows 5–45",
+      "use": "Historical TPC component choices, OPC UA licence, spares and costs; map the actual VD population separately",
+      "sha256": "c0f0605fbb6d4d7ed87081235b179f665db732dde3f890d71967da98600476bd"
+    },
+    {
+      "id": "power-analysis",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/2401090/4/DDSS_Controls_Power_Analysis.xlsx",
+      "revision": "EDMS 2401090 v4; older TPC population",
+      "location": "PLC Rack; TPC LV Rack; Bias HV Rack",
+      "use": "Existing calculation structure, not current VD totals",
+      "sha256": "7bb776e6b5f36948a8716f556104056f4b9dc63f52bb4f5a888ee5f76fc509e4"
+    },
+    {
+      "id": "px3-setup",
+      "path": "/home/arroyave/work/racks/sources/docdb-32655-v8/PX3_Rack_Protection_Setup.pdf",
+      "revision": "DUNE-doc-32655 v8; guide dated 5 June 2026",
+      "location": "Sections 2, 3, 4.3 and 5; Appendix A; PDF pp3–6,14–16",
+      "use": "PX3/smoke-interface hardware, sensor support, reference local fallback and deliberate recovery. The guide uses an Ignition-direct prototype; the proposed VD control chain follows manuel-architecture.",
+      "sha256": "df707a5e923cbcb81f2ae288c1a5705de8588f83475818f0ba3b2ce56fad7f72"
+    },
+    {
+      "id": "g271",
+      "path": "/home/arroyave/work/racks/sources/docdb-37378-v2/dune-sc-devices-g271.pdf",
+      "revision": "DUNE-doc-37378 v2; 7 July 2026",
+      "location": "PDF pp3–4",
+      "use": "Distinguishes installed test-rack items and then-planned additions",
+      "sha256": "b40bb9a9d207092bc2b7aa781bd686a417b7310684f16bedddc4ae2c777222d2"
+    },
+    {
+      "id": "sc-architecture",
+      "path": "/home/arroyave/work/kerberos-doc-access/record/architecture-inputs-20261021/DUNE Far Detector Slow Control System Architecture.pdf",
+      "revision": "User-supplied Trevor Nichols diagram; PDF metadata 7 October 2026; approval not established",
+      "location": "PDF p1",
+      "use": "PLC OPC UA/ADS; remote-I/O and equipment layout; central PLC rack TBD",
+      "sha256": "9771a3967d5644c1efbff134c7d88d3d12c0d3f92929ced515470d02532e2feb"
+    },
+    {
+      "id": "cryo-architecture",
+      "path": "/home/arroyave/work/kerberos-doc-access/record/architecture-inputs-20261021/LBNF Far Site Cryo Control System Architecture.pdf",
+      "revision": "User-supplied diagram; PDF metadata 4 May 2026; approval not established",
+      "location": "PDF p1",
+      "use": "CUC/VD/HD cryogenic and ODH domains; not a DPS rack allocation",
+      "sha256": "0b990b9865dddd722306e1f984f0e9f5a3a75eb07b6a0712380757edd5a1a1df"
+    },
+    {
+      "id": "pds-inventory",
+      "path": "/home/arroyave/work/vd-dps-plan/pds-hardware-control.md",
+      "revision": "Working inventory with user-supplied counts",
+      "location": "Inventory and SENSORS",
+      "use": "PoF box and monitoring populations only. PDS LV count is supplied by manuel-architecture; the older inventory does not govern that count.",
+      "sha256": "b46794086fec2e66287dff520c2dd62cdcf986902c03e7b822e3afc96963ced3"
+    },
+    {
+      "id": "matrix",
+      "path": "/home/arroyave/work/vd-dps-plan/integration-matrix-20261023/rules.json",
+      "revision": "Revision 0.2, 27 October 2026; 46 rules from 16 sources",
+      "location": "FAC-01, DPS-C001, RACK-01, Q-001, O-001 and hardware interface fields",
+      "use": "Starting conditions/actions for inhibit-path reviews; Rack infrastructure is its own group; the full response matrix remains under development",
+      "sha256": "60de6a03e22abb76e65492a7126f546aa0a8fdfad5922a2492bace97f2eab84a"
+    },
+    {
+      "id": "simulation",
+      "path": "/home/arroyave/work/sc_emu/RESULTS.md",
+      "revision": "Reference software tests, October 2026",
+      "location": "Reference results and test limits",
+      "use": "Software monitoring/configuration evidence; no PLC trip-time qualification",
+      "sha256": "de269987cea890cd373d27a2588e79a9b7a162283bc055b7f9153c280f237873"
+    },
+    {
+      "id": "hv-inventory",
+      "path": "/home/arroyave/work/vd-dps-plan/hv-hardware-control.md",
+      "revision": "Working VD inventory",
+      "location": "Inventory and Hardware",
+      "use": "Ten bias crates and 576 bias channels; other provisional protocol choices are not adopted",
+      "sha256": "cd662776896157ada755a4eb02d8996bd3478fb960707750b4563dd7be77fc90"
+    },
+    {
+      "id": "site-survey",
+      "path": "/home/arroyave/work/vd-dps-plan/development-20261021/SITE_SURVEY.txt",
+      "revision": "Working inspection notes, October 2026",
+      "location": "Panel list and drawing references",
+      "use": "U-FD-M-901 rev12 references; planned observations distinguished from installed equipment",
+      "sha256": "7d5b35ee7e5847c3c1b7fdac2921adedd28efbd229be98a0608e724cc8afa4cf"
+    },
+    {
+      "id": "panel-register",
+      "path": "/home/arroyave/work/vd-dps-plan/development-20261021/panel-survey-register.csv",
+      "revision": "Working inspection register, October 2026",
+      "location": "S01–S20",
+      "use": "Twenty drawing symbols, including eight CUC references and two 4910 sump interfaces",
+      "sha256": "59fc499930c1729685fe1dbe88bded283ec6b4c79a0cec989b1ba95ccd446bfc"
+    },
+    {
+      "id": "manuel-architecture",
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/architecture-inputs-20261027.txt",
+      "revision": "User instructions, 27 October 2026",
+      "location": "Roles and routes; VD counts; inhibit tracing; separate rack infrastructure; shared SNMP control; BDE/bias wired protection; current/future TDE scope",
+      "use": "Current presentation design basis",
+      "sha256": "63a92a50402fdd4409a34b8efac564e64d98c4b2ddeeda3eaa139db30a807b02"
+    },
+    {
+      "id": "original-presentation",
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_oct2026/archive/20261023-before-ii-feedback/main.tex",
+      "revision": "Original 23 October 2026 presentation",
+      "location": "Three systems, three jobs; facility inputs; protection can block an operating request",
+      "use": "Restored definitions and conceptual sequence",
+      "sha256": "8aa8b8de9befc7edf9794590a45348982e126978ab2ca8e63112d28d0e506070"
+    },
+    {
+      "id": "sc-dps-interface",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/2907050/1/2023-07-10-FD1andFD2-SC_and_DDSS_interfaces_and_requirements_docx_cpdf.pdf",
+      "revision": "EDMS 2907050 v1, released copy checked 21 October",
+      "location": "PDF pp4–5 and p13",
+      "use": "Historical definitions and low-level/HV example; current roles follow Manuel and supplied email",
+      "sha256": "16b3699b46365b7172f39230db7bb275ae043a9dffe70d31246a30285824222a"
+    },
+    {
+      "id": "inhibit-review-baseline",
+      "path": "/home/arroyave/work/vd-dps-plan/inhibit-path-review-20261027/hardware-baseline.txt",
+      "revision": "Working review, 27 October 2026",
+      "location": "Subsystem and facility hardware baseline",
+      "use": "Documented equipment and interfaces used before counting additions",
+      "sha256": "d44ae907a0a4afc7ed2f746e493b94519d5791a51ba13caa534790a497e80e7e"
+    },
+    {
+      "id": "bde-cooling-review",
+      "path": "/home/arroyave/work/vd-dps-plan/inhibit-path-review-20261027/DPS-C001.txt",
+      "revision": "Working review, 27 October 2026",
+      "location": "DPS-C001 physical/control path, quantities and open allocations",
+      "use": "BDE cooling example; distinguishes six-fan VD signal requirement from a new-module count",
+      "sha256": "7d5908d571dba353a36eeae761b2cffa1ad1fb3d447b8b1349f7fe4d7e51c07f"
+    },
+    {
+      "id": "facility-fire-review",
+      "path": "/home/arroyave/work/vd-dps-plan/inhibit-path-review-20261027/FAC-01.txt",
+      "revision": "Working review, 27 October 2026",
+      "location": "FAC-01 source, drift-HV and bias shutdown branches",
+      "use": "Example of named facility alarm and reuse of existing protection outputs",
+      "sha256": "4f2370fb545a95aaaf762afd659094c81c85ab2244e479517411acd82f605911"
+    },
+    {
+      "id": "rack-infrastructure",
+      "path": "/home/arroyave/work/vd-dps-plan/rack-infrastructure-hardware-control.txt",
+      "revision": "Working review, 27 October 2026",
+      "location": "Scope, hardware inventory, control path and interface gaps",
+      "use": "Separate rack/PDU/sensor system; shared hardware counted once",
+      "sha256": "e3a4870f26d818643a5b0c45e141e45f3e4b9764b9ac7e7064f9d8ec86cd69de"
+    },
+    {
+      "id": "wiec-safety-note",
+      "path": "/home/arroyave/work/document-library/recovered/work/wl-144132/dune-docdb-downloads/files/DUNE-doc-34374-v1/WIEC_Electrical_Safety_Note.docx",
+      "revision": "DocDB 34374 v1 attachment; internal rev 0; modified 19 September 2025; not established as released EDMS 3342150 v2",
+      "location": "Sections 4.1, 4.2 and 4.6; figures 6 and 10",
+      "use": "Six individual fan power/return/rotation circuits; AAVID PEAD26025BHPR00, 24 V, 0.33 A; conditional fan-status and fan-only load calculations",
+      "sha256": "e45af98db107fc83935206bda21a4090a108b9b9fc6f2a2055aef155c62bcba4"
+    },
+    {
+      "id": "iceberg-hardware",
+      "path": "/home/arroyave/work/document-library/recovered/work/wl-144132/dune-docdb-downloads/files/DUNE-doc-25905-v9/Iceberg DPS Hardware Design Note.pdf",
+      "revision": "DocDB 25905 v9 attachment; 27 June 2022 hardware note",
+      "location": "PDF pp6–8",
+      "use": "Four-fan reference: EL1004 inputs/pull-ups, EL2034 fan power/diagnostics, EL2124 5 V PL506 inhibits, EL9505 output-bank supply and EK1521",
+      "sha256": "4c081a545412aacdd7741f6fc6372ab11214f06cc65e67e44b2137fded55ab75"
+    },
+    {
+      "id": "hvs-icd",
+      "path": "/home/arroyave/work/kerberos-doc-access/downloads/3315615/1/DUNE_ICD_SC_HVS_v2_docx_cpdf.pdf",
+      "revision": "EDMS 3315615 v1 attachment; internal v2 In Work, modified 19 October 2026",
+      "location": "PDF pp5,7–10",
+      "use": "VD Heinzinger and cRIO control; ten ISEG crates, 576 bias channels; dedicated interlocks and all CRP/FC fire-shutdown scope",
+      "sha256": "4f2d9f62076f88377a63cb98f4afefce4c258adf613b32a3a101e47bf61adc8c"
+    },
+    {
+      "id": "rack-smoke-wiring",
+      "path": "/home/arroyave/work/racks/sources/docdb-32655-v8/PX3 Smoke Sensor wiring.pdf",
+      "revision": "DocDB 32655 v8 attachment",
+      "location": "Smoke-sensor wiring drawing",
+      "use": "4WTAR-B / EOLR-1 / DX-PD2C5 reference wiring",
+      "sha256": "7231ee913db859ed16a67b4b5d88f517f21d4b22effad3f96db234b98c8a5c97"
+    },
+    {
+      "id": "pof-corrected-inventory",
+      "path": "/home/arroyave/Downloads/PDS_Operational_Variables_v1.1_Draft.xlsx",
+      "revision": "Working v1.1 draft; PoF population corrected with Manuel on 14 October 2026",
+      "location": "PoF monitoring entries",
+      "use": "Eight temperature and eight voltage readings per PoF box; no inferred central PLC-terminal population",
+      "sha256": "583ff7edc920ecacbed307dcaf03a02bcb7fe0059ce766fe8777ddc15fa1a98f"
+    }
+  ],
+  "figures": [
+    {
+      "path": "figures/tpc-panel-reference.pdf",
+      "source_id": "panel-drawing",
+      "page": 2,
+      "trim_bp": [
+        290,
+        500,
+        900,
+        430
+      ],
+      "treatment": "Unmodified source PDF; clipped on slide; DunePaper background for transparent source. Reference panel layout, not a new VD electrical design."
+    },
+    {
+      "path": "figures/sc-progress-june2026.pdf",
+      "source_id": "sc-progress",
+      "page": 7,
+      "trim_bp": [
+        10,
+        210,
+        460,
+        74
+      ],
+      "treatment": "Unmodified source PDF; crop of existing BDE Ignition screenshot."
+    }
+  ],
+  "limits": [
+    "Presentation and source review only; no installed-equipment or response-time qualification.",
+    "Pinned local documents reviewed; no fresh EDMS latest-revision check.",
+    "CUC location and work assignments remain proposals. Inhibit review is underway; no complete additions bill of materials is claimed.",
+    "Historical TPC quantities/costs are not VD procurement quantities/costs. Eight WIECs per group is the VD baseline, not an HD conversion to purchase.",
+    "Marked rack space is not verified free DIN-rail capacity or a new reservation. First-pass output capacity is not verified spare capacity.",
+    "Six-fan calculations depend on the recovered WIEC interface note; the populated VD terminal and cable allocation is not established here."
+  ],
+  "derived_quantities": {
+    "bias_rails": {
+      "calculation": "10 racks x 2 rails = 20 rails",
+      "source": "rack-workbook, Bias HV Rack!K17:K18"
+    },
+    "bias_output_modules": {
+      "calculation": "20 rails x 18 EL2124 = 360 modules; 360 x 4 outputs = 1440 outputs",
+      "status": "First-pass layout capacity, not approved purchase quantity or verified spare capacity"
+    },
+    "comparison_bias_channels": {
+      "value": 576,
+      "source": "rack-workbook, Power Summary!B22:B23; working VD HV inventory",
+      "note": "Map inhibits before interpreting unused output capacity."
+    },
+    "pl506_input_power": {
+      "calculation": "20 x 2254 W = 45080 W, displayed as about 45.1 kW",
+      "source": "rack-workbook, BDE LV RACK!D27,K27:K29",
+      "status": "Expected AC input estimate using workbook load and efficiency assumptions; not measured"
+    },
+    "pof_monitoring": {
+      "calculation": "80 boxes x (8 temperature + 8 voltage readings) = 1280 monitoring values",
+      "source": "pof-corrected-inventory; pds-inventory",
+      "status": "Working monitoring population, not central PLC terminal count"
+    },
+    "wiec_fan_status": {
+      "calculation": "6 status signals x 8 WIECs = 48 per VD group; 80 WIECs x 6 = 480 for VD",
+      "source": "wiec-safety-note; sc-infrastructure and bde-icd for VD grouping",
+      "status": "Conditional six-fan baseline requirement; compare to actual VD terminal/cable allocation before counting additions"
+    },
+    "wiec_fan_load_only": {
+      "calculation": "8 WIECs x 6 fans x 0.33 A x 24 V = 380.16 W per group",
+      "source": "wiec-safety-note; VD grouping from sc-infrastructure",
+      "status": "Fan rated load only; excludes heaters and populated I/O; not total panel input power or new load"
+    },
+    "bias_supply_capacity": {
+      "calculation": "24 V x 40 A = 960 W DC capacity per rack",
+      "source": "rack-workbook, Bias HV Rack",
+      "status": "Supply capacity, not measured load"
+    },
+    "rack_space": {
+      "auxiliary": "12U DPS allocation; 19U marked Space, U3–U21; ground-plane note at U9",
+      "bias": "12U DPS allocation; 10U marked Space, U3–U12",
+      "source": "rack-workbook, BDE Aux Rack and Bias HV Rack",
+      "status": "Workbook allocations only; panel depth, DIN-rail layout, cabling and power determine usable expansion"
+    },
+    "rack_protection_allowance": {
+      "value": 76,
+      "source": "rack-workbook, Power Summary!B28",
+      "status": "Existing rack-protection/PDU planning entries; not 76 additional purchases or a complete VD/roof installed inventory"
+    }
+  },
+  "presentation": "Fourteen main slides: definitions and four input domains → detector control paths → existing BDE → trace each inhibit → BDE cooling and rack examples → detector/facility additions → prototypes and June 2027 procurement readiness. Eight backup slides.",
+  "current_architecture": {
+    "source_id": "manuel-architecture",
+    "dps_input_domains": [
+      "FFDG BMS",
+      "SDSTA BMS",
+      "Cryogenics",
+      "Detector"
+    ],
+    "detector_contains": [
+      "SC",
+      "Subsystems",
+      "Rack infrastructure"
+    ],
+    "sc_role": "Operation, monitoring and central data/event logging",
+    "dps_role": "Protection arbitration",
+    "pdu_control_chain": [
+      "Ignition",
+      "DPS PLC",
+      "PDU"
+    ],
+    "local_interlocks": "Retained; can trip independently",
+    "pds_lv_count": 34,
+    "count_basis": "Explicit correction by Manuel; replaces the prior PDS LV entry. No new supply-module count is inferred.",
+    "sc_dps_transport": "OPC UA: control requests, status and events between SC/Ignition and the DPS PLC",
+    "protection_path": "DPS arbitrates protection. PDUs and WIENER supplies share SNMP control/status to the PLC. BDE/bias EtherCAT remote I/O and dedicated PL506/ISEG wired inhibits are visible in the same overview. Additional subsystem OPC UA goes through SC.",
+    "proposal_diagram": "One detector overview on slide 4; CUC location proposed. Slide 7 explains the inhibit tracing method; slides 8–9 show BDE cooling and separate rack infrastructure.",
+    "additional_interfaces": "PDS/CalCI interfaces and possible future TDE interfaces ↔ OPC UA ↔ SC/Ignition ↔ OPC UA ↔ DPS PLC; current TDE control is via PDUs only.",
+    "pdu_connection": "SNMP control/status between DPS PLC and PDUs; grouped with LV supplies on the same connection; local interlocks retained",
+    "tde_scope": {
+      "racks": 20,
+      "available_control": "PDU control only",
+      "possible_extensions": [
+        "Crate-status exchange",
+        "External inhibit interface"
+      ],
+      "presentation": "Keep PDU-only current control distinct from possible future crate-status and external-inhibit interfaces."
+    },
+    "presentation_exclusions": [
+      "SC–OPC UA bridge-server implementation"
+    ],
+    "lv_supply_control": "SNMP control/status between DPS PLC and LV power supplies, grouped with PDUs. Documented BDE/PL506 TTL enable/inhibit inputs remain additional hardware protection interfaces.",
+    "device_control_protocol": "SNMP for both PDUs and WIENER LV power supplies",
+    "rack_infrastructure": "Rack/enclosure, feeds, PDU(s), smoke/humidity sensors and sensor support/power/relay/wiring; temperature/leak where fitted. Count once and map subsystem loads to outlets. No humidity shutdown rule is inferred.",
+    "ffdg_route": "API via Batavia server at FNAL → SC → DPS. Specific point availability remains to be mapped; this exchange itself adds no discrete/analog PLC terminals.",
+    "sdsta_route": "Under investigation; available signals, controllers and connection points determine any interface hardware.",
+    "pof_options": [
+      "Arduino Opta PLC",
+      "Beckhoff PLC"
+    ]
+  },
+  "protocol_evidence": {
+    "pdu": {
+      "source_id": "px3-setup",
+      "location": "Sections 2 and 4.3",
+      "finding": "SNMP control/status; reference setup uses v2c"
+    },
+    "lv_supplies": {
+      "source_id": "bde-icd",
+      "location": "Section 3.2, PDF p6",
+      "finding": "SNMP agents on PL506, MPOD ISEG and MPV supplies"
+    },
+    "shared_protocol": {
+      "source_id": "sc-progress",
+      "location": "Slide 26, PDF p27",
+      "finding": "WIENER/ISEG supplies and PDUs grouped under SNMP"
+    },
+    "additional_hardwired_interlock": {
+      "source_id": "bde-icd",
+      "location": "Section 5, PDF p7",
+      "finding": "PL506 per-channel TTL 0–5 V inhibits/enables on DSUB25; distinct from network protocol"
+    },
+    "control_endpoint_basis": "Manuel places the equipment-control connection at the DPS PLC for this presentation; device protocol evidence alone does not establish deployment.",
+    "manufacturer_checks": [
+      {
+        "url": "https://www.wiener-d.com/product/pl506-power-supply-system/",
+        "checked": "2026-10-27",
+        "finding": "Ethernet remote control and monitoring with SNMP"
+      },
+      {
+        "url": "https://www.raritan.com/products/power/power-distribution/rack-pdu/tech-specs",
+        "checked": "2026-10-27",
+        "finding": "PX3/PX4 equipment supports SNMP"
+      }
+    ]
+  },
+  "historical_calculations": {
+    "withdrawn_auxiliary_extrapolation": {
+      "calculation": "831 W x 8/6 = 1108 W per rack",
+      "status": "Removed from the current power slide. This historical linear scaling does not establish the VD component power budget."
+    }
+  },
+  "inhibit_review": {
+    "sequence": [
+      "condition/source",
+      "input signal/connection",
+      "DPS or local decision",
+      "output/load",
+      "equipment state/feedback"
+    ],
+    "record": [
+      "rack",
+      "connector",
+      "protocol",
+      "channel",
+      "power feed",
+      "allowed detection-to-shutdown time"
+    ],
+    "result": [
+      "existing hardware used",
+      "additions with quantities",
+      "open choices affecting quantities"
+    ],
+    "counting": "Shared signals and outputs count once. Wiring and software changes are identified separately from equipment purchases."
+  }
+}

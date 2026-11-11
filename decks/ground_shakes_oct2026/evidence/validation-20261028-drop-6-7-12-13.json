@@ -1,0 +1,24 @@
+{
+  "created_utc": "2026-10-28T22:59:32.173711+00:00",
+  "change": "Removed former slides6,7,12,13 from the current13-page deck at the user request; notes and references updated.",
+  "previous_version": "archive/20261028-before-drop-6-7-12-13/main.pdf",
+  "command": "tectonic --chatter minimal --keep-logs --keep-intermediates main.tex",
+  "checks": {
+    "PDF_pages": 9,
+    "main_slides": 6,
+    "backup_slides": 3,
+    "remaining_frame_content_unchanged": true,
+    "removed_slide_titles_absent": true,
+    "footer_9_of_9_present": true,
+    "layout_warnings": 0
+  },
+  "sha256": {
+    "main.tex": "05b355c8a0f4791625146ac3456f6e16cd134ee666b2695636997dc4869d398f",
+    "main.pdf": "13e302e946097caec9e7b454401599d6c72dd3739c2cfc00310c3d4c861e8577",
+    "README.md": "1e5d58706c98c01cc8c254d9b371298a12e7f7ac83c37c45bee240e44b99e6fb",
+    "SOURCES.md": "31c72adbc46115672923454113690cb0cff1ae3489ab28d6922963ef3038f254",
+    "speaker-notes.txt": "36c6316613cab49d35f0a8b2b70a06864dbc84279ecdccc80c05ccd164731cdb",
+    "evidence/build-20261028-drop-6-7-12-13.log": "7151d27757846ba4e1cefcabba63ddd790555e820d250591b311ce892193554a"
+  },
+  "reviewer": null
+}

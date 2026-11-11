@@ -1,0 +1,35 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{Run 45392: PDS-TA-triggered readout}
+\author{Manuel Arroyave}
+\date{20 October 2026}
+\begin{document}
+\begin{frame}{Run 45392 proved PDS-TA-triggered readout}
+  \centering
+  {\large PDS TPs $\rightarrow$ PDS TAs $\rightarrow$ TCs $\rightarrow$ MLT $\rightarrow$ readout\par}
+  \bigskip
+  \DuneCompactColorBlock{paper}{DECODED}{29 matching 1 ms windows}
+    {Every window: all 32 PDS channels across two links + emulated charge.}
+  \bigskip
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      \raggedright
+      \textbf{PDS supplied the triggers}\par
+      \smallskip
+      \small Software captures; TA prescale 100.\par
+      Charge trigger generation disabled.
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \raggedright
+      \textbf{PDS + charge payloads: 29/29 clean}\par
+      \smallskip
+      \small First record: TC metadata status 0x12;\par
+      candidate decoded, payloads complete.
+    \end{column}
+  \end{columns}
+  \bigskip
+  {\footnotesize\color{DuneTextMuted}\href{https://github.com/DUNE/PDS/tree/bed0920192126456089d7d44930dbfb145268463/deployments/cern-daphne14/20261020}{Evidence: decoded records + configuration}\par}
+\end{frame}
+\end{document}

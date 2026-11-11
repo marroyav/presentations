@@ -1,0 +1,15 @@
+{
+  "initial": {
+    "headline": "M6 has the largest first pulse in 99 / 602 assessable events. In the paired comparison, 60 / 86 M6-first events become strongest in M1–M2 at −60 µs.",
+    "stage": "602 events pass the comparison. 606 records checked for this stage.",
+    "paired": "60 of 86 events whose first pulse is largest in M6 become largest in M1–M2 (70%)."
+  },
+  "run32739": "17 of 27 events whose first pulse is largest in M6 become largest in M1–M2 (63%).",
+  "secondPulse": "8 of 21 events whose first pulse is largest in M6 become largest in M1–M2 (38%).",
+  "after": "5 events pass the comparison. 662 records checked for this stage. Most records have too little coverage here.",
+  "playAdvances": true,
+  "pauseStops": true,
+  "emptySample": "No early pulse passes the spatial comparison in this selected sample. This does not establish that no pulse occurred.",
+  "errors": [],
+  "viewer_sha256": "5e6fa94f535965ee5f07942412764d1c0a7d2b2385107e997c33ddd6d160d0f9"
+}

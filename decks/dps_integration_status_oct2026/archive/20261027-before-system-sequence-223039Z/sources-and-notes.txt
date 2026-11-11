@@ -1,0 +1,268 @@
+VD detector protection — speaker notes
+I&I workshop draft, 27 October 2026
+
+The argument
+
+We have a substantial BDE and HV hardware starting point. The next step is to
+trace each VD inhibit through that equipment, then identify the additions.
+Rack infrastructure is a separate system. This turns the matrix into the input
+for panel space, power, cabling, prototype tests and procurement before June 2027.
+The first path reviews are underway; this talk does not claim a complete new
+I/O count or bill of materials.
+
+1. VD detector protection
+
+This talk covers the VD detector. We propose a commercial PLC based on the
+existing BDE design, with distributed I/O. HD can later extend the system or
+use a separate PLC. The central PLC in the CUC is a proposed placement.
+
+2. DPS arbitrates protection; SC operates, monitors and logs
+
+Keep the original definitions. DPS uses facility and detector conditions to
+permit or inhibit actions and protect equipment. SC, using Ignition, operates
+and monitors the detector and owns the data and event logs. FFDG BMS and SDSTA
+BMS are separate building systems. Equipment can also act through local
+interlocks. An operating request cannot override a protection trip.
+
+3. DPS receives inputs from four system domains
+
+The four domains remain FFDG BMS, SDSTA BMS, cryogenics and detector. The
+FFDG path is the API through the Batavia server at FNAL, then SC and DPS.
+SDSTA is under investigation. Cryogenic process controls provide selected
+conditions, but some measurements, including relevant level measurements,
+may originate in detector instrumentation and reach DPS through SC.
+
+The detector contains SC, its subsystems and the separate rack-infrastructure
+system. Facility and cryogenic controllers keep control of their own services.
+SDSTA retains personnel-safety responsibility. The liquid-level/HV example
+explains arbitration without assigning a sensor to the wrong controller.
+
+4. VD uses SNMP control and dedicated protection I/O
+
+This is the single overview of the proposed detector connections. SC talks to
+the DPS PLC over OPC UA. Additional subsystem exchanges also use OPC UA
+through SC. PDU and WIENER-supply control/status use the same SNMP protocol.
+They have separate inventories: PDUs belong to rack infrastructure, and the
+LV/bias supplies remain subsystem equipment.
+
+BDE and bias protection also have an EtherCAT route to remote I/O and wired
+inhibits to the PL506/ISEG supplies. A supply can have both an SNMP control/
+status interface and a wired protection input. The diagram shows both roles.
+The wired arrow names PL506/ISEG; it does not assign that interface to all PDS
+supplies. The Heinzinger control system is described separately in the HVS
+material and is not being labelled as an SNMP supply.
+
+SC logs the decisions and states. Bridge-server implementation is outside
+this presentation. The PLC's CUC location is proposed, not an allocated rack.
+TDE currently has PDU control only; retain its other interfaces as possible
+extensions, not available control capabilities.
+
+5. BDE already defines a distributed protection system
+
+The VD baseline is ten groups of eight WIECs. Each group has two PL506 supplies
+in two LV racks, an auxiliary I/O rack and eight PTC/WIEC endpoints. Across VD
+this is 20 PL506 supplies, 80 WIECs and 480 WIBs. The auxiliary I/O connects
+fans, heaters, temperature sensors, PTC EtherCAT and the supply inhibits.
+
+The June 2026 layout and the VD rack workbook supply this grouping. Eight
+WIECs is already the VD starting point; do not count an HD six-to-eight
+conversion as new VD scope.
+
+6. BDE drawings, parts and software are already available
+
+Show the actual panel drawing and Ignition screen. We have the parts and
+power workbooks as well. The panel picture is a historical TPC reference;
+it identifies the engineering approach and component families. It does not
+prove the final VD population or free terminal space. The June Ignition
+screen shows the existing BDE work and the VD grouping.
+
+7. Trace each inhibit to the hardware it uses
+
+Read one matrix condition and action at a time. If it affects several loads,
+trace each output branch. Identify the source, input connection, decision,
+actuator, power path and feedback. Use the rack and interface documents to
+name the equipment, connector, protocol and channel. Include the time from
+condition detection to completed action.
+
+The result for each rule is existing equipment it uses, components/cables to
+add with quantities, and any choice that changes those quantities. A missing
+connection description does not itself prove missing hardware. A network
+point does not automatically require a new analog or digital PLC terminal.
+Several rules may use the same physical input or output: count it once.
+
+This is how the minimal matrix supports hardware procurement. It does not
+require the full operating response matrix to be frozen now.
+
+8. BDE cooling already has an input-to-inhibit path
+
+DPS-C001 proposes inhibiting the affected WIEC supply when cooling is
+inadequate. Fan rotation signals pass through the DB25 fan connector and
+cable to EL1004 inputs. The distributed I/O communicates with the DPS PLC
+over EtherCAT. The PLC uses an EL2124 5 V output to drive the PL506's wired
+channel inhibit; the affected 48 V feed supplies the WIEC/PTC/WIB chain.
+
+The ICEBERG design documents EL1004 pull-up inputs, EL2034 fan power and
+short/open-circuit diagnostics, EL2124 supply inhibits and the 5 V supply
+for that output bank. The fan command and diagnostics are part of deciding
+whether a fan is operating. Fans use the auxiliary supply; the cooling row
+does not require a whole-PDU shutdown.
+
+The recovered WIEC safety note describes six fans and six rotation-status
+signals per WIEC. This implies 48 inputs per eight-WIEC VD group if that
+interface is used throughout. The ICEBERG reference describes four fans.
+Match the six-fan interface to the populated VD terminal and cable allocation
+before counting additions. This is a baseline coverage check, not a claim
+that 480 new inputs or any number of new modules must be purchased.
+
+The WIEC note is internal revision 0, modified 19 September 2025, recovered
+from DocDB 34374 v1; it is not established here as the released EDMS v2 copy.
+The existing hardware families are documented, but the full VD cooling rule,
+fan voting, startup treatment and allowed action time are not approved here.
+
+PL506 channel state, interlock state and voltage/current provide the feedback
+candidate while its AC feed is retained. The PTC may stop reporting when its
+48 V feed is inhibited; its disappearance alone is not proof of shutdown.
+The proposed PLC/SC interface carries the result to the SC logs over OPC UA.
+
+9. Rack infrastructure is a separate protection system
+
+Put the rack, AC feeds, PDU(s), smoke and humidity sensors, sensor hub, power,
+relays and cables in one inventory. Include temperature and leak sensors
+where fitted. Subsystems reference the PDU outlets that power their equipment;
+their supplies and dedicated inhibits remain in their subsystem descriptions.
+
+The proposed chain is Ignition/SC to DPS over OPC UA, then DPS to PDU over
+SNMP. The PDU reads its sensors and retains local protection. SC logs sensor,
+outlet and trip states through DPS. RACK-01 is the smoke-shutdown rule.
+Humidity is in the monitoring scope; no humidity shutdown is inferred merely
+from the presence of the sensor.
+
+DocDB 32655 v8 supplies a concrete reference package: PX3, DX-PD2C5 powered
+contact hub, 4WTAR-B smoke detector and EOLR-1 relay. Its guide describes an
+Ignition-direct prototype with local fallback on loss of Ignition. The VD
+PLC command path needs corresponding trip, reachability and recovery
+configuration; we are not claiming the reference already implements that path.
+
+10. Detector additions follow the existing VD hardware
+
+BDE and HVS are documented starting points. The HVS ICD describes one
+Heinzinger PNC HP300000 with cRIO-9049/NI-9239/NI-9269, ten bias crates and
+576 bias channels: 480 CRP and 96 FC. The work is to match each required
+function to the appropriate existing connection and identify what is absent.
+
+PDS LV count is 34. Do not reconstruct it from the older 58-feed inventory.
+For the 80 PoF boxes, carry Opta PLC and Beckhoff PLC alternatives: the June
+SC presentation explicitly names both. Each option must cover the same box
+signals, local actions and reporting. The corrected working inventory has
+eight temperature and eight voltage readings per box, or 1,280 values.
+That does not establish a controller-per-box allocation or central DPS I/O
+count. Count each option's actual local I/O, power, enclosure and cabling.
+
+TDE has twenty racks, with current control through its PDUs. Preserve crate
+status and external inhibit as future options. CalCI already has useful
+material for purity monitors, thermometry, level readout and calibration;
+trace its status and optical permits from those descriptions. Its equipment
+inventory is incomplete, not empty.
+
+11. Facility interfaces need named signals and routes
+
+Use the FFDG API path through Batavia and SC. Each function needs a named
+point with a meaning and an update/loss behavior. A separate physical DPS
+input is an addition only if that function requires it. The SDSTA survey
+must identify what can be exported and where we can connect. Cryogenics
+and detector instrumentation must be distinguished by actual signal source.
+
+FAC-01 is a useful example. The released SC/DDSS requirement covers all HVS
+supplies on a fire alarm. The HVS draft explicitly includes CRP and FC bias.
+The output branches use the documented drift-HV and bias interfaces. First
+map the required alarm point and its zone to those loads; the known API route
+does not prove that this particular signal is published. The matrix's Top CRP
+column also does not by itself represent all bottom and top CRP bias.
+
+12. Test arbitration, trips and recovery on the bench
+
+Use the BDE vertical-slice work and G271 test resources for representative
+paths. Inject the relevant fault, observe the output and equipment state,
+and measure the full detection-to-action time. Test local trips, SC and bus
+loss, power failure, reset and re-enable. Verify the SC event record.
+
+No critical sub-ms protection function has been identified in Manuel's review
+so far; consortia must check that assumption. Simulation prepares load and
+fault cases. Hardware tests establish the actual response. The June BDE and
+July G271 records document available work/resources, not complete VD acceptance.
+
+13. Take the VD hardware to review in June 2027
+
+The path review produces the reused hardware, added channels/cables, quantities
+and alternatives. The prototype results and the component allocations then
+support panel space, power, drawings, costs, lead times and spares. Procurement
+follows hardware/procurement-readiness review. Some facility interfaces may
+be needed in summer 2027. Full VD response-matrix review remains early 2028.
+These are the proposed milestones in Marco's email.
+
+14. I will lead the VD hardware work with a control engineer
+
+Manuel can lead the hardware and SURF interfaces with a process control
+engineer. Terri and Trevor contribute BDE design and test work; Geoff and
+Manuel work on SC/DPS arbitration, PDU protection and recovery. Vivian,
+consortia and DPS supply equipment requirements and ICD updates. These are
+proposed contributions, not accepted assignments.
+
+Inspection maps are ready; access is being coordinated with Rachel. Dale
+Curran is the identified SDSTA integration contact. During phases when DPS
+is inactive, Manuel proposes that equipment-owning consortia retain equipment
+protection responsibility. That responsibility must be agreed for each phase.
+
+Backup slides
+
+15. VD rack space
+Ten auxiliary and ten bias racks each have 12U DPS allocations. The workbook
+marks 19U as Space in each auxiliary rack and 10U in each bias rack. Auxiliary
+U9 also has a possible ground-plane readout note. These are planning positions,
+not new DPS reservations or evidence of free DIN rail after VD population.
+
+16. Bias-panel parts
+Two rails per rack, each with 18 EL2124 terminals, give 360 terminals/1,440
+outputs in the first-pass layout across ten racks. The 576 bias channels do
+not establish unused capacity without the actual inhibit and interface mapping.
+
+17. Power
+The workbook's expected PL506 input is 2,254 W each, or 45.08 kW across twenty.
+The six-fan note gives 0.33 A per fan at 24 V. Eight WIECs with six fans each
+therefore have 380.16 W of rated fan load alone. This excludes heaters and I/O.
+The inherited 831 W auxiliary estimate is not a full VD component budget.
+The earlier 8/6 linear extrapolation is no longer presented as that budget.
+The bias supply allowance remains 24 V x 40 A = 960 W DC capacity, a different
+quantity from expected AC consumption.
+
+18. Rack hardware reference
+The rack package includes the PX3, powered hub, smoke detector, relay and
+sensor wiring. Humidity-probe identity and allocation must appear in the rack
+inventory. The May workbook has a 76-entry rack-protection/PDU allowance;
+this is existing planning scope, not 76 newly required devices. Other rack
+locations, including the top-plate concept, have their own source allocations.
+
+19. Local PDU trips and recovery
+The PX3 guide documents event/script functions for smoke, water and temperature,
+a retained network-switch outlet and deliberate restoration. In that guide
+local fallback depends on loss of Ignition. Carry its hardware and functions
+into the VD design while testing the selected PLC command path and failure
+behavior. Do not equate the guide with an installed VD protection function.
+
+20. Other subsystem inventory
+Retain the 34 PDS LV entry, 80 PoF boxes, twenty TDE racks and existing CalCI
+material. PoF alternatives are Opta PLC and Beckhoff PLC. TDE's extra status/
+inhibit interfaces are possible extensions. OPC UA subsystem exchange goes
+through SC; bridge-server deployment remains outside the talk.
+
+21. BMS inspection
+The twenty symbols on the marked drawings are panel references, not confirmed
+installed controllers. Eight are in the CUC area; SP-1 and SP-2 are the two
+4910 sump interfaces. Keep the drawing identity and survey results distinct.
+
+22. Rack inventory
+The May sheet has 76 numbered mezzanine positions, including reservations,
+and a separate concept for forty top-plate mini-racks. Rack positions, PDU
+quantities and remote-I/O stations are different counts. The June SC material
+also states a concept of remote I/O in 76 racks; that concept is not a populated
+terminal schedule and must be compared with the actual inhibit paths.

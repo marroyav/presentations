@@ -1,0 +1,47 @@
+{
+  "created_utc": "2026-10-28T23:30:54.506868+00:00",
+  "checks": {
+    "local_html_links_exist": true,
+    "six_page_supplement": true,
+    "both_events_have_all_three_figures": true,
+    "source_spatial_results_unchanged": true,
+    "native_code_difference_from_execution_record_is_command_label_only": true
+  },
+  "browser": {
+    "events": 2,
+    "stages": 6,
+    "first": {
+      "time": "-242.032 \u00b5s",
+      "status": "34/36 connected channels have usable samples; largest recorded signal: channel 1, module M6.",
+      "hasExactADC": true
+    },
+    "playAdvances": true,
+    "pauseStops": true,
+    "railFlagShown": true,
+    "otherEvent": "30/36 connected channels have usable samples; largest recorded signal: channel 1, module M6.",
+    "errors": [],
+    "viewer_sha256": "8223fd89fdeb1959c15bbf4272ccaf6177c77610cfaf1f86403cf9a6ec6e6e77"
+  },
+  "native_validation": {
+    "native_example_samples_matched_to_existing_independently_validated_arrays": 23728,
+    "matched_threshold_cohort": 407,
+    "matched_tied20": 260,
+    "matched_tied50": 365,
+    "both_thresholds_unique": 37,
+    "unique_leader_changed": 11
+  },
+  "sha256": {
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/build.py": "b9a2c5ec55d66558c68130ba31d0f46d1b29b9108ba48a3e25e09fabee65bb10",
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/make_viewer.py": "9800c9be30143e97faccd660a5e45134a663035cdcca8bef1f3a15c3e87a9336",
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/viewer.html": "8223fd89fdeb1959c15bbf4272ccaf6177c77610cfaf1f86403cf9a6ec6e6e77",
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/apa2-pds-sections.pdf": "174f8f505e6f4dc992bf03d45638fbbffbcffb744e1a152a9e3e0f2dfd53f3bf",
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/leading-channels.pdf": "1830b5d1f7fc450b0ab2f37dacd4eb2924a74d3a57bc3b256896ee8b9edddc2b",
+    "/home/arroyave/work/presentations/decks/ground_shakes_oct2026/pds-spatial/browser-validation.json": "2cb6cc7a931f0a45d49a8b89fce31a0a89c3cd6afde2e147dad005ad46e0e954",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-leading-channels-20261028/native.py": "fbb2c54c137bd364eca4573e0be4213d5941dcfc989d094d0358c24e420619cd",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-leading-channels-20261028/native-results.json": "8672485247c1d868fb02dfe36476ef4da587e75f794b4b694ead9a828d126329",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-leading-channels-20261028/native-event-onsets.json": "d14dd9c27beed6bc695e19aefec9936a87301dff63f505d9963abb4c9071fd3a",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-leading-channels-20261028/validation.json": "141b8b566a8a9956eb62e6f0cf82d34c7c241627ba76c232cd492d3d84bbf5d0",
+    "/home/arroyave/work/ground-shake-data/analysis/pds-leading-channels-20261028/selected-pairwise-comparisons.json": "fd0d1a5ffb636c48707d9164b8dcf52d7598dcaf8dc3b0b2067702baafd616fb"
+  },
+  "reviewer": null
+}

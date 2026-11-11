@@ -1,0 +1,248 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\makeatletter
+\input{../../templates/dune-professional/beamerthemeDUNEProfessional.sty}
+\makeatother
+\title{VD detector protection}
+\subtitle{System roles, BDE hardware and the VD extension}
+\author{Manuel Arroyave}
+\date{I\&I workshop draft --- 27 October 2026}
+\newcommand{\mydate}{27 October 2026}
+\hypersetup{colorlinks=true,urlcolor=DuneInfo,linkcolor=DuneInfo}
+\newcommand{\planningnote}[1]{\par\medskip{\footnotesize\color{DuneTextMuted}#1\par}}
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{DPS arbitrates protection; SC operates, monitors and logs}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \textbf{DPS} & \textbf{Detector Protection System.} Uses facility and detector conditions to allow or block actions; issues permits, inhibits and trips.\\
+    \textbf{SC} & \textbf{Slow controls, using Ignition.} Operates and monitors the detector; owns the data and event logs, including DPS decisions.\\
+    \textbf{BMS} & \textbf{Building Management System.} Controls building services. FFDG BMS and \mbox{SDSTA BMS} are separate systems.\\
+    \textbf{Local\newline interlocks} & \textbf{Equipment-level protection.} Can trip without waiting for SC or the central DPS.\\
+  \end{tabularx}\par
+  \bigskip
+  \textbf{An operating request cannot override a protection trip.}
+\end{frame}
+
+\begin{frame}{DPS receives inputs from four system domains}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=3.0cm,minimum height=0.78cm,inner sep=5pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (ffdg) at (-4.8,1.65) {FFDG BMS};
+    \node[box] (sdsta) at (-4.8,0.55) {SDSTA BMS};
+    \node[box] (cryo) at (-4.8,-0.55) {Cryogenics};
+    \draw[draw=DuneSky,line width=1pt,fill=DuneSurface] (-6.6,-1.25) rectangle (-3.0,-2.85);
+    \node[font=\small\bfseries] at (-4.8,-1.5) {DETECTOR};
+    \node[box,text width=0.9cm,minimum height=0.8cm,font=\small] at (-5.75,-2.15) {SC};
+    \node[box,text width=1.7cm,minimum height=0.8cm,font=\small] at (-4.1,-2.15) {Subsystems};
+    \node[box,fill=DuneSky,text width=2.4cm,minimum height=1.3cm] (dps) at (0,-0.2) {DPS\\arbitration};
+    \node[box,fill=DuneCoral,text width=2.8cm,minimum height=1.3cm] (actions) at (4.35,-0.2) {Detector actions\\permits / inhibits\\rack power};
+    \draw[edge] (ffdg.east) -- ($(dps.west)+(0,0.45)$);
+    \draw[edge] (sdsta.east) -- ($(dps.west)+(0,0.15)$);
+    \draw[edge] (cryo.east) -- ($(dps.west)+(0,-0.15)$);
+    \draw[edge] (-3.0,-2.15) -- ($(dps.west)+(0,-0.45)$);
+    \draw[edge] (dps) -- (actions);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Example: low liquid level withdraws the HV permit. SC logs the condition, decision and equipment state.}
+  \planningnote{This is the logical system view. Facility and cryogenic systems retain control of their services. SDSTA retains personnel-safety responsibility.}
+\end{frame}
+
+\begin{frame}{The PLC controls PDUs and LV supplies over SNMP}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=3.4cm,minimum height=1.6cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.3pt},
+    duplex/.style={arrows={Stealth-Stealth},draw=DuneSky,line width=1.3pt}]
+    \node[box] (sc) at (-3.8,1.45) {\textbf{SC / Ignition}\\control, monitoring\\and logs};
+    \node[box,fill=DuneSky] (plc) at (3.8,1.45) {\textbf{DPS PLC}\\protection arbitration};
+    \node[box,fill=DuneCoral] (power) at (3.8,-1.45) {\textbf{PDUs + LV supplies}\\power control\\local interlocks};
+    \node[box] (sub) at (-3.8,-1.45) {\textbf{Subsystems}\\BDE, HV, PDS\\TDE, CalCI};
+    \draw[duplex] (sc.east) -- node[above,font=\small\bfseries] {OPC UA} (plc.west);
+    \draw[duplex] (plc.south) -- node[right,align=left,font=\small] {\textbf{SNMP}\\control / status} (power.north);
+    \draw[edge] (power.west) -- node[above,font=\small] {subsystem power} (sub.east);
+    \draw[duplex] (sc.south) -- node[right,align=left,font=\small] {OPC UA\\where available} (sub.north);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{SNMP = Simple Network Management Protocol. SC logs commands, DPS decisions and equipment states.}
+  \planningnote{PLC = programmable logic controller; PDU = power distribution unit; LV/HV = low/high voltage; PDS = photon detection system; TDE = top drift electronics; CalCI = calibration and cryogenic instrumentation. BDE I/O is shown next.}
+\end{frame}
+
+\begin{frame}{BDE already defines a distributed protection system}
+  BDE = bottom drift electronics. I/O = inputs and outputs.\par\medskip
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=3.1cm,minimum height=1.05cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box,fill=DuneSky] (io) at (-4,0) {BDE auxiliary rack\\remote I/O};
+    \node[box] (lv) at (1.6,1.1) {2 LV racks\\2 PL506 supplies};
+    \node[box,fill=DuneCoral] (wiec) at (1.6,-1.1) {8 WIECs\\8 PTCs + 48 WIBs};
+    \draw[edge] (io.north east) -| (-1.7,1.1) -- node[above,font=\small] {inhibits} (lv.west);
+    \draw[edge,<->] (io.south east) -| (-1.7,-1.1) -- node[below,font=\small] {EtherCAT} (wiec.west);
+    \draw[edge] (lv.east) -- (4.35,1.1) -- node[right,font=\small] {48 V} (4.35,-1.1) -- (wiec.east);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Ten groups: 20 PL506 supplies, 80 WIECs and 480 WIBs.}
+  \medskip
+  \raggedright The auxiliary I/O also connects fans, heaters and temperature sensors.
+  \planningnote{WIEC = warm interface electronics crate; PTC = power and timing card; WIB = warm interface board. June 2026 layout; fan/heater wiring omitted here.}
+\end{frame}
+
+\begin{frame}{BDE drawings, parts and software are already available}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \textbf{TPC protection panel designs}\par\medskip
+      \colorbox{DunePaper}{\includegraphics[page=2,width=\dimexpr\linewidth-2\fboxsep\relax,height=3.1cm,keepaspectratio,
+        trim=290bp 500bp 900bp 430bp,clip]{figures/tpc-panel-reference.pdf}}\par
+      \medskip\DuneDiagramCaption{Central PLC, bias I/O and LV/fan/heater panels.}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      \textbf{BDE Ignition screens}\par\medskip
+      \includegraphics[page=7,width=\linewidth,height=3.1cm,keepaspectratio,
+        trim=10bp 210bp 460bp 74bp,clip]{figures/sc-progress-june2026.pdf}\par
+      \planningnote{Existing display of WIEC groups; June 2026 SC progress presentation.}
+    \end{column}
+  \end{columns}\par
+  \medskip
+  Parts list: CX5140 PLC, EK1100 couplers, EK1521 fibre links and EL2124 inhibit outputs.
+  \planningnote{TPC reference: EDMS 2401090 v4, sheet 2, with parts and power workbooks. PLC = programmable logic controller.}
+\end{frame}
+
+\begin{frame}{VD proposal: a PLC in the CUC, I/O at the detector}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.7cm,minimum height=1.2cm,inner sep=6pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.3pt},
+    duplex/.style={arrows={Stealth-Stealth},draw=DuneSky,line width=1.3pt}]
+    \node[box] (sc) at (-5,1.2) {\textbf{SC / Ignition}\\control and logs};
+    \node[box,fill=DuneSky,text width=3.0cm] (plc) at (0,1.2) {\textbf{VD DPS PLC}\\CUC proposed};
+    \node[box] (facility) at (5,1.2) {FFDG BMS\\SDSTA BMS\\Cryogenics};
+    \draw[draw=DuneBorder,line width=1pt,fill=DuneSurface] (-6.7,-0.55) rectangle (6.7,-3.0);
+    \node[anchor=west,align=left,font=\footnotesize\bfseries] at (-6.5,-0.9) {VD\\RACKS};
+    \node[box,minimum height=1.4cm] (bde) at (0,-2.05) {\textbf{BDE / bias HV}\\existing I/O panels};
+    \node[box,fill=DuneCoral,minimum height=1.4cm] (added) at (-5,-2.05) {\textbf{VD additions}\\PDS, TDE, CalCI};
+    \node[box,text width=3.4cm,minimum height=1.4cm] (pdu) at (4.7,-2.05) {\textbf{PDUs + LV supplies}\\power control\\local interlocks};
+    \draw[duplex] (sc.east) -- node[above,font=\small] {OPC UA} (plc.west);
+    \draw[edge,dashed] (facility.west) -- node[above,font=\small] {inputs} (plc.east);
+    \draw[duplex] (sc.south) -- (added.north);
+    \node[anchor=west,font=\small] at (-4.85,-0.05) {OPC UA};
+    \draw[duplex] (plc.south) -- (bde.north);
+    \node[anchor=west,font=\small] at (0.15,-0.05) {EtherCAT};
+    \draw[duplex] (plc.south east) -- (1.71,0.1) --
+      node[below,font=\small] {SNMP} (4.7,0.1) -- (pdu.north);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{The PLC uses SNMP for PDUs and LV supplies. Additional subsystem interfaces use OPC UA through SC.}
+  \planningnote{TDE: PDU control now; other interfaces are future options. CUC = Central Utility Cavern. Dashed inputs: paths selected per function. HD: extension or separate PLC.}
+\end{frame}
+
+\begin{frame}{Ignition controls the PLC; the PLC controls the PDU}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.1cm,minimum height=0.95cm,inner sep=5pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt},
+    logedge/.style={-{Stealth},draw=DuneCoral,line width=1.2pt,dashed}]
+    \node[box] (sc) at (-5.1,0.3) {Ignition\\control and logs};
+    \node[box,fill=DuneSky] (plc) at (-1.7,0.3) {DPS PLC\\arbitration};
+    \node[box,fill=DuneCoral] (pdu) at (1.7,0.3) {PDU\\rack power};
+    \node[box] (load) at (5.1,0.3) {Rack\\equipment};
+    \node[box,text width=4.3cm,font=\small] (local) at (1.7,1.8) {Local interlocks\\smoke / water / temperature};
+    \draw[edge] (sc.east) -- node[above,align=center,font=\small] {OPC\\UA} (plc.west);
+    \draw[edge] (plc.east) -- node[above,font=\small] {SNMP} (pdu.west);
+    \draw[edge] (pdu.east) -- (load.west);
+    \draw[edge] (local.south) -- node[right,font=\small] {trip} (pdu.north);
+    \draw[edge] (pdu.south) -- (1.7,-0.85) -- node[below,font=\small] {state / trip feedback} (-1.7,-0.85) -- (plc.south);
+    \draw[logedge] (plc.south west) -- (-2.9,-1.3) -- node[below,font=\small] {decisions / events} (-5.1,-1.3) -- (sc.south);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{The PLC arbitrates Ignition's commands. Local interlocks can trip independently; SC logs the outcome.}
+  \planningnote{PDU = power distribution unit. An Ignition command cannot override a trip. Reset and re-enable are separate actions.}
+\end{frame}
+
+\begin{frame}{The VD extension adds subsystem and facility interfaces}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.5cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{VD scope} & \textbf{Added DPS interface}\\
+    \midrule
+    PDS: 34 LV feeds; 80 PoF boxes & Supply control, fault feedback and local PoF readout/control\\
+    TDE: 20 racks & \textbf{Now:} PDU control only.\newline \textbf{Possible later:} crate status / external inhibit.\\
+    Drift HV / CalCI & Level, temperature and optical-source status; inhibits and operation permits\\
+    Facility interfaces & FFDG BMS, SDSTA BMS and cryogenic conditions for DPS arbitration\\
+    \bottomrule
+  \end{tabularx}\par
+  \medskip
+  The 80 PoF boxes have 1,280 monitoring values. Local readout handles the
+  measurements; protection permits and feedback determine the DPS I/O.\par
+  \planningnote{LV = low voltage; PoF = power over fibre. Parts, panel allocations and power estimates are in the backup slides.}
+\end{frame}
+
+\begin{frame}{Test arbitration, trips and recovery on the bench}
+  \centering
+  \begin{tikzpicture}[
+    box/.style={fill=DunePaper,text=DuneOnAccent,align=center,
+      text width=2.25cm,minimum height=1.0cm,inner sep=5pt},
+    edge/.style={-{Stealth},draw=DuneSky,line width=1.2pt}]
+    \node[box] (in) at (-4.8,0) {Fault input or\\conflicting request};
+    \node[box,fill=DuneSky] (plc) at (-1.6,0) {DPS PLC\\arbitration};
+    \node[box,fill=DuneCoral] (out) at (1.6,0) {Supply inhibit\\or PDU command};
+    \node[box] (state) at (4.8,0) {Equipment state\\and feedback};
+    \draw[edge] (in) -- (plc);
+    \draw[edge] (plc) -- (out);
+    \draw[edge] (out) -- (state);
+  \end{tikzpicture}\par
+  \medskip
+  \DuneDiagramCaption{Use the BDE vertical-slice work and G271 equipment for representative VD paths.}
+  \bigskip
+  Measure detection through completed shutdown. Test local trips, SC and fieldbus
+  loss, reset and re-enable. Verify that SC logs the decisions and equipment states.\par
+  \bigskip
+  No critical sub-ms function has been identified so far. Simulation prepares the
+  fault and load cases; hardware tests measure the complete response.
+\end{frame}
+
+\begin{frame}{Take the VD hardware to review in June 2027}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.2cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Work before review} & \textbf{Result for procurement}\\
+    \midrule
+    Adapt the BDE design & VD panels, added I/O, CUC fieldbus routes and power allocation\\
+    Test the interfaces & Trip-time, failure and recovery results; SC/PDU integration\\
+    Prepare purchases & Drawings, parts and cable lists, costs, lead times and spares\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  After readiness review: order the hardware and install it in the site sequence.
+  \planningnote{Possible facility-interface need: summer 2027. Full VD response-matrix review: early 2028. The early matrix work supplies requirements that affect hardware purchases.}
+\end{frame}
+
+\begin{frame}{I will lead the VD hardware work with a control engineer}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.1cm}>{\RaggedRight\arraybackslash}X@{}}
+    \toprule
+    \textbf{Proposed contribution} & \textbf{Work}\\
+    \midrule
+    Manuel + control engineer & VD design, SURF interfaces and procurement package\\
+    Terri and Trevor & BDE panels, PLC/I/O implementation and bench work\\
+    Geoff + Manuel & SC commands, PDU protection and recovery\\
+    Vivian + consortia / DPS & Equipment requirements and ICD updates\\
+    \bottomrule
+  \end{tabularx}\par
+  \bigskip
+  \textbf{Support needed:} control-engineering time and access to the existing test stands.
+  \planningnote{SURF work: inspection maps are ready; access is being coordinated with Rachel, with Dale Curran identified as an SDSTA integration contact.}
+\end{frame}
+
+\appendix
+\input{backup-slides.tex}
+\end{document}

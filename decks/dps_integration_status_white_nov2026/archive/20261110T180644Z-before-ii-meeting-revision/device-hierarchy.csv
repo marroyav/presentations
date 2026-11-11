@@ -1,0 +1,101 @@
+id,parent,device,count,unit,connection,status,source
+vd,,VD control and protection network,,,,Presentation scope,manuel-architecture
+shared,vd,Shared controls and network infrastructure,,,,Working design,sc-architecture
+sc,shared,Slow controls / Ignition services,,,OPC UA; operations and logging,Working design,sc-architecture
+historian,sc,Logging and database services,,,SC owns the common long-term record,Working design,sc-architecture
+operator,sc,Operator and engineering workstations,,,SC and PLC programming access,Working design,sc-architecture
+switches,shared,Control-network switches,,,Copper/fibre Ethernet; management protocol by device,Working design,sc-architecture
+router,shared,Network routers and firewalls,,,"Controlled exchange between facility, detector and DAQ networks",Working design,sc-architecture
+plc,shared,Central DPS PLC,,,OPC UA to SC; SNMP to PDUs/supplies; EtherCAT to remote I/O,Commercial BDE-based PLC proposed in CUC,manuel-architecture;panel-drawing
+plcpower,plc,24 V DC supplies and control panels,,,Power to PLC and remote I/O,Working design,parts-list
+remote,plc,Remote I/O stations,,,EtherCAT; station count and allocation require panel mapping,Working design,sc-architecture
+couplers,remote,"EK1100 couplers, EK1110 extension and EK1521 fibre links",,,EtherCAT,Working design,parts-list
+input,remote,EL1004 digital-input terminals,,,Fan-status inputs,Working design,bde-cooling-review
+output,remote,EL2124 output terminals,,,Wired supply inhibits,Working design,parts-list
+rtdio,remote,EL3202-0010 temperature-input terminals,,,Flange RTDs,Working design,shared-control-inventory
+iopower,remote,EL9410 supply terminals and EL9011 end caps,,,Panel supply and termination,Working design,rack-workbook
+facility,vd,Facility systems connected through SC,,,External control domains; not detector-LAN device counts,Working design,sc-architecture
+ffdg,facility,FFDG DUNE FD building management,,,Metasys API in Batavia to SC,Proposed exchange; live-data licence missing,bsi-spec;metasys-license;manuel-architecture
+metasys,ffdg,Metasys service and building controllers,,,BACnet within BMS; API at the SC boundary,Working design,bsi-spec
+building,metasys,"HVAC, chilled-water, pump, sump and power interfaces",,,Owned by BMS; individual points from the survey,Working design,panel-register
+sdsta,facility,SDSTA building management,,,Interface and protocols under investigation,Survey underway,site-survey;manuel-architecture
+sdstacontrol,sdsta,"Controllers, field I/O and network connections",,,Installed inventory to be established by survey,Not yet enumerated,site-survey
+cryo,facility,Cryogenic controls,,,One interface to SC from the internally divided system,Working design,cryo-architecture;manuel-architecture
+cryoplc,cryo,Process and safety PLCs,,,Within the cryogenic control domain,Working design,cryo-architecture
+cryohmi,cryo,"Cryogenic gateways, operator and engineering stations",,,Internal cryogenic control network,Working design,cryo-architecture
+cryofield,cryo,"Process instruments, valves and other controlled equipment",,,Attached to cryogenic PLCs; detailed point list is outside this deck,Working design,cryo-architecture
+bde,vd,Bottom Drift Electronics (BDE),10,groups,,Working design,rack-workbook;sc-infrastructure
+bderacks,bde,Auxiliary racks / low-voltage racks,,,10 auxiliary racks and 20 LV racks,Working design,rack-workbook
+pl506,bde,WIENER PL506 low-voltage supplies,20,supplies,DPS/SNMP plus wired channel inhibits,VD design,rack-workbook;bde-icd
+wiec,bde,Warm interface electronics crates (WIECs),80,crates,48 V from PL506; distributed control,VD design,rack-workbook;sc-infrastructure
+ptc,wiec,Power and timing cards (PTCs),80,cards,EtherCAT,VD design,rack-workbook;sc-architecture
+wib,wiec,Warm interface boards (WIBs),480,boards,Readout/configuration; protected through crate supply,VD design,rack-workbook;sc-architecture
+fans,wiec,Cooling fans and heaters,,,Fan status to remote I/O; local power connections,Six-fan reference case per WIEC; exact panel population to match,wiec-safety-note;bde-cooling-review
+flange,bde,Flange temperature sensors,,,RTDs to remote I/O,Working design,shared-control-inventory
+utca,vd,microTCA crates: TDE + DAQ/timing total,336,crates,"Crate management, readout and timing paths are separate","Total across TDE and DAQ/timing, confirmed by Manuel; no subsystem split inferred",manuel-corrections-20261028
+mch,utca,Carrier hubs (MCHs),,,Crate management; DAQ/TDE status to SC,Working design,tde-icd
+wrmch,utca,White Rabbit timing modules (WR-MCHs),,,Timing links; DAQ/TDE management,Working design,tde-icd;daq-timing-inventory
+amc,utca,AMC readout / timing modules,,,Managed through DAQ; composition depends on crate role,Working design,tde-icd;daq-timing-inventory
+utcapower,utca,Crate power units and fans,,,Local crate management; AC power through PDUs,Working design,tde-icd
+tde,vd,Top Drift Electronics (TDE),20,mezzanine racks,DPS control is limited to PDUs in the current scope,Current presentation scope,rack-workbook;manuel-architecture
+tdecrate,tde,Readout microTCA crates,,,Included once in the combined 336-crate total above,Working design,manuel-corrections-20261028;tde-icd
+tdelv,tde,WIENER MPOD MICRO 2 low-voltage crates,20,supplies,SC/SNMP; dedicated DPS inhibit remains a possible addition,ICD inventory; current DPS scope remains PDU-only,tde-icd
+tdemod,tdelv,Low-voltage modules,,,Module identity requires reconciliation between architecture and ICD,Working design,tde-icd;sc-architecture
+dist,tdelv,Passive distribution / filter / fanout units,20,units,LV cables to the front-end electronics,ICD inventory,tde-icd
+feb,tde,Front-end boards and calibration units,,,"Warm flange, LV and calibration connections; DAQ controls calibration",Working design,tde-icd;tde-inventory
+wr,tde,White Rabbit switches,24,switches,Timing network; DAQ/TDE management,ICD inventory; includes its described timing distribution,tde-icd
+hv,vd,High-voltage system,,,,Working design,sc-architecture
+drift,hv,Heinzinger drift-HV supply,1,supply,Analog control/readback; DPS wired interlock,VD interface inventory,hvs-icd
+criohv,drift,cRIO and LabVIEW control station,,,OPC UA through SC; analog I/O to supply,Working design,sc-architecture
+bias,hv,ISEG bias crates,10,crates,DPS/SNMP plus wired remote-I/O inhibits,VD interface inventory,hvs-icd
+biasmod,bias,ISEG positive/negative HV modules,,,576 output channels: 480 CRP + 96 field cage,Working design,hvs-icd
+biasrack,hv,Bias racks,10,racks,Remote I/O plus supply equipment,VD design,rack-workbook
+pds,vd,Photon Detection System (PDS),,,,Working design,sc-architecture
+pdslv,pds,WIENER LV supplies and controllers,34,LV feeds,DPS/SNMP; supply-controller quantity is not established by feed count,Current scope,manuel-architecture
+daphne,pds,DAPHNE readout boards,42,boards,SC/OPC UA to ZMQ; DAQ Hermes/IPBus; separate data links,Working inventory,pds-inventory;sc-pds-working-services
+pof,pds,Power-over-fibre laser boxes,80,boxes,PDU-controlled AC power; local analog measurements,Current scope,pds-inventory;manuel-architecture
+pofplc,pof,Opta or Beckhoff monitoring PLCs,,,OPC UA to SC; analog inputs from boxes,Working alternatives,manuel-architecture
+pofread,pof,Voltage and temperature measurement inputs,400,readings,4 voltage + 1 temperature per box; 320 V + 80 T,"Confirmed monitoring scope, not a laser-driver count",manuel-architecture
+pofenable,pof,Optional box-enable input,,,Additional control if the box exposes it,Not yet established,manuel-architecture
+pdsled,pds,Light-calibration boxes (LCMs),8,boxes,SC/OPC UA; native register protocol; LV and timing connections,Working inventory,pds-inventory
+pdstiming,pds,Local optical timing fanouts,,,Separate timing links to DAPHNE and calibration boxes,Working design,pds-inventory
+calci,vd,Calibration and Cryogenic Instrumentation (CalCI),,,,Working design,sc-architecture
+temp,calci,Temperature measurements,,,,Working design,sc-architecture
+rtd,temp,Resistance temperature sensors (RTDs),,,Cables to temperature readout; includes PrM temperature sensors,Working design,calci-thermometry
+tms,rtd,"Readout crates/cards, cRIO and LabVIEW station",,,SC/OPC UA,Working design,calci-thermometry
+fbg,temp,Fibre temperature sensors,,,Optical fibres to interrogators,Working design,calci-thermometry
+interrogator,fbg,Fibre interrogators and readout station,,,SC interface; native instrument protocol under review,Working design,calci-thermometry
+level,calci,Liquid-level measurements,,,,Working design,calci-thermometry
+levelboard,level,CRP / field-cage level sensors and readout boards,,,SC/OPC UA through the level-meter service; populations under review,Working design,calci-thermometry
+leveltrans,level,Level transmitter and controller,,,Signal source and interface to be mapped,Working design,calci-thermometry
+iols,calci,Ionization-laser stations,4,stations,SC/OPC UA via calibration interface board,Working inventory,calci-lasers
+cib,iols,Calibration interface board and station controllers,,,OPC UA; station control/trigger connections,Working design,sc-architecture;calci-lasers
+lasersafety,iols,"Local safety interface, shutter and emission feedback",,,Independent safety interlocks; operational status to SC,Working design,calci-lasers;sc-pds-working-matrix
+laserpc,iols,Station power/control electronics and computers,,,Local station connections,Working design,calci-lasers
+prm,calci,Purity monitors,,,SC/OPC UA via LabVIEW; operating rule with PDS still under review,Working design,calci-prm
+prmsupply,prm,HV/LV supplies and front-end electronics,,,Local monitor bias/readout; native interfaces under review,Working design,calci-prm
+prmlamp,prm,Xenon flash lamp and lamp supply,,,Local lamp control and activity status,Working design,calci-prm;sc-architecture
+prmread,prm,"Digitizers, photodiode trigger and LabVIEW computer",,,Readout and SC interface,Working design,calci-prm
+pns,calci,Pulsed neutron source and controller,,,SC/DAQ coordination; permits and native interface under review,Working design,calci-lasers
+othercal,calci,Other instruments shown in the SC architecture,,,,Working design,sc-architecture
+cameras,othercal,Cold cameras and camera interface,,,ONVIF / camera-control interface,Working design,sc-architecture
+gizmo,othercal,GIZMO,,,OPC UA shown; device allocation to be detailed,Working design,sc-architecture
+impedance,othercal,Impedance monitor,,,Instrument control/readout interface to be detailed,Working design,sc-architecture
+otherplc,othercal,Berghof and Siemens S7-1200 instrument controllers,,,Shown in the architecture; assignment and connections require detailed mapping,Working design,sc-architecture
+rack,vd,Rack infrastructure,,,Count once; referenced by each subsystem,Working design,rack-infrastructure
+pdus,rack,Raritan PX3 PDUs,,,DPS/SNMP; local outlet-trip rules,Reference hardware; final PDU population not inferred from rack count,px3-setup;rack-infrastructure
+smoke,pdus,Smoke detectors and end-of-line relays,,,4WTAR-B / EOLR-1 reference; dry-contact signal,Working design,rack-smoke-wiring
+contact,pdus,DX-PD2C5 contact interfaces and detector supplies,,,PDU sensor interface; 12 V smoke-detector supply,Working design,px3-setup
+env,pdus,"Humidity, temperature and water-leak sensors",,,PDU peripheral inputs; fitted sensors by rack,Working design,rack-infrastructure
+outlets,pdus,Controlled outlets and connected loads,,,"Subsystem supplies, PoF, crates, computers and other rack equipment",Working design,rack-infrastructure
+rackspace,rack,Mezzanine rack positions,76,positions,Includes reserved/spare positions; separate 40-roof-rack concept,May 2025 workbook allocation,rack-workbook
+daq,vd,DAQ and timing equipment,,,Readout/timing links are separate from SC device management,Working design,daq-timing-inventory
+daqservers,daq,DAQ computers and readout switches,,,DAQ data network; selected status to SC,Working design,daq-timing-inventory
+daqcrate,daq,Timing/readout microTCA crates,,,Included once in the combined 336-crate total above,Working design,manuel-corrections-20261028;daq-timing-inventory
+gib,daq,GPS interface boards (GIBs),,,OPC UA to SC; timing links,Working design,daq-timing-inventory;sc-architecture
+gps,daq,GPS-disciplined oscillator,,,Timing reference; management support per device,Working design,daq-timing-inventory
+fanout,daq,"Timing masters, distribution and fanouts",,,Dedicated timing network,Working design,daq-timing-inventory
+fanheater,remote,Fan/heater power output terminals (EL2034 / EL2878-005),,,24 V fan/heater outputs; module allocation by panel,Reference component families; VD population to map,parts-list;ddss-export-parts
+humidityio,remote,Humidity / dew-point analog-input terminals (EL3052 / EL3058),,,Environmental transmitter to central PLC; separate from rack-PDU humidity,Reference component families; VD allocation to map,parts-list;ddss-export-assumptions
+iopowerdist,remote,"EL9100 power terminals, EL9070 shields and panel distribution",,,Fan/heater and RTD support; terminal population by panel,Reference component families; VD population to map,parts-list
+dewpoint,bde,Ambient humidity / temperature / dew-point transmitter,,,Environmental input used by flange-heater logic,Historical TPC reference; VD placement and population not yet established,ddss-export-assumptions
