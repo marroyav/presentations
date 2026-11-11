@@ -1,30 +1,31 @@
-% Logical interfaces, adapted from the archived draw.io Overview page.
-% The dashed SDSTA connection remains under study.
+% Logical overview: facility systems remain outside the shared SC/DPS group.
+% Facility links meet the group boundary; SC/PLC endpoints remain undecided.
+% Dashed facility links are under study; cryogenics is bidirectional.
 \begin{tikzpicture}
-  \draw[dps boundary] (-6.5,-4.25) rectangle (6.5,-2.9);
-  \node[dps heading] at (0,-3.07) {DETECTOR};
+  \draw[dps boundary] (-6.5,-2.65) rectangle (6.5,-1.0);
+  \node[dps heading] at (0,-1.18) {SC / DPS};
+  \draw[dps boundary] (-6.5,-4.65) rectangle (6.5,-3.15);
+  \node[dps heading] at (0,-3.32) {DETECTOR};
 
   \node[dps node,text width=3.5cm] (ffdg) at (-4.85,0)
-    {FFDG DUNE FD BMS\\Metasys API -> OPC-UA};
+    {FFDG DUNE FD BMS\\Metasys API (proposed)};
   \node[dps node,text width=3.5cm] (sdsta) at (0,0)
-    {SDSTA SCADA\\Modbus TCP -> OPC-UA};
+    {SDSTA SCADA\\Modbus TCP (proposed)};
   \node[dps node,text width=3.5cm] (cryo) at (4.85,0)
-    {Cryogenics\\As one system OPC-UA };
-  \node[dps controller,text width=3.25cm] (sc) at (-3.6,-1.9)
+    {Cryogenics\\One system interface};
+  \node[dps controller,text width=3.25cm] (sc) at (-3.6,-1.92)
     {SC / Ignition\\Operations and logs};
-  \node[dps load,text width=3.25cm] (dps) at (3.6,-1.9)
+  \node[dps load,text width=3.25cm] (dps) at (3.6,-1.92)
     {DPS PLC\\Protection arbitration};
-  \node[dps node,text width=3.25cm] (subsystems) at (-3.6,-3.7)
+  \node[dps node,text width=3.25cm] (subsystems) at (-3.6,-4.0)
     {Subsystems\\Control and status};
-  \node[dps node,text width=3.25cm] (equipment) at (3.6,-3.7)
+  \node[dps node,text width=3.25cm] (equipment) at (3.6,-4.0)
     {PDUs, supplies\\Remote I/O};
 
-  \coordinate (sc-ffdg) at ([xshift=-9mm]sc.north);
-  \coordinate (sc-cryo) at ([xshift=9mm]sc.north);
-  \draw[dps flow] (ffdg.south) -- (-4.85,-0.83) -| (sc-ffdg);
-  \draw[dps flow,dashed] (sdsta.south) -- (0,-0.98) -| (sc.north);
-  \draw[dps flow] (cryo.south) -- (4.85,-1.13) -| (sc-cryo);
+  \draw[dps flow,dashed] (ffdg.south) -- (-4.85,-1.0);
+  \draw[dps flow,dashed] (sdsta.south) -- (0,-1.0);
+  \draw[dps both,dashed] (cryo.south) -- (4.85,-1.0);
   \draw[dps both] (sc.east) -- node[dps label,above] {OPC UA} (dps.west);
-  \draw[dps both] (sc.south) -- node[dps label,right,pos=0.35] {OPC UA} (subsystems.north);
-  \draw[dps both] (dps.south) -- node[dps label,left,pos=0.35] {SNMP / EtherCAT} (equipment.north);
+  \draw[dps both] (sc.south) -- node[dps label,right,pos=0.5] {OPC UA} (subsystems.north);
+  \draw[dps both] (dps.south) -- node[dps label,left,pos=0.5] {SNMP / EtherCAT} (equipment.north);
 \end{tikzpicture}

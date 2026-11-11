@@ -2,45 +2,50 @@ slide,title,section
 1,VD Detector Protection System,main
 2,The hardware connection list is still growing,main
 3,DPS protects equipment; SC operates and records,main
-4,Facility inputs reach DPS through slow controls,main
-5,The FFDG BMS connection needs an API licence,main
-6,How FFDG BSI status can support detector protection,main
-7,The SDSTA SCADA interface needs a hardware survey,main
-8,SDSTA proposes a restricted SCADA status interface,main
-9,Cryogenics presents one system to DUNE,main
-10,Trace each interlock from its source to the response,main
-11,Each group must identify its hardware connections,main
-12,A trip removes the permit; recovery needs a new request,main
-13,Build on the Batavia and SD DPS test setups,main
-14,Detector,main
-15,Ten BDE groups use the existing bottom-drift design,main
-16,Extend the BDE approach into a full DPS concept,main
-17,A cooling fault removes power from the affected crate,main
-18,SC and DAQ use distinct DAPHNE service paths,main
-19,DPS switches PoF power through the PDU,main
-20,LV supplies power DAPHNE and PDS calibration boxes,main
-21,Drift HV and bias supplies have separate inhibit paths,main
-22,Trace each protection input to a temperature sensor,main
-23,Proposed laser rules block conflicting PDS requests,main
-24,The purity-monitor inhibit rule still needs agreement,main
-25,Use rack sensors and PDUs for shared protection,main
-26,Measure the full path from fault to confirmed shutdown,main
-27,"Collect the inputs, then review the full DPS concept",main
-28,Prepare the hardware review,main
-29,Backups,backup transition
-30,Agree responsibility and control-engineering support,backup
-31,Existing panels and screens provide the BDE reference,backup
-32,The fan trip removes the PL506 channel permit,backup
-33,DAQ CCM and Hermes use distinct DAPHNE services,backup
-34,Rack space is not a count of spare I/O terminals,backup
-35,"The bias draft provides 1,440 outputs for review",backup
-36,Supply capacity differs from expected power use,backup
-37,Map each rack package against the existing allowance,backup
-38,Local PDU trips need deliberate power restoration,backup
-39,Keep subsystem quantities separate from crate totals,backup
-40,Survey the 20 panel references to find installed hardware,backup
-41,The workbook allocates 76 mezzanine rack positions,backup
-42,Count shared controls and rack devices once,backup
-43,The 336-crate total spans TDE and DAQ/timing,backup
-44,Keep PDS control and DAQ data links distinct,backup
-45,Instrument counts and interfaces still need allocation,backup
+4,Facility interfaces may connect to SC or the DPS PLC,main
+5,Build the DPS brain on the BDE PLC architecture,main
+6,Raritan PDU controls on dune-fd-test01,main
+7,Cryogenics presents one system to DUNE,main
+8,Trace each interlock from its source to the response,main
+9,Each group must identify its hardware connections,main
+10,A trip removes the permit; recovery needs a new request,main
+11,Build on the Batavia and SD DPS test setups,main
+12,Use the interlock matrix to track each protection function,main
+13,Measure milestones with completed records and evidence,main
+14,"Collect the inputs, then review the full DPS concept",main
+15,Prepare the hardware review,main
+16,Backups,backup transition
+17,Agree responsibility and control-engineering support,backup
+18,The FFDG BMS connection needs an API licence,backup
+19,How FFDG BSI status can support detector protection,backup
+20,The SDSTA SCADA interface needs a hardware survey,backup
+21,SDSTA proposes a restricted SCADA status interface,backup
+22,Detector,backup
+23,Ten BDE groups use the existing bottom-drift design,backup
+24,Extend the BDE approach into a full DPS concept,backup
+25,A cooling fault removes power from the affected crate,backup
+26,SC and DAQ use distinct DAPHNE service paths,backup
+27,DPS switches PoF power through the PDU,backup
+28,LV supplies power DAPHNE and PDS calibration boxes,backup
+29,Drift HV and bias supplies have separate inhibit paths,backup
+30,Trace each protection input to a temperature sensor,backup
+31,Proposed laser rules block conflicting PDS requests,backup
+32,The purity-monitor inhibit rule still needs agreement,backup
+33,Measure the full path from fault to confirmed shutdown,backup
+34,Existing panels and screens provide the BDE reference,backup
+35,The fan trip removes the PL506 channel permit,backup
+36,DAQ CCM and Hermes use distinct DAPHNE services,backup
+37,Rack space is not a count of spare I/O terminals,backup
+38,"The bias draft provides 1,440 outputs for review",backup
+39,Supply capacity differs from expected power use,backup
+40,Map each rack package against the existing allowance,backup
+41,Local PDU trips need deliberate power restoration,backup
+42,Keep subsystem quantities separate from crate totals,backup
+43,Survey the 20 panel references to find installed hardware,backup
+44,The workbook allocates 76 mezzanine rack positions,backup
+45,Count shared controls and rack devices once,backup
+46,The 336-crate total spans TDE and DAQ/timing,backup
+47,Keep PDS control and DAQ data links distinct,backup
+48,Instrument counts and interfaces still need allocation,backup
+49,Use rack sensors and PDUs for shared protection,backup
+50,Full interlock matrix: conditions and actions,backup

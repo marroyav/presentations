@@ -1,0 +1,24 @@
+% Minimal logical PLC / distributed-I/O sketch, following the BDE pattern.
+% The two BDE panels are illustrative, not a panel-count estimate or cable route.
+% Approximate 70 m layout span and PLC rationale: Manuel, 11 November 2026.
+% Supervisory Ethernet and EtherCAT are distinct interfaces, not an air-gap claim.
+\begin{tikzpicture}
+  \node[dps node,text width=2.2cm] (sc) at (-5,1.9) {SC / Ignition};
+  \node[dps controller,text width=2.2cm] (plc) at (-5,0)
+    {DPS PLC\\Protection logic};
+  \node[dps node,text width=2cm] (bde-a) at (-1.5,0) {BDE I/O\\panel};
+  \node[dps node,text width=2cm] (bde-b) at (2,0) {BDE I/O\\panel};
+  \node[dps node,dashed,text width=2.2cm] (other) at (5.5,0)
+    {Other systems\\I/O (proposed)};
+
+  \draw[dps both] (sc.south) --
+    node[dps label,right,align=left] {Supervisory Ethernet\\OPC UA} (plc.north);
+  \node[dps label,align=center] at (1.5,1.0) {Dedicated EtherCAT field network};
+  \draw[dps both] (plc.east) -- (bde-a.west);
+  \draw[dps both] (bde-a.east) -- (bde-b.west);
+  \draw[dps both,dashed] (bde-b.east) -- (other.west);
+
+  \draw[dps boundary] (-2.7,-0.75) -- (-2.7,-0.9) -- (3.2,-0.9) -- (3.2,-0.75);
+  \node[dps label,align=center] at (0.25,-1.2)
+    {BDE mezzanine span $\sim$70\,m};
+\end{tikzpicture}

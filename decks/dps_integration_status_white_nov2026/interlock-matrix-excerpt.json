@@ -1,0 +1,295 @@
+{
+  "title": "Main-talk excerpt of the existing DPS interlock matrix",
+  "revision": "0.2",
+  "source_date": "2026-10-27",
+  "source_state": "Working draft. We still need owner agreement and tests on the installed paths.",
+  "total_source_rules": 46,
+  "total_source_documents": 16,
+  "source_path": "/home/arroyave/work/vd-dps-plan/integration-matrix-20261023/rules.json",
+  "source_sha256": "60de6a03e22abb76e65492a7126f546aa0a8fdfad5922a2492bace97f2eab84a",
+  "full_pdf": "figures/interlock-matrix-v0.2.pdf",
+  "full_pdf_sha256": "64e42ddf2d66e6269f33e092aa105cdaf6f3bb3165269ce94db05e71f2d7129a",
+  "selected_rules": [
+    {
+      "id": "HV-01",
+      "group": "Cryogenics / HV",
+      "condition": "LAr approaches the HV feedthrough shielding rim while drift HV is on",
+      "kind": "Equipment protection",
+      "evidence": "Released source",
+      "targets": {
+        "hv": "OFF"
+      },
+      "action": "Shut down the drift HV supplies when the stated low-level condition is reached.",
+      "refs": [
+        {
+          "source": "S01",
+          "where": "PDF p13, §3.7",
+          "role": "Stated requirement"
+        },
+        {
+          "source": "S03",
+          "where": "PDF p9, §5",
+          "role": "Consistent draft"
+        }
+      ],
+      "module_scope": "FD-HD and FD-VD; map each module separately",
+      "stages": "When the named equipment is powered; agree installation, test, cold and operating configurations.",
+      "stage_basis": "Proposed applicability; stage approval not established.",
+      "limits": "Baseline says level drops within 5 cm of the shielding ground-plane top rim. Confirm the reference, direction, calibration and uncertainty; response time is absent.",
+      "input_path": "Source sensor/contact, cabinet, terminal or object, cable and I/O channel not mapped.",
+      "controller": "Execution controller and interface not confirmed.",
+      "feedback": "Map output to actual load and confirm equipment state independently of the command.",
+      "signal_loss": "Invalid input, stale data, controller and power-loss responses need agreement.",
+      "recovery": "Latch, reset authority and a separate re-enable decision need agreement.",
+      "review_with": "HVS; CI/cryogenics; DPS; SC",
+      "decision": "Map the actual level signal and relevant supplies; confirm current geometry and permitted delay.",
+      "inference": "",
+      "conflicts": [],
+      "previous_ids": [
+        "HV-01",
+        "DPS-C003"
+      ],
+      "function_approval": "Not recorded",
+      "installed_path": "Not verified",
+      "test_status": "Not run"
+    },
+    {
+      "id": "DPS-C001",
+      "group": "BDE",
+      "condition": "WIEC fan cooling is inadequate while BDE electronics are powered",
+      "kind": "Equipment protection candidate",
+      "evidence": "Inference",
+      "targets": {
+        "bde": "INHIBIT"
+      },
+      "action": "Propose inhibiting the affected BDE low-voltage group after an agreed cooling-fault test. The released ICD defines interfaces, not this complete rule.",
+      "refs": [
+        {
+          "source": "S04",
+          "where": "PDF p7, §5",
+          "role": "Dedicated input/output interfaces"
+        },
+        {
+          "source": "S06",
+          "where": "PDF p3",
+          "role": "PTC/DDSS path"
+        },
+        {
+          "source": "S16",
+          "where": "PDF pp7–8, §§6.3–6.4",
+          "role": "Historical Detector 1 precedent"
+        }
+      ],
+      "module_scope": "FD-VD BDE; scope must be mapped to WIEC, PTC and supply channels.",
+      "stages": "When the named equipment is powered; agree installation, test, cold and operating configurations.",
+      "stage_basis": "Proposed applicability; stage approval not established.",
+      "limits": "Fan voting, startup delay, command/status distinction and thermal response time are open. Historical X-of-4 voting leaves X undefined.",
+      "input_path": "Released ICD requests proper-operation inputs from fan supply channels and bidirectional PTC status.",
+      "controller": "Candidate DPS PLC/PTC path; S06 describes EtherCAT. S04 specifies individual PL506 channel inhibit/enable inputs, TTL 0–5 V on DSUB25. Confirm the output device, polarity and actual channel/interface mapping.",
+      "feedback": "Map output to actual load and confirm equipment state independently of the command.",
+      "signal_loss": "Invalid input, stale data, controller and power-loss responses need agreement.",
+      "recovery": "Latch, reset authority and a separate re-enable decision need agreement.",
+      "review_with": "BDE; DPS; SC; I&I",
+      "decision": "Agree cooling-fault definition, affected LV/bias outputs, timing and feedback.",
+      "inference": "The interface supports an inhibit, and the historical design gates power on cooling. Applying that rule to FD-VD requires review.",
+      "conflicts": [],
+      "previous_ids": [
+        "DPS-C001"
+      ],
+      "function_approval": "Not recorded",
+      "installed_path": "Not verified",
+      "test_status": "Not run"
+    },
+    {
+      "id": "P-011-I",
+      "group": "PDS / optical",
+      "condition": "PDS supply current is outside its specified range",
+      "kind": "Equipment protection",
+      "evidence": "Released source",
+      "targets": {
+        "pds": "OFF"
+      },
+      "action": "Shut down the affected PDS power supply.",
+      "refs": [
+        {
+          "source": "S01",
+          "where": "PDF p12, §3.6",
+          "role": "Stated requirement"
+        },
+        {
+          "source": "S07",
+          "where": "PDF pp6–7, §§4–5",
+          "role": "Draft supply mapping"
+        },
+        {
+          "source": "S08",
+          "where": "Interaction matrix P-011",
+          "role": "Consistent general proposal"
+        }
+      ],
+      "module_scope": "FD-HD and FD-VD; map each module separately",
+      "stages": "When the named equipment is powered; agree installation, test, cold and operating configurations.",
+      "stage_basis": "Proposed applicability; stage approval not established.",
+      "limits": "Acceptable current range, ramp allowance, persistence and action time are not specified.",
+      "input_path": "Source sensor/contact, cabinet, terminal or object, cable and I/O channel not mapped.",
+      "controller": "Local/DPS path to agree. MPV8060i has one interlock for four channels in S07; verify actual trip grouping.",
+      "feedback": "Map output to actual load and confirm equipment state independently of the command.",
+      "signal_loss": "Invalid input, stale data, controller and power-loss responses need agreement.",
+      "recovery": "Latch, reset authority and a separate re-enable decision need agreement.",
+      "review_with": "PDS power owner; DPS; SC",
+      "decision": "Agree settings and affected output group; confirm actual supply/channel interlock mapping.",
+      "inference": "",
+      "conflicts": [],
+      "previous_ids": [
+        "P-011"
+      ],
+      "function_approval": "Not recorded",
+      "installed_path": "Not verified",
+      "test_status": "Not run"
+    },
+    {
+      "id": "RACK-01",
+      "group": "Rack infrastructure",
+      "condition": "Smoke detected in a protected rack",
+      "kind": "Equipment protection",
+      "evidence": "Released source",
+      "targets": {
+        "rack": "OFF",
+        "sc": "MONITOR"
+      },
+      "action": "A hardware interlock removes power from the affected rack. SC monitors the smart-PDU status.",
+      "refs": [
+        {
+          "source": "S01",
+          "where": "PDF p13, §3.9",
+          "role": "Stated requirement"
+        },
+        {
+          "source": "S11",
+          "where": "PDF p10, §7",
+          "role": "Consistent draft boundary"
+        }
+      ],
+      "module_scope": "FD-HD and FD-VD; map each module separately",
+      "stages": "When the named equipment is powered; agree installation, test, cold and operating configurations.",
+      "stage_basis": "Proposed applicability; stage approval not established.",
+      "limits": "Smoke input and required response time to agree; do not replace this with a room-temperature alarm.",
+      "input_path": "Source sensor/contact, cabinet, terminal or object, cable and I/O channel not mapped.",
+      "controller": "Hardware interlock; rack/PLC path. Map both AC feeds and all affected loads.",
+      "feedback": "Map output to actual load and confirm equipment state independently of the command.",
+      "signal_loss": "Invalid input, stale data, controller and power-loss responses need agreement.",
+      "recovery": "Latch, reset authority and a separate re-enable decision need agreement.",
+      "review_with": "I&I; electrical/rack owner; DPS; DAQ; SC",
+      "decision": "Identify detector, contact, both feeds, protected load list and power-off feedback.",
+      "inference": "",
+      "conflicts": [],
+      "previous_ids": [
+        "RACK-01"
+      ],
+      "function_approval": "Not recorded",
+      "installed_path": "Not verified",
+      "test_status": "Not run"
+    },
+    {
+      "id": "Q-001",
+      "group": "PDS / optical",
+      "condition": "Purity-monitor flash lamp is active",
+      "kind": "Unresolved protection / data-quality rule",
+      "evidence": "Conflict",
+      "targets": {
+        "pds": "REVIEW",
+        "daq": "REVIEW"
+      },
+      "action": "Older sources require SiPM bias off/verified off. The later working PDS matrix permits acquisition with activity tagging. Do not select either as an agreed operating rule.",
+      "refs": [
+        {
+          "source": "S01",
+          "where": "PDF p12, §3.6",
+          "role": "Stated requirement"
+        },
+        {
+          "source": "S07",
+          "where": "PDF p7, §5",
+          "role": "Working draft"
+        },
+        {
+          "source": "S12",
+          "where": "PDF pp24,28,40",
+          "role": "TTO requirement"
+        },
+        {
+          "source": "S08",
+          "where": "Interaction matrix Q-001",
+          "role": "Different proposal"
+        }
+      ],
+      "module_scope": "FD-HD and FD-VD; map each module separately",
+      "stages": "When the named equipment is powered; agree installation, test, cold and operating configurations.",
+      "stage_basis": "Proposed applicability; stage approval not established.",
+      "limits": "Need optical exposure/damage evidence, affected channels, settling and time precision.",
+      "input_path": "Source sensor/contact, cabinet, terminal or object, cable and I/O channel not mapped.",
+      "controller": "Protection/operations/metadata boundary unresolved; see decision D02.",
+      "feedback": "Map output to actual load and confirm equipment state independently of the command.",
+      "signal_loss": "Invalid input, stale data, controller and power-loss responses need agreement.",
+      "recovery": "Latch, reset authority and a separate re-enable decision need agreement.",
+      "review_with": "PDS; PrM/CI; DPS; SC; DAQ",
+      "decision": "Resolve the physical protection requirement before choosing tagging or bias exclusion.",
+      "inference": "",
+      "conflicts": [
+        "D02"
+      ],
+      "previous_ids": [
+        "Q-001"
+      ],
+      "function_approval": "Not recorded",
+      "installed_path": "Not verified",
+      "test_status": "Not run"
+    },
+    {
+      "id": "Q-002",
+      "group": "PDS / optical",
+      "condition": "Declared LCM light calibration is running",
+      "kind": "Calibration / data quality",
+      "evidence": "Draft source",
+      "targets": {
+        "daq": "TAG"
+      },
+      "action": "Allow the declared calibration and publish its activity, configuration identity and affected scope for DAQ tagging.",
+      "refs": [
+        {
+          "source": "S08",
+          "where": "Interaction matrix Q-002",
+          "role": "Proposed rule"
+        }
+      ],
+      "module_scope": "FD-HD and FD-VD; map each module separately",
+      "stages": "When the named equipment is powered; agree installation, test, cold and operating configurations.",
+      "stage_basis": "Proposed applicability; stage approval not established.",
+      "limits": "Pulse metadata, scope, allowed run types and settling remain open.",
+      "input_path": "Source sensor/contact, cabinet, terminal or object, cable and I/O channel not mapped.",
+      "controller": "LCM/SC/DAQ operational interface; this row is not an equipment trip.",
+      "feedback": "Agree activity interval, configuration identity and affected-channel receipt.",
+      "signal_loss": "Invalid input, stale data, controller and power-loss responses need agreement.",
+      "recovery": "End the declared activity interval; no power reset follows from this row.",
+      "review_with": "LCM/PDS; SC; DAQ",
+      "decision": "Agree the data contract and allowed run modes.",
+      "inference": "",
+      "conflicts": [],
+      "previous_ids": [
+        "Q-002"
+      ],
+      "function_approval": "Not recorded",
+      "installed_path": "Not verified",
+      "test_status": "Not run"
+    }
+  ],
+  "shown_target_columns": [
+    "hv",
+    "bde",
+    "pds",
+    "rack",
+    "daq"
+  ],
+  "omitted_targets": "Unshown columns remain in the full matrix; no action is inferred from omission.",
+  "delivery_status": "No completion or approval is inferred from the source evidence class."
+}

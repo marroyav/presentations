@@ -1,0 +1,24 @@
+Matrix and milestone-delivery focus — Manuel, 11 November 2026
+
+Move the entire current Detector section, slides 12–23, into the backups.
+Retain current slide 24 (connection collection / conceptual-design milestones)
+and slide 25 (hardware-review preparation) in the main talk.
+Restore the earlier interlock matrix in place of the detector walkthrough and
+explain how milestone deliveries are measured. Commit and push when complete.
+
+Presentation treatment:
+- Reuse the existing DPS integration matrix v0.2, 27 October 2026: 46 rules,
+  16 pinned sources, explicit evidence, decisions and test-status fields.
+- Main talk: a readable selected-row excerpt, then proposed delivery checks.
+- A blank matrix cell assigns no action; REVIEW remains unresolved.
+- Source evidence does not establish owner agreement, installed wiring or tests.
+- Connection records and protection-function rows are different counting units.
+- Collection: complete required connection records and confirmed group coverage.
+- Concept: functions mapped and reviewed, gaps and decisions recorded, test plan.
+- Hardware evidence is separate: test records and measured response against the
+  agreed requirement, including communications loss, reset and recovery.
+- Denominators, reviewers and acceptance of these checks still need agreement.
+- No completion percentages, approvals, new test results or deadlines are invented.
+
+Keep all previous slides and user edits. The original slides 24 and 25 are
+retained verbatim, apart from their new page numbers, as main slides 14 and 15.

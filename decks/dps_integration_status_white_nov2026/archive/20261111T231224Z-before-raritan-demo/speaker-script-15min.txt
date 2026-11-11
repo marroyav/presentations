@@ -1,0 +1,154 @@
+VD Detector Protection System — 15-minute speaking script
+I&I meeting, November 2026
+
+25 main slides; 1,609 spoken words. Allow about fifteen minutes, following the timing cues.
+Backups 26–46 are for questions.
+
+1. VD Detector Protection System
+Target 00:00–00:30
+
+Today I’ll cover where we stand with the vertical-drift detector protection system, and the work needed for a full conceptual design. We already have a useful starting point in rack protection and the bottom-drift electronics. The main task now is to identify the remaining connections and turn those pieces into a complete, testable design.
+
+2. The hardware connection list is still growing
+Target 00:30–01:05
+
+We can start from the rack PDUs and the BDE protection design, including its drawings and test work. The main gap is the complete set of hardware inputs, outputs and feedback for the central DPS controller. We need every consortium, and the LBNF facility, to identify those connections. That collection will determine how far the existing approach can extend.
+
+3. DPS protects equipment; SC operates and records
+Target 01:05–01:35
+
+DPS makes protection decisions, applies permits and inhibits, and checks the response. Slow controls handles operation, monitoring and records. The consortia define the equipment limits and required response times. Local interlocks can also act independently. This separation matters when an operating request conflicts with a protection condition: protection takes priority. Personnel-safety alarms remain with SDSTA and the responsible safety systems.
+
+4. Facility interfaces may connect to SC or the DPS PLC
+Target 01:35–02:15
+
+The shared box groups SC/Ignition and the DPS PLC. The three facility systems stay outside it, with their links meeting the boundary. We have not decided whether each interface connects to SC/Ignition, the PLC, or both. Cryogenics exchanges information in both directions. OPC UA carries the exchange inside the SC/DPS group; the lower links reach detector subsystems, supplies, PDUs and remote I/O.
+
+5. Build the DPS brain on the BDE PLC architecture
+Target 02:15–03:00
+
+Here’s why we’d like to use a PLC as the DPS brain. It gives us industrial off-the-shelf hardware and modular I/O, with an established route for expansion, maintenance and upgrades.
+
+The BDE design already spreads its control and I/O panels along roughly seventy metres of mezzanine. We can build on that layout and add interfaces for other systems. The EtherCAT field network is separate from the supervisory Ethernet. The dashed part of the sketch shows the proposed extension.
+
+6. Cryogenics presents one system to DUNE
+Target 03:00–03:35
+
+Cryogenics has its own process controls in the CUC. For detector integration, we treat it as one system interface, even though its internal responsibilities are divided. Conditions such as liquid-argon level can affect detector permits. We need to agree which states mean ready, which limits matter for each load, and what the DPS should do when a required state becomes invalid or disappears.
+
+7. Trace each interlock from its source to the response
+Target 03:35–04:10
+
+The review follows a simple chain: the condition and its source, the physical input, the protection decision, the equipment action, and the final feedback. For each proposed interlock, we need to trace that entire chain. This tells us which hardware already exists, which connections are missing, and what we need to add. It also gives us the path whose response time must be tested.
+
+8. Each group must identify its hardware connections
+Target 04:10–04:45
+
+We should use one common connection register for the consortia and LBNF. Each entry needs both endpoints, the connector or channel, the signal meaning, the required action, and the expected feedback. It also needs a response-time requirement and behaviour for lost signals. A named contact and a source drawing or document are essential so we can resolve gaps and confirm that the list is complete.
+
+9. A trip removes the permit; recovery needs a new request
+Target 04:45–05:25
+
+The proposed controller allows operation when the request is valid, the required conditions are met, and no trip is active. A trip removes the permit, retains the cause, and checks the equipment response. Slow controls records what happened. Recovery has two separate steps: clear or reset the trip, then make a new request to re-enable. The response to missing inputs must be defined for each protected load.
+
+10. Build on the Batavia and SD DPS test setups
+Target 05:25–06:10
+
+We have development work in Batavia and an existing local setup in SD. Trevor reports that the initial BDE demonstrator design is complete and has been reviewed with the WIEC team at BNL. Applying that feedback, testing the fan tachometer reading, and assembling and installing the demonstrator remain his next steps. In the Nevada room, our dune-fd-test01 setup includes a PDU, smoke sensors, relay and GIZMo, plus Ignition, OPC UA bridges and emulators. We plan to expand that setup along the Batavia model and exercise protection, feedback and recovery.
+
+11. Detector
+Target 06:10–06:20
+
+I’ll now go through the detector systems and the protection interfaces we need to map.
+
+12. Ten BDE groups use the existing bottom-drift design
+Target 06:20–07:00
+
+BDE provides the most developed starting design in this presentation. The documented VD layout has ten groups, each with eight warm crates, remote I/O and two PL506 supplies. That gives eighty warm crates and twenty supplies. We have panel drawings, parts lists, power calculations and Ignition screens. The diagram separates the EtherCAT exchange, the wired supply inhibits and the forty-eight-volt power path.
+
+13. Extend the BDE approach into a full DPS concept
+Target 07:00–07:35
+
+Our proposal is to extend that PLC and distributed-I/O approach to the full DPS where it fits. We would map the additional subsystem and facility connections, then size the controller and I/O from the complete list. Slow controls would carry operating requests and record states and trips. Each added protection path would need a test from the input condition to the confirmed equipment response.
+
+14. A cooling fault removes power from the affected crate
+Target 07:35–08:10
+
+The fan example shows how to review a concrete protection path. A fan-status signal reaches the PLC; the cooling rule then removes the permit for the supply channel feeding the affected crate. We check the supply state and voltage, and slow controls records the trip. The dashed bias branch is a possible associated action. Its scope and shutdown order still need an agreed VD rule.
+
+15. SC and DAQ use distinct DAPHNE service paths
+Target 08:10–08:50
+
+For DAPHNE, we must keep the different service paths clear. Slow controls and DAQ’s CCM and monitoring clients use the OPC UA bridge to the DAPHNE software services. Hermes has a separate IPBus and UDP configuration path. The proposed SiPM-bias action runs from DPS through slow controls to DAPHNE, with status returned and DAQ informed. We still need to demonstrate acknowledgement, final-state feedback and timing for that software action.
+
+16. DPS switches PoF power through the PDU
+Target 08:50–09:25
+
+For cathode PDS power over fibre, the proposed shutdown route goes through the rack PDU. A local controller collects the box measurements; a separate box-enable connection remains an optional interface to investigate. Our working scope is eighty boxes, with four voltage readings and one temperature reading per box: four hundred readings overall. These are monitoring values; they do not directly determine the number of central DPS input terminals.
+
+17. LV supplies power DAPHNE and PDS calibration boxes
+Target 09:25–10:10
+
+This is the other PDS power path: the LV supplies serving DAPHNE and the calibration boxes. The proposed control exchange is SNMP between DPS and the WIENER supplies. The diagram separates DAPHNE’s forty-eight-volt feed from calibration-board and pulser power. We retain the working scope of thirty-four feeds. Load-to-channel mapping, module choices, hardware-inhibit groups, trip conditions and recovery still need to be resolved. After a trip, we need to check the supply state, voltage and current.
+
+18. Drift HV and bias supplies have separate inhibit paths
+Target 10:10–10:45
+
+The HV design has different interfaces for drift HV and for the CRP and field-cage bias supplies. Both include dedicated wired inhibits, alongside their control and monitoring interfaces. The documented bias scope is ten crates and five hundred and seventy-six channels. Low liquid-argon level is an example of a drift-HV trip condition. We must trace each rule to its actual sensor, inhibit connection and affected channels.
+
+19. Trace each protection input to a temperature sensor
+Target 10:45–11:20
+
+For CalCI temperature measurements, RTDs and fibre sensors have different readout systems. Their measurements reach slow controls through those systems. To use a measurement for protection, we need its location, threshold and required response time, together with the equipment that would be shut down. A general label such as temperature is insufficient to define a hardware input or a protection rule.
+
+20. Proposed laser rules block conflicting PDS requests
+Target 11:20–11:55
+
+For the four laser stations, the proposed operating rule is to block conflicting laser and PDS requests. The requests and status would be coordinated through slow controls, DPS and the calibration interface. Return to the PDS operating state would require confirmed emission-off or shutter closure. Local laser-safety interlocks remain independent. We still need agreement on the actual excluded states, affected scope and feedback.
+
+21. The purity-monitor inhibit rule still needs agreement
+Target 11:55–12:35
+
+The purity-monitor case contains a real open decision. Our working proposal is to continue acquisition and tag the intervals when the flash lamp is active. The older PDS interface document instead requires SiPM bias to be off during purity-monitor activity. We need the affected groups to agree that rule before implementing it. That decision determines both the operating sequence and the hardware or software action we must provide.
+
+22. Use rack sensors and PDUs for shared protection
+Target 12:35–13:10
+
+Rack infrastructure provides protection shared by several detector systems. The PDU receives its fitted sensors and can apply local outlet rules; DPS supervises the agreed power actions and slow controls records the state. Humidity monitoring alone does not establish a humidity shutdown rule. We count shared rack equipment once. For TDE, the current DPS scope is PDU control; additional crate-status and external-inhibit interfaces remain possible extensions.
+
+23. Measure the full path from fault to confirmed shutdown
+Target 13:10–13:50
+
+Our tests need to cover the whole protection chain: fault detection, PLC decision, output action and confirmed equipment state. We should also test local trips, lost communications, reset, re-enable and logging. We can build these tests into the Batavia demonstrator and the planned expansion of the SD setup. No critical function requiring less than one millisecond has been identified so far; the consortium review and hardware tests must check that assumption.
+
+24. Collect the inputs, then review the full DPS concept
+Target 13:50–14:25
+
+There are two main milestones. First, collect the hardware connections from every consortium and LBNF, confirm coverage, and record the remaining gaps and contacts. Second, review the full DPS concept, including architecture, controller and I/O allocation, interfaces, fault response and the test plan. The dates remain open. We need to agree the scope, contributors and available resources before setting that schedule.
+
+25. Prepare the hardware review
+Target 14:25–15:00
+
+The hardware review then needs a traceable account of what we can reuse, what must be added, the cable and channel allocations, and the test results. That should lead to drawings, power and space requirements, parts, licences, costs and spares. My immediate request is for consortium contacts and control-engineering support, so we can complete the connection register and develop a full DPS concept together.
+
+26. Backups — after the main talk
+
+The remaining slides are available for questions.
+
+Facility details — optional backup notes
+
+28. The FFDG BMS connection needs an API licence
+
+For FFDG, the proposed route uses the Metasys API through the Batavia server, then into DUNE slow controls. The API and OPC UA publication have been exercised using SBN building data. The remaining step for live FD data is the licence. We also need to identify exactly which variables we would receive and how they could be used.
+
+29. How FFDG BSI status can support detector protection
+
+The commissioning discussion highlighted an important operating constraint: FFDG described support on the next business day, without a round-the-clock service for us. They also recommended our own sensors for critical equipment protection. We therefore need to agree which BMS information supports operator decisions, which information could support an interlock, and which functions require our own sensors.
+
+30. The SDSTA SCADA interface needs a hardware survey
+
+On the SDSTA side, the immediate work is a hardware survey, including controllers, connections and network access at Ross Dry. Modbus TCP and OPC UA have been discussed, but the available signals and receiving interfaces still need agreement. We need enough detail to name the source of each useful state and understand who maintains it.
+
+31. SDSTA proposes a restricted SCADA status interface
+
+SDSTA has proposed a restricted Modbus TCP interface exposing a selected set of variables while retaining control on their side. The intended exchange is status only. That restriction needs to be agreed and checked in the interface. We are awaiting the variable list, including Oro Hondo and HVAC information, along with definitions, update behaviour and loss-of-data handling.

@@ -1,0 +1,70 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-11T22:52:00.840741+00:00",
+  "task": "dps-overview-boundary-20261111",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "f9d8c463468375f3d805d693a0db4016b9335be8",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 22,
+    "tracked_diff_sha256": "cb45b2ba7662f022692aa0d3d1634a687ec0f72f1fd1a866cd3539977ab28675",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261111T225033Z-overview-boundary-build.log",
+      "sha256": "9d799ddc8ccfc4ea1e04a87ce2668fd9bba0bad8c8e331f1d65a74b8ef414625"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "5452d23346fd0d171e118a7fe4aa752f3ca040c3e28e9dbf40e5494c5a2c6d58"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/overview.tikz.tex",
+      "sha256": "1f2b8a0b4a5c2c40d188b0006cdd98b0e77b5d69eeb27a5f6b3e9e96576c6d97"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/styles.tex",
+      "sha256": "d8f29a9ed0239362432509bb35d23c461d967df3be8bd8d8d3d25005260c4659"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "eb718a3629edf295e6222f750d5db113495994b06c78710edd09fccfd9d40430"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "da75a72d0a583cfcacaa37f7a15567ae803df924e1ca2fa3787a9067ffee15ca"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "072faf5e4aa6142f60053cc013b30367635ac40564c29f5a89f1b57c73111eaf"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/overview-input-20261111.txt",
+      "sha256": "c984ccefb6b63c791929ad45694c51cfab1349471ddd41e04c1251c8474063c0"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/speaker-script-fast.txt",
+      "sha256": "f485c6b296b28627668a740fdb272481c2ba6fa7f66ecdbafdde2b5f805f2e67"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/speaker-script-15min.txt",
+      "sha256": "035f384a7c06286405dec83a7ff94283a0d539981ed42c1ff02df7a68c14ccc7"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/speaker-script-15min.md",
+      "sha256": "e21306b3ba1a0670a55c151474d984c9557846bbeb4d2767596d759afa6a4a72"
+    }
+  ],
+  "limitations": "Logical overview only. Facility reception at SC/Ignition, the DPS PLC or both remains undecided. No new site inspection, installed connectivity or facility-control authority is claimed."
+}

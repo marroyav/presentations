@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-11-11T22:52:00.891266+00:00",
+  "request": "Group SC and DPS in a shared box, retain all three external facility boxes above it, connect their arrows to its boundary, leave SC/PLC endpoints open, and make the Cryogenics link bidirectional.",
+  "pre_change_archive": "archive/20261111T225033Z-before-overview-boundary",
+  "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "exit_code": 0,
+  "build_evidence": "verification-20261111T225033Z-overview-boundary-evidence.json",
+  "checks": {
+    "slides_before": 45,
+    "slides_after": 45,
+    "changed_page_text": [
+      4,
+      9
+    ],
+    "all_other_page_text_retained": true,
+    "facility_nodes_outside_shared_group": true,
+    "facility_arrows_end_at_group_boundary": true,
+    "cryogenics_arrow_bidirectional": true,
+    "receiving_endpoint_explicitly_open": true,
+    "matching_speaking_scripts_updated": true,
+    "source_audit_errors": [],
+    "source_audit_advisories": [],
+    "tex_layout_warnings": []
+  },
+  "visual_review": {
+    "reviewer": "Codex; no human approval recorded",
+    "slides": [
+      4,
+      9
+    ],
+    "scale_pixels": 1400,
+    "result": "External facility cards remain above the SC/DPS boundary; clear straight boundary links include a two-headed cryogenics arrow. SC/DPS and Detector boundaries are separate; labels and paths are clear."
+  },
+  "source_sha256": {
+    "decks/dps_integration_status_white_nov2026/main.tex": "5452d23346fd0d171e118a7fe4aa752f3ca040c3e28e9dbf40e5494c5a2c6d58",
+    "decks/dps_integration_status_white_nov2026/diagrams/overview.tikz.tex": "1f2b8a0b4a5c2c40d188b0006cdd98b0e77b5d69eeb27a5f6b3e9e96576c6d97",
+    "decks/dps_integration_status_white_nov2026/diagrams/styles.tex": "d8f29a9ed0239362432509bb35d23c461d967df3be8bd8d8d3d25005260c4659",
+    "decks/dps_integration_status_white_nov2026/README.md": "eb718a3629edf295e6222f750d5db113495994b06c78710edd09fccfd9d40430",
+    "decks/dps_integration_status_white_nov2026/sources.json": "da75a72d0a583cfcacaa37f7a15567ae803df924e1ca2fa3787a9067ffee15ca",
+    "decks/dps_integration_status_white_nov2026/sources-and-notes.txt": "072faf5e4aa6142f60053cc013b30367635ac40564c29f5a89f1b57c73111eaf",
+    "decks/dps_integration_status_white_nov2026/overview-input-20261111.txt": "c984ccefb6b63c791929ad45694c51cfab1349471ddd41e04c1251c8474063c0",
+    "decks/dps_integration_status_white_nov2026/speaker-script-fast.txt": "f485c6b296b28627668a740fdb272481c2ba6fa7f66ecdbafdde2b5f805f2e67",
+    "decks/dps_integration_status_white_nov2026/speaker-script-15min.txt": "035f384a7c06286405dec83a7ff94283a0d539981ed42c1ff02df7a68c14ccc7",
+    "decks/dps_integration_status_white_nov2026/speaker-script-15min.md": "e21306b3ba1a0670a55c151474d984c9557846bbeb4d2767596d759afa6a4a72"
+  },
+  "output_sha256": {
+    "main.pdf": "8f2eb199c4c2757fc5c173f7767a4826ad73d683c515300f97811273206afbc4",
+    "main.txt": "e89c67ca23f0fd1187bdba9a12fcef34631f36bd1db5e7040ae0be44577dcf04",
+    "review/slide-04.png": "3d6eb93075fd9453cf00c9c091ca057116a7a5688c1c6d935bc072bb5593075a",
+    "review/slide-04-grayscale.png": "c70e774013d9eb080b947f3175ad33293b4e0d551ae2660dd8f9b85d20dc0318",
+    "review/slide-09.png": "df2480f96a33610d35d5cda8656d1ce2306a241ef2179433cf83638ded020b06",
+    "review/slide-index.csv": "4a7613a23016af72a4e6753c0ac2270c3baf831de851cdb4ef5ea888ff4ed5a2"
+  }
+}

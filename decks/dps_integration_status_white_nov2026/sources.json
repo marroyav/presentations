@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-11-10",
+  "revision_date": "2026-11-11",
   "scope": "VD only. HD later by extension or separate PLC.",
   "context": "I&I email thread and Manuel's clarifications, including combined 336 microTCA count, public-audience polish and draw.io request on 28 October. Native TikZ conversion requested by Manuel on 10 November; overview label changed to SDSTA SCADA. White design version requested by Manuel on 10 November 2026; the technical evidence remains the October I&I baseline. November I&I meeting revision: retain all earlier slides and backups; add title/date/logos, centred transition, commissioning update, fire-system boundary, connection collection and proposed milestones. DAPHNE correction requested by Manuel: slide 18 uses the same service diagram source as slide 31; the simplified topology is retired. Branding clarification: large grey DUNE on footerless title and transition slides; black Fermilab only in other slide footers, retaining the meeting date and page number.",
   "references": [
@@ -490,6 +490,74 @@
       "location": "Available local setup and expansion intent",
       "use": "dune-fd-test01 in the SD Nevada room: PDU, smoke sensors, relay, GIZMo, Ignition, OPC UA bridges and emulators. Expansion along the Batavia model is planned; no new hardware verification claimed.",
       "sha256": "486b6a549fc0a5ec806ea64f2e6ce69220b36aa80355a36c2926878088d420cc"
+    },
+    {
+      "id": "manuel-facility-routing-20261111",
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/overview-input-20261111.txt",
+      "revision": "Manuel’s clarification, 11 November 2026",
+      "location": "SC/DPS grouping, external facility links, endpoint uncertainty and bidirectional cryogenics",
+      "use": "Current overview geometry and interface scope; supersedes the SC-only facility-routing assumption. No installed route or facility-control authority implied.",
+      "sha256": "c984ccefb6b63c791929ad45694c51cfab1349471ddd41e04c1251c8474063c0"
+    },
+    {
+      "id": "manuel-plc-brain-20261111",
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/plc-brain-input-20261111.txt",
+      "revision": "Manuel’s slide-order and PLC rationale, 11 November 2026",
+      "location": "PLC rationale, distributed BDE panels, approximate 70 m mezzanine span and separate field network",
+      "use": "User-directed conceptual PLC extension and rationale; span is approximate, drawn panels illustrative, upgrade support not a service guarantee.",
+      "sha256": "21813773fa3159885e40ad47b3399a5985a62f1084f49832141291570e18f5e9"
+    },
+    {
+      "id": "bde-network-interface-note",
+      "path": "/home/arroyave/work/vd-dps-plan/bde-hardware-control.md",
+      "revision": "Local working BDE hardware/control note; documented interfaces, not as-built confirmation",
+      "location": "HWDB cross-check notes: supervisory Ethernet and EtherCAT protection connections are distinct interfaces",
+      "use": "Supports distinguishing EtherCAT field communications from supervisory Ethernet in the minimal sketch. LAN assignment and physical topology remain open.",
+      "sha256": "952502c5fca2f6c818baa7ab9a39f0da2b6ea9381ced615dc8f92a057775dda1"
+    },
+    {
+      "id": "manuel-raritan-demo-20261111",
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/raritan-demo-input-20261111.txt",
+      "revision": "11 November 2026",
+      "location": "Demonstration goal and scope",
+      "use": "User-directed PDU demo after the PLC slide; retain prior rack/TDE detail in backup.",
+      "sha256": "07effa39bda9bd4db259da5ce6ca6f35c4360afe44eb6aa9955b8eee7c775282"
+    },
+    {
+      "id": "raritan-platform-capabilities-20261111",
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/raritan-capabilities-review-20261111.json",
+      "revision": "11 November 2026",
+      "location": "Official vendor manuals, SDK pages and SmartSensor distinctions",
+      "use": "Documents platform switching, discrete contact outputs and local event/Lua logic. These are planned demonstration capabilities, not current hardware test results.",
+      "sha256": "598063c13b5ce9df641ef954124c8830bf370959f53ce8864e99226539d9667b"
+    },
+    {
+      "id": "manuel-matrix-delivery-20261111",
+      "path": "matrix-delivery-input-20261111.txt",
+      "revision": "11 November 2026 presentation revision",
+      "use": "Manuel’s requested main-talk focus and retention of former slides 24 and 25",
+      "sha256": "0a4a399fe22ea51242ffbc1a5a592727cb1938990c6956b741a91fb7d677f9d6"
+    },
+    {
+      "id": "matrix-main-excerpt",
+      "path": "interlock-matrix-excerpt.json",
+      "revision": "11 November 2026 presentation revision",
+      "use": "Six exact source records for the main-talk excerpt; full target/actions and source status retained",
+      "sha256": "89819390eac0c3b5084ba1ab741a5def6b687339b92819a5441c2a38f79d7077"
+    },
+    {
+      "id": "matrix-full-pdf",
+      "path": "figures/interlock-matrix-v0.2.pdf",
+      "revision": "Working matrix v0.2, 27 October 2026",
+      "use": "Unmodified five-page v0.2 matrix companion, 27 October 2026; conditions/actions shown in backup 50",
+      "sha256": "64e42ddf2d66e6269f33e092aa105cdaf6f3bb3165269ce94db05e71f2d7129a"
+    },
+    {
+      "id": "milestone-delivery-checks",
+      "path": "milestone-delivery-checks.json",
+      "revision": "11 November 2026 presentation revision",
+      "use": "Proposed checks; connection records, protection functions and test cases are distinct units; no current completion counts",
+      "sha256": "007b2b860a475ae9ad86cbe930536f9c834420aa7962dbac81bd7dff9f7b8bcf"
     }
   ],
   "figures": [
@@ -582,19 +650,19 @@
       "status": "Existing rack-protection/PDU planning entries; not 76 additional purchases or a complete VD/roof installed inventory"
     }
   },
-  "presentation": "28 main slides including a Batavia/SD test-setups progress slide before Detector, a Backups transition on slide 29, then 16 backup slides. PDS LV follows PoF on slide 20. All existing slides are retained; the fire-scope slide remains disabled in main.tex by Manuel.",
+  "presentation": "25 main slides, Backups transition on slide 26 and 21 backup slides. Expanded Raritan demo is slide 6, after the PLC rationale. Original rack/TDE protection detail is retained unchanged at backup 47. All 46 previous slide bodies remain in the PDF.",
   "current_architecture": {
     "source_id": "manuel-architecture",
     "dps_input_domains": [
-      "FFDG DUNE FD BMS via SC",
-      "SDSTA SCADA via SC",
-      "Cryogenics as one system via SC",
+      "FFDG DUNE FD BMS: SC/PLC receiving endpoint open",
+      "SDSTA SCADA: SC/PLC receiving endpoint open",
+      "Cryogenics as one bidirectional system interface: SC/PLC endpoint open",
       "Detector"
     ],
     "detector_contains": [
-      "SC",
       "Subsystems",
-      "Rack infrastructure"
+      "PDUs and supplies",
+      "Remote I/O"
     ],
     "sc_role": "Operation, monitoring and central data/event logging",
     "dps_role": "Protection arbitration",
@@ -608,7 +676,7 @@
     "count_basis": "Explicit correction by Manuel; replaces the prior PDS LV entry. No new supply-module count is inferred.",
     "sc_dps_transport": "OPC UA: control requests, status and events between SC/Ignition and the DPS PLC",
     "protection_path": "DPS arbitrates protection. PDUs and WIENER supplies share SNMP control/status to the PLC. BDE/bias EtherCAT remote I/O and dedicated PL506/ISEG wired inhibits are visible in the same overview. Additional subsystem OPC UA goes through SC.",
-    "proposal_diagram": "Slide 2: separate FFDG, SDSTA and cryogenic inputs to SC; SC ↔ OPC UA ↔ DPS; detector beneath with SC/OPC UA and DPS/SNMP/EtherCAT paths.",
+    "proposal_diagram": "Slide 4: three external facility systems link to the boundary of a shared SC/DPS group. Endpoints at SC/Ignition, the PLC, or both remain open. Cryogenics is bidirectional. Detector is a separate group below.",
     "additional_interfaces": "PDS/CalCI interfaces and possible future TDE interfaces ↔ OPC UA ↔ SC/Ignition ↔ OPC UA ↔ DPS PLC; current TDE control is via PDUs only.",
     "pdu_connection": "SNMP control/status between DPS PLC and PDUs; grouped with LV supplies on the same connection; local interlocks retained",
     "tde_scope": {
@@ -621,18 +689,18 @@
       "presentation": "Keep PDU-only current control distinct from possible future crate-status and external-inhibit interfaces."
     },
     "presentation_exclusions": [
-      "SC–OPC UA server deployment details in the main talk; original service figure retained in backup 23 at user request"
+      "SC–OPC UA server deployment details in the main talk; original service figure retained in backup 36 at user request"
     ],
     "lv_supply_control": "SNMP control/status between DPS PLC and LV power supplies, grouped with PDUs. Documented BDE/PL506 TTL enable/inhibit inputs remain additional hardware protection interfaces.",
     "device_control_protocol": "SNMP for both PDUs and WIENER LV power supplies",
     "rack_infrastructure": "Rack/enclosure, feeds, PDU(s), smoke/humidity sensors and sensor support/power/relay/wiring; temperature/leak where fitted. Count once and map subsystem loads to outlets. No humidity shutdown rule is inferred.",
-    "ffdg_route": "ISD proposes Metasys API in Batavia → DUNE FD SC → DPS. SBN API/OPC UA exercise reported by Manuel; live data awaits licence.",
-    "sdsta_route": "Survey and agreement work ongoing; controller models, I/O, exported states and protocols under investigation. Intended information route enters SC.",
+    "ffdg_route": "Metasys API in Batavia is a proposed interface; reception at SC/Ignition, the DPS PLC or both remains open. SBN API/OPC UA exercise reported by Manuel; live FD data awaits licence.",
+    "sdsta_route": "Survey and agreement ongoing; proposed restricted Modbus TCP. The receiving endpoint at SC/Ignition, the DPS PLC or both remains open.",
     "pof_options": [
       "Arduino Opta PLC",
       "Beckhoff PLC"
     ],
-    "cryo_route": "Cryogenics is in the CUC. Internal control divisions appear as one system interface to SC and DPS. Run-state agreement remains open.",
+    "cryo_route": "Cryogenics is in the CUC and appears as one bidirectional system interface. The receiving endpoint at SC/Ignition, the DPS PLC or both and the run-state agreement remain open.",
     "pof_monitoring": "4 laser-voltage readings + 1 chassis temperature per box, confirmed by Manuel",
     "pof_inhibition": "DPS → SNMP → PDU → PoF AC power. Additional local box-enable/inhibit is optional if an interface is available.",
     "daphne_control": "DPS ↔ SC ↔ OPC UA interface ↔ DAPHNE ZMQ control/status; DAQ CCM/opmon shares OPC UA; DAQ Hermes retains distinct IPBus/UDP route.",
@@ -645,7 +713,8 @@
       "source_id": "manuel-corrections-20261028",
       "limits": "No current subsystem split or PDU quantity inferred."
     },
-    "dps_basis": "Commercial PLC and distributed I/O derived from BDE; historical Detector 1 quantities are not the VD population."
+    "dps_basis": "Proposed commercial PLC brain with distributed I/O, building on the BDE architecture; industrial off-the-shelf hardware, modular expansion and vendor support are the stated rationale. No full-DPS design approval or new hardware test is claimed.",
+    "facility_routing_source_id": "manuel-facility-routing-20261111"
   },
   "protocol_evidence": {
     "pdu": {
@@ -715,35 +784,22 @@
       "open choices affecting quantities"
     ],
     "counting": "Shared signals and outputs count once. Wiring and software changes are identified separately from equipment purchases.",
-    "presentation_position": "Slides 11 and 12: trace each interlock and collect the full hardware connection information from the consortia and LBNF."
+    "presentation_position": "Slides 8 and 9: trace each interlock and collect the hardware connections from the consortia and LBNF."
   },
   "main_slide_order": [
     "VD Detector Protection System",
     "The hardware connection list is still growing",
     "DPS protects equipment; SC operates and records",
-    "Facility inputs reach DPS through slow controls",
-    "The FFDG BMS connection needs an API licence",
-    "How FFDG BSI status can support detector protection",
-    "The SDSTA SCADA interface needs a hardware survey",
-    "SDSTA proposes a restricted SCADA status interface",
+    "Facility interfaces may connect to SC or the DPS PLC",
+    "Build the DPS brain on the BDE PLC architecture",
+    "Raritan PDU controls on dune-fd-test01",
     "Cryogenics presents one system to DUNE",
     "Trace each interlock from its source to the response",
     "Each group must identify its hardware connections",
     "A trip removes the permit; recovery needs a new request",
     "Build on the Batavia and SD DPS test setups",
-    "Detector",
-    "Ten BDE groups use the existing bottom-drift design",
-    "Extend the BDE approach into a full DPS concept",
-    "A cooling fault removes power from the affected crate",
-    "SC and DAQ use distinct DAPHNE service paths",
-    "DPS switches PoF power through the PDU",
-    "LV supplies power DAPHNE and PDS calibration boxes",
-    "Drift HV and bias supplies have separate inhibit paths",
-    "Trace each protection input to a temperature sensor",
-    "Proposed laser rules block conflicting PDS requests",
-    "The purity-monitor inhibit rule still needs agreement",
-    "Use rack sensors and PDUs for shared protection",
-    "Measure the full path from fault to confirmed shutdown",
+    "Use the interlock matrix to track each protection function",
+    "Measure milestones with completed records and evidence",
     "Collect the inputs, then review the full DPS concept",
     "Prepare the hardware review"
   ],
@@ -757,24 +813,24 @@
         "bsi-spec"
       ],
       "slides": [
-        5,
-        7
+        18,
+        20
       ],
       "treatment": "New vector schematic; service responsibilities and source drawing examples, not a geographical scale drawing or verified BMS point inventory"
     },
     {
       "path": "diagrams/daphne-icd-reference.tex",
       "slides": [
-        18,
-        33
+        26,
+        36
       ],
       "source_id": "sc-pds-working-services",
-      "treatment": "Shared working-ICD Figure 1 on main slide 18 and backup slide 33. SC/CCM clients, configuration request/response, monitoring and Hermes IPBus/UDP stay separate. The DPS bias proposal is a separate note; the LV path is on slide 20."
+      "treatment": "Shared working-ICD Figure 1 in backups 26 and 36. SC/CCM and Hermes paths remain distinct; the DPS bias proposal is a separate note. PDS LV is in backup 28."
     },
     {
       "path": "diagrams/pds-lv.tikz.tex",
       "slides": [
-        20
+        28
       ],
       "source_ids": [
         "manuel-architecture",
@@ -782,6 +838,48 @@
         "pds-lv-historical-icd"
       ],
       "treatment": "Proposed DPS–SNMP–WIENER LV path with separate output branches for DAPHNE 48 V and PDS calibration board/pulser power. Arrows group feeds. No selected module/crate population, shared rail, installed hardwired inhibit or agreed trip rule is implied."
+    },
+    {
+      "path": "diagrams/plc-brain.tikz.tex",
+      "slides": [
+        5
+      ],
+      "source_ids": [
+        "manuel-plc-brain-20261111",
+        "sc-architecture",
+        "bde-network-interface-note"
+      ],
+      "treatment": "Minimal native TikZ adaptation of the PLC/distributed-I/O pattern in Trevor’s architecture. One logical PLC brain, illustrative BDE panels on EtherCAT, and dashed expansion to other systems. No selected model, physical routing, panel quantity or independent qualification is implied."
+    },
+    {
+      "path": "diagrams/raritan-demo.tikz.tex",
+      "slides": [
+        6
+      ],
+      "source_ids": [
+        "manuel-raritan-demo-20261111",
+        "raritan-platform-capabilities-20261111"
+      ],
+      "treatment": "Planned sensor-to-local-PDU-logic demonstration with individual AC outlets and a dashed discrete-output path through a compatible actuator to a PLC/device input. Accessory, firmware and input match remain to confirm; no native actuator, pinout or installed PLC connection inferred."
+    },
+    {
+      "path": "diagrams/interlock-matrix-excerpt.tex",
+      "slides": [
+        12
+      ],
+      "source_ids": [
+        "matrix",
+        "matrix-main-excerpt"
+      ],
+      "treatment": "Six condition/action rows from the existing 46-rule working matrix. Five target columns shown; omitted columns remain in the full companion. Released and Draft abbreviate source evidence classes, not function approval or a passed test."
+    },
+    {
+      "path": "figures/interlock-matrix-v0.2.pdf",
+      "slides": [
+        50
+      ],
+      "source_id": "matrix-full-pdf",
+      "treatment": "Conditions/action pages 1–2 shown as a reference; complete five-page PDF copied unchanged. Use the companion for detailed reading."
     }
   ],
   "device_hierarchy": {
@@ -804,11 +902,8 @@
     ],
     "main_slides": [
       4,
-      18,
-      19,
-      20,
-      23,
-      25
+      5,
+      6
     ],
     "sources": {
       "overview": "diagrams/overview.tikz.tex",
@@ -816,7 +911,10 @@
       "pof": "diagrams/pof.tikz.tex",
       "lasers": "diagrams/lasers.tikz.tex",
       "racks": "diagrams/racks.tikz.tex",
-      "pds_lv": "diagrams/pds-lv.tikz.tex"
+      "pds_lv": "diagrams/pds-lv.tikz.tex",
+      "plc_brain": "diagrams/plc-brain.tikz.tex",
+      "raritan_demo": "diagrams/raritan-demo.tikz.tex",
+      "interlock_matrix": "diagrams/interlock-matrix-excerpt.tex"
     },
     "build_command": "make decks/dps_integration_status_white_nov2026/main.pdf",
     "previous_drawio_archive": "../dps_integration_status_oct2026/archive/20261110T153535Z-before-native-tikz",
@@ -824,7 +922,7 @@
     "markmap": "device-hierarchy.html",
     "markmap_initial_view": "Two levels expanded in the local HTML; click branches to open device groups.",
     "profile": "White; unfilled nodes, dark outlines and explicit connection labels",
-    "daphne_source_policy": "Slides 18 and 33 include the same native TikZ source directly; no separate simplified topology.",
+    "daphne_source_policy": "Backups 26 and 36 include the same native TikZ source directly; no separate simplified topology.",
     "retired_daphne_diagram": {
       "path": "archive/20261110T182102Z-before-daphne-reference-correction/diagrams/daphne.tikz.tex",
       "reason": "User identified the merged CCM/Hermes and combined control/status view as misleading; main slide 18 now uses the working-ICD service diagram from slide 31."
@@ -848,9 +946,9 @@
     "meeting": "I&I meeting, November 2026",
     "requested_by": "Manuel Arroyave",
     "content_policy": "Keep all earlier slides and technical backups in the same PDF; no shortening or separate backup PDF.",
-    "main_slides": 28,
-    "backup_slides": 16,
-    "total_slides": 45,
+    "main_slides": 15,
+    "backup_slides": 34,
+    "total_slides": 50,
     "branding": "Title, Detector transition and Backups transition: large grey DUNE on the left, text on the right, no footer. Other slides: black Fermilab with the meeting date and page number.",
     "fire_scope": "Fire detection, alarms and emergency response remain outside DPS control; a possible equipment-status feed is an unagreed discussion idea.",
     "milestones": [
@@ -869,13 +967,13 @@
     "commissioning_source_id": "manuel-commissioning-update-20261110",
     "security_limit": "No air-gap claim is adopted. A status-only Modbus TCP interface still needs agreement and verification.",
     "register_template": "connection-register-template.csv",
-    "backup_transition_slide": 29
+    "backup_transition_slide": 16
   },
   "branding_revision": {
     "special_slides": [
       1,
-      14,
-      29
+      16,
+      22
     ],
     "special_slide_logo": "templates/dune-professional/logos/DUNElogo_gray.pdf",
     "special_slide_logo_width_cm": 5.2,
@@ -886,7 +984,7 @@
     "variant_source": "Existing logo PNG alpha channels embedded unchanged in SVG masks; monochrome fills rendered as PDF. No generated replacement logo or change to logo geometry."
   },
   "pds_lv_slide": {
-    "slide": 20,
+    "slide": 28,
     "placed_after": "DPS switches PoF power through the PDU",
     "working_feeds": 34,
     "loads": [
@@ -903,8 +1001,8 @@
     "scope_limit": "34 is the existing LV-feed scope, not a derived crate/module count. Calibration-board voltage remains unresolved. Nichols is a discussion input only."
   },
   "test_setups_slide": {
-    "slide": 13,
-    "placement": "Immediately before Detector transition (slide 14)",
+    "slide": 11,
+    "placement": "Main slide 11 precedes the interlock matrix on slide 12. Detector transition is now backup 22.",
     "batavia_source_id": "nichols-dps-workshop-review-20261110",
     "batavia_source_slides": [
       15,
@@ -926,5 +1024,105 @@
     "sd_plan": "Expand along the Batavia model",
     "proposed_test_goal": "Protection inputs, trips, feedback, reset and recovery",
     "limits": "No dates or new test results; Batavia status is reported from an unverified draft, local equipment is reported by Manuel."
+  },
+  "overview_revision": {
+    "slide": 4,
+    "diagram": "diagrams/overview.tikz.tex",
+    "source_id": "manuel-facility-routing-20261111",
+    "facility_boxes_external": true,
+    "shared_group": [
+      "SC / Ignition",
+      "DPS PLC"
+    ],
+    "facility_links_terminate_at": "SC/DPS group boundary",
+    "endpoint_status": "SC/Ignition, DPS PLC, or both: to agree",
+    "cryogenics_bidirectional": true,
+    "dashed_links": "Facility interfaces under study"
+  },
+  "plc_brain_slide": {
+    "slide": 5,
+    "status": "Proposed approach",
+    "rationale": [
+      "Industrial off-the-shelf hardware",
+      "Modular expansion and scalability",
+      "Vendor support for maintenance and upgrades",
+      "Reuse of distributed BDE panels"
+    ],
+    "approximate_mezzanine_span_m": 70,
+    "span_basis": "Manuel’s approximate layout description; not a measured cable route",
+    "networks": [
+      "Supervisory Ethernet / OPC UA",
+      "Dedicated EtherCAT field network"
+    ],
+    "source_id": "manuel-plc-brain-20261111",
+    "moved_facility_details": {
+      "old_slides": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "new_backup_slides": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    "limits": "Conceptual drawing. Existing BDE pattern can be extended after interface and I/O allocation; no installed full-DPS architecture or support commitment is claimed."
+  },
+  "raritan_demo_slide": {
+    "slide": 6,
+    "user_reported_host": "dune-fd-test01",
+    "status": "Proposed collaboration demonstration",
+    "capabilities": [
+      "Individual outlet on/off/cycle with state/power readback",
+      "Fault or permit bit via a compatible dry-contact actuator",
+      "Local event rules and LuaPLC: contact/threshold conditions, selected outputs, delays, sequences and explicit reset"
+    ],
+    "original_rack_scope_backup": 49,
+    "validation_pending": [
+      "Fitted output-capable actuator",
+      "Installed firmware and enabled functions",
+      "PLC/device digital-input compatibility",
+      "Test load, feedback, communications-loss and recovery behaviour"
+    ],
+    "source_ids": [
+      "manuel-raritan-demo-20261111",
+      "raritan-platform-capabilities-20261111"
+    ]
+  },
+  "milestone_delivery_view": {
+    "status": "Proposed checks, pending collaboration agreement",
+    "matrix_slide": 12,
+    "delivery_checks_slide": 13,
+    "full_matrix_reference_slide": 50,
+    "detector_walkthrough_backups": [
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33
+    ],
+    "kept_main": {
+      "former_24": 14,
+      "former_25": 15
+    },
+    "measurement_units": {
+      "collection": "Complete / required connection records, by consortium and LBNF",
+      "concept": "Reviewed, mapped / in-scope protection functions; remaining decisions listed",
+      "hardware": "Passed / planned test cases; measured fault-to-final-state delay against agreed budget; loss/reset/recovery evidence"
+    },
+    "required_scope_and_reviewers": "To agree",
+    "current_completion_counts": null,
+    "dates": "Open",
+    "limits": "46 source rules are not 46 physical connections or installed tests. Source evidence does not establish agreement, installation or a passed hardware test."
   }
 }

@@ -1,0 +1,12 @@
+Overview diagram clarification — Manuel, 11 November 2026
+
+Put SC/Ignition and the DPS PLC inside one shared box, like the Detector box.
+Keep the three upper facility boxes outside and above that shared box:
+FFDG DUNE FD BMS, SDSTA SCADA and Cryogenics.
+Their arrows meet the shared box boundary. No receiving node inside it is chosen.
+Whether each facility connects to SC/Ignition, the PLC, or both remains open.
+The Cryogenics link is bidirectional.
+
+This revises the earlier SC-only assumption for the facility overview.
+The box groups logical interfaces; it does not allocate facility-control ownership,
+specify an installed cable, or establish a selected facility protocol or endpoint.

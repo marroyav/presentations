@@ -1,0 +1,21 @@
+% Collaboration demo plan; no outlet command or hardware test is performed here.
+% Contact inputs sense external switches; dry-contact outputs need a compatible
+% actuator accessory. The dashed branch is a proposed discrete signal, not a
+% network data stream or an assumption that the smoke-input relay is an output.
+\begin{tikzpicture}
+  \node[dps node,text width=2.6cm] (sensors) at (-5,0.1)
+    {Smoke /\\contact inputs};
+  \node[dps controller,text width=2.8cm] (pdu) at (0,0.1)
+    {Raritan PDU\\Rules / LuaPLC};
+  \node[dps load,text width=2.7cm] (outlets) at (5,1)
+    {Individual outlets\\On / off / cycle};
+  \node[dps node,text width=2.7cm] (plc) at (5,-0.9)
+    {PLC / other device\\Digital input};
+
+  \draw[dps flow] (sensors.east) -- node[dps label,above] {SENSOR} (pdu.west);
+  \draw[dps power] ([yshift=1.5mm]pdu.east) -- (2.5,0.25) -- (2.5,1)
+    -- node[dps label,pos=1,above,anchor=south east,xshift=-2pt] {AC power} (outlets.west);
+  \draw[dps flow,dashed] ([yshift=-1.5mm]pdu.east) -- (2.5,-0.05) -- (2.5,-0.9)
+    -- node[dps label,pos=1,below,anchor=north east,xshift=-2pt,align=right]
+      {Via dry-contact\\actuator} (plc.west);
+\end{tikzpicture}

@@ -1,0 +1,127 @@
+VD Detector Protection System — fast speaking script
+I&I meeting, November 2026
+
+25 main slides; 369 spoken words. Allow about four minutes.
+Backups 26–46 are for questions.
+
+1. VD Detector Protection System
+
+I’ll cover our starting point for the VD DPS, and the work needed for a full conceptual design.
+
+2. The hardware connection list is still growing
+
+We know rack protection and BDE. We still need the complete hardware connection list.
+
+3. DPS protects equipment; SC operates and records
+
+DPS protects equipment. Slow controls operates and records; local interlocks can act independently.
+
+4. Facility interfaces may connect to SC or the DPS PLC
+
+Facility interfaces may connect to SC/Ignition, the DPS PLC, or both. Cryogenics exchanges information in both directions.
+
+5. Build the DPS brain on the BDE PLC architecture
+
+We propose the BDE PLC approach: industrial hardware, modular expansion and vendor support, with a separate EtherCAT field network.
+
+6. Cryogenics presents one system to DUNE
+
+Cryogenics keeps its own controls. We need agreed readiness states and responses to missing signals.
+
+7. Trace each interlock from its source to the response
+
+Trace each interlock from its source through the connection, decision, action and feedback.
+
+8. Each group must identify its hardware connections
+
+We need each consortium and LBNF to identify their connections, requirements, gaps and contact.
+
+9. A trip removes the permit; recovery needs a new request
+
+A trip removes the permit. Reset and re-enable are separate actions.
+
+10. Build on the Batavia and SD DPS test setups
+
+Batavia reports design and review progress. Our SD setup has hardware, Ignition, bridges and emulators; expansion is planned.
+
+11. Detector
+
+Now, the detector systems.
+
+12. Ten BDE groups use the existing bottom-drift design
+
+BDE provides the starting design: ten groups, eighty warm crates and dedicated supply inhibits.
+
+13. Extend the BDE approach into a full DPS concept
+
+We propose to extend that PLC and remote-I/O approach once the additional interfaces are mapped.
+
+14. A cooling fault removes power from the affected crate
+
+A fan fault inhibits power to the affected crate. Associated bias shutdown still needs agreement.
+
+15. SC and DAQ use distinct DAPHNE service paths
+
+SC and DAQ’s CCM use the OPC UA path; Hermes has a separate configuration interface.
+
+16. DPS switches PoF power through the PDU
+
+For PoF, the proposed shutdown uses the rack PDU. A separate box-enable path remains optional.
+
+17. LV supplies power DAPHNE and PDS calibration boxes
+
+For DAPHNE and calibration boxes, the working LV scope is thirty-four feeds; channel and inhibit assignments remain open.
+
+18. Drift HV and bias supplies have separate inhibit paths
+
+The HV design has separate wired inhibits for drift HV and CRP/field-cage bias.
+
+19. Trace each protection input to a temperature sensor
+
+Each protection measurement needs a sensor location, limit, response time and affected load.
+
+20. Proposed laser rules block conflicting PDS requests
+
+The proposed laser rule blocks conflicting PDS requests. Local laser-safety interlocks remain independent.
+
+21. The purity-monitor inhibit rule still needs agreement
+
+We still need to agree whether purity-monitor activity needs tagging or PDS bias inhibition.
+
+22. Use rack sensors and PDUs for shared protection
+
+Rack sensors and PDUs provide shared protection. For TDE, our current DPS scope is PDU control.
+
+23. Measure the full path from fault to confirmed shutdown
+
+We plan to test fault detection through confirmed shutdown, including communications loss, recovery and logging.
+
+24. Collect the inputs, then review the full DPS concept
+
+First collect the connections, then review the full concept. Dates remain to be agreed with the contributors.
+
+25. Prepare the hardware review
+
+Prepare the hardware and test plan for review. The immediate needs are consortium contacts and control-engineering support.
+
+26. Backups — after the main talk
+
+The remaining slides are available for questions.
+
+Facility details — optional backup notes
+
+28. The FFDG BMS connection needs an API licence
+
+The Metasys interface was exercised with SBN data. Live FFDG access still needs the licence.
+
+29. How FFDG BSI status can support detector protection
+
+FFDG says support is next business day. Critical protection may need our own sensors.
+
+30. The SDSTA SCADA interface needs a hardware survey
+
+The SDSTA survey is identifying controllers and usable connections at Ross Dry.
+
+31. SDSTA proposes a restricted SCADA status interface
+
+SDSTA proposes status-only Modbus TCP. Variables, access controls and failure behaviour still need agreement.

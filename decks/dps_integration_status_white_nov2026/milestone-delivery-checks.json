@@ -1,0 +1,38 @@
+{
+  "status": "Proposed checks for collaboration agreement",
+  "scope_and_reviewers": "To agree with consortia and LBNF",
+  "dates": "Open",
+  "current_delivery_counts": null,
+  "connection_collection": {
+    "unit": "Connection record",
+    "measure": "Complete / required records, per contributing group",
+    "complete_when": [
+      "Required endpoint and signal fields populated",
+      "Action, feedback, timing and loss/recovery requirements traced",
+      "Source and contact recorded",
+      "Group confirms coverage and reviewer records acceptance"
+    ]
+  },
+  "concept_review": {
+    "unit": "In-scope protection function",
+    "measure": "Reviewed, mapped / in-scope functions; list remaining decisions",
+    "complete_when": [
+      "Hardware and logic paths mapped",
+      "I/O additions and gaps identified",
+      "Failure/recovery behaviour reviewed",
+      "Open decisions and contacts recorded",
+      "Concept review and test plan recorded"
+    ]
+  },
+  "hardware_evidence": {
+    "unit": "Test case",
+    "measure": "Passed / planned cases; measured end-to-end delay against agreed response budget",
+    "complete_when": [
+      "Fault and affected scope demonstrated",
+      "Command and final equipment feedback recorded",
+      "Communications-loss/reset/re-enable/recovery cases reviewed"
+    ],
+    "status": "Separate from document and concept-delivery acceptance; no new test result claimed"
+  },
+  "source_acceptance_plan": "/home/arroyave/work/vd-dps-plan/development-20261021/acceptance-tests.csv"
+}

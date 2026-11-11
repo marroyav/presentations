@@ -1,0 +1,86 @@
+{
+  "schema": "dune.workflow.evidence.v1",
+  "recorded_at": "2026-11-11T23:04:43.039925+00:00",
+  "task": "dps-plc-brain-restructure-20261111",
+  "kind": "documentation",
+  "result": "passed",
+  "source": {
+    "repo": "/home/arroyave/work/presentations",
+    "commit": "f9d8c463468375f3d805d693a0db4016b9335be8",
+    "branch": "main",
+    "dirty": true,
+    "changed_entries": 81,
+    "tracked_diff_sha256": "403cced0689e6b75246a5b1e3a4db8934b5e29024d4b7a24a48c7d9ea22c0daa",
+    "submodules": ""
+  },
+  "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+  "command_executed_by_recorder": false,
+  "exit_code": 0,
+  "tools": [
+    "tectonic=0.17.0",
+    "python=3.13.5"
+  ],
+  "files": [
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/verification-20261111T230112Z-plc-brain-restructure-build.log",
+      "sha256": "9d799ddc8ccfc4ea1e04a87ce2668fd9bba0bad8c8e331f1d65a74b8ef414625"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/main.tex",
+      "sha256": "f67a4be7ad89e4262d183501dfc6c3b31ccd3ab75099606935114d7c08e9128e"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/backup-slides.tex",
+      "sha256": "a71421d366b5b9f1e824655100c1acbe68223184ce7f35dde1f398c06f41777b"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/meeting-updates.tex",
+      "sha256": "405ec442afdfd3e3a0906a10c6cce985144d028688418174654a4fd7a5ef08d6"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/plc-brain.tikz.tex",
+      "sha256": "a212ab65a608fe87b441645f09063974146728ca0e57bb614d2e0816bc38e873"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/diagrams/styles.tex",
+      "sha256": "d8f29a9ed0239362432509bb35d23c461d967df3be8bd8d8d3d25005260c4659"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/plc-brain-input-20261111.txt",
+      "sha256": "21813773fa3159885e40ad47b3399a5985a62f1084f49832141291570e18f5e9"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/README.md",
+      "sha256": "d59b23310cfe87eef038be3ee2f44330a177753e9b5817e90637d6bfa023e382"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources.json",
+      "sha256": "74766d4437f4d1c057b3de4c2faf9bb9549aa98902901c60f8320902c2bd779b"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/sources-and-notes.txt",
+      "sha256": "6ef766925de3dcf63b36db23b86af9ad94d08f7ead77cd495ccc8ff31988abd6"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/speaker-script-fast.txt",
+      "sha256": "1a7b47474b9773aeb984d960348c11a774de96a30cedc2565384bb5492bf6302"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/speaker-script-15min.txt",
+      "sha256": "eec02ffc1583767f726b869a5862e1b90a847bf854781490037a2399550bfaf8"
+    },
+    {
+      "path": "/home/arroyave/work/presentations/decks/dps_integration_status_white_nov2026/speaker-script-15min.md",
+      "sha256": "fa01bcd6e59a67e4ff828adfe3fb051207603ea23b182e7684adcec28217c185"
+    },
+    {
+      "path": "/home/arroyave/work/vd-dps-plan/bde-hardware-control.md",
+      "sha256": "952502c5fca2f6c818baa7ab9a39f0da2b6ea9381ced615dc8f92a057775dda1"
+    },
+    {
+      "path": "/home/arroyave/work/kerberos-doc-access/record/architecture-inputs-20261021/DUNE Far Detector Slow Control System Architecture.pdf",
+      "sha256": "9771a3967d5644c1efbff134c7d88d3d12c0d3f92929ced515470d02532e2feb"
+    }
+  ],
+  "limitations": "Conceptual PLC extension and slide reordering only. Approximate 70 m span supplied by Manuel; no measured cable route, panel count, installed full DPS, network isolation guarantee or service commitment is claimed."
+}

@@ -1,0 +1,21 @@
+Raritan PDU collaboration demo — Manuel, 11 November 2026
+
+Place the rack-PDU topic immediately after the PLC-brain slide.
+Use the Raritan PDU connected in the dune-fd-test01 setup to explain a proposed
+demonstration for the collaboration: individual socket control, discrete contact
+signals to PLC logic or other equipment, and programmable local PDU logic.
+
+Keep the original rack/TDE protection slide as a backup so its prior hardware
+scope, quantities and proposed control chain remain available.
+
+Technical distinction for the new sketch:
+- Contact-closure inputs acquire smoke/switch status.
+- A compatible output-capable dry-contact actuator can switch a discrete circuit
+  into a matched PLC or other device input. It conveys a fault/permit bit, not a
+  stream of sensor measurements. Do not treat the smoke-input relay as that output.
+- Individual AC outlet switching is distinct from a low-voltage contact signal.
+- Raritan documents event rules and LuaPLC for local automation. The fitted
+  accessory, firmware, enabled features and PLC input must be checked on the setup.
+
+This is a demo plan. No PDU outlet was switched, no PLC variable written, and no
+new installed capability or completed protection test is claimed.

@@ -44,27 +44,267 @@ Protection trips take priority over operating requests.
 
 SDSTA issues personnel-safety alarms.
                                      I&I meeting | November 2026                                    3
-Facility inputs reach DPS through slow controls
+Facility interfaces may connect to SC or the DPS PLC
 
-         FFDG DUNE FD BMS                       SDSTA SCADA                               Cryogenics
-        Metasys API -> OPC-UA                Modbus TCP -> OPC-UA                   As one system OPC-UA
-
-
+            FFDG DUNE FD BMS                       SDSTA SCADA                            Cryogenics
+            Metasys API (proposed)              Modbus TCP (proposed)                 One system interface
 
 
-                       SC / Ignition                  OPC UA                     DPS PLC
-                    Operations and logs                                     Protection arbitration
-                               OPC UA                              SNMP / EtherCAT
-                                                    DETECTOR
-                       Subsystems                                             PDUs, supplies
-                     Control and status                                        Remote I/O
+                                                        SC / DPS
+                           SC / Ignition                OPC UA                    DPS PLC
+                        Operations and logs                                  Protection arbitration
 
-Diagram. Logical interfaces. The dashed SDSTA connection is under study; two-way arrows carry status and requests.
+                                  OPC UA                             SNMP / EtherCAT
+                                                      DETECTOR
+                          Subsystems                                            PDUs, supplies
+                        Control and status                                       Remote I/O
 
-OPC UA carries status and requests. DPS uses SNMP for power distribution units (PDUs) and
-supplies, and EtherCAT for remote I/O.
 
-                                            I&I meeting | November 2026                                              4
+Diagram. Dashed: facility links under study. Cryogenics exchanges information in both directions.
+
+The receiving endpoint may be SC/Ignition, the DPS PLC, or both; it is still to be agreed.
+SC ↔ DPS: OPC UA. DPS ↔ equipment: SNMP / EtherCAT.
+
+                                              I&I meeting | November 2026                                    4
+Build the DPS brain on the BDE PLC architecture
+
+▶ Industrial off-the-shelf hardware; modular I/O supports expansion and scaling.
+
+▶ Vendor support for maintenance and upgrades.
+
+▶ Reuse the BDE panels across the ∼70 m mezzanine; extend to other systems.
+
+
+         SC / Ignition
+
+                Supervisory Ethernet
+                                                   Dedicated EtherCAT field network
+                OPC UA
+          DPS PLC                       BDE I/O                     BDE I/O                   Other systems
+       Protection logic                  panel                       panel                    I/O (proposed)
+
+
+                                           BDE mezzanine span ∼70 m
+
+Diagram. Logical sketch. EtherCAT field network is separate from supervisory Ethernet. Dashed: proposed extension.
+
+
+                                            I&I meeting | November 2026                                              5
+Raritan PDU controls on dune-fd-test01
+
+                                                                        AC power   Individual outlets
+                                                                                    On / off / cycle
+           Smoke /             SENSOR           Raritan PDU
+         contact inputs                        Rules / LuaPLC
+                                                                                   PLC / other device
+                                                                 Via dry-contact     Digital input
+                                                                        actuator
+
+Capability                Demonstration
+
+Single outlets            On / off / cycle a test load; check outlet state and power.
+Contact output            Send a fault/permit bit to a PLC or other device using an actuator.
+Local logic               Rules: contact/threshold → output. LuaPLC: delays, sequences, reset.
+
+
+
+                                          I&I meeting | November 2026                                   6
+Cryogenics presents one system to DUNE
+
+The cryogenic controls are in the Central Utility Cavern (CUC). Their internal divisions appear as one
+system to DUNE FD DSCS.
+
+
+Function                Detector interface
+
+Process control         Cryogenics operates and protects its own process.
+Protection inputs       Liquid-argon level, relief-valve state and boiling-risk conditions can affect HV
+                        and bias permits.
+Information path        Cryogenics ↔ SC and/or DPS; endpoint to agree. Trace each measurement
+                        to its actual sensor.
+Before operation        Agree readiness states, limits and the response to missing or invalid data.
+
+The detector running conditions are still being agreed.
+
+                                      I&I meeting | November 2026                                      7
+Trace each interlock from its source to the response
+
+
+
+         Condition           Physical input          DPS / local            Action and          Equipment state
+        and source          and connection            decision              equipment            and feedback
+
+Diagram. Review each interlock from its source and physical input through the decision, action and equipment response.
+
+Start with the interlocks proposed by the consortia in their interface documents (ICDs).
+
+For each one, identify the existing hardware, missing connections and required additions. Check the
+time from detection to completed shutdown.
+
+Use the rack lists, drawings, parts lists and power calculations.
+
+
+
+
+                                             I&I meeting | November 2026                                                 8
+Each group must identify its hardware connections
+
+For every connection       Record
+
+Source and destination     Equipment, rack / panel, connector, channel and drawing revision
+Signal and interface       Measurement or state; units, normal / fault values; wired I/O or network
+                           protocol
+Protection action          Condition, affected load, permit / inhibit and allowed response time
+Feedback and recovery      Equipment response; lost-signal behaviour; reset and re-enable
+Responsibility and         Consortium or LBNF contact; evidence, missing items and next action
+gaps
+
+
+Use one common register for the consortia and the LBNF facility. Each group confirms that its list
+covers its hardware.
+
+
+                                      I&I meeting | November 2026                                     9
+A trip removes the permit; recovery needs a new request
+
+
+           Conditions                  DPS PLC                Permits / inhibits          Equipment state
+        and SC requests             protection rules         SNMP or wired I/O             and feedback
+
+
+
+Allow: the request is valid, required conditions are met and no trip is active.
+
+Trip: remove the permit, retain the cause and check the equipment response. SC logs the event.
+
+Recover: reset the trip, then request a separate re-enable.
+
+Diagram. Proposed controller: a commercial programmable logic controller (PLC) based on BDE, located in the CUC.
+Loss-of-signal behaviour is set for each protected load.
+
+
+
+
+                                           I&I meeting | November 2026                                             10
+Build on the Batavia and SD DPS test setups
+
+Batavia — HEERC G271                                 SD — Nevada room
+
+                                                     dune-fd-test01
+Reported progress
+                                                     Available
+Initial BDE demonstrator design completed and
+reviewed with the WIEC team at BNL.                  PDU, smoke sensors, relay and GIZMo.
+
+                                                     Ignition, OPC UA bridges and emulators.
+Next steps
+
+Apply BNL feedback, test fan tachometer              Next step
+readout, then assemble and install the
+                                                     Expand the setup along the Batavia model.
+demonstrator.
+
+Goal: exercise protection inputs, trips, feedback, reset and recovery.
+
+
+                                      I&I meeting | November 2026                                11
+Use the interlock matrix to track each protection function
+
+Working matrix v0.2: 46 rules. Owner agreement and tests remain open.
+
+Condition                      HV            BDE             PDS         Rack AC           DAQ         Evidence
+
+Low LAr level                 OFF              –              –              –               –         Released
+BDE fan fault                   –           INHIBIT           –              –               –         Inference
+PDS overcurrent                 –              –             OFF             –               –         Released
+Rack smoke                      –              –              –             OFF              –         Released
+PrM lamp active                 –              –          REVIEW             –          REVIEW         Conflict
+LCM calibration                 –              –              –              –             TAG         Draft
+
+Excerpt: a dash assigns no action; REVIEW is unresolved; TAG records activity. Evidence describes the source, not
+approval or a passed test.
+
+For each function: source, physical path, action, feedback, timing and reviewer.
+
+                                             I&I meeting | November 2026                                            12
+Measure milestones with completed records and evidence
+Proposed delivery checks
+
+Delivery              Evidence to deliver                            Progress measure
+
+Connection            Confirmed inventory from each group:           Complete / required connection
+collection            endpoints, signal, action, feedback, timing,   records, by consortium and
+                      contact and source.                            LBNF.
+Concept review        Functions mapped to hardware and logic;        Reviewed, mapped / in-scope
+                      I/O gaps, failure/recovery behaviour,          functions; open decisions listed.
+                      decisions and test plan reviewed.
+
+Hardware evidence is a separate gate: passed / planned tests; fault-to-final-state time against the
+agreed budget; loss, reset and recovery.
+
+Agree the row scope and reviewer before counting completion. Dates remain open.
+                                     I&I meeting | November 2026                                    13
+Collect the inputs, then review the full DPS concept
+
+Milestones for discussion; dates to be agreed
+
+
+Milestone                     What closes it
+
+Collect hardware              Every consortium and LBNF return their lists, confirm coverage and
+connections                   identify remaining gaps and owners.
+Review the full DPS           Review the architecture, controller / I/O allocation, interfaces, fault
+concept                       response and test plan. Record open choices.
+
+
+Next step: agree a contact for each contributor.
+
+Set the schedule with the consortia and LBNF once the scope and available resources are clear.
+
+
+                                      I&I meeting | November 2026                                       14
+Prepare the hardware review
+
+
+Work before review         Result
+
+Trace each inhibit         Existing hardware, additions, cable routes and quantities
+
+Test representative        Measured trip times, recovery and SC logging
+paths
+
+Prepare purchases          Panel space, power, drawings, parts, licences, costs and spares
+
+
+Order after the readiness review; install to match the site schedule.
+
+Agree the facility-interface and full VD response-matrix review schedule with the consortia and LBNF.
+
+
+
+                                       I&I meeting | November 2026                                15
+Backups
+Agree responsibility and control-engineering support
+
+
+
+Proposed responsibility       Work
+
+Manuel + control engineer     VD hardware design, SURF interfaces and procurement
+
+Terri and Trevor              BDE panels, PLC and I/O implementation, bench tests
+
+Geoff + Manuel                SC commands, DPS arbitration and recovery
+
+Vivian + consortia / DPS      Equipment requirements and interface-document updates
+
+
+Support needed: control-engineering time and access to the existing test stands.
+
+
+
+
+                                     I&I meeting | November 2026                      17
 The FFDG BMS connection needs an API licence
 
                   SDSTA             FFDG DUNE FD              Proposed connection
@@ -89,7 +329,7 @@ Diagram. Service boundaries at SURF. The map shows the scope of the systems, not
 
 
 
-                                            I&I meeting | November 2026                                    5
+                                            I&I meeting | November 2026                                    18
 How FFDG BSI status can support detector protection
 
 
@@ -107,7 +347,7 @@ BMS access alone does not establish a protection interface.
 
 
 
-                                  I&I meeting | November 2026                                  6
+                                  I&I meeting | November 2026                              19
 The SDSTA SCADA interface needs a hardware survey
 
 
@@ -133,7 +373,7 @@ Diagram. SDSTA services extend beyond the detector caverns. The survey will esta
 
 
 
-                                            I&I meeting | November 2026                                         7
+                                            I&I meeting | November 2026                                       20
 SDSTA proposes a restricted SCADA status interface
 
 
@@ -151,108 +391,7 @@ Still to agree: variable meaning, data quality, loss-of-data behaviour and netwo
 
 
 
-                                      I&I meeting | November 2026                                 8
-Cryogenics presents one system to DUNE
-
-The cryogenic controls are in the Central Utility Cavern (CUC). Their internal divisions appear as one
-system to DUNE FD DSCS.
-
-
-Function                Detector interface
-
-Process control         Cryogenics operates and protects its own process.
-Protection inputs       Liquid-argon level, relief-valve state and boiling-risk conditions can affect HV
-                        and bias permits.
-Information path        Cryogenics ↔ SC ↔ DPS. Trace each measurement to its actual sensor.
-Before operation        Agree readiness states, limits and the response to missing or invalid data.
-
-The detector running conditions are still being agreed.
-
-
-                                      I&I meeting | November 2026                                      9
-Trace each interlock from its source to the response
-
-
-
-         Condition           Physical input          DPS / local            Action and          Equipment state
-        and source          and connection            decision              equipment            and feedback
-
-Diagram. Review each interlock from its source and physical input through the decision, action and equipment response.
-
-Start with the interlocks proposed by the consortia in their interface documents (ICDs).
-
-For each one, identify the existing hardware, missing connections and required additions. Check the
-time from detection to completed shutdown.
-
-Use the rack lists, drawings, parts lists and power calculations.
-
-
-
-
-                                             I&I meeting | November 2026                                             10
-Each group must identify its hardware connections
-
-For every connection       Record
-
-Source and destination     Equipment, rack / panel, connector, channel and drawing revision
-Signal and interface       Measurement or state; units, normal / fault values; wired I/O or network
-                           protocol
-Protection action          Condition, affected load, permit / inhibit and allowed response time
-Feedback and recovery      Equipment response; lost-signal behaviour; reset and re-enable
-Responsibility and         Consortium or LBNF contact; evidence, missing items and next action
-gaps
-
-
-Use one common register for the consortia and the LBNF facility. Each group confirms that its list
-covers its hardware.
-
-
-                                      I&I meeting | November 2026                                     11
-A trip removes the permit; recovery needs a new request
-
-
-           Conditions                  DPS PLC                Permits / inhibits          Equipment state
-        and SC requests             protection rules         SNMP or wired I/O             and feedback
-
-
-
-Allow: the request is valid, required conditions are met and no trip is active.
-
-Trip: remove the permit, retain the cause and check the equipment response. SC logs the event.
-
-Recover: reset the trip, then request a separate re-enable.
-
-Diagram. Proposed controller: a commercial programmable logic controller (PLC) based on BDE, located in the CUC.
-Loss-of-signal behaviour is set for each protected load.
-
-
-
-
-                                           I&I meeting | November 2026                                             12
-Build on the Batavia and SD DPS test setups
-
-Batavia — HEERC G271                                           SD — Nevada room
-
-                                                               dune-fd-test01
-Reported progress
-                                                               Available
-Initial BDE demonstrator design completed and
-reviewed with the WIEC team at BNL.                            PDU, smoke sensors, relay and GIZMo.
-
-                                                               Ignition, OPC UA bridges and emulators.
-Next steps
-
-Apply BNL feedback, test fan tachometer                        Next step
-readout, then assemble and install the
-                                                               Expand the setup along the Batavia model.
-demonstrator.
-
-Goal: exercise protection inputs, trips, feedback, reset and recovery.
-
-Batavia: Trevor’s reported status, draft slides 15–16. SD: Manuel’s update.
-
-
-                                              I&I meeting | November 2026                                  13
+                                      I&I meeting | November 2026                                 21
 Detector
 Ten BDE groups use the existing bottom-drift design
 
@@ -273,7 +412,7 @@ Each crate has a power and timing card (PTC). Ten bias racks provide the separat
 charge-readout-plane and field-cage interfaces.
 
 Available: panel drawings, parts lists, power calculations and Ignition screens.
-                                           I&I meeting | November 2026                                           15
+                                           I&I meeting | November 2026                                           23
 Extend the BDE approach into a full DPS concept
 
 
@@ -294,7 +433,7 @@ Test each added path from the fault input to confirmed equipment response.
 
 
 
-                                            I&I meeting | November 2026                                             16
+                                            I&I meeting | November 2026                                             24
 A cooling fault removes power from the affected crate
 
                                                                   Remote output               Affected WIEC
@@ -314,7 +453,7 @@ records the trip.
 The dependency and shutdown order for associated bias are still being agreed.
 
 
-                                             I&I meeting | November 2026                                          17
+                                             I&I meeting | November 2026                                          25
 SC and DAQ use distinct DAPHNE service paths
         SC server                           DAQ CCM client                              DAQ Hermes
   OPC UA client → Ignition                 opmon subscriber                           configuration client
@@ -338,7 +477,7 @@ Diagram. Working SC–PDS–DPS ICD, Fig. 1. PDS: 34 LV feeds; cathode devices u
 
 Proposed SiPM bias inhibit: DPS → SC → DAPHNE; SC returns bias status and informs DAQ.
 
-                                          I&I meeting | November 2026                                              18
+                                          I&I meeting | November 2026                                              26
 DPS switches PoF power through the PDU
 
                                  OPC UA          Opta or Beckhoff            Sensor inputs
@@ -363,7 +502,7 @@ Diagram. Sensor inputs reach the local PLC. The dashed box-enable path is option
 DPS inhibits power over fibre (PoF) through the PDU. A separate box-enable signal would provide
 another control option, if available.
 
-                                            I&I meeting | November 2026                                          19
+                                            I&I meeting | November 2026                                          27
 LV supplies power DAPHNE and PDS calibration boxes
 
 Working PDS LV scope: 34 feeds.
@@ -385,7 +524,7 @@ To complete: map loads to channels and inhibit groups; agree trip conditions and
 
 Check supply state, voltage and current after each trip.
 
-                                           I&I meeting | November 2026                                           20
+                                           I&I meeting | November 2026                                           28
 Drift HV and bias supplies have separate inhibit paths
 
 One drift-HV supply; ten bias crates with 576 channels.
@@ -404,7 +543,7 @@ supplies         and logs                                     inhibits
 Example: low liquid-argon level removes the drift-HV permit. A drift-HV trip also shuts down the
 associated field-cage termination supplies.
 
-                                      I&I meeting | November 2026                                  21
+                                      I&I meeting | November 2026                                  29
 Trace each protection input to a temperature sensor
 
          Temperature
@@ -427,7 +566,7 @@ Temperature profiles guide cooldown and operation.
 For protection, each measurement needs a location, a limit, an allowed response time and a named
 piece of equipment to shut down.
 
-                                           I&I meeting | November 2026                                           22
+                                           I&I meeting | November 2026                                           30
 Proposed laser rules block conflicting PDS requests
 
                                 OPC UA         Calibration interface                     Ionization-laser
@@ -450,7 +589,7 @@ Four laser stations. Proposed rule: block conflicting laser and PDS requests. Re
 confirmed emission-off or shutter closure.
 
 Local laser-safety interlocks remain independent.
-                                           I&I meeting | November 2026                                       23
+                                           I&I meeting | November 2026                                       31
 The purity-monitor inhibit rule still needs agreement
 
 
@@ -468,27 +607,7 @@ purity-monitor activity. Agree the rule before implementing the inhibit.
 
 
 
-                                             I&I meeting | November 2026                                                 24
-Use rack sensors and PDUs for shared protection
-                                                                 RACK INFRASTRUCTURE
-
-                                                                       Smoke / humidity
-                                                                      Temperature / leak
-
-                          OPC UA                       SNMP
-       SC / Ignition                     DPS PLC                              PDU                        Connected
-    Logs and requests                    Arbitration                  Local trips / outlets              equipment
-
-                                                                                              AC power
-
-Diagram. Sensors feed the PDU; the outgoing line supplies AC power. Two-way links carry control and status.
-
-Local PDU rules switch off affected outlets. Humidity is monitored; a humidity trip needs a separate
-requirement.
-
-TDE + DAQ/timing: 336 microTCA crates. TDE uses 20 mezzanine racks. DPS controls their
-PDUs; crate-status and external-inhibit interfaces remain possible additions.
-                                            I&I meeting | November 2026                                              25
+                                             I&I meeting | November 2026                                                 32
 Measure the full path from fault to confirmed shutdown
 
 
@@ -510,68 +629,7 @@ hardware tests will check this assumption.
 
 
 
-                                             I&I meeting | November 2026                                    26
-Collect the inputs, then review the full DPS concept
-
-Milestones for discussion; dates to be agreed
-
-
-Milestone                     What closes it
-
-Collect hardware              Every consortium and LBNF return their lists, confirm coverage and
-connections                   identify remaining gaps and owners.
-Review the full DPS           Review the architecture, controller / I/O allocation, interfaces, fault
-concept                       response and test plan. Record open choices.
-
-
-Next step: agree a contact for each contributor.
-
-Set the schedule with the consortia and LBNF once the scope and available resources are clear.
-
-
-                                      I&I meeting | November 2026                                       27
-Prepare the hardware review
-
-
-Work before review         Result
-
-Trace each inhibit         Existing hardware, additions, cable routes and quantities
-
-Test representative        Measured trip times, recovery and SC logging
-paths
-
-Prepare purchases          Panel space, power, drawings, parts, licences, costs and spares
-
-
-Order after the readiness review; install to match the site schedule.
-
-Agree the facility-interface and full VD response-matrix review schedule with the consortia and LBNF.
-
-
-
-                                       I&I meeting | November 2026                                28
-Backups
-Agree responsibility and control-engineering support
-
-
-
-Proposed responsibility       Work
-
-Manuel + control engineer     VD hardware design, SURF interfaces and procurement
-
-Terri and Trevor              BDE panels, PLC and I/O implementation, bench tests
-
-Geoff + Manuel                SC commands, DPS arbitration and recovery
-
-Vivian + consortia / DPS      Equipment requirements and interface-document updates
-
-
-Support needed: control-engineering time and access to the existing test stands.
-
-
-
-
-                                     I&I meeting | November 2026                      30
+                                             I&I meeting | November 2026                                    33
         Existing panels and screens provide the BDE reference
 
     8                                                                                                                       7                                                                                                                                                                                                                                                                                      6                                               5                                                                                                                        4                                                                                                                                             3                                       2                                                           1
@@ -1095,7 +1153,7 @@ A                                                                               
 
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  I&I meeting | November 2026                                                                                                31
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  I&I meeting | November 2026                                                                                                34
 The fan trip removes the PL506 channel permit
 
 
@@ -1118,7 +1176,7 @@ Six fans per crate is the design case used here. These are existing input requir
 
 
 
-                                              I&I meeting | November 2026                                             32
+                                              I&I meeting | November 2026                                             35
 DAQ CCM and Hermes use distinct DAPHNE services
 
         SC server                          DAQ CCM client                           DAQ Hermes
@@ -1142,7 +1200,7 @@ Six fans per crate is the design case used here. These are existing input requir
 Diagram. Working SC–PDS–DPS ICD, Figure 1. DAQ CCM/opmon and Hermes remain distinct clients. The dashed
 bracket groups the board-side services.
 
-                                        I&I meeting | November 2026                                          33
+                                        I&I meeting | November 2026                                          36
 Rack space is not a count of spare I/O terminals
 
 
@@ -1163,7 +1221,7 @@ U denotes rack height. The marked space is not an allocation of free PLC termina
 
 
 
-                                             I&I meeting | November 2026                          34
+                                             I&I meeting | November 2026                          37
 The bias draft provides 1,440 outputs for review
 
 
@@ -1181,7 +1239,7 @@ Draft layout: the difference between 1,440 outputs and 576 bias channels is not 
 
 
 
-                                              I&I meeting | November 2026                                             35
+                                              I&I meeting | November 2026                                             38
 Supply capacity differs from expected power use
 
 
@@ -1199,7 +1257,7 @@ Fan power assumes six fans per crate. Supply capacity is distinct from expected 
 
 
 
-                                             I&I meeting | November 2026                                   36
+                                             I&I meeting | November 2026                                   39
 Map each rack package against the existing allowance
 
 
@@ -1219,7 +1277,7 @@ remain open.
 
 
 
-                                            I&I meeting | November 2026                                             37
+                                            I&I meeting | November 2026                                             40
 Local PDU trips need deliberate power restoration
 
 
@@ -1240,7 +1298,7 @@ the VD PLC path needs its own communication-loss and recovery tests.
 
 
 
-                                             I&I meeting | November 2026                                             38
+                                             I&I meeting | November 2026                                             41
 Keep subsystem quantities separate from crate totals
 
 Subsystem                    Working inventory and interfaces
@@ -1257,7 +1315,7 @@ TDE and DAQ/timing contain 336 microTCA crates in total. Crate totals do not est
 switches.
 
 
-                                            I&I meeting | November 2026                                                39
+                                            I&I meeting | November 2026                                                42
 Survey the 20 panel references to find installed hardware
 
 
@@ -1278,7 +1336,7 @@ These are drawing references. The underground survey will establish what is inst
 
 
 
-                                             I&I meeting | November 2026                                  40
+                                             I&I meeting | November 2026                                  43
 The workbook allocates 76 mezzanine rack positions
 
 
@@ -1298,7 +1356,7 @@ May 2025 workbook. Rack positions include reserved and spare allocations; they a
 
 
 
-                                             I&I meeting | November 2026                                                 41
+                                             I&I meeting | November 2026                                                 44
 Count shared controls and rack devices once
 
 
@@ -1325,7 +1383,7 @@ Facility systems keep their own controls. Rack protection and shared I/O are cou
 
 
 
-                                         I&I meeting | November 2026                                       42
+                                         I&I meeting | November 2026                                       45
 The 336-crate total spans TDE and DAQ/timing
 
 336 microTCA crates in total across TDE and DAQ/timing.
@@ -1345,7 +1403,7 @@ High voltage                                              20 mezzanine racks
 
 
 
-                                          I&I meeting | November 2026                              43
+                                          I&I meeting | November 2026                              46
 Keep PDS control and DAQ data links distinct
 
 
@@ -1369,7 +1427,7 @@ Light calibration and timing                          receives the agreed status
 
 
 
-                                      I&I meeting | November 2026                                       44
+                                      I&I meeting | November 2026                                       47
 Instrument counts and interfaces still need allocation
 
 
@@ -1391,5 +1449,147 @@ The device list records the interfaces and quantities still awaiting allocation.
 
 
 
-                                            I&I meeting | November 2026                                     45
+                                            I&I meeting | November 2026                                     48
+Use rack sensors and PDUs for shared protection
+                                                                 RACK INFRASTRUCTURE
+
+                                                                       Smoke / humidity
+                                                                      Temperature / leak
+
+                          OPC UA                       SNMP
+       SC / Ignition                     DPS PLC                              PDU                        Connected
+    Logs and requests                    Arbitration                  Local trips / outlets              equipment
+
+                                                                                              AC power
+
+Diagram. Sensors feed the PDU; the outgoing line supplies AC power. Two-way links carry control and status.
+
+Local PDU rules switch off affected outlets. Humidity is monitored; a humidity trip needs a separate
+requirement.
+
+TDE + DAQ/timing: 336 microTCA crates. TDE uses 20 mezzanine racks. DPS controls their
+PDUs; crate-status and external-inhibit interfaces remain possible additions.
+                                            I&I meeting | November 2026                                              49
+Full interlock matrix: conditions and actions
+
+ DUNE · WORKING MATRIX · 2026-10-27 · V0.2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                PDS bias /                                                                                       DAQ
+                                                                                                                                                                                                                                                                                                                                               Rule            Condition                                                       Evidence     Drift HV   FC termination   Top CRP bias     BDE power        TDE power                    Lights / lasers   CI / calibration   Rack AC   Facility plant   SC / operator                 Sources
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           power                                                                                       information
+ DPS integration: cause and effect                                                                                                                                                                                                                                                                                                             HV-06           Excess cathode HV current / streamer detected                                   ·             ·               ·                 ·               ·            NOTIFY            ·                 ·              ·            ·                ·           NOTIFY      S01, S03
+                                                                                                                                                                                                                                                                                                                                                                                                                                Released
+ Review the conditions, actions and interfaces needed to protect equipment and coordinate operation.
+                                                                                                                                                                                                                                                                                                                                               CI-01           Unexpected temperature change or possible recirculation          Released                                                                                                                                                                                             S01
+                                                                                                                                                                                                                                                                                                                                                                                                                                               ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·            MONITOR            ·
+                                                                                                                                                                                                                                                                                                                                                               problem
+    Working draft. We still need owner agreement and tests on the installed paths.
+                                                                                                                                                                                                                                                                                                                                               CI-02           LAr level, temperature-readout state and PrM flash-lamp          Released                                                                                                                                                                                             S01
+    46 rules · 16 sources · 5 decisions                                                                                                                                                                                                                                                                                                                                                                                                        ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·            MONITOR            ·
+                                                                                                                                                                                                                                                                                                                                                               state
+
+
+ Conditions → actions                                                                                                                                                                                                                                                                                                                          BDE
+
+                                                                                                                                                                                                                                                                                                                                               DPS-C001        WIEC fan cooling is inadequate while BDE electronics are         Inference                                                                                                                                                                                            S04, S06, S16
+ A blank cell means this row assigns no action there. Read each condition with its action, sources and open decisions.                                                                                                                                                                                                                                         powered
+                                                                                                                                                                                                                                                                                                                                                                                                                                               ·             ·               ·              INHIBIT            ·              ·               ·                 ·              ·            ·                ·              ·
+
+
+ Released, draft and design describe the source. Inference = proposed rule. Open = missing rule. Conflict = sources differ.                                                                                                                                                                                                                    BDE-02          Flange heat is inadequate or flange approaches dew point         Inference      ·             ·               ·              REVIEW             ·              ·               ·                 ·              ·            ·                ·              ·        S04, S16
+
+ OFF Stop or remove power from the named load.         INHIBIT Withdraw the permit or inhibit the named equipment.   BLOCK Deny the conflicting operating request.      LOCAL Facility or equipment controller acts locally; see the rule.   ALARM Annunciate the stated alarm; no detector trip is assigned by this cell.
+                                                                                                                                                                                                                                                                                                                                               BDE-03          WIB temperature crosses its listed SC alarm bound                Draft          ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·             ALARM             ·        S05
+ MONITOR Monitor or report the stated status.      TAG Publish activity and scope for data tagging.   NOTIFY Send the named event/status; this does not stop DAQ.       REVIEW Action or priority is unresolved.     CONTINUE Keep the named local functions running within the stated limits.
+                                                                                                                                                                                                                                                                                                                                               BDE-04          PTC/WIB protection data or control path is lost                  Open           ·             ·               ·              REVIEW             ·              ·               ·                 ·              ·            ·                ·              ·        S04, S02, S06
+
+                                                                                                                                                                                                   PDS bias /                                                                                                        DAQ
+  Rule              Condition                                                       Evidence             Drift HV      FC termination    Top CRP bias       BDE power           TDE power                           Lights / lasers   CI / calibration     Rack AC         Facility plant     SC / operator                    Sources         PDS / optical
+                                                                                                                                                                                                    power                                                                                                        information
+
+                                                                                                                                                                                                                                                                                                                                               Q-001           Purity-monitor flash lamp is active                              Conflict                                                                                                                                                                                             S01, S07, S12,
+  Facility                                                                                                                                                                                                                                                                                                                                                                                                                                     ·             ·               ·                 ·               ·           REVIEW             ·                 ·              ·            ·                ·           REVIEW
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     S08
+
+  FAC-01            Fire alarm applies to the detector area                          Released              OFF              OFF             REVIEW                ·                  ·                  ·                  ·                 ·                 ·                  ·                 ·                  ·       S01, S03        O-001           Camera illumination is requested while the relevant PDS          Conflict                                                                                                                                                                                             S07, S03, S08
+                                                                                                                                                                                                                                                                                                                                                                                                                                               ·             ·               ·                 ·               ·           REVIEW          REVIEW               ·              ·            ·             NOTIFY            ·
+                                                                                                                                                                                                                                                                                                                                                               state is active
+  DAQ-01            DAQ barracks or Ross Dry emergency AC shutdown                   Released                ·                ·                ·                  ·                  ·                  ·                  ·                 ·                OFF                 ·                 ·                  ·       S01
+                                                                                                                                                                                                                                                                                                                                               O-002           Ionisation or alignment laser conflicts with a PDS operation     Draft          ·             ·               ·                 ·               ·              ·            BLOCK                ·              ·            ·             NOTIFY            ·        S08
+  ODH-01            Oxygen-deficiency alarm or personnel-safety condition            Open                 REVIEW              ·                ·                  ·                  ·                  ·                  ·                 ·                 ·               LOCAL             REVIEW                ·       S01, S12, S15
+                                                                                                                                                                                                                                                                                                                                               Q-002           Declared LCM light calibration is running                        Draft          ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·                ·            TAG        S08
+  FAC-02            Oro Hondo / SDSTA ventilation status unavailable or not          Open                                                                                                                                                                                                                                      S12, S14
+                                                                                                             ·                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·               REVIEW            REVIEW                ·
+                    satisfactory                                                                                                                                                                                                                                                                                                               C-001           PoF supply is unavailable or reports its own fault               Draft          ·             ·               ·                 ·               ·           REVIEW          LOCAL                ·              ·            ·                ·              ·        S08, S07
+
+  BMS-01            Fire/smoke override for the named ventilation equipment          Design                  ·                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·               LOCAL                ·                  ·       S13             P-011-I         PDS supply current is outside its specified range                                                                                                                                                                                                                     S01, S07, S08
+                                                                                                                                                                                                                                                                                                                                                                                                                                Released       ·             ·               ·                 ·               ·             OFF              ·                 ·              ·            ·                ·              ·
+
+
+  BMS-02            Supply-fan high discharge or low suction pressure switch         Design                                                                                                                                                                                                                                    S13             P-011-V         PDS supply voltage is outside its specified range                Released       ·             ·               ·                 ·               ·             OFF              ·                 ·              ·            ·                ·              ·        S01, S07, S08
+                                                                                                             ·                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·                OFF                 ·                  ·
+                    trips
+                                                                                                                                                                                                                                                                                                                                               P-012-S         PDS power supply reports overtemperature                         Released       ·             ·               ·                 ·               ·             OFF              ·                 ·              ·            ·                ·              ·        S01, S07, S08
+  BMS-03            Sump-pump common alarm                                           Design                  ·                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·               ALARM                ·                  ·       S13
+
+                                                                                                                                                                                                                                                                                                                                               P-012-R         PDS readout module reports overtemperature                       Released       ·             ·               ·                 ·               ·             OFF              ·                 ·              ·            ·                ·              ·        S01, S07, S08
+  BMS-04            BMS UPS alarm                                                    Design                  ·                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·               ALARM                ·                  ·       S13
+
+                                                                                                                                                                                                                                                                                                                                               P-012-L         Light Calibration Module reports overtemperature                 Released       ·             ·               ·                 ·               ·             OFF              ·                 ·              ·            ·                ·              ·        S01, S07, S08
+  BMS-05            Active condenser basin reaches the specified low-low or          Design                                                                                                                                                                                                                                    S13
+                                                                                                             ·                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·                OFF                 ·                  ·
+                    high-high level
+                                                                                                                                                                                                                                                                                                                                               TDE / other
+  BMS-06            Required cooling service is lost while its detector load is      Inference                                                                                                                                                                                                                                 S13, S10, S11
+                                                                                                             ·                ·                ·               REVIEW                ·                  ·                  ·                 ·              REVIEW                ·                 ·                  ·                       TDE-01          TDE crate/board local fault                                      Draft          ·             ·               ·                 ·            LOCAL             ·               ·                 ·              ·            ·                ·              ·        S09
+                    powered
+
+  BMS-07            Rack or room temperature exceeds its monitoring limit                                                                                                                                                                                                                                                      S10, S11        TDE-02          TDE condition requiring an external DPS inhibit                  Open           ·             ·               ·                 ·            REVIEW            ·               ·                 ·              ·            ·                ·              ·        S09
+                                                                                     Inference               ·                ·                ·                  ·                  ·                  ·                  ·                 ·              REVIEW                ·               ALARM                ·
+
+
+  BMS-08            BMS operator station or controller network fails                                                                                                                                                                                                                                                           S13             CRYO-01         Cryogenic instrumentation itself needs equipment protection      Open           ·             ·               ·                 ·               ·              ·               ·              REVIEW            ·            ·                ·              ·        S01
+                                                                                     Design                  ·                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·              CONTINUE              ·                  ·
+
+                                                                                                                                                                                                                                                                                                                                               PNS-01          Pulsed-neutron calibration condition needs exclusion or          Open                                                                                                                                                                                                 S08, S12
+  Rack infrastructure                                                                                                                                                                                                                                                                                                                                                                                                                          ·             ·               ·                 ·               ·              ·               ·              REVIEW            ·            ·                ·              ·
+                                                                                                                                                                                                                                                                                                                                                               protection
+  RACK-01           Smoke detected in a protected rack                               Released                ·                ·                ·                  ·                  ·                  ·                  ·                 ·                OFF                 ·              MONITOR               ·       S01, S11
+                                                                                                                                                                                                                                                                                                                                               GND-01          Grounding/impedance-monitoring alarm                             Open           ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·             REVIEW            ·        S10
+
+  Cryogenics / HV
+                                                                                                                                                                                                                                                                                                                                               SC / DPS / DAQ
+  CRP-01            LAr falls below the top CRP composite frame while top CRP        Released                                                                                                                                                                                                                                  S01
+                                                                                                             ·                ·               OFF                 ·                  ·                  ·                  ·                 ·                 ·                  ·                 ·                  ·                       SC-01           SC server, display or normal monitoring link fails               Inference      ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·             ALARM             ·        S04, S01, S12
+                    bias is on
+                                                                                                                                                                                                                                                                                                                                               SC-02           Operator requests reset or re-enable after a trip                Inference      ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·             REVIEW            ·        S01, S11
+  HV-01             LAr approaches the HV feedthrough shielding rim while drift      Released                                                                                                                                                                                                                                  S01, S03
+                                                                                                           OFF                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·                  ·                 ·                  ·
+                    HV is on
+                                                                                                                                                                                                                                                                                                                                               DPS-C006        Protection controller, input module or its power supply fails    Open        REVIEW        REVIEW           REVIEW           REVIEW          REVIEW         REVIEW             ·                 ·           REVIEW          ·                ·              ·        S14, S01
+
+  HV-02             Pressure relief valve opens while drift HV is on                 Released              OFF                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·                  ·                 ·                  ·       S01, S03
+                                                                                                                                                                                                                                                                                                                                               DAQ-02          SC detects an approaching equipment limit before a               Draft                                                                                                                                                                                                S11
+                                                                                                                                                                                                                                                                                                                                                                                                                                               ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·             ALARM          NOTIFY
+  HV-05             Another condition could cause shallow LAr boiling while drift    Released                                                                                                                                                                                                                                  S01, S03                        protection trip
+                                                                                                           OFF                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·                  ·                 ·                  ·
+                    HV is on
+                                                                                                                                                                                                                                                                                                                                               DAQ-03          Routine SC command would disturb equipment in an active          Draft                                                                                                                                                                                                S11
+                                                                                                                                                                                                                                                                                                                                                                                                                                               ·             ·               ·                 ·               ·              ·               ·                 ·              ·            ·             BLOCK         MONITOR
+  HV-03             Sudden unexpected cathode HV current increase                    Released              OFF                ·                ·                  ·                  ·                  ·                  ·                 ·                 ·                  ·                 ·                  ·       S01, S03                        DAQ run
+
+  HV-04             Cathode HV supply shuts down                                     Released                ·              OFF                ·                  ·                  ·                  ·                  ·                 ·                 ·                  ·                 ·                  ·       S01, S03
+
+
+
+
+                                                                                                                                                    DPS integration · review draft · 1 / 5                                                                                                                                                                                                                                                                                       DPS integration · review draft · 2 / 5
+
+
+
+
+Diagram. Working matrix v0.2, 27 October 2026, conditions/action pages 1–2. The five-page companion also contains
+sources, decisions and readiness notes.
+
+
+
+                                                                                                                                                                                                                                                                      I&I meeting | November 2026                                                                                                                                                                                                                                                                                                                                               50
 

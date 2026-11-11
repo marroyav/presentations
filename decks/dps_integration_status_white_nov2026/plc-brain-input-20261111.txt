@@ -1,0 +1,24 @@
+PLC brain and slide-order direction — Manuel, 11 November 2026
+
+Move current slides 5–8, the FFDG and SDSTA interface details, into the backups.
+Add a new slide immediately after slide 4 explaining the ambition to use a PLC
+solution as the brain of the full DPS.
+
+Rationale supplied by Manuel:
+- Industrial off-the-shelf hardware.
+- Established modular expansion and scalability.
+- Vendor support for maintenance and upgrades.
+- Build on the BDE DPS architecture, with distributed PLC/I/O panels over an
+  approximately 70 m mezzanine span, and extend interfaces to other systems.
+- Use a separate field network; distinguish it from supervisory Ethernet.
+
+The slide is a proposed extension, not an approved full DPS design.
+Use one PLC brain with distributed I/O in the minimal sketch, consistent with
+the existing working architecture. The drawn panels are illustrative and do not
+establish a panel count, actual cable length, physical topology or installed state.
+The 70 m figure is Manuel's approximate layout span, not a measured cable route.
+Vendor support is a design consideration, not a guaranteed service commitment.
+
+Trevor's architecture provides the PLC / distributed-I/O pattern. Keep its
+equipment models, subsystem interlock choices and draft populations separate
+from the new minimal conceptual sketch.

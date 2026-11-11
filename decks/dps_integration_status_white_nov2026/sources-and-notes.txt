@@ -329,3 +329,52 @@ PDU, smoke sensors, relay, GIZMo, Ignition, OPC UA bridges and emulators. He pla
 to expand this local setup along the Batavia model. The slide states a test goal;
 it does not report new integration or protection test results. Dates remain open.
 See test-setups-input-20261110.txt for the source distinction.
+
+Overview routing clarification, 11 November 2026
+SC/Ignition and DPS PLC now share one logical boundary. All three facility boxes
+remain external and their dashed arrows meet that boundary. The receiving node
+may be SC, the PLC or both; this remains undecided. Cryogenics is bidirectional.
+This supersedes the earlier SC-only facility overview. Detector interfaces below
+remain unchanged. Slide 4 narration and speaking scripts reflect this distinction.
+
+PLC brain rationale and main-talk edit, 11 November 2026
+Old main slides 5–8 are retained unchanged in backups 28–31, after the
+responsibility slide. New slide 5 explains the proposed BDE-based PLC brain:
+industrial off-the-shelf hardware, modular expansion/scaling, vendor support
+and reuse of distributed panels over Manuel’s approximate 70 m mezzanine span.
+The editable sketch follows Trevor’s PLC/distributed-I/O pattern and distinguishes
+supervisory Ethernet/OPC UA from the dedicated EtherCAT field network. The two
+BDE panels drawn are illustrative; no panel count or cable route is inferred.
+The wider-system I/O is dashed and proposed. The four moved slides’ full content
+and speaking paragraphs remain available in backups. Main scripts and timing
+cues now cover slides 1–25, with backups starting at 26. No dates are introduced.
+
+Raritan PDU demonstration, 11 November 2026
+The PDU topic is now slide 6 after the PLC rationale. The expanded main slide
+shows individual outlet control, a discrete fault/permit output through a
+compatible actuator, and event-rule/LuaPLC automation. Existing rack/TDE scope,
+including the 336-crate and 20-rack statements, remains unchanged in backup 47.
+Official vendor documentation was checked for switching, actuator and scripting
+functions; hashes and links are in raritan-capabilities-review-20261111.json.
+Contact input and output are distinct. The sensor relay is not assumed to be an
+output actuator. Firmware, accessory and PLC input match remain to confirm.
+This is a planned demonstration; no PDU outlet or PLC was commanded or tested.
+
+Interlock matrix and delivery focus, 11 November 2026
+The Detector walkthrough, former main slides 12–23, is retained intact in
+backups 22–33. Former slides 24 and 25 remain main slides 14 and 15, unchanged.
+Main slide 12 restores six rows from working matrix v0.2 (46 rules, 16 sources,
+27 October 2026). The excerpt JSON retains the exact source records and hashes.
+The five-page companion is copied unchanged; its first two conditions/action
+pages appear in backup 50. Short evidence labels describe the supporting source,
+not agreement on the function, an installed path or a passed test. A dash assigns
+no action; REVIEW remains unresolved; TAG records declared activity.
+
+Main slide 13 proposes checks for milestone delivery. Collection uses complete
+connection records by consortium and LBNF; concept review uses reviewed, mapped
+functions and visible remaining decisions. Hardware evidence uses separate test
+cases, final-state feedback and measured response against an agreed budget.
+The acceptance-test plan is a planning reference, not test evidence. Scope,
+reviewers and dates remain open. No current completion counts are invented.
+Speaking scripts and the slide index follow 15 main slides and backups 16–50.
+Manuel’s latest PDU slide title and actuator wording are retained.

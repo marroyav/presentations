@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-11-11T23:13:49.470832+00:00",
+  "purpose": "Verify documented Raritan platform functions for the proposed dune-fd-test01 collaboration demonstration",
+  "sources": [
+    {
+      "url": "https://help.raritan.com/json-rpc/4.3.14/md_eventengine.html",
+      "title": "Xerus JSON-RPC 4.3.14 event engine",
+      "section": "Event Rules; SwitchOutlets; SwitchPeripheralActuator; StartStopLuaScript",
+      "sha256": "2aee2a38f552e9568f0fef9ec7ae27df0470d714d0ed79b3e990eae0c5f38270",
+      "bytes": 20385,
+      "retrieval": "Direct HTTPS download; content inspected locally",
+      "use": "Rules connect trigger conditions to actions; outlet and peripheral actuator actions are distinct."
+    },
+    {
+      "url": "https://help.raritan.com/json-rpc/4.3.14/md_lua-plc.html",
+      "title": "Xerus JSON-RPC 4.3.14 LuaPLC",
+      "section": "Introduction; event-rule/timer execution; PDU data-model access",
+      "sha256": "6ab892383f70eb222558aa41b6034a588bd4cd6d3d777fd4b41439e4bea510a1",
+      "bytes": 31320,
+      "retrieval": "Direct HTTPS download; content inspected locally",
+      "use": "Small programs execute on the PDU; local rules and scripts can implement timed actions and recovery logic."
+    },
+    {
+      "url": "https://cdn1.raritan.com/download/pdu-g4/4.3.10/PDU_G4_UG_F1_4.3.10.pdf",
+      "title": "PX4 User Guide 4.3.10",
+      "section": "PDF p328: available event actions; outlet sequence/delay and actuator sections",
+      "sha256": "c9cbd77d4c9fb72973bba95c3fa1a64e9edacb5480e76445062438c08679183a",
+      "bytes": 10877952,
+      "retrieval": "Direct HTTPS download; content inspected locally",
+      "use": "Documented switching, sequencing and event actions. Installed firmware is not established by this manual revision."
+    },
+    {
+      "url": "https://www.raritan.com/assets/ram/resources/data_sheets/raritan-smartsensor-datasheet.pdf",
+      "title": "Legrand SmartSensors datasheet V1379, copyright 2024",
+      "section": "PDF p4: contact-closure input versus dry-contact actuator models",
+      "use": "DX2-CC2 is an input; DX2-D2/D2C6 provide output-capable dry-contact functions. A matching accessory and PLC input are required.",
+      "retrieval": "Opened with web tool, 11 November 2026"
+    },
+    {
+      "url": "https://www.raritan.com/product-selector/pdu-detail/PX4-54A7CR-A0",
+      "title": "Raritan PX4-54A7CR-A0 product selector",
+      "section": "Remote outlet switching; metering; sensors",
+      "use": "The model named in local PDU planning supports individual switching/metering. This does not independently confirm the installed unit or configuration.",
+      "retrieval": "Opened with web tool, 11 November 2026"
+    }
+  ],
+  "local_sources": [
+    "/home/arroyave/work/raritan-ix12-notes/docs/dry-contacts.md",
+    "/home/arroyave/work/raritan-ix12-notes/docs/plc-integration.md",
+    "/home/arroyave/work/racks/sources/docdb-32655-v8/PX3_Rack_Protection_Setup.pdf"
+  ],
+  "access_notes": "The web tool could not open two SDK pages or the large user-guide PDF; direct HTTPS downloads succeeded and were inspected. No credentials used.",
+  "distinctions": [
+    "Sensor contact input is distinct from an output-capable actuator",
+    "Dry contact conveys one discrete state, not continuous measurement data",
+    "AC outlet control is distinct from a low-voltage PLC input",
+    "LuaPLC is embedded PDU scripting, not proof of native arbitrary PLC protocol support"
+  ],
+  "limits": "No PDU/PLC accessed or commanded. Installed model, firmware, actuator and input compatibility not independently checked; user reports the connected PDU. No completed demo, timing guarantee or safety qualification claimed."
+}
