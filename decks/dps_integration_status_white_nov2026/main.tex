@@ -132,65 +132,7 @@ For each one, identify the existing hardware, missing connections and required a
 \raggedright\DuneDiagramCaption{Proposed controller: a commercial programmable logic controller (PLC) based on BDE, located in the CUC. Loss-of-signal behaviour is set for each protected load.}
 \end{frame}
 
-\begin{frame}{Build on the Batavia and SD DPS test setups}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.48\textwidth}
-\textbf{Batavia --- HEERC G271}\par\bigskip
-\textbf{Reported progress}\par\medskip
-Initial BDE demonstrator design completed and reviewed with the WIEC team at BNL.\par\bigskip
-\textbf{Next steps}\par\medskip
-Apply BNL feedback, test fan tachometer readout, then assemble and install the demonstrator.
-\end{column}
-\begin{column}{0.48\textwidth}
-\textbf{SD --- Nevada room}\par\medskip
-\texttt{dune-fd-test01}\par\medskip
-\textbf{Available}\par\medskip
-PDU, smoke sensors, relay and GIZMo.\par\medskip
-Ignition, OPC UA bridges and emulators.\par\bigskip
-\textbf{Next step}\par\medskip
-Expand the setup along the Batavia model.
-\end{column}
-\end{columns}\par\bigskip
-\textbf{Goal:} exercise protection inputs, trips, feedback, reset and recovery.\par\medskip
-%\captionline{Batavia: Trevor's reported status, draft slides 15--16. SD: Manuel's update.}
-\end{frame}
-
-\begin{frame}{Use the interlock matrix to track each protection function}
-\textbf{Working matrix v0.2: 46 rules. Owner agreement and tests remain open.}\par\medskip
-\input{diagrams/interlock-matrix-excerpt.tex}\par\medskip
-\captionline{Excerpt: a dash assigns no action; REVIEW is unresolved; TAG records activity. Evidence describes the source, not approval or a passed test.}\par\medskip
-\textbf{For each function:} source, physical path, action, feedback, timing and reviewer.
-\end{frame}
-
-\begin{frame}{Measure milestones with completed records and evidence}
-\textbf{Proposed delivery checks}\par\medskip
-\renewcommand{\arraystretch}{1.25}
-\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.8cm}>{\RaggedRight\arraybackslash}p{6.1cm}>{\RaggedRight\arraybackslash}X@{}}
-\toprule
-\textbf{Delivery} & \textbf{Evidence to deliver} & \textbf{Progress measure}\\\midrule
-Connection collection & Confirmed inventory from each group: endpoints, signal, action, feedback, timing, contact and source. & Complete / required connection records, by consortium and LBNF.\\
-Concept review & Functions mapped to hardware and logic; I/O gaps, failure/recovery behaviour, decisions and test plan reviewed. & Reviewed, mapped / in-scope functions; open decisions listed.\\
-\bottomrule
-\end{tabularx}\par\bigskip
-\textbf{Hardware evidence is a separate gate:} passed / planned tests; fault-to-final-state time against the agreed budget; loss, reset and recovery.\par\medskip
-Agree the row scope and reviewer before counting completion. Dates remain open.
-\end{frame}
-
-\DpsMilestones
-
-\begin{frame}{Prepare the hardware review}
-\renewcommand{\arraystretch}{1.45}
-\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.4cm}>{\RaggedRight\arraybackslash}X@{}}
-\toprule
-\textbf{Work before review} & \textbf{Result}\\\midrule
-Trace each inhibit & Existing hardware, additions, cable routes and quantities\\
-Test representative paths & Measured trip times, recovery and SC logging\\
-Prepare purchases & Panel space, power, drawings, parts, licences, costs and spares\\
-\bottomrule
-\end{tabularx}\par\bigskip
-Order after the readiness review; install to match the site schedule.\par\medskip
-Agree the facility-interface and full VD response-matrix review schedule with the consortia and LBNF.
-\end{frame}
+\input{consortium-actions.tex}
 
 \appendix
 \DpsBackupsTransition

@@ -1,11 +1,12 @@
 # VD detector protection system — I&I meeting, November 2026
 
-Current draft: 15 main slides, followed by a Backups transition (slide 16)
-and 34 backup slides in the same PDF. The Detector walkthrough is in backups
-22–33. The former slides 24 and 25 remain in the main talk as slides 14 and 15.
-The responsibilities slide is the first backup. All 35 earlier slides and
-technical details are retained, following Manuel's instruction to keep everything
-for now. The earlier white version is saved in `archive/`.
+Current draft: 14 main slides, followed by a Backups transition (slide 15)
+and 37 backup slides. Main slides 11–12 show the critical consortium interlocks
+and group actions. Slide 13 covers the Batavia and SURF test benches; slide 14
+sets the information target for late January 2027 and the comprehensive design
+target for mid-April 2027. The Detector walkthrough remains in backups 21–32.
+The matrix excerpt, delivery checks and hardware-review detail are in backups
+50–52. Earlier versions remain in Git and `archive/`.
 
 ## Purpose
 
@@ -30,32 +31,34 @@ and decisions. The proposed responsibilities and protection rules remain proposa
 - Slide 5 proposes the BDE PLC architecture as the DPS brain: industrial hardware,
   modular expansion, vendor support and distributed panels across the roughly 70 m
   mezzanine. The sketch distinguishes EtherCAT from supervisory Ethernet.
-- The FFDG and SDSTA detail slides are retained as backups 18–21.
+- The FFDG and SDSTA detail slides are retained as backups 17–20.
 - Slide 6 presents a collaboration demo using the Raritan PDU in the
   dune-fd-test01 setup: single-outlet switching, a discrete contact output and
   local event-rule/LuaPLC logic. The fitted actuator, firmware and PLC input
-  remain to confirm. The original rack/TDE slide is retained as backup 49.
+  remain to confirm. The original rack/TDE slide is retained as backup 48.
 - Fire detection, fire alarms and emergency response remain outside DPS control.
   A possible equipment-status feed to responders needs a recipient agreement.
 - The FFDG and SDSTA commissioning discussions are reported inputs. Service
   commitments, protection use, variable lists and network access remain open.
-- Backup 28 follows PoF and groups DAPHNE with the PDS calibration box.
+- Backup 27 follows PoF and groups DAPHNE with the PDS calibration box.
   It retains the 34-feed working scope; channel and inhibit assignments remain open.
-- Main slide 11 pairs the reported Batavia demonstrator work with dune-fd-test01 in the SD Nevada room. The local setup
-  includes PDU/sensors/relay/GIZMo, Ignition, OPC UA bridges and emulators;
-  expansion along the Batavia model remains planned.
-- Main slide 12 restores a readable excerpt of the 46-rule working interlock matrix.
-  It distinguishes source evidence from agreement and tested protection paths.
-- Main slide 13 proposes delivery checks: complete connection records for collection,
-  reviewed and mapped functions for the concept, and separate hardware-test evidence.
-  Scope and reviewers still need agreement; no completion totals are reported.
-- Backup 50 shows the full conditions/action matrix. The complete five-page
-  [matrix companion](figures/interlock-matrix-v0.2.pdf) also contains sources,
-  decisions and readiness notes.
-
-The milestones remain collecting the hardware connections and reviewing the full
-DPS concept. Dates are open and will be agreed with the consortia and LBNF.
-The hardware-review and facility-interface schedule also remains open.
+- Main slides 11–12 highlight the group actions. BDE is nearly complete,
+  as reported by Manuel; PDS must assess purity-monitor inhibition versus tagging
+  and define PoF inhibition. CalCI/PDS must agree the laser handshake. HVS,
+  Cryogenics and CalCI must map protection inputs and shutdown dependencies;
+  TDE/DPS must define the external PDU protection interface.
+- Main slide 13 pairs the reported Batavia demonstrator work with
+  `dune-fd-test01` in the SURF Nevada room. Both benches have explicit next work
+  and a common protection-path test goal. No new test result is reported.
+- Main slide 14 gives the requested planning targets: gather consortium and LBNF
+  information by late January 2027; complete a comprehensive DPS design by
+  mid-April 2027. Individual group commitments and installation dates are separate.
+- Backup 26 labels PDU switching and box-enable as candidate PoF inhibition paths.
+  PDS still needs to define the path, scope, response time, feedback and recovery.
+- Backup 49 shows the full conditions/action matrix. The complete five-page
+  [matrix companion](figures/interlock-matrix-v0.2.pdf) retains its sources,
+  decisions and readiness notes. Backups 50–52 retain the earlier matrix excerpt,
+  delivery measures and hardware-review preparation.
 
 ## Source material and working files
 
@@ -75,13 +78,13 @@ record. `review/` contains the current slide previews and index.
 
 ## Edit and build
 
-The speaking scripts follow main slides 1–15:
+The speaking scripts follow main slides 1–14:
 
-- `speaker-script-fast.txt`: about three minutes.
+- `speaker-script-fast.txt`: about four minutes.
 - `speaker-script-15min.md`: an expanded version with rehearsal timing cues,
   targeting fifteen minutes.
 
-Slides 16–50 are for questions. The scripts retain the Detector, facility and
+Slides 15–52 are for questions. The scripts retain the Detector, facility and
 original rack/TDE paragraphs as optional backup notes.
 
 From the repository root:
@@ -94,7 +97,7 @@ Edit the main sequence in `main.tex`, the added meeting slides in
 `meeting-updates.tex`, and technical backups in `backup-slides.tex`. The title,
 footer, meeting date and transition layout are in `deck-style.tex`.
 
-The system diagrams are native TikZ in `diagrams/`. Backups 26 and 36 both use
+The system diagrams are native TikZ in `diagrams/`. Backups 25 and 35 both use
 `diagrams/daphne-icd-reference.tex`, which keeps CCM/opmon and Hermes separate.
 `diagrams/styles.tex` uses the shared framework's styles and colours. The site
 map also compiles with the deck. The PDS LV slide uses `diagrams/pds-lv.tikz.tex`;
@@ -102,7 +105,11 @@ the PLC proposal uses `diagrams/plc-brain.tikz.tex`. The PDU demonstration uses
 `diagrams/raritan-demo.tikz.tex`; its vendor references and verification limits
 are in `raritan-capabilities-review-20261111.json`.
 
-Edit the main matrix excerpt in `diagrams/interlock-matrix-excerpt.tex`.
+Edit the two interlock summaries and test-bench slide in `consortium-actions.tex`,
+and the dated work plan in `meeting-updates.tex`.
+`consortium-actions-20261112.json` maps group actions to the source material.
+
+Edit the backup matrix excerpt in `diagrams/interlock-matrix-excerpt.tex`.
 `interlock-matrix-excerpt.json` retains the selected source records and hashes.
 `milestone-delivery-checks.json` records the proposed checks; it contains no
 current completion counts or new hardware-test results.

@@ -1,0 +1,130 @@
+{
+  "checked_at": "2026-11-12T23:26:35.791281+00:00",
+  "request": "At most two main slides for critical consortium interlocks, then test benches and the January–April 2027 work plan.",
+  "parent_commit": "74c110c1834594e654e13b71dcd595ed8feb3083",
+  "build": {
+    "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+    "exit_code": 0,
+    "log": "verification-20261112-consortium-actions-build.log"
+  },
+  "checks": {
+    "total_slides": 52,
+    "main_slides": 14,
+    "interlock_slides": [
+      11,
+      12
+    ],
+    "work_slides": [
+      13,
+      14
+    ],
+    "backup_transition": 15,
+    "retained_detail": [
+      49,
+      50,
+      51,
+      52
+    ],
+    "planning_targets": {
+      "information": "Late January 2027",
+      "comprehensive_design": "Mid-April 2027"
+    },
+    "titles_match_index": true,
+    "test_benches_shown_once_in_main": true,
+    "unchanged_previous_slide_text_mapping": {
+      "1": 1,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10,
+      "16": 15,
+      "17": 16,
+      "18": 17,
+      "19": 18,
+      "20": 19,
+      "21": 20,
+      "22": 21,
+      "23": 22,
+      "24": 23,
+      "25": 24,
+      "26": 25,
+      "28": 27,
+      "29": 28,
+      "30": 29,
+      "31": 30,
+      "32": 31,
+      "33": 32,
+      "34": 33,
+      "35": 34,
+      "36": 35,
+      "37": 36,
+      "38": 37,
+      "39": 38,
+      "40": 39,
+      "41": 40,
+      "42": 41,
+      "43": 42,
+      "44": 43,
+      "45": 44,
+      "46": 45,
+      "47": 46,
+      "48": 47,
+      "49": 48,
+      "50": 49,
+      "12": 50,
+      "15": 52
+    },
+    "unchanged_previous_slide_text_count": 45,
+    "full_matrix_unchanged": true,
+    "tex_layout_warnings": [],
+    "source_audit_errors": [],
+    "source_audit_advisories": [],
+    "all_52_previews_refreshed": true
+  },
+  "repository_audit": {
+    "command": "make audit",
+    "exit_code": 0,
+    "log": "verification-20261112-consortium-actions-audit.log",
+    "scope": "23 decks; pre-existing advisories remain in other decks"
+  },
+  "visual_review": {
+    "reviewer": "Codex",
+    "slides": [
+      11,
+      12,
+      13,
+      14,
+      51
+    ],
+    "scale_pixels": 1400,
+    "result": "Summary tables, group-action emphasis, bench tasks, January–April targets and retained delivery-check slide fit without clipping.",
+    "human_approval": "Not recorded"
+  },
+  "limitations": "Documentation build and review only. No new hardware test results, installed protection paths, individual consortium commitments or exact dates within the target periods are established.",
+  "source_sha256": {
+    "main.tex": "ca5fb751140caf8cf85aae5407adafaca9dfdd13bb17204f54647abe8feadbe5",
+    "consortium-actions.tex": "4b700c3ff0b99cdcfcfd30b47a1d3d2309430369d0b586a75e64b86a4217b03f",
+    "meeting-updates.tex": "04faae83f61468774b120fe026cf09ea05f75d23f2a5af9f2821d9c431666e91",
+    "backup-slides.tex": "298993f5f10dcac55c7de43ab119f686b5aecf1a4366c981c62b8fbc0884aae6",
+    "sources.json": "1871d3347db6e2d406c35e935e47eafa6d42147dcec6a966a4b24cb91daf8ace",
+    "consortium-actions-input-20261112.txt": "c361545e53c6d2c809f731ab6521dfcc9a770e084375d036796c289f78fb71c6",
+    "consortium-actions-20261112.json": "5193e47d666a0212f76e091b423ef603cc083d7dc74fccc08e57751162fa9186",
+    "speaker-script-fast.txt": "ed9d2676f904892779bfb442942d56fe3aacbd823b66dc81754fe4d7ddb9299b",
+    "speaker-script-15min.md": "2fd6b83ed634d5c775670e37b60aa4062fdfa58f186ecc387388525a18833d2f",
+    "speaker-script-15min.txt": "4deff384f47250fd5b786335cc18bfbf7f1fdccc268ad86f41598988d6a6d77c"
+  },
+  "output_sha256": {
+    "main.pdf": "e6da9d12023978bc8541f4af4dcc87f1406fa2d690c21462b926f0dfd3c01c58",
+    "main.txt": "478a1e35a1bc84d74512417d3c2568a9a09e9fac4f508fb9c1b5b973b7f2c322",
+    "review/slide-index.csv": "e43d700fb9dbdc8548962145882423e52692f49f12bcb0ac9b6fbbb6b43161a0",
+    "review/slide-11.png": "221ec0213bc5d50be90b47ced1114020286faf84d355da6cd21ec2ffb83e56a5",
+    "review/slide-12.png": "0245aea35185a3c673f2036181f1b559d0c9ca057d0516f4bb528285908e3d7e",
+    "review/slide-13.png": "31552a0b2dc67d7823f1be7f445547aafc57626e38f7ee0d9b70acad8b8a1d77",
+    "review/slide-14.png": "b0a8912f669ef63b0866d541676d28214f190fa470409e088315999a5bf236e0",
+    "review/slide-51.png": "a33907a431df3aee82e4192a9df07390d644baab640cc505e8c91d121e016fe3"
+  }
+}

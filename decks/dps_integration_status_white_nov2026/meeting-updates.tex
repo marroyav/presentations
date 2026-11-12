@@ -14,7 +14,7 @@ A conceptual design covering all VD DPS connections.
 \end{column}
 \end{columns}\par\bigskip
 \textbf{Approach:} extend the existing TPC/BDE protection schema based on a central PLC.\par\medskip
-Agree a deadline for the consortia and LBNF to return their connection information.
+Target: gather the consortia and LBNF connection information by late January 2027.
 \end{frame}%
 }
 
@@ -109,17 +109,24 @@ Test each added path from the fault input to confirmed equipment response.
 }
 
 \newcommand{\DpsMilestones}{%
-\begin{frame}{Collect the inputs, then review the full DPS concept}
-\textbf{Milestones for discussion; dates to be agreed}\par\bigskip
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4cm}>{\RaggedRight\arraybackslash}X@{}}
-\toprule
-\textbf{Milestone} & \textbf{What closes it}\\\midrule
-Collect hardware connections & Every consortium and LBNF return their lists, confirm coverage and identify remaining gaps and owners.\\
-Review the full DPS concept & Review the architecture, controller / I/O allocation, interfaces, fault response and test plan. Record open choices.\\
-\bottomrule
-\end{tabularx}\par\bigskip
-\textbf{Next step:} agree a contact for each contributor.\par\medskip
-Set the schedule with the consortia and LBNF once the scope and available resources are clear.
+\begin{frame}{Gather inputs by January; complete the design by April}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+{\large\textbf{Late January 2027}}\par\medskip
+\textbf{Gather the information}\par\medskip
+Consortia and LBNF return their connections, limits and required actions.\par\medskip
+Include feedback, response times and lost-signal behaviour.\par\medskip
+Confirm coverage; name contacts and remaining gaps.
+\end{column}
+\begin{column}{0.48\textwidth}
+{\large\textbf{Mid-April 2027}}\par\medskip
+\textbf{Complete a comprehensive DPS design}\par\medskip
+Architecture, controller and I/O allocation; interfaces and protection rules.\par\medskip
+Fault response, shutdown order and recovery.\par\medskip
+Drawings, parts, power needs and test plan; record open choices for review.
+\end{column}
+\end{columns}\par\bigskip
+\textbf{Work in parallel:} use the Batavia and SURF benches to check representative protection paths as the design develops.
+\captionline{Planning targets. Hardware qualification and installation are separate steps.}
 \end{frame}%
 }

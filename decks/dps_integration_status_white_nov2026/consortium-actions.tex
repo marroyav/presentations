@@ -1,0 +1,63 @@
+% Two interlock summaries, then two slides on the work needed.
+% Source mapping and Manuel's priorities: consortium-actions-20261112.json.
+\begin{frame}{BDE is nearly complete; PDS has two decisions}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.4cm}>{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\textbf{Critical interlock} & \textbf{Status and group action}\\\midrule
+\textbf{BDE cooling}\newline
+Fan fault $\rightarrow$ affected LV off.
+& \textbf{Nearly complete.} Close the remaining checks, including whether associated bias must also shut down, and in what order.\\[1.2ex]
+\textbf{PDS / purity monitors}\newline
+Flash-lamp activity $\rightarrow$ bias inhibit or data tagging?
+& \textbf{\color{DuneDanger}Action --- PDS + CalCI:} assess whether SiPM protection requires inhibition, or whether tagging the affected data is sufficient.\\[1.2ex]
+\textbf{PDS power over fibre (PoF)}\newline
+Fault $\rightarrow$ inhibit affected PoF power.
+& \textbf{\color{DuneDanger}Action --- PDS:} define the inhibition path, affected boxes, response time and feedback. PDU switching and box-enable are candidates.\\
+\bottomrule
+\end{tabularx}\par\medskip
+\captionline{Red marks the decisions needing group input. PoF inhibition and the purity-monitor rule remain open.}
+\end{frame}
+
+\begin{frame}{Agree the CalCI, HV and TDE protection interfaces}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{4.4cm}>{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\textbf{Critical interlock} & \textbf{Group action}\\\midrule
+\textbf{CalCI laser / PDS}\newline
+Conflicting requests $\rightarrow$ block request.
+& \textbf{\color{DuneDanger}CalCI + PDS:} agree priority and emission-off or shutter-closed confirmation before PDS returns.\\[0.5ex]
+\textbf{HVS}\newline
+Low LAr $\rightarrow$ affected HV/bias off.\newline
+Drift HV off $\rightarrow$ associated field-cage termination off.
+& \textbf{\color{DuneDanger}HVS + Cryogenics / CalCI:} map level, relief-valve and boiling-risk signals. Agree supply groups, limits and shutdown order.\\[0.5ex]
+\textbf{TDE / rack protection}\newline
+Rack fault $\rightarrow$ affected PDU outlets off.
+& \textbf{\color{DuneDanger}TDE + DPS:} define trip conditions, outlets, timing and feedback. Keep local crate protection independent.\\
+\bottomrule
+\end{tabularx}\par\smallskip
+\captionline{CalCI: Calibration and Cryogenic Instrumentation. HVS: High Voltage System. Red marks group actions.}
+\end{frame}
+
+\begin{frame}{Use Batavia and SURF benches to test the protection paths}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+\textbf{Batavia --- HEERC G271}\par\medskip
+\textbf{Reported progress}\par\smallskip
+Initial BDE demonstrator design completed and reviewed with the WIEC team at BNL.\par\bigskip
+\textbf{To do}\par\smallskip
+Apply BNL feedback, test fan tachometer readout, then assemble and install the demonstrator.
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{SURF --- Nevada room}\par\smallskip
+\texttt{dune-fd-test01}\par\medskip
+\textbf{Available}\par\smallskip
+PDU, smoke sensors, relay and GIZMo; Ignition, OPC UA bridges and emulators.\par\bigskip
+\textbf{To do}\par\smallskip
+Expand the setup along the Batavia model, adding the PLC/I/O and subsystem interfaces.
+\end{column}
+\end{columns}\par\bigskip
+\textbf{Test on both benches:} faults, inhibits, equipment feedback and response time; lost communications, reset and re-enable.
+\end{frame}
+
+\DpsMilestones

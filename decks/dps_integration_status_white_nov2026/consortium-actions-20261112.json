@@ -1,0 +1,163 @@
+{
+  "revision_date": "2026-11-12",
+  "user_input": "consortium-actions-input-20261112.txt",
+  "user_input_sha256": "c361545e53c6d2c809f731ab6521dfcc9a770e084375d036796c289f78fb71c6",
+  "main_sequence": [
+    {
+      "slide": 11,
+      "title": "BDE is nearly complete; PDS has two decisions",
+      "purpose": "interlock summary"
+    },
+    {
+      "slide": 12,
+      "title": "Agree the CalCI, HV and TDE protection interfaces",
+      "purpose": "interlock summary"
+    },
+    {
+      "slide": 13,
+      "title": "Use Batavia and SURF benches to test the protection paths",
+      "purpose": "work needed"
+    },
+    {
+      "slide": 14,
+      "title": "Gather inputs by January; complete the design by April",
+      "purpose": "work needed"
+    }
+  ],
+  "planning_targets": {
+    "information": "Late January 2027",
+    "comprehensive_design": "Mid-April 2027",
+    "basis": "Manuel’s latest instruction; January year inferred from the design cycle",
+    "consortium_commitments": "Not recorded"
+  },
+  "source_matrix": {
+    "path": "/home/arroyave/work/vd-dps-plan/integration-matrix-20261023/rules.json",
+    "revision": "0.2, 27 October 2026",
+    "sha256": "60de6a03e22abb76e65492a7126f546aa0a8fdfad5922a2492bace97f2eab84a"
+  },
+  "interlocks": [
+    {
+      "group": "BDE",
+      "main_slide": 11,
+      "source_backup_slides_at_parent_commit": [
+        23,
+        25,
+        35
+      ],
+      "rule_ids": [
+        "DPS-C001"
+      ],
+      "status": "Nearly complete: Manuel’s reported assessment, not a hardware qualification result",
+      "remaining_action": "Check associated bias shutdown and order, plus remaining checks"
+    },
+    {
+      "group": "PDS / purity monitors",
+      "main_slide": 11,
+      "source_backup_slides_at_parent_commit": [
+        32
+      ],
+      "rule_ids": [
+        "Q-001"
+      ],
+      "action": "PDS with CalCI assesses inhibition versus activity tagging; neither outcome selected"
+    },
+    {
+      "group": "PDS / PoF",
+      "main_slide": 11,
+      "source_backup_slides_at_parent_commit": [
+        27,
+        47
+      ],
+      "rule_ids": [
+        "C-001"
+      ],
+      "action": "PDS defines actuator, affected scope, response time, feedback and recovery; PDU and box-enable remain candidates"
+    },
+    {
+      "group": "CalCI / PDS",
+      "main_slide": 12,
+      "source_backup_slides_at_parent_commit": [
+        31
+      ],
+      "rule_ids": [
+        "O-002"
+      ],
+      "action": "Agree request priority and confirmed emission-off or shutter closure before PDS return; local laser safety stays independent"
+    },
+    {
+      "group": "HVS / Cryogenics / CalCI",
+      "main_slide": 12,
+      "source_backup_slides_at_parent_commit": [
+        29,
+        30
+      ],
+      "rule_ids": [
+        "CRP-01",
+        "HV-01",
+        "HV-02",
+        "HV-04",
+        "HV-05",
+        "CI-02"
+      ],
+      "action": "Map low-level, relief-valve and boiling-risk inputs to relevant supplies; agree limits and shutdown order. Top-CRP-bias and drift-HV level thresholds remain distinct"
+    },
+    {
+      "group": "TDE / racks",
+      "main_slide": 12,
+      "source_backup_slides_at_parent_commit": [
+        41,
+        46,
+        49
+      ],
+      "rule_ids": [
+        "TDE-01",
+        "TDE-02"
+      ],
+      "action": "Define external trip conditions, PDU outlets, timing and feedback; local crate protection stays independent"
+    }
+  ],
+  "other_backup_points": [
+    {
+      "topic": "PDS LV voltage, current and temperature protection; channel/inhibit groups",
+      "current_backup_slide": 27,
+      "rule_ids": [
+        "P-011-I",
+        "P-011-V",
+        "P-012-S",
+        "P-012-R",
+        "P-012-L"
+      ],
+      "treatment": "Retained in technical backups; not another main interlock slide"
+    },
+    {
+      "topic": "CalCI temperature sensor locations, limits and protected loads",
+      "current_backup_slide": 29,
+      "treatment": "Included in HV input-mapping action; detailed sensor paths remain in backups"
+    },
+    {
+      "topic": "Camera illumination and pulsed neutron source",
+      "current_backup_slides": [
+        47,
+        49
+      ],
+      "rule_ids": [
+        "O-001",
+        "PNS-01"
+      ],
+      "treatment": "Working matrix only; not promoted into an agreed interlock"
+    }
+  ],
+  "test_benches": {
+    "slide": 13,
+    "batavia": "HEERC G271; reported design and BNL review, remaining assembly/testing",
+    "surf": "Nevada room, dune-fd-test01; available hardware/software, expansion planned",
+    "test_results": "No new hardware tests performed"
+  },
+  "retained_detail": {
+    "full_matrix": 49,
+    "matrix_excerpt": 50,
+    "delivery_checks": 51,
+    "hardware_review": 52
+  },
+  "limits": "Presentation and source checks only. No new function agreement, installed path, equipment test result or procurement approval is claimed."
+}

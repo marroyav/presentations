@@ -378,3 +378,30 @@ The acceptance-test plan is a planning reference, not test evidence. Scope,
 reviewers and dates remain open. No current completion counts are invented.
 Speaking scripts and the slide index follow 15 main slides and backups 16–50.
 Manuel’s latest PDU slide title and actuator wording are retained.
+
+
+Consortium actions and dated work plan, 12 November 2026
+Manuel replaces the previous matrix/delivery emphasis with at most two main
+interlock slides followed by one or two work-plan slides. Main 11–12 cover BDE,
+PDS, CalCI/PDS, HVS/Cryogenics/CalCI and TDE/rack protection. Red text marks
+needed group action. The nearly-complete BDE status is Manuel's assessment;
+it is not a new hardware qualification result. PDS must assess the purity-monitor
+rule and define the PoF inhibition path. The PoF backup now labels both PDU
+switching and box-enable as candidates, not an agreed implementation.
+
+Main 13 covers the two benches in Batavia and at SURF, with reported progress,
+next work and the tests to perform. Main 14 sets the planning targets Manuel
+requested: gather information by late January 2027 and complete a comprehensive
+DPS design by mid-April 2027. January is interpreted as January 2027 in the same
+design cycle. These dates supersede the earlier instruction to leave those two
+milestones open; they do not establish individual group commitments or hardware
+qualification. No exact day within either target period is invented.
+
+The resulting talk has 14 main slides, Backups on slide 15, and technical/planning
+material through slide 52. Existing detector backups move down one number.
+The full matrix is backup 49; the former main excerpt, delivery checks and
+hardware-review preparation are backups 50–52. The old undated milestone slide
+is replaced by the dated plan; its architecture/I/O/interface/fault/test scope
+is retained. All three scripts and the current slide index follow this order.
+Source mapping and the user instruction are recorded in
+consortium-actions-20261112.json and consortium-actions-input-20261112.txt.

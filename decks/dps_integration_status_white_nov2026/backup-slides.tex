@@ -92,15 +92,15 @@ The dependency and shutdown order for associated bias are still being agreed.
 {\footnotesize\textbf{Proposed SiPM bias inhibit:} DPS $\rightarrow$ SC $\rightarrow$ DAPHNE; SC returns bias status and informs DAQ.\par}
 \end{frame}
 
-\begin{frame}{DPS switches PoF power through the PDU}
+\begin{frame}{PDS must define the PoF inhibition path}
 \centering
 
 \dpsdiagram{pof}\par\smallskip
-\raggedright\DuneDiagramCaption{Sensor inputs reach the local PLC. The dashed box-enable path is optional; the PDU supplies AC power.}\par\smallskip
+\raggedright\DuneDiagramCaption{Candidate paths: PDU power removal or a box-enable input, if available. Sensor inputs reach the local PLC.}\par\smallskip
 \raggedright
 
 \textbf{80 boxes: 320 voltage + 80 temperature readings = 400 readings.}\par\medskip
-DPS inhibits power over fibre (PoF) through the PDU. A separate box-enable signal would provide another control option, if available.
+PDS must define how DPS inhibits power over fibre (PoF). Agree the actuator, affected boxes, response time, feedback and recovery.
 \end{frame}
 
 \begin{frame}{LV supplies power DAPHNE and PDS calibration boxes}
@@ -554,4 +554,41 @@ Local PDU rules switch off affected outlets. Humidity is monitored; a humidity t
 \includegraphics[page=1,width=0.495\linewidth,height=5.8cm,keepaspectratio]{figures/interlock-matrix-v0.2.pdf}\hfill
 \includegraphics[page=2,width=0.495\linewidth,height=5.8cm,keepaspectratio]{figures/interlock-matrix-v0.2.pdf}\par\medskip
 \raggedright\DuneDiagramCaption{Working matrix v0.2, 27 October 2026, conditions/action pages 1--2. The five-page companion also contains sources, decisions and readiness notes.}
+\end{frame}
+
+
+% Matrix and planning detail moved from the main talk on 12 November 2026.
+\begin{frame}{Use the interlock matrix to track each protection function}
+\textbf{Working matrix v0.2: 46 rules. Owner agreement and tests remain open.}\par\medskip
+\input{diagrams/interlock-matrix-excerpt.tex}\par\medskip
+\captionline{Excerpt: a dash assigns no action; REVIEW is unresolved; TAG records activity. Evidence describes the source, not approval or a passed test.}\par\medskip
+\textbf{For each function:} source, physical path, action, feedback, timing and reviewer.
+\end{frame}
+
+\begin{frame}{Measure milestones with completed records and evidence}
+\textbf{Proposed delivery checks}\par\medskip
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{2.8cm}>{\RaggedRight\arraybackslash}p{6.1cm}>{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\textbf{Delivery} & \textbf{Evidence to deliver} & \textbf{Progress measure}\\\midrule
+Connection collection & Confirmed inventory from each group: endpoints, signal, action, feedback, timing, contact and source. & Complete / required connection records, by consortium and LBNF.\\
+Concept review & Functions mapped to hardware and logic; I/O gaps, failure/recovery behaviour, decisions and test plan reviewed. & Reviewed, mapped / in-scope functions; open decisions listed.\\
+\bottomrule
+\end{tabularx}\par\smallskip
+\textbf{Hardware evidence is a separate gate:} passed / planned tests; fault-to-final-state time against the agreed budget; loss, reset and recovery.\par\smallskip
+Agree scope and reviewers before counting. Targets: inputs by late January; design by mid-April 2027.
+\end{frame}
+
+\begin{frame}{Prepare the hardware review}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{3.4cm}>{\RaggedRight\arraybackslash}X@{}}
+\toprule
+\textbf{Work before review} & \textbf{Result}\\\midrule
+Trace each inhibit & Existing hardware, additions, cable routes and quantities\\
+Test representative paths & Measured trip times, recovery and SC logging\\
+Prepare purchases & Panel space, power, drawings, parts, licences, costs and spares\\
+\bottomrule
+\end{tabularx}\par\bigskip
+Order after the readiness review; install to match the site schedule.\par\medskip
+Agree the facility-interface and full VD response-matrix review schedule with the consortia and LBNF.
 \end{frame}

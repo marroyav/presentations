@@ -1,5 +1,5 @@
 {
-  "revision_date": "2026-11-11",
+  "revision_date": "2026-11-12",
   "scope": "VD only. HD later by extension or separate PLC.",
   "context": "I&I email thread and Manuel's clarifications, including combined 336 microTCA count, public-audience polish and draw.io request on 28 October. Native TikZ conversion requested by Manuel on 10 November; overview label changed to SDSTA SCADA. White design version requested by Manuel on 10 November 2026; the technical evidence remains the October I&I baseline. November I&I meeting revision: retain all earlier slides and backups; add title/date/logos, centred transition, commissioning update, fire-system boundary, connection collection and proposed milestones. DAPHNE correction requested by Manuel: slide 18 uses the same service diagram source as slide 31; the simplified topology is retired. Branding clarification: large grey DUNE on footerless title and transition slides; black Fermilab only in other slide footers, retaining the meeting date and page number.",
   "references": [
@@ -542,22 +542,36 @@
       "id": "matrix-main-excerpt",
       "path": "interlock-matrix-excerpt.json",
       "revision": "11 November 2026 presentation revision",
-      "use": "Six exact source records for the main-talk excerpt; full target/actions and source status retained",
+      "use": "Six exact source records for the retained matrix excerpt in backup 50",
       "sha256": "89819390eac0c3b5084ba1ab741a5def6b687339b92819a5441c2a38f79d7077"
     },
     {
       "id": "matrix-full-pdf",
       "path": "figures/interlock-matrix-v0.2.pdf",
       "revision": "Working matrix v0.2, 27 October 2026",
-      "use": "Unmodified five-page v0.2 matrix companion, 27 October 2026; conditions/actions shown in backup 50",
+      "use": "Unmodified five-page v0.2 matrix companion, 27 October 2026; conditions/actions shown in backup 49",
       "sha256": "64e42ddf2d66e6269f33e092aa105cdaf6f3bb3165269ce94db05e71f2d7129a"
     },
     {
       "id": "milestone-delivery-checks",
       "path": "milestone-delivery-checks.json",
       "revision": "11 November 2026 presentation revision",
-      "use": "Proposed checks; connection records, protection functions and test cases are distinct units; no current completion counts",
+      "use": "Proposed delivery checks retained in backup 51; no completion counts",
       "sha256": "007b2b860a475ae9ad86cbe930536f9c834420aa7962dbac81bd7dff9f7b8bcf"
+    },
+    {
+      "id": "manuel-consortium-actions-20261112",
+      "path": "consortium-actions-input-20261112.txt",
+      "revision": "12 November 2026 presentation revision",
+      "use": "Manuel’s two interlock slides plus two work slides and January–April 2027 planning targets",
+      "sha256": "c361545e53c6d2c809f731ab6521dfcc9a770e084375d036796c289f78fb71c6"
+    },
+    {
+      "id": "consortium-action-selection",
+      "path": "consortium-actions-20261112.json",
+      "revision": "12 November 2026 presentation revision",
+      "use": "Source and decision mapping for the consortium summaries, work plan and remaining backup topics",
+      "sha256": "5193e47d666a0212f76e091b423ef603cc083d7dc74fccc08e57751162fa9186"
     }
   ],
   "figures": [
@@ -650,7 +664,7 @@
       "status": "Existing rack-protection/PDU planning entries; not 76 additional purchases or a complete VD/roof installed inventory"
     }
   },
-  "presentation": "25 main slides, Backups transition on slide 26 and 21 backup slides. Expanded Raritan demo is slide 6, after the PLC rationale. Original rack/TDE protection detail is retained unchanged at backup 47. All 46 previous slide bodies remain in the PDF.",
+  "presentation": "14 main slides: two consortium interlock summaries (11–12), test benches (13), and dated work plan (14). Backups transition is slide 15; technical and planning detail runs through slide 52.",
   "current_architecture": {
     "source_id": "manuel-architecture",
     "dps_input_domains": [
@@ -689,7 +703,7 @@
       "presentation": "Keep PDU-only current control distinct from possible future crate-status and external-inhibit interfaces."
     },
     "presentation_exclusions": [
-      "SC–OPC UA server deployment details in the main talk; original service figure retained in backup 36 at user request"
+      "SC–OPC UA server deployment details in the main talk; original service figure retained in backup 35 at user request"
     ],
     "lv_supply_control": "SNMP control/status between DPS PLC and LV power supplies, grouped with PDUs. Documented BDE/PL506 TTL enable/inhibit inputs remain additional hardware protection interfaces.",
     "device_control_protocol": "SNMP for both PDUs and WIENER LV power supplies",
@@ -702,7 +716,7 @@
     ],
     "cryo_route": "Cryogenics is in the CUC and appears as one bidirectional system interface. The receiving endpoint at SC/Ignition, the DPS PLC or both and the run-state agreement remain open.",
     "pof_monitoring": "4 laser-voltage readings + 1 chassis temperature per box, confirmed by Manuel",
-    "pof_inhibition": "DPS → SNMP → PDU → PoF AC power. Additional local box-enable/inhibit is optional if an interface is available.",
+    "pof_inhibition": "PDS must define the inhibition path. DPS/SNMP/PDU power removal and a local box-enable input are candidates; actuator, scope, timing, feedback and recovery remain to agree.",
     "daphne_control": "DPS ↔ SC ↔ OPC UA interface ↔ DAPHNE ZMQ control/status; DAQ CCM/opmon shares OPC UA; DAQ Hermes retains distinct IPBus/UDP route.",
     "daphne_power": "DPS ↔ SNMP ↔ WIENER LV supply → DAPHNE 48 V; PDS LV scope remains 34 feeds.",
     "dps_logic": "Proposed per-load permits, valid input handling, trip latches, actuator/readback and separate reset/re-enable on a commercial BDE-based PLC.",
@@ -797,11 +811,10 @@
     "Trace each interlock from its source to the response",
     "Each group must identify its hardware connections",
     "A trip removes the permit; recovery needs a new request",
-    "Build on the Batavia and SD DPS test setups",
-    "Use the interlock matrix to track each protection function",
-    "Measure milestones with completed records and evidence",
-    "Collect the inputs, then review the full DPS concept",
-    "Prepare the hardware review"
+    "BDE is nearly complete; PDS has two decisions",
+    "Agree the CalCI, HV and TDE protection interfaces",
+    "Use Batavia and SURF benches to test the protection paths",
+    "Gather inputs by January; complete the design by April"
   ],
   "figure_adaptations": [
     {
@@ -922,7 +935,7 @@
     "markmap": "device-hierarchy.html",
     "markmap_initial_view": "Two levels expanded in the local HTML; click branches to open device groups.",
     "profile": "White; unfilled nodes, dark outlines and explicit connection labels",
-    "daphne_source_policy": "Backups 26 and 36 include the same native TikZ source directly; no separate simplified topology.",
+    "daphne_source_policy": "Backups 25 and 35 include the same native TikZ source directly; no separate simplified topology.",
     "retired_daphne_diagram": {
       "path": "archive/20261110T182102Z-before-daphne-reference-correction/diagrams/daphne.tikz.tex",
       "reason": "User identified the merged CCM/Hermes and combined control/status view as misleading; main slide 18 now uses the working-ICD service diagram from slide 31."
@@ -946,28 +959,28 @@
     "meeting": "I&I meeting, November 2026",
     "requested_by": "Manuel Arroyave",
     "content_policy": "Keep all earlier slides and technical backups in the same PDF; no shortening or separate backup PDF.",
-    "main_slides": 15,
-    "backup_slides": 34,
-    "total_slides": 50,
+    "main_slides": 14,
+    "backup_slides": 37,
+    "total_slides": 52,
     "branding": "Title, Detector transition and Backups transition: large grey DUNE on the left, text on the right, no footer. Other slides: black Fermilab with the meeting date and page number.",
     "fire_scope": "Fire detection, alarms and emergency response remain outside DPS control; a possible equipment-status feed is an unagreed discussion idea.",
     "milestones": [
       {
-        "proposed_date": null,
-        "outcome": "Collect hardware connection lists from every consortium and LBNF; confirm coverage and record gaps/owners",
-        "status": "Milestone for discussion; date to be agreed"
+        "target": "Late January 2027",
+        "outcome": "Gather consortia and LBNF connections, limits, actions, feedback, response times and coverage gaps",
+        "status": "Planning target requested by Manuel"
       },
       {
-        "proposed_date": null,
-        "outcome": "Review the full DPS conceptual design, including hardware allocation, fault response and test plan",
-        "status": "Milestone for discussion; date to be agreed"
+        "target": "Mid-April 2027",
+        "outcome": "Complete a comprehensive DPS design: architecture, I/O, interfaces, protection/recovery rules, drawings, parts, power needs and test plan",
+        "status": "Planning target requested by Manuel"
       }
     ],
-    "schedule_status": "Connection collection, full DPS concept review, hardware review and facility-interface dates remain open for agreement with the consortia and LBNF.",
+    "schedule_status": "Manuel sets late January 2027 for information and mid-April 2027 for a comprehensive design. Individual consortium commitments, hardware-review and installation dates are not recorded.",
     "commissioning_source_id": "manuel-commissioning-update-20261110",
     "security_limit": "No air-gap claim is adopted. A status-only Modbus TCP interface still needs agreement and verification.",
     "register_template": "connection-register-template.csv",
-    "backup_transition_slide": 16
+    "backup_transition_slide": 15
   },
   "branding_revision": {
     "special_slides": [
@@ -984,8 +997,8 @@
     "variant_source": "Existing logo PNG alpha channels embedded unchanged in SVG masks; monochrome fills rendered as PDF. No generated replacement logo or change to logo geometry."
   },
   "pds_lv_slide": {
-    "slide": 28,
-    "placed_after": "DPS switches PoF power through the PDU",
+    "slide": 27,
+    "placed_after": "PDS must define the PoF inhibition path",
     "working_feeds": 34,
     "loads": [
       "DAPHNE boards",
@@ -1001,8 +1014,8 @@
     "scope_limit": "34 is the existing LV-feed scope, not a derived crate/module count. Calibration-board voltage remains unresolved. Nichols is a discussion input only."
   },
   "test_setups_slide": {
-    "slide": 11,
-    "placement": "Main slide 11 precedes the interlock matrix on slide 12. Detector transition is now backup 22.",
+    "slide": 13,
+    "placement": "After the two consortium summaries and before the dated work plan.",
     "batavia_source_id": "nichols-dps-workshop-review-20261110",
     "batavia_source_slides": [
       15,
@@ -1011,7 +1024,7 @@
     "batavia_status": "Reported initial BDE demonstrator design and BNL review; feedback, fan tachometer test, assembly and installation remain next steps.",
     "sd_source_id": "manuel-sd-test-setup-20261110",
     "sd_host": "dune-fd-test01",
-    "sd_location": "Nevada room, SD",
+    "sd_location": "Nevada room, SURF",
     "sd_available": [
       "PDU",
       "Smoke sensors",
@@ -1021,9 +1034,9 @@
       "OPC UA bridges",
       "Emulators"
     ],
-    "sd_plan": "Expand along the Batavia model",
-    "proposed_test_goal": "Protection inputs, trips, feedback, reset and recovery",
-    "limits": "No dates or new test results; Batavia status is reported from an unverified draft, local equipment is reported by Manuel."
+    "sd_plan": "Expand along the Batavia model, adding PLC/I/O and subsystem interfaces",
+    "proposed_test_goal": "Faults, inhibits, feedback, response time, communications loss, reset and re-enable",
+    "limits": "No new test results. Batavia progress is reported from the Nichols draft; SURF equipment is reported by Manuel."
   },
   "overview_revision": {
     "slide": 4,
@@ -1063,10 +1076,10 @@
         8
       ],
       "new_backup_slides": [
+        17,
         18,
         19,
-        20,
-        21
+        20
       ]
     },
     "limits": "Conceptual drawing. Existing BDE pattern can be extended after interface and I/O allocation; no installed full-DPS architecture or support commitment is claimed."
@@ -1080,7 +1093,7 @@
       "Fault or permit bit via a compatible dry-contact actuator",
       "Local event rules and LuaPLC: contact/threshold conditions, selected outputs, delays, sequences and explicit reset"
     ],
-    "original_rack_scope_backup": 49,
+    "original_rack_scope_backup": 48,
     "validation_pending": [
       "Fitted output-capable actuator",
       "Installed firmware and enabled functions",
@@ -1093,11 +1106,12 @@
     ]
   },
   "milestone_delivery_view": {
-    "status": "Proposed checks, pending collaboration agreement",
-    "matrix_slide": 12,
-    "delivery_checks_slide": 13,
-    "full_matrix_reference_slide": 50,
+    "status": "Planning reference in backups; current main talk follows the two-plus-two format requested on 12 November",
+    "matrix_slide": 50,
+    "delivery_checks_slide": 51,
+    "full_matrix_reference_slide": 49,
     "detector_walkthrough_backups": [
+      21,
       22,
       23,
       24,
@@ -1108,13 +1122,8 @@
       29,
       30,
       31,
-      32,
-      33
+      32
     ],
-    "kept_main": {
-      "former_24": 14,
-      "former_25": 15
-    },
     "measurement_units": {
       "collection": "Complete / required connection records, by consortium and LBNF",
       "concept": "Reviewed, mapped / in-scope protection functions; remaining decisions listed",
@@ -1122,7 +1131,32 @@
     },
     "required_scope_and_reviewers": "To agree",
     "current_completion_counts": null,
-    "dates": "Open",
-    "limits": "46 source rules are not 46 physical connections or installed tests. Source evidence does not establish agreement, installation or a passed hardware test."
+    "dates": "Targets: late January 2027 for information; mid-April 2027 for the comprehensive design",
+    "limits": "46 source rules are not 46 physical connections or installed tests. Source evidence does not establish agreement, installation or a passed hardware test.",
+    "earlier_planning_slides": {
+      "former_24": "Revised as dated main work-plan slide 14",
+      "former_25": 52
+    }
+  },
+  "consortium_action_view": {
+    "record": "consortium-actions-20261112.json",
+    "input": "consortium-actions-input-20261112.txt",
+    "interlock_slides": [
+      11,
+      12
+    ],
+    "work_slides": [
+      13,
+      14
+    ],
+    "attention_style": "Explicit group action text in shared DuneDanger colour; BDE status in normal text",
+    "bde_status_basis": "Manuel reports nearly complete; no new hardware test claim",
+    "targets": {
+      "information": "Late January 2027",
+      "comprehensive_design": "Mid-April 2027",
+      "basis": "Manuel’s latest instruction; January year inferred from the design cycle",
+      "consortium_commitments": "Not recorded"
+    },
+    "test_results": "No new hardware tests"
   }
 }

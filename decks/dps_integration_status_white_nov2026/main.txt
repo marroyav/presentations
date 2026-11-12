@@ -22,7 +22,7 @@ The TPC electronics / Bottom Drift Electronics
 
 Approach: extend the existing TPC/BDE protection schema based on a central PLC.
 
-Agree a deadline for the consortia and LBNF to return their connection information.
+Target: gather the consortia and LBNF connection information by late January 2027.
 
 
 
@@ -186,103 +186,82 @@ Loss-of-signal behaviour is set for each protected load.
 
 
                                            I&I meeting | November 2026                                             10
-Build on the Batavia and SD DPS test setups
-
-Batavia — HEERC G271                                 SD — Nevada room
-
-                                                     dune-fd-test01
-Reported progress
-                                                     Available
-Initial BDE demonstrator design completed and
-reviewed with the WIEC team at BNL.                  PDU, smoke sensors, relay and GIZMo.
-
-                                                     Ignition, OPC UA bridges and emulators.
-Next steps
-
-Apply BNL feedback, test fan tachometer              Next step
-readout, then assemble and install the
-                                                     Expand the setup along the Batavia model.
-demonstrator.
-
-Goal: exercise protection inputs, trips, feedback, reset and recovery.
+BDE is nearly complete; PDS has two decisions
 
 
-                                      I&I meeting | November 2026                                11
-Use the interlock matrix to track each protection function
+Critical interlock                      Status and group action
 
-Working matrix v0.2: 46 rules. Owner agreement and tests remain open.
+BDE cooling                             Nearly complete. Close the remaining checks, including whether
+Fan fault → affected LV off.            associated bias must also shut down, and in what order.
+PDS / purity monitors                   Action — PDS + CalCI: assess whether SiPM protection requires
+Flash-lamp activity → bias              inhibition, or whether tagging the affected data is sufficient.
+inhibit or data tagging?
+PDS power over fibre (PoF)              Action — PDS: define the inhibition path, affected boxes,
+Fault → inhibit affected PoF            response time and feedback. PDU switching and box-enable are
+power.                                  candidates.
 
-Condition                      HV            BDE             PDS         Rack AC           DAQ         Evidence
-
-Low LAr level                 OFF              –              –              –               –         Released
-BDE fan fault                   –           INHIBIT           –              –               –         Inference
-PDS overcurrent                 –              –             OFF             –               –         Released
-Rack smoke                      –              –              –             OFF              –         Released
-PrM lamp active                 –              –          REVIEW             –          REVIEW         Conflict
-LCM calibration                 –              –              –              –             TAG         Draft
-
-Excerpt: a dash assigns no action; REVIEW is unresolved; TAG records activity. Evidence describes the source, not
-approval or a passed test.
-
-For each function: source, physical path, action, feedback, timing and reviewer.
-
-                                             I&I meeting | November 2026                                            12
-Measure milestones with completed records and evidence
-Proposed delivery checks
-
-Delivery              Evidence to deliver                            Progress measure
-
-Connection            Confirmed inventory from each group:           Complete / required connection
-collection            endpoints, signal, action, feedback, timing,   records, by consortium and
-                      contact and source.                            LBNF.
-Concept review        Functions mapped to hardware and logic;        Reviewed, mapped / in-scope
-                      I/O gaps, failure/recovery behaviour,          functions; open decisions listed.
-                      decisions and test plan reviewed.
-
-Hardware evidence is a separate gate: passed / planned tests; fault-to-final-state time against the
-agreed budget; loss, reset and recovery.
-
-Agree the row scope and reviewer before counting completion. Dates remain open.
-                                     I&I meeting | November 2026                                    13
-Collect the inputs, then review the full DPS concept
-
-Milestones for discussion; dates to be agreed
-
-
-Milestone                     What closes it
-
-Collect hardware              Every consortium and LBNF return their lists, confirm coverage and
-connections                   identify remaining gaps and owners.
-Review the full DPS           Review the architecture, controller / I/O allocation, interfaces, fault
-concept                       response and test plan. Record open choices.
-
-
-Next step: agree a contact for each contributor.
-
-Set the schedule with the consortia and LBNF once the scope and available resources are clear.
-
-
-                                      I&I meeting | November 2026                                       14
-Prepare the hardware review
-
-
-Work before review         Result
-
-Trace each inhibit         Existing hardware, additions, cable routes and quantities
-
-Test representative        Measured trip times, recovery and SC logging
-paths
-
-Prepare purchases          Panel space, power, drawings, parts, licences, costs and spares
-
-
-Order after the readiness review; install to match the site schedule.
-
-Agree the facility-interface and full VD response-matrix review schedule with the consortia and LBNF.
+Red marks the decisions needing group input. PoF inhibition and the purity-monitor rule remain open.
 
 
 
-                                       I&I meeting | November 2026                                15
+                                             I&I meeting | November 2026                               11
+Agree the CalCI, HV and TDE protection interfaces
+
+Critical interlock                     Group action
+
+CalCI laser / PDS                      CalCI + PDS: agree priority and emission-off or shutter-closed
+Conflicting requests → block           confirmation before PDS returns.
+request.
+HVS                                    HVS + Cryogenics / CalCI: map level, relief-valve and boiling-risk
+Low LAr → affected HV/bias             signals. Agree supply groups, limits and shutdown order.
+off.
+Drift HV off → associated
+field-cage termination off.
+TDE / rack protection                  TDE + DPS: define trip conditions, outlets, timing and feedback.
+Rack fault → affected PDU              Keep local crate protection independent.
+outlets off.
+CalCI: Calibration and Cryogenic Instrumentation. HVS: High Voltage System. Red marks group actions.
+
+                                            I&I meeting | November 2026                                   12
+Use Batavia and SURF benches to test the protection paths
+
+Batavia — HEERC G271                                SURF — Nevada room
+
+Reported progress                                   dune-fd-test01
+
+Initial BDE demonstrator design completed and       Available
+reviewed with the WIEC team at BNL.                 PDU, smoke sensors, relay and GIZMo; Ignition,
+                                                    OPC UA bridges and emulators.
+To do
+Apply BNL feedback, test fan tachometer             To do
+readout, then assemble and install the              Expand the setup along the Batavia model,
+demonstrator.                                       adding the PLC/I/O and subsystem interfaces.
+
+Test on both benches: faults, inhibits, equipment feedback and response time; lost
+communications, reset and re-enable.
+
+
+                                     I&I meeting | November 2026                                   13
+Gather inputs by January; complete the design by April
+
+Late January 2027                                               Mid-April 2027
+Gather the information                                          Complete a comprehensive DPS design
+
+Consortia and LBNF return their connections,                    Architecture, controller and I/O allocation;
+limits and required actions.                                    interfaces and protection rules.
+
+Include feedback, response times and                            Fault response, shutdown order and recovery.
+lost-signal behaviour.
+                                                                Drawings, parts, power needs and test plan;
+Confirm coverage; name contacts and                             record open choices for review.
+remaining gaps.
+
+Work in parallel: use the Batavia and SURF benches to check representative protection paths as
+the design develops.
+Planning targets. Hardware qualification and installation are separate steps.
+
+
+                                              I&I meeting | November 2026                                      14
 Backups
 Agree responsibility and control-engineering support
 
@@ -304,7 +283,7 @@ Support needed: control-engineering time and access to the existing test stands.
 
 
 
-                                     I&I meeting | November 2026                      17
+                                     I&I meeting | November 2026                      16
 The FFDG BMS connection needs an API licence
 
                   SDSTA             FFDG DUNE FD              Proposed connection
@@ -329,7 +308,7 @@ Diagram. Service boundaries at SURF. The map shows the scope of the systems, not
 
 
 
-                                            I&I meeting | November 2026                                    18
+                                            I&I meeting | November 2026                                    17
 How FFDG BSI status can support detector protection
 
 
@@ -347,7 +326,7 @@ BMS access alone does not establish a protection interface.
 
 
 
-                                  I&I meeting | November 2026                              19
+                                  I&I meeting | November 2026                              18
 The SDSTA SCADA interface needs a hardware survey
 
 
@@ -373,7 +352,7 @@ Diagram. SDSTA services extend beyond the detector caverns. The survey will esta
 
 
 
-                                            I&I meeting | November 2026                                       20
+                                            I&I meeting | November 2026                                       19
 SDSTA proposes a restricted SCADA status interface
 
 
@@ -391,7 +370,7 @@ Still to agree: variable meaning, data quality, loss-of-data behaviour and netwo
 
 
 
-                                      I&I meeting | November 2026                                 21
+                                      I&I meeting | November 2026                                 20
 Detector
 Ten BDE groups use the existing bottom-drift design
 
@@ -412,7 +391,7 @@ Each crate has a power and timing card (PTC). Ten bias racks provide the separat
 charge-readout-plane and field-cage interfaces.
 
 Available: panel drawings, parts lists, power calculations and Ignition screens.
-                                           I&I meeting | November 2026                                           23
+                                           I&I meeting | November 2026                                           22
 Extend the BDE approach into a full DPS concept
 
 
@@ -433,7 +412,7 @@ Test each added path from the fault input to confirmed equipment response.
 
 
 
-                                            I&I meeting | November 2026                                             24
+                                            I&I meeting | November 2026                                             23
 A cooling fault removes power from the affected crate
 
                                                                   Remote output               Affected WIEC
@@ -453,7 +432,7 @@ records the trip.
 The dependency and shutdown order for associated bias are still being agreed.
 
 
-                                             I&I meeting | November 2026                                          25
+                                             I&I meeting | November 2026                                          24
 SC and DAQ use distinct DAPHNE service paths
         SC server                           DAQ CCM client                              DAQ Hermes
   OPC UA client → Ignition                 opmon subscriber                           configuration client
@@ -477,32 +456,32 @@ Diagram. Working SC–PDS–DPS ICD, Fig. 1. PDS: 34 LV feeds; cathode devices u
 
 Proposed SiPM bias inhibit: DPS → SC → DAPHNE; SC returns bias status and informs DAQ.
 
-                                          I&I meeting | November 2026                                              26
-DPS switches PoF power through the PDU
+                                          I&I meeting | November 2026                                              25
+PDS must define the PoF inhibition path
 
-                                 OPC UA          Opta or Beckhoff            Sensor inputs
+                                  OPC UA          Opta or Beckhoff             Sensor inputs
            SC / Ignition
-                                                   Local PLC
+                                                    Local PLC
 
 
-                                                                                           PoF laser box
-                                                                Optional enable
-                  OPC UA                                                                 4 voltage readings
-                                                                                           1 temperature
+                                                                                            PoF laser box
+                                                                 Optional enable
+                   OPC UA                                                                 4 voltage readings
+                                                                                            1 temperature
 
 
-                                  SNMP                                          AC power
-            DPS PLC                                 Rack PDU
+                                   SNMP                                          AC power
+             DPS PLC                                 Rack PDU
 
 
-Diagram. Sensor inputs reach the local PLC. The dashed box-enable path is optional; the PDU supplies AC power.
+Diagram. Candidate paths: PDU power removal or a box-enable input, if available. Sensor inputs reach the local PLC.
 
 80 boxes: 320 voltage + 80 temperature readings = 400 readings.
 
-DPS inhibits power over fibre (PoF) through the PDU. A separate box-enable signal would provide
-another control option, if available.
+PDS must define how DPS inhibits power over fibre (PoF). Agree the actuator, affected boxes,
+response time, feedback and recovery.
 
-                                            I&I meeting | November 2026                                          27
+                                            I&I meeting | November 2026                                               26
 LV supplies power DAPHNE and PDS calibration boxes
 
 Working PDS LV scope: 34 feeds.
@@ -524,7 +503,7 @@ To complete: map loads to channels and inhibit groups; agree trip conditions and
 
 Check supply state, voltage and current after each trip.
 
-                                           I&I meeting | November 2026                                           28
+                                           I&I meeting | November 2026                                           27
 Drift HV and bias supplies have separate inhibit paths
 
 One drift-HV supply; ten bias crates with 576 channels.
@@ -543,7 +522,7 @@ supplies         and logs                                     inhibits
 Example: low liquid-argon level removes the drift-HV permit. A drift-HV trip also shuts down the
 associated field-cage termination supplies.
 
-                                      I&I meeting | November 2026                                  29
+                                      I&I meeting | November 2026                                  28
 Trace each protection input to a temperature sensor
 
          Temperature
@@ -566,7 +545,7 @@ Temperature profiles guide cooldown and operation.
 For protection, each measurement needs a location, a limit, an allowed response time and a named
 piece of equipment to shut down.
 
-                                           I&I meeting | November 2026                                           30
+                                           I&I meeting | November 2026                                           29
 Proposed laser rules block conflicting PDS requests
 
                                 OPC UA         Calibration interface                     Ionization-laser
@@ -589,7 +568,7 @@ Four laser stations. Proposed rule: block conflicting laser and PDS requests. Re
 confirmed emission-off or shutter closure.
 
 Local laser-safety interlocks remain independent.
-                                           I&I meeting | November 2026                                       31
+                                           I&I meeting | November 2026                                       30
 The purity-monitor inhibit rule still needs agreement
 
 
@@ -607,7 +586,7 @@ purity-monitor activity. Agree the rule before implementing the inhibit.
 
 
 
-                                             I&I meeting | November 2026                                                 32
+                                             I&I meeting | November 2026                                                 31
 Measure the full path from fault to confirmed shutdown
 
 
@@ -629,7 +608,7 @@ hardware tests will check this assumption.
 
 
 
-                                             I&I meeting | November 2026                                    33
+                                             I&I meeting | November 2026                                    32
         Existing panels and screens provide the BDE reference
 
     8                                                                                                                       7                                                                                                                                                                                                                                                                                      6                                               5                                                                                                                        4                                                                                                                                             3                                       2                                                           1
@@ -1153,7 +1132,7 @@ A                                                                               
 
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  I&I meeting | November 2026                                                                                                34
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  I&I meeting | November 2026                                                                                                33
 The fan trip removes the PL506 channel permit
 
 
@@ -1176,7 +1155,7 @@ Six fans per crate is the design case used here. These are existing input requir
 
 
 
-                                              I&I meeting | November 2026                                             35
+                                              I&I meeting | November 2026                                             34
 DAQ CCM and Hermes use distinct DAPHNE services
 
         SC server                          DAQ CCM client                           DAQ Hermes
@@ -1200,7 +1179,7 @@ Six fans per crate is the design case used here. These are existing input requir
 Diagram. Working SC–PDS–DPS ICD, Figure 1. DAQ CCM/opmon and Hermes remain distinct clients. The dashed
 bracket groups the board-side services.
 
-                                        I&I meeting | November 2026                                          36
+                                        I&I meeting | November 2026                                          35
 Rack space is not a count of spare I/O terminals
 
 
@@ -1221,7 +1200,7 @@ U denotes rack height. The marked space is not an allocation of free PLC termina
 
 
 
-                                             I&I meeting | November 2026                          37
+                                             I&I meeting | November 2026                          36
 The bias draft provides 1,440 outputs for review
 
 
@@ -1239,7 +1218,7 @@ Draft layout: the difference between 1,440 outputs and 576 bias channels is not 
 
 
 
-                                              I&I meeting | November 2026                                             38
+                                              I&I meeting | November 2026                                             37
 Supply capacity differs from expected power use
 
 
@@ -1257,7 +1236,7 @@ Fan power assumes six fans per crate. Supply capacity is distinct from expected 
 
 
 
-                                             I&I meeting | November 2026                                   39
+                                             I&I meeting | November 2026                                   38
 Map each rack package against the existing allowance
 
 
@@ -1277,7 +1256,7 @@ remain open.
 
 
 
-                                            I&I meeting | November 2026                                             40
+                                            I&I meeting | November 2026                                             39
 Local PDU trips need deliberate power restoration
 
 
@@ -1298,7 +1277,7 @@ the VD PLC path needs its own communication-loss and recovery tests.
 
 
 
-                                             I&I meeting | November 2026                                             41
+                                             I&I meeting | November 2026                                             40
 Keep subsystem quantities separate from crate totals
 
 Subsystem                    Working inventory and interfaces
@@ -1315,7 +1294,7 @@ TDE and DAQ/timing contain 336 microTCA crates in total. Crate totals do not est
 switches.
 
 
-                                            I&I meeting | November 2026                                                42
+                                            I&I meeting | November 2026                                                41
 Survey the 20 panel references to find installed hardware
 
 
@@ -1336,7 +1315,7 @@ These are drawing references. The underground survey will establish what is inst
 
 
 
-                                             I&I meeting | November 2026                                  43
+                                             I&I meeting | November 2026                                  42
 The workbook allocates 76 mezzanine rack positions
 
 
@@ -1356,7 +1335,7 @@ May 2025 workbook. Rack positions include reserved and spare allocations; they a
 
 
 
-                                             I&I meeting | November 2026                                                 44
+                                             I&I meeting | November 2026                                                 43
 Count shared controls and rack devices once
 
 
@@ -1383,7 +1362,7 @@ Facility systems keep their own controls. Rack protection and shared I/O are cou
 
 
 
-                                         I&I meeting | November 2026                                       45
+                                         I&I meeting | November 2026                                       44
 The 336-crate total spans TDE and DAQ/timing
 
 336 microTCA crates in total across TDE and DAQ/timing.
@@ -1403,7 +1382,7 @@ High voltage                                              20 mezzanine racks
 
 
 
-                                          I&I meeting | November 2026                              46
+                                          I&I meeting | November 2026                              45
 Keep PDS control and DAQ data links distinct
 
 
@@ -1427,7 +1406,7 @@ Light calibration and timing                          receives the agreed status
 
 
 
-                                      I&I meeting | November 2026                                       47
+                                      I&I meeting | November 2026                                       46
 Instrument counts and interfaces still need allocation
 
 
@@ -1449,7 +1428,7 @@ The device list records the interfaces and quantities still awaiting allocation.
 
 
 
-                                            I&I meeting | November 2026                                     48
+                                            I&I meeting | November 2026                                     47
 Use rack sensors and PDUs for shared protection
                                                                  RACK INFRASTRUCTURE
 
@@ -1469,7 +1448,7 @@ requirement.
 
 TDE + DAQ/timing: 336 microTCA crates. TDE uses 20 mezzanine racks. DPS controls their
 PDUs; crate-status and external-inhibit interfaces remain possible additions.
-                                            I&I meeting | November 2026                                              49
+                                            I&I meeting | November 2026                                              48
 Full interlock matrix: conditions and actions
 
  DUNE · WORKING MATRIX · 2026-10-27 · V0.2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                PDS bias /                                                                                       DAQ
@@ -1591,5 +1570,61 @@ sources, decisions and readiness notes.
 
 
 
-                                                                                                                                                                                                                                                                      I&I meeting | November 2026                                                                                                                                                                                                                                                                                                                                               50
+                                                                                                                                                                                                                                                                      I&I meeting | November 2026                                                                                                                                                                                                                                                                                                                                               49
+Use the interlock matrix to track each protection function
+
+Working matrix v0.2: 46 rules. Owner agreement and tests remain open.
+
+Condition                      HV            BDE             PDS         Rack AC           DAQ         Evidence
+
+Low LAr level                 OFF              –              –              –               –         Released
+BDE fan fault                   –           INHIBIT           –              –               –         Inference
+PDS overcurrent                 –              –             OFF             –               –         Released
+Rack smoke                      –              –              –             OFF              –         Released
+PrM lamp active                 –              –          REVIEW             –          REVIEW         Conflict
+LCM calibration                 –              –              –              –             TAG         Draft
+
+Excerpt: a dash assigns no action; REVIEW is unresolved; TAG records activity. Evidence describes the source, not
+approval or a passed test.
+
+For each function: source, physical path, action, feedback, timing and reviewer.
+
+                                             I&I meeting | November 2026                                            50
+Measure milestones with completed records and evidence
+Proposed delivery checks
+
+Delivery              Evidence to deliver                            Progress measure
+
+Connection            Confirmed inventory from each group:           Complete / required connection
+collection            endpoints, signal, action, feedback, timing,   records, by consortium and
+                      contact and source.                            LBNF.
+Concept review        Functions mapped to hardware and logic;        Reviewed, mapped / in-scope
+                      I/O gaps, failure/recovery behaviour,          functions; open decisions listed.
+                      decisions and test plan reviewed.
+
+Hardware evidence is a separate gate: passed / planned tests; fault-to-final-state time against the
+agreed budget; loss, reset and recovery.
+Agree scope and reviewers before counting. Targets: inputs by late January; design by mid-April
+2027.
+                                     I&I meeting | November 2026                                    51
+Prepare the hardware review
+
+
+Work before review         Result
+
+Trace each inhibit         Existing hardware, additions, cable routes and quantities
+
+Test representative        Measured trip times, recovery and SC logging
+paths
+
+Prepare purchases          Panel space, power, drawings, parts, licences, costs and spares
+
+
+Order after the readiness review; install to match the site schedule.
+
+Agree the facility-interface and full VD response-matrix review schedule with the consortia and LBNF.
+
+
+
+                                       I&I meeting | November 2026                                52
 

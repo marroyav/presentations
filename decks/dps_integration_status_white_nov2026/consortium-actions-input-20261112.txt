@@ -1,0 +1,24 @@
+DPS main-talk focus — Manuel, 12 November 2026
+
+Replace the misleading emphasis in the last commit's main slides 12–15.
+Show the most critical interlocks by consortium and highlight the actions the
+groups need to take. BDE is nearly complete (Manuel's reported assessment).
+PDS must assess whether purity-monitor activity requires an interlock or only
+data tagging, and must define the inhibition path for its power over fibre.
+CalCI has an interlock with PDS. Check the backups for other points to highlight.
+
+Clarification in the same conversation:
+Use at most two slides for the interlocks, followed by one or two slides on the
+work needed. One covers the test benches in Batavia and at SURF. The other
+covers gathering information by late January and achieving a comprehensive
+design by mid-April 2027. January is treated as January 2027, in the same cycle.
+These are planning targets supplied by Manuel, not recorded commitments from
+each consortium or evidence of installed or tested protection.
+
+Implementation:
+Main 11–12: critical interlocks and explicitly marked group actions.
+Main 13: Batavia and SURF test-bench progress and next work; shown once.
+Main 14: late January 2027 information target and mid-April 2027 design target.
+Move matrix excerpt, delivery checks and hardware-review detail to backups.
+Retain the detailed detector walkthrough and original source matrix.
+Mark the backup PoF path as a candidate, pending the PDS definition.
