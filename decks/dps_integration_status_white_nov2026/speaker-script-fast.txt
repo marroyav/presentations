@@ -1,8 +1,8 @@
 VD Detector Protection System — fast speaking script
 I&I meeting, November 2026
 
-14 main slides; 242 spoken words. Allow about four minutes.
-Backups 15–52 are for questions.
+15 main slides; 266 spoken words. Allow about four minutes.
+Backups 16–53 are for questions.
 
 1. VD Detector Protection System
 
@@ -28,108 +28,112 @@ We propose the BDE PLC approach: industrial hardware, modular expansion and vend
 
 Our Raritan demo will show individual outlet control, local rules or Lua scripts, and a fault/permit bit sent through a compatible contact actuator.
 
-7. Cryogenics presents one system to DUNE
+7. FFDG BMS and SDSTA SCADA integration is progressing
+
+We’re progressing with both interfaces. FFDG BMS can inform operator decisions; hard interlocks are not assumed. The SDSTA work includes Oro Hondo ventilation status.
+
+8. Cryogenics presents one system to DUNE
 
 Cryogenics keeps its own controls. We need agreed readiness states and responses to missing signals.
 
-8. Trace each interlock from its source to the response
+9. Trace each interlock from its source to the response
 
 Trace each interlock from its source through the connection, decision, action and feedback.
 
-9. Each group must identify its hardware connections
+10. Each group must identify its hardware connections
 
 We need each consortium and LBNF to identify their connections, requirements, gaps and contact.
 
-10. A trip removes the permit; recovery needs a new request
+11. A trip removes the permit; recovery needs a new request
 
 A trip removes the permit. Reset and re-enable are separate actions.
 
-11. BDE is nearly complete; PDS has two decisions
+12. BDE is nearly complete; PDS has two decisions
 
 BDE is nearly complete. PDS must assess purity-monitor inhibition versus data tagging, and define its PoF inhibition path.
 
-12. Agree the CalCI, HV and TDE protection interfaces
+13. Agree the CalCI, HV and TDE protection interfaces
 
 CalCI and PDS must agree the laser handshake. HVS needs mapped cryogenic inputs and shutdown dependencies; TDE needs defined PDU trips and feedback.
 
-13. Use Batavia and SURF benches to test the protection paths
+14. Use Batavia and SURF benches to test the protection paths
 
 Complete the Batavia demonstrator and expand the SURF setup. Test faults, inhibits, feedback, response time, communications loss and recovery on both benches.
 
-14. Gather inputs by January; complete the design by April
+15. Gather inputs by January; complete the design by April
 
 Gather consortium and LBNF information by late January 2027. Complete the comprehensive DPS design by mid-April 2027, supported by the two benches.
 
-15. Backups — after the main talk
+16. Backups — after the main talk
 
 The detector walkthrough, full matrix and planning details are available for questions.
 
 Optional backup notes
 
-17. The FFDG BMS connection needs an API licence
+18. The FFDG BMS connection needs an API licence
 
 The Metasys interface was exercised with SBN data. Live FFDG access still needs the licence.
 
-18. How FFDG BSI status can support detector protection
+19. How FFDG BSI status can support detector protection
 
 FFDG says support is next business day. Critical protection may need our own sensors.
 
-19. The SDSTA SCADA interface needs a hardware survey
+20. The SDSTA SCADA interface needs a hardware survey
 
 The SDSTA survey is identifying controllers and usable connections at Ross Dry.
 
-20. SDSTA proposes a restricted SCADA status interface
+21. SDSTA proposes a restricted SCADA status interface
 
 SDSTA proposes status-only Modbus TCP. Variables, access controls and failure behaviour still need agreement.
 
-21. Detector
+22. Detector
 
 Now, the detector systems.
 
-22. Ten BDE groups use the existing bottom-drift design
+23. Ten BDE groups use the existing bottom-drift design
 
 BDE provides the starting design: ten groups, eighty warm crates and dedicated supply inhibits.
 
-23. Extend the BDE approach into a full DPS concept
+24. Extend the BDE approach into a full DPS concept
 
 We propose to extend that PLC and remote-I/O approach once the additional interfaces are mapped.
 
-24. A cooling fault removes power from the affected crate
+25. A cooling fault removes power from the affected crate
 
 A fan fault inhibits power to the affected crate. Associated bias shutdown still needs agreement.
 
-25. SC and DAQ use distinct DAPHNE service paths
+26. SC and DAQ use distinct DAPHNE service paths
 
 SC and DAQ’s CCM use the OPC UA path; Hermes has a separate configuration interface.
 
-26. PDS must define the PoF inhibition path
+27. PDS must define the PoF inhibition path
 
 PDS must define PoF inhibition. PDU switching and a box-enable input are candidates.
 
-27. LV supplies power DAPHNE and PDS calibration boxes
+28. LV supplies power DAPHNE and PDS calibration boxes
 
 For DAPHNE and calibration boxes, the working LV scope is thirty-four feeds; channel and inhibit assignments remain open.
 
-28. Drift HV and bias supplies have separate inhibit paths
+29. Drift HV and bias supplies have separate inhibit paths
 
 The HV design has separate wired inhibits for drift HV and CRP/field-cage bias.
 
-29. Trace each protection input to a temperature sensor
+30. Trace each protection input to a temperature sensor
 
 Each protection measurement needs a sensor location, limit, response time and affected load.
 
-30. Proposed laser rules block conflicting PDS requests
+31. Proposed laser rules block conflicting PDS requests
 
 The proposed laser rule blocks conflicting PDS requests. Local laser-safety interlocks remain independent.
 
-31. The purity-monitor inhibit rule still needs agreement
+32. The purity-monitor inhibit rule still needs agreement
 
 We still need to agree whether purity-monitor activity needs tagging or PDS bias inhibition.
 
-32. Measure the full path from fault to confirmed shutdown
+33. Measure the full path from fault to confirmed shutdown
 
 We plan to test fault detection through confirmed shutdown, including communications loss, recovery and logging.
 
-48. Use rack sensors and PDUs for shared protection
+49. Use rack sensors and PDUs for shared protection
 
 Rack sensors and PDUs provide shared protection. For TDE, our current DPS scope is PDU control.

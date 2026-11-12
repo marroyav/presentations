@@ -3,9 +3,9 @@
 I&I meeting, November 2026
 
 **About 15 minutes**, including pauses on the interlocks, group actions and work plan.
-1,403 spoken words across slides 1–14. Timing cues are rehearsal targets.
+1,450 spoken words across slides 1–15. Timing cues are rehearsal targets.
 
-Backups 15–52 are for questions.
+Backups 16–53 are for questions.
 
 ## Slide 1 — VD Detector Protection System
 
@@ -55,41 +55,47 @@ This is something we’d like to demonstrate to the collaboration using the Rari
 
 We can also demonstrate the PDU’s own event rules and LuaPLC scripts: for example, a smoke/contact or threshold condition acting on selected outlets or a contact output, with delays and deliberate recovery. We still need to check the fitted accessory, firmware and PLC input before calling that demonstration complete.
 
-## Slide 7 — Cryogenics presents one system to DUNE
+## Slide 7 — FFDG BMS and SDSTA SCADA integration is progressing
 
-**Target: 04:05–04:45**
+**Target: 04:05–04:40**
+
+We’re making progress with the FFDG BMS and SDSTA SCADA interfaces. For FFDG, the focus is monitoring and information for operator decisions; we are not assuming hard interlocks through that interface. The SDSTA work includes Oro Hondo ventilation status. We are still agreeing the signals to share.
+
+## Slide 8 — Cryogenics presents one system to DUNE
+
+**Target: 04:40–05:15**
 
 Cryogenics keeps its own process controls in the CUC. For our purposes, we want one system interface to DUNE, even though there are several groups of controls behind it.
 
 A state such as liquid-argon level can affect whether detector equipment is allowed to run. We need to agree what ready means for each load, which limits apply, and how the DPS should respond if a required signal disappears.
 
-## Slide 8 — Trace each interlock from its source to the response
+## Slide 9 — Trace each interlock from its source to the response
 
-**Target: 04:45–05:25**
+**Target: 05:15–05:50**
 
 For each interlock, I’d like us to follow this chain all the way through. Start with the condition and where it comes from, identify the actual connection, then follow the decision and the action to the equipment’s response.
 
 That gives us a useful way to review the design. We can see what hardware we already have, where a connection is missing, and which parts of the response we need to test.
 
-## Slide 9 — Each group must identify its hardware connections
+## Slide 10 — Each group must identify its hardware connections
 
-**Target: 05:25–06:05**
+**Target: 05:50–06:25**
 
 This is the information we’re asking each consortium and LBNF to provide. We need both ends of the connection, the connector or channel, what the signal means, and what action it should cause. We also need the expected feedback and the response if the signal is lost.
 
 We’ll use one common register, with a contact and a source document for each entry, so we can work through the gaps together.
 
-## Slide 10 — A trip removes the permit; recovery needs a new request
+## Slide 11 — A trip removes the permit; recovery needs a new request
 
-**Target: 06:05–06:40**
+**Target: 06:25–07:00**
 
 The basic behaviour I’m proposing is simple: allow operation when the request and the required conditions are valid. If something trips, remove the permit, keep the cause and check what the equipment did. Slow controls records the event.
 
 Clearing the trip and turning the equipment back on are separate steps. We also need a clear rule for each load when an input is missing or no longer valid.
 
-## Slide 11 — BDE is nearly complete; PDS has two decisions
+## Slide 12 — BDE is nearly complete; PDS has two decisions
 
-**Target: 06:40–09:15**
+**Target: 07:00–09:25**
 
 BDE is nearly complete. The cooling path is our starting point: a fan fault inhibits the low-voltage channel feeding the affected crate. We still need to close the remaining checks, including whether the associated bias must also switch off and in what order. Nearly complete describes the current status; it does not claim that every installed protection path has passed its tests.
 
@@ -97,9 +103,9 @@ The two PDS items in red need a decision from the group. First, PDS needs to ass
 
 Second, PDS needs to define the inhibition path for power over fibre. The backup drawing shows PDU switching and a possible box-enable input. Those are candidates. We need to know what actually stops the affected boxes, how quickly it acts, what feedback confirms the result, and how recovery works.
 
-## Slide 12 — Agree the CalCI, HV and TDE protection interfaces
+## Slide 13 — Agree the CalCI, HV and TDE protection interfaces
 
-**Target: 09:15–11:35**
+**Target: 09:25–11:40**
 
 CalCI and PDS need to finish the laser handshake. The proposed rule blocks conflicting requests. The groups need to agree which request takes priority and what confirms emission off or the shutter closed before PDS returns. The laser's local personnel-safety interlocks remain independent.
 
@@ -109,9 +115,9 @@ For TDE, our current external protection route is through the rack PDUs. TDE and
 
 These are the critical interfaces I want to bring to the groups. The detailed PDS low-voltage supply mapping, sensor paths and full matrix remain in the backups for discussion.
 
-## Slide 13 — Use Batavia and SURF benches to test the protection paths
+## Slide 14 — Use Batavia and SURF benches to test the protection paths
 
-**Target: 11:35–13:20**
+**Target: 11:40–13:20**
 
 We need the two test benches to turn those decisions into working protection paths. In Batavia, Trevor reports that the initial BDE demonstrator design is complete and has been reviewed with the WIEC team at BNL. The next work is to apply that feedback, check the fan tachometer readout, and assemble and install the demonstrator.
 
@@ -119,7 +125,7 @@ At SURF, in the Nevada room, we already have dune-fd-test01, the PDU, smoke sens
 
 Both benches should exercise the same full path: introduce the fault, observe the inhibit and confirm the equipment state. Measure response time and test lost communications, reset and re-enable. Slow controls should record the cause and the final state. These are tasks to perform; the slide does not report new test results.
 
-## Slide 14 — Gather inputs by January; complete the design by April
+## Slide 15 — Gather inputs by January; complete the design by April
 
 **Target: 13:20–15:00**
 
@@ -129,107 +135,107 @@ The second target is a comprehensive DPS design by mid-April 2027. That should b
 
 The two benches support that design work in parallel. Representative tests will help us check the proposed paths and find missing hardware or unsuitable interfaces while we can still change the design. The April target is for the comprehensive design. Hardware qualification and installation remain separate steps.
 
-## Slide 15 — Backups — after the main talk
+## Slide 16 — Backups — after the main talk
 
 The detector walkthrough, full matrix and planning details are available for questions.
 
 ## Optional backup notes
 
-### Slide 17 — The FFDG BMS connection needs an API licence
+### Slide 18 — The FFDG BMS connection needs an API licence
 
 For FFDG, the route we’re discussing uses the Metasys API through Batavia. We still need to agree whether the data reaches SC, the DPS PLC or both. We’ve exercised the API and OPC UA publication with SBN building data. Live FD data still needs the licence.
 
 Once access is available, we need to check the actual variables, their meaning and how often they update, before deciding how to use them.
 
-### Slide 18 — How FFDG BSI status can support detector protection
+### Slide 19 — How FFDG BSI status can support detector protection
 
 The discussion with FFDG also gave us a practical limit. They described support on the next business day, without a twenty-four-hour service for us. For critical equipment protection, they recommended that we install our own sensors.
 
 So we need to work out which information helps an operator make a decision, which could support an interlock, and where we need our own measurement.
 
-### Slide 19 — The SDSTA SCADA interface needs a hardware survey
+### Slide 20 — The SDSTA SCADA interface needs a hardware survey
 
 For SDSTA, we’re still doing the hardware survey. That includes finding the controllers, connections and network access at Ross Dry, and agreeing which signals could be made available.
 
 Modbus TCP and OPC UA have both been discussed. The next step is to turn that discussion into named signals, with a known source and someone responsible for maintaining them.
 
-### Slide 20 — SDSTA proposes a restricted SCADA status interface
+### Slide 21 — SDSTA proposes a restricted SCADA status interface
 
 The more specific proposal from SDSTA is a restricted Modbus TCP interface. They would expose a selected set of variables and keep control of their systems. The intention is for us to read status.
 
 We still need to agree and check that restriction. We’re also waiting for the variable list, including Oro Hondo and HVAC information, and the details of how we recognise stale or missing data.
 
-### Slide 21 — Detector
+### Slide 22 — Detector
 
 I’ll now go through the detector systems and show where those connections fit.
 
-### Slide 22 — Ten BDE groups use the existing bottom-drift design
+### Slide 23 — Ten BDE groups use the existing bottom-drift design
 
 BDE gives us the most developed starting design here. The documented VD layout has ten groups, each with eight warm crates and two PL506 supplies. That’s eighty warm crates and twenty supplies in total.
 
 We also have drawings, parts lists, power calculations and Ignition screens to work from. In this diagram, the EtherCAT exchange, the supply inhibits and the forty-eight-volt power feed are shown as separate connections.
 
-### Slide 23 — Extend the BDE approach into a full DPS concept
+### Slide 24 — Extend the BDE approach into a full DPS concept
 
 The idea is to extend that PLC and remote-I/O approach wherever it fits the wider DPS. First we map the additional connections; then we work out the controller and I/O we need.
 
 Slow controls would carry operating requests and keep the record of states and trips. For every protection function we add, we’d test the path from the fault appearing to the equipment reaching the intended state.
 
-### Slide 24 — A cooling fault removes power from the affected crate
+### Slide 25 — A cooling fault removes power from the affected crate
 
 Here, the fan-status signal goes to the PLC. The cooling rule then inhibits the supply channel feeding the affected crate. We check the supply state and voltage, and slow controls records why the trip happened.
 
 The dashed branch shows a possible shutdown of the associated bias. That part still needs agreement for VD: which bias channels are affected, and in what order they should be switched off.
 
-### Slide 25 — SC and DAQ use distinct DAPHNE service paths
+### Slide 26 — SC and DAQ use distinct DAPHNE service paths
 
 There are two routes to keep in mind for DAPHNE. Slow controls and the DAQ CCM and monitoring clients use the OPC UA bridge. Hermes has its separate IPBus and UDP configuration path.
 
 The proposed SiPM-bias action would go from DPS through slow controls to DAPHNE, with status coming back and DAQ being informed. We still need to check the acknowledgement, the actual bias state and the time taken before relying on that action.
 
-### Slide 26 — PDS must define the PoF inhibition path
+### Slide 27 — PDS must define the PoF inhibition path
 
 For power over fibre, PDS still needs to define the inhibition path. The rack PDU and a possible box-enable connection are candidates. A local controller collects the box measurements.
 
 Our working case is eighty boxes, each with four voltage readings and one temperature reading. That gives four hundred readings. Those values are gathered locally, so we still need to map the physical connections before counting central DPS inputs.
 
-### Slide 27 — LV supplies power DAPHNE and PDS calibration boxes
+### Slide 28 — LV supplies power DAPHNE and PDS calibration boxes
 
 Here we’re looking at the LV supplies for DAPHNE and the PDS calibration boxes. We’d control and read back the WIENER supplies over SNMP. The drawing separates DAPHNE’s forty-eight-volt supply from the calibration board and pulser feeds.
 
 The working count is still thirty-four feeds. We need to map those feeds to loads, channels and inhibit groups, then agree the trip conditions and recovery. After a trip, we need to check the supply state, voltage and current.
 
-### Slide 28 — Drift HV and bias supplies have separate inhibit paths
+### Slide 29 — Drift HV and bias supplies have separate inhibit paths
 
 Drift HV and the CRP and field-cage bias supplies have their own wired inhibit interfaces, alongside normal control and monitoring. The documented bias scope is ten crates and five hundred and seventy-six channels.
 
 Low liquid-argon level is one example of a drift-HV trip condition. For each rule, we need to identify the sensor, the inhibit connection and exactly which channels should respond.
 
-### Slide 29 — Trace each protection input to a temperature sensor
+### Slide 30 — Trace each protection input to a temperature sensor
 
 For temperature, we need to know where the reading comes from and which limit applies before we can use it for protection. We also need to know how quickly to act and which equipment to switch off.
 
 RTDs and fibre sensors use different readout systems. We need to follow the measurements through those systems to the particular protection rule they would support.
 
-### Slide 30 — Proposed laser rules block conflicting PDS requests
+### Slide 31 — Proposed laser rules block conflicting PDS requests
 
 For the four laser stations, our starting proposal is to block operating requests that conflict with PDS operation. Slow controls, DPS and the calibration interface would exchange the requests and status.
 
 Before returning to the PDS operating state, we’d need confirmation that emission is off or the shutter is closed. The laser’s own safety interlocks remain independent. The exact excluded states and the affected equipment still need agreement.
 
-### Slide 31 — The purity-monitor inhibit rule still needs agreement
+### Slide 32 — The purity-monitor inhibit rule still needs agreement
 
 This is one we still need to settle. Our current proposal is to keep taking data and tag the times when the purity-monitor flash lamp is active. The older PDS interface document requires the SiPM bias to be off during that activity.
 
 We need PDS and the purity-monitor group to agree which rule applies. That decision tells us what operating sequence and what hardware or software action we need to provide.
 
-### Slide 32 — Measure the full path from fault to confirmed shutdown
+### Slide 33 — Measure the full path from fault to confirmed shutdown
 
 I want us to measure the time from a fault appearing to the equipment reaching its intended state. That includes the PLC decision, the output action and the feedback. Then we should repeat the tests for lost communications, reset and re-enable, and check the logs.
 
 We can build that work into the Batavia demonstrator and the SD expansion. So far, we haven’t identified a critical function needing less than one millisecond. The consortium review and hardware tests need to check that assumption.
 
-### Slide 48 — Use rack sensors and PDUs for shared protection
+### Slide 49 — Use rack sensors and PDUs for shared protection
 
 Where detector systems share a rack, they also share its protection hardware. We should count that package once and map the equipment to its PDU outlets. The PDU can act on its fitted sensors, while DPS supervises the agreed power actions and slow controls keeps the records.
 

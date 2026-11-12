@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-11-12T23:49:19.456193+00:00",
+  "request": "One short FFDG BMS/SDSTA SCADA progress slide before Cryogenics, using existing material; do not change backup slides.",
+  "parent_commit": "4217e8e63a6dc22a5238567e3f4626b004c7cb1b",
+  "build": {
+    "command": "make decks/dps_integration_status_white_nov2026/main.pdf",
+    "exit_code": 0,
+    "log": "verification-20261112-facility-progress-build.log"
+  },
+  "checks": {
+    "total_slides": 53,
+    "main_slides": 15,
+    "new_slide": 7,
+    "cryogenics_slide": 8,
+    "interlock_slides": [
+      12,
+      13
+    ],
+    "work_slides": [
+      14,
+      15
+    ],
+    "backup_transition": 16,
+    "all_52_previous_slide_bodies_retained": true,
+    "backup_source_and_shared_macros_unchanged": {
+      "backup-slides.tex": "298993f5f10dcac55c7de43ab119f686b5aecf1a4366c981c62b8fbc0884aae6",
+      "meeting-updates.tex": "04faae83f61468774b120fe026cf09ea05f75d23f2a5af9f2821d9c431666e91"
+    },
+    "backup_slide_bodies_unchanged": true,
+    "previous_slide_mapping": "1–6 unchanged; 7–52 move one page later. Only page footers change.",
+    "titles_match_index": true,
+    "new_summary_under_70_words": true,
+    "no_protocol_licence_or_service_details_on_summary": true,
+    "tex_layout_warnings": [],
+    "source_audit_errors": [],
+    "source_audit_advisories": []
+  },
+  "repository_audit": {
+    "command": "make audit",
+    "exit_code": 0,
+    "log": "verification-20261112-facility-progress-audit.log",
+    "scope": "23 decks; existing advisories remain in other decks"
+  },
+  "visual_review": {
+    "reviewer": "Codex",
+    "slides": [
+      7
+    ],
+    "scale_pixels": 1400,
+    "result": "One concise two-row table; FFDG interlock wording and Oro Hondo status fit without clipping.",
+    "human_approval": "Not recorded"
+  },
+  "limitations": "Presentation build and source review only. Progress is reported; no newly installed or tested interface or agreed hard interlock is claimed.",
+  "source_sha256": {
+    "main.tex": "bdc98fdb73c5ebbd8bdd2c715558ae49eff25692578c3742c433f43b9ed324e3",
+    "backup-slides.tex": "298993f5f10dcac55c7de43ab119f686b5aecf1a4366c981c62b8fbc0884aae6",
+    "meeting-updates.tex": "04faae83f61468774b120fe026cf09ea05f75d23f2a5af9f2821d9c431666e91",
+    "sources.json": "91676ffa592581b5233bdcc42f63e8802d90b5ecca9dfa5cb154f14f6d1728b4",
+    "consortium-actions-20261112.json": "6fa0e14223f926b2ac262c8aca3e81f6ecc2914661859083c092ebf26c4cfd76",
+    "speaker-script-fast.txt": "7ab452b920d6d34e264dc33d85f4e737a3790645039c64bf4d942eda32ee023b",
+    "speaker-script-15min.md": "d7c62e79e603496c193fc9b6cab68ce9c83a7210a3964312b81f838aa9f6bea4",
+    "speaker-script-15min.txt": "8a06e877855cddae4df8c4cf71a50193cf305cbdcf94c7cdfafdbfa458b7afce"
+  },
+  "output_sha256": {
+    "main.pdf": "229af4e23e4202e8c9b3d0b59a0f1d7c37ad2139969dedaf48f22ea56d37bd82",
+    "main.txt": "00e4288be6e56a82d29c42b6638741a6450c5a95b1eba6bc142a9f130e088d33",
+    "review/slide-index.csv": "a32fbbed7b394a72e3ddbf08ecd87e2237c58211029545d0ad71b7fdde9b3d6d",
+    "review/slide-07.png": "def1c13a9cb281f08bdeb0ac62028035ec8460577693dd8f4fdeb225b08ed75f"
+  }
+}

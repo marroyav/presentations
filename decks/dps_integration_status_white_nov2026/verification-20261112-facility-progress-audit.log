@@ -1,0 +1,47 @@
+python3 scripts/audit_design.py
+Design tokens match templates/dune-professional/beamerthemeDUNEProfessional.sty.
+Checked contrast pairs:
+- text/background 16.31:1 (minimum 4.5:1)
+- text-muted/background 10.28:1 (minimum 4.5:1)
+- text/surface 13.83:1 (minimum 4.5:1)
+- text-muted/surface 8.71:1 (minimum 4.5:1)
+- text/surface-raised 11.29:1 (minimum 4.5:1)
+- border/background 3.08:1 (minimum 3.0:1)
+- on-accent/primary 7.47:1 (minimum 4.5:1)
+- on-accent/info 7.72:1 (minimum 4.5:1)
+- on-accent/success 7.83:1 (minimum 4.5:1)
+- on-accent/warning 12.28:1 (minimum 4.5:1)
+- on-danger/danger 6.66:1 (minimum 4.5:1)
+- on-accent/paper 15.00:1 (minimum 4.5:1)
+- on-accent/sky 12.11:1 (minimum 4.5:1)
+- on-accent/coral 8.62:1 (minimum 4.5:1)
+- editorial-text/editorial-canvas 14.97:1 (minimum 4.5:1)
+- editorial-muted/editorial-canvas 8.78:1 (minimum 4.5:1)
+- editorial-text/editorial-sky 13.63:1 (minimum 4.5:1)
+- editorial-muted/editorial-sky 7.99:1 (minimum 4.5:1)
+- editorial-text/editorial-warm 13.42:1 (minimum 4.5:1)
+- editorial-muted/editorial-warm 7.87:1 (minimum 4.5:1)
+- editorial-canvas/editorial-text 14.97:1 (minimum 4.5:1)
+python3 scripts/audit_decks.py decks
+Presentation audit advisories:
+- decks/daphne_pab_qualification_aug2026/main.tex: 2 frame(s) use four or more columns; prefer a two-by-two grid or another slide
+- decks/dps_integration_status_oct2026/main.tex: 7 visual frame(s) lack \DuneDiagramCaption
+- decks/fd_dps_boundaries_sep2026/main.tex: 1 visual frame(s) lack \DuneDiagramCaption
+- decks/pds_calibration_daq_oct2026/main.tex: 2 visual frame(s) lack \DuneDiagramCaption
+- decks/pds_data_selection_oct2026/main.tex: 1 visual frame(s) lack \DuneDiagramCaption
+- decks/pds_readout_oct2026/main.tex: 1 visual frame(s) lack \DuneDiagramCaption
+- decks/pds_selftrigger_deadtime_aug2026/main.tex: 1 visual frame(s) lack \DuneDiagramCaption
+- decks/pds_selftrigger_deadtime_aug2026/main.tex: 3 frame(s) use four or more columns; prefer a two-by-two grid or another slide
+- decks/pds_trigger_story_sep2026/main.tex: 2 visual frame(s) lack \DuneDiagramCaption
+- decks/pds_trigger_story_sep2026/main.tex: 1 frame(s) use \tiny or \scriptsize; split content instead of shrinking projected text
+- decks/scdps_git_management_aug2026/main.tex: uses a compact Beamer base size; new decks should use 11pt
+- decks/scdps_git_management_aug2026/main.tex: 5 visual frame(s) lack \DuneDiagramCaption
+- decks/scdps_git_management_aug2026/main.tex: 1 frame(s) use \tiny or \scriptsize; split content instead of shrinking projected text
+- decks/scdps_git_management_aug2026/main.tex: 2 frame(s) use four or more columns; prefer a two-by-two grid or another slide
+- decks/scdps_git_management_aug2026/main.tex: uses 17 legacy hue token(s); migrate new edits to shared tokens/components
+- decks/scdps_repo_plan_aug2026/main.tex: uses a compact Beamer base size; new decks should use 11pt
+- decks/scdps_repo_plan_aug2026/main.tex: 1 frame(s) exceed the source-density guide; review at projector size
+- decks/scdps_repo_plan_aug2026/main.tex: 2 visual frame(s) lack \DuneDiagramCaption
+- decks/scdps_repo_plan_aug2026/main.tex: 1 frame(s) use \tiny or \scriptsize; split content instead of shrinking projected text
+- decks/scdps_repo_plan_aug2026/main.tex: uses 4 legacy hue token(s); migrate new edits to shared tokens/components
+Presentation audit passed for 23 deck(s); review advisories above.

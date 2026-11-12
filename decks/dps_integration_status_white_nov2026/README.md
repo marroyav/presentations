@@ -1,12 +1,12 @@
 # VD detector protection system — I&I meeting, November 2026
 
-Current draft: 14 main slides, followed by a Backups transition (slide 15)
-and 37 backup slides. Main slides 11–12 show the critical consortium interlocks
-and group actions. Slide 13 covers the Batavia and SURF test benches; slide 14
+Current draft: 15 main slides, followed by a Backups transition (slide 16)
+and 37 backup slides. Main slides 12–13 show the critical consortium interlocks
+and group actions. Slide 14 covers the Batavia and SURF test benches; slide 15
 sets the information target for late January 2027 and the comprehensive design
-target for mid-April 2027. The Detector walkthrough remains in backups 21–32.
+target for mid-April 2027. The Detector walkthrough remains in backups 22–33.
 The matrix excerpt, delivery checks and hardware-review detail are in backups
-50–52. Earlier versions remain in Git and `archive/`.
+51–53. Earlier versions remain in Git and `archive/`.
 
 ## Purpose
 
@@ -31,33 +31,36 @@ and decisions. The proposed responsibilities and protection rules remain proposa
 - Slide 5 proposes the BDE PLC architecture as the DPS brain: industrial hardware,
   modular expansion, vendor support and distributed panels across the roughly 70 m
   mezzanine. The sketch distinguishes EtherCAT from supervisory Ethernet.
-- The FFDG and SDSTA detail slides are retained as backups 17–20.
+- Main slide 7 briefly reports progress on FFDG BMS and SDSTA SCADA before
+  Cryogenics. FFDG status can inform operator decisions; hard interlocks are not
+  assumed. The SDSTA update names Oro Hondo ventilation.
+- The FFDG and SDSTA detail slides are retained as backups 18–21.
 - Slide 6 presents a collaboration demo using the Raritan PDU in the
   dune-fd-test01 setup: single-outlet switching, a discrete contact output and
   local event-rule/LuaPLC logic. The fitted actuator, firmware and PLC input
-  remain to confirm. The original rack/TDE slide is retained as backup 48.
+  remain to confirm. The original rack/TDE slide is retained as backup 49.
 - Fire detection, fire alarms and emergency response remain outside DPS control.
   A possible equipment-status feed to responders needs a recipient agreement.
 - The FFDG and SDSTA commissioning discussions are reported inputs. Service
   commitments, protection use, variable lists and network access remain open.
-- Backup 27 follows PoF and groups DAPHNE with the PDS calibration box.
+- Backup 28 follows PoF and groups DAPHNE with the PDS calibration box.
   It retains the 34-feed working scope; channel and inhibit assignments remain open.
-- Main slides 11–12 highlight the group actions. BDE is nearly complete,
+- Main slides 12–13 highlight the group actions. BDE is nearly complete,
   as reported by Manuel; PDS must assess purity-monitor inhibition versus tagging
   and define PoF inhibition. CalCI/PDS must agree the laser handshake. HVS,
   Cryogenics and CalCI must map protection inputs and shutdown dependencies;
   TDE/DPS must define the external PDU protection interface.
-- Main slide 13 pairs the reported Batavia demonstrator work with
+- Main slide 14 pairs the reported Batavia demonstrator work with
   `dune-fd-test01` in the SURF Nevada room. Both benches have explicit next work
   and a common protection-path test goal. No new test result is reported.
-- Main slide 14 gives the requested planning targets: gather consortium and LBNF
+- Main slide 15 gives the requested planning targets: gather consortium and LBNF
   information by late January 2027; complete a comprehensive DPS design by
   mid-April 2027. Individual group commitments and installation dates are separate.
-- Backup 26 labels PDU switching and box-enable as candidate PoF inhibition paths.
+- Backup 27 labels PDU switching and box-enable as candidate PoF inhibition paths.
   PDS still needs to define the path, scope, response time, feedback and recovery.
-- Backup 49 shows the full conditions/action matrix. The complete five-page
+- Backup 50 shows the full conditions/action matrix. The complete five-page
   [matrix companion](figures/interlock-matrix-v0.2.pdf) retains its sources,
-  decisions and readiness notes. Backups 50–52 retain the earlier matrix excerpt,
+  decisions and readiness notes. Backups 51–53 retain the earlier matrix excerpt,
   delivery measures and hardware-review preparation.
 
 ## Source material and working files
@@ -78,13 +81,13 @@ record. `review/` contains the current slide previews and index.
 
 ## Edit and build
 
-The speaking scripts follow main slides 1–14:
+The speaking scripts follow main slides 1–15:
 
 - `speaker-script-fast.txt`: about four minutes.
 - `speaker-script-15min.md`: an expanded version with rehearsal timing cues,
   targeting fifteen minutes.
 
-Slides 15–52 are for questions. The scripts retain the Detector, facility and
+Slides 16–53 are for questions. The scripts retain the Detector, facility and
 original rack/TDE paragraphs as optional backup notes.
 
 From the repository root:
@@ -97,7 +100,7 @@ Edit the main sequence in `main.tex`, the added meeting slides in
 `meeting-updates.tex`, and technical backups in `backup-slides.tex`. The title,
 footer, meeting date and transition layout are in `deck-style.tex`.
 
-The system diagrams are native TikZ in `diagrams/`. Backups 25 and 35 both use
+The system diagrams are native TikZ in `diagrams/`. Backups 26 and 36 both use
 `diagrams/daphne-icd-reference.tex`, which keeps CCM/opmon and Hermes separate.
 `diagrams/styles.tex` uses the shared framework's styles and colours. The site
 map also compiles with the deck. The PDS LV slide uses `diagrams/pds-lv.tikz.tex`;

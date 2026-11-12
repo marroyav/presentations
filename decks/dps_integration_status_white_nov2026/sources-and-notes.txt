@@ -405,3 +405,14 @@ is replaced by the dated plan; its architecture/I/O/interface/fault/test scope
 is retained. All three scripts and the current slide index follow this order.
 Source mapping and the user instruction are recorded in
 consortium-actions-20261112.json and consortium-actions-input-20261112.txt.
+
+
+Brief facility progress slide, 12 November 2026
+Manuel requested one short slide before Cryogenics, using the existing FFDG BMS
+and SDSTA SCADA material. It reports progress, presents FFDG status as useful for
+monitoring and operator decisions without assuming hard interlocks, and names
+Oro Hondo ventilation in the SDSTA work. Protocol, licence, service and network
+details stay in the backups. No new live interface or test is claimed.
+The existing backup source and shared backup macros are unchanged. All previous
+slides remain in the same order; the added main slide is page 7, Cryogenics is 8,
+interlock summaries are 12–13, bench/work-plan slides are 14–15, and Backups is 16.
